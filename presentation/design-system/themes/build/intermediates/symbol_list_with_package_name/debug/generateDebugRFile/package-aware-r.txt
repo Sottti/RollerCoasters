@@ -1,0 +1,9 @@
+co.sottti.roller.coasters.presentation.design.system.themes
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+style Theme_RollerCoasters

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.sottti.roller.coasters.app-mergeDebugResources-48:/layout/fragment_notifications.xml",
+        "source": "com.sottti.roller.coasters.app-main-51:/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "com.sottti.roller.coasters.app-mergeDebugResources-48:/layout/fragment_home.xml",
+        "source": "com.sottti.roller.coasters.app-main-51:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.sottti.roller.coasters.app-mergeDebugResources-48:/layout/fragment_dashboard.xml",
+        "source": "com.sottti.roller.coasters.app-main-51:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.sottti.roller.coasters.app-mergeDebugResources-48:/layout/activity_main.xml",
+        "source": "com.sottti.roller.coasters.app-main-51:/layout/activity_main.xml"
+    }
+]

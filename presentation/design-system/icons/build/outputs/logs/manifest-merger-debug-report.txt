@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml:2:13-83
+INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml:2:13-83
+	package
+		INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml
+	xmlns:android
+		ADDED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml:2:23-81
+uses-sdk
+INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml reason: use-sdk injection requested
+INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml
+INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml
+	android:targetSdkVersion
+		INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml
+	android:minSdkVersion
+		INJECTED from /Users/sotti/Projects/RollerCoasters/presentation/design-system/icons/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest5243816475540580294.xml

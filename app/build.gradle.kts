@@ -50,6 +50,9 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.material)
-    
+
+    implementation(project(":presentation:design-system:icons"))
+    implementation(project(":presentation:design-system:themes"))
+
     testImplementation(libs.junit)
 }

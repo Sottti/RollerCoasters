@@ -1,3 +1,5 @@
+rootProject.name = "Roller Coasters"
+
 pluginManagement {
     repositories {
         google {
@@ -11,6 +13,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -18,6 +21,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
-rootProject.name = "Roller Coasters"
-include(":app")
+include(
+    ":app",
+    ":presentation:design-system:icons",
+    ":presentation:design-system:themes"
+)
