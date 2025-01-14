@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 internal class MainActivityViewModel : ViewModel() {
-    private val _viewState = MutableStateFlow(navigationBarItems())
-    val state: StateFlow<NavigationBarItems> = _viewState.asStateFlow()
+    private val _state = MutableStateFlow(navigationBarItems())
+    val state: StateFlow<NavigationBarItems> = _state.asStateFlow()
 
     val actions = NavigationBarActions(
         onDestinationSelected = { destination ->
-            _viewState.value = navigationBarItems(destination)
+            _state.value = navigationBarItems(destination)
         }
     )
 }
