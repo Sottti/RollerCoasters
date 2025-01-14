@@ -1,9 +1,12 @@
 package com.sottti.roller.coasters.model
 
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.runtime.Immutable
 
+@Immutable
 internal data class NavigationBarItem(
-    val label: String,
-    val icon: ImageVector,
-    val route: String,
+    @DrawableRes val iconResId: Int,
+    @StringRes val labelResId: Int,
+    val destination: NavigationBarDestination,
 )

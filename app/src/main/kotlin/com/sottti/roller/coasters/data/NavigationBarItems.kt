@@ -1,32 +1,49 @@
 package com.sottti.roller.coasters.data
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
+import co.cuvva.presentation.design.system.icons.Icons
+import com.sottti.roller.coasters.R
 import com.sottti.roller.coasters.model.NavigationBarDestination
 import com.sottti.roller.coasters.model.NavigationBarItem
+import com.sottti.roller.coasters.model.NavigationBarItems
 
-internal fun navigationBarItems(): List<NavigationBarItem> = listOf(
-    home(),
-    favourites(),
-    aboutMe(),
+internal fun navigationBarItems(
+    selectedItem: NavigationBarDestination = NavigationBarDestination.Home,
+): NavigationBarItems =
+    NavigationBarItems(
+        items = listOf(home(selectedItem), favourites(selectedItem), aboutMe(selectedItem)),
+        selectedItem = selectedItem,
+    )
+
+
+private fun home(
+    selectedItem: NavigationBarDestination,
+) = NavigationBarItem(
+    labelResId = R.string.navigation_bar_item_label_home,
+    iconResId = when (selectedItem) {
+        NavigationBarDestination.Home -> Icons.Home.Filled
+        else -> Icons.Home.Outlined
+    },
+    destination = NavigationBarDestination.Home,
 )
 
-private fun home() = NavigationBarItem(
-    label = "Home",
-    icon = Icons.Filled.Home,
-    route = NavigationBarDestination.Home.route,
+private fun favourites(
+    selectedItem: NavigationBarDestination,
+) = NavigationBarItem(
+    labelResId = R.string.navigation_bar_item_label_favourites,
+    iconResId = when (selectedItem) {
+        NavigationBarDestination.Favourites -> Icons.Star.Filled
+        else -> Icons.Star.Outlined
+    },
+    destination = NavigationBarDestination.Favourites,
 )
 
-private fun favourites() = NavigationBarItem(
-    label = "Favourites",
-    icon = Icons.Filled.Favorite,
-    route = NavigationBarDestination.Favourites.route,
-)
-
-private fun aboutMe() = NavigationBarItem(
-    label = "Profile",
-    icon = Icons.Filled.AccountCircle,
-    route = NavigationBarDestination.AboutMe.route,
+private fun aboutMe(
+    selectedItem: NavigationBarDestination,
+) = NavigationBarItem(
+    labelResId = R.string.navigation_bar_item_label_about_me,
+    iconResId = when (selectedItem) {
+        NavigationBarDestination.AboutMe -> Icons.AccountCircle.Filled
+        else -> Icons.AccountCircle.Outlined
+    },
+    destination = NavigationBarDestination.AboutMe,
 )

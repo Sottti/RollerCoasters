@@ -5,15 +5,18 @@ composeBom = "2024.12.01"
 composeNavigation = "2.8.5"
 coreKtx = "1.15.0"
 kotlin = "2.1.0"
+material = "1.12.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 compose-activity = { module = "androidx.activity:activity-compose" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
 compose-material = { module = "androidx.compose.material3:material3" }
-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

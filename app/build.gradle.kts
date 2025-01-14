@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.compose.activity)
+    implementation(libs.compose.foundation)
     implementation(libs.compose.material)
     implementation(libs.compose.navigation)
     implementation(platform(libs.compose.bom))
