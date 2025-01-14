@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlin.android)
 }
 
@@ -26,33 +27,22 @@ android {
             )
         }
     }
+    buildFeatures { compose = true }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
+    composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
+    kotlinOptions { jvmTarget = "17" }
 }
 
 dependencies {
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
-
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.material)
-
+    implementation(libs.compose.activity)
+    implementation(libs.compose.material)
+    implementation(libs.compose.navigation)
+    implementation(platform(libs.compose.bom))
     implementation(project(":presentation:design-system:icons"))
     implementation(project(":presentation:design-system:themes"))
-
-    testImplementation(libs.junit)
 }

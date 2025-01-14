@@ -8,3 +8,8 @@ android {
     compileSdk = 35
     defaultConfig { minSdk = 24 }
 }
+
+dependencies {
+    api(platform(libs.compose.bom))
+    api(libs.compose.material.icons.core)
+}

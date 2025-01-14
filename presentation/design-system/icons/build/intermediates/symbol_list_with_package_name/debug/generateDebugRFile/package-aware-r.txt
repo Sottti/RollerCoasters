@@ -1,9 +1,0 @@
-co.sottti.roller.coasters.presentation.design.system.icons
-color ic_launcher_background
-drawable ic_dashboard_black_24dp
-drawable ic_home_black_24dp
-drawable ic_launcher_foreground
-drawable ic_launcher_monochrome
-drawable ic_notifications_black_24dp
-mipmap ic_launcher
-mipmap ic_launcher_round
