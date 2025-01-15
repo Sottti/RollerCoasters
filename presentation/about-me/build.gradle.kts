@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "co.sottti.roller.coasters.presentation.design.system.themes"
+    namespace = "com.sottti.roller.coasters.about.me"
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
 dependencies {
-    implementation(libs.compose.material)
+    implementation(libs.compose.foundation)
     implementation(platform(libs.compose.bom))
 }

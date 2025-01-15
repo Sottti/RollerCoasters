@@ -1,10 +1,10 @@
-package com.sottti.roller.coasters.data
+package com.sottti.roller.coasters.app.data
 
 import co.cuvva.presentation.design.system.icons.Icons
 import com.sottti.roller.coasters.R
-import com.sottti.roller.coasters.model.NavigationBarDestination
-import com.sottti.roller.coasters.model.NavigationBarItem
-import com.sottti.roller.coasters.model.NavigationBarItems
+import com.sottti.roller.coasters.app.model.NavigationBarDestination
+import com.sottti.roller.coasters.app.model.NavigationBarItem
+import com.sottti.roller.coasters.app.model.NavigationBarItems
 
 internal fun navigationBarItems(
     selectedItem: NavigationBarDestination = NavigationBarDestination.Home,

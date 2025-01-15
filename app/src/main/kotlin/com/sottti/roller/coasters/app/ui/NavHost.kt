@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui
+package com.sottti.roller.coasters.app.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -7,7 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sottti.roller.coasters.model.NavigationBarDestination
+import com.sottti.roller.coasters.app.model.NavigationBarDestination
+import com.sottti.roller.coasters.ui.AboutMe
+import com.sottti.roller.coasters.ui.favourites.Favourites
+import com.sottti.roller.coasters.ui.home.Home
 
 @Composable
 internal fun NavHost(

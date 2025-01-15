@@ -1,11 +1,12 @@
-package com.sottti.roller.coasters.ui
+package com.sottti.roller.coasters.app.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.MaterialTheme
-import com.sottti.roller.coasters.data.MainActivityViewModel
+import com.sotti.rollercoaster.presentation.design.system.themes.AppTheme
+import com.sottti.roller.coasters.app.data.MainActivityViewModel
 
 internal class MainActivity : AppCompatActivity() {
 
@@ -14,7 +15,7 @@ internal class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val viewModel = MainActivityViewModel()
-            MaterialTheme {
+            AppTheme {
                 MainActivityContent(viewModel)
             }
         }

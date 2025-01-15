@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui
+package com.sottti.roller.coasters.app.ui
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -9,9 +9,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.sottti.roller.coasters.model.NavigationBarActions
-import com.sottti.roller.coasters.model.NavigationBarItem
-import com.sottti.roller.coasters.model.NavigationBarItems
+import com.sottti.roller.coasters.app.model.NavigationBarActions
+import com.sottti.roller.coasters.app.model.NavigationBarItem
+import com.sottti.roller.coasters.app.model.NavigationBarItems
 
 @Composable
 internal fun NavigationBar(

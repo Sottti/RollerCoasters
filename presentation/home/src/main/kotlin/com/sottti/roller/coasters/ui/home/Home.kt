@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui
+package com.sottti.roller.coasters.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-internal fun AboutMe(paddingValues: PaddingValues) {
+fun Home(paddingValues: PaddingValues) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .background(color = Color.Green)
+            .background(color = Color.Blue)
     )
 }

@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.model
+package com.sottti.roller.coasters.app.model
 
 internal sealed class NavigationBarDestination(
     val route: String,

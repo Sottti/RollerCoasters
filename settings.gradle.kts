@@ -17,6 +17,9 @@ dependencyResolutionManagement {
 }
 include(
     ":app",
+    ":presentation:about-me",
     ":presentation:design-system:icons",
-    ":presentation:design-system:themes"
+    ":presentation:design-system:themes",
+    ":presentation:favourites",
+    ":presentation:home",
 )

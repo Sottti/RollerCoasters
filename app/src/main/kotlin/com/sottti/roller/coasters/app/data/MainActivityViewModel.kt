@@ -1,8 +1,8 @@
-package com.sottti.roller.coasters.data
+package com.sottti.roller.coasters.app.data
 
 import androidx.lifecycle.ViewModel
-import com.sottti.roller.coasters.model.NavigationBarActions
-import com.sottti.roller.coasters.model.NavigationBarItems
+import com.sottti.roller.coasters.app.model.NavigationBarActions
+import com.sottti.roller.coasters.app.model.NavigationBarItems
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

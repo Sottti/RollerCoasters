@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-internal fun Favourites(paddingValues: PaddingValues) {
+fun AboutMe(paddingValues: PaddingValues) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .background(color = Color.Red)
+            .background(color = Color.Green)
     )
 }

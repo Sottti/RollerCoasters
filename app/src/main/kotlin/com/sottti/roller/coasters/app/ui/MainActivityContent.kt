@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui
+package com.sottti.roller.coasters.app.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.sottti.roller.coasters.data.MainActivityViewModel
+import com.sottti.roller.coasters.app.data.MainActivityViewModel
 
 @Composable
 internal fun MainActivityContent(

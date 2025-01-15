@@ -1,21 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.sottti.roller.coasters"
-    compileSdk = 35
+    buildFeatures { compose = true }
+    composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 
     defaultConfig {
         applicationId = "com.sottti.roller.coasters"
-        minSdk = 24
-        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -27,13 +24,6 @@ android {
             )
         }
     }
-    buildFeatures { compose = true }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
-    kotlinOptions { jvmTarget = "17" }
 }
 
 dependencies {
@@ -44,6 +34,9 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.compose.navigation)
     implementation(platform(libs.compose.bom))
+    implementation(project(":presentation:about-me"))
     implementation(project(":presentation:design-system:icons"))
     implementation(project(":presentation:design-system:themes"))
+    implementation(project(":presentation:favourites"))
+    implementation(project(":presentation:home"))
 }

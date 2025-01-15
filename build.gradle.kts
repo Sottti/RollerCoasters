@@ -1,5 +1,61 @@
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
 }
+
+subprojects {
+    afterEvaluate {
+        when {
+            plugins.hasPlugin("com.android.application") -> {
+                extensions.configure<ApplicationExtension> { androidApplicationConfig() }
+            }
+
+            plugins.hasPlugin("com.android.library") -> androidLibraryConfig()
+        }
+    }
+    plugins.withId("org.jetbrains.kotlin.android") {
+        extensions.configure<KotlinAndroidProjectExtension> {
+            compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+        }
+    }
+}
+
+private fun ApplicationExtension.androidApplicationConfig() {
+    compileSdk = compileSdk()
+
+    defaultConfig {
+        minSdk = minSdk()
+        targetSdk = targetSdk()
+    }
+
+    compileOptions {
+        sourceCompatibility = javaVersion()
+        targetCompatibility = javaVersion()
+    }
+}
+
+private fun Project.androidLibraryConfig() {
+    extensions.configure<LibraryExtension> {
+        compileSdk = compileSdk()
+        defaultConfig { minSdk = minSdk() }
+        lint { targetSdk = targetSdk() }
+
+        compileOptions {
+            sourceCompatibility = javaVersion()
+            targetCompatibility = javaVersion()
+        }
+    }
+}
+
+private fun compileSdk() = libs.versions.compileSdk.get().toInt()
+private fun javaVersion() = JavaVersion.VERSION_17
+private fun minSdk() = libs.versions.minSdk.get().toInt()
+private fun targetSdk() = libs.versions.targetSdk.get().toInt()
+private val kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
