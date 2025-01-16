@@ -5,11 +5,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.MaterialTheme
-import com.sotti.rollercoaster.presentation.design.system.themes.AppTheme
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.sotti.rollercoaster.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.app.data.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 internal class MainActivity : AppCompatActivity() {
@@ -19,9 +21,22 @@ internal class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        setContent {
-            AppTheme {
-                MainActivityContent(viewModel)
+        renderUi()
+    }
+
+    private fun renderUi() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { state ->
+                    setContent {
+                        RollerCoastersTheme {
+                            MainActivityContent(
+                                actions = viewModel.actions,
+                                state = state,
+                            )
+                        }
+                    }
+                }
             }
         }
     }

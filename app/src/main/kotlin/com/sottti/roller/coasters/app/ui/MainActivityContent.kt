@@ -3,14 +3,15 @@ package com.sottti.roller.coasters.app.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.sottti.roller.coasters.app.data.MainActivityViewModel
+import com.sottti.roller.coasters.app.model.NavigationBarActions
+import com.sottti.roller.coasters.app.model.NavigationBarItems
 
 @Composable
 internal fun MainActivityContent(
-    viewModel: MainActivityViewModel,
+    actions: NavigationBarActions,
+    state: NavigationBarItems,
 ) {
     val navController = rememberNavController()
 
@@ -19,8 +20,8 @@ internal fun MainActivityContent(
         bottomBar = {
             NavigationBar(
                 navController = navController,
-                navigationBarItems = viewModel.state.collectAsState().value,
-                navigationBarActions = viewModel.actions,
+                navigationBarItems = state,
+                navigationBarActions = actions,
             )
         },
     ) { paddingValues -> NavHost(navController, paddingValues) }

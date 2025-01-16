@@ -12,5 +12,7 @@ android {
 
 dependencies {
     implementation(libs.compose.foundation)
+    implementation(libs.hilt)
+    implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
 }

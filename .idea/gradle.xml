@@ -12,8 +12,12 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/presentation" />
+            <option value="$PROJECT_DIR$/presentation/about-me" />
             <option value="$PROJECT_DIR$/presentation/design-system" />
             <option value="$PROJECT_DIR$/presentation/design-system/icons" />
+            <option value="$PROJECT_DIR$/presentation/design-system/themes" />
+            <option value="$PROJECT_DIR$/presentation/favourites" />
+            <option value="$PROJECT_DIR$/presentation/home" />
           </set>
         </option>
       </GradleProjectSettings>

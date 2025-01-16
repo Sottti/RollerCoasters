@@ -33,8 +33,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.core.ktx)
     implementation(libs.compose.activity)
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
@@ -45,6 +45,6 @@ dependencies {
     implementation(project(":presentation:design-system:themes"))
     implementation(project(":presentation:favourites"))
     implementation(project(":presentation:home"))
-    implementation(libs.dagger.hilt)
-    kapt(libs.dagger.hilt.compiler)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 }
