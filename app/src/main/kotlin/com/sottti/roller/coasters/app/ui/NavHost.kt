@@ -8,9 +8,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sottti.roller.coasters.app.model.NavigationBarDestination
-import com.sottti.roller.coasters.ui.ui.AboutMe
 import com.sottti.roller.coasters.ui.favourites.ui.Favourites
 import com.sottti.roller.coasters.ui.home.ui.Home
+import com.sottti.roller.coasters.ui.about.me.ui.AboutMe
 
 @Composable
 internal fun NavHost(

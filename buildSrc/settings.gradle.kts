@@ -1,4 +1,4 @@
-rootProject.name = "Roller Coasters"
+rootProject.name = "buildSrc"
 
 pluginManagement {
     repositories {
@@ -17,11 +17,3 @@ dependencyResolutionManagement {
         gradlePluginPortal()
     }
 }
-include(
-    ":app",
-    ":presentation:about-me",
-    ":presentation:design-system:icons",
-    ":presentation:design-system:themes",
-    ":presentation:favourites",
-    ":presentation:home",
-)

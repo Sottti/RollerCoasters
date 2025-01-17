@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui.data
+package com.sottti.roller.coasters.ui.about.me.data
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel

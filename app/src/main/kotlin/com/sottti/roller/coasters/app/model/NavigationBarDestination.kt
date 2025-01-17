@@ -1,9 +1,12 @@
 package com.sottti.roller.coasters.app.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 internal sealed class NavigationBarDestination(
     val route: String,
 ) {
-    data object Home : NavigationBarDestination("home")
-    data object Favourites : NavigationBarDestination("favourites")
-    data object AboutMe : NavigationBarDestination("aboutMe")
+    data object AboutMe : NavigationBarDestination(route = "aboutMe")
+    data object Favourites : NavigationBarDestination(route = "favourites")
+    data object Home : NavigationBarDestination(route = "home")
 }

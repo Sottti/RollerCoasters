@@ -1,3 +1,22 @@
+# Ignore all files in .idea by default
+.idea/
+
+# Allow specific files that are project-wide settings
+!.idea/misc.xml
+!.idea/vcs.xml
+!.idea/gradle.xml
+!.idea/compiler.xml
+!.idea/ktlint-plugin.xml
+
+# Ignore user-specific and temporary files
+.idea/AndroidProjectSystem.xml
+.idea/appInsightsSettings.xml
+.idea/deploymentTargetSelector.xml
+.idea/runConfigurations.xml
+.idea/migrations.xml
+.idea/kotlinc.xml
+.idea/.name
+
 *.iml
 .gradle
 /local.properties

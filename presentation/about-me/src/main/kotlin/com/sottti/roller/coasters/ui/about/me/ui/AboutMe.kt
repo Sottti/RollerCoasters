@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui.ui
+package com.sottti.roller.coasters.ui.about.me.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,14 +10,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.sottti.roller.coasters.ui.data.AboutMeViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.sottti.roller.coasters.ui.about.me.data.AboutMeViewModel
 
 @Composable
 fun AboutMe(
     paddingValues: PaddingValues,
     viewModel: AboutMeViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Box(
         modifier = Modifier
