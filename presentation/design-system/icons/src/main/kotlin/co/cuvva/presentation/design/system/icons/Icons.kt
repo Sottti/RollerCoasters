@@ -27,4 +27,9 @@ object Icons {
         val outlined = R.drawable.ic_settings_rounded_outlined
         val descriptionResId = R.string.settings_icon_description
     }
+
+    object ArrowBack {
+        val filled = R.drawable.ic_arrow_back_rounded
+        val descriptionResId = R.string.arrow_back_icon_description
+    }
 }

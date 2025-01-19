@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="account_circle_icon_description">About me</string>
+    <string name="arrow_back_icon_description">Flecha atras</string>
     <string name="home_icon_description">Inicio </string>
     <string name="settings_icon_description">Ajustes</string>
     <string name="star_icon_description">Favoritos</string>

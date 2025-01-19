@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import co.cuvva.presentation.design.system.icons.Icons
+import com.sottti.roller.coasters.app.navigation.NavigationDestination
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,14 +23,14 @@ fun TopBar(
 
     TopAppBar(
         title = {},
-        actions = { SettingsAction() },
+        actions = { SettingsAction(navController) },
         scrollBehavior = scrollBehavior,
     )
 }
 
 @Composable
-private fun SettingsAction() {
-    IconButton(onClick = { }) {
+private fun SettingsAction(navController: NavController) {
+    IconButton(onClick = { navController.navigate(NavigationDestination.Settings.route) }) {
         Icon(
             painter = painterResource(Icons.Settings.outlined),
             contentDescription = stringResource(Icons.Settings.descriptionResId)

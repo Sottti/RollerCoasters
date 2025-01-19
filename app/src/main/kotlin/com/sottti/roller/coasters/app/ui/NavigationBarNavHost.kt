@@ -8,13 +8,13 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sottti.roller.coasters.app.model.NavigationBarDestination
+import com.sottti.roller.coasters.app.navigation.NavigationBarDestination
 import com.sottti.roller.coasters.ui.about.me.ui.AboutMe
 import com.sottti.roller.coasters.ui.favourites.ui.Favourites
 import com.sottti.roller.coasters.ui.home.ui.Home
 
 @Composable
-internal fun NavHost(
+internal fun NavigationBarNavHost(
     navController: NavHostController,
     nestedScrollConnection: NestedScrollConnection,
     paddingValues: PaddingValues,

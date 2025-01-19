@@ -28,4 +28,5 @@ include(
     ":presentation:design-system:typography",
     ":presentation:favourites",
     ":presentation:home",
+    ":presentation:settings",
 )
