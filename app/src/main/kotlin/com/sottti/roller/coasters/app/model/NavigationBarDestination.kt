@@ -9,4 +9,9 @@ internal sealed class NavigationBarDestination(
     data object AboutMe : NavigationBarDestination(route = "aboutMe")
     data object Favourites : NavigationBarDestination(route = "favourites")
     data object Home : NavigationBarDestination(route = "home")
+
+    companion object {
+        fun fromRoute(route: String?): NavigationBarDestination? =
+            listOf(AboutMe, Favourites, Home).find { it.route == route }
+    }
 }

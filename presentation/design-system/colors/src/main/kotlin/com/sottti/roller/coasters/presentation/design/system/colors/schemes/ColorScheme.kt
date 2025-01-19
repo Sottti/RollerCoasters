@@ -1,28 +1,13 @@
-package com.sotti.rollercoaster.presentation.design.system.themes
+package com.sottti.roller.coasters.presentation.design.system.colors.schemes
 
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun RollerCoastersTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
-    content: @Composable() () -> Unit,
-) {
-    MaterialTheme(
-        colorScheme = colorScheme(dynamicColor = dynamicColor, darkTheme = darkTheme),
-        typography = AppTypography,
-        content = content,
-    )
-}
-
-@Composable
-private fun colorScheme(
+fun colorScheme(
     dynamicColor: Boolean,
     darkTheme: Boolean,
 ) = when {

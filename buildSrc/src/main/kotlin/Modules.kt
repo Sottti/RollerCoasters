@@ -7,14 +7,12 @@ object module {
         const val home = ":presentation:home"
 
         object designSystem {
+            const val colors = ":presentation:design-system:colors"
+            const val dimensions = ":presentation:design-system:dimensions"
             const val icons = ":presentation:design-system:icons"
+            const val playground = ":presentation:design-system:playground"
             const val themes = ":presentation:design-system:themes"
-        }
-
-        object domain {
-        }
-
-        object data {
+            const val typography = ":presentation:design-system:typography"
         }
     }
 }

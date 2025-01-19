@@ -1,20 +1,30 @@
+@file:Suppress("ConstPropertyName")
+
 package co.cuvva.presentation.design.system.icons
 
 import co.sottti.roller.coasters.presentation.design.system.icons.R
 
 object Icons {
     object Home {
-        val Filled = R.drawable.ic_home_rounded_filled
-        val Outlined = R.drawable.ic_home_rounded_outlined
+        val filled = R.drawable.ic_home_rounded_filled
+        val outlined = R.drawable.ic_home_rounded_outlined
+        val descriptionResId = R.string.home_icon_description
     }
 
     object Star {
-        val Filled = R.drawable.ic_star_rounded_filled
-        val Outlined = R.drawable.ic_star_rounded_outlined
+        val filled = R.drawable.ic_star_rounded_filled
+        val outlined = R.drawable.ic_star_rounded_outlined
+        val descriptionResId = R.string.star_icon_description
     }
 
     object AccountCircle {
-        val Filled = R.drawable.ic_account_circle_rounded_filled
-        val Outlined = R.drawable.ic_account_circle_rounded_outlined
+        val filled = R.drawable.ic_account_circle_rounded_filled
+        val outlined = R.drawable.ic_account_circle_rounded_outlined
+        val descriptionResId = R.string.account_circle_icon_description
+    }
+
+    object Settings {
+        val outlined = R.drawable.ic_settings_rounded_outlined
+        val descriptionResId = R.string.settings_icon_description
     }
 }

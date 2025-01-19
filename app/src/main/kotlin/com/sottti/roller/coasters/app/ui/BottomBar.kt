@@ -14,7 +14,7 @@ import com.sottti.roller.coasters.app.model.NavigationBarItem
 import com.sottti.roller.coasters.app.model.NavigationBarItems
 
 @Composable
-internal fun NavigationBar(
+internal fun BottomBar(
     navController: NavController,
     navigationBarItems: NavigationBarItems,
     navigationBarActions: NavigationBarActions,
@@ -43,6 +43,6 @@ internal fun NavigationBar(
 private fun NavigationBarItemIcon(item: NavigationBarItem) {
     Icon(
         painter = painterResource(item.iconResId),
-        contentDescription = stringResource(item.labelResId),
+        contentDescription = stringResource(item.iconDescriptionResId),
     )
 }

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 internal data class NavigationBarItem(
     @DrawableRes val iconResId: Int,
+    @StringRes val iconDescriptionResId: Int,
     @StringRes val labelResId: Int,
     val destination: NavigationBarDestination,
 )
