@@ -25,22 +25,13 @@ internal fun NavHost(
         modifier = Modifier.padding(paddingValues = paddingValues)
     ) {
         composable(NavigationBarDestination.Home.route) {
-            Home(
-                nestedScrollConnection = nestedScrollConnection,
-                paddingValues = paddingValues
-            )
+            Home(nestedScrollConnection = nestedScrollConnection)
         }
         composable(NavigationBarDestination.Favourites.route) {
-            Favourites(
-                nestedScrollConnection = nestedScrollConnection,
-                paddingValues = paddingValues
-            )
+            Favourites(nestedScrollConnection = nestedScrollConnection)
         }
         composable(NavigationBarDestination.AboutMe.route) {
-            AboutMe(
-                nestedScrollConnection = nestedScrollConnection,
-                paddingValues = paddingValues
-            )
+            AboutMe(nestedScrollConnection = nestedScrollConnection)
         }
     }
 }
