@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dimensions.resolution.DimensionsLocalMockProvider
 
 @Composable
-fun RollerCoastersPreviewTheme(
+public fun RollerCoastersPreviewTheme(
     dynamicColor: Boolean = true,
     windowWidthSizeClass: WindowWidthSizeClass,
     content: @Composable () -> Unit,

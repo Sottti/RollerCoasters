@@ -2,6 +2,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -26,6 +27,16 @@ subprojects {
     plugins.withId("org.jetbrains.kotlin.android") {
         extensions.configure<KotlinAndroidProjectExtension> {
             compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+        }
+    }
+    plugins.withId("org.jetbrains.kotlin.jvm") {
+        extensions.configure<KotlinProjectExtension> {
+            explicitApi()
+        }
+    }
+    plugins.withId("org.jetbrains.kotlin.android") {
+        extensions.configure<KotlinAndroidProjectExtension> {
+            explicitApi()
         }
     }
 }

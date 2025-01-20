@@ -8,7 +8,7 @@ import co.cuvva.presentation.design.system.icons.model.IconState
 import androidx.compose.material3.Icon as MaterialIcon
 
 @Composable
-fun Icon(
+public fun Icon(
     state: IconState,
     onClick: (() -> Unit)? = null,
 ) {

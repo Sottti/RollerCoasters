@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import androidx.compose.material3.Switch as MaterialSwitch
 
 @Composable
-fun Switch(
+public fun Switch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit),
     modifier: Modifier = Modifier,

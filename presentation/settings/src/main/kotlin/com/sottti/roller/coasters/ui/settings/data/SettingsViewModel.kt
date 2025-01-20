@@ -14,11 +14,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor() : ViewModel() {
+internal class SettingsViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(settingsState())
-    internal val state: StateFlow<SettingsState> = _state.asStateFlow()
+    val state: StateFlow<SettingsState> = _state.asStateFlow()
 
-    internal val actions = SettingsActions({})
+    val actions = SettingsActions({})
 }
 
 private fun settingsState(): SettingsState {

@@ -9,7 +9,14 @@ import androidx.navigation.NavHostController
 import com.sottti.roller.coasters.ui.settings.data.SettingsViewModel
 
 @Composable
-fun Settings(
+public fun Settings(
+    navController: NavHostController,
+) {
+    SettingsInternal(navController = navController)
+}
+
+@Composable
+internal fun SettingsInternal(
     viewModel: SettingsViewModel = hiltViewModel(),
     navController: NavHostController,
 ) {

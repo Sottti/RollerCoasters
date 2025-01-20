@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dimensions.resolution.DimensionsLocalProvider
 
 @Composable
-fun RollerCoastersTheme(
+public fun RollerCoastersTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit,

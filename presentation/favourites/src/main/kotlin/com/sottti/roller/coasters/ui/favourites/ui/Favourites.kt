@@ -9,7 +9,14 @@ import com.sottti.roller.coasters.presentation.design.system.playground.RainbowL
 import com.sottti.roller.coasters.ui.favourites.data.FavouritesViewModel
 
 @Composable
-fun Favourites(
+public fun Favourites(
+    nestedScrollConnection: NestedScrollConnection,
+) {
+    FavouritesInternal(nestedScrollConnection)
+}
+
+@Composable
+internal fun FavouritesInternal(
     nestedScrollConnection: NestedScrollConnection,
     viewModel: FavouritesViewModel = hiltViewModel(),
 ) {

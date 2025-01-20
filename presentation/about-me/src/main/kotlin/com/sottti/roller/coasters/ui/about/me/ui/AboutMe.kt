@@ -9,7 +9,14 @@ import com.sottti.roller.coasters.presentation.design.system.playground.RainbowL
 import com.sottti.roller.coasters.ui.about.me.data.AboutMeViewModel
 
 @Composable
-fun AboutMe(
+public fun AboutMe(
+    nestedScrollConnection: NestedScrollConnection,
+) {
+    AboutMeInternal(nestedScrollConnection)
+}
+
+@Composable
+internal fun AboutMeInternal(
     nestedScrollConnection: NestedScrollConnection,
     viewModel: AboutMeViewModel = hiltViewModel(),
 ) {

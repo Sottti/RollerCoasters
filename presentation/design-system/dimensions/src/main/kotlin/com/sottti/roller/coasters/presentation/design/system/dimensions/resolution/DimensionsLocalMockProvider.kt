@@ -6,7 +6,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.dimensions.data.mockDimensions
 
 @Composable
-fun DimensionsLocalMockProvider(
+public fun DimensionsLocalMockProvider(
     windowWidthSizeClass: WindowWidthSizeClass,
     content: @Composable () -> Unit,
 ) {

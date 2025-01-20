@@ -17,7 +17,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RainbowLazyColumn(
+public fun RainbowLazyColumn(
     nestedScrollConnection: NestedScrollConnection,
     seedColor: Color,
 ) {
