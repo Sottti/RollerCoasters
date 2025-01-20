@@ -5,16 +5,16 @@ plugins {
 }
 
 android {
-    namespace = "co.sottti.roller.coasters.presentation.design.system.themes"
+    namespace = "co.sottti.roller.coasters.presentation.design.system.switchh"
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
 dependencies {
-    api(libs.compose.window.size)
     implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.presentation.designSystem.colors))
-    implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.typography))
+    implementation(project(module.presentation.designSystem.icons))
+    implementation(project(module.presentation.designSystem.previews))
+    implementation(project(module.presentation.designSystem.themes))
 }

@@ -26,7 +26,6 @@ internal fun BottomBar(
                 label = { Text(stringResource(item.labelResId)) },
                 selected = navigationBarItems.selectedItem.route == item.destination.route,
                 onClick = {
-
                     navigationBarActions.onDestinationSelected(item.destination)
                     navController.navigate(item.destination.route) {
                         popUpTo(navController.graph.findStartDestination().id) { saveState = true }

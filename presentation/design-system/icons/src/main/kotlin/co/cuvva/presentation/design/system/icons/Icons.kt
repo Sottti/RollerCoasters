@@ -29,7 +29,17 @@ object Icons {
     }
 
     object ArrowBack {
-        val filled = R.drawable.ic_arrow_back_rounded
+        val rounded = R.drawable.ic_arrow_back_rounded
         val descriptionResId = R.string.arrow_back_icon_description
+    }
+
+    object Palette {
+        val outlined = R.drawable.ic_palette_rounded_outline
+        val descriptionResId = R.string.palette_icon_description
+    }
+
+    object Check {
+        val rounded = R.drawable.ic_check_rounded
+        val descriptionResId = R.string.check_icon_description
     }
 }
