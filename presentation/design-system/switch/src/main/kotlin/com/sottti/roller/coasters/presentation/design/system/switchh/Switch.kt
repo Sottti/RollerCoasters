@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import co.cuvva.presentation.design.system.icons.Icon
-import co.cuvva.presentation.design.system.icons.Icons
+import co.cuvva.presentation.design.system.icons.data.Icons
+import co.cuvva.presentation.design.system.icons.ui.Icon
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import androidx.compose.material3.Switch as MaterialSwitch
 
@@ -31,10 +31,7 @@ private fun ThumbIcon(
     checked: Boolean,
 ) {
     if (checked) {
-        Icon(
-            iconResId = Icons.Check.rounded,
-            contentDescriptionResId = Icons.Check.descriptionResId,
-        )
+        Icon(Icons.Check.Rounded)
     }
 }
 

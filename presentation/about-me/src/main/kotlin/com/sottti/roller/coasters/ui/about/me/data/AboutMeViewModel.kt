@@ -12,7 +12,7 @@ import kotlin.random.Random
 @HiltViewModel
 class AboutMeViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(generateRandomColor())
-    val state: StateFlow<Color> = _state.asStateFlow()
+    internal val state: StateFlow<Color> = _state.asStateFlow()
 }
 
 private fun generateRandomColor(): Color {

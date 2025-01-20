@@ -17,4 +17,5 @@ dependencies {
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.previews))
     implementation(project(module.presentation.designSystem.themes))
+    screenshotTestImplementation(libs.compose.ui.tooling)
 }

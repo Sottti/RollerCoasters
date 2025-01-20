@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title">Ajustes</string>
+    <string name="dynamic_color_headline">Color Dinámico</string>
+    <string name="dynamic_color_supporting">Adapta los colores de la aplicación al fondo de pantalla de tu dispositivo.</string>
 </resources>

@@ -25,11 +25,17 @@ internal fun NavigationBar(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar(navController = mainNavHostController, scrollBehavior = scrollBehavior) },
+        topBar = {
+            TopBar(
+                navController = mainNavHostController,
+                scrollBehavior = scrollBehavior,
+                state = state.topBar
+            )
+        },
         bottomBar = {
             BottomBar(
                 navController = navigationBarNavHost,
-                navigationBarItems = state,
+                navigationBarItems = state.navigationBarItems,
                 navigationBarActions = viewModel.actions,
             )
         },

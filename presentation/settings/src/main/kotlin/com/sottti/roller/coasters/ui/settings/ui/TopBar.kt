@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.ui.favourites.ui
+package com.sottti.roller.coasters.ui.settings.ui
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -6,19 +6,20 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import co.cuvva.presentation.design.system.icons.Icon
-import co.cuvva.presentation.design.system.icons.Icons
-import com.sottti.roller.coasters.settings.R
+import co.cuvva.presentation.design.system.icons.ui.Icon
+import com.sottti.roller.coasters.ui.settings.model.TopBarState
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun TopBar(navController: NavHostController) {
+internal fun TopBar(
+    navController: NavHostController,
+    state: TopBarState,
+) {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.title)) },
+        title = { Text(text = stringResource(state.title)) },
         navigationIcon = {
             Icon(
-                contentDescriptionResId = Icons.ArrowBack.descriptionResId,
-                iconResId = Icons.ArrowBack.rounded,
+                state = state.icon,
                 onClick = { navController.popBackStack() },
             )
         }

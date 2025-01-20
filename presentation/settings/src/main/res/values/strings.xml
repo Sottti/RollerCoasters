@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title">Settings</string>
+    <string name="dynamic_color_headline">Dynamic Color</string>
+    <string name="dynamic_color_supporting">Matches the app’s colors with your device’s wallpaper.</string>
 </resources>

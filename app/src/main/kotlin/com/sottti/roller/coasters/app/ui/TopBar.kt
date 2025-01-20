@@ -6,31 +6,35 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import co.cuvva.presentation.design.system.icons.Icon
-import co.cuvva.presentation.design.system.icons.Icons
+import co.cuvva.presentation.design.system.icons.model.IconState
+import co.cuvva.presentation.design.system.icons.ui.Icon
+import com.sottti.roller.coasters.app.data.TopBarState
 import com.sottti.roller.coasters.app.navigation.NavigationDestination
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun TopBar(
+internal fun TopBar(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
+    state: TopBarState,
 ) {
     val currentDestination =
         navController.currentBackStackEntryAsState().value?.destination?.route
 
     TopAppBar(
         title = {},
-        actions = { SettingsAction(navController) },
+        actions = { SettingsAction(icon = state.settingsIcon, navController = navController) },
         scrollBehavior = scrollBehavior,
     )
 }
 
 @Composable
-private fun SettingsAction(navController: NavController) {
+private fun SettingsAction(
+    icon: IconState,
+    navController: NavController,
+) {
     Icon(
-        contentDescriptionResId = Icons.Settings.descriptionResId,
-        iconResId = Icons.Settings.outlined,
+        state = icon,
         onClick = { navController.navigate(NavigationDestination.Settings.route) },
     )
 }
