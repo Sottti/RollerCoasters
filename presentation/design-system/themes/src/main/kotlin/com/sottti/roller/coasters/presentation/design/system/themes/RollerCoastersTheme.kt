@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.data.settings.di.provideSettingsRepository
 import com.sottti.roller.coasters.presentation.design.system.dimensions.resolution.DimensionsLocalProvider
@@ -13,8 +14,13 @@ public fun RollerCoastersTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    val repository = provideSettingsRepository(LocalContext.current)
-    val dynamicColor by repository.getDynamicColor().collectAsState(initial = true)
+    val context = LocalContext.current
+    val repository = remember { provideSettingsRepository(context) }
+
+    val dynamicColor by repository
+        .observeDynamicColor()
+        .collectAsState(initial = true)
+
     DimensionsLocalProvider {
         BaseTheme(
             dynamicColor = dynamicColor,

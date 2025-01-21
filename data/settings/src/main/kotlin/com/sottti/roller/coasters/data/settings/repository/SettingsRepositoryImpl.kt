@@ -17,7 +17,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
         private val DYNAMIC_COLOR_KEY = booleanPreferencesKey("dynamic_color")
     }
 
-    override fun getDynamicColor(): Flow<Boolean> =
+    override fun observeDynamicColor(): Flow<Boolean> =
         dataStore.data.map { preferences ->
             preferences[DYNAMIC_COLOR_KEY] ?: DYNAMIC_COLOR_DEFAULT_VALUE
         }

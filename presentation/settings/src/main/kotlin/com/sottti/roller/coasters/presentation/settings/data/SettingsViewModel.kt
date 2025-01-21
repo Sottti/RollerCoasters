@@ -31,7 +31,7 @@ internal class SettingsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             settingsRepository
-                .getDynamicColor()
+                .observeDynamicColor()
                 .collect { dynamicColorChecked ->
                     _state.update { currentState ->
                         currentState.copy(

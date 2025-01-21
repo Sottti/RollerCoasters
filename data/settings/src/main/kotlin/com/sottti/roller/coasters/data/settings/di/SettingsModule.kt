@@ -19,7 +19,5 @@ internal object SettingsModule {
     @Singleton
     fun provideRepository(
         @ApplicationContext context: Context,
-    ): SettingsRepository {
-        return SettingsRepositoryImpl(context.dataStore)
-    }
+    ): SettingsRepository = SettingsRepositoryImpl(context.dataStore)
 }
