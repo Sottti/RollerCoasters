@@ -1,3 +1,5 @@
+import com.sottti.roller.coasters.buildSrc.module
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.dagger.hilt)

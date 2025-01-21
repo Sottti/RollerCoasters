@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sottti.roller.coasters.app.data.MainActivityViewModel
 import com.sottti.roller.coasters.app.navigation.NavigationDestination
-import com.sottti.roller.coasters.ui.settings.ui.Settings
+import com.sottti.roller.coasters.presentation.settings.ui.Settings
 
 @Composable
 internal fun MainActivityContent(

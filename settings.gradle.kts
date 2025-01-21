@@ -19,6 +19,7 @@ dependencyResolutionManagement {
 }
 include(
     ":app",
+    ":data:settings",
     ":presentation:about-me",
     ":presentation:design-system:colors",
     ":presentation:design-system:dimensions",
