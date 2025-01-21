@@ -23,7 +23,7 @@ internal fun SettingsInternal(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
-        topBar = { TopBar(navController = navController, state = state.topBar) }
+        topBar = { TopBar(navController = navController, state = state.topBar) },
     ) { paddingValues ->
         SettingsContent(paddingValues = paddingValues, state = state, actions = viewModel.actions)
     }
