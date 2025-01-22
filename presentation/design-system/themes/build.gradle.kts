@@ -15,6 +15,7 @@ android {
 dependencies {
     api(libs.compose.window.size)
     implementation(libs.compose.material)
+    implementation(libs.core.ktx)
     implementation(platform(libs.compose.bom))
     implementation(project(module.data.settings))
     implementation(project(module.presentation.designSystem.colors))

@@ -4,6 +4,7 @@ appcompat = "1.7.0"
 compileSdk = "35"
 composeBom = "2025.01.00"
 composeNavigation = "2.8.5"
+coreKtx = "1.15.0"
 coroutines = "1.10.1"
 datastorePreferences = "1.1.2"
 hilt = "2.54"
@@ -25,12 +26,14 @@ compose-runtime = { module = "androidx.compose.runtime:runtime" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-window-size = { module = "androidx.compose.material3:material3-window-size-class" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
