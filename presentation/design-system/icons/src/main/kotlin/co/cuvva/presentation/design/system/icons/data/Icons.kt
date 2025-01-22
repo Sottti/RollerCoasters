@@ -66,4 +66,11 @@ public object Icons {
             descriptionResId = R.string.check_icon_description
         )
     }
+
+    public object Colors {
+        public val Rounded: IconState = IconState(
+            resId = R.drawable.ic_colors_rounded,
+            descriptionResId = R.string.colors_icon_description
+        )
+    }
 }

@@ -25,6 +25,6 @@ internal fun SettingsInternal(
     Scaffold(
         topBar = { TopBar(navController = navController, state = state.topBar) },
     ) { paddingValues ->
-        SettingsContent(paddingValues = paddingValues, state = state, actions = viewModel.actions)
+        SettingsContent(paddingValues = paddingValues, state = state, onAction = viewModel.onAction)
     }
 }

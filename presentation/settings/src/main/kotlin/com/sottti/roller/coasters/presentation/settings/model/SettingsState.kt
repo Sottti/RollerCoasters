@@ -6,8 +6,10 @@ import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class SettingsState(
-    val topBar: TopBarState,
     val dynamicColor: DynamicColorState,
+    val theme: ThemeState,
+    val themePicker: ThemePickerState?,
+    val topBar: TopBarState,
 )
 
 @Immutable
@@ -23,3 +25,29 @@ internal data class DynamicColorState(
     val checked: Boolean,
     val icon: IconState,
 )
+
+@Immutable
+internal data class ThemeState(
+    @StringRes val headline: Int,
+    @StringRes val supporting: Int,
+    @StringRes val trailing: Int,
+    val icon: IconState,
+)
+
+@Immutable
+internal data class ThemePickerState(
+    @StringRes val confirm: Int,
+    @StringRes val dismiss: Int,
+    @StringRes val title: Int,
+    val selectedTheme: ThemeWithText,
+    val themes: List<ThemeWithText>,
+)
+
+@Immutable
+internal sealed class ThemeWithText(
+    @StringRes val text: Int,
+) {
+    class DarkTheme(@StringRes text: Int) : ThemeWithText(text)
+    class LightTheme(@StringRes text: Int) : ThemeWithText(text)
+    class SystemTheme(@StringRes text: Int) : ThemeWithText(text)
+}

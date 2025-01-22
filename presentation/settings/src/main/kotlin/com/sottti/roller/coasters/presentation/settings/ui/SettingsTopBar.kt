@@ -1,12 +1,11 @@
 package com.sottti.roller.coasters.presentation.settings.ui
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import co.cuvva.presentation.design.system.icons.ui.Icon
+import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 
 @Composable
@@ -16,7 +15,7 @@ internal fun TopBar(
     state: TopBarState,
 ) {
     TopAppBar(
-        title = { Text(text = stringResource(state.title)) },
+        title = { Text(state.title) },
         navigationIcon = {
             Icon(
                 state = state.icon,

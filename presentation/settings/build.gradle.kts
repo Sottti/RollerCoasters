@@ -19,7 +19,9 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
     implementation(project(module.data.settings))
+    implementation(project(module.presentation.designSystem.dialogs))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.switch))
+    implementation(project(module.presentation.designSystem.text))
     kapt(libs.hilt.compiler)
 }

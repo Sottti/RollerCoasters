@@ -2,12 +2,11 @@ package com.sottti.roller.coasters.app.ui
 
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import co.cuvva.presentation.design.system.icons.ui.Icon
+import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.app.model.NavigationBarActions
 import com.sottti.roller.coasters.app.model.NavigationBarItems
 
@@ -21,7 +20,7 @@ internal fun BottomBar(
         navigationBarItems.items.forEach { item ->
             NavigationBarItem(
                 icon = { Icon(item.icon) },
-                label = { Text(stringResource(item.labelResId)) },
+                label = { Text(item.labelResId) },
                 selected = navigationBarItems.selectedItem.route == item.destination.route,
                 onClick = {
                     navigationBarActions.onDestinationSelected(item.destination)

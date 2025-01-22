@@ -3,11 +3,18 @@ package com.sottti.roller.coasters.presentation.settings.data
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
-import com.sottti.roller.coasters.presentation.settings.model.SettingsActions
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemeSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
+import com.sottti.roller.coasters.presentation.settings.model.ThemeState
+import com.sottti.roller.coasters.presentation.settings.model.ThemeWithText
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,41 +30,101 @@ internal class SettingsViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState())
     val state: StateFlow<SettingsState> = _state.asStateFlow()
-
-    val actions = SettingsActions(
-        onDynamicColorCheckedChange = { setDynamicColor(enabled = it) }
-    )
+    val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
 
     init {
         viewModelScope.launch {
-            settingsRepository
-                .observeDynamicColor()
-                .collect { dynamicColorChecked ->
-                    _state.update { currentState ->
-                        currentState.copy(
-                            dynamicColor = currentState
-                                .dynamicColor
-                                .copy(checked = dynamicColorChecked)
-                        )
-                    }
+            settingsRepository.observeDynamicColor().collect { dynamicColorChecked ->
+                _state.update { currentState ->
+                    currentState.copy(
+                        dynamicColor = currentState.dynamicColor.copy(checked = dynamicColorChecked)
+                    )
                 }
+            }
+        }
+
+        viewModelScope.launch {
+            settingsRepository.observeTheme().collect { theme ->
+                _state.update { currentTheme ->
+                    currentTheme.copy(
+                        theme = themeState(theme.toPresentationModel()),
+                    )
+                }
+            }
         }
     }
 
-    private fun setDynamicColor(enabled: Boolean) {
+    private fun processAction(action: SettingsAction) {
         viewModelScope.launch {
-            settingsRepository.setDynamicColor(enabled)
+            when (action) {
+                LaunchThemePicker -> showThemePicker()
+                DismissThemePicker -> hideThemePicker()
+                is DynamicColorCheckedChange -> setDynamicColor(action.checked)
+                is ConfirmThemeSelection -> confirmThemeSelection(action.theme)
+            }
         }
+    }
+
+    private suspend fun showThemePicker() {
+        _state.update { currentState ->
+            currentState.copy(
+                themePicker = themePickerState(
+                    settingsRepository.getTheme().toPresentationModel()
+                )
+            )
+        }
+    }
+
+    private fun hideThemePicker() {
+        _state.update { currentState ->
+            currentState.copy(
+                themePicker = null,
+            )
+        }
+    }
+
+    private suspend fun setDynamicColor(enabled: Boolean) {
+        settingsRepository.setDynamicColor(enabled)
+    }
+
+    private suspend fun confirmThemeSelection(theme: ThemeWithText) {
+        hideThemePicker()
+        settingsRepository.setTheme(theme.toDomainModel())
     }
 }
 
-private fun initialState(): SettingsState =
-    SettingsState(
-        topBar = TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded),
-        dynamicColor = DynamicColorState(
-            checked = true,
-            headline = R.string.dynamic_color_headline,
-            supporting = R.string.dynamic_color_supporting,
-            icon = Icons.Palette.Outlined
-        ),
-    )
+private fun initialState(): SettingsState = SettingsState(
+    dynamicColor = dynamicColorState(),
+    theme = themeState(systemTheme()),
+    themePicker = null,
+    topBar = TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded),
+)
+
+private fun dynamicColorState() = DynamicColorState(
+    checked = true,
+    headline = R.string.dynamic_color_headline,
+    supporting = R.string.dynamic_color_supporting,
+    icon = Icons.Palette.Outlined
+)
+
+private fun themeState(selectedTheme: ThemeWithText) = ThemeState(
+    headline = R.string.theme_color_headline,
+    supporting = R.string.theme_color_supporting,
+    trailing = selectedTheme.text,
+    icon = Icons.Colors.Rounded
+)
+
+private fun themePickerState(
+    selectedTheme: ThemeWithText,
+) = ThemePickerState(
+    title = R.string.theme_color_picker_title,
+    selectedTheme = selectedTheme,
+    confirm = R.string.theme_color_picker_confirm,
+    dismiss = R.string.theme_color_picker_dismiss,
+    themes = themesList,
+)
+
+private val themesList = listOf(systemTheme(), lightTheme(), darkTheme())
+private fun darkTheme() = ThemeWithText.DarkTheme(R.string.theme_dark)
+private fun lightTheme() = ThemeWithText.LightTheme(R.string.theme_light)
+private fun systemTheme() = ThemeWithText.SystemTheme(R.string.theme_system)

@@ -11,14 +11,20 @@ object module {
 
         object designSystem {
             const val colors = ":presentation:design-system:colors"
+            const val dialogs = ":presentation:design-system:dialogs"
             const val dimensions = ":presentation:design-system:dimensions"
             const val icons = ":presentation:design-system:icons"
             const val playground = ":presentation:design-system:playground"
             const val previews = ":presentation:design-system:previews"
             const val switch = ":presentation:design-system:switch"
+            const val text = ":presentation:design-system:text"
             const val themes = ":presentation:design-system:themes"
             const val typography = ":presentation:design-system:typography"
         }
+    }
+
+    object domain {
+        const val settings = ":domain:settings"
     }
 
     object data {
