@@ -16,22 +16,17 @@ public fun RollerCoastersTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
+    val dynamicColorInitialValue = true
+    val isSystemInDarkTheme = isSystemInDarkTheme()
     val repository = remember { provideSettingsRepository(context) }
 
     val dynamicColor by repository
         .observeDynamicColor()
-        .collectAsState(initial = true)
+        .collectAsState(initial = dynamicColorInitialValue)
 
-    val isSystemInDarkTheme = isSystemInDarkTheme()
     val darkTheme by repository
         .observeTheme()
-        .map {
-            when (it) {
-                Theme.DarkTheme -> true
-                Theme.LightTheme -> false
-                Theme.SystemTheme -> isSystemInDarkTheme
-            }
-        }
+        .map { theme -> theme.toDarkTheme(isSystemInDarkTheme) }
         .collectAsState(initial = isSystemInDarkTheme)
 
     DimensionsLocalProvider {
@@ -41,4 +36,12 @@ public fun RollerCoastersTheme(
             content = content,
         )
     }
+}
+
+private fun Theme.toDarkTheme(
+    isSystemInDarkTheme: Boolean,
+) = when (this) {
+    Theme.DarkTheme -> true
+    Theme.LightTheme -> false
+    Theme.SystemTheme -> isSystemInDarkTheme
 }
