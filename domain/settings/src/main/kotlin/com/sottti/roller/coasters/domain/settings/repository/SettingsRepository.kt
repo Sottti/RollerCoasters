@@ -7,7 +7,8 @@ public interface SettingsRepository {
     public suspend fun setDynamicColor(enabled: Boolean)
     public fun observeDynamicColor(): Flow<Boolean>
 
-    public suspend fun setTheme(theme: Theme)
-    public suspend fun getTheme(): Theme
-    public fun observeTheme(): Flow<Theme>
+    public fun observeAppTheme(): Flow<Theme>
+    public suspend fun applyStoredAppTheme()
+    public suspend fun getAppTheme(): Theme
+    public suspend fun setAppTheme(theme: Theme)
 }

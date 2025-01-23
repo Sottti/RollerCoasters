@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "com.sottti.roller.coasters.utils.device"
 }
+
+dependencies {
+    implementation(libs.annotations)
+}

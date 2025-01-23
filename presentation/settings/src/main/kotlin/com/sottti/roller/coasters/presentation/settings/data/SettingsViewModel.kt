@@ -47,7 +47,7 @@ internal class SettingsViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            settingsRepository.observeTheme().collect { theme ->
+            settingsRepository.observeAppTheme().collect { theme ->
                 _state.update { currentTheme ->
                     currentTheme.copy(
                         theme = themeState(theme.toPresentationModel()),
@@ -63,7 +63,7 @@ internal class SettingsViewModel @Inject constructor(
                 LaunchThemePicker -> showThemePicker()
                 DismissThemePicker -> hideThemePicker()
                 is DynamicColorCheckedChange -> setDynamicColor(action.checked)
-                is ConfirmThemeSelection -> setTheme(action.theme)
+                is ConfirmThemeSelection -> setAppTheme(action.theme)
             }
         }
     }
@@ -72,7 +72,7 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(
                 themePicker = themePickerState(
-                    settingsRepository.getTheme().toPresentationModel()
+                    settingsRepository.getAppTheme().toPresentationModel()
                 )
             )
         }
@@ -90,9 +90,9 @@ internal class SettingsViewModel @Inject constructor(
         settingsRepository.setDynamicColor(enabled)
     }
 
-    private suspend fun setTheme(theme: ThemeWithText) {
+    private suspend fun setAppTheme(theme: ThemeWithText) {
         hideThemePicker()
-        settingsRepository.setTheme(theme.toDomainModel())
+        settingsRepository.setAppTheme(theme.toDomainModel())
     }
 }
 

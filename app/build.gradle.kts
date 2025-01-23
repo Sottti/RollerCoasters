@@ -42,7 +42,9 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.material)
+    implementation(libs.splashscreen)
     implementation(platform(libs.compose.bom))
+    implementation(project(module.data.settings))
     implementation(project(module.presentation.aboutMe))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.text))
@@ -50,5 +52,6 @@ dependencies {
     implementation(project(module.presentation.favourites))
     implementation(project(module.presentation.home))
     implementation(project(module.presentation.settings))
+    implementation(project(module.utils.device))
     kapt(libs.hilt.compiler)
 }

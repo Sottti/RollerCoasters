@@ -8,11 +8,12 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-public class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
         setContent {
             RollerCoastersTheme {
                 MainActivityContent()
