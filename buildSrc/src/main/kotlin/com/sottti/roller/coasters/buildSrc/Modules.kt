@@ -30,4 +30,8 @@ object module {
     object data {
         const val settings = ":data:settings"
     }
+
+    object utils {
+        const val device = ":utils:device"
+    }
 }

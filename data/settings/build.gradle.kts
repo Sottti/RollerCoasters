@@ -12,7 +12,9 @@ android {
 
 dependencies {
     api(project(module.domain.settings))
+    implementation(libs.appcompat)
     implementation(libs.datastore.preferences)
     implementation(libs.hilt)
+    implementation(project(module.utils.device))
     kapt(libs.hilt.compiler)
 }

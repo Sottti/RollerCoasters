@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.presentation.settings.ui
 import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemeSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 
 @Composable

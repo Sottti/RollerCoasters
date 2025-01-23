@@ -1,9 +1,11 @@
 package com.sottti.roller.coasters.data.settings.di
 
 import android.content.Context
+import com.sottti.roller.coasters.data.settings.ThemeManager
 import com.sottti.roller.coasters.data.settings.dataStore
-import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
+import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +20,16 @@ internal object SettingsModule {
     @Provides
     @Singleton
     fun provideRepository(
+        localDataSource: SettingsLocalDataSource,
+        themeManager: ThemeManager,
+    ): SettingsRepository = SettingsRepositoryImpl(
+        localDataSource = localDataSource,
+        themeManager = themeManager,
+    )
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(
         @ApplicationContext context: Context,
-    ): SettingsRepository = SettingsRepositoryImpl(context.dataStore)
+    ): SettingsLocalDataSource = SettingsLocalDataSource(context.dataStore)
 }

@@ -35,4 +35,5 @@ include(
     ":presentation:favourites",
     ":presentation:home",
     ":presentation:settings",
+    ":utils:device",
 )
