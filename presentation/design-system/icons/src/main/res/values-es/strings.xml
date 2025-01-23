@@ -2,7 +2,6 @@
 <resources>
     <string name="account_circle_icon_description">About me</string>
     <string name="arrow_back_icon_description">Flecha atras</string>
-    <string name="check_icon_description">hecho</string>
     <string name="colors_icon_description">Colores</string>
     <string name="home_icon_description">Inicio </string>
     <string name="palette_icon_description">Paleta de colores</string>

@@ -6,7 +6,7 @@ import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class SettingsState(
-    val dynamicColor: DynamicColorState,
+    val dynamicColor: DynamicColorState?,
     val theme: ThemeState,
     val themePicker: ThemePickerState?,
     val topBar: TopBarState,

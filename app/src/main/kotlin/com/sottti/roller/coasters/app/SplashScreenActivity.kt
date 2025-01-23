@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.app
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@SuppressLint("CustomSplashScreen")
 internal class SplashScreenActivity : ComponentActivity() {
 
     @Inject

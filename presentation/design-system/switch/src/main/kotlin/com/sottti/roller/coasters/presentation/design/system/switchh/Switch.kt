@@ -5,8 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import co.cuvva.presentation.design.system.icons.data.Icons
-import co.cuvva.presentation.design.system.icons.ui.Icon
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import androidx.compose.material3.Switch as MaterialSwitch
 
@@ -22,17 +20,7 @@ public fun Switch(
         enabled = enabled,
         modifier = modifier,
         onCheckedChange = onCheckedChange,
-        thumbContent = { ThumbIcon(checked) },
     )
-}
-
-@Composable
-private fun ThumbIcon(
-    checked: Boolean,
-) {
-    if (checked) {
-        Icon(Icons.Check.Rounded)
-    }
 }
 
 @Composable

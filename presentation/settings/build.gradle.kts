@@ -23,5 +23,6 @@ dependencies {
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.switch))
     implementation(project(module.presentation.designSystem.text))
+    implementation(project(module.utils.device))
     kapt(libs.hilt.compiler)
 }

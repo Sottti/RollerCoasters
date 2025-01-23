@@ -24,4 +24,5 @@ dependencies {
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.typography))
+    implementation(project(module.utils.device))
 }

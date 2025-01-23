@@ -16,7 +16,6 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.previews))
     implementation(project(module.presentation.designSystem.themes))
 }

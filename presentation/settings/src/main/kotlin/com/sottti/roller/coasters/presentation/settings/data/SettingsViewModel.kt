@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
@@ -17,8 +16,8 @@ import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeWithText
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
+import com.sottti.roller.coasters.utils.device.isDynamicColorEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +27,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState())
@@ -36,12 +34,15 @@ internal class SettingsViewModel @Inject constructor(
     val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
 
     init {
-        viewModelScope.launch {
-            settingsRepository.observeDynamicColor().collect { dynamicColorChecked ->
-                _state.update { currentState ->
-                    currentState.copy(
-                        dynamicColor = currentState.dynamicColor.copy(checked = dynamicColorChecked)
-                    )
+        if (isDynamicColorEnabled()) {
+            viewModelScope.launch {
+                settingsRepository.observeDynamicColor().collect { dynamicColorChecked ->
+                    _state.update { currentState ->
+                        currentState.copy(
+                            dynamicColor =
+                                currentState.dynamicColor?.copy(checked = dynamicColorChecked)
+                        )
+                    }
                 }
             }
         }
@@ -97,7 +98,7 @@ internal class SettingsViewModel @Inject constructor(
 }
 
 private fun initialState(): SettingsState = SettingsState(
-    dynamicColor = dynamicColorState(),
+    dynamicColor = dynamicColorState().takeIf { isDynamicColorEnabled() },
     theme = themeState(systemTheme()),
     themePicker = null,
     topBar = TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded),

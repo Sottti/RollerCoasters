@@ -2,7 +2,7 @@
 <resources>
     <string name="dynamic_color_headline">Dynamic Color</string>
     <string name="dynamic_color_supporting">Matches colors with your device’s wallpaper.</string>
-    <string name="theme_color_headline">Pick Theme</string>
+    <string name="theme_color_headline">Theme</string>
     <string name="theme_color_picker_confirm">Confirm</string>
     <string name="theme_color_picker_dismiss">Dismiss</string>
     <string name="theme_color_picker_title">Pick theme</string>

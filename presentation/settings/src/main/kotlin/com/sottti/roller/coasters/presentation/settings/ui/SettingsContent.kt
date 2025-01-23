@@ -26,11 +26,13 @@ internal fun SettingsContent(
     LazyColumn(
         modifier = Modifier.padding(paddingValues)
     ) {
-        item {
-            DynamicColorSetting(
-                onDynamicColorCheckedChange = { onAction(DynamicColorCheckedChange(it)) },
-                state = state.dynamicColor,
-            )
+        state.dynamicColor?.let {
+            item {
+                DynamicColorSetting(
+                    onDynamicColorCheckedChange = { onAction(DynamicColorCheckedChange(it)) },
+                    state = state.dynamicColor,
+                )
+            }
         }
 
         item {

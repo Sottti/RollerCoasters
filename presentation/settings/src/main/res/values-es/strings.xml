@@ -2,7 +2,7 @@
 <resources>
     <string name="dynamic_color_headline">Color Dinámico</string>
     <string name="dynamic_color_supporting">Adapta los colores al fondo de pantalla de tu dispositivo.</string>
-    <string name="theme_color_headline">Elige tema</string>
+    <string name="theme_color_headline">Tema</string>
     <string name="theme_color_picker_confirm">Confirmar</string>
     <string name="theme_color_picker_dismiss">Cancelar</string>
     <string name="theme_color_picker_title">Elige tema</string>
