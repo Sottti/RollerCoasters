@@ -1,35 +1,46 @@
-# Ignore all files in .idea by default
+# IntelliJ IDEA-specific files
 .idea/
-
-# Allow specific files that are project-wide settings
+!.idea/compiler.xml
+!.idea/gradle.xml
+!.idea/ktlint-plugin.xml
 !.idea/misc.xml
 !.idea/vcs.xml
-!.idea/gradle.xml
-!.idea/compiler.xml
-!.idea/ktlint-plugin.xml
-
-# Ignore user-specific and temporary files
+.idea/modules.xml
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/runConfigurations.xml
 .idea/AndroidProjectSystem.xml
 .idea/appInsightsSettings.xml
 .idea/deploymentTargetSelector.xml
-.idea/runConfigurations.xml
-.idea/migrations.xml
 .idea/kotlinc.xml
-.idea/.name
-
-*.iml
-.gradle
-/local.properties
+.idea/migrations.xml
+/.idea/assetWizardSettings.xml
 /.idea/caches
 /.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
 /.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
+
+# Build output
 **/build/
-/build
-/captures
-.externalNativeBuild
+*.aab
+*.ap_
+*.apk
+*.class
+*.dex
+
+# OS and IDE-specific files
+.DS_Store
+Thumbs.db
+
+# Gradle files
+.gradle
+/local.properties
+output.json
+
+# Native build files
 .cxx
-local.properties
+.externalNativeBuild
+
+# Miscellaneous
+captures/
+gen/
+bin/
