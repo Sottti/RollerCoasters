@@ -1,5 +1,3 @@
-@file:Suppress("ConstPropertyName")
-
 package co.cuvva.presentation.design.system.icons.data
 
 import co.cuvva.presentation.design.system.icons.model.IconState
