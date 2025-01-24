@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
 }
 
@@ -14,8 +13,6 @@ kapt {
 
 android {
     namespace = "com.sottti.roller.coasters"
-    buildFeatures { compose = true }
-    composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 
     defaultConfig {
         applicationId = "com.sottti.roller.coasters"
@@ -36,22 +33,10 @@ android {
 
 dependencies {
     implementation(libs.appcompat)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.material)
-    implementation(libs.compose.navigation)
     implementation(libs.hilt)
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.material)
     implementation(libs.splashscreen)
-    implementation(platform(libs.compose.bom))
     implementation(project(module.data.settings))
-    implementation(project(module.presentation.aboutMe))
-    implementation(project(module.presentation.designSystem.icons))
-    implementation(project(module.presentation.designSystem.text))
-    implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.favourites))
-    implementation(project(module.presentation.home))
-    implementation(project(module.presentation.settings))
+    implementation(project(module.presentation.navigationBar))
     implementation(project(module.utils.device))
     kapt(libs.hilt.compiler)
 }

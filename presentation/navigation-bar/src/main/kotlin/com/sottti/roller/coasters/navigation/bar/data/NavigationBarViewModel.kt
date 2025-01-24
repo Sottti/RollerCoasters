@@ -1,8 +1,8 @@
-package com.sottti.roller.coasters.app.data
+package com.sottti.roller.coasters.navigation.bar.data
 
 import androidx.lifecycle.ViewModel
 import co.cuvva.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.app.model.NavigationBarActions
+import com.sottti.roller.coasters.navigation.bar.model.NavigationBarActions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,18 +11,18 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-internal class MainActivityViewModel @Inject constructor() : ViewModel() {
+internal class NavigationBarViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(
-        MainActivityState(
+        NavigationBarState(
             navigationBarItems(),
             topBar = TopBarState(settingsIcon = Icons.Settings.Outlined),
         )
     )
-    val state: StateFlow<MainActivityState> = _state.asStateFlow()
+    val state: StateFlow<NavigationBarState> = _state.asStateFlow()
 
     val actions = NavigationBarActions(
         onDestinationSelected = { destination ->
-            _state.update { it.copy(navigationBarItems = navigationBarItems(destination)) }
+            _state.update { it.copy(items = navigationBarItems(destination)) }
         }
     )
 }

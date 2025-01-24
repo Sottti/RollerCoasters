@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.app.ui
+package com.sottti.roller.coasters.navigation.bar.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.sottti.roller.coasters.app.data.MainActivityViewModel
+import com.sottti.roller.coasters.navigation.bar.data.NavigationBarViewModel
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun NavigationBar(
     mainNavHostController: NavHostController,
-    viewModel: MainActivityViewModel,
+    viewModel: NavigationBarViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -35,7 +35,7 @@ internal fun NavigationBar(
         bottomBar = {
             BottomBar(
                 navController = navigationBarNavHost,
-                navigationBarItems = state.navigationBarItems,
+                navigationBarItems = state.items,
                 navigationBarActions = viewModel.actions,
             )
         },

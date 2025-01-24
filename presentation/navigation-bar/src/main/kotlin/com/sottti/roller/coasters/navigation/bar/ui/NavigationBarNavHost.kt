@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.app.ui
+package com.sottti.roller.coasters.navigation.bar.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sottti.roller.coasters.app.navigation.NavigationBarDestination
+import com.sottti.roller.coasters.navigation.bar.navigation.NavigationBarDestination
 import com.sottti.roller.coasters.presentation.about.me.ui.AboutMe
 import com.sottti.roller.coasters.presentation.favourites.ui.Favourites
 import com.sottti.roller.coasters.presentation.home.ui.Home

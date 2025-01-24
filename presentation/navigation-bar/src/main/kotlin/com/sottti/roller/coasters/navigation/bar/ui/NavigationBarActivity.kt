@@ -1,5 +1,7 @@
-package com.sottti.roller.coasters.app.ui
+package com.sottti.roller.coasters.navigation.bar.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -8,7 +10,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-internal class MainActivity : AppCompatActivity() {
+internal class NavigationBarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -16,8 +18,12 @@ internal class MainActivity : AppCompatActivity() {
 
         setContent {
             RollerCoastersTheme {
-                MainActivityContent()
+                NavigationBarContent()
             }
         }
     }
+}
+
+public fun startNavigationBarActivity(context: Context) {
+    context.startActivity(Intent(context, NavigationBarActivity::class.java))
 }

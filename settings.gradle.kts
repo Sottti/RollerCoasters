@@ -34,6 +34,7 @@ include(
     ":presentation:design-system:typography",
     ":presentation:favourites",
     ":presentation:home",
+    ":presentation:navigation-bar",
     ":presentation:settings",
     ":utils:device",
 )

@@ -1,0 +1,5 @@
+<resources>
+    <string name="navigation_bar_item_label_about_me">About Me</string>>
+    <string name="navigation_bar_item_label_favourites">Favourites</string>>
+    <string name="navigation_bar_item_label_home">Home</string>>
+</resources>

@@ -7,6 +7,7 @@ object module {
         const val aboutMe = ":presentation:about-me"
         const val favourites = ":presentation:favourites"
         const val home = ":presentation:home"
+        const val navigationBar = ":presentation:navigation-bar"
         const val settings = ":presentation:settings"
 
         object designSystem {

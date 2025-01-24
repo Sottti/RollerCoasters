@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.app.ui
+package com.sottti.roller.coasters.navigation.bar.ui
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBar
@@ -8,8 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import co.cuvva.presentation.design.system.icons.model.IconState
 import co.cuvva.presentation.design.system.icons.ui.Icon
-import com.sottti.roller.coasters.app.data.TopBarState
-import com.sottti.roller.coasters.app.navigation.NavigationDestination
+import com.sottti.roller.coasters.navigation.bar.data.TopBarState
+import com.sottti.roller.coasters.navigation.bar.navigation.NavigationDestination
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

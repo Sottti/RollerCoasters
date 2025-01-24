@@ -1,9 +1,9 @@
-package com.sottti.roller.coasters.app.model
+package com.sottti.roller.coasters.navigation.bar.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
-import com.sottti.roller.coasters.app.navigation.NavigationBarDestination
+import com.sottti.roller.coasters.navigation.bar.navigation.NavigationBarDestination
 
 @Immutable
 internal data class NavigationBarItem(

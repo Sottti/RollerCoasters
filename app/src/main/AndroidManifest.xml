@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".app.ui.RollerCoastersApplication"
+        android:name=".app.RollerCoastersApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,10 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".app.ui.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Material3.DayNight.NoActionBar" />
     </application>
 
 </manifest>

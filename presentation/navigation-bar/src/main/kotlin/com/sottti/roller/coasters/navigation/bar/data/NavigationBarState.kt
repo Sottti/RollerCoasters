@@ -1,12 +1,12 @@
-package com.sottti.roller.coasters.app.data
+package com.sottti.roller.coasters.navigation.bar.data
 
 import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
-import com.sottti.roller.coasters.app.model.NavigationBarItems
+import com.sottti.roller.coasters.navigation.bar.model.NavigationBarItems
 
 @Immutable
-internal data class MainActivityState(
-    val navigationBarItems: NavigationBarItems,
+internal data class NavigationBarState(
+    val items: NavigationBarItems,
     val topBar: TopBarState,
 )
 

@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">Montañas Rusas</string>
-    <string name="navigation_bar_item_label_about_me">Sobre mí</string>>
-    <string name="navigation_bar_item_label_favourites">Favoritos</string>>
-    <string name="navigation_bar_item_label_home">Inicio</string>>
 </resources>

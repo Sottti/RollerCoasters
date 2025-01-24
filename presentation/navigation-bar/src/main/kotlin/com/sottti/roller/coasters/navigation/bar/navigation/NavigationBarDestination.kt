@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.app.navigation
+package com.sottti.roller.coasters.navigation.bar.navigation
 
 import androidx.compose.runtime.Immutable
 
