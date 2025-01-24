@@ -1,18 +1,18 @@
-package com.sottti.roller.coasters.presentation.design.system.colors.schemes
+package com.sottti.roller.coasters.presentation.design.system.colors.color
 
-import android.os.Build
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.sottti.roller.coasters.utils.device.isAtLeastSdk31
 
 @Composable
-public fun colorScheme(
+public fun colors(
     dynamicColor: Boolean,
     darkTheme: Boolean,
 ): ColorScheme = when {
-    dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+    dynamicColor && isAtLeastSdk31() -> {
         val context = LocalContext.current
         if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     }

@@ -27,7 +27,6 @@ include(
     ":presentation:design-system:dimensions",
     ":presentation:design-system:icons",
     ":presentation:design-system:playground",
-    ":presentation:design-system:previews",
     ":presentation:design-system:switch",
     ":presentation:design-system:text",
     ":presentation:design-system:themes",

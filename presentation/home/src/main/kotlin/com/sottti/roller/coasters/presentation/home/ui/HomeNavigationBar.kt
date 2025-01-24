@@ -38,7 +38,7 @@ internal fun NavigationBar(
             TopBar(
                 navController = navHostController,
                 scrollBehavior = scrollBehavior,
-                state = state.topBar
+                state = state.topBar,
             )
         },
         bottomBar = {

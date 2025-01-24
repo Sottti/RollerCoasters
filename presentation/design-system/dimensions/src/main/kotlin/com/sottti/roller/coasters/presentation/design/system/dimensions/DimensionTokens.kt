@@ -1,8 +1,7 @@
-package com.sottti.roller.coasters.presentation.design.system.dimensions.data
+package com.sottti.roller.coasters.presentation.design.system.dimensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.sottti.roller.coasters.presentation.design.system.dimensions.model.Dimensions
 
 @Composable
 internal fun compactDimensions() =

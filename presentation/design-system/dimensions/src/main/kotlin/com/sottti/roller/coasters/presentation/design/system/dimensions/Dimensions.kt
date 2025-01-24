@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.design.system.dimensions.model
+package com.sottti.roller.coasters.presentation.design.system.dimensions
 
 import androidx.compose.ui.unit.Dp
 

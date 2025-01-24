@@ -1,8 +1,7 @@
-package com.sottti.roller.coasters.presentation.design.system.dimensions.resolution
+package com.sottti.roller.coasters.presentation.design.system.dimensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import com.sottti.roller.coasters.presentation.design.system.dimensions.data.dimensions
 
 @Composable
 public fun DimensionsLocalProvider(

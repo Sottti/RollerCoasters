@@ -6,7 +6,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.data.settings.di.provideSettingsRepository
-import com.sottti.roller.coasters.presentation.design.system.dimensions.resolution.DimensionsLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
 import com.sottti.roller.coasters.utils.device.isDynamicColorEnabled
 
 @Composable
@@ -29,10 +31,17 @@ public fun RollerCoastersTheme(
     }
 
     DimensionsLocalProvider {
-        BaseTheme(
-            dynamicColor = dynamicColor,
-            darkTheme = isSystemInDarkTheme,
-            content = content,
-        )
+        ColorsLocalProvider(
+            darkTheme = dynamicColor,
+            dynamicColor = isSystemInDarkTheme,
+        ) {
+            OpacityLocalProvider {
+                BaseTheme(
+                    dynamicColor = dynamicColor,
+                    darkTheme = isSystemInDarkTheme,
+                    content = content,
+                )
+            }
+        }
     }
 }
