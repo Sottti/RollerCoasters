@@ -36,7 +36,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.splashscreen)
     implementation(project(module.data.settings))
-    implementation(project(module.presentation.navigationBar))
+    implementation(project(module.presentation.home))
     implementation(project(module.utils.device))
     kapt(libs.hilt.compiler)
 }
