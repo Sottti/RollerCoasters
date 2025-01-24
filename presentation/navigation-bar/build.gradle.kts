@@ -25,8 +25,8 @@ dependencies {
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
+    implementation(project(module.presentation.explore))
     implementation(project(module.presentation.favourites))
-    implementation(project(module.presentation.home))
     implementation(project(module.presentation.settings))
     kapt(libs.hilt.compiler)
 }

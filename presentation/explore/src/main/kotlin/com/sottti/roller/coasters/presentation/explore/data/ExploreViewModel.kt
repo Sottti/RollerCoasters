@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.home.data
+package com.sottti.roller.coasters.presentation.explore.data
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-internal class HomeViewModel @Inject constructor() : ViewModel() {
+internal class ExploreViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(generateRandomColor())
     val state: StateFlow<Color> = _state.asStateFlow()
 }

@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sottti.roller.coasters.navigation.bar.navigation.NavigationBarDestination
 import com.sottti.roller.coasters.presentation.about.me.ui.AboutMe
+import com.sottti.roller.coasters.presentation.explore.ui.Explore
 import com.sottti.roller.coasters.presentation.favourites.ui.Favourites
-import com.sottti.roller.coasters.presentation.home.ui.Home
 
 @Composable
 internal fun NavigationBarNavHost(
@@ -21,11 +21,11 @@ internal fun NavigationBarNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavigationBarDestination.Home.route,
+        startDestination = NavigationBarDestination.Explore.route,
         modifier = Modifier.padding(paddingValues = paddingValues)
     ) {
-        composable(NavigationBarDestination.Home.route) {
-            Home(nestedScrollConnection = nestedScrollConnection)
+        composable(NavigationBarDestination.Explore.route) {
+            Explore(nestedScrollConnection = nestedScrollConnection)
         }
         composable(NavigationBarDestination.Favourites.route) {
             Favourites(nestedScrollConnection = nestedScrollConnection)

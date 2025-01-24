@@ -7,23 +7,23 @@ import com.sottti.roller.coasters.navigation.bar.model.NavigationBarItems
 import com.sottti.roller.coasters.navigation.bar.navigation.NavigationBarDestination
 
 internal fun navigationBarItems(
-    selectedItem: NavigationBarDestination = NavigationBarDestination.Home,
+    selectedItem: NavigationBarDestination = NavigationBarDestination.Explore,
 ): NavigationBarItems =
     NavigationBarItems(
-        items = listOf(home(selectedItem), favourites(selectedItem), aboutMe(selectedItem)),
+        items = listOf(explore(selectedItem), favourites(selectedItem), aboutMe(selectedItem)),
         selectedItem = selectedItem,
     )
 
 
-private fun home(
+private fun explore(
     selectedItem: NavigationBarDestination,
 ) = NavigationBarItem(
-    labelResId = R.string.navigation_bar_item_label_home,
+    labelResId = R.string.navigation_bar_item_label_explore,
     icon = when (selectedItem) {
-        NavigationBarDestination.Home -> Icons.Home.Filled
-        else -> Icons.Home.Outlined
+        NavigationBarDestination.Explore -> Icons.Explore.Filled
+        else -> Icons.Explore.Outlined
     },
-    destination = NavigationBarDestination.Home,
+    destination = NavigationBarDestination.Explore,
 )
 
 private fun favourites(

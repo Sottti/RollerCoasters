@@ -3,7 +3,7 @@
     <string name="account_circle_icon_description">About me</string>
     <string name="arrow_back_icon_description">Arrow back</string>
     <string name="colors_icon_description">Colors</string>
-    <string name="home_icon_description">Home</string>
+    <string name="explore_icon_description">Explore</string>
     <string name="palette_icon_description">Color palette</string>
     <string name="settings_icon_description">Settings</string>
     <string name="star_icon_description">Favourites</string>

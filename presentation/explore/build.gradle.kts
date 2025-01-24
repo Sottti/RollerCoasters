@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.presentation.home"
+    namespace = "com.sottti.roller.coasters.presentation.explore"
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
