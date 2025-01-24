@@ -7,5 +7,5 @@ internal sealed class SettingsAction {
     data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction()
     data class ConfirmThemeSelection(val theme: ThemeWithText) : SettingsAction()
     data object DismissThemePicker : SettingsAction()
-    data object LaunchThemePicker : SettingsAction()
+    data object LaunchAppThemePicker : SettingsAction()
 }

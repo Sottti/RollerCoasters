@@ -21,15 +21,15 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun setAppTheme(theme: Theme) {
         appThemeManager.setAppTheme(theme)
-        localDataSource.setTheme(theme)
+        localDataSource.setAppTheme(theme)
     }
 
-    override suspend fun getAppTheme(): Theme = localDataSource.getTheme()
+    override suspend fun getAppTheme(): Theme = localDataSource.getAppTheme()
 
-    override fun observeAppTheme(): Flow<Theme> = localDataSource.observeTheme()
+    override fun observeAppTheme(): Flow<Theme> = localDataSource.observeAppTheme()
 
     override suspend fun applyStoredAppTheme() {
-        val theme = localDataSource.getTheme()
+        val theme = localDataSource.getAppTheme()
         appThemeManager.setAppTheme(theme)
     }
 }

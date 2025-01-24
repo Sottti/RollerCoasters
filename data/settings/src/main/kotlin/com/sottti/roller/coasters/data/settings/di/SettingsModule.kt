@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.sottti.roller.coasters.data.settings.AppThemeManager
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
+import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.DATA_STORE_NAME
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import dagger.Module
@@ -36,5 +37,4 @@ internal object SettingsModule {
     ): SettingsLocalDataSource = SettingsLocalDataSource(context.dataStore)
 }
 
-private const val DATA_STORE_NAME = "settings"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(DATA_STORE_NAME)

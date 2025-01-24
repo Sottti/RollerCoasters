@@ -15,6 +15,8 @@ internal class SettingsLocalDataSource @Inject constructor(
     private val dataStore: DataStore<Preferences>,
 ) {
     companion object {
+        internal const val DATA_STORE_NAME = "settings"
+
         private const val DYNAMIC_COLOR_DEFAULT_VALUE = true
         private val DYNAMIC_COLOR_KEY = booleanPreferencesKey("dynamic_color")
 
@@ -33,15 +35,15 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
-    suspend fun setTheme(theme: Theme) {
+    suspend fun setAppTheme(theme: Theme) {
         dataStore.edit { preferences ->
             preferences[THEME_KEY] = theme.key
         }
     }
 
-    fun observeTheme(): Flow<Theme> = themeFlow
+    fun observeAppTheme(): Flow<Theme> = themeFlow
 
-    suspend fun getTheme(): Theme = themeFlow.first()
+    suspend fun getAppTheme(): Theme = themeFlow.first()
 
     private val themeFlow: Flow<Theme> = dataStore.data.map { preferences ->
         when (preferences[THEME_KEY] ?: THEME_DEFAULT_VALUE) {

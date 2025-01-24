@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
+import com.sottti.roller.coasters.presentation.settings.model.AppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
-import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 
 @Composable
 internal fun SettingsContent(
@@ -36,15 +36,15 @@ internal fun SettingsContent(
         }
 
         item {
-            ThemeSetting(
-                state = state.theme,
-                onLaunchThemePicker = { onAction(LaunchThemePicker) })
+            AppThemeSetting(
+                state = state.appTheme,
+                onLaunchAppThemePicker = { onAction(LaunchAppThemePicker) })
         }
     }
 
-    state.themePicker?.let { themePickerState ->
-        ThemePickerDialog(
-            state = themePickerState,
+    state.appThemePicker?.let { appThemePickerState ->
+        AppThemePickerDialog(
+            state = appThemePickerState,
             onAction = onAction,
         )
     }
@@ -69,12 +69,12 @@ private fun DynamicColorSetting(
 }
 
 @Composable
-private fun ThemeSetting(
-    state: ThemeState,
-    onLaunchThemePicker: () -> Unit,
+private fun AppThemeSetting(
+    state: AppThemeState,
+    onLaunchAppThemePicker: () -> Unit,
 ) {
     ListItem(
-        modifier = Modifier.clickable { onLaunchThemePicker() },
+        modifier = Modifier.clickable { onLaunchAppThemePicker() },
         headlineContent = { Text(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text(state.supporting) },
