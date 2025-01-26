@@ -1,12 +1,16 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
+import android.R.attr.theme
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.domain.settings.model.Theme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeState
+import com.sottti.roller.coasters.presentation.settings.model.CurrentThemeState
+import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemeSelection
@@ -18,6 +22,7 @@ import com.sottti.roller.coasters.presentation.settings.model.ThemeWithText
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 import com.sottti.roller.coasters.utils.device.isDynamicColorEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,25 +45,37 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun observeDynamicColor() {
         viewModelScope.launch {
-            settingsRepository.observeDynamicColor().collect { dynamicColorChecked ->
-                _state.update { currentState ->
-                    currentState.copy(
-                        dynamicColor = currentState.dynamicColor?.copy(checked = dynamicColorChecked)
-                    )
-                }
-            }
+            settingsRepository
+                .observeDynamicColor()
+                .collect { dynamicColorChecked -> updateDynamicColor(dynamicColorChecked) }
+        }
+    }
+
+    private fun updateDynamicColor(dynamicColorChecked: Boolean) {
+        _state.update { currentState ->
+            currentState.copy(
+                dynamicColor = currentState
+                    .dynamicColor
+                    ?.copy(checkedState = DynamicColorCheckedState.Loaded(dynamicColorChecked))
+            )
         }
     }
 
     private fun observeAppTheme() {
         viewModelScope.launch {
-            settingsRepository.observeAppTheme().collect { theme ->
-                _state.update { currentTheme ->
-                    currentTheme.copy(
-                        appTheme = themeState(theme.toPresentationModel()),
-                    )
-                }
-            }
+            settingsRepository
+                .observeAppTheme()
+                .collect { theme -> updateAppTheme(theme) }
+        }
+    }
+
+    private fun updateAppTheme(theme: Theme) {
+        _state.update { currentTheme ->
+            currentTheme.copy(
+                appTheme = currentTheme.appTheme.copy(
+                    currentTheme = CurrentThemeState.Loaded(theme.toPresentationModel())
+                ),
+            )
         }
     }
 
@@ -76,7 +93,7 @@ internal class SettingsViewModel @Inject constructor(
     private suspend fun showThemePicker() {
         _state.update { currentState ->
             currentState.copy(
-                appThemePicker = themePickerState(
+                appThemePicker = appThemePickerState(
                     settingsRepository.getAppTheme().toPresentationModel()
                 )
             )
@@ -101,28 +118,32 @@ internal class SettingsViewModel @Inject constructor(
     }
 }
 
-private fun initialState(): SettingsState = SettingsState(
-    dynamicColor = dynamicColorState().takeIf { isDynamicColorEnabled() },
-    appTheme = themeState(systemTheme()),
-    appThemePicker = null,
-    topBar = TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded),
-)
+private fun initialState(): SettingsState =
+    SettingsState(
+        dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorEnabled() },
+        appTheme = appThemeInitialState(),
+        appThemePicker = null,
+        topBar = topBarState(),
+    )
 
-private fun dynamicColorState() = DynamicColorState(
-    checked = true,
+private fun dynamicColorInitialState() = DynamicColorState(
+    checkedState = DynamicColorCheckedState.Loading,
     headline = R.string.dynamic_color_headline,
     supporting = R.string.dynamic_color_supporting,
     icon = Icons.Palette.Outlined
 )
 
-private fun themeState(selectedTheme: ThemeWithText) = AppThemeState(
+private fun appThemeInitialState() = AppThemeState(
     headline = R.string.theme_color_headline,
     supporting = R.string.theme_color_supporting,
-    trailing = selectedTheme.text,
+    currentTheme = CurrentThemeState.Loading,
     icon = Icons.Colors.Rounded
 )
 
-private fun themePickerState(
+private fun topBarState(): TopBarState =
+    TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded)
+
+private fun appThemePickerState(
     selectedTheme: ThemeWithText,
 ) = AppThemePickerState(
     title = R.string.theme_color_picker_title,

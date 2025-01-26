@@ -9,8 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicator
+import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeState
+import com.sottti.roller.coasters.presentation.settings.model.CurrentThemeState
+import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
@@ -59,13 +63,23 @@ private fun DynamicColorSetting(
         headlineContent = { Text(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text(state.supporting) },
-        trailingContent = {
-            Switch(
-                checked = state.checked,
-                onCheckedChange = { onDynamicColorCheckedChange(it) },
-            )
-        },
+        trailingContent = { DynamicColorTrailingContent(state, onDynamicColorCheckedChange) },
     )
+}
+
+@Composable
+private fun DynamicColorTrailingContent(
+    state: DynamicColorState,
+    onDynamicColorCheckedChange: (Boolean) -> Unit
+) {
+    when (state.checkedState) {
+        is DynamicColorCheckedState.Loaded -> Switch(
+            checked = state.checkedState.checked,
+            onCheckedChange = { onDynamicColorCheckedChange(it) },
+        )
+
+        DynamicColorCheckedState.Loading -> SmallLoadingIndicator()
+    }
 }
 
 @Composable
@@ -78,6 +92,19 @@ private fun AppThemeSetting(
         headlineContent = { Text(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text(state.supporting) },
-        trailingContent = { Text(state.trailing) },
+        trailingContent = { AppThemeTrailingContent(state) },
     )
+}
+
+@Composable
+private fun AppThemeTrailingContent(state: AppThemeState) {
+    when (state.currentTheme) {
+        is CurrentThemeState.Loaded -> Text(state.currentTheme.theme.text)
+        CurrentThemeState.Loading -> SmallLoadingIndicator()
+    }
+}
+
+@Composable
+private fun SmallLoadingIndicator() {
+    LoadingIndicator(LoadingIndicatorSize.Small)
 }

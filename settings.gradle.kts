@@ -24,6 +24,7 @@ include(
     ":presentation:about-me",
     ":presentation:design-system:colors",
     ":presentation:design-system:dialogs",
+    ":presentation:design-system:loading",
     ":presentation:design-system:dimensions",
     ":presentation:design-system:icons",
     ":presentation:design-system:playground",

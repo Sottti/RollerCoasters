@@ -21,6 +21,7 @@ dependencies {
     implementation(project(module.data.settings))
     implementation(project(module.presentation.designSystem.dialogs))
     implementation(project(module.presentation.designSystem.icons))
+    implementation(project(module.presentation.designSystem.loading))
     implementation(project(module.presentation.designSystem.switch))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.utils.device))

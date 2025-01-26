@@ -6,6 +6,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.sottti.roller.coasters.presentation.design.system.dimensions.model.Dimensions
 
 @Composable
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)

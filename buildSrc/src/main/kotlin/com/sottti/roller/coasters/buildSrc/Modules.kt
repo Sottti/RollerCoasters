@@ -15,6 +15,7 @@ object module {
             const val dialogs = ":presentation:design-system:dialogs"
             const val dimensions = ":presentation:design-system:dimensions"
             const val icons = ":presentation:design-system:icons"
+            const val loading = ":presentation:design-system:loading"
             const val playground = ":presentation:design-system:playground"
             const val switch = ":presentation:design-system:switch"
             const val text = ":presentation:design-system:text"
