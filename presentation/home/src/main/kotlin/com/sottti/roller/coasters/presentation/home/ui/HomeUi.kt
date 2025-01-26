@@ -1,5 +1,12 @@
 package com.sottti.roller.coasters.presentation.home.ui
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -27,4 +34,12 @@ internal fun HomeUi(
             SettingsUi(navController = navController)
         }
     }
+}
+
+public fun AnimatedContentScope.defaultEnterTransition(): EnterTransition {
+    return fadeIn() + scaleIn(initialScale = 0.92f)
+}
+
+public fun AnimatedContentScope.defaultExitTransition(): ExitTransition {
+    return fadeOut(animationSpec = tween(90))
 }

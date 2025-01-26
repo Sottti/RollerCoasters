@@ -14,6 +14,7 @@ android {
 
 dependencies {
     api(libs.compose.window.size)
+    api(project(module.utils.device))
     implementation(libs.compose.material)
     implementation(libs.core.ktx)
     implementation(libs.material)
@@ -24,5 +25,4 @@ dependencies {
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.typography))
-    implementation(project(module.utils.device))
 }

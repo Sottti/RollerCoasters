@@ -10,6 +10,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.Colors
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
 import com.sottti.roller.coasters.utils.device.isDynamicColorEnabled
+import com.sottti.roller.coasters.utils.device.provideDeviceAccessibility
 
 @Composable
 public fun RollerCoastersTheme(
@@ -19,6 +20,7 @@ public fun RollerCoastersTheme(
     val dynamicColorInitialValue = true
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val repository = remember { provideSettingsRepository(context) }
+    val colorContrast = remember { provideDeviceAccessibility(context).colorContrast }
 
     val dynamicColor = when {
         isDynamicColorEnabled() ->
@@ -32,11 +34,13 @@ public fun RollerCoastersTheme(
 
     DimensionsLocalProvider {
         ColorsLocalProvider(
+            colorContrast = colorContrast,
             darkTheme = dynamicColor,
             dynamicColor = isSystemInDarkTheme,
         ) {
             OpacityLocalProvider {
                 BaseTheme(
+                    colorContrast = colorContrast,
                     dynamicColor = dynamicColor,
                     darkTheme = isSystemInDarkTheme,
                     content = content,

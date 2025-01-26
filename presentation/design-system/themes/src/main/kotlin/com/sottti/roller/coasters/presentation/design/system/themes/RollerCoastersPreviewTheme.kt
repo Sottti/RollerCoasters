@@ -6,23 +6,27 @@ import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalMockProvider
+import com.sottti.roller.coasters.utils.device.ColorContrast
 
 @Composable
 public fun RollerCoastersPreviewTheme(
+    colorContrast: ColorContrast = ColorContrast.StandardContrast,
     dynamicColor: Boolean = true,
-    windowWidthSizeClass: WindowWidthSizeClass,
+    windowWidthSizeClass: WindowWidthSizeClass = WindowWidthSizeClass.Compact,
     content: @Composable () -> Unit,
 ) {
     val isSystemInDarkTheme = isSystemInDarkTheme()
     DimensionsLocalMockProvider(windowWidthSizeClass) {
         ColorsLocalProvider(
+            colorContrast = colorContrast,
             darkTheme = dynamicColor,
             dynamicColor = isSystemInDarkTheme,
         ) {
             OpacityLocalProvider {
                 BaseTheme(
-                    dynamicColor = dynamicColor,
+                    colorContrast = colorContrast,
                     darkTheme = isSystemInDarkTheme,
+                    dynamicColor = dynamicColor,
                     content = content,
                 )
             }

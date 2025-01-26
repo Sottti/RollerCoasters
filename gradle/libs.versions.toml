@@ -10,17 +10,19 @@ coroutines = "1.10.1"
 datastorePreferences = "1.1.2"
 hilt = "2.54"
 hiltNavigationCompose = "1.2.0"
+junit = "4.13.2"
 kotlin = "2.1.0"
 kotlinCompilerExtension = "1.5.15"
 material = "1.12.0"
 minSdk = "24"
+mockk = "1.13.14"
 splashscreen = "1.0.1"
 targetSdk = "35"
-uiToolingPreview = "<version>"
 
 [libraries]
 annotations = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+compose-animation = { module = "androidx.compose.animation:animation" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-material = { module = "androidx.compose.material3:material3" }
@@ -37,7 +39,9 @@ datastore-preferences = { module = "androidx.datastore:datastore-preferences", v
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+junit = { module = "junit:junit", version.ref = "junit" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
 [plugins]

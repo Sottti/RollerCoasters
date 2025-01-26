@@ -9,5 +9,5 @@ public fun provideSettingsRepository(
 ): SettingsRepository =
     EntryPointAccessors.fromApplication(
         context = context.applicationContext,
-        entryPoint = SettingsRepositoryEntryPoint::class.java
+        entryPoint = SettingsRepositoryEntryPoint::class.java,
     ).getSettingsRepository()
