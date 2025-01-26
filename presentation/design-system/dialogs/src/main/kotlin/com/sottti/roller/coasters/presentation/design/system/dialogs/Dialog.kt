@@ -11,13 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.presentation.design.system.text.Text
 
 public object Dialog {
@@ -27,23 +24,21 @@ public object Dialog {
         @StringRes title: Int,
         @StringRes confirm: Int,
         @StringRes dismiss: Int,
-        @StringRes options: List<Int>,
-        @StringRes initialSelection: Int,
-        onConfirm: (Int) -> Unit,
+        options: List<RadioButtonOption>,
+        onOptionSelected: (RadioButtonOption) -> Unit,
+        onConfirm: () -> Unit,
         onDismiss: () -> Unit,
     ) {
-        var selection by remember { mutableIntStateOf(initialSelection) }
-
         AlertDialog(
             onDismissRequest = onDismiss,
             title = { Text(title) },
             text = {
                 OptionsList(
                     options = options,
-                    selection = selection,
-                    onOptionSelected = { selection = it })
+                    onOptionSelected = onOptionSelected
+                )
             },
-            confirmButton = { ConfirmButton(text = confirm, onConfirm = { onConfirm(selection) }) },
+            confirmButton = { ConfirmButton(text = confirm, onConfirm = { onConfirm() }) },
             dismissButton = { DismissButton(text = dismiss, onDismiss = onDismiss) },
         )
     }
@@ -51,15 +46,13 @@ public object Dialog {
 
 @Composable
 private fun OptionsList(
-    @StringRes options: List<Int>,
-    @StringRes selection: Int,
-    onOptionSelected: (Int) -> Unit,
+    options: List<RadioButtonOption>,
+    onOptionSelected: (RadioButtonOption) -> Unit,
 ) {
     Column {
         options.forEach { option ->
             RadioButtonRow(
-                text = option,
-                selected = option == selection,
+                option = option,
                 onOptionSelected = onOptionSelected,
             )
         }
@@ -68,22 +61,22 @@ private fun OptionsList(
 
 @Composable
 private fun RadioButtonRow(
-    selected: Boolean,
-    @StringRes text: Int,
-    onOptionSelected: (Int) -> Unit,
+    option: RadioButtonOption,
+    onOptionSelected: (RadioButtonOption) -> Unit,
 ) {
     ListItem(
-        headlineContent = { Text(text) },
+        leadingContent = { Icon(option.icon) },
+        headlineContent = { Text(option.text) },
         trailingContent = {
             RadioButton(
-                selected = selected,
-                onClick = { onOptionSelected(text) })
+                selected = option.selected,
+                onClick = { onOptionSelected(option) })
         },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         modifier = Modifier
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.small)
-            .clickable { onOptionSelected(text) },
+            .clickable { onOptionSelected(option) },
     )
 }
 

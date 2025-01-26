@@ -4,8 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.Theme.DarkTheme
+import com.sottti.roller.coasters.domain.settings.model.Theme.LightTheme
+import com.sottti.roller.coasters.domain.settings.model.Theme.SystemTheme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.presentation.settings.R
+import com.sottti.roller.coasters.presentation.settings.model.AppTheme
 import com.sottti.roller.coasters.presentation.settings.model.AppThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.CurrentThemeState
@@ -17,7 +21,6 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Dis
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
-import com.sottti.roller.coasters.presentation.settings.model.ThemeWithText
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 import com.sottti.roller.coasters.utils.device.isDynamicColorEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -71,7 +74,9 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentTheme ->
             currentTheme.copy(
                 appTheme = currentTheme.appTheme.copy(
-                    currentTheme = CurrentThemeState.Loaded(theme.toPresentationModel())
+                    selectedTheme = CurrentThemeState.Loaded(
+                        theme.toPresentationModel(currentTheme.appTheme.selectedTheme == theme),
+                    )
                 ),
             )
         }
@@ -80,25 +85,38 @@ internal class SettingsViewModel @Inject constructor(
     private fun processAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
-                LaunchAppThemePicker -> showThemePicker()
-                DismissThemePicker -> hideThemePicker()
+                LaunchAppThemePicker -> showAppThemePicker()
+                DismissThemePicker -> hideAppThemePicker()
                 is DynamicColorCheckedChange -> setDynamicColor(action.checked)
+                is SettingsAction.ThemeSelected -> updateAppThemePicker(action.theme)
                 is ConfirmThemeSelection -> setAppTheme(action.theme)
             }
         }
     }
 
-    private suspend fun showThemePicker() {
+    private suspend fun showAppThemePicker() {
         _state.update { currentState ->
             currentState.copy(
                 appThemePicker = appThemePickerState(
-                    settingsRepository.getAppTheme().toPresentationModel()
+                    selectedTheme = settingsRepository
+                        .getAppTheme()
+                        .toPresentationModel(isSelectedTheme = true)
                 )
             )
         }
     }
 
-    private fun hideThemePicker() {
+    private fun updateAppThemePicker(
+        selectedTheme: AppTheme,
+    ) {
+        _state.update { currentState ->
+            currentState.copy(
+                appThemePicker = appThemePickerState(selectedTheme = selectedTheme)
+            )
+        }
+    }
+
+    private fun hideAppThemePicker() {
         _state.update { currentState ->
             currentState.copy(
                 appThemePicker = null,
@@ -110,8 +128,8 @@ internal class SettingsViewModel @Inject constructor(
         settingsRepository.setDynamicColor(enabled)
     }
 
-    private suspend fun setAppTheme(theme: ThemeWithText) {
-        hideThemePicker()
+    private suspend fun setAppTheme(theme: AppTheme) {
+        hideAppThemePicker()
         settingsRepository.setAppTheme(theme.toDomainModel())
     }
 }
@@ -134,7 +152,7 @@ private fun dynamicColorInitialState() = DynamicColorState(
 private fun appThemeInitialState() = AppThemeState(
     headline = R.string.theme_color_headline,
     supporting = R.string.theme_color_supporting,
-    currentTheme = CurrentThemeState.Loading,
+    selectedTheme = CurrentThemeState.Loading,
     icon = Icons.Colors.Rounded
 )
 
@@ -142,16 +160,19 @@ private fun topBarState(): TopBarState =
     TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded)
 
 private fun appThemePickerState(
-    selectedTheme: ThemeWithText,
+    selectedTheme: AppTheme,
 ) = AppThemePickerState(
     title = R.string.theme_color_picker_title,
-    selectedTheme = selectedTheme,
     confirm = R.string.theme_color_picker_confirm,
     dismiss = R.string.theme_color_picker_dismiss,
-    themes = themesList,
+    themes = themesList(selectedTheme),
 )
 
-private val themesList = listOf(systemTheme(), lightTheme(), darkTheme())
-private fun darkTheme() = ThemeWithText.DarkTheme(R.string.theme_dark)
-private fun lightTheme() = ThemeWithText.LightTheme(R.string.theme_light)
-private fun systemTheme() = ThemeWithText.SystemTheme(R.string.theme_system)
+private fun themesList(
+    selectedTheme: AppTheme,
+) = listOf(
+    SystemTheme.toPresentationModel(isSelectedTheme = selectedTheme is AppTheme.SystemTheme),
+    LightTheme.toPresentationModel(isSelectedTheme = selectedTheme is AppTheme.LightTheme),
+    DarkTheme.toPresentationModel(isSelectedTheme = selectedTheme is AppTheme.DarkTheme),
+)
+

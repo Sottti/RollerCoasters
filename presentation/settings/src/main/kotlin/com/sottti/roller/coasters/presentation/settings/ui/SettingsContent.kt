@@ -98,8 +98,8 @@ private fun AppThemeSetting(
 
 @Composable
 private fun AppThemeTrailingContent(state: AppThemeState) {
-    when (state.currentTheme) {
-        is CurrentThemeState.Loaded -> Text(state.currentTheme.theme.text)
+    when (state.selectedTheme) {
+        is CurrentThemeState.Loaded -> Text(state.selectedTheme.theme.text)
         CurrentThemeState.Loading -> SmallLoadingIndicator()
     }
 }
