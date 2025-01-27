@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="color_contrast_color_headline">Color Contrast</string>
+    <string name="color_contrast_color_supporting">Higher contrast makes text, buttons, and icons stand out more.</string>
+    <string name="color_contrast_high_contrast">High contrast</string>
+    <string name="color_contrast_medium_contrast">Medium contrast</string>
+    <string name="color_contrast_picker_title">Pick contrast</string>
+    <string name="color_contrast_standard_contrast">Standard contrast</string>
+    <string name="color_contrast_system_contrast">Standard contrast</string>
+</resources>

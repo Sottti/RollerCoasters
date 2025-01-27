@@ -2,6 +2,11 @@
 <resources>
     <string name="account_circle_icon_description">Sobre mí</string>
     <string name="arrow_back_icon_description">Flecha atras</string>
+    <string name="brightness_auto">Brillo automático</string>
+    <string name="brightness_high">Brillo alto</string>
+    <string name="brightness_medium">Brillo medio</string>
+    <string name="brightness_standard">Brillo normal</string>
+    <string name="colors_icon_contrast">Contraste</string>
     <string name="colors_icon_description">Colores</string>
     <string name="dark_mode_icon_description">Modo oscuro</string>
     <string name="explore_icon_description">Explorar</string>

@@ -24,10 +24,66 @@ public object Icons {
         )
     }
 
+    public object BrightnessAuto {
+        public val Description: Int = R.string.brightness_auto
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_brightness_auto_rounded_filled,
+            descriptionResId = Description,
+        )
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_brightness_auto_rounded_outlined,
+            descriptionResId = Description,
+        )
+    }
+
+    public object BrightnessHigh {
+        public val Description: Int = R.string.brightness_high
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_brightness_7_rounded_filled,
+            descriptionResId = Description,
+        )
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_brightness_7_rounded_outlined,
+            descriptionResId = Description,
+        )
+    }
+
+    public object BrightnessMedium {
+        public val Description: Int = R.string.brightness_medium
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_brightness_medium_rounded_filled,
+            descriptionResId = Description,
+        )
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_brightness_medium_rounded_outlined,
+            descriptionResId = Description,
+        )
+    }
+
+    public object BrightnessStandard {
+        public val Description: Int = R.string.brightness_standard
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_brightness_4_rounded_filled,
+            descriptionResId = Description,
+        )
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_brightness_4_rounded_outlined,
+            descriptionResId = Description,
+        )
+    }
+
     public object Colors {
         public val Description: Int = R.string.colors_icon_description
         public val Rounded: IconState = IconState(
             resId = R.drawable.ic_colors_rounded,
+            descriptionResId = Description,
+        )
+    }
+
+    public object Contrast {
+        public val Description: Int = R.string.colors_icon_contrast
+        public val Rounded: IconState = IconState(
+            resId = R.drawable.ic_contrast_rounded,
             descriptionResId = Description,
         )
     }

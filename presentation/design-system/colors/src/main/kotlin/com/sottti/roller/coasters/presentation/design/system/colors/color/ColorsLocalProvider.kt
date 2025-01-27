@@ -5,7 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
 public fun ColorsLocalProvider(
-    colorContrast: com.sottti.roller.coasters.utils.device.ColorContrast,
+    colorContrast: ColorContrastTheme,
     darkTheme: Boolean,
     dynamicColor: Boolean,
     content: @Composable () -> Unit,

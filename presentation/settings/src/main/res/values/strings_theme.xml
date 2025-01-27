@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_dark">Dark theme</string>
+    <string name="theme_headline">Theme</string>
+    <string name="theme_light">Light theme</string>
+    <string name="theme_picker_title">Pick theme</string>
+    <string name="theme_supporting">Light, dark or system default theme.</string>
+    <string name="theme_system">System theme</string>
+</resources>

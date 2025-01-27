@@ -4,9 +4,12 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 internal sealed class SettingsAction {
-    data class ConfirmAppThemePickerSelection(val theme: AppTheme) : SettingsAction()
     data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction()
-    data class AppThemePickerSelectionChange(val theme: AppTheme) : SettingsAction()
-    data object DismissAppThemePicker : SettingsAction()
-    data object LaunchAppThemePicker : SettingsAction()
+    data object LaunchThemePicker : SettingsAction()
+    data class ThemePickerSelectionChange(val theme: ThemeUi) : SettingsAction()
+    data class ConfirmThemePickerSelection(val theme: ThemeUi) : SettingsAction()
+    data object DismissThemePicker : SettingsAction()
+    data object LaunchColorContrastPicker : SettingsAction()
+    data class ColorContrastPickerSelectionChange(val contrast: ColorContrast) : SettingsAction()
+    data object DismissColorContrastPicker : SettingsAction()
 }

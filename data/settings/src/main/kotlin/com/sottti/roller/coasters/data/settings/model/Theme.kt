@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.settings.model
+package com.sottti.roller.coasters.data.settings.model
 
 public sealed class Theme {
     public data object DarkTheme : Theme()

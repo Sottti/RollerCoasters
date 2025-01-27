@@ -2,6 +2,11 @@
 <resources>
     <string name="account_circle_icon_description">About me</string>
     <string name="arrow_back_icon_description">Arrow back</string>
+    <string name="brightness_auto">Auto brightness</string>
+    <string name="brightness_high">High brightness</string>
+    <string name="brightness_medium">Medium brightness</string>
+    <string name="brightness_standard">Standard brightness</string>
+    <string name="colors_icon_contrast">Contrast</string>
     <string name="colors_icon_description">Colors</string>
     <string name="dark_mode_icon_description">Dark mode</string>
     <string name="explore_icon_description">Explore</string>

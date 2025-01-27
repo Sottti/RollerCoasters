@@ -1,14 +1,14 @@
 package com.sottti.roller.coasters.data.settings.repository
 
-import com.sottti.roller.coasters.data.settings.AppThemeManager
+import com.sottti.roller.coasters.data.settings.ThemeManager
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
-import com.sottti.roller.coasters.domain.settings.model.Theme
-import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.data.settings.model.ColorContrast
+import com.sottti.roller.coasters.data.settings.model.Theme
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class SettingsRepositoryImpl @Inject constructor(
-    private val appThemeManager: AppThemeManager,
+    private val themeManager: ThemeManager,
     private val localDataSource: SettingsLocalDataSource,
 ) : SettingsRepository {
 
@@ -19,17 +19,31 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun observeDynamicColor(): Flow<Boolean> =
         localDataSource.observeDynamicColor()
 
-    override suspend fun setAppTheme(theme: Theme) {
-        appThemeManager.setAppTheme(theme)
-        localDataSource.setAppTheme(theme)
+    override suspend fun setTheme(theme: Theme) {
+        themeManager.setTheme(theme)
+        localDataSource.setTheme(theme)
     }
 
-    override suspend fun getAppTheme(): Theme = localDataSource.getAppTheme()
+    override suspend fun getTheme(): Theme = localDataSource.getTheme()
 
-    override fun observeAppTheme(): Flow<Theme> = localDataSource.observeAppTheme()
+    override fun observeTheme(): Flow<Theme> = localDataSource.observeTheme()
 
-    override suspend fun applyStoredAppTheme() {
-        val theme = localDataSource.getAppTheme()
-        appThemeManager.setAppTheme(theme)
+    override suspend fun applyStoredTheme() {
+        val theme = localDataSource.getTheme()
+        themeManager.setTheme(theme)
+    }
+
+    override suspend fun setColorContrast(
+        contrast: ColorContrast,
+    ): ColorContrast {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getColorContrast(): ColorContrast {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeColorContrast(): Flow<ColorContrast> {
+        TODO("Not yet implemented")
     }
 }

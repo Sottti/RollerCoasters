@@ -20,7 +20,6 @@ dependencyResolutionManagement {
 include(
     ":app",
     ":data:settings",
-    ":domain:settings",
     ":presentation:about-me",
     ":presentation:design-system:colors",
     ":presentation:design-system:dialogs",

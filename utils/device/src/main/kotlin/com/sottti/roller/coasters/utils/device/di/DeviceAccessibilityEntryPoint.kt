@@ -1,5 +1,6 @@
-package com.sottti.roller.coasters.utils.device
+package com.sottti.roller.coasters.utils.device.di
 
+import com.sottti.roller.coasters.utils.device.accesibility.DeviceAccessibility
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

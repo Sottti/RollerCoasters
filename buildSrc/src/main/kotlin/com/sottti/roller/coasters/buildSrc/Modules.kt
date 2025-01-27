@@ -24,10 +24,6 @@ object module {
         }
     }
 
-    object domain {
-        const val settings = ":domain:settings"
-    }
-
     object data {
         const val settings = ":data:settings"
     }

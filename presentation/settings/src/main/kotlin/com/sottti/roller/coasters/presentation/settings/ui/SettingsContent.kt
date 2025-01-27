@@ -12,14 +12,17 @@ import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicator
 import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
-import com.sottti.roller.coasters.presentation.settings.model.AppThemeState
-import com.sottti.roller.coasters.presentation.settings.model.CurrentThemeState
+import com.sottti.roller.coasters.presentation.settings.model.ColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 
 @Composable
 internal fun SettingsContent(
@@ -40,15 +43,22 @@ internal fun SettingsContent(
         }
 
         item {
-            AppThemeSetting(
-                state = state.appTheme,
-                onLaunchAppThemePicker = { onAction(LaunchAppThemePicker) })
+            ThemeSetting(
+                state = state.theme,
+                onLaunchThemePicker = { onAction(LaunchThemePicker) })
+        }
+
+        item {
+            ColorContrastSetting(
+                state = state.colorContrast,
+                onLaunchColorContrastPicker = { onAction(LaunchColorContrastPicker) },
+            )
         }
     }
 
-    state.appThemePicker?.let { appThemePickerState ->
-        AppThemePickerDialog(
-            state = appThemePickerState,
+    state.themePicker?.let { themePickerState ->
+        ThemePickerDialog(
+            state = themePickerState,
             onAction = onAction,
         )
     }
@@ -83,24 +93,46 @@ private fun DynamicColorTrailingContent(
 }
 
 @Composable
-private fun AppThemeSetting(
-    state: AppThemeState,
-    onLaunchAppThemePicker: () -> Unit,
+private fun ThemeSetting(
+    state: ThemeState,
+    onLaunchThemePicker: () -> Unit,
 ) {
     ListItem(
-        modifier = Modifier.clickable { onLaunchAppThemePicker() },
+        modifier = Modifier.clickable { onLaunchThemePicker() },
         headlineContent = { Text(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text(state.supporting) },
-        trailingContent = { AppThemeTrailingContent(state) },
+        trailingContent = { ThemeTrailingContent(state) },
     )
 }
 
 @Composable
-private fun AppThemeTrailingContent(state: AppThemeState) {
+private fun ColorContrastSetting(
+    state: ColorContrastState,
+    onLaunchColorContrastPicker: () -> Unit,
+) {
+    ListItem(
+        modifier = Modifier.clickable { onLaunchColorContrastPicker() },
+        headlineContent = { Text(state.headline) },
+        leadingContent = { Icon(state.icon) },
+        supportingContent = { Text(state.supporting) },
+        trailingContent = { ColorContrastTrailingContent(state) },
+    )
+}
+
+@Composable
+private fun ThemeTrailingContent(state: ThemeState) {
     when (state.selectedTheme) {
-        is CurrentThemeState.Loaded -> Text(state.selectedTheme.theme.text)
-        CurrentThemeState.Loading -> SmallLoadingIndicator()
+        is SelectedThemeState.Loaded -> Text(state.selectedTheme.theme.text)
+        SelectedThemeState.Loading -> SmallLoadingIndicator()
+    }
+}
+
+@Composable
+private fun ColorContrastTrailingContent(state: ColorContrastState) {
+    when (state.selectedColorContrast) {
+        is SelectedColorContrastState.Loaded -> Text(state.selectedColorContrast.colorContrast.text)
+        SelectedColorContrastState.Loading -> SmallLoadingIndicator()
     }
 }
 

@@ -6,9 +6,11 @@ import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class SettingsState(
-    val appTheme: AppThemeState,
-    val appThemePicker: AppThemePickerState?,
     val dynamicColor: DynamicColorState?,
+    val theme: ThemeState,
+    val themePicker: ThemePickerState?,
+    val colorContrast: ColorContrastState,
+    val colorContrastPicker : ColorContrastPickerState?,
     val topBar: TopBarState,
 )
 
@@ -35,29 +37,51 @@ internal sealed class DynamicColorCheckedState {
 }
 
 @Immutable
-internal data class AppThemeState(
+internal data class ThemeState(
     @StringRes val headline: Int,
     @StringRes val supporting: Int,
-    val selectedTheme: CurrentThemeState,
+    val selectedTheme: SelectedThemeState,
     val icon: IconState,
 )
 
 @Immutable
-internal sealed class CurrentThemeState {
-    data object Loading : CurrentThemeState()
-    data class Loaded(val theme: AppTheme) : CurrentThemeState()
-}
-
-@Immutable
-internal data class AppThemePickerState(
-    @StringRes val confirm: Int,
-    @StringRes val dismiss: Int,
-    @StringRes val title: Int,
-    val themes: List<AppTheme>,
+internal data class ColorContrastState(
+    @StringRes val headline: Int,
+    @StringRes val supporting: Int,
+    val selectedColorContrast: SelectedColorContrastState,
+    val icon: IconState,
 )
 
 @Immutable
-internal sealed class AppTheme(
+internal sealed class SelectedThemeState {
+    data object Loading : SelectedThemeState()
+    data class Loaded(val theme: ThemeUi) : SelectedThemeState()
+}
+
+@Immutable
+internal sealed class SelectedColorContrastState {
+    data object Loading : SelectedColorContrastState()
+    data class Loaded(val colorContrast: ColorContrastUi) : SelectedColorContrastState()
+}
+
+@Immutable
+internal data class ThemePickerState(
+    @StringRes val confirm: Int,
+    @StringRes val dismiss: Int,
+    @StringRes val title: Int,
+    val themes: List<ThemeUi>,
+)
+
+@Immutable
+internal data class ColorContrastPickerState(
+    @StringRes val confirm: Int,
+    @StringRes val dismiss: Int,
+    @StringRes val title: Int,
+    val contrasts: List<ColorContrastUi>,
+)
+
+@Immutable
+internal sealed class ThemeUi(
     @StringRes val text: Int,
     val icon: IconState,
     val selected: Boolean,
@@ -66,18 +90,48 @@ internal sealed class AppTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : AppTheme(text, icon, selected)
+    ) : ThemeUi(text, icon, selected)
 
     class LightTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : AppTheme(text, icon, selected)
+    ) : ThemeUi(text, icon, selected)
 
     class SystemTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : AppTheme(text, icon, selected)
+    ) : ThemeUi(text, icon, selected)
+}
 
+@Immutable
+internal sealed class ColorContrastUi(
+    @StringRes val text: Int,
+    val icon: IconState,
+    val selected: Boolean,
+) {
+    class StandardContrast(
+        @StringRes text: Int,
+        icon: IconState,
+        selected: Boolean,
+    ) : ColorContrastUi(text, icon, selected)
+
+    class MediumContrast(
+        @StringRes text: Int,
+        icon: IconState,
+        selected: Boolean,
+    ) : ColorContrastUi(text, icon, selected)
+
+    class HighContrast(
+        @StringRes text: Int,
+        icon: IconState,
+        selected: Boolean,
+    ) : ColorContrastUi(text, icon, selected)
+
+    class SystemContrast(
+        @StringRes text: Int,
+        icon: IconState,
+        selected: Boolean,
+    ) : ColorContrastUi(text, icon, selected)
 }

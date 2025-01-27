@@ -3,14 +3,14 @@ package com.sottti.roller.coasters.presentation.design.system.themes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorContrastTheme
 import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalMockProvider
-import com.sottti.roller.coasters.utils.device.ColorContrast
 
 @Composable
 public fun RollerCoastersPreviewTheme(
-    colorContrast: ColorContrast = ColorContrast.StandardContrast,
+    colorContrast: ColorContrastTheme = ColorContrastTheme.StandardContrast,
     dynamicColor: Boolean = true,
     windowWidthSizeClass: WindowWidthSizeClass = WindowWidthSizeClass.Compact,
     content: @Composable () -> Unit,

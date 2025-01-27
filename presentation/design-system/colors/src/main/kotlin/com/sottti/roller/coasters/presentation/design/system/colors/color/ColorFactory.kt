@@ -5,12 +5,11 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.sottti.roller.coasters.utils.device.ColorContrast
-import com.sottti.roller.coasters.utils.device.isAtLeastSdk31
+import com.sottti.roller.coasters.utils.device.sdk.isAtLeastSdk31
 
 @Composable
 public fun colors(
-    colorContrast: ColorContrast,
+    colorContrast: ColorContrastTheme,
     darkTheme: Boolean,
     dynamicColor: Boolean,
 ): ColorScheme = when {
@@ -23,16 +22,14 @@ public fun colors(
     }
 
     darkTheme -> when (colorContrast) {
-        ColorContrast.LowContrast -> ColorSchemes.Dark.standardContrast
-        ColorContrast.StandardContrast -> ColorSchemes.Dark.standardContrast
-        ColorContrast.MediumContrast -> ColorSchemes.Dark.mediumContrast
-        ColorContrast.HighContrast -> ColorSchemes.Dark.highContrast
+        ColorContrastTheme.HighContrast -> ColorSchemes.Dark.highContrast
+        ColorContrastTheme.MediumContrast -> ColorSchemes.Dark.mediumContrast
+        ColorContrastTheme.StandardContrast -> ColorSchemes.Dark.standardContrast
     }
 
     else -> when (colorContrast) {
-        ColorContrast.LowContrast -> ColorSchemes.Light.standardContrast
-        ColorContrast.StandardContrast -> ColorSchemes.Light.standardContrast
-        ColorContrast.MediumContrast -> ColorSchemes.Light.mediumContrast
-        ColorContrast.HighContrast -> ColorSchemes.Light.highContrast
+        ColorContrastTheme.HighContrast -> ColorSchemes.Light.highContrast
+        ColorContrastTheme.MediumContrast -> ColorSchemes.Light.mediumContrast
+        ColorContrastTheme.StandardContrast -> ColorSchemes.Light.standardContrast
     }
 }

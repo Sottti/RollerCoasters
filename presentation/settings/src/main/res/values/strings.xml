@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dynamic_color_headline">Dynamic Color</string>
-    <string name="dynamic_color_supporting">Matches colors with your device’s wallpaper.</string>
-    <string name="theme_color_headline">Theme</string>
-    <string name="theme_color_picker_confirm">Confirm</string>
-    <string name="theme_color_picker_dismiss">Dismiss</string>
-    <string name="theme_color_picker_title">Pick theme</string>
-    <string name="theme_color_supporting">Light, dark or system default theme.</string>
-    <string name="theme_dark">Dark theme</string>
-    <string name="theme_light">Light theme</string>
-    <string name="theme_system">System theme</string>
+    <string name="picker_confirm">Confirm</string>
+    <string name="picker_dismiss">Dismiss</string>
     <string name="title">Settings</string>
 </resources>

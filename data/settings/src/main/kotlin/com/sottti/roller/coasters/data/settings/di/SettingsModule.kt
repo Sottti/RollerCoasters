@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.sottti.roller.coasters.data.settings.AppThemeManager
+import com.sottti.roller.coasters.data.settings.ThemeManager
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.DATA_STORE_NAME
+import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
-import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,10 +24,10 @@ internal object SettingsModule {
     @Singleton
     fun provideRepository(
         localDataSource: SettingsLocalDataSource,
-        appThemeManager: AppThemeManager,
+        themeManager: ThemeManager,
     ): SettingsRepository = SettingsRepositoryImpl(
         localDataSource = localDataSource,
-        appThemeManager = appThemeManager,
+        themeManager = themeManager,
     )
 
     @Provides

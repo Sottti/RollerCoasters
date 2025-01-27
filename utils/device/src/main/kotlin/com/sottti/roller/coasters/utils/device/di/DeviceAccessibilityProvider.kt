@@ -1,6 +1,7 @@
-package com.sottti.roller.coasters.utils.device
+package com.sottti.roller.coasters.utils.device.di
 
 import android.content.Context
+import com.sottti.roller.coasters.utils.device.accesibility.DeviceAccessibility
 import dagger.hilt.android.EntryPointAccessors
 
 public fun provideDeviceAccessibility(

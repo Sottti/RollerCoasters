@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.di
 
 import android.content.Context
-import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import dagger.hilt.android.EntryPointAccessors
 
 public fun provideSettingsRepository(

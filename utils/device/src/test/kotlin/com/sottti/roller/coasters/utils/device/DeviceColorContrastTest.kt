@@ -1,5 +1,8 @@
 package com.sottti.roller.coasters.utils.device
 
+import com.sottti.roller.coasters.utils.device.accesibility.DeviceAccessibility
+import com.sottti.roller.coasters.utils.device.accesibility.DeviceColorContrast.*
+import com.sottti.roller.coasters.utils.device.sdk.SdkLevel
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
@@ -15,7 +18,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = mockk { every { contrast } returns -0.1f },
         )
-        assertEquals(ColorContrast.LowContrast, deviceAccessibility.colorContrast)
+        assertEquals(LowContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -24,7 +27,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel33,
             uiModeManager = mockk { every { contrast } returns -0.1f },
         )
-        assertEquals(ColorContrast.StandardContrast, deviceAccessibility.colorContrast)
+        assertEquals(StandardContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -33,7 +36,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = mockk { every { contrast } returns 0.0f },
         )
-        assertEquals(ColorContrast.StandardContrast, deviceAccessibility.colorContrast)
+        assertEquals(StandardContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -42,7 +45,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = mockk { every { contrast } returns 0.4f },
         )
-        assertEquals(ColorContrast.StandardContrast, deviceAccessibility.colorContrast)
+        assertEquals(StandardContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -51,7 +54,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = mockk { every { contrast } returns 0.5f },
         )
-        assertEquals(ColorContrast.MediumContrast, deviceAccessibility.colorContrast)
+        assertEquals(MediumContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -60,7 +63,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = mockk { every { contrast } returns 0.99f },
         )
-        assertEquals(ColorContrast.MediumContrast, deviceAccessibility.colorContrast)
+        assertEquals(MediumContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -69,7 +72,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = mockk { every { contrast } returns 1.0f },
         )
-        assertEquals(ColorContrast.HighContrast, deviceAccessibility.colorContrast)
+        assertEquals(HighContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -78,7 +81,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel33,
             uiModeManager = mockk { every { contrast } returns 1.0f },
         )
-        assertEquals(ColorContrast.StandardContrast, deviceAccessibility.colorContrast)
+        assertEquals(StandardContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -87,7 +90,7 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel34,
             uiModeManager = null,
         )
-        assertEquals(ColorContrast.StandardContrast, deviceAccessibility.colorContrast)
+        assertEquals(StandardContrast, deviceAccessibility.colorContrast)
     }
 
     @Test
@@ -96,6 +99,6 @@ internal class ColorContrastTest {
             sdkLevel = sdkLevel33,
             uiModeManager = null,
         )
-        assertEquals(ColorContrast.StandardContrast, deviceAccessibility.colorContrast)
+        assertEquals(StandardContrast, deviceAccessibility.colorContrast)
     }
 }

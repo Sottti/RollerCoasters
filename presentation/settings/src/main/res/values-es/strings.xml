@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dynamic_color_headline">Color Dinámico</string>
-    <string name="dynamic_color_supporting">Adapta los colores al fondo de pantalla de tu dispositivo.</string>
-    <string name="theme_color_headline">Tema</string>
-    <string name="theme_color_picker_confirm">Confirmar</string>
-    <string name="theme_color_picker_dismiss">Cancelar</string>
-    <string name="theme_color_picker_title">Elige tema</string>
-    <string name="theme_color_supporting">Claro, oscuro o tema del sistema.</string>
-    <string name="theme_dark">Tema oscuro</string>
-    <string name="theme_light">Tema claro</string>
-    <string name="theme_system">Tema del sistema</string>
+    <string name="picker_confirm">Confirmar</string>
+    <string name="picker_dismiss">Descartar</string>
     <string name="title">Ajustes</string>
 </resources>

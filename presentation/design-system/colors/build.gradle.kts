@@ -17,5 +17,6 @@ dependencies {
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
     implementation(platform(libs.compose.bom))
+    implementation(project(module.data.settings))
     implementation(project(module.utils.device))
 }

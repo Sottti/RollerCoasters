@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_dark">Tema oscuro</string>
+    <string name="theme_headline">Tema</string>
+    <string name="theme_light">Tema claro</string>
+    <string name="theme_picker_title">Elige tema</string>
+    <string name="theme_supporting">Claro, oscuro o tema del sistema.</string>
+    <string name="theme_system">Tema del sistema</string>
+</resources>

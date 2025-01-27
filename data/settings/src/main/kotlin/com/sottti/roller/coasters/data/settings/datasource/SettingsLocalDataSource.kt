@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.data.settings.model.Theme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -20,7 +20,7 @@ internal class SettingsLocalDataSource @Inject constructor(
         private const val DYNAMIC_COLOR_DEFAULT_VALUE = true
         private val DYNAMIC_COLOR_KEY = booleanPreferencesKey("dynamic_color")
 
-        private val THEME_DEFAULT_VALUE = Theme.SystemTheme.key
+        private val THEME_DEFAULT_VALUE = Theme.SystemTheme.toString()
         private val THEME_KEY = stringPreferencesKey("theme")
     }
 
@@ -35,20 +35,20 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
-    suspend fun setAppTheme(theme: Theme) {
+    suspend fun setTheme(theme: Theme) {
         dataStore.edit { preferences ->
-            preferences[THEME_KEY] = theme.key
+            preferences[THEME_KEY] = theme.toString()
         }
     }
 
-    fun observeAppTheme(): Flow<Theme> = themeFlow
+    fun observeTheme(): Flow<Theme> = themeFlow
 
-    suspend fun getAppTheme(): Theme = themeFlow.first()
+    suspend fun getTheme(): Theme = themeFlow.first()
 
     private val themeFlow: Flow<Theme> = dataStore.data.map { preferences ->
         when (preferences[THEME_KEY] ?: THEME_DEFAULT_VALUE) {
-            Theme.LightTheme.key -> Theme.LightTheme
-            Theme.DarkTheme.key -> Theme.DarkTheme
+            Theme.LightTheme.toString() -> Theme.LightTheme
+            Theme.DarkTheme.toString() -> Theme.DarkTheme
             else -> Theme.SystemTheme
         }
     }
