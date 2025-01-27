@@ -1,18 +1,15 @@
 package com.sottti.roller.coasters.presentation.settings.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
-import com.sottti.roller.coasters.presentation.design.system.dialogs.RadioButtonOption
+import com.sottti.roller.coasters.presentation.settings.data.toAppTheme
+import com.sottti.roller.coasters.presentation.settings.data.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.AppTheme
 import com.sottti.roller.coasters.presentation.settings.model.AppThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemeSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemeSelected
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppThemePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemePickerSelectionChange
 
 @Composable
 internal fun AppThemePickerDialog(
@@ -25,16 +22,13 @@ internal fun AppThemePickerDialog(
         confirm = state.confirm,
         dismiss = state.dismiss,
         options = state.themes.map { theme -> theme.toRadioButtonOption() },
-        onOptionSelected = { onAction(ThemeSelected(it.toAppTheme(state.themes)))  },
-        onConfirm = { onAction(ConfirmThemeSelection(state.themes.find { it.selected } ?: state.themes.first())) },
-        onDismiss = { onAction(DismissThemePicker) },
+        onOptionSelected = { selectedOption ->
+            onAction(AppThemePickerSelectionChange(selectedOption.toAppTheme(state.themes)))
+        },
+        onConfirm = { onAction(ConfirmAppThemePickerSelection(state.themes.findSelectedTheme())) },
+        onDismiss = { onAction(DismissAppThemePicker) },
     )
 }
 
-@Composable
-private fun AppTheme.toRadioButtonOption(): RadioButtonOption =
-    RadioButtonOption(text, icon, selected)
+private fun List<AppTheme>.findSelectedTheme(): AppTheme = find { it.selected } ?: first()
 
-private fun RadioButtonOption.toAppTheme(
-    themes: List<AppTheme>,
-): AppTheme = themes.find { it.text == text } ?: themes.first()

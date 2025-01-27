@@ -1,9 +1,11 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
+import androidx.compose.runtime.Composable
 import co.cuvva.presentation.design.system.icons.data.Icons.DarkMode
 import co.cuvva.presentation.design.system.icons.data.Icons.LightMode
 import co.cuvva.presentation.design.system.icons.data.Icons.Smartphone
 import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.presentation.design.system.dialogs.RadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppTheme
 
@@ -44,4 +46,12 @@ private fun darkTheme(
     icon = if (isSelectedTheme) DarkMode.Filled else DarkMode.Outlined,
     selected = isSelectedTheme,
 )
+
+@Composable
+internal fun AppTheme.toRadioButtonOption(): RadioButtonOption =
+    RadioButtonOption(text, icon, selected)
+
+internal fun RadioButtonOption.toAppTheme(
+    themes: List<AppTheme>,
+): AppTheme = themes.find { it.text == text } ?: themes.first()
 

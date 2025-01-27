@@ -16,10 +16,7 @@ import com.sottti.roller.coasters.presentation.settings.model.CurrentThemeState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemeSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.*
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 import com.sottti.roller.coasters.utils.device.isDynamicColorEnabled
@@ -85,11 +82,11 @@ internal class SettingsViewModel @Inject constructor(
     private fun processAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
-                LaunchAppThemePicker -> showAppThemePicker()
-                DismissThemePicker -> hideAppThemePicker()
                 is DynamicColorCheckedChange -> setDynamicColor(action.checked)
-                is SettingsAction.ThemeSelected -> updateAppThemePicker(action.theme)
-                is ConfirmThemeSelection -> setAppTheme(action.theme)
+                LaunchAppThemePicker -> showAppThemePicker()
+                is AppThemePickerSelectionChange -> updateAppThemePicker(action.theme)
+                is ConfirmAppThemePickerSelection -> setAppTheme(action.theme)
+                DismissAppThemePicker -> hideAppThemePicker()
             }
         }
     }
