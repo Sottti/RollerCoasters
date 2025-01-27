@@ -9,7 +9,7 @@ import com.sottti.roller.coasters.utils.device.sdk.isAtLeastSdk31
 
 @Composable
 public fun colors(
-    colorContrast: ColorContrastTheme,
+    colorContrast: AppColorContrast,
     darkTheme: Boolean,
     dynamicColor: Boolean,
 ): ColorScheme = when {
@@ -22,14 +22,14 @@ public fun colors(
     }
 
     darkTheme -> when (colorContrast) {
-        ColorContrastTheme.HighContrast -> ColorSchemes.Dark.highContrast
-        ColorContrastTheme.MediumContrast -> ColorSchemes.Dark.mediumContrast
-        ColorContrastTheme.StandardContrast -> ColorSchemes.Dark.standardContrast
+        AppColorContrast.HighContrast -> ColorSchemes.Dark.highContrast
+        AppColorContrast.MediumContrast -> ColorSchemes.Dark.mediumContrast
+        AppColorContrast.StandardContrast -> ColorSchemes.Dark.standardContrast
     }
 
     else -> when (colorContrast) {
-        ColorContrastTheme.HighContrast -> ColorSchemes.Light.highContrast
-        ColorContrastTheme.MediumContrast -> ColorSchemes.Light.mediumContrast
-        ColorContrastTheme.StandardContrast -> ColorSchemes.Light.standardContrast
+        AppColorContrast.HighContrast -> ColorSchemes.Light.highContrast
+        AppColorContrast.MediumContrast -> ColorSchemes.Light.mediumContrast
+        AppColorContrast.StandardContrast -> ColorSchemes.Light.standardContrast
     }
 }

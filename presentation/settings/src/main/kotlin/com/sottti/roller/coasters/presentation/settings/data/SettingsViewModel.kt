@@ -4,7 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
-import com.sottti.roller.coasters.data.settings.model.ColorContrast.*
+import com.sottti.roller.coasters.data.settings.model.ColorContrast.HighContrast
+import com.sottti.roller.coasters.data.settings.model.ColorContrast.MediumContrast
+import com.sottti.roller.coasters.data.settings.model.ColorContrast.StandardContrast
+import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.data.settings.model.Theme
 import com.sottti.roller.coasters.data.settings.model.Theme.DarkTheme
 import com.sottti.roller.coasters.data.settings.model.Theme.LightTheme
@@ -13,12 +16,21 @@ import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastState
+import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.*
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ColorContrastPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeState
@@ -44,6 +56,7 @@ internal class SettingsViewModel @Inject constructor(
     init {
         if (isDynamicColorEnabled()) observeDynamicColor()
         observeTheme()
+        observeColorContrast()
     }
 
     private fun observeDynamicColor() {
@@ -73,11 +86,33 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     private fun updateTheme(theme: Theme) {
-        _state.update { currentTheme ->
-            currentTheme.copy(
-                theme = currentTheme.theme.copy(
+        _state.update { currentState ->
+            currentState.copy(
+                theme = currentState.theme.copy(
                     selectedTheme = SelectedThemeState.Loaded(
-                        theme.toPresentationModel(currentTheme.theme.selectedTheme == theme),
+                        theme.toPresentationModel(currentState.theme.selectedTheme == theme),
+                    )
+                ),
+            )
+        }
+    }
+
+    private fun observeColorContrast() {
+        viewModelScope.launch {
+            settingsRepository
+                .observeColorContrast()
+                .collect { colorContrast -> updateColorContrast(colorContrast) }
+        }
+    }
+
+    private fun updateColorContrast(colorContrast: ColorContrast) {
+        _state.update { currentState ->
+            currentState.copy(
+                colorContrast = currentState.colorContrast.copy(
+                    selectedColorContrast = SelectedColorContrastState.Loaded(
+                        colorContrast.toPresentationModel(
+                            currentState.colorContrast.selectedColorContrast == colorContrast,
+                        ),
                     )
                 ),
             )
@@ -95,8 +130,9 @@ internal class SettingsViewModel @Inject constructor(
                 DismissThemePicker -> hideThemePicker()
 
                 LaunchColorContrastPicker -> showColorContrastPicker()
-                is ColorContrastPickerSelectionChange -> TODO()
-                DismissColorContrastPicker -> TODO()
+                is ColorContrastPickerSelectionChange -> updateColorContrastPicker(action.contrast)
+                is ConfirmColorContrastPickerSelection -> setColorContrast(action.contrast)
+                DismissColorContrastPicker -> hideColorContrastPicker()
             }
         }
     }
@@ -117,7 +153,9 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(
                 colorContrastPicker = colorContrastPickerState(
-                    selectedColorContrast = settingsRepository.getColorContrast()
+                    selectedColorContrast = settingsRepository
+                        .getColorContrast()
+                        .toPresentationModel(isSelected = true)
                 )
             )
         }
@@ -148,6 +186,31 @@ internal class SettingsViewModel @Inject constructor(
     private suspend fun setTheme(theme: ThemeUi) {
         hideThemePicker()
         settingsRepository.setTheme(theme.toDomainModel())
+    }
+
+    private suspend fun setColorContrast(contrast: ColorContrastUi) {
+        hideColorContrastPicker()
+        settingsRepository.setColorContrast(contrast.toDomainModel())
+    }
+
+    private fun updateColorContrastPicker(
+        selectedContrast: ColorContrastUi,
+    ) {
+        _state.update { currentState ->
+            currentState.copy(
+                colorContrastPicker = colorContrastPickerState(
+                    selectedColorContrast = selectedContrast,
+                )
+            )
+        }
+    }
+
+    private fun hideColorContrastPicker() {
+        _state.update { currentState ->
+            currentState.copy(
+                colorContrastPicker = null,
+            )
+        }
     }
 }
 
@@ -204,7 +267,7 @@ private fun themesList(
 )
 
 private fun colorContrastPickerState(
-    selectedColorContrast: ColorContrast,
+    selectedColorContrast: ColorContrastUi,
 ) = ColorContrastPickerState(
     title = R.string.color_contrast_picker_title,
     confirm = R.string.picker_confirm,
@@ -213,10 +276,18 @@ private fun colorContrastPickerState(
 )
 
 private fun colorContrastsList(
-    selectedColorContrast: ColorContrast,
+    selectedColorContrast: ColorContrastUi,
 ) = listOf(
-    SystemContrast.toPresentationModel(isSelected = selectedColorContrast is SystemContrast),
-    StandardContrast.toPresentationModel(isSelected = selectedColorContrast is StandardContrast),
-    MediumContrast.toPresentationModel(isSelected = selectedColorContrast is MediumContrast),
-    HighContrast.toPresentationModel(isSelected = selectedColorContrast is HighContrast),
+    SystemContrast.toPresentationModel(
+        isSelected = selectedColorContrast is ColorContrastUi.SystemContrast,
+    ),
+    StandardContrast.toPresentationModel(
+        isSelected = selectedColorContrast is ColorContrastUi.StandardContrast,
+    ),
+    MediumContrast.toPresentationModel(
+        isSelected = selectedColorContrast is ColorContrastUi.MediumContrast,
+    ),
+    HighContrast.toPresentationModel(
+        isSelected = selectedColorContrast is ColorContrastUi.HighContrast,
+    ),
 )

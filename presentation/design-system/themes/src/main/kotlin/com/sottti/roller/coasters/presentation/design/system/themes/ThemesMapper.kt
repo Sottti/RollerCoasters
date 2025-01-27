@@ -1,23 +1,23 @@
 package com.sottti.roller.coasters.presentation.design.system.themes
 
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorContrastTheme
-import com.sottti.roller.coasters.utils.device.accesibility.DeviceColorContrast
+import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
 
-internal fun DeviceColorContrast.toColorContrastTheme(): ColorContrastTheme =
+internal fun ColorContrast.toAppColorContrast(
+    systemColorContrast: SystemColorContrast,
+): AppColorContrast =
     when (this) {
-        DeviceColorContrast.LowContrast -> ColorContrastTheme.StandardContrast
-        DeviceColorContrast.StandardContrast -> ColorContrastTheme.StandardContrast
-        DeviceColorContrast.MediumContrast -> ColorContrastTheme.MediumContrast
-        DeviceColorContrast.HighContrast -> ColorContrastTheme.HighContrast
+        ColorContrast.HighContrast -> AppColorContrast.HighContrast
+        ColorContrast.MediumContrast -> AppColorContrast.MediumContrast
+        ColorContrast.StandardContrast -> AppColorContrast.StandardContrast
+        ColorContrast.SystemContrast -> systemColorContrast.toAppColorContrast()
     }
 
-internal fun ColorContrast.toColorContrastTheme(
-    deviceColorContrast: DeviceColorContrast,
-): ColorContrastTheme =
+private fun SystemColorContrast.toAppColorContrast(): AppColorContrast =
     when (this) {
-        ColorContrast.HighContrast -> ColorContrastTheme.HighContrast
-        ColorContrast.MediumContrast -> ColorContrastTheme.MediumContrast
-        ColorContrast.StandardContrast -> ColorContrastTheme.StandardContrast
-        ColorContrast.SystemContrast -> deviceColorContrast.toColorContrastTheme()
+        SystemColorContrast.LowContrast -> AppColorContrast.StandardContrast
+        SystemColorContrast.StandardContrast -> AppColorContrast.StandardContrast
+        SystemColorContrast.MediumContrast -> AppColorContrast.MediumContrast
+        SystemColorContrast.HighContrast -> AppColorContrast.HighContrast
     }

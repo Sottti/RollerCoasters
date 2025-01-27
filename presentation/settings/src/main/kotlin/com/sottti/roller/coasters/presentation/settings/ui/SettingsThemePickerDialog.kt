@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.settings.ui
 import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
 import com.sottti.roller.coasters.presentation.settings.data.toRadioButtonOption
-import com.sottti.roller.coasters.presentation.settings.data.toThemeDisplayable
+import com.sottti.roller.coasters.presentation.settings.data.toThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
@@ -23,7 +23,7 @@ internal fun ThemePickerDialog(
         dismiss = state.dismiss,
         options = state.themes.map { theme -> theme.toRadioButtonOption() },
         onOptionSelected = { selectedOption ->
-            onAction(ThemePickerSelectionChange(selectedOption.toThemeDisplayable(state.themes)))
+            onAction(ThemePickerSelectionChange(selectedOption.toThemeUi(state.themes)))
         },
         onConfirm = { onAction(ConfirmThemePickerSelection(state.themes.findSelectedTheme())) },
         onDismiss = { onAction(DismissThemePicker) },
@@ -31,4 +31,3 @@ internal fun ThemePickerDialog(
 }
 
 private fun List<ThemeUi>.findSelectedTheme(): ThemeUi = find { it.selected } ?: first()
-

@@ -4,12 +4,15 @@ import com.sottti.roller.coasters.data.settings.ThemeManager
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
 import com.sottti.roller.coasters.data.settings.model.Theme
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
+import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class SettingsRepositoryImpl @Inject constructor(
-    private val themeManager: ThemeManager,
     private val localDataSource: SettingsLocalDataSource,
+    private val systemSettings: SystemSettings,
+    private val themeManager: ThemeManager,
 ) : SettingsRepository {
 
     override suspend fun setDynamicColor(enabled: Boolean) {
@@ -35,15 +38,16 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun setColorContrast(
         contrast: ColorContrast,
-    ): ColorContrast {
-        TODO("Not yet implemented")
+    ) {
+        localDataSource.setColorContrast(contrast)
     }
 
-    override suspend fun getColorContrast(): ColorContrast {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getColorContrast(): ColorContrast =
+        localDataSource.getColorContrast()
 
-    override fun observeColorContrast(): Flow<ColorContrast> {
-        TODO("Not yet implemented")
-    }
+    override fun observeColorContrast(): Flow<ColorContrast> =
+        localDataSource.observeColorContrast()
+
+    override fun getSystemColorContrast(): SystemColorContrast =
+        systemSettings.colorContrast
 }

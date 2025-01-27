@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSour
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.DATA_STORE_NAME
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
+import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,10 +25,12 @@ internal object SettingsModule {
     @Singleton
     fun provideRepository(
         localDataSource: SettingsLocalDataSource,
+        systemSettings: SystemSettings,
         themeManager: ThemeManager,
     ): SettingsRepository = SettingsRepositoryImpl(
         localDataSource = localDataSource,
         themeManager = themeManager,
+        systemSettings = systemSettings,
     )
 
     @Provides

@@ -62,6 +62,13 @@ internal fun SettingsContent(
             onAction = onAction,
         )
     }
+
+    state.colorContrastPicker?.let { colorContrastPickerState ->
+        ColorContrastPickerDialog(
+            state = colorContrastPickerState,
+            onAction = onAction,
+        )
+    }
 }
 
 @Composable

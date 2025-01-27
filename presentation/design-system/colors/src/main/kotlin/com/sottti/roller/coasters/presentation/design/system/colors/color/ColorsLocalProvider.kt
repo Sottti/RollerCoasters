@@ -5,7 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
 public fun ColorsLocalProvider(
-    colorContrast: ColorContrastTheme,
+    colorContrast: AppColorContrast,
     darkTheme: Boolean,
     dynamicColor: Boolean,
     content: @Composable () -> Unit,

@@ -4,7 +4,13 @@ import android.app.UiModeManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import com.sottti.roller.coasters.data.settings.model.ColorContrast
 import com.sottti.roller.coasters.data.settings.model.Theme
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.HighContrast
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.LowContrast
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.MediumContrast
+import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.StandardContrast
 
 @RequiresApi(Build.VERSION_CODES.R)
 internal fun Theme.toUiModeManagerNightMode() = when (this) {
@@ -18,3 +24,18 @@ internal fun Theme.toAppCompatDelegateNightMode() = when (this) {
     Theme.LightTheme -> AppCompatDelegate.MODE_NIGHT_NO
     Theme.SystemTheme -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 }
+
+internal val Theme.key: String
+    get() = when (this) {
+        Theme.DarkTheme -> "dark"
+        Theme.LightTheme -> "light"
+        Theme.SystemTheme -> "system"
+    }
+
+internal val ColorContrast.key: String
+    get() = when (this) {
+        ColorContrast.HighContrast -> "high"
+        ColorContrast.MediumContrast -> "medium"
+        ColorContrast.StandardContrast -> "standard"
+        ColorContrast.SystemContrast -> "system"
+    }

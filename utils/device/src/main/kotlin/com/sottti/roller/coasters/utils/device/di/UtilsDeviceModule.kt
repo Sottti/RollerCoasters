@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.utils.device.di
 import android.app.UiModeManager
 import android.content.Context
 import android.os.Build
-import com.sottti.roller.coasters.utils.device.accesibility.DeviceAccessibility
 import com.sottti.roller.coasters.utils.device.sdk.SdkLevel
+import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,10 +24,10 @@ internal object UtilsDeviceModule {
 
     @Provides
     @Singleton
-    fun provideDeviceAccessibility(
+    fun provideSystemSettings(
         @ApplicationContext context: Context,
         uiModeManager: UiModeManager?,
-    ): DeviceAccessibility = DeviceAccessibility(
+    ): SystemSettings = SystemSettings(
         sdkLevel = SdkLevel(Build.VERSION.SDK_INT),
         uiModeManager = uiModeManager,
     )

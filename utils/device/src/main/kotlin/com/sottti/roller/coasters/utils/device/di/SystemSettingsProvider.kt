@@ -1,13 +1,13 @@
 package com.sottti.roller.coasters.utils.device.di
 
 import android.content.Context
-import com.sottti.roller.coasters.utils.device.accesibility.DeviceAccessibility
+import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import dagger.hilt.android.EntryPointAccessors
 
-public fun provideDeviceAccessibility(
+public fun provideSystemSettings(
     context: Context,
-): DeviceAccessibility =
+): SystemSettings =
     EntryPointAccessors.fromApplication(
         context = context.applicationContext,
-        entryPoint = DeviceAccessibilityEntryPoint::class.java,
-    ).getDeviceAccessibility()
+        entryPoint = SystemSettingsEntryPoint::class.java,
+    ).getSystemSettings()
