@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
 import androidx.compose.runtime.Composable
-import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.data.Icons.DarkMode
 import co.cuvva.presentation.design.system.icons.data.Icons.LightMode
 import co.cuvva.presentation.design.system.icons.data.Icons.Smartphone
@@ -10,6 +9,7 @@ import com.sottti.roller.coasters.data.settings.model.Theme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.RadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi
+import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi.*
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 
 internal fun ThemeUi.toDomainModel(): Theme =
@@ -63,12 +63,12 @@ internal fun ColorContrast.toPresentationModel(isSelected: Boolean): ColorContra
         ColorContrast.SystemContrast -> systemContrast(isSelected)
         ColorContrast.StandardContrast -> standardContrast(isSelected)
         ColorContrast.MediumContrast -> mediumContrast(isSelected)
-        ColorContrast.HighContrast -> hightContrast(isSelected)
+        ColorContrast.HighContrast -> highContrast(isSelected)
     }
 
 private fun systemContrast(
     isSelected: Boolean,
-): ColorContrastUi.SystemContrast = ColorContrastUi.SystemContrast(
+): SystemContrast = SystemContrast(
     icon = if (isSelected) Smartphone.Filled else Smartphone.Outlined,
     selected = isSelected,
     text = R.string.color_contrast_system_contrast,
@@ -76,7 +76,23 @@ private fun systemContrast(
 
 private fun standardContrast(
     isSelected: Boolean,
-): ColorContrastUi.SystemContrast = ColorContrastUi.SystemContrast(
+): SystemContrast = SystemContrast(
+    icon = if (isSelected) Smartphone.Filled else Smartphone.Outlined,
+    selected = isSelected,
+    text = R.string.color_contrast_standard_contrast,
+)
+
+private fun mediumContrast(
+    isSelected: Boolean,
+): SystemContrast = SystemContrast(
+    icon = if (isSelected) Smartphone.Filled else Smartphone.Outlined,
+    selected = isSelected,
+    text = R.string.color_contrast_standard_contrast,
+)
+
+private fun highContrast(
+    isSelected: Boolean,
+): SystemContrast = SystemContrast(
     icon = if (isSelected) Smartphone.Filled else Smartphone.Outlined,
     selected = isSelected,
     text = R.string.color_contrast_standard_contrast,

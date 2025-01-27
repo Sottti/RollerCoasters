@@ -117,7 +117,7 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(
                 colorContrastPicker = colorContrastPickerState(
-
+                    selectedColorContrast = settingsRepository.getColorContrast()
                 )
             )
         }
