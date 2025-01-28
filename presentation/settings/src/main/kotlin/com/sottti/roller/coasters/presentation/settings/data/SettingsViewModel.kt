@@ -124,7 +124,12 @@ internal class SettingsViewModel @Inject constructor(
     private fun processAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
-                is DynamicColorCheckedChange -> setDynamicColor(action.checked)
+                is DynamicColorCheckedChange -> {
+                    setDynamicColor(action.checked)
+                    if (action.checked == true) {
+                        settingsRepository.setColorContrast(SystemContrast)
+                    }
+                }
 
                 LaunchThemePicker -> showThemePicker()
                 is ThemePickerSelectionChange -> updateThemePicker(action.theme)
