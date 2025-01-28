@@ -6,11 +6,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
 import com.sottti.roller.coasters.data.settings.model.Theme
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.HighContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.LowContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.MediumContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.StandardContrast
 
 @RequiresApi(Build.VERSION_CODES.R)
 internal fun Theme.toUiModeManagerNightMode() = when (this) {

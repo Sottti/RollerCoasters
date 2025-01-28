@@ -126,7 +126,7 @@ internal class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             when (action) {
                 is DynamicColorCheckedChange -> {
-                    setDynamicColor(action.checked)
+                    settingsRepository.setDynamicColor(action.checked)
                     if (action.checked == true) {
                         settingsRepository.setColorContrast(SystemContrast)
                     }
@@ -134,12 +134,20 @@ internal class SettingsViewModel @Inject constructor(
 
                 LaunchThemePicker -> showThemePicker()
                 is ThemePickerSelectionChange -> updateThemePicker(action.theme)
-                is ConfirmThemePickerSelection -> setTheme(action.theme)
+                is ConfirmThemePickerSelection -> {
+                    hideThemePicker()
+                    settingsRepository.setTheme(action.theme.toDomainModel())
+                }
+
                 DismissThemePicker -> hideThemePicker()
 
                 LaunchColorContrastPicker -> showColorContrastPicker()
                 is ColorContrastPickerSelectionChange -> updateColorContrastPicker(action.contrast)
-                is ConfirmColorContrastPickerSelection -> setColorContrast(action.contrast)
+                is ConfirmColorContrastPickerSelection -> {
+                    hideColorContrastPicker()
+                    settingsRepository.setColorContrast(action.contrast.toDomainModel())
+                }
+
                 DismissColorContrastPicker -> hideColorContrastPicker()
                 DismissColorContrastNotAvailableMessage -> hideColorContrastNotAvailableMessage()
             }
@@ -159,7 +167,8 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     private fun SettingsState.isDynamicColorChecked() =
-        dynamicColor?.checkedState is DynamicColorCheckedState.Loaded && dynamicColor.checkedState.checked
+        dynamicColor?.checkedState is DynamicColorCheckedState.Loaded
+                && dynamicColor.checkedState.checked
 
     private suspend fun showColorContrastPicker() {
         _state.update { currentState ->
@@ -204,20 +213,6 @@ internal class SettingsViewModel @Inject constructor(
                 themePicker = null,
             )
         }
-    }
-
-    private suspend fun setDynamicColor(enabled: Boolean) {
-        settingsRepository.setDynamicColor(enabled)
-    }
-
-    private suspend fun setTheme(theme: ThemeUi) {
-        hideThemePicker()
-        settingsRepository.setTheme(theme.toDomainModel())
-    }
-
-    private suspend fun setColorContrast(contrast: ColorContrastUi) {
-        hideColorContrastPicker()
-        settingsRepository.setColorContrast(contrast.toDomainModel())
     }
 
     private fun updateColorContrastPicker(

@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
 import com.sottti.roller.coasters.presentation.settings.data.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.data.toThemeUi
-import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
-import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemePickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
+import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 
 @Composable
 internal fun ThemePickerDialog(

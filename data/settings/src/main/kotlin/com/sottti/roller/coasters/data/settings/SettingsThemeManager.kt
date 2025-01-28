@@ -13,7 +13,8 @@ internal class ThemeManager @Inject constructor(
 ) {
     internal fun setTheme(theme: Theme) {
         when {
-            isAtLeastSdk31() -> context.getSystemService(UiModeManager::class.java)
+            isAtLeastSdk31() -> context
+                .getSystemService(UiModeManager::class.java)
                 ?.setApplicationNightMode(theme.toUiModeManagerNightMode())
 
             else -> AppCompatDelegate.setDefaultNightMode(theme.toAppCompatDelegateNightMode())

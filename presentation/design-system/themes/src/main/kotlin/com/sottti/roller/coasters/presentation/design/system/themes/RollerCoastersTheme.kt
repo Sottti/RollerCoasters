@@ -6,14 +6,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.data.settings.di.provideSettingsRepository
-import com.sottti.roller.coasters.data.settings.model.ColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
 import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorEnabled
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 @Composable
