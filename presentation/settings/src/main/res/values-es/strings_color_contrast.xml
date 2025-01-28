@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="color_contrast_color_headline">Contraste de color</string>
-    <string name="color_contrast_color_supporting">Un mayor contraste hace que el contenido destaquen más.</string>
+    <string name="color_contrast_color_supporting">
+        Un mayor contraste hace que el contenido destaquen más.
+    </string>
     <string name="color_contrast_high_contrast">Contraste alto</string>
     <string name="color_contrast_medium_contrast">Contraste medio</string>
-    <string name="color_contrast_not_available_message_text">El ajuste de contraste de color en la aplicación solo está disponible cuando el color dinámico está desactivado. Cuando el color dinámico está activado, el contraste siempre sigue la configuración de contraste del sistema.</string>
+    <string name="color_contrast_not_available_message_text">
+        El ajuste de contraste de color en la aplicación solo está disponible cuando el color
+        dinámico está desactivado. /n/nCuando el color dinámico está activado, el contraste siempre
+        sigue la configuración de contraste del sistema.</string>
     <string name="color_contrast_not_available_message_title">Contraste de color</string>
     <string name="color_contrast_picker_title">Elige contraste</string>
     <string name="color_contrast_standard_contrast">Contraste normal</string>
