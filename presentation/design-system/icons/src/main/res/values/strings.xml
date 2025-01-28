@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="account_circle_icon_description">About me</string>
-    <string name="arrow_back_icon_description">Arrow back</string>
-    <string name="brightness_auto">Auto brightness</string>
-    <string name="brightness_high">High brightness</string>
-    <string name="brightness_medium">Medium brightness</string>
-    <string name="brightness_standard">Standard brightness</string>
-    <string name="colors_icon_contrast">Contrast</string>
-    <string name="colors_icon_description">Colors</string>
-    <string name="dark_mode_icon_description">Dark mode</string>
-    <string name="explore_icon_description">Explore</string>
-    <string name="light_mode_icon_description">Light mode</string>
-    <string name="palette_icon_description">Color palette</string>
-    <string name="settings_icon_description">Settings</string>
-    <string name="smartphone_icon_description">Smartphone</string>
-    <string name="star_icon_description">Favourites</string>
+    <string name="description_icon_contrast">Contrast</string>
+    <string name="description_icon_account_circle">About me</string>
+    <string name="description_icon_arrow_back">Arrow back</string>
+    <string name="description_icon_brightness_auto">Auto brightness</string>
+    <string name="description_icon_brightness_high">High brightness</string>
+    <string name="description_icon_brightness_medium">Medium brightness</string>
+    <string name="description_icon_brightness_standard">Standard brightness</string>
+    <string name="description_icon_colors">Colors</string>
+    <string name="description_icon_dark_mode">Dark mode</string>
+    <string name="description_icon_explore">Explore</string>
+    <string name="description_icon_light_mode">Light mode</string>
+    <string name="description_icon_palette">Color palette</string>
+    <string name="description_icon_settings">Settings</string>
+    <string name="description_icon_smartphone">Smartphone</string>
+    <string name="description_icon_star">Favourites</string>
+    <string name="description_icon_visibility">Visibility</string>
 </resources>

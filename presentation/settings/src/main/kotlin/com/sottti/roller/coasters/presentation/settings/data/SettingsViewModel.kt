@@ -38,8 +38,9 @@ import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
-import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorEnabled
-import com.sottti.roller.coasters.utils.device.sdk.isLightDarkThemeSystemEnabled
+import com.sottti.roller.coasters.utils.device.sdk.isColorContrastAvailable
+import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorAvailable
+import com.sottti.roller.coasters.utils.device.sdk.isLightDarkThemeSystemAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -57,7 +58,7 @@ internal class SettingsViewModel @Inject constructor(
     val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
 
     init {
-        if (isDynamicColorEnabled()) observeDynamicColor()
+        if (isDynamicColorAvailable()) observeDynamicColor()
         observeTheme()
         observeColorContrast()
     }
@@ -93,7 +94,10 @@ internal class SettingsViewModel @Inject constructor(
             currentState.copy(
                 theme = currentState.theme.copy(
                     selectedTheme = SelectedThemeState.Loaded(
-                        theme.toPresentationModel(currentState.theme.selectedTheme == theme),
+                        theme.toPresentationModel(
+                            currentState.theme.selectedTheme is SelectedThemeState.Loaded
+                                    && currentState.theme.selectedTheme.theme == theme
+                        ),
                     )
                 ),
             )
@@ -249,7 +253,7 @@ private fun initialState(): SettingsState =
         colorContrast = colorContrastInitialState(),
         colorContrastNotAvailableMessage = null,
         colorContrastPicker = null,
-        dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorEnabled() },
+        dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorAvailable() },
         theme = themeInitialState(),
         themePicker = null,
         topBar = topBarState(),
@@ -259,20 +263,20 @@ private fun dynamicColorInitialState() = DynamicColorState(
     checkedState = DynamicColorCheckedState.Loading,
     headline = R.string.dynamic_color_headline,
     supporting = R.string.dynamic_color_supporting,
-    icon = Icons.Palette.Outlined
+    icon = Icons.Palette.Outlined,
 )
 
 private fun themeInitialState() = ThemeState(
     headline = R.string.theme_headline,
     supporting = R.string.theme_supporting,
     selectedTheme = SelectedThemeState.Loading,
-    icon = Icons.Colors.Rounded
+    icon = Icons.Contrast.Rounded
 )
 
 private fun colorContrastInitialState() =
     ColorContrastState(
         headline = R.string.color_contrast_color_headline,
-        icon = Icons.Contrast.Rounded,
+        icon = Icons.Visibility.Outlined,
         selectedColorContrast = SelectedColorContrastState.Loading,
         supporting = R.string.color_contrast_color_supporting,
     )
@@ -293,7 +297,7 @@ private fun themesList(
     selectedTheme: ThemeUi,
 ) = listOfNotNull(
     SystemTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme)
-        .takeIf { isLightDarkThemeSystemEnabled() },
+        .takeIf { isLightDarkThemeSystemAvailable() },
     LightTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.LightTheme),
     DarkTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.DarkTheme),
 )
@@ -309,10 +313,10 @@ private fun colorContrastPickerState(
 
 private fun colorContrastsList(
     selectedColorContrast: ColorContrastUi,
-) = listOf(
+) = listOfNotNull(
     SystemContrast.toPresentationModel(
         isSelected = selectedColorContrast is ColorContrastUi.SystemContrast,
-    ),
+    ).takeIf { isColorContrastAvailable() },
     StandardContrast.toPresentationModel(
         isSelected = selectedColorContrast is ColorContrastUi.StandardContrast,
     ),

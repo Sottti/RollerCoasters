@@ -5,7 +5,7 @@ import co.sottti.roller.coasters.presentation.design.system.icons.R
 
 public object Icons {
     public object AccountCircle {
-        public val Description: Int = R.string.account_circle_icon_description
+        public val Description: Int = R.string.description_icon_account_circle
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_account_circle_rounded_filled,
             descriptionResId = Description,
@@ -17,7 +17,7 @@ public object Icons {
     }
 
     public object ArrowBack {
-        public val Description: Int = R.string.arrow_back_icon_description
+        public val Description: Int = R.string.description_icon_arrow_back
         public val Rounded: IconState = IconState(
             resId = R.drawable.ic_arrow_back_rounded,
             descriptionResId = Description,
@@ -25,7 +25,7 @@ public object Icons {
     }
 
     public object BrightnessAuto {
-        public val Description: Int = R.string.brightness_auto
+        public val Description: Int = R.string.description_icon_brightness_auto
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_brightness_auto_rounded_filled,
             descriptionResId = Description,
@@ -37,7 +37,7 @@ public object Icons {
     }
 
     public object BrightnessHigh {
-        public val Description: Int = R.string.brightness_high
+        public val Description: Int = R.string.description_icon_brightness_high
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_brightness_7_rounded_filled,
             descriptionResId = Description,
@@ -49,7 +49,7 @@ public object Icons {
     }
 
     public object BrightnessMedium {
-        public val Description: Int = R.string.brightness_medium
+        public val Description: Int = R.string.description_icon_brightness_medium
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_brightness_medium_rounded_filled,
             descriptionResId = Description,
@@ -61,7 +61,7 @@ public object Icons {
     }
 
     public object BrightnessStandard {
-        public val Description: Int = R.string.brightness_standard
+        public val Description: Int = R.string.description_icon_brightness_standard
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_brightness_4_rounded_filled,
             descriptionResId = Description,
@@ -73,7 +73,7 @@ public object Icons {
     }
 
     public object Colors {
-        public val Description: Int = R.string.colors_icon_description
+        public val Description: Int = R.string.description_icon_colors
         public val Rounded: IconState = IconState(
             resId = R.drawable.ic_colors_rounded,
             descriptionResId = Description,
@@ -81,7 +81,7 @@ public object Icons {
     }
 
     public object Contrast {
-        public val Description: Int = R.string.colors_icon_contrast
+        public val Description: Int = R.string.description_icon_contrast
         public val Rounded: IconState = IconState(
             resId = R.drawable.ic_contrast_rounded,
             descriptionResId = Description,
@@ -89,7 +89,7 @@ public object Icons {
     }
 
     public object DarkMode {
-        public val Description: Int = R.string.dark_mode_icon_description
+        public val Description: Int = R.string.description_icon_dark_mode
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_dark_mode_rounded_filled,
             descriptionResId = Description,
@@ -101,7 +101,7 @@ public object Icons {
     }
 
     public object Explore {
-        public val Description: Int = R.string.explore_icon_description
+        public val Description: Int = R.string.description_icon_explore
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_explore_rounded_filled,
             descriptionResId = Description,
@@ -113,7 +113,7 @@ public object Icons {
     }
 
     public object LightMode {
-        public val Description: Int = R.string.light_mode_icon_description
+        public val Description: Int = R.string.description_icon_light_mode
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_light_mode_rounded_filled,
             descriptionResId = Description,
@@ -125,7 +125,7 @@ public object Icons {
     }
 
     public object Palette {
-        public val Description: Int = R.string.palette_icon_description
+        public val Description: Int = R.string.description_icon_palette
         public val Outlined: IconState = IconState(
             resId = R.drawable.ic_palette_rounded_outline,
             descriptionResId = Description,
@@ -133,7 +133,7 @@ public object Icons {
     }
 
     public object Settings {
-        public val Description: Int = R.string.settings_icon_description
+        public val Description: Int = R.string.description_icon_settings
         public val Outlined: IconState = IconState(
             resId = R.drawable.ic_settings_rounded_outlined,
             descriptionResId = Description,
@@ -141,7 +141,7 @@ public object Icons {
     }
 
     public object Smartphone {
-        public val Description: Int = R.string.smartphone_icon_description
+        public val Description: Int = R.string.description_icon_smartphone
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_smartphone_rounded_filled,
             descriptionResId = Description,
@@ -153,13 +153,25 @@ public object Icons {
     }
 
     public object Star {
-        public val Description: Int = R.string.star_icon_description
+        public val Description: Int = R.string.description_icon_star
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_star_rounded_filled,
             descriptionResId = Description,
         )
         public val Outlined: IconState = IconState(
             resId = R.drawable.ic_star_rounded_outlined,
+            descriptionResId = Description,
+        )
+    }
+
+    public object Visibility {
+        public val Description: Int = R.string.description_icon_visibility
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_visibility_rounded_filled,
+            descriptionResId = Description,
+        )
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_visibility_rounded_outlined,
             descriptionResId = Description,
         )
     }

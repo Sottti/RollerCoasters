@@ -12,6 +12,9 @@ import com.sottti.roller.coasters.data.settings.model.ColorContrast.MediumContra
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.StandardContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.data.settings.model.Theme
+import com.sottti.roller.coasters.utils.device.sdk.isColorContrastAvailable
+import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorAvailable
+import com.sottti.roller.coasters.utils.device.sdk.isLightDarkThemeSystemAvailable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -23,13 +26,22 @@ internal class SettingsLocalDataSource @Inject constructor(
     companion object {
         internal const val DATA_STORE_NAME = "settings"
 
-        private const val DYNAMIC_COLOR_DEFAULT_VALUE = true
+        private val DYNAMIC_COLOR_DEFAULT_VALUE = when {
+            isDynamicColorAvailable() -> true
+            else -> false
+        }
         private val DYNAMIC_COLOR_KEY = booleanPreferencesKey("dynamic_color")
 
-        private val THEME_DEFAULT_VALUE = Theme.SystemTheme.key
+        private val THEME_DEFAULT_VALUE = when {
+            isLightDarkThemeSystemAvailable() -> Theme.SystemTheme.key
+            else -> Theme.LightTheme.key
+        }
         private val THEME_KEY = stringPreferencesKey("theme")
 
-        private val COLOR_CONTRAST_DEFAULT_VALUE = SystemContrast.key
+        private val COLOR_CONTRAST_DEFAULT_VALUE = when {
+            isColorContrastAvailable() -> SystemContrast.key
+            else -> StandardContrast.key
+        }
         private val COLOR_CONTRAST_KEY = stringPreferencesKey("color_contrast")
     }
 
