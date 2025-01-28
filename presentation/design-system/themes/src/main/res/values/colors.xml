@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#4C662B</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryContainer">#CDEDA3</color>
+    <color name="onPrimaryContainer">#102000</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#586249</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="secondaryContainer">#DCE7C8</color>
+    <color name="onSecondaryContainer">#151E0B</color>
+
+    <!-- Tertiary Colors -->
+    <color name="tertiary">#386663</color>
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="tertiaryContainer">#BCECE7</color>
+    <color name="onTertiaryContainer">#00201E</color>
+
+    <!-- Error Colors -->
+    <color name="error">#BA1A1A</color>
+    <color name="onError">#FFFFFF</color>
+    <color name="errorContainer">#FFDAD6</color>
+    <color name="onErrorContainer">#410002</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#F9FAEF</color>
+    <color name="onBackground">#1A1C16</color>
+    <color name="surface">#F9FAEF</color>
+    <color name="onSurface">#1A1C16</color>
+
+    <!-- Surface Variants -->
+    <color name="surfaceVariant">#E1E4D5</color>
+    <color name="onSurfaceVariant">#44483D</color>
+
+    <!-- Outline & Scrim -->
+    <color name="outline">#75796C</color>
+    <color name="outlineVariant">#C5C8BA</color>
+    <color name="scrim">#000000</color>
+
+    <!-- Inverse Colors -->
+    <color name="inverseSurface">#2F312A</color>
+    <color name="inverseOnSurface">#F1F2E6</color>
+    <color name="inversePrimary">#B1D18A</color>
+
+    <!-- Extra Surface Colors -->
+    <color name="surfaceDim">#DADBD0</color>
+    <color name="surfaceBright">#F9FAEF</color>
+    <color name="surfaceContainerLowest">#FFFFFF</color>
+    <color name="surfaceContainerLow">#F3F4E9</color>
+    <color name="surfaceContainer">#EEEFE3</color>
+    <color name="surfaceContainerHigh">#E8E9DE</color>
+    <color name="surfaceContainerHighest">#E2E3D8</color>
+</resources>

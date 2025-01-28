@@ -2,446 +2,236 @@ package com.sottti.roller.coasters.presentation.design.system.colors.color
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.backgroundDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.errorContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.errorDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.inverseOnSurfaceDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.inversePrimaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.inverseSurfaceDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onBackgroundDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onErrorContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onErrorDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onPrimaryContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onPrimaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onSecondaryContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onSecondaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onSurfaceDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onSurfaceVariantDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onTertiaryContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.onTertiaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.outlineDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.outlineVariantDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.primaryContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.primaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.scrimDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.secondaryContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.secondaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceBrightDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceContainerHighDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceContainerHighestDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceContainerLowDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceContainerLowestDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceDimDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.surfaceVariantDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.tertiaryContainerDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.HighContrast.tertiaryDarkHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.backgroundDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.errorContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.errorDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.inverseOnSurfaceDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.inversePrimaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.inverseSurfaceDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onBackgroundDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onErrorContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onErrorDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onPrimaryContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onPrimaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onSecondaryContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onSecondaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onSurfaceDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onSurfaceVariantDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onTertiaryContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.onTertiaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.outlineDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.outlineVariantDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.primaryContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.primaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.scrimDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.secondaryContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.secondaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceBrightDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceContainerHighDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceContainerHighestDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceContainerLowDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceContainerLowestDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceDimDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.surfaceVariantDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.tertiaryContainerDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.MediumContrast.tertiaryDarkMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.backgroundDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.errorContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.errorDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.inverseOnSurfaceDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.inversePrimaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.inverseSurfaceDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onBackgroundDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onErrorContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onErrorDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onPrimaryContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onPrimaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onSecondaryContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onSecondaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onSurfaceDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onSurfaceVariantDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onTertiaryContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.onTertiaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.outlineDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.outlineVariantDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.primaryContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.primaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.scrimDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.secondaryContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.secondaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceBrightDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceContainerHighDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceContainerHighestDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceContainerLowDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceContainerLowestDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceDimDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.surfaceVariantDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.tertiaryContainerDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Dark.StandardContrast.tertiaryDark
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.backgroundLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.errorContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.errorLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.inverseOnSurfaceLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.inversePrimaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.inverseSurfaceLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onBackgroundLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onErrorContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onErrorLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onPrimaryContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onPrimaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onSecondaryContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onSecondaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onSurfaceLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onSurfaceVariantLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onTertiaryContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.onTertiaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.outlineLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.outlineVariantLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.primaryContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.primaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.scrimLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.secondaryContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.secondaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceBrightLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceContainerHighLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceContainerHighestLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceContainerLowLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceContainerLowestLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceDimLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.surfaceVariantLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.tertiaryContainerLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.HighContrast.tertiaryLightHighContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.backgroundLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.errorContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.errorLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.inverseOnSurfaceLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.inversePrimaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.inverseSurfaceLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onBackgroundLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onErrorContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onErrorLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onPrimaryContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onPrimaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onSecondaryContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onSecondaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onSurfaceLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onSurfaceVariantLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onTertiaryContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.onTertiaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.outlineLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.outlineVariantLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.primaryContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.primaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.scrimLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.secondaryContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.secondaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceBrightLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceContainerHighLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceContainerHighestLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceContainerLowLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceContainerLowestLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceDimLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.surfaceVariantLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.tertiaryContainerLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.MediumContrast.tertiaryLightMediumContrast
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.backgroundLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.errorContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.errorLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.inverseOnSurfaceLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.inversePrimaryLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.inverseSurfaceLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onBackgroundLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onErrorContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onErrorLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onPrimaryContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onPrimaryLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onSecondaryContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onSecondaryLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onSurfaceLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onSurfaceVariantLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onTertiaryContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.onTertiaryLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.outlineLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.outlineVariantLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.primaryContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.primaryLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.scrimLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.secondaryContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.secondaryLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceBrightLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceContainerHighLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceContainerHighestLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceContainerLowLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceContainerLowestLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceDimLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.surfaceVariantLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.tertiaryContainerLight
-import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorTokens.Light.StandardContrast.tertiaryLight
 
 internal object ColorSchemes {
     internal object Light {
         internal val standardContrast = lightColorScheme(
-            primary = primaryLight,
-            onPrimary = onPrimaryLight,
-            primaryContainer = primaryContainerLight,
-            onPrimaryContainer = onPrimaryContainerLight,
-            secondary = secondaryLight,
-            onSecondary = onSecondaryLight,
-            secondaryContainer = secondaryContainerLight,
-            onSecondaryContainer = onSecondaryContainerLight,
-            tertiary = tertiaryLight,
-            onTertiary = onTertiaryLight,
-            tertiaryContainer = tertiaryContainerLight,
-            onTertiaryContainer = onTertiaryContainerLight,
-            error = errorLight,
-            onError = onErrorLight,
-            errorContainer = errorContainerLight,
-            onErrorContainer = onErrorContainerLight,
-            background = backgroundLight,
-            onBackground = onBackgroundLight,
-            surface = surfaceLight,
-            onSurface = onSurfaceLight,
-            surfaceVariant = surfaceVariantLight,
-            onSurfaceVariant = onSurfaceVariantLight,
-            outline = outlineLight,
-            outlineVariant = outlineVariantLight,
-            scrim = scrimLight,
-            inverseSurface = inverseSurfaceLight,
-            inverseOnSurface = inverseOnSurfaceLight,
-            inversePrimary = inversePrimaryLight,
-            surfaceDim = surfaceDimLight,
-            surfaceBright = surfaceBrightLight,
-            surfaceContainerLowest = surfaceContainerLowestLight,
-            surfaceContainerLow = surfaceContainerLowLight,
-            surfaceContainer = surfaceContainerLight,
-            surfaceContainerHigh = surfaceContainerHighLight,
-            surfaceContainerHighest = surfaceContainerHighestLight,
+            primary = ColorTokens.Light.StandardContrast.primary,
+            onPrimary = ColorTokens.Light.StandardContrast.onPrimary,
+            primaryContainer = ColorTokens.Light.StandardContrast.primaryContainer,
+            onPrimaryContainer = ColorTokens.Light.StandardContrast.onPrimaryContainer,
+            secondary = ColorTokens.Light.StandardContrast.secondary,
+            onSecondary = ColorTokens.Light.StandardContrast.onSecondary,
+            secondaryContainer = ColorTokens.Light.StandardContrast.secondaryContainer,
+            onSecondaryContainer = ColorTokens.Light.StandardContrast.onSecondaryContainer,
+            tertiary = ColorTokens.Light.StandardContrast.tertiary,
+            onTertiary = ColorTokens.Light.StandardContrast.onTertiary,
+            tertiaryContainer = ColorTokens.Light.StandardContrast.tertiaryContainer,
+            onTertiaryContainer = ColorTokens.Light.StandardContrast.onTertiaryContainer,
+            error = ColorTokens.Light.StandardContrast.error,
+            onError = ColorTokens.Light.StandardContrast.onError,
+            errorContainer = ColorTokens.Light.StandardContrast.errorContainer,
+            onErrorContainer = ColorTokens.Light.StandardContrast.onErrorContainer,
+            background = ColorTokens.Light.StandardContrast.background,
+            onBackground = ColorTokens.Light.StandardContrast.onBackground,
+            surface = ColorTokens.Light.StandardContrast.surface,
+            onSurface = ColorTokens.Light.StandardContrast.onSurface,
+            surfaceVariant = ColorTokens.Light.StandardContrast.surfaceVariant,
+            onSurfaceVariant = ColorTokens.Light.StandardContrast.onSurfaceVariant,
+            outline = ColorTokens.Light.StandardContrast.outline,
+            outlineVariant = ColorTokens.Light.StandardContrast.outlineVariant,
+            scrim = ColorTokens.Light.StandardContrast.scrim,
+            inverseSurface = ColorTokens.Light.StandardContrast.inverseSurface,
+            inverseOnSurface = ColorTokens.Light.StandardContrast.inverseOnSurface,
+            inversePrimary = ColorTokens.Light.StandardContrast.inversePrimary,
+            surfaceDim = ColorTokens.Light.StandardContrast.surfaceDim,
+            surfaceBright = ColorTokens.Light.StandardContrast.surfaceBright,
+            surfaceContainerLowest = ColorTokens.Light.StandardContrast.surfaceContainerLowest,
+            surfaceContainerLow = ColorTokens.Light.StandardContrast.surfaceContainerLow,
+            surfaceContainer = ColorTokens.Light.StandardContrast.surfaceContainer,
+            surfaceContainerHigh = ColorTokens.Light.StandardContrast.surfaceContainerHigh,
+            surfaceContainerHighest = ColorTokens.Light.StandardContrast.surfaceContainerHighest,
         )
         internal val mediumContrast = lightColorScheme(
-            primary = primaryLightMediumContrast,
-            onPrimary = onPrimaryLightMediumContrast,
-            primaryContainer = primaryContainerLightMediumContrast,
-            onPrimaryContainer = onPrimaryContainerLightMediumContrast,
-            secondary = secondaryLightMediumContrast,
-            onSecondary = onSecondaryLightMediumContrast,
-            secondaryContainer = secondaryContainerLightMediumContrast,
-            onSecondaryContainer = onSecondaryContainerLightMediumContrast,
-            tertiary = tertiaryLightMediumContrast,
-            onTertiary = onTertiaryLightMediumContrast,
-            tertiaryContainer = tertiaryContainerLightMediumContrast,
-            onTertiaryContainer = onTertiaryContainerLightMediumContrast,
-            error = errorLightMediumContrast,
-            onError = onErrorLightMediumContrast,
-            errorContainer = errorContainerLightMediumContrast,
-            onErrorContainer = onErrorContainerLightMediumContrast,
-            background = backgroundLightMediumContrast,
-            onBackground = onBackgroundLightMediumContrast,
-            surface = surfaceLightMediumContrast,
-            onSurface = onSurfaceLightMediumContrast,
-            surfaceVariant = surfaceVariantLightMediumContrast,
-            onSurfaceVariant = onSurfaceVariantLightMediumContrast,
-            outline = outlineLightMediumContrast,
-            outlineVariant = outlineVariantLightMediumContrast,
-            scrim = scrimLightMediumContrast,
-            inverseSurface = inverseSurfaceLightMediumContrast,
-            inverseOnSurface = inverseOnSurfaceLightMediumContrast,
-            inversePrimary = inversePrimaryLightMediumContrast,
-            surfaceDim = surfaceDimLightMediumContrast,
-            surfaceBright = surfaceBrightLightMediumContrast,
-            surfaceContainerLowest = surfaceContainerLowestLightMediumContrast,
-            surfaceContainerLow = surfaceContainerLowLightMediumContrast,
-            surfaceContainer = surfaceContainerLightMediumContrast,
-            surfaceContainerHigh = surfaceContainerHighLightMediumContrast,
-            surfaceContainerHighest = surfaceContainerHighestLightMediumContrast,
+            primary = ColorTokens.Light.MediumContrast.primaryMediumContrast,
+            onPrimary = ColorTokens.Light.MediumContrast.onPrimaryMediumContrast,
+            primaryContainer = ColorTokens.Light.MediumContrast.primaryContainerMediumContrast,
+            onPrimaryContainer = ColorTokens.Light.MediumContrast.onPrimaryContainerMediumContrast,
+            secondary = ColorTokens.Light.MediumContrast.secondaryMediumContrast,
+            onSecondary = ColorTokens.Light.MediumContrast.onSecondaryMediumContrast,
+            secondaryContainer = ColorTokens.Light.MediumContrast.secondaryContainerMediumContrast,
+            onSecondaryContainer = ColorTokens.Light.MediumContrast.onSecondaryContainerMediumContrast,
+            tertiary = ColorTokens.Light.MediumContrast.tertiaryMediumContrast,
+            onTertiary = ColorTokens.Light.MediumContrast.onTertiaryMediumContrast,
+            tertiaryContainer = ColorTokens.Light.MediumContrast.tertiaryContainerMediumContrast,
+            onTertiaryContainer = ColorTokens.Light.MediumContrast.onTertiaryContainerMediumContrast,
+            error = ColorTokens.Light.MediumContrast.errorMediumContrast,
+            onError = ColorTokens.Light.MediumContrast.onErrorMediumContrast,
+            errorContainer = ColorTokens.Light.MediumContrast.errorContainerMediumContrast,
+            onErrorContainer = ColorTokens.Light.MediumContrast.onErrorContainerMediumContrast,
+            background = ColorTokens.Light.MediumContrast.backgroundMediumContrast,
+            onBackground = ColorTokens.Light.MediumContrast.onBackgroundMediumContrast,
+            surface = ColorTokens.Light.MediumContrast.surfaceMediumContrast,
+            onSurface = ColorTokens.Light.MediumContrast.onSurfaceMediumContrast,
+            surfaceVariant = ColorTokens.Light.MediumContrast.surfaceVariantMediumContrast,
+            onSurfaceVariant = ColorTokens.Light.MediumContrast.onSurfaceVariantMediumContrast,
+            outline = ColorTokens.Light.MediumContrast.outlineMediumContrast,
+            outlineVariant = ColorTokens.Light.MediumContrast.outlineVariantMediumContrast,
+            scrim = ColorTokens.Light.MediumContrast.scrimMediumContrast,
+            inverseSurface = ColorTokens.Light.MediumContrast.inverseSurfaceMediumContrast,
+            inverseOnSurface = ColorTokens.Light.MediumContrast.inverseOnSurfaceMediumContrast,
+            inversePrimary = ColorTokens.Light.MediumContrast.inversePrimaryMediumContrast,
+            surfaceDim = ColorTokens.Light.MediumContrast.surfaceDimMediumContrast,
+            surfaceBright = ColorTokens.Light.MediumContrast.surfaceBrightMediumContrast,
+            surfaceContainerLowest = ColorTokens.Light.MediumContrast.surfaceContainerLowestMediumContrast,
+            surfaceContainerLow = ColorTokens.Light.MediumContrast.surfaceContainerLowMediumContrast,
+            surfaceContainer = ColorTokens.Light.MediumContrast.surfaceContainerMediumContrast,
+            surfaceContainerHigh = ColorTokens.Light.MediumContrast.surfaceContainerHighMediumContrast,
+            surfaceContainerHighest = ColorTokens.Light.MediumContrast.surfaceContainerHighestMediumContrast,
         )
 
         internal val highContrast = lightColorScheme(
-            primary = primaryLightHighContrast,
-            onPrimary = onPrimaryLightHighContrast,
-            primaryContainer = primaryContainerLightHighContrast,
-            onPrimaryContainer = onPrimaryContainerLightHighContrast,
-            secondary = secondaryLightHighContrast,
-            onSecondary = onSecondaryLightHighContrast,
-            secondaryContainer = secondaryContainerLightHighContrast,
-            onSecondaryContainer = onSecondaryContainerLightHighContrast,
-            tertiary = tertiaryLightHighContrast,
-            onTertiary = onTertiaryLightHighContrast,
-            tertiaryContainer = tertiaryContainerLightHighContrast,
-            onTertiaryContainer = onTertiaryContainerLightHighContrast,
-            error = errorLightHighContrast,
-            onError = onErrorLightHighContrast,
-            errorContainer = errorContainerLightHighContrast,
-            onErrorContainer = onErrorContainerLightHighContrast,
-            background = backgroundLightHighContrast,
-            onBackground = onBackgroundLightHighContrast,
-            surface = surfaceLightHighContrast,
-            onSurface = onSurfaceLightHighContrast,
-            surfaceVariant = surfaceVariantLightHighContrast,
-            onSurfaceVariant = onSurfaceVariantLightHighContrast,
-            outline = outlineLightHighContrast,
-            outlineVariant = outlineVariantLightHighContrast,
-            scrim = scrimLightHighContrast,
-            inverseSurface = inverseSurfaceLightHighContrast,
-            inverseOnSurface = inverseOnSurfaceLightHighContrast,
-            inversePrimary = inversePrimaryLightHighContrast,
-            surfaceDim = surfaceDimLightHighContrast,
-            surfaceBright = surfaceBrightLightHighContrast,
-            surfaceContainerLowest = surfaceContainerLowestLightHighContrast,
-            surfaceContainerLow = surfaceContainerLowLightHighContrast,
-            surfaceContainer = surfaceContainerLightHighContrast,
-            surfaceContainerHigh = surfaceContainerHighLightHighContrast,
-            surfaceContainerHighest = surfaceContainerHighestLightHighContrast,
+            primary = ColorTokens.Light.HighContrast.primaryHighContrast,
+            onPrimary = ColorTokens.Light.HighContrast.onPrimaryHighContrast,
+            primaryContainer = ColorTokens.Light.HighContrast.primaryContainerHighContrast,
+            onPrimaryContainer = ColorTokens.Light.HighContrast.onPrimaryContainerHighContrast,
+            secondary = ColorTokens.Light.HighContrast.secondaryHighContrast,
+            onSecondary = ColorTokens.Light.HighContrast.onSecondaryHighContrast,
+            secondaryContainer = ColorTokens.Light.HighContrast.secondaryContainerHighContrast,
+            onSecondaryContainer = ColorTokens.Light.HighContrast.onSecondaryContainerHighContrast,
+            tertiary = ColorTokens.Light.HighContrast.tertiaryHighContrast,
+            onTertiary = ColorTokens.Light.HighContrast.onTertiaryHighContrast,
+            tertiaryContainer = ColorTokens.Light.HighContrast.tertiaryContainerHighContrast,
+            onTertiaryContainer = ColorTokens.Light.HighContrast.onTertiaryContainerHighContrast,
+            error = ColorTokens.Light.HighContrast.errorHighContrast,
+            onError = ColorTokens.Light.HighContrast.onErrorHighContrast,
+            errorContainer = ColorTokens.Light.HighContrast.errorContainerHighContrast,
+            onErrorContainer = ColorTokens.Light.HighContrast.onErrorContainerHighContrast,
+            background = ColorTokens.Light.HighContrast.backgroundHighContrast,
+            onBackground = ColorTokens.Light.HighContrast.onBackgroundHighContrast,
+            surface = ColorTokens.Light.HighContrast.surfaceHighContrast,
+            onSurface = ColorTokens.Light.HighContrast.onSurfaceHighContrast,
+            surfaceVariant = ColorTokens.Light.HighContrast.surfaceVariantHighContrast,
+            onSurfaceVariant = ColorTokens.Light.HighContrast.onSurfaceVariantHighContrast,
+            outline = ColorTokens.Light.HighContrast.outlineHighContrast,
+            outlineVariant = ColorTokens.Light.HighContrast.outlineVariantHighContrast,
+            scrim = ColorTokens.Light.HighContrast.scrimHighContrast,
+            inverseSurface = ColorTokens.Light.HighContrast.inverseSurfaceHighContrast,
+            inverseOnSurface = ColorTokens.Light.HighContrast.inverseOnSurfaceHighContrast,
+            inversePrimary = ColorTokens.Light.HighContrast.inversePrimaryHighContrast,
+            surfaceDim = ColorTokens.Light.HighContrast.surfaceDimHighContrast,
+            surfaceBright = ColorTokens.Light.HighContrast.surfaceBrightHighContrast,
+            surfaceContainerLowest = ColorTokens.Light.HighContrast.surfaceContainerLowestHighContrast,
+            surfaceContainerLow = ColorTokens.Light.HighContrast.surfaceContainerLowHighContrast,
+            surfaceContainer = ColorTokens.Light.HighContrast.surfaceContainerHighContrast,
+            surfaceContainerHigh = ColorTokens.Light.HighContrast.surfaceContainerHighHighContrast,
+            surfaceContainerHighest = ColorTokens.Light.HighContrast.surfaceContainerHighestHighContrast,
         )
     }
 
     internal object Dark {
         internal val standardContrast = darkColorScheme(
-            primary = primaryDark,
-            onPrimary = onPrimaryDark,
-            primaryContainer = primaryContainerDark,
-            onPrimaryContainer = onPrimaryContainerDark,
-            secondary = secondaryDark,
-            onSecondary = onSecondaryDark,
-            secondaryContainer = secondaryContainerDark,
-            onSecondaryContainer = onSecondaryContainerDark,
-            tertiary = tertiaryDark,
-            onTertiary = onTertiaryDark,
-            tertiaryContainer = tertiaryContainerDark,
-            onTertiaryContainer = onTertiaryContainerDark,
-            error = errorDark,
-            onError = onErrorDark,
-            errorContainer = errorContainerDark,
-            onErrorContainer = onErrorContainerDark,
-            background = backgroundDark,
-            onBackground = onBackgroundDark,
-            surface = surfaceDark,
-            onSurface = onSurfaceDark,
-            surfaceVariant = surfaceVariantDark,
-            onSurfaceVariant = onSurfaceVariantDark,
-            outline = outlineDark,
-            outlineVariant = outlineVariantDark,
-            scrim = scrimDark,
-            inverseSurface = inverseSurfaceDark,
-            inverseOnSurface = inverseOnSurfaceDark,
-            inversePrimary = inversePrimaryDark,
-            surfaceDim = surfaceDimDark,
-            surfaceBright = surfaceBrightDark,
-            surfaceContainerLowest = surfaceContainerLowestDark,
-            surfaceContainerLow = surfaceContainerLowDark,
-            surfaceContainer = surfaceContainerDark,
-            surfaceContainerHigh = surfaceContainerHighDark,
-            surfaceContainerHighest = surfaceContainerHighestDark,
+            primary = ColorTokens.Dark.StandardContrast.primary,
+            onPrimary = ColorTokens.Dark.StandardContrast.onPrimary,
+            primaryContainer = ColorTokens.Dark.StandardContrast.primaryContainer,
+            onPrimaryContainer = ColorTokens.Dark.StandardContrast.onPrimaryContainer,
+            secondary = ColorTokens.Dark.StandardContrast.secondary,
+            onSecondary = ColorTokens.Dark.StandardContrast.onSecondary,
+            secondaryContainer = ColorTokens.Dark.StandardContrast.secondaryContainer,
+            onSecondaryContainer = ColorTokens.Dark.StandardContrast.onSecondaryContainer,
+            tertiary = ColorTokens.Dark.StandardContrast.tertiary,
+            onTertiary = ColorTokens.Dark.StandardContrast.onTertiary,
+            tertiaryContainer = ColorTokens.Dark.StandardContrast.tertiaryContainer,
+            onTertiaryContainer = ColorTokens.Dark.StandardContrast.onTertiaryContainer,
+            error = ColorTokens.Dark.StandardContrast.error,
+            onError = ColorTokens.Dark.StandardContrast.onError,
+            errorContainer = ColorTokens.Dark.StandardContrast.errorContainer,
+            onErrorContainer = ColorTokens.Dark.StandardContrast.onErrorContainer,
+            background = ColorTokens.Dark.StandardContrast.background,
+            onBackground = ColorTokens.Dark.StandardContrast.onBackground,
+            surface = ColorTokens.Dark.StandardContrast.surface,
+            onSurface = ColorTokens.Dark.StandardContrast.onSurface,
+            surfaceVariant = ColorTokens.Dark.StandardContrast.surfaceVariant,
+            onSurfaceVariant = ColorTokens.Dark.StandardContrast.onSurfaceVariant,
+            outline = ColorTokens.Dark.StandardContrast.outline,
+            outlineVariant = ColorTokens.Dark.StandardContrast.outlineVariant,
+            scrim = ColorTokens.Dark.StandardContrast.scrim,
+            inverseSurface = ColorTokens.Dark.StandardContrast.inverseSurface,
+            inverseOnSurface = ColorTokens.Dark.StandardContrast.inverseOnSurface,
+            inversePrimary = ColorTokens.Dark.StandardContrast.inversePrimary,
+            surfaceDim = ColorTokens.Dark.StandardContrast.surfaceDim,
+            surfaceBright = ColorTokens.Dark.StandardContrast.surfaceBright,
+            surfaceContainerLowest = ColorTokens.Dark.StandardContrast.surfaceContainerLowest,
+            surfaceContainerLow = ColorTokens.Dark.StandardContrast.surfaceContainerLow,
+            surfaceContainer = ColorTokens.Dark.StandardContrast.surfaceContainer,
+            surfaceContainerHigh = ColorTokens.Dark.StandardContrast.surfaceContainerHigh,
+            surfaceContainerHighest = ColorTokens.Dark.StandardContrast.surfaceContainerHighest,
         )
 
         internal val mediumContrast = darkColorScheme(
-            primary = primaryDarkMediumContrast,
-            onPrimary = onPrimaryDarkMediumContrast,
-            primaryContainer = primaryContainerDarkMediumContrast,
-            onPrimaryContainer = onPrimaryContainerDarkMediumContrast,
-            secondary = secondaryDarkMediumContrast,
-            onSecondary = onSecondaryDarkMediumContrast,
-            secondaryContainer = secondaryContainerDarkMediumContrast,
-            onSecondaryContainer = onSecondaryContainerDarkMediumContrast,
-            tertiary = tertiaryDarkMediumContrast,
-            onTertiary = onTertiaryDarkMediumContrast,
-            tertiaryContainer = tertiaryContainerDarkMediumContrast,
-            onTertiaryContainer = onTertiaryContainerDarkMediumContrast,
-            error = errorDarkMediumContrast,
-            onError = onErrorDarkMediumContrast,
-            errorContainer = errorContainerDarkMediumContrast,
-            onErrorContainer = onErrorContainerDarkMediumContrast,
-            background = backgroundDarkMediumContrast,
-            onBackground = onBackgroundDarkMediumContrast,
-            surface = surfaceDarkMediumContrast,
-            onSurface = onSurfaceDarkMediumContrast,
-            surfaceVariant = surfaceVariantDarkMediumContrast,
-            onSurfaceVariant = onSurfaceVariantDarkMediumContrast,
-            outline = outlineDarkMediumContrast,
-            outlineVariant = outlineVariantDarkMediumContrast,
-            scrim = scrimDarkMediumContrast,
-            inverseSurface = inverseSurfaceDarkMediumContrast,
-            inverseOnSurface = inverseOnSurfaceDarkMediumContrast,
-            inversePrimary = inversePrimaryDarkMediumContrast,
-            surfaceDim = surfaceDimDarkMediumContrast,
-            surfaceBright = surfaceBrightDarkMediumContrast,
-            surfaceContainerLowest = surfaceContainerLowestDarkMediumContrast,
-            surfaceContainerLow = surfaceContainerLowDarkMediumContrast,
-            surfaceContainer = surfaceContainerDarkMediumContrast,
-            surfaceContainerHigh = surfaceContainerHighDarkMediumContrast,
-            surfaceContainerHighest = surfaceContainerHighestDarkMediumContrast,
+            primary = ColorTokens.Dark.MediumContrast.primaryMediumContrast,
+            onPrimary = ColorTokens.Dark.MediumContrast.onPrimaryMediumContrast,
+            primaryContainer = ColorTokens.Dark.MediumContrast.primaryContainerMediumContrast,
+            onPrimaryContainer = ColorTokens.Dark.MediumContrast.onPrimaryContainerMediumContrast,
+            secondary = ColorTokens.Dark.MediumContrast.secondaryMediumContrast,
+            onSecondary = ColorTokens.Dark.MediumContrast.onSecondaryMediumContrast,
+            secondaryContainer = ColorTokens.Dark.MediumContrast.secondaryContainerMediumContrast,
+            onSecondaryContainer = ColorTokens.Dark.MediumContrast.onSecondaryContainerMediumContrast,
+            tertiary = ColorTokens.Dark.MediumContrast.tertiaryMediumContrast,
+            onTertiary = ColorTokens.Dark.MediumContrast.onTertiaryMediumContrast,
+            tertiaryContainer = ColorTokens.Dark.MediumContrast.tertiaryContainerMediumContrast,
+            onTertiaryContainer = ColorTokens.Dark.MediumContrast.onTertiaryContainerMediumContrast,
+            error = ColorTokens.Dark.MediumContrast.errorMediumContrast,
+            onError = ColorTokens.Dark.MediumContrast.onErrorMediumContrast,
+            errorContainer = ColorTokens.Dark.MediumContrast.errorContainerMediumContrast,
+            onErrorContainer = ColorTokens.Dark.MediumContrast.onErrorContainerMediumContrast,
+            background = ColorTokens.Dark.MediumContrast.backgroundMediumContrast,
+            onBackground = ColorTokens.Dark.MediumContrast.onBackgroundMediumContrast,
+            surface = ColorTokens.Dark.MediumContrast.surfaceMediumContrast,
+            onSurface = ColorTokens.Dark.MediumContrast.onSurfaceMediumContrast,
+            surfaceVariant = ColorTokens.Dark.MediumContrast.surfaceVariantMediumContrast,
+            onSurfaceVariant = ColorTokens.Dark.MediumContrast.onSurfaceVariantMediumContrast,
+            outline = ColorTokens.Dark.MediumContrast.outlineMediumContrast,
+            outlineVariant = ColorTokens.Dark.MediumContrast.outlineVariantMediumContrast,
+            scrim = ColorTokens.Dark.MediumContrast.scrimMediumContrast,
+            inverseSurface = ColorTokens.Dark.MediumContrast.inverseSurfaceMediumContrast,
+            inverseOnSurface = ColorTokens.Dark.MediumContrast.inverseOnSurfaceMediumContrast,
+            inversePrimary = ColorTokens.Dark.MediumContrast.inversePrimaryMediumContrast,
+            surfaceDim = ColorTokens.Dark.MediumContrast.surfaceDimMediumContrast,
+            surfaceBright = ColorTokens.Dark.MediumContrast.surfaceBrightMediumContrast,
+            surfaceContainerLowest = ColorTokens.Dark.MediumContrast.surfaceContainerLowestMediumContrast,
+            surfaceContainerLow = ColorTokens.Dark.MediumContrast.surfaceContainerLowMediumContrast,
+            surfaceContainer = ColorTokens.Dark.MediumContrast.surfaceContainerMediumContrast,
+            surfaceContainerHigh = ColorTokens.Dark.MediumContrast.surfaceContainerHighMediumContrast,
+            surfaceContainerHighest = ColorTokens.Dark.MediumContrast.surfaceContainerHighestMediumContrast,
         )
 
         internal val highContrast = darkColorScheme(
-            primary = primaryDarkHighContrast,
-            onPrimary = onPrimaryDarkHighContrast,
-            primaryContainer = primaryContainerDarkHighContrast,
-            onPrimaryContainer = onPrimaryContainerDarkHighContrast,
-            secondary = secondaryDarkHighContrast,
-            onSecondary = onSecondaryDarkHighContrast,
-            secondaryContainer = secondaryContainerDarkHighContrast,
-            onSecondaryContainer = onSecondaryContainerDarkHighContrast,
-            tertiary = tertiaryDarkHighContrast,
-            onTertiary = onTertiaryDarkHighContrast,
-            tertiaryContainer = tertiaryContainerDarkHighContrast,
-            onTertiaryContainer = onTertiaryContainerDarkHighContrast,
-            error = errorDarkHighContrast,
-            onError = onErrorDarkHighContrast,
-            errorContainer = errorContainerDarkHighContrast,
-            onErrorContainer = onErrorContainerDarkHighContrast,
-            background = backgroundDarkHighContrast,
-            onBackground = onBackgroundDarkHighContrast,
-            surface = surfaceDarkHighContrast,
-            onSurface = onSurfaceDarkHighContrast,
-            surfaceVariant = surfaceVariantDarkHighContrast,
-            onSurfaceVariant = onSurfaceVariantDarkHighContrast,
-            outline = outlineDarkHighContrast,
-            outlineVariant = outlineVariantDarkHighContrast,
-            scrim = scrimDarkHighContrast,
-            inverseSurface = inverseSurfaceDarkHighContrast,
-            inverseOnSurface = inverseOnSurfaceDarkHighContrast,
-            inversePrimary = inversePrimaryDarkHighContrast,
-            surfaceDim = surfaceDimDarkHighContrast,
-            surfaceBright = surfaceBrightDarkHighContrast,
-            surfaceContainerLowest = surfaceContainerLowestDarkHighContrast,
-            surfaceContainerLow = surfaceContainerLowDarkHighContrast,
-            surfaceContainer = surfaceContainerDarkHighContrast,
-            surfaceContainerHigh = surfaceContainerHighDarkHighContrast,
-            surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
+            primary = ColorTokens.Dark.HighContrast.primaryHighContrast,
+            onPrimary = ColorTokens.Dark.HighContrast.onPrimaryHighContrast,
+            primaryContainer = ColorTokens.Dark.HighContrast.primaryContainerHighContrast,
+            onPrimaryContainer = ColorTokens.Dark.HighContrast.onPrimaryContainerHighContrast,
+            secondary = ColorTokens.Dark.HighContrast.secondaryHighContrast,
+            onSecondary = ColorTokens.Dark.HighContrast.onSecondaryHighContrast,
+            secondaryContainer = ColorTokens.Dark.HighContrast.secondaryContainerHighContrast,
+            onSecondaryContainer = ColorTokens.Dark.HighContrast.onSecondaryContainerHighContrast,
+            tertiary = ColorTokens.Dark.HighContrast.tertiaryHighContrast,
+            onTertiary = ColorTokens.Dark.HighContrast.onTertiaryHighContrast,
+            tertiaryContainer = ColorTokens.Dark.HighContrast.tertiaryContainerHighContrast,
+            onTertiaryContainer = ColorTokens.Dark.HighContrast.onTertiaryContainerHighContrast,
+            error = ColorTokens.Dark.HighContrast.errorHighContrast,
+            onError = ColorTokens.Dark.HighContrast.onErrorHighContrast,
+            errorContainer = ColorTokens.Dark.HighContrast.errorContainerHighContrast,
+            onErrorContainer = ColorTokens.Dark.HighContrast.onErrorContainerHighContrast,
+            background = ColorTokens.Dark.HighContrast.backgroundHighContrast,
+            onBackground = ColorTokens.Dark.HighContrast.onBackgroundHighContrast,
+            surface = ColorTokens.Dark.HighContrast.surfaceHighContrast,
+            onSurface = ColorTokens.Dark.HighContrast.onSurfaceHighContrast,
+            surfaceVariant = ColorTokens.Dark.HighContrast.surfaceVariantHighContrast,
+            onSurfaceVariant = ColorTokens.Dark.HighContrast.onSurfaceVariantHighContrast,
+            outline = ColorTokens.Dark.HighContrast.outlineHighContrast,
+            outlineVariant = ColorTokens.Dark.HighContrast.outlineVariantHighContrast,
+            scrim = ColorTokens.Dark.HighContrast.scrimHighContrast,
+            inverseSurface = ColorTokens.Dark.HighContrast.inverseSurfaceHighContrast,
+            inverseOnSurface = ColorTokens.Dark.HighContrast.inverseOnSurfaceHighContrast,
+            inversePrimary = ColorTokens.Dark.HighContrast.inversePrimaryHighContrast,
+            surfaceDim = ColorTokens.Dark.HighContrast.surfaceDimHighContrast,
+            surfaceBright = ColorTokens.Dark.HighContrast.surfaceBrightHighContrast,
+            surfaceContainerLowest = ColorTokens.Dark.HighContrast.surfaceContainerLowestHighContrast,
+            surfaceContainerLow = ColorTokens.Dark.HighContrast.surfaceContainerLowHighContrast,
+            surfaceContainer = ColorTokens.Dark.HighContrast.surfaceContainerHighContrast,
+            surfaceContainerHigh = ColorTokens.Dark.HighContrast.surfaceContainerHighHighContrast,
+            surfaceContainerHighest = ColorTokens.Dark.HighContrast.surfaceContainerHighestHighContrast,
         )
 
     }

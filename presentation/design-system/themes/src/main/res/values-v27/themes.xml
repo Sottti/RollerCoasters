@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.RollerCoasters.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-    </style>
-
-    <style name="Theme.RollerCoasters" parent="Theme.RollerCoasters.Base" />
-
-    <style name="Theme.RollerCoasters.Base" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RollerCoasters" parent="Theme.RollerCoasters.Base">
         <!-- Primary Colors -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
@@ -66,5 +60,6 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/surface</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
     </style>
 </resources>
