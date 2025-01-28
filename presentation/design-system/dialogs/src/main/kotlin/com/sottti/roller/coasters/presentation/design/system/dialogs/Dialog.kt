@@ -2,8 +2,8 @@ package com.sottti.roller.coasters.presentation.design.system.dialogs
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -64,12 +64,14 @@ private fun OptionsList(
     options: List<RadioButtonOption>,
     onOptionSelected: (RadioButtonOption) -> Unit,
 ) {
-    Column {
+    LazyColumn {
         options.forEach { option ->
-            RadioButtonRow(
-                option = option,
-                onOptionSelected = onOptionSelected,
-            )
+            item {
+                RadioButtonRow(
+                    option = option,
+                    onOptionSelected = onOptionSelected,
+                )
+            }
         }
     }
 }
