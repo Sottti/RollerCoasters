@@ -39,6 +39,7 @@ import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorEnabled
+import com.sottti.roller.coasters.utils.device.sdk.isLightDarkThemeSystemEnabled
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -295,8 +296,9 @@ private fun themePickerState(
 
 private fun themesList(
     selectedTheme: ThemeUi,
-) = listOf(
-    SystemTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme),
+) = listOfNotNull(
+    SystemTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme)
+        .takeIf { isLightDarkThemeSystemEnabled() },
     LightTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.LightTheme),
     DarkTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.DarkTheme),
 )
