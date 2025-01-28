@@ -14,6 +14,7 @@ import com.sottti.roller.coasters.data.settings.model.Theme.LightTheme
 import com.sottti.roller.coasters.data.settings.model.Theme.SystemTheme
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.presentation.settings.R
+import com.sottti.roller.coasters.presentation.settings.model.ColorContrastNotAvailableMessageState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi
@@ -25,6 +26,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ColorContrastPickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastNotAvailableMessage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
@@ -133,6 +135,7 @@ internal class SettingsViewModel @Inject constructor(
                 is ColorContrastPickerSelectionChange -> updateColorContrastPicker(action.contrast)
                 is ConfirmColorContrastPickerSelection -> setColorContrast(action.contrast)
                 DismissColorContrastPicker -> hideColorContrastPicker()
+                DismissColorContrastNotAvailableMessage -> hideColorContrastNotAvailableMessage()
             }
         }
     }
@@ -149,17 +152,35 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
+    private fun SettingsState.isDynamicColorChecked() =
+        dynamicColor?.checkedState is DynamicColorCheckedState.Loaded && dynamicColor.checkedState.checked
+
     private suspend fun showColorContrastPicker() {
         _state.update { currentState ->
-            currentState.copy(
-                colorContrastPicker = colorContrastPickerState(
-                    selectedColorContrast = settingsRepository
-                        .getColorContrast()
-                        .toPresentationModel(isSelected = true)
+            when {
+                currentState.isDynamicColorChecked() -> currentState.copy(
+                    colorContrastPicker = null,
+                    colorContrastNotAvailableMessage = contrastNotAvailableMessageState(),
                 )
-            )
+
+                else -> currentState.copy(
+                    colorContrastNotAvailableMessage = null,
+                    colorContrastPicker = colorContrastPickerState(
+                        selectedColorContrast = settingsRepository
+                            .getColorContrast()
+                            .toPresentationModel(isSelected = true)
+                    )
+                )
+            }
         }
     }
+
+    private fun contrastNotAvailableMessageState(): ColorContrastNotAvailableMessageState =
+        ColorContrastNotAvailableMessageState(
+            dismiss = R.string.picker_dismiss,
+            text = R.string.color_contrast_not_available_message_text,
+            title = R.string.color_contrast_not_available_message_title,
+        )
 
     private fun updateThemePicker(
         selectedTheme: ThemeUi,
@@ -212,11 +233,20 @@ internal class SettingsViewModel @Inject constructor(
             )
         }
     }
+
+    private fun hideColorContrastNotAvailableMessage() {
+        _state.update { currentState ->
+            currentState.copy(
+                colorContrastNotAvailableMessage = null,
+            )
+        }
+    }
 }
 
 private fun initialState(): SettingsState =
     SettingsState(
         colorContrast = colorContrastInitialState(),
+        colorContrastNotAvailableMessage = null,
         colorContrastPicker = null,
         dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorEnabled() },
         theme = themeInitialState(),

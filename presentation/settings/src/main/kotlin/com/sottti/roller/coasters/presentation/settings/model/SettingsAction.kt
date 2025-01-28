@@ -13,4 +13,5 @@ internal sealed class SettingsAction {
     data class ColorContrastPickerSelectionChange(val contrast: ColorContrastUi) : SettingsAction()
     data class ConfirmColorContrastPickerSelection(val contrast: ColorContrastUi) : SettingsAction()
     data object DismissColorContrastPicker : SettingsAction()
+    data object DismissColorContrastNotAvailableMessage : SettingsAction()
 }

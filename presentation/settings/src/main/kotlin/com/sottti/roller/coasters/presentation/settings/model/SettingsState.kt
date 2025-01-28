@@ -6,11 +6,12 @@ import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class SettingsState(
+    val colorContrast: ColorContrastState,
+    val colorContrastNotAvailableMessage: ColorContrastNotAvailableMessageState?,
+    val colorContrastPicker : ColorContrastPickerState?,
     val dynamicColor: DynamicColorState?,
     val theme: ThemeState,
     val themePicker: ThemePickerState?,
-    val colorContrast: ColorContrastState,
-    val colorContrastPicker : ColorContrastPickerState?,
     val topBar: TopBarState,
 )
 
@@ -78,6 +79,13 @@ internal data class ColorContrastPickerState(
     @StringRes val dismiss: Int,
     @StringRes val title: Int,
     val contrasts: List<ColorContrastUi>,
+)
+
+@Immutable
+internal data class ColorContrastNotAvailableMessageState(
+    @StringRes val dismiss: Int,
+    @StringRes val text: Int,
+    @StringRes val title: Int,
 )
 
 @Immutable

@@ -20,6 +20,21 @@ import co.cuvva.presentation.design.system.text.Text
 public object Dialog {
 
     @Composable
+    public fun Informative(
+        @StringRes title: Int,
+        @StringRes text: Int,
+        @StringRes dismiss: Int,
+        onDismiss: () -> Unit,
+    ) {
+        AlertDialog(
+            onDismissRequest = onDismiss,
+            title = { Text(title) },
+            text = { Text(text) },
+            confirmButton = { DismissButton(text = dismiss, onDismiss = onDismiss) },
+        )
+    }
+
+    @Composable
     public fun WithRadioButtons(
         @StringRes title: Int,
         @StringRes confirm: Int,

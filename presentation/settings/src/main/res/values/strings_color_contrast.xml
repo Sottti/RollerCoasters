@@ -4,6 +4,8 @@
     <string name="color_contrast_color_supporting">Higher contrast makes content stand out more.</string>
     <string name="color_contrast_high_contrast">High contrast</string>
     <string name="color_contrast_medium_contrast">Medium contrast</string>
+    <string name="color_contrast_not_available_message_text">Color contrast in app setting is only available when dynamic color is disabled.When dynamic color is enabled the contrast always follows the system contrast settings.</string>
+    <string name="color_contrast_not_available_message_title">Color Contrast</string>
     <string name="color_contrast_picker_title">Pick contrast</string>
     <string name="color_contrast_standard_contrast">Standard contrast</string>
     <string name="color_contrast_system_contrast">System contrast</string>

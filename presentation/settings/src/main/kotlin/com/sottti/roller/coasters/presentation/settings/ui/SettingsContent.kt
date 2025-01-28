@@ -69,6 +69,13 @@ internal fun SettingsContent(
             onAction = onAction,
         )
     }
+
+    state.colorContrastNotAvailableMessage?.let { colorContrastNotAvailableMessageState ->
+        ColorContrastNotAvailableDialog(
+            state = colorContrastNotAvailableMessageState,
+            onAction = onAction,
+        )
+    }
 }
 
 @Composable
