@@ -15,11 +15,14 @@ import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastListItemState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
+import com.sottti.roller.coasters.presentation.settings.model.LanguageListItemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedLanguageState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeListItemState
@@ -52,6 +55,13 @@ internal fun SettingsContent(
             ColorContrastSetting(
                 state = state.colorContrast.listItem,
                 onLaunchColorContrastPicker = { onAction(LaunchColorContrastPicker) },
+            )
+        }
+
+        item {
+            LanguageSetting(
+                state = state.language.listItem,
+                onLaunchLanguagePicker = { onAction(LaunchLanguagePicker) },
             )
         }
     }
@@ -121,6 +131,14 @@ private fun ThemeSetting(
 }
 
 @Composable
+private fun ThemeTrailingContent(state: SelectedThemeState) {
+    when (state) {
+        is SelectedThemeState.Loaded -> Text(state.theme.text)
+        SelectedThemeState.Loading -> SmallLoadingIndicator()
+    }
+}
+
+@Composable
 private fun ColorContrastSetting(
     state: ColorContrastListItemState,
     onLaunchColorContrastPicker: () -> Unit,
@@ -135,18 +153,32 @@ private fun ColorContrastSetting(
 }
 
 @Composable
-private fun ThemeTrailingContent(state: SelectedThemeState) {
-    when (state) {
-        is SelectedThemeState.Loaded -> Text(state.theme.text)
-        SelectedThemeState.Loading -> SmallLoadingIndicator()
-    }
-}
-
-@Composable
 private fun ColorContrastTrailingContent(state: SelectedColorContrastState) {
     when (state) {
         is SelectedColorContrastState.Loaded -> Text(state.colorContrast.text)
         SelectedColorContrastState.Loading -> SmallLoadingIndicator()
+    }
+}
+
+@Composable
+private fun LanguageSetting(
+    state: LanguageListItemState,
+    onLaunchLanguagePicker: () -> Unit,
+) {
+    ListItem(
+        modifier = Modifier.clickable { onLaunchLanguagePicker() },
+        headlineContent = { Text(state.headline) },
+        leadingContent = { Icon(state.icon) },
+        supportingContent = { Text(state.supporting) },
+        trailingContent = { LanguageTrailingContent(state.selectedLanguage) },
+    )
+}
+
+@Composable
+private fun LanguageTrailingContent(state: SelectedLanguageState) {
+    when (state) {
+        is SelectedLanguageState.Loaded -> Text(state.language.text)
+        SelectedLanguageState.Loading -> SmallLoadingIndicator()
     }
 }
 

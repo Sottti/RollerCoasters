@@ -21,17 +21,26 @@ import com.sottti.roller.coasters.presentation.settings.model.ColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
+import com.sottti.roller.coasters.presentation.settings.model.LanguageListItemState
+import com.sottti.roller.coasters.presentation.settings.model.LanguagePickerState
+import com.sottti.roller.coasters.presentation.settings.model.LanguageState
+import com.sottti.roller.coasters.presentation.settings.model.LanguageUi
 import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedLanguageState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ColorContrastPickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmLanguagePickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemePickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastNotAvailableMessage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LanguagePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
@@ -97,17 +106,7 @@ internal class SettingsViewModel @Inject constructor(
                 theme = currentState.theme.copy(
                     currentState.theme.listItem.copy(
                         selectedTheme = SelectedThemeState.Loaded(
-                            theme.toPresentationModel(
-                                currentState
-                                    .theme
-                                    .listItem
-                                    .selectedTheme is SelectedThemeState.Loaded
-                                        && currentState
-                                    .theme
-                                    .listItem
-                                    .selectedTheme
-                                    .theme == theme
-                            ),
+                            theme.toPresentationModel(isSelected = true),
                         )
                     ),
                 )
@@ -129,12 +128,7 @@ internal class SettingsViewModel @Inject constructor(
                 colorContrast = currentState.colorContrast.copy(
                     listItem = currentState.colorContrast.listItem.copy(
                         selectedColorContrast = SelectedColorContrastState.Loaded(
-                            colorContrast.toPresentationModel(
-                                currentState
-                                    .colorContrast
-                                    .listItem
-                                    .selectedColorContrast == colorContrast,
-                            ),
+                            colorContrast.toPresentationModel(isSelected = true),
                         )
                     ),
                 )
@@ -170,6 +164,11 @@ internal class SettingsViewModel @Inject constructor(
 
                 DismissColorContrastPicker -> hideColorContrastPicker()
                 DismissColorContrastNotAvailableMessage -> hideColorContrastNotAvailableMessage()
+
+                LaunchLanguagePicker -> showLanguagePicker()
+                is LanguagePickerSelectionChange -> TODO()
+                is ConfirmLanguagePickerSelection -> TODO()
+                DismissLanguagePicker -> TODO()
             }
         }
     }
@@ -187,10 +186,6 @@ internal class SettingsViewModel @Inject constructor(
             )
         }
     }
-
-    private fun SettingsState.isDynamicColorChecked() =
-        dynamicColor?.checkedState is DynamicColorCheckedState.Loaded
-                && dynamicColor.checkedState.checked
 
     private suspend fun showColorContrastPicker() {
         _state.update { currentState ->
@@ -216,32 +211,19 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun contrastNotAvailableMessageState(): ColorContrastNotAvailableMessageState =
-        ColorContrastNotAvailableMessageState(
-            dismiss = R.string.picker_dismiss,
-            text = R.string.color_contrast_not_available_message_text,
-            title = R.string.color_contrast_not_available_message_title,
-        )
-
     private fun updateThemePicker(
         selectedTheme: ThemeUi,
     ) {
         _state.update { currentState ->
             currentState.copy(
-                theme = currentState.theme.copy(
-                    picker = themePickerState(selectedTheme = selectedTheme)
-                )
+                theme = currentState.theme.copy(picker = themePickerState(selectedTheme)),
             )
         }
     }
 
     private fun hideThemePicker() {
         _state.update { currentState ->
-            currentState.copy(
-                theme = currentState.theme.copy(
-                    picker = null,
-                )
-            )
+            currentState.copy(theme = currentState.theme.copy(picker = null))
         }
     }
 
@@ -251,9 +233,7 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(
                 colorContrast = currentState.colorContrast.copy(
-                    picker = colorContrastPickerState(
-                        selectedColorContrast = selectedContrast,
-                    )
+                    picker = colorContrastPickerState(selectedColorContrast = selectedContrast)
                 )
             )
         }
@@ -261,20 +241,22 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun hideColorContrastPicker() {
         _state.update { currentState ->
-            currentState.copy(
-                colorContrast = currentState.colorContrast.copy(
-                    picker = null,
-                )
-            )
+            currentState.copy(colorContrast = currentState.colorContrast.copy(picker = null))
         }
     }
 
     private fun hideColorContrastNotAvailableMessage() {
         _state.update { currentState ->
             currentState.copy(
-                colorContrast = currentState.colorContrast.copy(
-                    notAvailableMessage = null,
-                )
+                colorContrast = currentState.colorContrast.copy(notAvailableMessage = null)
+            )
+        }
+    }
+
+    private suspend fun showLanguagePicker() {
+        _state.update { currentState ->
+            currentState.copy(
+                language = currentState.language.copy(picker = languagePickerState(TODO()))
             )
         }
     }
@@ -284,26 +266,10 @@ private fun initialState(): SettingsState =
     SettingsState(
         colorContrast = colorContrastInitialState(),
         dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorAvailable() },
+        language = languageInitialState(),
         theme = themeInitialState(),
         topBar = topBarState(),
     )
-
-private fun dynamicColorInitialState() = DynamicColorState(
-    checkedState = DynamicColorCheckedState.Loading,
-    headline = R.string.dynamic_color_headline,
-    supporting = R.string.dynamic_color_supporting,
-    icon = Icons.Palette.Outlined,
-)
-
-private fun themeInitialState() = ThemeState(
-    listItem = ThemeListItemState(
-        headline = R.string.theme_headline,
-        supporting = R.string.theme_supporting,
-        selectedTheme = SelectedThemeState.Loading,
-        icon = Icons.Contrast.Rounded
-    ),
-    picker = null,
-)
 
 private fun colorContrastInitialState() =
     ColorContrastState(
@@ -315,6 +281,45 @@ private fun colorContrastInitialState() =
         ),
         notAvailableMessage = null,
         picker = null,
+    )
+
+private fun dynamicColorInitialState() = DynamicColorState(
+    checkedState = DynamicColorCheckedState.Loading,
+    headline = R.string.dynamic_color_headline,
+    supporting = R.string.dynamic_color_supporting,
+    icon = Icons.Palette.Outlined,
+)
+
+private fun languageInitialState() =
+    LanguageState(
+        listItem = LanguageListItemState(
+            headline = R.string.language_headline,
+            icon = Icons.Language.Rounded,
+            supporting = R.string.language_supporting,
+            selectedLanguage = SelectedLanguageState.Loading,
+        ),
+        picker = null,
+    )
+
+private fun SettingsState.isDynamicColorChecked() =
+    dynamicColor?.checkedState is DynamicColorCheckedState.Loaded
+            && dynamicColor.checkedState.checked
+
+private fun themeInitialState() = ThemeState(
+    listItem = ThemeListItemState(
+        headline = R.string.theme_headline,
+        supporting = R.string.theme_supporting,
+        selectedTheme = SelectedThemeState.Loading,
+        icon = Icons.Contrast.Rounded
+    ),
+    picker = null,
+)
+
+private fun contrastNotAvailableMessageState(): ColorContrastNotAvailableMessageState =
+    ColorContrastNotAvailableMessageState(
+        dismiss = R.string.picker_dismiss,
+        text = R.string.color_contrast_not_available_message_text,
+        title = R.string.color_contrast_not_available_message_title,
     )
 
 private fun topBarState(): TopBarState =
@@ -363,3 +368,16 @@ private fun colorContrastsList(
         isSelected = selectedColorContrast is ColorContrastUi.HighContrast,
     ),
 )
+
+private fun languagePickerState(
+    selectedLanguage: LanguageUi,
+) = LanguagePickerState(
+    title = R.string.color_contrast_picker_title,
+    confirm = R.string.picker_confirm,
+    dismiss = R.string.picker_dismiss,
+    languages = languagesList(selectedLanguage),
+)
+
+private fun languagesList(
+    selectedLanguage: LanguageUi,
+) = listOfNotNull(TODO())

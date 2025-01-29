@@ -112,6 +112,14 @@ public object Icons {
         )
     }
 
+    public object Language {
+        public val Description: Int = R.string.description_icon_language
+        public val Rounded: IconState = IconState(
+            resId = R.drawable.ic_language_rounded,
+            descriptionResId = Description,
+        )
+    }
+
     public object LightMode {
         public val Description: Int = R.string.description_icon_light_mode
         public val Filled: IconState = IconState(

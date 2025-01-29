@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="description_icon_contrast">Contrast</string>
     <string name="description_icon_account_circle">About me</string>
     <string name="description_icon_arrow_back">Arrow back</string>
     <string name="description_icon_brightness_auto">Auto brightness</string>
@@ -8,8 +7,10 @@
     <string name="description_icon_brightness_medium">Medium brightness</string>
     <string name="description_icon_brightness_standard">Standard brightness</string>
     <string name="description_icon_colors">Colors</string>
+    <string name="description_icon_contrast">Contrast</string>
     <string name="description_icon_dark_mode">Dark mode</string>
     <string name="description_icon_explore">Explore</string>
+    <string name="description_icon_language">Language</string>
     <string name="description_icon_light_mode">Light mode</string>
     <string name="description_icon_palette">Color palette</string>
     <string name="description_icon_settings">Settings</string>
