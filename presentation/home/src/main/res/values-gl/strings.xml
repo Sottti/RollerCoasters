@@ -1,0 +1,5 @@
+<resources>
+    <string name="navigation_bar_item_label_about_me">Sobre min</string>
+    <string name="navigation_bar_item_label_explore">Inicio</string>
+    <string name="navigation_bar_item_label_favourites">Favoritos</string>
+</resources>

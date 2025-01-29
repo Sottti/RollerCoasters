@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="picker_confirm">Confirmar</string>
+    <string name="picker_dismiss">Descartar</string>
+    <string name="title">Axustes</string>
+</resources>

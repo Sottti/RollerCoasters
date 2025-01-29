@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="color_contrast_color_headline">Contraste de cor</string>
+    <string name="color_contrast_color_supporting">
+        Un maior contraste fai que o contido destaque máis.
+    </string>
+    <string name="color_contrast_high_contrast">Contraste alto</string>
+    <string name="color_contrast_medium_contrast">Contraste medio</string>
+    <string name="color_contrast_not_available_message_text">
+        A configuración do contraste de cor na aplicación só está dispoñible cando a cor
+        dinámica está desactivada.\n\nCando a cor dinámica está activada, o contraste sempre
+        segue a configuración de contraste do sistema cando sexa posible.
+    </string>
+    <string name="color_contrast_not_available_message_title">Contraste de cor</string>
+    <string name="color_contrast_picker_title">Escolle contraste</string>
+    <string name="color_contrast_standard_contrast">Contraste normal</string>
+    <string name="color_contrast_system_contrast">Contraste do sistema</string>
+</resources>

@@ -7,7 +7,7 @@ import co.cuvva.presentation.design.system.icons.model.IconState
 @Immutable
 internal data class ThemeState(
     val listItem: ThemeListItemState,
-    val picker : ThemePickerState?,
+    val picker: ThemePickerState?,
 )
 
 @Immutable
