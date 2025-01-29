@@ -14,6 +14,7 @@ import com.sottti.roller.coasters.data.settings.model.Theme.LightTheme
 import com.sottti.roller.coasters.data.settings.model.Theme.SystemTheme
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.presentation.settings.R
+import com.sottti.roller.coasters.presentation.settings.model.ColorContrastListItemState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastNotAvailableMessageState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastState
@@ -34,6 +35,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Lau
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.settings.model.ThemeListItemState
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
@@ -93,13 +95,22 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(
                 theme = currentState.theme.copy(
-                    selectedTheme = SelectedThemeState.Loaded(
-                        theme.toPresentationModel(
-                            currentState.theme.selectedTheme is SelectedThemeState.Loaded
-                                    && currentState.theme.selectedTheme.theme == theme
-                        ),
-                    )
-                ),
+                    currentState.theme.listItem.copy(
+                        selectedTheme = SelectedThemeState.Loaded(
+                            theme.toPresentationModel(
+                                currentState
+                                    .theme
+                                    .listItem
+                                    .selectedTheme is SelectedThemeState.Loaded
+                                        && currentState
+                                    .theme
+                                    .listItem
+                                    .selectedTheme
+                                    .theme == theme
+                            ),
+                        )
+                    ),
+                )
             )
         }
     }
@@ -116,12 +127,17 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(
                 colorContrast = currentState.colorContrast.copy(
-                    selectedColorContrast = SelectedColorContrastState.Loaded(
-                        colorContrast.toPresentationModel(
-                            currentState.colorContrast.selectedColorContrast == colorContrast,
-                        ),
-                    )
-                ),
+                    listItem = currentState.colorContrast.listItem.copy(
+                        selectedColorContrast = SelectedColorContrastState.Loaded(
+                            colorContrast.toPresentationModel(
+                                currentState
+                                    .colorContrast
+                                    .listItem
+                                    .selectedColorContrast == colorContrast,
+                            ),
+                        )
+                    ),
+                )
             )
         }
     }
@@ -161,10 +177,12 @@ internal class SettingsViewModel @Inject constructor(
     private suspend fun showThemePicker() {
         _state.update { currentState ->
             currentState.copy(
-                themePicker = themePickerState(
-                    selectedTheme = settingsRepository
-                        .getTheme()
-                        .toPresentationModel(isSelected = true)
+                theme = currentState.theme.copy(
+                    picker = themePickerState(
+                        selectedTheme = settingsRepository
+                            .getTheme()
+                            .toPresentationModel(isSelected = true)
+                    )
                 )
             )
         }
@@ -178,16 +196,20 @@ internal class SettingsViewModel @Inject constructor(
         _state.update { currentState ->
             when {
                 currentState.isDynamicColorChecked() -> currentState.copy(
-                    colorContrastPicker = null,
-                    colorContrastNotAvailableMessage = contrastNotAvailableMessageState(),
+                    currentState.colorContrast.copy(
+                        picker = null,
+                        notAvailableMessage = contrastNotAvailableMessageState(),
+                    )
                 )
 
                 else -> currentState.copy(
-                    colorContrastNotAvailableMessage = null,
-                    colorContrastPicker = colorContrastPickerState(
-                        selectedColorContrast = settingsRepository
-                            .getColorContrast()
-                            .toPresentationModel(isSelected = true)
+                    colorContrast = currentState.colorContrast.copy(
+                        notAvailableMessage = null,
+                        picker = colorContrastPickerState(
+                            selectedColorContrast = settingsRepository
+                                .getColorContrast()
+                                .toPresentationModel(isSelected = true)
+                        )
                     )
                 )
             }
@@ -206,7 +228,9 @@ internal class SettingsViewModel @Inject constructor(
     ) {
         _state.update { currentState ->
             currentState.copy(
-                themePicker = themePickerState(selectedTheme = selectedTheme)
+                theme = currentState.theme.copy(
+                    picker = themePickerState(selectedTheme = selectedTheme)
+                )
             )
         }
     }
@@ -214,7 +238,9 @@ internal class SettingsViewModel @Inject constructor(
     private fun hideThemePicker() {
         _state.update { currentState ->
             currentState.copy(
-                themePicker = null,
+                theme = currentState.theme.copy(
+                    picker = null,
+                )
             )
         }
     }
@@ -224,8 +250,10 @@ internal class SettingsViewModel @Inject constructor(
     ) {
         _state.update { currentState ->
             currentState.copy(
-                colorContrastPicker = colorContrastPickerState(
-                    selectedColorContrast = selectedContrast,
+                colorContrast = currentState.colorContrast.copy(
+                    picker = colorContrastPickerState(
+                        selectedColorContrast = selectedContrast,
+                    )
                 )
             )
         }
@@ -234,7 +262,9 @@ internal class SettingsViewModel @Inject constructor(
     private fun hideColorContrastPicker() {
         _state.update { currentState ->
             currentState.copy(
-                colorContrastPicker = null,
+                colorContrast = currentState.colorContrast.copy(
+                    picker = null,
+                )
             )
         }
     }
@@ -242,7 +272,9 @@ internal class SettingsViewModel @Inject constructor(
     private fun hideColorContrastNotAvailableMessage() {
         _state.update { currentState ->
             currentState.copy(
-                colorContrastNotAvailableMessage = null,
+                colorContrast = currentState.colorContrast.copy(
+                    notAvailableMessage = null,
+                )
             )
         }
     }
@@ -251,11 +283,8 @@ internal class SettingsViewModel @Inject constructor(
 private fun initialState(): SettingsState =
     SettingsState(
         colorContrast = colorContrastInitialState(),
-        colorContrastNotAvailableMessage = null,
-        colorContrastPicker = null,
         dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorAvailable() },
         theme = themeInitialState(),
-        themePicker = null,
         topBar = topBarState(),
     )
 
@@ -267,18 +296,25 @@ private fun dynamicColorInitialState() = DynamicColorState(
 )
 
 private fun themeInitialState() = ThemeState(
-    headline = R.string.theme_headline,
-    supporting = R.string.theme_supporting,
-    selectedTheme = SelectedThemeState.Loading,
-    icon = Icons.Contrast.Rounded
+    listItem = ThemeListItemState(
+        headline = R.string.theme_headline,
+        supporting = R.string.theme_supporting,
+        selectedTheme = SelectedThemeState.Loading,
+        icon = Icons.Contrast.Rounded
+    ),
+    picker = null,
 )
 
 private fun colorContrastInitialState() =
     ColorContrastState(
-        headline = R.string.color_contrast_color_headline,
-        icon = Icons.Visibility.Outlined,
-        selectedColorContrast = SelectedColorContrastState.Loading,
-        supporting = R.string.color_contrast_color_supporting,
+        listItem = ColorContrastListItemState(
+            headline = R.string.color_contrast_color_headline,
+            icon = Icons.Visibility.Outlined,
+            selectedColorContrast = SelectedColorContrastState.Loading,
+            supporting = R.string.color_contrast_color_supporting,
+        ),
+        notAvailableMessage = null,
+        picker = null,
     )
 
 private fun topBarState(): TopBarState =
