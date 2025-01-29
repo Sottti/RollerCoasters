@@ -6,7 +6,7 @@ import androidx.compose.runtime.Immutable
 internal data class SettingsState(
     val colorContrast: ColorContrastState,
     val dynamicColor: DynamicColorState?,
-    val language : LanguageState,
+    val language: LanguageState,
     val theme: ThemeState,
     val topBar: TopBarState,
 )
