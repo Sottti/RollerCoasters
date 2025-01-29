@@ -8,10 +8,10 @@
     <string name="color_contrast_medium_contrast">Contraste medio</string>
     <string name="color_contrast_not_available_message_text">
         El ajuste de contraste de color en la aplicación solo está disponible cuando el color
-        dinámico está desactivado. /n/nCuando el color dinámico está activado, el contraste siempre
+        dinámico está desactivado.\n\nCuando el color dinámico está activado, el contraste siempre
         sigue la configuración de contraste del sistema cuando sea posible.</string>
     <string name="color_contrast_not_available_message_title">Contraste de color</string>
     <string name="color_contrast_picker_title">Elige contraste</string>
     <string name="color_contrast_standard_contrast">Contraste normal</string>
-    <string name="color_contrast_system_contrast">Contraste del systema</string>
+    <string name="color_contrast_system_contrast">Contraste del sistema</string>
 </resources>

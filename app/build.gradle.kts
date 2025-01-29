@@ -14,6 +14,10 @@ kapt {
 android {
     namespace = "com.sottti.roller.coasters"
 
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.sottti.roller.coasters"
         versionCode = 1
