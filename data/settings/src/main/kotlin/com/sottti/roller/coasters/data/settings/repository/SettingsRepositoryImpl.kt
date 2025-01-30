@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.data.settings.repository
 import com.sottti.roller.coasters.data.settings.ThemeManager
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
+import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
 import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
 import com.sottti.roller.coasters.utils.device.system.SystemSettings
@@ -50,4 +51,11 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override fun getSystemColorContrast(): SystemColorContrast =
         systemSettings.colorContrast
+
+    override fun setLanguage(language: Language) {
+        localDataSource.setLanguage(language)
+    }
+
+    override suspend fun getLanguage(): Language =
+        localDataSource.getLanguage()
 }

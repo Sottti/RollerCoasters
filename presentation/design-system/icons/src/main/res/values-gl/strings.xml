@@ -6,11 +6,11 @@
     <string name="description_icon_brightness_high">Brillo alto</string>
     <string name="description_icon_brightness_medium">Brillo medio</string>
     <string name="description_icon_brightness_standard">Brillo normal</string>
-    <string name="description_icon_colors">Cores</string>
-    <string name="description_icon_contrast">Contraste</string>
     <string name="description_icon_dark_mode">Modo escuro</string>
     <string name="description_icon_explore">Explorar</string>
     <string name="description_icon_language">Lingua</string>
+    <string name="description_icon_language_english_gb">Inglés británico</string>
+    <string name="description_icon_language_spanish">Lingua española</string>
     <string name="description_icon_light_mode">Modo claro</string>
     <string name="description_icon_palette">Paleta de cores</string>
     <string name="description_icon_settings">Axustes</string>

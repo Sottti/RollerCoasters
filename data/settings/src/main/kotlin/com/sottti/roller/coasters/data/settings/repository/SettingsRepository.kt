@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.data.settings.repository
 
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
+import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
 import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
 import kotlinx.coroutines.flow.Flow
@@ -19,4 +20,7 @@ public interface SettingsRepository {
     public fun observeColorContrast(): Flow<ColorContrast>
 
     public fun getSystemColorContrast(): SystemColorContrast
+
+    public fun setLanguage(language: Language)
+    public suspend fun getLanguage(): Language
 }

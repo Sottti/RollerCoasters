@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="language_english_gb">English (UK)</string>
+    <string name="language_galician">Galician</string>
     <string name="language_headline">Language</string>
+    <string name="language_spanish_spain">Spanish (Spain)</string>
     <string name="language_supporting">Select the language to be used in the app.</string>
+    <string name="language_system">System</string>
 </resources>

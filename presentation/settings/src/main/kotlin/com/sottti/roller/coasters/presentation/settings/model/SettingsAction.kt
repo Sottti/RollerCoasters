@@ -18,7 +18,7 @@ internal sealed class SettingsAction {
     data object DismissColorContrastNotAvailableMessage : SettingsAction()
 
     data object LaunchLanguagePicker : SettingsAction()
-    data class LanguagePickerSelectionChange(val theme: LanguageUi) : SettingsAction()
-    data class ConfirmLanguagePickerSelection(val theme: LanguageUi) : SettingsAction()
+    data class LanguagePickerSelectionChange(val language: LanguageUi) : SettingsAction()
+    data class ConfirmLanguagePickerSelection(val language: LanguageUi) : SettingsAction()
     data object DismissLanguagePicker : SettingsAction()
 }

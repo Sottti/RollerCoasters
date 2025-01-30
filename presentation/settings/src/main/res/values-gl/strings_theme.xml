@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="theme_dark">Tema escuro</string>
+    <string name="theme_dark">Escuro</string>
     <string name="theme_headline">Tema</string>
-    <string name="theme_light">Tema claro</string>
+    <string name="theme_light">Claro</string>
     <string name="theme_picker_title">Escolle tema</string>
     <string name="theme_supporting">Claro, escuro ou tema do sistema.</string>
-    <string name="theme_system">Tema do sistema</string>
+    <string name="theme_system">Sistema</string>
 </resources>

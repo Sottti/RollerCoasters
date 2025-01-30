@@ -8,6 +8,10 @@ import com.sottti.roller.coasters.data.settings.model.ColorContrast.HighContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.MediumContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.StandardContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.data.settings.model.Language.EnglishGbLanguage
+import com.sottti.roller.coasters.data.settings.model.Language.GalicianLanguage
+import com.sottti.roller.coasters.data.settings.model.Language.SpanishSpainLanguage
+import com.sottti.roller.coasters.data.settings.model.Language.SystemLanguage
 import com.sottti.roller.coasters.data.settings.model.Theme
 import com.sottti.roller.coasters.data.settings.model.Theme.DarkTheme
 import com.sottti.roller.coasters.data.settings.model.Theme.LightTheme
@@ -72,12 +76,12 @@ internal class SettingsViewModel @Inject constructor(
         if (isDynamicColorAvailable()) observeDynamicColor()
         observeTheme()
         observeColorContrast()
+        updateLanguage()
     }
 
     private fun observeDynamicColor() {
         viewModelScope.launch {
-            settingsRepository
-                .observeDynamicColor()
+            settingsRepository.observeDynamicColor()
                 .collect { dynamicColorChecked -> updateDynamicColor(dynamicColorChecked) }
         }
     }
@@ -85,18 +89,16 @@ internal class SettingsViewModel @Inject constructor(
     private fun updateDynamicColor(dynamicColorChecked: Boolean) {
         _state.update { currentState ->
             currentState.copy(
-                dynamicColor = currentState
-                    .dynamicColor
-                    ?.copy(checkedState = DynamicColorCheckedState.Loaded(dynamicColorChecked))
+                dynamicColor = currentState.dynamicColor?.copy(
+                    checkedState = DynamicColorCheckedState.Loaded(dynamicColorChecked)
+                )
             )
         }
     }
 
     private fun observeTheme() {
         viewModelScope.launch {
-            settingsRepository
-                .observeTheme()
-                .collect { theme -> updateTheme(theme) }
+            settingsRepository.observeTheme().collect { theme -> updateTheme(theme) }
         }
     }
 
@@ -116,8 +118,7 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun observeColorContrast() {
         viewModelScope.launch {
-            settingsRepository
-                .observeColorContrast()
+            settingsRepository.observeColorContrast()
                 .collect { colorContrast -> updateColorContrast(colorContrast) }
         }
     }
@@ -133,6 +134,23 @@ internal class SettingsViewModel @Inject constructor(
                     ),
                 )
             )
+        }
+    }
+
+    private fun updateLanguage() {
+        viewModelScope.launch {
+            val selectedLanguage = settingsRepository.getLanguage()
+            _state.update { currentState ->
+                currentState.copy(
+                    language = currentState.language.copy(
+                        listItem = currentState.language.listItem.copy(
+                            selectedLanguage = SelectedLanguageState.Loaded(
+                                selectedLanguage.toPresentationModel(isSelected = true),
+                            )
+                        ),
+                    )
+                )
+            }
         }
     }
 
@@ -166,9 +184,14 @@ internal class SettingsViewModel @Inject constructor(
                 DismissColorContrastNotAvailableMessage -> hideColorContrastNotAvailableMessage()
 
                 LaunchLanguagePicker -> showLanguagePicker()
-                is LanguagePickerSelectionChange -> TODO()
-                is ConfirmLanguagePickerSelection -> TODO()
-                DismissLanguagePicker -> TODO()
+                is LanguagePickerSelectionChange -> updateLanguagePicker(action.language)
+                is ConfirmLanguagePickerSelection -> {
+                    hideLanguagePicker()
+                    settingsRepository.setLanguage(action.language.toDomainModel())
+                    updateLanguage()
+                }
+
+                DismissLanguagePicker -> hideLanguagePicker()
             }
         }
     }
@@ -178,8 +201,7 @@ internal class SettingsViewModel @Inject constructor(
             currentState.copy(
                 theme = currentState.theme.copy(
                     picker = themePickerState(
-                        selectedTheme = settingsRepository
-                            .getTheme()
+                        selectedTheme = settingsRepository.getTheme()
                             .toPresentationModel(isSelected = true)
                     )
                 )
@@ -199,10 +221,8 @@ internal class SettingsViewModel @Inject constructor(
 
                 else -> currentState.copy(
                     colorContrast = currentState.colorContrast.copy(
-                        notAvailableMessage = null,
-                        picker = colorContrastPickerState(
-                            selectedColorContrast = settingsRepository
-                                .getColorContrast()
+                        notAvailableMessage = null, picker = colorContrastPickerState(
+                            selectedColorContrast = settingsRepository.getColorContrast()
                                 .toPresentationModel(isSelected = true)
                         )
                     )
@@ -253,35 +273,59 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun showLanguagePicker() {
+    private fun showLanguagePicker() {
+        viewModelScope.launch {
+            _state.update { currentState ->
+                currentState.copy(
+                    language = currentState.language.copy(
+                        picker = languagePickerState(
+                            settingsRepository.getLanguage().toPresentationModel(isSelected = true)
+                        ),
+                    )
+                )
+            }
+        }
+    }
+
+    private fun updateLanguagePicker(
+        selectedLanguage: LanguageUi,
+    ) {
         _state.update { currentState ->
             currentState.copy(
-                language = currentState.language.copy(picker = languagePickerState(TODO()))
+                language = currentState
+                    .language
+                    .copy(picker = languagePickerState(selectedLanguage)),
+            )
+        }
+    }
+
+    private fun hideLanguagePicker() {
+        _state.update { currentState ->
+            currentState.copy(
+                language = currentState.language.copy(picker = null)
             )
         }
     }
 }
 
-private fun initialState(): SettingsState =
-    SettingsState(
-        colorContrast = colorContrastInitialState(),
-        dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorAvailable() },
-        language = languageInitialState(),
-        theme = themeInitialState(),
-        topBar = topBarState(),
-    )
+private fun initialState(): SettingsState = SettingsState(
+    colorContrast = colorContrastInitialState(),
+    dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorAvailable() },
+    language = languageInitialState(),
+    theme = themeInitialState(),
+    topBar = topBarState(),
+)
 
-private fun colorContrastInitialState() =
-    ColorContrastState(
-        listItem = ColorContrastListItemState(
-            headline = R.string.color_contrast_color_headline,
-            icon = Icons.Visibility.Outlined,
-            selectedColorContrast = SelectedColorContrastState.Loading,
-            supporting = R.string.color_contrast_color_supporting,
-        ),
-        notAvailableMessage = null,
-        picker = null,
-    )
+private fun colorContrastInitialState() = ColorContrastState(
+    listItem = ColorContrastListItemState(
+        headline = R.string.color_contrast_color_headline,
+        icon = Icons.Visibility.Outlined,
+        selectedColorContrast = SelectedColorContrastState.Loading,
+        supporting = R.string.color_contrast_color_supporting,
+    ),
+    notAvailableMessage = null,
+    picker = null,
+)
 
 private fun dynamicColorInitialState() = DynamicColorState(
     checkedState = DynamicColorCheckedState.Loading,
@@ -290,27 +334,25 @@ private fun dynamicColorInitialState() = DynamicColorState(
     icon = Icons.Palette.Outlined,
 )
 
-private fun languageInitialState() =
-    LanguageState(
-        listItem = LanguageListItemState(
-            headline = R.string.language_headline,
-            icon = Icons.Language.Rounded,
-            supporting = R.string.language_supporting,
-            selectedLanguage = SelectedLanguageState.Loading,
-        ),
-        picker = null,
-    )
+private fun languageInitialState() = LanguageState(
+    listItem = LanguageListItemState(
+        headline = R.string.language_headline,
+        icon = Icons.Language.Rounded,
+        supporting = R.string.language_supporting,
+        selectedLanguage = SelectedLanguageState.Loading,
+    ),
+    picker = null,
+)
 
 private fun SettingsState.isDynamicColorChecked() =
-    dynamicColor?.checkedState is DynamicColorCheckedState.Loaded
-            && dynamicColor.checkedState.checked
+    dynamicColor?.checkedState is DynamicColorCheckedState.Loaded && dynamicColor.checkedState.checked
 
 private fun themeInitialState() = ThemeState(
     listItem = ThemeListItemState(
         headline = R.string.theme_headline,
         supporting = R.string.theme_supporting,
         selectedTheme = SelectedThemeState.Loading,
-        icon = Icons.Contrast.Rounded
+        icon = Icons.BrightnessMedium.Outlined
     ),
     picker = null,
 )
@@ -380,4 +422,17 @@ private fun languagePickerState(
 
 private fun languagesList(
     selectedLanguage: LanguageUi,
-) = listOfNotNull(TODO())
+) = listOfNotNull(
+    SystemLanguage.toPresentationModel(isSelected = selectedLanguage is LanguageUi.SystemLanguage),
+    EnglishGbLanguage.toPresentationModel(
+        isSelected = selectedLanguage is LanguageUi.EnglishGbLanguage,
+    ),
+    SpanishSpainLanguage.toPresentationModel(
+        isSelected = selectedLanguage is LanguageUi.SpanishSpainLanguage,
+    ),
+    GalicianLanguage.toPresentationModel(
+        isSelected = selectedLanguage is LanguageUi.GalicianLanguage,
+    ),
+
+
+    )

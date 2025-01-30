@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.data.Icons.DarkMode
 import co.cuvva.presentation.design.system.icons.data.Icons.LightMode
-import co.cuvva.presentation.design.system.icons.data.Icons.Smartphone
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
+import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.RadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
@@ -14,6 +14,11 @@ import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi.Hi
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi.MediumContrast
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi.StandardContrast
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi.SystemContrast
+import com.sottti.roller.coasters.presentation.settings.model.LanguageUi
+import com.sottti.roller.coasters.presentation.settings.model.LanguageUi.EnglishGbLanguage
+import com.sottti.roller.coasters.presentation.settings.model.LanguageUi.GalicianLanguage
+import com.sottti.roller.coasters.presentation.settings.model.LanguageUi.SpanishSpainLanguage
+import com.sottti.roller.coasters.presentation.settings.model.LanguageUi.SystemLanguage
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 
 internal fun ColorContrastUi.toDomainModel(): ColorContrast =
@@ -31,6 +36,14 @@ internal fun ThemeUi.toDomainModel(): Theme =
         is ThemeUi.SystemTheme -> Theme.SystemTheme
     }
 
+internal fun LanguageUi.toDomainModel(): Language =
+    when (this) {
+        is EnglishGbLanguage -> Language.EnglishGbLanguage
+        is SpanishSpainLanguage -> Language.SpanishSpainLanguage
+        is GalicianLanguage -> Language.GalicianLanguage
+        is SystemLanguage -> Language.SystemLanguage
+    }
+
 internal fun Theme.toPresentationModel(isSelected: Boolean): ThemeUi =
     when (this) {
         is Theme.DarkTheme -> darkTheme(isSelected)
@@ -42,7 +55,7 @@ private fun systemTheme(
     isSelected: Boolean,
 ): ThemeUi.SystemTheme = ThemeUi.SystemTheme(
     text = R.string.theme_system,
-    icon = if (isSelected) Smartphone.Filled else Smartphone.Outlined,
+    icon = if (isSelected) Icons.BrightnessAuto.Filled else Icons.BrightnessAuto.Outlined,
     selected = isSelected,
 )
 
@@ -70,6 +83,10 @@ internal fun ThemeUi.toRadioButtonOption(): RadioButtonOption =
 internal fun ColorContrastUi.toRadioButtonOption(): RadioButtonOption =
     RadioButtonOption(text, icon, selected)
 
+@Composable
+internal fun LanguageUi.toRadioButtonOption(): RadioButtonOption =
+    RadioButtonOption(text, icon, selected)
+
 internal fun RadioButtonOption.toThemeUi(
     themes: List<ThemeUi>,
 ): ThemeUi = themes.find { it.text == text } ?: themes.first()
@@ -78,12 +95,43 @@ internal fun RadioButtonOption.toColorContrastUi(
     contrasts: List<ColorContrastUi>,
 ): ColorContrastUi = contrasts.find { it.text == text } ?: contrasts.first()
 
+internal fun RadioButtonOption.toLanguageUi(
+    languages: List<LanguageUi>,
+): LanguageUi = languages.find { it.text == text } ?: languages.first()
+
 internal fun ColorContrast.toPresentationModel(isSelected: Boolean): ColorContrastUi =
     when (this) {
         ColorContrast.SystemContrast -> systemContrast(isSelected)
         ColorContrast.StandardContrast -> standardContrast(isSelected)
         ColorContrast.MediumContrast -> mediumContrast(isSelected)
         ColorContrast.HighContrast -> highContrast(isSelected)
+    }
+
+internal fun Language.toPresentationModel(isSelected: Boolean): LanguageUi =
+    when (this) {
+        Language.EnglishGbLanguage -> EnglishGbLanguage(
+            text = R.string.language_english_gb,
+            icon = Icons.LanguageEnglishGb.Rounded,
+            selected = isSelected,
+        )
+
+        Language.SpanishSpainLanguage -> SpanishSpainLanguage(
+            text = R.string.language_spanish_spain,
+            icon = Icons.LanguageSpanish.Rounded,
+            selected = isSelected,
+        )
+
+        Language.GalicianLanguage -> GalicianLanguage(
+            text = R.string.language_galician,
+            icon = Icons.Language.Rounded,
+            selected = isSelected,
+        )
+
+        Language.SystemLanguage -> SystemLanguage(
+            text = R.string.language_system,
+            icon = Icons.Language.Rounded,
+            selected = isSelected,
+        )
     }
 
 private fun systemContrast(

@@ -38,13 +38,13 @@ internal sealed class LanguageUi(
     val icon: IconState,
     val selected: Boolean,
 ) {
-    class SpanishLanguage(
+    class SpanishSpainLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : LanguageUi(text, icon, selected)
 
-    class EnglishLanguage(
+    class EnglishGbLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,

@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.data.settings.datasource
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -11,7 +12,10 @@ import com.sottti.roller.coasters.data.settings.model.ColorContrast.HighContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.MediumContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.StandardContrast
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
+import com.sottti.roller.coasters.data.settings.toLanguage
+import com.sottti.roller.coasters.data.settings.toLocaleList
 import com.sottti.roller.coasters.utils.device.sdk.isColorContrastAvailable
 import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorAvailable
 import com.sottti.roller.coasters.utils.device.sdk.isLightDarkThemeSystemAvailable
@@ -94,5 +98,15 @@ internal class SettingsLocalDataSource @Inject constructor(
             SystemContrast.key -> SystemContrast
             else -> SystemContrast
         }
+    }
+
+    internal fun setLanguage(language: Language) {
+        AppCompatDelegate.setApplicationLocales(language.toLocaleList())
+    }
+
+    internal fun getLanguage(): Language {
+        val localeList = AppCompatDelegate.getApplicationLocales()
+        val currentLocale = localeList[0]
+        return currentLocale.toLanguage()
     }
 }

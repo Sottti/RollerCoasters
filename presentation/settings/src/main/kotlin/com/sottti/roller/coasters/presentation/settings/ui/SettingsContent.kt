@@ -33,9 +33,17 @@ internal fun SettingsContent(
     onAction: (SettingsAction) -> Unit,
     paddingValues: PaddingValues,
 ) {
-    LazyColumn(
-        modifier = Modifier.padding(paddingValues)
-    ) {
+    SettingsList(paddingValues, state, onAction)
+    Dialogs(state, onAction)
+}
+
+@Composable
+private fun SettingsList(
+    paddingValues: PaddingValues,
+    state: SettingsState,
+    onAction: (SettingsAction) -> Unit
+) {
+    LazyColumn(modifier = Modifier.padding(paddingValues)) {
         state.dynamicColor?.let {
             item {
                 DynamicColorSetting(
@@ -44,20 +52,17 @@ internal fun SettingsContent(
                 )
             }
         }
-
         item {
             ThemeSetting(
                 state = state.theme.listItem,
                 onLaunchThemePicker = { onAction(LaunchThemePicker) })
         }
-
         item {
             ColorContrastSetting(
                 state = state.colorContrast.listItem,
                 onLaunchColorContrastPicker = { onAction(LaunchColorContrastPicker) },
             )
         }
-
         item {
             LanguageSetting(
                 state = state.language.listItem,
@@ -65,7 +70,13 @@ internal fun SettingsContent(
             )
         }
     }
+}
 
+@Composable
+private fun Dialogs(
+    state: SettingsState,
+    onAction: (SettingsAction) -> Unit
+) {
     state.theme.picker?.let { themePickerState ->
         ThemePickerDialog(
             state = themePickerState,
@@ -86,7 +97,15 @@ internal fun SettingsContent(
             onAction = onAction,
         )
     }
+
+    state.language.picker?.let { languagePickerState ->
+        LanguagePickerDialog(
+            state = languagePickerState,
+            onAction = onAction,
+        )
+    }
 }
+
 
 @Composable
 private fun DynamicColorSetting(

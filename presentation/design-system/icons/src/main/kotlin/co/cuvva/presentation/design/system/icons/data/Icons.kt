@@ -72,22 +72,6 @@ public object Icons {
         )
     }
 
-    public object Colors {
-        public val Description: Int = R.string.description_icon_colors
-        public val Rounded: IconState = IconState(
-            resId = R.drawable.ic_colors_rounded,
-            descriptionResId = Description,
-        )
-    }
-
-    public object Contrast {
-        public val Description: Int = R.string.description_icon_contrast
-        public val Rounded: IconState = IconState(
-            resId = R.drawable.ic_contrast_rounded,
-            descriptionResId = Description,
-        )
-    }
-
     public object DarkMode {
         public val Description: Int = R.string.description_icon_dark_mode
         public val Filled: IconState = IconState(
@@ -116,6 +100,22 @@ public object Icons {
         public val Description: Int = R.string.description_icon_language
         public val Rounded: IconState = IconState(
             resId = R.drawable.ic_language_rounded,
+            descriptionResId = Description,
+        )
+    }
+
+    public object LanguageEnglishGb {
+        public val Description: Int = R.string.description_icon_language_english_gb
+        public val Rounded: IconState = IconState(
+            resId = R.drawable.ic_language_gb_english_rounded,
+            descriptionResId = Description,
+        )
+    }
+
+    public object LanguageSpanish {
+        public val Description: Int = R.string.description_icon_language_spanish
+        public val Rounded: IconState = IconState(
+            resId = R.drawable.ic_language_spanish_rounded,
             descriptionResId = Description,
         )
     }
