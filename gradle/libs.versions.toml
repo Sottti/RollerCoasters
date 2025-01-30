@@ -8,7 +8,8 @@ composeNavigation = "2.8.6"
 coreKtx = "1.15.0"
 coroutines = "1.10.1"
 datastorePreferences = "1.1.2"
-hilt = "2.54"
+dependencyVersions = "0.52.0"
+hilt = "2.55"
 hiltNavigationCompose = "1.2.0"
 junit = "4.13.2"
 kotlin = "2.1.0"
@@ -16,7 +17,7 @@ kotlinCompilerExtension = "1.5.15"
 lifecycleProcess = "2.8.7"
 material = "1.12.0"
 minSdk = "24"
-mockk = "1.13.14"
+mockk = "1.13.16"
 splashscreen = "1.0.1"
 targetSdk = "35"
 
@@ -24,7 +25,7 @@ targetSdk = "35"
 annotations = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 compose-animation = { module = "androidx.compose.animation:animation" }
-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-bom = { module = "androidx.compose:compose-bom-beta", version.ref = "composeBom" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-material = { module = "androidx.compose.material3:material3" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
@@ -50,6 +51,7 @@ splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "spla
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+dependency-versions = { id = "com.github.ben-manes.versions", version.ref = "dependencyVersions" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
