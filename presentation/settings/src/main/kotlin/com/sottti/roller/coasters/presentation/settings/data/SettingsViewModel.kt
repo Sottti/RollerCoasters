@@ -1,5 +1,8 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
+import android.app.Application
+import android.content.ComponentCallbacks
+import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
@@ -66,17 +69,36 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
+    private val application: Application,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState())
-    val state: StateFlow<SettingsState> = _state.asStateFlow()
-    val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
+    internal val state: StateFlow<SettingsState> = _state.asStateFlow()
+    internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
+    private val configObserver = object : ComponentCallbacks {
+        override fun onConfigurationChanged(newConfig: Configuration) = updateLanguage()
+        override fun onLowMemory() = Unit
+    }
 
     init {
         if (isDynamicColorAvailable()) observeDynamicColor()
         observeTheme()
         observeColorContrast()
         updateLanguage()
+        registerForConfigChanges()
+    }
+
+    override fun onCleared() {
+        unregisterForConfigChanges()
+        super.onCleared()
+    }
+
+    private fun registerForConfigChanges() {
+        application.registerComponentCallbacks(configObserver)
+    }
+
+    private fun unregisterForConfigChanges() {
+        application.unregisterComponentCallbacks(configObserver)
     }
 
     private fun observeDynamicColor() {

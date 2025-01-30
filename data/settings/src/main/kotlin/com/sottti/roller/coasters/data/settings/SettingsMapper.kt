@@ -12,7 +12,7 @@ import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
 import java.util.Locale
 
-private const val LOCALE_GALICIA_TAG = "gl"
+private const val LOCALE_GALICIA_TAG = "gl-ES"
 private const val LOCALE_SPAIN_TAG = "es-ES"
 private const val LOCALE_UK_TAG = "en-GB"
 

@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.lifecycle.process)
     implementation(platform(libs.compose.bom))
     implementation(project(module.data.settings))
     implementation(project(module.presentation.designSystem.dialogs))
@@ -26,4 +27,5 @@ dependencies {
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.utils.device))
     kapt(libs.hilt.compiler)
+
 }
