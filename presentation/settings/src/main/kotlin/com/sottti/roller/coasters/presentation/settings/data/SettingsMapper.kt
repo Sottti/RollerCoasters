@@ -129,7 +129,7 @@ internal fun Language.toPresentationModel(isSelected: Boolean): LanguageUi =
 
         Language.SystemLanguage -> SystemLanguage(
             text = R.string.language_system,
-            icon = Icons.Language.Rounded,
+            icon = if (isSelected) Icons.Smartphone.Filled else Icons.Smartphone.Outlined,
             selected = isSelected,
         )
     }
