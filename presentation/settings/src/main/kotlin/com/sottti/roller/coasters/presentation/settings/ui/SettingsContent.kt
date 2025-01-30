@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicator
@@ -32,18 +34,24 @@ internal fun SettingsContent(
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
     paddingValues: PaddingValues,
+    nestedScrollConnection: NestedScrollConnection,
 ) {
-    SettingsList(paddingValues, state, onAction)
+    SettingsList(nestedScrollConnection, paddingValues, state, onAction)
     Dialogs(state, onAction)
 }
 
 @Composable
 private fun SettingsList(
+    nestedScrollConnection: NestedScrollConnection,
     paddingValues: PaddingValues,
     state: SettingsState,
     onAction: (SettingsAction) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.padding(paddingValues)) {
+    LazyColumn(
+        modifier = Modifier
+            .padding(paddingValues)
+            .nestedScroll(nestedScrollConnection),
+    ) {
         state.dynamicColor?.let {
             item {
                 DynamicColorSetting(

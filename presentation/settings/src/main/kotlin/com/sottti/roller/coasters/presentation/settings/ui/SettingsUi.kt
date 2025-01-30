@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.presentation.settings.ui
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -16,19 +18,29 @@ public fun SettingsUi(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun SettingsUiInternal(
     viewModel: SettingsViewModel = hiltViewModel(),
     navController: NavHostController,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val nestedScrollConnection = scrollBehavior.nestedScrollConnection
 
     Scaffold(
-        topBar = { TopBar(navController = navController, state = state.topBar) },
+        topBar = {
+            TopBar(
+                navController = navController,
+                scrollBehavior = scrollBehavior,
+                state = state.topBar,
+            )
+        },
     ) { paddingValues ->
         SettingsContent(
+            nestedScrollConnection = nestedScrollConnection,
+            onAction = viewModel.onAction,
             paddingValues = paddingValues,
             state = state,
-            onAction = viewModel.onAction
         )
     }
 }

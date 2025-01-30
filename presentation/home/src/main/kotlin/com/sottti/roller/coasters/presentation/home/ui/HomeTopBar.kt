@@ -18,9 +18,6 @@ internal fun TopBar(
     scrollBehavior: TopAppBarScrollBehavior,
     state: TopBarState,
 ) {
-    val currentDestination =
-        navController.currentBackStackEntryAsState().value?.destination?.route
-
     TopAppBar(
         title = {},
         actions = { SettingsAction(icon = state.settingsIcon, navController = navController) },

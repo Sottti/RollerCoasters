@@ -29,17 +29,26 @@ internal fun expandedDimensions() =
     )
 
 @Composable
-private fun compactSpacing(): Spacing = Spacing(
+private fun compactSpacing(): Spacing =
+    Spacing(
+        small = 2.dp,
+        medium = 4.dp,
+        large = 8.dp,
+    )
+
+@Composable
+private fun mediumSpacing(): Spacing = Spacing(
     small = 2.dp,
     medium = 4.dp,
     large = 8.dp,
 )
 
 @Composable
-private fun mediumSpacing(): Spacing = TODO()
-
-@Composable
-private fun expandedSpacing(): Spacing = TODO()
+private fun expandedSpacing(): Spacing = Spacing(
+    small = 2.dp,
+    medium = 4.dp,
+    large = 8.dp,
+)
 
 @Composable
 private fun compactComponentDimensions() =
@@ -50,13 +59,13 @@ private fun compactComponentDimensions() =
 @Composable
 private fun mediumComponentDimensions() =
     ComponentDimensions(
-        progressIndicator = progressIndicatorCompactDimensions(),
+        progressIndicator = progressIndicatorMediumDimensions(),
     )
 
 @Composable
 private fun expandedComponentDimensions() =
     ComponentDimensions(
-        progressIndicator = progressIndicatorCompactDimensions(),
+        progressIndicator = progressIndicatorExpandedDimensions(),
     )
 
 @Composable
@@ -68,7 +77,18 @@ private fun progressIndicatorCompactDimensions(): ProgressIndicatorDimensions =
     )
 
 @Composable
-private fun progressIndicatorMediumDimensions(): ProgressIndicatorDimensions = TODO()
+private fun progressIndicatorMediumDimensions(): ProgressIndicatorDimensions =
+    ProgressIndicatorDimensions(
+        small = 24.dp,
+        medium = 36.dp,
+        large = 48.dp,
+    )
+
 
 @Composable
-private fun progressIndicatorExpandedDimensions(): ProgressIndicatorDimensions = TODO()
+private fun progressIndicatorExpandedDimensions(): ProgressIndicatorDimensions =
+    ProgressIndicatorDimensions(
+        small = 24.dp,
+        medium = 36.dp,
+        large = 48.dp,
+    )
