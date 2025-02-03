@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+        android:enableOnBackInvokedCallback="true"
         tools:targetApi="35">
         <activity
             android:name=".app.SplashScreenActivity"
