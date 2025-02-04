@@ -39,8 +39,8 @@ public object Dialog {
         @StringRes title: Int,
         @StringRes confirm: Int,
         @StringRes dismiss: Int,
-        options: List<RadioButtonOption>,
-        onOptionSelected: (RadioButtonOption) -> Unit,
+        options: List<DialogRadioButtonOption>,
+        onOptionSelected: (DialogRadioButtonOption) -> Unit,
         onConfirm: () -> Unit,
         onDismiss: () -> Unit,
     ) {
@@ -61,8 +61,8 @@ public object Dialog {
 
 @Composable
 private fun OptionsList(
-    options: List<RadioButtonOption>,
-    onOptionSelected: (RadioButtonOption) -> Unit,
+    options: List<DialogRadioButtonOption>,
+    onOptionSelected: (DialogRadioButtonOption) -> Unit,
 ) {
     LazyColumn {
         options.forEach { option ->
@@ -78,8 +78,8 @@ private fun OptionsList(
 
 @Composable
 private fun RadioButtonRow(
-    option: RadioButtonOption,
-    onOptionSelected: (RadioButtonOption) -> Unit,
+    option: DialogRadioButtonOption,
+    onOptionSelected: (DialogRadioButtonOption) -> Unit,
 ) {
     ListItem(
         leadingContent = { Icon(option.icon, crossfade = true) },

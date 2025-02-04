@@ -2,8 +2,8 @@ package com.sottti.roller.coasters.presentation.settings.ui
 
 import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
-import com.sottti.roller.coasters.presentation.settings.data.toColorContrastUi
-import com.sottti.roller.coasters.presentation.settings.data.toRadioButtonOption
+import com.sottti.roller.coasters.presentation.settings.data.mapper.toColorContrastUi
+import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction

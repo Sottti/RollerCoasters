@@ -34,15 +34,15 @@ internal class SettingsLocalDataSource @Inject constructor(
     }
 
     private val dynamicColorDefault = when {
-        sdkFeatures.isDynamicColorAvailable() -> true
+        sdkFeatures.dynamicColorAvailable() -> true
         else -> false
     }
     private val themeDefaultValue = when {
-        sdkFeatures.isLightDarkThemeSystemAvailable() -> Theme.SystemTheme.key
+        sdkFeatures.lightDarkSystemThemingAvailable() -> Theme.SystemTheme.key
         else -> Theme.LightTheme.key
     }
     private val colorContrastDefaultValue = when {
-        sdkFeatures.isColorContrastAvailable() -> SystemContrast.key
+        sdkFeatures.colorContrastAvailable() -> SystemContrast.key
         else -> StandardContrast.key
     }
 

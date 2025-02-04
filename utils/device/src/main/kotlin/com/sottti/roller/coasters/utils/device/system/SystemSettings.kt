@@ -1,17 +1,16 @@
 package com.sottti.roller.coasters.utils.device.system
 
 import android.app.UiModeManager
-import com.sottti.roller.coasters.utils.device.sdk.SdkLevel
-import com.sottti.roller.coasters.utils.device.sdk.isAtLeastSdk34
+import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import javax.inject.Inject
 
 public class SystemSettings @Inject constructor(
-    private val sdkLevel: SdkLevel,
+    private val sdkFeatures: SdkFeatures,
     private val uiModeManager: UiModeManager?,
 ) {
     public val colorContrast: SystemColorContrast
         get() = when {
-            sdkLevel.isAtLeastSdk34() -> {
+            sdkFeatures.colorContrastAvailable() -> {
                 val contrast = uiModeManager?.contrast ?: 0f
                 when {
                     contrast < 0f -> SystemColorContrast.LowContrast

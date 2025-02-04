@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.repository
 
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
-import com.sottti.roller.coasters.data.settings.helpers.ThemeManager
+import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
 import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
@@ -13,7 +13,7 @@ import javax.inject.Inject
 internal class SettingsRepositoryImpl @Inject constructor(
     private val localDataSource: SettingsLocalDataSource,
     private val systemSettings: SystemSettings,
-    private val themeManager: ThemeManager,
+    private val uiModeManager: UiModeManager,
 ) : SettingsRepository {
 
     override suspend fun setDynamicColor(enabled: Boolean) {
@@ -24,7 +24,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
         localDataSource.observeDynamicColor()
 
     override suspend fun setTheme(theme: Theme) {
-        themeManager.setTheme(theme)
+        uiModeManager.setTheme(theme)
         localDataSource.setTheme(theme)
     }
 
@@ -34,7 +34,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun applyStoredTheme() {
         val theme = localDataSource.getTheme()
-        themeManager.setTheme(theme)
+        uiModeManager.setTheme(theme)
     }
 
     override suspend fun setColorContrast(

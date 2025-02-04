@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.settings.di
+package com.sottti.roller.coasters.utils.device.di
 
 import android.content.Context
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures

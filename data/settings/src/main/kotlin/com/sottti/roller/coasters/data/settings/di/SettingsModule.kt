@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.DATA_STORE_NAME
-import com.sottti.roller.coasters.data.settings.helpers.ThemeManager
+import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
@@ -27,11 +27,11 @@ internal object SettingsModule {
     fun provideRepository(
         localDataSource: SettingsLocalDataSource,
         systemSettings: SystemSettings,
-        themeManager: ThemeManager,
+        uiModeManager: UiModeManager,
     ): SettingsRepository = SettingsRepositoryImpl(
         localDataSource = localDataSource,
-        themeManager = themeManager,
         systemSettings = systemSettings,
+        uiModeManager = uiModeManager,
     )
 
     @Provides

@@ -2,8 +2,8 @@ package com.sottti.roller.coasters.presentation.settings.ui
 
 import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
-import com.sottti.roller.coasters.presentation.settings.data.toLanguageUi
-import com.sottti.roller.coasters.presentation.settings.data.toRadioButtonOption
+import com.sottti.roller.coasters.presentation.settings.data.mapper.toLanguageUi
+import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.LanguagePickerState
 import com.sottti.roller.coasters.presentation.settings.model.LanguageUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
