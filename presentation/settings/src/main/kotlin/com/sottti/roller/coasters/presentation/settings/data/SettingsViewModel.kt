@@ -56,9 +56,7 @@ import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
-import com.sottti.roller.coasters.utils.device.sdk.isColorContrastAvailable
-import com.sottti.roller.coasters.utils.device.sdk.isDynamicColorAvailable
-import com.sottti.roller.coasters.utils.device.sdk.isLightDarkThemeSystemAvailable
+import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -70,6 +68,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
     private val application: Application,
+    private val sdkFeatures: SdkFeatures,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState())
@@ -81,7 +80,7 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     init {
-        if (isDynamicColorAvailable()) observeDynamicColor()
+        if (sdkFeatures.isDynamicColorAvailable()) observeDynamicColor()
         observeTheme()
         observeColorContrast()
         updateLanguage()
@@ -328,15 +327,59 @@ internal class SettingsViewModel @Inject constructor(
             )
         }
     }
-}
 
-private fun initialState(): SettingsState = SettingsState(
-    colorContrast = colorContrastInitialState(),
-    dynamicColor = dynamicColorInitialState().takeIf { isDynamicColorAvailable() },
-    language = languageInitialState(),
-    theme = themeInitialState(),
-    topBar = topBarState(),
-)
+    private fun initialState(): SettingsState = SettingsState(
+        colorContrast = colorContrastInitialState(),
+        dynamicColor = dynamicColorInitialState().takeIf { sdkFeatures.isDynamicColorAvailable() },
+        language = languageInitialState(),
+        theme = themeInitialState(),
+        topBar = topBarState(),
+    )
+
+    private fun themePickerState(
+        selectedTheme: ThemeUi,
+    ) = ThemePickerState(
+        title = R.string.theme_picker_title,
+        confirm = R.string.picker_confirm,
+        dismiss = R.string.picker_dismiss,
+        themes = themesList(selectedTheme),
+    )
+
+    private fun themesList(
+        selectedTheme: ThemeUi,
+    ) = listOfNotNull(
+        SystemTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme)
+            .takeIf { sdkFeatures.isLightDarkThemeSystemAvailable() },
+        LightTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.LightTheme),
+        DarkTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.DarkTheme),
+    )
+
+    private fun colorContrastPickerState(
+        selectedColorContrast: ColorContrastUi,
+    ) = ColorContrastPickerState(
+        title = R.string.color_contrast_picker_title,
+        confirm = R.string.picker_confirm,
+        dismiss = R.string.picker_dismiss,
+        contrasts = colorContrastsList(selectedColorContrast),
+    )
+
+    private fun colorContrastsList(
+        selectedColorContrast: ColorContrastUi,
+    ) = listOfNotNull(
+        SystemContrast.toPresentationModel(
+            isSelected = selectedColorContrast is ColorContrastUi.SystemContrast,
+        ).takeIf { sdkFeatures.isColorContrastAvailable() },
+        StandardContrast.toPresentationModel(
+            isSelected = selectedColorContrast is ColorContrastUi.StandardContrast,
+        ),
+        MediumContrast.toPresentationModel(
+            isSelected = selectedColorContrast is ColorContrastUi.MediumContrast,
+        ),
+        HighContrast.toPresentationModel(
+            isSelected = selectedColorContrast is ColorContrastUi.HighContrast,
+        ),
+    )
+}
 
 private fun colorContrastInitialState() = ColorContrastState(
     listItem = ColorContrastListItemState(
@@ -388,50 +431,6 @@ private fun contrastNotAvailableMessageState(): ColorContrastNotAvailableMessage
 
 private fun topBarState(): TopBarState =
     TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded)
-
-private fun themePickerState(
-    selectedTheme: ThemeUi,
-) = ThemePickerState(
-    title = R.string.theme_picker_title,
-    confirm = R.string.picker_confirm,
-    dismiss = R.string.picker_dismiss,
-    themes = themesList(selectedTheme),
-)
-
-private fun themesList(
-    selectedTheme: ThemeUi,
-) = listOfNotNull(
-    SystemTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme)
-        .takeIf { isLightDarkThemeSystemAvailable() },
-    LightTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.LightTheme),
-    DarkTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.DarkTheme),
-)
-
-private fun colorContrastPickerState(
-    selectedColorContrast: ColorContrastUi,
-) = ColorContrastPickerState(
-    title = R.string.color_contrast_picker_title,
-    confirm = R.string.picker_confirm,
-    dismiss = R.string.picker_dismiss,
-    contrasts = colorContrastsList(selectedColorContrast),
-)
-
-private fun colorContrastsList(
-    selectedColorContrast: ColorContrastUi,
-) = listOfNotNull(
-    SystemContrast.toPresentationModel(
-        isSelected = selectedColorContrast is ColorContrastUi.SystemContrast,
-    ).takeIf { isColorContrastAvailable() },
-    StandardContrast.toPresentationModel(
-        isSelected = selectedColorContrast is ColorContrastUi.StandardContrast,
-    ),
-    MediumContrast.toPresentationModel(
-        isSelected = selectedColorContrast is ColorContrastUi.MediumContrast,
-    ),
-    HighContrast.toPresentationModel(
-        isSelected = selectedColorContrast is ColorContrastUi.HighContrast,
-    ),
-)
 
 private fun languagePickerState(
     selectedLanguage: LanguageUi,

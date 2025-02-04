@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.repository
 
-import com.sottti.roller.coasters.data.settings.ThemeManager
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
+import com.sottti.roller.coasters.data.settings.helpers.ThemeManager
 import com.sottti.roller.coasters.data.settings.model.ColorContrast
 import com.sottti.roller.coasters.data.settings.model.Language
 import com.sottti.roller.coasters.data.settings.model.Theme
