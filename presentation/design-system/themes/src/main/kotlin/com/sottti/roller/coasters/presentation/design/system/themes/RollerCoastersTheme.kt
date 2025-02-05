@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.sottti.roller.coasters.utils.device.di.provideSdkFeatures
 import com.sottti.roller.coasters.data.settings.di.provideSettingsRepository
 import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
+import com.sottti.roller.coasters.utils.device.di.provideSdkFeatures
 import kotlinx.coroutines.flow.map
 
 @Composable
@@ -32,7 +32,9 @@ public fun RollerCoastersTheme(
     val colorContrast =
         settingsRepository
             .observeColorContrast()
-            .map { it.toAppColorContrast(settingsRepository.getSystemColorContrast()) }
+            .map { colorContrast ->
+                colorContrast.toAppColorContrast(settingsRepository.getSystemColorContrast())
+            }
             .collectAsState(initial = AppColorContrast.StandardContrast).value
 
     val colors = colors(
