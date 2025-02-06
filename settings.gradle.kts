@@ -19,13 +19,15 @@ dependencyResolutionManagement {
 }
 include(
     ":app",
+    ":data:network",
+    ":data:roller-coasters",
     ":data:settings",
     ":presentation:about-me",
     ":presentation:design-system:colors",
     ":presentation:design-system:dialogs",
-    ":presentation:design-system:loading",
     ":presentation:design-system:dimensions",
     ":presentation:design-system:icons",
+    ":presentation:design-system:loading",
     ":presentation:design-system:playground",
     ":presentation:design-system:switch",
     ":presentation:design-system:text",

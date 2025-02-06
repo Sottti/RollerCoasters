@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.presentation.home.data
 
 import androidx.lifecycle.ViewModel
 import co.cuvva.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.presentation.home.model.HomeActions
 import com.sottti.roller.coasters.presentation.home.model.NavigationBarState
 import com.sottti.roller.coasters.presentation.home.model.TopBarState
@@ -13,7 +14,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-internal class HomeViewModel @Inject constructor() : ViewModel() {
+internal class HomeViewModel @Inject constructor(
+    private val rollerCoastersRepository: RollerCoastersRepository,
+) : ViewModel() {
     private val _state = MutableStateFlow(
         NavigationBarState(
             navigationBarItems(),

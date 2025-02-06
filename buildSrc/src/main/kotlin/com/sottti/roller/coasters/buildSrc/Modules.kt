@@ -25,6 +25,8 @@ object module {
     }
 
     object data {
+        const val network = ":data:network"
+        const val rollerCoasters = ":data:roller-coasters"
         const val settings = ":data:settings"
     }
 
