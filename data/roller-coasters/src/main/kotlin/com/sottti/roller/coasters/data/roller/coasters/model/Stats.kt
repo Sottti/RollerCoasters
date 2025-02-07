@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.model
 
-public data class Statistics(
+public data class Stats(
     val arrangement: RollerCoasterArrangement?,
     val capacity: Capacity?,
     val cost: Cost?,

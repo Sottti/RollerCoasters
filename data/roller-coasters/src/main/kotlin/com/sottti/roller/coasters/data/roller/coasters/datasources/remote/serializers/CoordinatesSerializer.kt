@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers
 
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.API_FIELD_LATITUDE
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.API_FIELD_LONGITUDE
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.CoordinatesApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.API_FIELD_LATITUDE
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.API_FIELD_LONGITUDE
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.CoordinatesApiModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer

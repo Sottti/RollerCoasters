@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
+package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api
 
 internal const val API_BASE_URL = "https://rcdb-api.vercel.app/api"
 internal const val API_FIELD_LATITUDE: String = "lat"

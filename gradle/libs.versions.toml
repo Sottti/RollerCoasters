@@ -19,6 +19,7 @@ lifecycleProcess = "2.8.7"
 material = "1.12.0"
 minSdk = "26"
 mockk = "1.13.16"
+room = "2.6.1"
 splashscreen = "1.0.1"
 targetSdk = "35"
 work = "2.10.0"
@@ -49,6 +50,9 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleProcess" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 

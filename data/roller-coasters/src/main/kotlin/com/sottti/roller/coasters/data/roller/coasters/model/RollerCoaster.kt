@@ -10,7 +10,7 @@ public data class RollerCoaster(
     val model: Model,
     val type: Type,
     val design: Design,
-    val stats: Statistics?,
+    val stats: Stats?,
     val mainPicture: Picture?,
     val pictures: List<Picture>,
 )

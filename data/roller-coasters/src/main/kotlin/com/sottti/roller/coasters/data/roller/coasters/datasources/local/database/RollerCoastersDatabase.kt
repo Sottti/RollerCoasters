@@ -1,0 +1,21 @@
+package com.sottti.roller.coasters.data.roller.coasters.datasources.local.database
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
+import kotlinx.serialization.InternalSerializationApi
+
+@OptIn(InternalSerializationApi::class)
+@Database(
+    entities = [RollerCoasterRoomModel::class, PictureRoomModel::class],
+    version = 1,
+    exportSchema = false,
+)
+internal abstract class RollerCoastersDatabase : RoomDatabase() {
+    companion object {
+        const val ROLLER_COASTERS_DATABASE_NAME: String = "roller_coasters_db"
+    }
+
+    abstract fun rollerCoastersDao(): RollerCoastersDao
+}

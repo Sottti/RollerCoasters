@@ -1,11 +1,11 @@
-package com.sottti.roller.coasters.data.roller.coasters
+package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper
 
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.AmusementParkApiModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.CoordinatesApiModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.PictureApiModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoasterApiModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoasterStatsApiModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoasterStatusApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.AmusementParkApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.CoordinatesApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatsApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatusApiModel
 import com.sottti.roller.coasters.data.roller.coasters.model.AmusementPark
 import com.sottti.roller.coasters.data.roller.coasters.model.Author
 import com.sottti.roller.coasters.data.roller.coasters.model.Capacity
@@ -50,7 +50,7 @@ import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterElemen
 import com.sottti.roller.coasters.data.roller.coasters.model.Seconds
 import com.sottti.roller.coasters.data.roller.coasters.model.Speed
 import com.sottti.roller.coasters.data.roller.coasters.model.State
-import com.sottti.roller.coasters.data.roller.coasters.model.Statistics
+import com.sottti.roller.coasters.data.roller.coasters.model.Stats
 import com.sottti.roller.coasters.data.roller.coasters.model.Status
 import com.sottti.roller.coasters.data.roller.coasters.model.Type
 import com.sottti.roller.coasters.data.roller.coasters.model.Url
@@ -87,8 +87,8 @@ private fun PictureApiModel.copyright(): PictureCopyright =
         date = copyDate.toLocalDate(),
     )
 
-private fun RollerCoasterStatsApiModel.toDomain(): Statistics =
-    Statistics(
+private fun RollerCoasterStatsApiModel.toDomain(): Stats =
+    Stats(
         arrangement = arrangement?.let { RollerCoasterArrangement(it) },
         capacity = capacity?.let { Capacity(RidersPerHour(it)) },
         cost = cost?.let { Cost(Euros(it)) },

@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers
 
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.PictureApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
