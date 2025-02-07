@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.home.data
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import co.cuvva.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.presentation.home.model.HomeActions
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,4 +32,9 @@ internal class HomeViewModel @Inject constructor(
             _state.update { it.copy(items = navigationBarItems(destination)) }
         }
     )
+
+    val a = viewModelScope.launch {
+        val b = rollerCoastersRepository.getRandomRollerCoaster()
+        val c = b.name
+    }
 }

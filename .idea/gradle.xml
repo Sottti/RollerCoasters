@@ -45,6 +45,7 @@
             <option value="$PROJECT_DIR$/presentation/home" />
             <option value="$PROJECT_DIR$/presentation/settings" />
             <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils/dates" />
             <option value="$PROJECT_DIR$/utils/device" />
           </set>
         </option>

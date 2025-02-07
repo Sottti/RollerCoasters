@@ -31,6 +31,7 @@ object module {
     }
 
     object utils {
+        const val dates = ":utils:dates"
         const val device = ":utils:device"
     }
 }

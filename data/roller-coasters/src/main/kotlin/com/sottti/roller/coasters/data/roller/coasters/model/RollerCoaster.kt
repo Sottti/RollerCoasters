@@ -1,5 +1,16 @@
 package com.sottti.roller.coasters.data.roller.coasters.model
 
 public data class RollerCoaster(
-    val name: RollerCoasterName,
+    val id: Id,
+    val name: Name,
+    val park: AmusementPark,
+    val location: Location,
+    val status: Status,
+    val manufacturer: Manufacturer,
+    val model: Model,
+    val type: Type,
+    val design: Design,
+    val stats: Statistics?,
+    val mainPicture: Picture?,
+    val pictures: List<Picture>,
 )

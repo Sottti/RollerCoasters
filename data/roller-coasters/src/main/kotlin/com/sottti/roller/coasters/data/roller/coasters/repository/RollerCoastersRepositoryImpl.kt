@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.repository
 
-import com.sottti.roller.coasters.data.roller.coasters.datasources.RollerCoastersRemoteDataSource
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
 import javax.inject.Inject
 

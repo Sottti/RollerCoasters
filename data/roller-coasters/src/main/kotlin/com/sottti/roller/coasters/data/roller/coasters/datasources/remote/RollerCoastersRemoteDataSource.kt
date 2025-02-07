@@ -1,7 +1,7 @@
-package com.sottti.roller.coasters.data.roller.coasters.datasources
+package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.toDomainModel
+import com.sottti.roller.coasters.data.roller.coasters.toDomain
 import javax.inject.Inject
 
 internal class RollerCoastersRemoteDataSource @Inject constructor(
@@ -10,5 +10,5 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
     suspend fun getRandomRollerCoaster(): RollerCoaster =
         endpoints
             .getRandomCoaster()
-            .toDomainModel()
+            .toDomain()
 }

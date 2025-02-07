@@ -14,5 +14,6 @@ android {
 dependencies {
     implementation(libs.hilt)
     implementation(project(module.data.network))
+    implementation(project(module.utils.dates))
     kapt(libs.hilt.compiler)
 }
