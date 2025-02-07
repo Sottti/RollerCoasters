@@ -32,9 +32,4 @@ internal class HomeViewModel @Inject constructor(
             _state.update { it.copy(items = navigationBarItems(destination)) }
         }
     )
-
-    val a = viewModelScope.launch {
-        val b = rollerCoastersRepository.getRandomRollerCoaster()
-        val c = b.name
-    }
 }
