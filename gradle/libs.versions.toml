@@ -10,6 +10,7 @@ datastorePreferences = "1.1.2"
 dependencyVersions = "0.52.0"
 hilt = "2.55"
 hiltNavigationCompose = "1.2.0"
+hiltWork = "1.2.0"
 junit = "4.13.2"
 kotlin = "2.1.0"
 kotlinCompilerExtension = "1.5.15"
@@ -20,6 +21,7 @@ minSdk = "26"
 mockk = "1.13.16"
 splashscreen = "1.0.1"
 targetSdk = "35"
+work = "2.10.0"
 
 [libraries]
 annotations = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -37,6 +39,7 @@ datastore-preferences = { module = "androidx.datastore:datastore-preferences", v
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
 junit = { module = "junit:junit", version.ref = "junit" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -47,6 +50,7 @@ lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.r
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
+work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

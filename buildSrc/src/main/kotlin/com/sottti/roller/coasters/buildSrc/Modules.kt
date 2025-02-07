@@ -28,6 +28,7 @@ object module {
         const val network = ":data:network"
         const val rollerCoasters = ":data:roller-coasters"
         const val settings = ":data:settings"
+        const val workManager = ":data:work-manager"
     }
 
     object utils {

@@ -8,6 +8,10 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     private val remoteDataSource: RollerCoastersRemoteDataSource,
 ) : RollerCoastersRepository {
 
+    override suspend fun syncAllRollerCoasters() {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getRandomRollerCoaster(): RollerCoaster =
         remoteDataSource.getRandomRollerCoaster()
 }

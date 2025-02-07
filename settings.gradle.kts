@@ -22,6 +22,7 @@ include(
     ":data:network",
     ":data:roller-coasters",
     ":data:settings",
+    ":data:work-manager",
     ":presentation:about-me",
     ":presentation:design-system:colors",
     ":presentation:design-system:dialogs",
