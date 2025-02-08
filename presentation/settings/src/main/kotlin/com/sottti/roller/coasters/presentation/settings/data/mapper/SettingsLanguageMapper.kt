@@ -46,7 +46,7 @@ internal fun Language.toPresentationModel(isSelected: Boolean): LanguageUi =
         )
     }
 
-internal fun LanguageUi.toDomainModel(): Language =
+internal fun LanguageUi.toDomain(): Language =
     when (this) {
         is EnglishGbLanguage -> Language.EnglishGbLanguage
         is SpanishSpainLanguage -> Language.SpanishSpainLanguage

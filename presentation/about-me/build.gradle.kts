@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -20,5 +20,5 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.playground))
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

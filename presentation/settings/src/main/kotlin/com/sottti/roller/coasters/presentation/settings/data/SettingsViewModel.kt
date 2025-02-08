@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
-import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomainModel
+import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastNotAvailableMessage
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastPicker
@@ -143,7 +143,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 is ConfirmThemePickerSelection -> {
                     _state.hideThemePicker()
-                    settingsRepository.setTheme(action.theme.toDomainModel())
+                    settingsRepository.setTheme(action.theme.toDomain())
                 }
 
                 DismissThemePicker -> _state.hideThemePicker()
@@ -164,7 +164,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 is ConfirmColorContrastPickerSelection -> {
                     _state.hideColorContrastPicker()
-                    settingsRepository.setColorContrast(action.contrast.toDomainModel())
+                    settingsRepository.setColorContrast(action.contrast.toDomain())
                 }
 
                 DismissColorContrastPicker -> _state.hideColorContrastPicker()
@@ -176,7 +176,7 @@ internal class SettingsViewModel @Inject constructor(
                 is LanguagePickerSelectionChange -> _state.updateLanguagePicker(action.language)
                 is ConfirmLanguagePickerSelection -> {
                     _state.hideLanguagePicker()
-                    settingsRepository.setLanguage(action.language.toDomainModel())
+                    settingsRepository.setLanguage(action.language.toDomain())
                     updateLanguage()
                 }
 

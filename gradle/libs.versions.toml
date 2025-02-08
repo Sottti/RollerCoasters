@@ -12,7 +12,8 @@ hilt = "2.55"
 hiltNavigationCompose = "1.2.0"
 hiltWork = "1.2.0"
 junit = "4.13.2"
-kotlin = "2.1.0"
+kotlin = "2.1.10"
+kotlin-ksp = "2.1.10-1.0.29"
 kotlinCompilerExtension = "1.5.15"
 ktor = "3.0.3"
 lifecycleProcess = "2.8.7"
@@ -38,7 +39,7 @@ compose-window-size = { module = "androidx.compose.material3:material3-window-si
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -63,5 +64,5 @@ dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 dependency-versions = { id = "com.github.ben-manes.versions", version.ref = "dependencyVersions" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

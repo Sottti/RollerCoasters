@@ -3,7 +3,7 @@ import com.sottti.roller.coasters.buildSrc.module
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -15,5 +15,5 @@ dependencies {
     implementation(libs.hilt.work)
     implementation(libs.work.runtime)
     implementation(project(module.data.rollerCoasters))
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

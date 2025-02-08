@@ -4,11 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-}
-
-kapt {
-    correctErrorTypes = true
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -42,5 +38,5 @@ dependencies {
     implementation(project(module.data.settings))
     implementation(project(module.presentation.home))
     implementation(project(module.utils.device))
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

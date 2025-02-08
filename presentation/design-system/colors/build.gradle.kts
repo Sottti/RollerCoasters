@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "co.sottti.roller.coasters.presentation.design.system.themes"
+    namespace = "co.sottti.roller.coasters.presentation.design.system.colors"
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }

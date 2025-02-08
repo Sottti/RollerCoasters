@@ -13,7 +13,7 @@ internal class RollerCoastersApi @Inject constructor(
         offset: Int,
         limit: Int,
     ): RollerCoastersApiModel =
-        httpClient.fetch("$API_BASE_URL/coasters?offset=$offset&limit=$limit")
+        httpClient.fetch("$API_BASE_URL?offset=$offset&limit=$limit")
 
     suspend fun getRandomCoaster(): RollerCoasterApiModel =
         httpClient.fetch("$API_BASE_URL/coasters/random")

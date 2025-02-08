@@ -75,13 +75,13 @@ internal fun RollerCoasterApiModel.toDomain(): RollerCoaster =
 
 private fun PictureApiModel.toDomain(): Picture =
     Picture(
+        copyright = toDomainCopyright(),
         id = PictureId(id),
         name = PictureName(name),
         url = Url(url),
-        copyright = copyright(),
     )
 
-private fun PictureApiModel.copyright(): PictureCopyright =
+private fun PictureApiModel.toDomainCopyright(): PictureCopyright =
     PictureCopyright(
         author = Author(copyName),
         date = copyDate.toLocalDate(),

@@ -16,7 +16,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         var totalItems: Int
 
         do {
-            val response = api.getRollerCoasters(offset, limit)
+            val response = api.getRollerCoasters(offset = offset, limit = limit)
             val rollerCoasters = response.data.map { it.toDomain() }
             if (rollerCoasters.isEmpty()) break
             onStoreRollerCoasters(rollerCoasters)

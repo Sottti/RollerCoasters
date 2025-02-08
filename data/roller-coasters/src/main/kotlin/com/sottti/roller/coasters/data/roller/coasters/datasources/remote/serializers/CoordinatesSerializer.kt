@@ -19,7 +19,7 @@ import kotlinx.serialization.json.jsonPrimitive
 internal object CoordinatesSerializer : KSerializer<CoordinatesApiModel?> {
 
     override val descriptor: SerialDescriptor =
-        buildClassSerialDescriptor("CoordinatesApiModel") {
+        buildClassSerialDescriptor(CoordinatesApiModel::class.java.simpleName) {
             element<Double>(API_FIELD_LATITUDE)
             element<Double>(API_FIELD_LONGITUDE)
         }

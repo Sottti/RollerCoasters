@@ -48,7 +48,7 @@ private fun darkTheme(
     selected = isSelected,
 )
 
-internal fun ThemeUi.toDomainModel(): Theme =
+internal fun ThemeUi.toDomain(): Theme =
     when (this) {
         is ThemeUi.DarkTheme -> Theme.DarkTheme
         is ThemeUi.LightTheme -> Theme.LightTheme

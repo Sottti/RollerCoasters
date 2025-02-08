@@ -59,7 +59,7 @@ private fun highContrast(
     text = R.string.color_contrast_high_contrast,
 )
 
-internal fun ColorContrastUi.toDomainModel(): ColorContrast =
+internal fun ColorContrastUi.toDomain(): ColorContrast =
     when (this) {
         is HighContrast -> ColorContrast.HighContrast
         is MediumContrast -> ColorContrast.MediumContrast

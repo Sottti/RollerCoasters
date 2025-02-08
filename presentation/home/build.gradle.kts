@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -29,5 +29,5 @@ dependencies {
     implementation(project(module.presentation.explore))
     implementation(project(module.presentation.favourites))
     implementation(project(module.presentation.settings))
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

@@ -3,7 +3,7 @@ import com.sottti.roller.coasters.buildSrc.module
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -17,6 +17,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(project(module.data.network))
     implementation(project(module.utils.dates))
-    kapt(libs.hilt.compiler)
-    kapt(libs.room.compiler)
+    ksp(libs.hilt.compiler)
+    ksp(libs.room.compiler)
 }

@@ -10,15 +10,15 @@ import kotlinx.serialization.Serializable
 @InternalSerializationApi
 @Entity(tableName = "roller_coasters")
 internal data class RollerCoasterRoomModel(
-    @PrimaryKey val id: Int,
-    val name: String,
-    @Embedded val park: AmusementParkRoomModel,
     @Embedded val location: LocationRoomModel,
+    @Embedded val mainPicture: PictureRoomModel?,
+    @Embedded val park: AmusementParkRoomModel,
+    @Embedded val stats: StatsRoomModel?,
     @Embedded val status: StatusRoomModel,
+    @PrimaryKey val id: Int,
+    val design: String,
     val manufacturer: String,
     val model: String,
+    val name: String,
     val type: String,
-    val design: String,
-    @Embedded val stats: StatsRoomModel?,
-    @Embedded val mainPicture: PictureRoomModel?
 )
