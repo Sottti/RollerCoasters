@@ -41,6 +41,7 @@ import com.sottti.roller.coasters.data.roller.coasters.model.Picture
 import com.sottti.roller.coasters.data.roller.coasters.model.PictureCopyright
 import com.sottti.roller.coasters.data.roller.coasters.model.PictureId
 import com.sottti.roller.coasters.data.roller.coasters.model.PictureName
+import com.sottti.roller.coasters.data.roller.coasters.model.Pictures
 import com.sottti.roller.coasters.data.roller.coasters.model.Region
 import com.sottti.roller.coasters.data.roller.coasters.model.Relocations
 import com.sottti.roller.coasters.data.roller.coasters.model.RidersPerHour
@@ -62,15 +63,20 @@ internal fun RollerCoasterApiModel.toDomain(): RollerCoaster =
         design = Design(design),
         id = Id(id),
         location = toDomainLocation(),
-        mainPicture = mainPicture?.toDomain(),
         manufacturer = Manufacturer(make),
         model = Model(model),
         name = Name(name),
         park = park.toDomain(),
-        pictures = pictures.map { it.toDomain() },
+        pictures = toDomainPictures(),
         stats = stats?.toDomain(),
         status = status.toDomain(),
         type = Type(type),
+    )
+
+private fun RollerCoasterApiModel.toDomainPictures() =
+    Pictures(
+        main = mainPicture?.toDomain(),
+        other = this.pictures.map { it.toDomain() }
     )
 
 private fun PictureApiModel.toDomain(): Picture =

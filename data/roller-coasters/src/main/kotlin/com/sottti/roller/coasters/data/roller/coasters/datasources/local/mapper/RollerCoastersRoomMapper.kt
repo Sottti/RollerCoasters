@@ -20,7 +20,7 @@ import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
 internal fun RollerCoaster.toPicturesRoomModel(): List<PictureRoomModel> =
-    pictures.map { picture -> picture.toRoomModel(rollerCoasterId = id) }
+    pictures.other.map { picture -> picture.toRoomModel(rollerCoasterId = id) }
 
 @OptIn(InternalSerializationApi::class)
 internal fun RollerCoaster.toRoomModel() =
@@ -28,7 +28,7 @@ internal fun RollerCoaster.toRoomModel() =
         design = design.value,
         id = id.value,
         location = location.toLocationRoomModel(),
-        mainPicture = mainPicture?.toRoomModel(id),
+        mainPicture = pictures.main?.toRoomModel(id),
         manufacturer = manufacturer.value,
         model = model.value,
         name = name.value,
