@@ -13,6 +13,7 @@ android {
 dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.work)
+    implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
     implementation(project(module.data.rollerCoasters))
     ksp(libs.hilt.compiler)

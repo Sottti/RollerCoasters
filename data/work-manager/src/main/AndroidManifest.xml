@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <application></application>
+    <application>
+        <meta-data
+            android:name="androidx.work.WorkManagerInitializer"
+            tools:node="remove" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:enabled="true"
+            android:exported="false">
+
+            <meta-data
+                android:name="com.sottti.roller.coasters.data.work.manager.RollerCoastersSyncInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
 
 </manifest>

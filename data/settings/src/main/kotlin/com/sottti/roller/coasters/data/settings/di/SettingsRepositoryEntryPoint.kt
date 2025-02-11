@@ -8,5 +8,5 @@ import dagger.hilt.components.SingletonComponent
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 internal interface SettingsRepositoryEntryPoint {
-    fun getSettingsRepository(): SettingsRepository
+    fun getSeettingsRepository(): SettingsRepository
 }
