@@ -18,13 +18,13 @@ internal class RollerCoasterSyncScheduler @Inject constructor(
 ) {
     fun scheduleSync() {
         workManager.enqueueUniqueWork(
-            "initial_sync",
+            ROLLER_COASTERS_INITIAL_SYNC_WORK_NAME,
             ExistingWorkPolicy.KEEP,
             OneTimeWorkRequestBuilder<RollerCoastersSyncWorker>().build()
         )
 
         workManager.enqueueUniquePeriodicWork(
-            uniqueWorkName = ROLLER_COASTERS_SYNC_WORK_NAME,
+            uniqueWorkName = ROLLER_COASTERS_PERIODIC_SYNC_WORK_NAME,
             existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
             request = rollerCoastersSyncWorkRequest(),
         )
@@ -39,8 +39,8 @@ private fun rollerCoastersSyncWorkRequest(): PeriodicWorkRequest =
         .setConstraints(constraints)
         .build()
 
-private const val ROLLER_COASTERS_SYNC_WORK_NAME: String = "periodic_roller_coasters_sync"
-
+private const val ROLLER_COASTERS_INITIAL_SYNC_WORK_NAME: String = "initial_roller_coasters_sync"
+private const val ROLLER_COASTERS_PERIODIC_SYNC_WORK_NAME: String = "periodic_roller_coasters_sync"
 private val constraints =
     Constraints.Builder()
         .setRequiresBatteryNotLow(true)
