@@ -2,6 +2,8 @@ package com.sottti.roller.coasters.data.work.manager.schedulers
 
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -15,6 +17,12 @@ internal class RollerCoasterSyncScheduler @Inject constructor(
     private val workManager: WorkManager
 ) {
     fun scheduleSync() {
+        workManager.enqueueUniqueWork(
+            "initial_sync",
+            ExistingWorkPolicy.KEEP,
+            OneTimeWorkRequestBuilder<RollerCoastersSyncWorker>().build()
+        )
+
         workManager.enqueueUniquePeriodicWork(
             uniqueWorkName = ROLLER_COASTERS_SYNC_WORK_NAME,
             existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
@@ -31,7 +39,7 @@ private fun rollerCoastersSyncWorkRequest(): PeriodicWorkRequest =
         .setConstraints(constraints)
         .build()
 
-private const val ROLLER_COASTERS_SYNC_WORK_NAME: String = "sync_all_roller_coasters"
+private const val ROLLER_COASTERS_SYNC_WORK_NAME: String = "periodic_roller_coasters_sync"
 
 private val constraints =
     Constraints.Builder()

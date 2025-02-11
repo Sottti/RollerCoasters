@@ -4,6 +4,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.databas
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
 import javax.inject.Inject
 
@@ -14,16 +16,18 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     suspend fun storeRollerCoasters(
         rollerCoasters: List<RollerCoaster>,
     ) {
-        val rollerCoastersRoomModel =
-            rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoomModel() }
+        withContext(Dispatchers.IO) {
+            val rollerCoastersRoomModel =
+                rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoomModel() }
 
-        val picturesRoomModel =
-            rollerCoasters
-                .flatMap { rollerCoaster -> rollerCoaster.toPicturesRoomModel() }
+            val picturesRoomModel =
+                rollerCoasters
+                    .flatMap { rollerCoaster -> rollerCoaster.toPicturesRoomModel() }
 
-        dao.insertRollerCoastersWithPictures(
-            pictures = picturesRoomModel,
-            rollerCoasters = rollerCoastersRoomModel,
-        )
+            dao.insertRollerCoastersWithPictures(
+                pictures = picturesRoomModel,
+                rollerCoasters = rollerCoastersRoomModel,
+            )
+        }
     }
 }

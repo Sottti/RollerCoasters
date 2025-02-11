@@ -12,8 +12,7 @@ internal class RollerCoastersSyncInitializer : Initializer<Unit> {
             context = context,
             entryPoint = RollerCoastersSyncEntryPoint::class.java
         )
-        val scheduler = entryPoint.scheduler()
-        scheduler.scheduleSync()
+        entryPoint.scheduler().scheduleSync()
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> =

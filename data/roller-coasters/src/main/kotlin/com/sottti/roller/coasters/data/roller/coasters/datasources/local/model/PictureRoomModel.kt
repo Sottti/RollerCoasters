@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 internal data class PictureRoomModel(
     @ColumnInfo(name = "picture_id") @PrimaryKey val id: Int,
     @ColumnInfo(name = "picture_name") val name: String,
-    val copyrightDate: String,
+    val copyrightDate: String?,
     val copyrightName: String,
     val rollerCoasterId: Int,
     val url: String,

@@ -1,4 +1,10 @@
 package com.sottti.roller.coasters.data.roller.coasters.model
 
-@JvmInline
-public value class Design(public val value: String)
+public data class Design(
+    val arrangement: RollerCoasterArrangement?,
+    val designer: Designer?,
+    val elements: RollerCoasterElement?,
+    val restraints: Restraints?,
+    val train: Train,
+    val type: Type,
+)

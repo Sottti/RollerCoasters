@@ -17,7 +17,7 @@ internal data class RollerCoasterRoomModel(
     @Embedded val status: StatusRoomModel,
     @PrimaryKey val id: Int,
     val design: String,
-    val manufacturer: String,
+    val manufacturer: String?,
     val model: String,
     val name: String,
     val type: String,

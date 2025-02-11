@@ -5,5 +5,6 @@ public data class Location(
     val coordinates: Coordinates?,
     val country: Country,
     val region: Region,
+    val relocations: Relocations?,
     val state: State,
 )

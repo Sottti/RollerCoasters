@@ -3,8 +3,10 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.CoordinatesSerializer
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.ElementsSerializer
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.DoubleOrListSerializer
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.IntOrListSerializer
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.PictureSerializer
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.StringOrListSerializer
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -58,23 +60,43 @@ internal data class RollerCoasterStatsApiModel(
     @SerialName("arrangement") val arrangement: String?,
     @SerialName("builtBy") val builtBy: String?,
     @SerialName("capacity") val capacity: Int?,
-    @SerialName("cost") val cost: Int?,
+    @SerialName("cost") val cost: Long?,
     @SerialName("designer") val designer: String?,
     @SerialName("dimensions") val dimensions: Double?,
-    @SerialName("drop") val drop: Double?,
-    @SerialName("duration") val duration: Int?,
-    @SerialName("elements")
-    @Serializable(with = ElementsSerializer::class)
-    val elements: List<String>?,
+    @SerialName("drop")
+    @Serializable(with = DoubleOrListSerializer::class)
+    val drop: List<Double>?,
+    @SerialName("duration")
+    @Serializable(with = StringOrListSerializer::class)
+    val duration: List<String>?,
     @SerialName("formerNames") val formerNames: String?,
     @SerialName("formerStatus") val formerStatus: String?,
-    @SerialName("gForce") val gForce: Double?,
-    @SerialName("height") val height: Double?,
-    @SerialName("inversions") val inversions: Int?,
-    @SerialName("length") val length: Double?,
+    @SerialName("restraints") val restraints: String?,
+    @SerialName("gForce")
+    @Serializable(with = DoubleOrListSerializer::class)
+    val gForce: List<Double>?,
+    @SerialName("height")
+    @Serializable(with = DoubleOrListSerializer::class)
+    val height: List<Double>?,
+    @SerialName("inversions")
+    @Serializable(with = IntOrListSerializer::class)
+    val inversions: List<Int>?,
+    @SerialName("length")
+    @Serializable(with = DoubleOrListSerializer::class)
+    val length: List<Double>?,
+    @SerialName("name")
+    @Serializable(with = StringOrListSerializer::class)
+    val name: List<String>?,
     @SerialName("relocations") val relocations: String?,
-    @SerialName("speed") val speed: Double?,
-    @SerialName("verticalAngle") val verticalAngle: Int?,
+    @SerialName("speed")
+    @Serializable(with = DoubleOrListSerializer::class)
+    val speed: List<Double>?,
+    @SerialName("verticalAngle")
+    @Serializable(with = IntOrListSerializer::class)
+    val verticalAngle: List<Int>?,
+    @SerialName("elements")
+    @Serializable(with = StringOrListSerializer::class)
+    val elements: List<String>?,
 )
 
 @Serializable

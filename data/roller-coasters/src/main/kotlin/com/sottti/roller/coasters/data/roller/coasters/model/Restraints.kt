@@ -1,4 +1,4 @@
 package com.sottti.roller.coasters.data.roller.coasters.model
 
 @JvmInline
-public value class Euros(public val value: Long)
+public value class Restraints(public val value: String)

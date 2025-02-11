@@ -5,7 +5,6 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatsApiModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatusApiModel
 import com.sottti.roller.coasters.data.roller.coasters.model.AmusementPark
 import com.sottti.roller.coasters.data.roller.coasters.model.Author
 import com.sottti.roller.coasters.data.roller.coasters.model.Capacity
@@ -14,13 +13,13 @@ import com.sottti.roller.coasters.data.roller.coasters.model.CloseDate
 import com.sottti.roller.coasters.data.roller.coasters.model.Coordinates
 import com.sottti.roller.coasters.data.roller.coasters.model.Cost
 import com.sottti.roller.coasters.data.roller.coasters.model.Country
+import com.sottti.roller.coasters.data.roller.coasters.model.Degrees
 import com.sottti.roller.coasters.data.roller.coasters.model.Design
 import com.sottti.roller.coasters.data.roller.coasters.model.Designer
 import com.sottti.roller.coasters.data.roller.coasters.model.Dimensions
 import com.sottti.roller.coasters.data.roller.coasters.model.Drop
 import com.sottti.roller.coasters.data.roller.coasters.model.Duration
 import com.sottti.roller.coasters.data.roller.coasters.model.Euros
-import com.sottti.roller.coasters.data.roller.coasters.model.FormerNames
 import com.sottti.roller.coasters.data.roller.coasters.model.FormerStatus
 import com.sottti.roller.coasters.data.roller.coasters.model.GForce
 import com.sottti.roller.coasters.data.roller.coasters.model.Height
@@ -32,8 +31,10 @@ import com.sottti.roller.coasters.data.roller.coasters.model.Length
 import com.sottti.roller.coasters.data.roller.coasters.model.Location
 import com.sottti.roller.coasters.data.roller.coasters.model.Longitude
 import com.sottti.roller.coasters.data.roller.coasters.model.Manufacturer
+import com.sottti.roller.coasters.data.roller.coasters.model.MaxVertical
 import com.sottti.roller.coasters.data.roller.coasters.model.Meters
 import com.sottti.roller.coasters.data.roller.coasters.model.Model
+import com.sottti.roller.coasters.data.roller.coasters.model.MultiTrackRide
 import com.sottti.roller.coasters.data.roller.coasters.model.Name
 import com.sottti.roller.coasters.data.roller.coasters.model.OpenDate
 import com.sottti.roller.coasters.data.roller.coasters.model.OperationalState
@@ -44,39 +45,65 @@ import com.sottti.roller.coasters.data.roller.coasters.model.PictureName
 import com.sottti.roller.coasters.data.roller.coasters.model.Pictures
 import com.sottti.roller.coasters.data.roller.coasters.model.Region
 import com.sottti.roller.coasters.data.roller.coasters.model.Relocations
+import com.sottti.roller.coasters.data.roller.coasters.model.Restraints
+import com.sottti.roller.coasters.data.roller.coasters.model.Ride
 import com.sottti.roller.coasters.data.roller.coasters.model.RidersPerHour
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterArrangement
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterElement
+import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterName
 import com.sottti.roller.coasters.data.roller.coasters.model.Seconds
+import com.sottti.roller.coasters.data.roller.coasters.model.SingleTrackRide
+import com.sottti.roller.coasters.data.roller.coasters.model.Specs
 import com.sottti.roller.coasters.data.roller.coasters.model.Speed
 import com.sottti.roller.coasters.data.roller.coasters.model.State
-import com.sottti.roller.coasters.data.roller.coasters.model.Stats
 import com.sottti.roller.coasters.data.roller.coasters.model.Status
+import com.sottti.roller.coasters.data.roller.coasters.model.Train
 import com.sottti.roller.coasters.data.roller.coasters.model.Type
 import com.sottti.roller.coasters.data.roller.coasters.model.Url
 import com.sottti.roller.coasters.utils.dates.mappers.toDate
-import com.sottti.roller.coasters.utils.dates.mappers.toLocalDate
+import com.sottti.roller.coasters.utils.dates.mappers.toSeconds
 
 internal fun RollerCoasterApiModel.toDomain(): RollerCoaster =
     RollerCoaster(
-        design = Design(design),
         id = Id(id),
         location = toDomainLocation(),
-        manufacturer = Manufacturer(make),
-        model = Model(model),
-        name = Name(name),
+        name = toDomainName(),
         park = park.toDomain(),
         pictures = toDomainPictures(),
-        stats = stats?.toDomain(),
-        status = status.toDomain(),
-        type = Type(type),
+        specs = toDomainSpecs(),
+        status = toDomainStatus(),
+    )
+
+private fun RollerCoasterApiModel.toDomainLocation(): Location =
+    Location(
+        city = City(city),
+        coordinates = coords?.toDomain(),
+        country = Country(country),
+        region = Region(region),
+        relocations = stats?.relocations?.let { Relocations(it) },
+        state = State(state),
+    )
+
+private fun CoordinatesApiModel.toDomain(): Coordinates? =
+    Coordinates(latitude = Latitude(lat), longitude = Longitude(lng))
+
+private fun RollerCoasterApiModel.toDomainName(): RollerCoasterName =
+    RollerCoasterName(
+        current = Name(name),
+        former = stats?.formerNames?.let { Name(it) },
+    )
+
+private fun AmusementParkApiModel.toDomain(): AmusementPark =
+    AmusementPark(
+        id = Id(id),
+        name = Name(name),
     )
 
 private fun RollerCoasterApiModel.toDomainPictures() =
     Pictures(
         main = mainPicture?.toDomain(),
-        other = this.pictures.map { it.toDomain() }
+        other = this.pictures.map { it.toDomain() },
     )
 
 private fun PictureApiModel.toDomain(): Picture =
@@ -90,50 +117,74 @@ private fun PictureApiModel.toDomain(): Picture =
 private fun PictureApiModel.toDomainCopyright(): PictureCopyright =
     PictureCopyright(
         author = Author(copyName),
-        date = copyDate.toLocalDate(),
+        date = copyDate.toDate(),
     )
 
-private fun RollerCoasterStatsApiModel.toDomain(): Stats =
-    Stats(
-        arrangement = arrangement?.let { RollerCoasterArrangement(it) },
-        capacity = capacity?.let { Capacity(RidersPerHour(it)) },
-        cost = cost?.let { Cost(Euros(it)) },
-        designer = designer?.let { Designer(it) },
-        dimensions = dimensions?.let { Dimensions(Meters(it)) },
-        drop = drop?.let { Drop(Meters(it)) },
-        duration = duration?.let { Duration(Seconds(it)) },
-        elements = elements?.map { RollerCoasterElement(it) },
-        formerNames = formerNames?.let { FormerNames(it) },
-        formerStatus = formerStatus?.let { FormerStatus(it) },
-        gForce = gForce?.let { GForce(it) },
-        height = height?.let { Height(Meters(it)) },
-        inversions = inversions?.let { Inversions(it) },
-        length = length?.let { Length(Meters(it)) },
-        relocations = relocations?.let { Relocations(it) },
-        speed = speed?.let { Speed(Kmh(it)) },
+private fun RollerCoasterApiModel.toDomainSpecs(): Specs = Specs(
+    capacity = stats?.capacity?.let { Capacity(RidersPerHour(it)) },
+    cost = stats?.cost?.let { Cost(Euros(it)) },
+    design = toDomainDesign(),
+    dimensions = stats?.dimensions?.let { Dimensions(Meters(it)) },
+    manufacturer = stats?.builtBy?.let { Manufacturer(it) },
+    model = Model(model),
+    ride = stats?.toDomain(),
+)
+
+private fun RollerCoasterApiModel.toDomainDesign(): Design =
+    Design(
+        arrangement = stats?.arrangement?.let { RollerCoasterArrangement(it) },
+        designer = stats?.designer?.let { Designer(it) },
+        elements = stats?.elements?.let { RollerCoasterElement(it.first()) },
+        restraints = stats?.restraints?.let { Restraints(it) },
+        train = Train(design),
+        type = Type(type),
     )
 
-private fun RollerCoasterStatusApiModel.toDomain(): Status =
+private fun RollerCoasterStatsApiModel.toDomain(): Ride? =
+    when {
+        isMultiTrack() -> toDomainMultiTrack()
+        else -> toDomainSingleTrack()
+    }
+
+private fun RollerCoasterStatsApiModel.isMultiTrack(): Boolean =
+    (duration?.size ?: 0) > 1 ||
+            (gForce?.size ?: 0) > 1 ||
+            (height?.size ?: 0) > 1 ||
+            (inversions?.size ?: 0) > 1 ||
+            (length?.size ?: 0) > 1 ||
+            (speed?.size ?: 0) > 1 ||
+            (verticalAngle?.size ?: 0) > 1 ||
+            (drop?.size ?: 0) > 1
+
+private fun RollerCoasterStatsApiModel.toDomainMultiTrack(): MultiTrackRide =
+    MultiTrackRide(
+        drop = drop?.map { Drop(Meters(it)) },
+        duration = duration?.map { Duration(Seconds(it.toSeconds())) },
+        gForce = gForce?.map { GForce(it) },
+        height = height?.map { Height(Meters(it)) },
+        inversions = inversions?.map { Inversions(it) },
+        length = length?.map { Length(Meters(it)) },
+        maxVertical = verticalAngle?.map { MaxVertical(Degrees(it)) },
+        trackNames = name?.map { Name(it) },
+        speed = speed?.map { Speed(Kmh(it)) },
+    )
+
+private fun RollerCoasterStatsApiModel.toDomainSingleTrack(): SingleTrackRide =
+    SingleTrackRide(
+        drop = drop?.let { Drop(Meters(it.first())) },
+        duration = duration?.let { Duration(Seconds(it.first().toSeconds())) },
+        gForce = gForce?.let { GForce(it.first()) },
+        height = height?.let { Height(Meters(it.first())) },
+        inversions = inversions?.let { Inversions(it.first()) },
+        length = length?.let { Length(Meters(it.first())) },
+        maxVertical = verticalAngle?.let { MaxVertical(Degrees(it.first())) },
+        speed = speed?.let { Speed(Kmh(it.first())) },
+    )
+
+private fun RollerCoasterApiModel.toDomainStatus(): Status =
     Status(
-        state = OperationalState(state),
-        openedDate = OpenDate(date.opened.toDate()),
-        closedDate = date.closed?.let { CloseDate(date.closed.toDate()) },
-    )
-
-private fun RollerCoasterApiModel.toDomainLocation(): Location =
-    Location(
-        city = City(city),
-        country = Country(country),
-        region = Region(region),
-        state = State(state),
-        coordinates = coords?.toDomain(),
-    )
-
-private fun CoordinatesApiModel.toDomain(): Coordinates? =
-    Coordinates(latitude = Latitude(lat), longitude = Longitude(lng))
-
-private fun AmusementParkApiModel.toDomain(): AmusementPark =
-    AmusementPark(
-        id = Id(id),
-        name = Name(name),
+        closedDate = status.date.closed?.toDate()?.let { CloseDate(it) },
+        current = OperationalState(state),
+        former = stats?.formerStatus?.let { FormerStatus(it) },
+        openedDate = status.date.opened.toDate()?.let { OpenDate(it) },
     )

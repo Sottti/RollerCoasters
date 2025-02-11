@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.data.roller.coasters.model
 
-import java.time.LocalDate
+import com.sottti.roller.coasters.utils.dates.model.Date
 
 public data class PictureCopyright(
     val author: Author,
-    val date: LocalDate,
+    val date: Date?,
 )

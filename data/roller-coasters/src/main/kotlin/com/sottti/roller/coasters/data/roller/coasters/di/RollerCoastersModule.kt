@@ -17,7 +17,7 @@ internal object RollerCoastersModule {
     @Provides
     @Singleton
     fun provideRepository(
-        localDataSource : RollerCoastersLocalDataSource,
+        localDataSource: RollerCoastersLocalDataSource,
         remoteDataSource: RollerCoastersRemoteDataSource,
     ): RollerCoastersRepository = RollerCoastersRepositoryImpl(
         localDataSource = localDataSource,

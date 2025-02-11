@@ -12,7 +12,6 @@ import kotlinx.serialization.json.Json
 
 internal fun createHttpClient() =
     HttpClient(CIO) {
-
         install(ContentNegotiation) {
             json(Json {
                 coerceInputValues = true

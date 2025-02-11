@@ -3,6 +3,10 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApi
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 internal class RollerCoastersRemoteDataSource @Inject constructor(
@@ -11,22 +15,29 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
     suspend fun syncAllRollerCoasters(
         onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
     ) {
-        var offset = 0
-        val limit = 1000
-        var totalItems: Int
+        val limit = 200
+        val totalItems = withContext(Dispatchers.IO) {
+            val rollerCoastersPage = api.getRollerCoasters(offset = 0, limit = limit)
+            onStoreRollerCoasters(rollerCoastersPage.data.map { it.toDomain() })
+            rollerCoastersPage.pagination.total
+        }
 
-        do {
-            val response = api.getRollerCoasters(offset = offset, limit = limit)
-            val rollerCoasters = response.data.map { it.toDomain() }
-            if (rollerCoasters.isEmpty()) break
-            onStoreRollerCoasters(rollerCoasters)
-            totalItems = response.pagination.total
-            offset += limit
-        } while (offset < totalItems)
+        val offsets = (limit until totalItems step limit).toList()
+
+        coroutineScope {
+            offsets.forEach { offset ->
+                launch(Dispatchers.IO) {
+                    api.getRollerCoasters(
+                        offset = offset,
+                        limit = limit
+                    ).data
+                        .map { it.toDomain() }
+                        .also { onStoreRollerCoasters(it) }
+                }
+            }
+        }
     }
 
-    suspend fun getRandomRollerCoaster(): RollerCoaster =
-        api
-            .getRandomCoaster()
-            .toDomain()
+    suspend fun getRandomRollerCoaster(): RollerCoaster = api.getRandomCoaster().toDomain()
+
 }
