@@ -12,13 +12,9 @@ import kotlinx.serialization.Serializable
 internal data class RollerCoasterRoomModel(
     @Embedded val location: LocationRoomModel,
     @Embedded val mainPicture: PictureRoomModel?,
-    @Embedded val park: AmusementParkRoomModel,
-    @Embedded val stats: StatsRoomModel?,
+    @Embedded val name: NameRoomModel,
+    @Embedded val park: ParkRoomModel,
+    @Embedded val specs: SpecsRoomModel,
     @Embedded val status: StatusRoomModel,
     @PrimaryKey val id: Int,
-    val design: String,
-    val manufacturer: String?,
-    val model: String,
-    val name: String,
-    val type: String,
 )

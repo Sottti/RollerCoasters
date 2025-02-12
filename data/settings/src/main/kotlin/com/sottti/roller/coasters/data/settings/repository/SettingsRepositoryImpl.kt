@@ -2,10 +2,10 @@ package com.sottti.roller.coasters.data.settings.repository
 
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
-import com.sottti.roller.coasters.data.settings.model.ColorContrast
-import com.sottti.roller.coasters.data.settings.model.Language
-import com.sottti.roller.coasters.data.settings.model.Theme
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast
+import com.sottti.roller.coasters.domain.model.Language
+import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.model.Theme
 import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

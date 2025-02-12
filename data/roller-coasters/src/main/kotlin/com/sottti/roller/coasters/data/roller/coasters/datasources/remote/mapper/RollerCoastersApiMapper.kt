@@ -5,68 +5,69 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatsApiModel
-import com.sottti.roller.coasters.data.roller.coasters.model.AmusementPark
-import com.sottti.roller.coasters.data.roller.coasters.model.Author
-import com.sottti.roller.coasters.data.roller.coasters.model.Capacity
-import com.sottti.roller.coasters.data.roller.coasters.model.City
-import com.sottti.roller.coasters.data.roller.coasters.model.CloseDate
-import com.sottti.roller.coasters.data.roller.coasters.model.Coordinates
-import com.sottti.roller.coasters.data.roller.coasters.model.Cost
-import com.sottti.roller.coasters.data.roller.coasters.model.Country
-import com.sottti.roller.coasters.data.roller.coasters.model.Degrees
-import com.sottti.roller.coasters.data.roller.coasters.model.Design
-import com.sottti.roller.coasters.data.roller.coasters.model.Designer
-import com.sottti.roller.coasters.data.roller.coasters.model.Dimensions
-import com.sottti.roller.coasters.data.roller.coasters.model.Drop
-import com.sottti.roller.coasters.data.roller.coasters.model.Duration
-import com.sottti.roller.coasters.data.roller.coasters.model.Euros
-import com.sottti.roller.coasters.data.roller.coasters.model.FormerStatus
-import com.sottti.roller.coasters.data.roller.coasters.model.GForce
-import com.sottti.roller.coasters.data.roller.coasters.model.Height
-import com.sottti.roller.coasters.data.roller.coasters.model.Id
-import com.sottti.roller.coasters.data.roller.coasters.model.Inversions
-import com.sottti.roller.coasters.data.roller.coasters.model.Kmh
-import com.sottti.roller.coasters.data.roller.coasters.model.Latitude
-import com.sottti.roller.coasters.data.roller.coasters.model.Length
-import com.sottti.roller.coasters.data.roller.coasters.model.Location
-import com.sottti.roller.coasters.data.roller.coasters.model.Longitude
-import com.sottti.roller.coasters.data.roller.coasters.model.Manufacturer
-import com.sottti.roller.coasters.data.roller.coasters.model.MaxVertical
-import com.sottti.roller.coasters.data.roller.coasters.model.Meters
-import com.sottti.roller.coasters.data.roller.coasters.model.Model
-import com.sottti.roller.coasters.data.roller.coasters.model.MultiTrackRide
-import com.sottti.roller.coasters.data.roller.coasters.model.Name
-import com.sottti.roller.coasters.data.roller.coasters.model.OpenDate
-import com.sottti.roller.coasters.data.roller.coasters.model.OperationalState
-import com.sottti.roller.coasters.data.roller.coasters.model.Picture
-import com.sottti.roller.coasters.data.roller.coasters.model.PictureCopyright
-import com.sottti.roller.coasters.data.roller.coasters.model.PictureId
-import com.sottti.roller.coasters.data.roller.coasters.model.PictureName
-import com.sottti.roller.coasters.data.roller.coasters.model.Pictures
-import com.sottti.roller.coasters.data.roller.coasters.model.Region
-import com.sottti.roller.coasters.data.roller.coasters.model.Relocations
-import com.sottti.roller.coasters.data.roller.coasters.model.Restraints
-import com.sottti.roller.coasters.data.roller.coasters.model.Ride
-import com.sottti.roller.coasters.data.roller.coasters.model.RidersPerHour
-import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterArrangement
-import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterElement
-import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoasterName
-import com.sottti.roller.coasters.data.roller.coasters.model.Seconds
-import com.sottti.roller.coasters.data.roller.coasters.model.SingleTrackRide
-import com.sottti.roller.coasters.data.roller.coasters.model.Specs
-import com.sottti.roller.coasters.data.roller.coasters.model.Speed
-import com.sottti.roller.coasters.data.roller.coasters.model.State
-import com.sottti.roller.coasters.data.roller.coasters.model.Status
-import com.sottti.roller.coasters.data.roller.coasters.model.Train
-import com.sottti.roller.coasters.data.roller.coasters.model.Type
-import com.sottti.roller.coasters.data.roller.coasters.model.Url
+import com.sottti.roller.coasters.domain.model.AmusementPark
+import com.sottti.roller.coasters.domain.model.Arrangement
+import com.sottti.roller.coasters.domain.model.Author
+import com.sottti.roller.coasters.domain.model.Capacity
+import com.sottti.roller.coasters.domain.model.City
+import com.sottti.roller.coasters.domain.model.ClosedDate
+import com.sottti.roller.coasters.domain.model.Coordinates
+import com.sottti.roller.coasters.domain.model.Cost
+import com.sottti.roller.coasters.domain.model.Country
+import com.sottti.roller.coasters.domain.model.Degrees
+import com.sottti.roller.coasters.domain.model.Design
+import com.sottti.roller.coasters.domain.model.Designer
+import com.sottti.roller.coasters.domain.model.Dimensions
+import com.sottti.roller.coasters.domain.model.Drop
+import com.sottti.roller.coasters.domain.model.Duration
+import com.sottti.roller.coasters.domain.model.Element
+import com.sottti.roller.coasters.domain.model.Euros
+import com.sottti.roller.coasters.domain.model.FormerStatus
+import com.sottti.roller.coasters.domain.model.GForce
+import com.sottti.roller.coasters.domain.model.Height
+import com.sottti.roller.coasters.domain.model.Id
+import com.sottti.roller.coasters.domain.model.ImageUrl
+import com.sottti.roller.coasters.domain.model.Inversions
+import com.sottti.roller.coasters.domain.model.Kmh
+import com.sottti.roller.coasters.domain.model.Latitude
+import com.sottti.roller.coasters.domain.model.Length
+import com.sottti.roller.coasters.domain.model.Location
+import com.sottti.roller.coasters.domain.model.Longitude
+import com.sottti.roller.coasters.domain.model.Manufacturer
+import com.sottti.roller.coasters.domain.model.MaxVertical
+import com.sottti.roller.coasters.domain.model.Meters
+import com.sottti.roller.coasters.domain.model.Model
+import com.sottti.roller.coasters.domain.model.MultiTrackRide
+import com.sottti.roller.coasters.domain.model.Name
+import com.sottti.roller.coasters.domain.model.OpenedDate
+import com.sottti.roller.coasters.domain.model.OperationalState
+import com.sottti.roller.coasters.domain.model.Picture
+import com.sottti.roller.coasters.domain.model.PictureCopyright
+import com.sottti.roller.coasters.domain.model.PictureId
+import com.sottti.roller.coasters.domain.model.PictureName
+import com.sottti.roller.coasters.domain.model.Pictures
+import com.sottti.roller.coasters.domain.model.Region
+import com.sottti.roller.coasters.domain.model.Relocations
+import com.sottti.roller.coasters.domain.model.Restraints
+import com.sottti.roller.coasters.domain.model.Ride
+import com.sottti.roller.coasters.domain.model.RidersPerHour
+import com.sottti.roller.coasters.domain.model.RollerCoaster
+import com.sottti.roller.coasters.domain.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.model.RollerCoasterName
+import com.sottti.roller.coasters.domain.model.Seconds
+import com.sottti.roller.coasters.domain.model.SingleTrackRide
+import com.sottti.roller.coasters.domain.model.Specs
+import com.sottti.roller.coasters.domain.model.Speed
+import com.sottti.roller.coasters.domain.model.State
+import com.sottti.roller.coasters.domain.model.Status
+import com.sottti.roller.coasters.domain.model.Train
+import com.sottti.roller.coasters.domain.model.Type
 import com.sottti.roller.coasters.utils.dates.mappers.toDate
 import com.sottti.roller.coasters.utils.dates.mappers.toSeconds
 
 internal fun RollerCoasterApiModel.toDomain(): RollerCoaster =
     RollerCoaster(
-        id = Id(id),
+        id = RollerCoasterId(id),
         location = toDomainLocation(),
         name = toDomainName(),
         park = park.toDomain(),
@@ -111,7 +112,7 @@ private fun PictureApiModel.toDomain(): Picture =
         copyright = toDomainCopyright(),
         id = PictureId(id),
         name = PictureName(name),
-        url = Url(url),
+        url = ImageUrl(url),
     )
 
 private fun PictureApiModel.toDomainCopyright(): PictureCopyright =
@@ -132,9 +133,9 @@ private fun RollerCoasterApiModel.toDomainSpecs(): Specs = Specs(
 
 private fun RollerCoasterApiModel.toDomainDesign(): Design =
     Design(
-        arrangement = stats?.arrangement?.let { RollerCoasterArrangement(it) },
+        arrangement = stats?.arrangement?.let { Arrangement(it) },
         designer = stats?.designer?.let { Designer(it) },
-        elements = stats?.elements?.let { RollerCoasterElement(it.first()) },
+        elements = stats?.elements?.let { Element(it.first()) },
         restraints = stats?.restraints?.let { Restraints(it) },
         train = Train(design),
         type = Type(type),
@@ -183,8 +184,8 @@ private fun RollerCoasterStatsApiModel.toDomainSingleTrack(): SingleTrackRide =
 
 private fun RollerCoasterApiModel.toDomainStatus(): Status =
     Status(
-        closedDate = status.date.closed?.toDate()?.let { CloseDate(it) },
+        closedDate = status.date.closed?.toDate()?.let { ClosedDate(it) },
         current = OperationalState(state),
         former = stats?.formerStatus?.let { FormerStatus(it) },
-        openedDate = status.date.opened.toDate()?.let { OpenDate(it) },
+        openedDate = status.date.opened.toDate()?.let { OpenedDate(it) },
     )

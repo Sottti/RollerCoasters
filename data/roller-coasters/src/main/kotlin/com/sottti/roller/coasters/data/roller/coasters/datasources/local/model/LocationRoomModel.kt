@@ -13,4 +13,5 @@ internal data class LocationRoomModel(
     val city: String,
     val country: String,
     val region: String,
+    val relocations: String?,
 )

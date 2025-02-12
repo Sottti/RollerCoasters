@@ -1,9 +1,11 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
+import com.sottti.roller.coasters.domain.model.Id
+import com.sottti.roller.coasters.domain.model.RollerCoaster
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
@@ -18,16 +20,26 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     ) {
         withContext(Dispatchers.IO) {
             val rollerCoastersRoomModel =
-                rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoomModel() }
+                rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoom() }
 
             val picturesRoomModel =
                 rollerCoasters
                     .flatMap { rollerCoaster -> rollerCoaster.toPicturesRoomModel() }
 
-            dao.insertRollerCoastersWithPictures(
+            dao.insertRollerCoasters(
                 pictures = picturesRoomModel,
                 rollerCoasters = rollerCoastersRoomModel,
             )
         }
     }
+
+    @OptIn(InternalSerializationApi::class)
+    suspend fun getRollerCoasterById(
+        id: Id,
+    ): RollerCoaster? =
+        withContext(Dispatchers.IO) {
+            dao
+                .getRollerCoasterById(id.value)
+                ?.toDomain(dao.getPicturesByRollerCoasterId(id.value))
+        }
 }

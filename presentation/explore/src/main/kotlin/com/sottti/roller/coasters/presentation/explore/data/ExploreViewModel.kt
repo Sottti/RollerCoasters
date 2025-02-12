@@ -1,24 +1,31 @@
 package com.sottti.roller.coasters.presentation.explore.data
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
+import com.sottti.roller.coasters.domain.model.RollerCoasterId
+import com.sottti.roller.coasters.presentation.explore.model.ExploreState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
-internal class ExploreViewModel @Inject constructor() : ViewModel() {
-    private val _state = MutableStateFlow(generateRandomColor())
-    val state: StateFlow<Color> = _state.asStateFlow()
-}
+internal class ExploreViewModel @Inject constructor(
+    rollerCoastersRepository: RollerCoastersRepository,
+) : ViewModel() {
+    private val _state = MutableStateFlow(ExploreState(null))
+    val state: StateFlow<ExploreState> = _state.asStateFlow()
 
-private fun generateRandomColor(): Color {
-    val red = Random.nextInt(from = 0, until = 256)
-    val green = Random.nextInt(from = 0, until = 256)
-    val blue = Random.nextInt(from = 0, until = 256)
-
-    return Color(red, green, blue)
+    init {
+        viewModelScope.launch {
+            val url = rollerCoastersRepository
+                .getRollerCoaster(RollerCoasterId(760))
+                .pictures.main?.url
+            _state.update { currentState -> currentState.copy(url = url) }
+        }
+    }
 }

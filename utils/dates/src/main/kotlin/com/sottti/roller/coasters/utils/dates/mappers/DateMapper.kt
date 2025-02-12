@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.utils.dates.mappers
 
-import com.sottti.roller.coasters.utils.dates.model.Date
-import com.sottti.roller.coasters.utils.dates.model.Date.FullDate
-import com.sottti.roller.coasters.utils.dates.model.Date.YearAndMonth
-import com.sottti.roller.coasters.utils.dates.model.Date.YearOnly
+import com.sottti.roller.coasters.domain.model.Date
+import com.sottti.roller.coasters.domain.model.Date.FullDate
+import com.sottti.roller.coasters.domain.model.Date.YearAndMonth
+import com.sottti.roller.coasters.domain.model.Date.YearOnly
 import java.time.LocalDate
 import java.time.Year
 import java.time.YearMonth

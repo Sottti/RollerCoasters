@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.data.settings.mappers
 import androidx.core.os.LocaleListCompat
 import androidx.core.os.LocaleListCompat.forLanguageTags
 import androidx.core.os.LocaleListCompat.getEmptyLocaleList
-import com.sottti.roller.coasters.data.settings.model.Language
+import com.sottti.roller.coasters.domain.model.Language
 import java.util.Locale
 
 private const val LOCALE_GALICIA_TAG = "gl-ES"

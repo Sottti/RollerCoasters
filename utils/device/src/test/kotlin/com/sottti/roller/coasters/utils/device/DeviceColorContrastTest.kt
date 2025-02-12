@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.utils.device
 
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.HighContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.LowContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.MediumContrast
-import com.sottti.roller.coasters.utils.device.system.SystemColorContrast.StandardContrast
+import com.sottti.roller.coasters.domain.model.SystemColorContrast.HighContrast
+import com.sottti.roller.coasters.domain.model.SystemColorContrast.LowContrast
+import com.sottti.roller.coasters.domain.model.SystemColorContrast.MediumContrast
+import com.sottti.roller.coasters.domain.model.SystemColorContrast.StandardContrast
 import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import io.mockk.every
 import io.mockk.mockk

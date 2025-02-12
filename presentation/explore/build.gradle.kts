@@ -18,6 +18,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.presentation.designSystem.playground))
+    implementation(project(module.data.rollerCoasters))
+    implementation(project(module.presentation.imageLoading))
     ksp(libs.hilt.compiler)
 }

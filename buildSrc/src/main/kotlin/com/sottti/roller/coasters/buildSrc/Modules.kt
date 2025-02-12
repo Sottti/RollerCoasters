@@ -8,6 +8,7 @@ object module {
         const val explore = ":presentation:explore"
         const val favourites = ":presentation:favourites"
         const val home = ":presentation:home"
+        const val imageLoading = ":presentation:image-loading"
         const val settings = ":presentation:settings"
 
         object designSystem {
@@ -22,6 +23,10 @@ object module {
             const val themes = ":presentation:design-system:themes"
             const val typography = ":presentation:design-system:typography"
         }
+    }
+
+    object domain {
+        const val model = ":domain:model"
     }
 
     object data {

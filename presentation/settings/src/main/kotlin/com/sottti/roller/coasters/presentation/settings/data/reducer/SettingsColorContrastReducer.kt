@@ -1,10 +1,10 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.data.settings.model.ColorContrast
-import com.sottti.roller.coasters.data.settings.model.ColorContrast.HighContrast
-import com.sottti.roller.coasters.data.settings.model.ColorContrast.MediumContrast
-import com.sottti.roller.coasters.data.settings.model.ColorContrast.StandardContrast
-import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.HighContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.MediumContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.StandardContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastNotAvailableMessageState

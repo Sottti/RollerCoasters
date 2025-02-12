@@ -11,6 +11,7 @@ android {
 }
 
 dependencies {
+    api(project(module.domain.model))
     api(project(module.utils.device))
     implementation(libs.appcompat)
     implementation(libs.datastore.preferences)

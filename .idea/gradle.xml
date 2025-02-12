@@ -28,6 +28,8 @@
             <option value="$PROJECT_DIR$/data/roller-coasters" />
             <option value="$PROJECT_DIR$/data/settings" />
             <option value="$PROJECT_DIR$/data/work-manager" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/model" />
             <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/presentation/about-me" />
             <option value="$PROJECT_DIR$/presentation/design-system" />
@@ -44,6 +46,7 @@
             <option value="$PROJECT_DIR$/presentation/explore" />
             <option value="$PROJECT_DIR$/presentation/favourites" />
             <option value="$PROJECT_DIR$/presentation/home" />
+            <option value="$PROJECT_DIR$/presentation/image-loading" />
             <option value="$PROJECT_DIR$/presentation/settings" />
             <option value="$PROJECT_DIR$/utils" />
             <option value="$PROJECT_DIR$/utils/dates" />

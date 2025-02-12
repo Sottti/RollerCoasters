@@ -5,8 +5,8 @@ import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.data.settings.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastNotAvailableMessage

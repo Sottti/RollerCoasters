@@ -12,6 +12,7 @@ android {
 }
 
 dependencies {
+    api(project(module.domain.model))
     implementation(libs.hilt)
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)

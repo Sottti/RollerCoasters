@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
-import com.sottti.roller.coasters.data.settings.model.ColorContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast
 
 private const val COLOR_CONTRAST_KEY_HIGH = "high"
 private const val COLOR_CONTRAST_KEY_MEDIUM = "medium"

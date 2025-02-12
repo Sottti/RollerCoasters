@@ -5,8 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sottti.roller.coasters.presentation.design.system.playground.RainbowLazyColumn
 import com.sottti.roller.coasters.presentation.explore.data.ExploreViewModel
+import com.sottti.roller.coasters.presentation.image.loading.Image
 
 @Composable
 public fun ExploreUi(
@@ -22,8 +22,11 @@ private fun ExploreUiInternal(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    RainbowLazyColumn(
-        nestedScrollConnection = nestedScrollConnection,
-        seedColor = state,
-    )
+    state.url?.let {
+        Image(
+            url = it,
+            contentDescription = ""
+        )
+    }
+
 }

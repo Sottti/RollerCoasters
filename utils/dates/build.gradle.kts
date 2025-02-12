@@ -1,3 +1,5 @@
+import com.sottti.roller.coasters.buildSrc.module
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -5,4 +7,8 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.utils.dates"
+}
+
+dependencies {
+    api(project(module.domain.model))
 }

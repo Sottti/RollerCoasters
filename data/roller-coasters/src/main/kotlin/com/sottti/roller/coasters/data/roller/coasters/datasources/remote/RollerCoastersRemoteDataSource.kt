@@ -2,7 +2,8 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApi
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
-import com.sottti.roller.coasters.data.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.model.RollerCoaster
+import com.sottti.roller.coasters.domain.model.RollerCoasterId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -12,6 +13,11 @@ import javax.inject.Inject
 internal class RollerCoastersRemoteDataSource @Inject constructor(
     private val api: RollerCoastersApi,
 ) {
+    suspend fun getRollerCoaster(id: RollerCoasterId): RollerCoaster =
+        api
+            .getRollerCoaster(id)
+            .toDomain()
+
     suspend fun syncAllRollerCoasters(
         onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
     ) {
@@ -37,7 +43,4 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
             }
         }
     }
-
-    suspend fun getRandomRollerCoaster(): RollerCoaster = api.getRandomCoaster().toDomain()
-
 }

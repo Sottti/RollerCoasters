@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.utils.device.system
 
 import android.app.UiModeManager
 import androidx.annotation.FloatRange
+import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import javax.inject.Inject
 
