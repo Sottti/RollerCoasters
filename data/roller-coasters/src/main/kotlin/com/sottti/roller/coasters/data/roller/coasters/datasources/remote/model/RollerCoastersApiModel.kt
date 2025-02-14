@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class RollerCoastersApiModel(
-    @SerialName("data") val data: List<RollerCoasterApiModel>,
+    @SerialName("data") val rollerCoasters: List<RollerCoasterApiModel>,
     @SerialName("pagination") val pagination: PaginationApiModel,
 )
 

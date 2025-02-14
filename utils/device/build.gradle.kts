@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.annotations)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
 }

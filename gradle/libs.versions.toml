@@ -1,12 +1,13 @@
 [versions]
-agp = "8.8.0"
+agp = "8.8.1"
 annotation = "1.9.1"
 appcompat = "1.7.0"
 coil = "3.1.0"
 compileSdk = "35"
-composeBom = "2025.01.01"
-composeNavigation = "2.8.6"
+composeBom = "2025.02.00"
+composeNavigation = "2.8.7"
 coreKtx = "1.15.0"
+coroutinesTest = "1.10.1"
 datastorePreferences = "1.1.2"
 dependencyVersions = "0.52.0"
 hilt = "2.55"
@@ -16,7 +17,8 @@ junit = "4.13.2"
 kotlin = "2.1.10"
 kotlin-ksp = "2.1.10-1.0.29"
 kotlinCompilerExtension = "1.5.15"
-ktor = "3.0.3"
+kotlinResult = "2.0.1"
+ktor = "3.1.0"
 lifecycleProcess = "2.8.7"
 material = "1.12.0"
 minSdk = "26"
@@ -47,6 +49,9 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
 junit = { module = "junit:junit", version.ref = "junit" }
+kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "kotlinResult" }
+kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

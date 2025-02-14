@@ -20,4 +20,8 @@ dependencies {
     implementation(project(module.utils.dates))
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.mockk)
 }
