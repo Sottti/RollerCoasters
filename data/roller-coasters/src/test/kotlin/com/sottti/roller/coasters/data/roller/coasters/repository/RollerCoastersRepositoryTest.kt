@@ -1,18 +1,17 @@
-package com.sottti.roller.coasters.data.roller.coasters
+package com.sottti.roller.coasters.data.roller.coasters.repository
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
-import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl
+import com.sottti.roller.coasters.data.roller.coasters.rollerCoasterId
 import com.sottti.roller.coasters.domain.model.RollerCoaster
-import com.sottti.roller.coasters.domain.model.RollerCoasterId
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
-import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -20,7 +19,6 @@ import org.junit.Test
 internal class RollerCoastersRepositoryTest {
 
     internal val notFoundException: Exception = Exception("Not found")
-    internal val rollerCoasterId = RollerCoasterId(1)
     internal val syncFailedException = Exception("Sync failed")
 
     private lateinit var repository: RollerCoastersRepositoryImpl
@@ -42,7 +40,7 @@ internal class RollerCoastersRepositoryTest {
 
         val result = repository.getRollerCoaster(rollerCoasterId).value
 
-        assertEquals(localRollerCoaster, result)
+        TestCase.assertEquals(localRollerCoaster, result)
 
         coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId) }
         coVerify(exactly = 0) { remoteDataSource.getRollerCoaster(rollerCoasterId) }
@@ -65,7 +63,7 @@ internal class RollerCoastersRepositoryTest {
 
         val result = repository.getRollerCoaster(rollerCoasterId).value
 
-        assertEquals(remoteRollerCoaster, result)
+        TestCase.assertEquals(remoteRollerCoaster, result)
         coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId) }
         coVerify(exactly = 1) { remoteDataSource.getRollerCoaster(rollerCoasterId) }
         coVerify(exactly = 1) { localDataSource.storeRollerCoaster(remoteRollerCoaster) }
@@ -79,7 +77,7 @@ internal class RollerCoastersRepositoryTest {
 
         val result = repository.getRollerCoaster(rollerCoasterId)
 
-        assertEquals(Err(networkError), result)
+        TestCase.assertEquals(Err(networkError), result)
         coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId) }
         coVerify(exactly = 1) { remoteDataSource.getRollerCoaster(rollerCoasterId) }
         coVerify(exactly = 0) { localDataSource.storeRollerCoaster(any()) }
@@ -101,17 +99,18 @@ internal class RollerCoastersRepositoryTest {
 
         val result = repository.syncAllRollerCoasters()
 
-        assertEquals(Ok(Unit), result)
+        TestCase.assertEquals(Ok(Unit), result)
         coVerify(exactly = 1) { remoteDataSource.syncRollerCoasters(any()) }
         coVerify(exactly = 1) { localDataSource.storeRollerCoasters(rollerCoasters) }
     }
+
     @Test
     fun `Sync roller coasters - Fails when remote fails`() = runTest {
         coEvery { remoteDataSource.syncRollerCoasters(any()) } returns Err(syncFailedException)
 
         val result = repository.syncAllRollerCoasters()
 
-        assertEquals(Err(syncFailedException), result)
+        TestCase.assertEquals(Err(syncFailedException), result)
         coVerify(exactly = 1) { remoteDataSource.syncRollerCoasters(any()) }
         coVerify(exactly = 0) { localDataSource.storeRollerCoasters(any()) }
     }

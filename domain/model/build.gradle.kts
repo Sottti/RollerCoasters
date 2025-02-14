@@ -2,6 +2,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
-dependencies{
+dependencies {
     api(libs.kotlin.result)
 }

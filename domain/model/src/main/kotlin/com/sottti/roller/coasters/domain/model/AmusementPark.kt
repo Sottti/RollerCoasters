@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.domain.model
 
 public data class AmusementPark(
-    val id: Id,
+    val id: ParkId,
     val name: Name,
 )

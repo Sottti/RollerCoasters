@@ -57,13 +57,13 @@ private fun Coordinates.toRoom(): CoordinatesRoomModel =
     )
 
 @OptIn(InternalSerializationApi::class)
-private fun Picture.toRoom(id: RollerCoasterId) =
+private fun Picture.toRoom(rollerCoasterId: RollerCoasterId) =
     PictureRoomModel(
         copyrightDate = copyright.date?.toOriginalString(),
         copyrightName = copyright.author.value,
         id = id.value,
         name = name.value,
-        rollerCoasterId = id.value,
+        rollerCoasterId = rollerCoasterId.value,
         url = url.value,
     )
 
@@ -82,8 +82,8 @@ private fun RollerCoasterName.toRoom(): NameRoomModel =
     )
 
 @OptIn(InternalSerializationApi::class)
-internal fun RollerCoaster.toPicturesRoomModel(): List<PictureRoomModel> =
-    pictures.other.map { picture -> picture.toRoom(id = id) }
+internal fun RollerCoaster.toPicturesRoom(): List<PictureRoomModel> =
+    pictures.other.map { picture -> picture.toRoom(rollerCoasterId = id) }
 
 @OptIn(InternalSerializationApi::class)
 private fun Status.toRoom(): StatusRoomModel =

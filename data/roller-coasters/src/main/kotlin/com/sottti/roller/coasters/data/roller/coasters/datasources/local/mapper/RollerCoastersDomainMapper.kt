@@ -30,7 +30,6 @@ import com.sottti.roller.coasters.domain.model.Euros
 import com.sottti.roller.coasters.domain.model.FormerStatus
 import com.sottti.roller.coasters.domain.model.GForce
 import com.sottti.roller.coasters.domain.model.Height
-import com.sottti.roller.coasters.domain.model.Id
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.domain.model.Inversions
 import com.sottti.roller.coasters.domain.model.Kmh
@@ -46,6 +45,7 @@ import com.sottti.roller.coasters.domain.model.MultiTrackRide
 import com.sottti.roller.coasters.domain.model.Name
 import com.sottti.roller.coasters.domain.model.OpenedDate
 import com.sottti.roller.coasters.domain.model.OperationalState
+import com.sottti.roller.coasters.domain.model.ParkId
 import com.sottti.roller.coasters.domain.model.Picture
 import com.sottti.roller.coasters.domain.model.PictureCopyright
 import com.sottti.roller.coasters.domain.model.PictureId
@@ -111,7 +111,7 @@ private fun NameRoomModel.toDomain() =
 @OptIn(InternalSerializationApi::class)
 private fun ParkRoomModel.toDomain() =
     AmusementPark(
-        id = Id(id),
+        id = ParkId(id),
         name = Name(name),
     )
 
