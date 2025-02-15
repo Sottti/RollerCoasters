@@ -50,7 +50,6 @@ internal class RollerCoastersDaoTest {
         val result: RollerCoasterRoomModel? =
             dao.getRollerCoasterById(rollerCoasterRoom.id)
 
-        assertThat(result).isNotNull()
         assertThat(result).isEqualTo(rollerCoasterRoom)
     }
 
@@ -61,7 +60,6 @@ internal class RollerCoastersDaoTest {
         val result: List<PictureRoomModel> =
             dao.getPicturesByRollerCoasterId(rollerCoasterRoom.id)
 
-        assertThat(result).isNotEmpty()
         assertThat(result).isEqualTo(picturesRoom)
     }
 
@@ -82,14 +80,19 @@ internal class RollerCoastersDaoTest {
 
         val result = dao.getRollerCoasterById(updatedCoaster.id)
 
-        assertThat(result).isNotNull()
         assertThat(result).isEqualTo(updatedCoaster)
         assertThat(result).isNotEqualTo(rollerCoasterRoom)
     }
 
     @Test
-    fun insertAndRetrieveEmptyRollerCoaster() = runTest {
+    fun retrieveNonExistentRollerCoaster() = runTest {
         val result = dao.getRollerCoasterById(9999)
         assertThat(result).isNull()
+    }
+
+    @Test
+    fun retrieveNonExistentPictures() = runTest {
+        val result = dao.getPicturesByRollerCoasterId(9999)
+        assertThat(result).isEmpty()
     }
 }
