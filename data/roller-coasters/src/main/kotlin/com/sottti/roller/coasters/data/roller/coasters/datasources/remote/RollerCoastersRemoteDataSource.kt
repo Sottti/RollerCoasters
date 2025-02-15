@@ -34,10 +34,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
     ): Result<Unit> {
         val limit = 200
-        val mutex = Mutex()
         var successfulCalls = 0
-        var error: Exception? = null
-
         val rollerCoastersPage = api
             .getRollerCoasters(offset = 0, limit = limit)
             .onSuccess { successfulCalls++ }
@@ -53,6 +50,9 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
 
         val offsets = (limit until totalItems step limit).toList()
         val expectedSuccessfulCalls = offsets.size + 1
+
+        val mutex = Mutex()
+        var error: Exception? = null
 
         return coroutineScope {
             val deferredResults = offsets.map { offset ->
