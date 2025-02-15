@@ -25,7 +25,6 @@ internal data class RollerCoasterApiModel(
     @Serializable(with = PictureSerializer::class)
     val mainPicture: PictureApiModel?,
     @SerialName("make") val make: String,
-    @SerialName("manufactured") val manufactured: Int?,
     @SerialName("model") val model: String,
     @SerialName("name") val name: String,
     @SerialName("park") val park: AmusementParkApiModel,

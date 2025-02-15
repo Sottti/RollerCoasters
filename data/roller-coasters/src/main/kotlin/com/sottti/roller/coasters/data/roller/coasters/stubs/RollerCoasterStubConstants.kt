@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.roller.coasters
+package com.sottti.roller.coasters.data.roller.coasters.stubs
 
 internal const val CITY = "Salou"
 internal const val COASTER_ARRANGEMENT = "3 trains with 7 cars per train. Riders are " +
@@ -11,7 +11,8 @@ internal const val COASTER_TRAIN = "Sit Down"
 internal const val COASTER_TYPE = "Steel"
 internal const val COUNTRY = "Spain"
 internal const val DROP = 49.1
-internal const val DURATION = 105
+internal const val DURATION_IN_MMSS = "1:45"
+internal const val DURATION_IN_SECONDS = 105
 internal const val HEIGHT = 45.1
 internal const val INVERSIONS = 8
 internal const val LATITUDE = 41.087482

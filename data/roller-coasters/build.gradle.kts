@@ -24,9 +24,10 @@ dependencies {
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)
 
-    testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
+    testImplementation(libs.junit)
     testImplementation(libs.mockk)
+    testImplementation(libs.truth)
 
     androidTestImplementation(libs.core)
     androidTestImplementation(libs.coroutines.test)

@@ -107,7 +107,7 @@ private fun Specs.toRoom(): SpecsRoomModel =
     )
 
 @OptIn(InternalSerializationApi::class)
-internal fun Design.toRoom(): DesignRoomModel =
+private fun Design.toRoom(): DesignRoomModel =
     DesignRoomModel(
         arrangement = arrangement?.value,
         designer = designer?.value,
@@ -118,7 +118,7 @@ internal fun Design.toRoom(): DesignRoomModel =
     )
 
 @OptIn(InternalSerializationApi::class)
-internal fun Ride.toRoom(): RideRoomModel =
+private fun Ride.toRoom(): RideRoomModel =
     RideRoomModel(
         drop = toRoomDrop(),
         duration = toRoomDuration(),

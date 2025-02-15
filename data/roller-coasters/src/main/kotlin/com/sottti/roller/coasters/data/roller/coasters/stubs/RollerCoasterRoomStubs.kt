@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.roller.coasters
+package com.sottti.roller.coasters.data.roller.coasters.stubs
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.CoordinatesRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.DesignRoomModel
@@ -17,19 +17,19 @@ internal val coordinatesRoomModel: CoordinatesRoomModel =
     CoordinatesRoomModel(latitude = LATITUDE, longitude = LONGITUDE)
 
 @OptIn(InternalSerializationApi::class)
-internal val parkRoom = ParkRoomModel(
+internal val parkRoomModel = ParkRoomModel(
     id = PARK_ID,
     name = PARK_NAME,
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val nameRoom = NameRoomModel(
+internal val nameRoomModel = NameRoomModel(
     current = COASTER_NAME,
     former = null,
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val mainPictureRoom = PictureRoomModel(
+internal val mainPictureRoomModel = PictureRoomModel(
     id = MAIN_PICTURE_ID,
     name = COASTER_NAME,
     rollerCoasterId = COASTER_ID,
@@ -39,7 +39,7 @@ internal val mainPictureRoom = PictureRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val picturesRoom = listOf(
+internal val picturesRoomModel = listOf(
     PictureRoomModel(
         id = OTHER_PICTURE_ID,
         name = COASTER_NAME,
@@ -51,7 +51,7 @@ internal val picturesRoom = listOf(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val statusRoom = StatusRoomModel(
+internal val statusRoomModel = StatusRoomModel(
     current = STATUS,
     former = null,
     openedDate = OPENED_DATE,
@@ -59,7 +59,7 @@ internal val statusRoom = StatusRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val designRoom = DesignRoomModel(
+internal val designRoomModel = DesignRoomModel(
     type = COASTER_TYPE,
     train = COASTER_TRAIN,
     elements = COASTER_ELEMENT,
@@ -69,11 +69,11 @@ internal val designRoom = DesignRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val rideRoom = RideRoomModel(
+internal val rideRoomModel = RideRoomModel(
     height = listOf(HEIGHT),
     length = listOf(LENGTH),
     speed = listOf(SPEED),
-    duration = listOf(DURATION),
+    duration = listOf(DURATION_IN_SECONDS),
     inversions = listOf(INVERSIONS),
     gForce = null,
     drop = listOf(DROP),
@@ -82,18 +82,18 @@ internal val rideRoom = RideRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val specsRoom = SpecsRoomModel(
+internal val specsRoomModel = SpecsRoomModel(
     model = MODEL,
     manufacturer = MANUFACTURER,
     cost = null,
     dimensions = null,
     capacity = null,
-    design = designRoom,
-    ride = rideRoom,
+    design = designRoomModel,
+    ride = rideRoomModel,
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val locationRoom = LocationRoomModel(
+internal val locationRoomModel = LocationRoomModel(
     city = CITY,
     country = COUNTRY,
     region = REGION,
@@ -103,15 +103,15 @@ internal val locationRoom = LocationRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val rollerCoasterRoom = RollerCoasterRoomModel(
+internal val rollerCoasterRoomModel = RollerCoasterRoomModel(
     id = COASTER_ID,
-    location = locationRoom,
-    park = parkRoom,
-    name = nameRoom,
-    status = statusRoom,
-    specs = specsRoom,
-    mainPicture = mainPictureRoom,
+    location = locationRoomModel,
+    park = parkRoomModel,
+    name = nameRoomModel,
+    status = statusRoomModel,
+    specs = specsRoomModel,
+    mainPicture = mainPictureRoomModel,
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val rollerCoastersRoom = listOf(rollerCoasterRoom)
+internal val rollerCoastersRoom = listOf(rollerCoasterRoomModel)

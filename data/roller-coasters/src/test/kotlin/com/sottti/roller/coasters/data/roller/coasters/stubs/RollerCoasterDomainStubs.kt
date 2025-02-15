@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.roller.coasters
+package com.sottti.roller.coasters.data.roller.coasters.stubs
 
 import com.sottti.roller.coasters.domain.model.AmusementPark
 import com.sottti.roller.coasters.domain.model.Arrangement
@@ -102,7 +102,7 @@ internal val ride = SingleTrackRide(
     height = Height(Meters(HEIGHT)),
     length = Length(Meters(LENGTH)),
     speed = Speed(Kmh(SPEED)),
-    duration = Duration(Seconds(DURATION)),
+    duration = Duration(Seconds(DURATION_IN_SECONDS)),
     inversions = Inversions(INVERSIONS),
     gForce = null,
     drop = Drop(Meters(DROP)),

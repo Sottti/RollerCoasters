@@ -1,21 +1,20 @@
-package com.sottti.roller.coasters.data.roller.coasters.datasources
+package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import com.github.michaelbull.result.Err
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
+import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.picturesRoom
-import com.sottti.roller.coasters.data.roller.coasters.rollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.rollerCoasterId
-import com.sottti.roller.coasters.data.roller.coasters.rollerCoasterRoom
-import com.sottti.roller.coasters.data.roller.coasters.rollerCoasters
-import com.sottti.roller.coasters.data.roller.coasters.rollerCoastersRoom
+import com.sottti.roller.coasters.data.roller.coasters.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasters
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoastersRoom
 import com.sottti.roller.coasters.domain.model.NotFound
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
-import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.InternalSerializationApi
@@ -36,14 +35,14 @@ internal class RollerCoastersLocalDataSourceTest {
     @Test
     @OptIn(InternalSerializationApi::class)
     fun `Get roller coaster - Exists in DB`() = runTest {
-
-        coEvery { dao.getRollerCoasterById(rollerCoasterId.value) } returns rollerCoasterRoom
-        coEvery { dao.getPicturesByRollerCoasterId(rollerCoasterId.value) } returns picturesRoom
+        coEvery { dao.getRollerCoasterById(rollerCoasterId.value) } returns rollerCoasterRoomModel
+        coEvery { dao.getPicturesByRollerCoasterId(rollerCoasterId.value) } returns picturesRoomModel
 
         val result = dataSource.getRollerCoaster(rollerCoasterId)
 
-        assert(result.isOk)
-        assertEquals(result.value, rollerCoaster)
+        assertThat(result.isOk).isTrue()
+        assertThat(result.value).isEqualTo(rollerCoaster)
+
         coVerify(exactly = 1) { dao.getRollerCoasterById(rollerCoasterId.value) }
         coVerify(exactly = 1) { dao.getPicturesByRollerCoasterId(rollerCoasterId.value) }
     }
@@ -55,8 +54,9 @@ internal class RollerCoastersLocalDataSourceTest {
 
         val result = dataSource.getRollerCoaster(rollerCoasterId)
 
-        assert(result.isErr)
-        assertEquals(result, Err(NotFound))
+        assertThat(result.isErr).isTrue()
+        assertThat(result).isEqualTo(Err(NotFound))
+
         coVerify(exactly = 1) { dao.getRollerCoasterById(rollerCoasterId.value) }
     }
 
@@ -65,8 +65,8 @@ internal class RollerCoastersLocalDataSourceTest {
     fun `Store roller coaster - Stores successfully`() = runTest {
         coEvery {
             dao.insertRollerCoasters(
-                pictures = picturesRoom,
-                rollerCoasters = listOf(rollerCoasterRoom),
+                pictures = picturesRoomModel,
+                rollerCoasters = listOf(rollerCoasterRoomModel),
             )
         } just runs
 
@@ -74,8 +74,8 @@ internal class RollerCoastersLocalDataSourceTest {
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
-                pictures = picturesRoom,
-                rollerCoasters = listOf(rollerCoasterRoom)
+                pictures = picturesRoomModel,
+                rollerCoasters = listOf(rollerCoasterRoomModel)
             )
         }
     }
@@ -85,7 +85,7 @@ internal class RollerCoastersLocalDataSourceTest {
     fun `Store multiple roller coasters - Stores successfully`() = runTest {
         coEvery {
             dao.insertRollerCoasters(
-                pictures = picturesRoom,
+                pictures = picturesRoomModel,
                 rollerCoasters = rollerCoastersRoom,
             )
         } just runs
@@ -94,7 +94,7 @@ internal class RollerCoastersLocalDataSourceTest {
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
-                pictures = picturesRoom,
+                pictures = picturesRoomModel,
                 rollerCoasters = rollerCoastersRoom
             )
         }

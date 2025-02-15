@@ -1,13 +1,10 @@
 package com.sottti.roller.coasters.utils.device
 
-import com.sottti.roller.coasters.domain.model.SystemColorContrast.HighContrast
-import com.sottti.roller.coasters.domain.model.SystemColorContrast.LowContrast
-import com.sottti.roller.coasters.domain.model.SystemColorContrast.MediumContrast
-import com.sottti.roller.coasters.domain.model.SystemColorContrast.StandardContrast
+import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.model.SystemColorContrast.*
 import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import io.mockk.every
 import io.mockk.mockk
-import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 internal class ColorContrastTest {
@@ -18,7 +15,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns -0.1f },
         )
-        assertEquals(LowContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(LowContrast)
     }
 
     @Test
@@ -27,7 +24,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns false },
             uiModeManager = mockk { every { contrast } returns -0.1f },
         )
-        assertEquals(StandardContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(StandardContrast)
     }
 
     @Test
@@ -36,7 +33,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.0f },
         )
-        assertEquals(StandardContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(StandardContrast)
     }
 
     @Test
@@ -45,7 +42,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.4f },
         )
-        assertEquals(StandardContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(StandardContrast)
     }
 
     @Test
@@ -54,7 +51,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.5f },
         )
-        assertEquals(MediumContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(MediumContrast)
     }
 
     @Test
@@ -63,7 +60,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.99f },
         )
-        assertEquals(MediumContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(MediumContrast)
     }
 
     @Test
@@ -72,7 +69,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 1.0f },
         )
-        assertEquals(HighContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(HighContrast)
     }
 
     @Test
@@ -81,7 +78,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns false },
             uiModeManager = mockk { every { contrast } returns 1.0f },
         )
-        assertEquals(StandardContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(StandardContrast)
     }
 
     @Test
@@ -90,7 +87,7 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = null,
         )
-        assertEquals(StandardContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(StandardContrast)
     }
 
     @Test
@@ -99,6 +96,6 @@ internal class ColorContrastTest {
             sdkFeatures = mockk { every { colorContrastAvailable() } returns false },
             uiModeManager = null,
         )
-        assertEquals(StandardContrast, systemSettings.colorContrast)
+        assertThat(systemSettings.colorContrast).isEqualTo(StandardContrast)
     }
 }

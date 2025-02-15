@@ -3,6 +3,8 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.mapBoth
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
 import com.sottti.roller.coasters.domain.model.Result
@@ -28,9 +30,13 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
     suspend fun syncRollerCoasters(
         onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
     ): Result<Unit> {
+        var successfulCalls = 0
+        var error: Exception? = null
         val limit = 200
         val rollerCoastersPage = api
             .getRollerCoasters(offset = 0, limit = limit)
+            .onSuccess { successfulCalls++ }
+            .onFailure { return Err(Exception(it.message)) }
             .value
 
         val totalItems = rollerCoastersPage.pagination.total
@@ -42,21 +48,24 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         onStoreRollerCoasters(rollerCoasters)
 
         val offsets = (limit until totalItems step limit).toList()
+        val expectedSuccessfulCalls = offsets.size + 1
         coroutineScope {
             offsets.forEach { offset ->
                 launch {
-                    val additionalCoasters = api
+                    api
                         .getRollerCoasters(offset = offset, limit = limit)
-                        .value
-                        .rollerCoasters
-
-                    val mappedCoasters = withContext(Dispatchers.Default) {
-                        additionalCoasters.map { it.toDomain() }
-                    }
-                    onStoreRollerCoasters(mappedCoasters)
+                        .onSuccess { successfulCalls++ }
+                        .onFailure { error = Exception(it.message) }
+                        .onSuccess { page ->
+                            val mappedCoasters = withContext(Dispatchers.Default) {
+                                page.rollerCoasters.map { it.toDomain() }
+                            }
+                            onStoreRollerCoasters(mappedCoasters)
+                        }
                 }
             }
         }
-        return Ok(Unit)
+        return if (successfulCalls == expectedSuccessfulCalls) Ok(Unit)
+        else Err(error ?: Exception("Error syncing roller coasters"))
     }
 }

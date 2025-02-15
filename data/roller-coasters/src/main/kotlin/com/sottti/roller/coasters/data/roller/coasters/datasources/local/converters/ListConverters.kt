@@ -8,11 +8,11 @@ import kotlinx.serialization.json.Json
 internal object ListConverters {
 
     @TypeConverter
-    fun fromList(value: List<String>?): String? =
+    fun fromStringList(value: List<String>?): String? =
         value?.let { Json.encodeToString(ListSerializer(String.serializer()), it) }
 
     @TypeConverter
-    fun toList(value: String?): List<String>? =
+    fun toStringList(value: String?): List<String>? =
         value?.let { Json.decodeFromString(ListSerializer(String.serializer()), it) }
 
     @TypeConverter

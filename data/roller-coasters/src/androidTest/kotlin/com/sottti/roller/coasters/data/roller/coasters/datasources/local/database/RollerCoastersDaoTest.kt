@@ -1,13 +1,14 @@
-package com.sottti.roller.coasters.data.roller.coasters
+package com.sottti.roller.coasters.data.roller.coasters.datasources.local.database
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDatabase
+import com.google.common.truth.Truth
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoastersRoom
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.InternalSerializationApi
@@ -37,62 +38,63 @@ internal class RollerCoastersDaoTest {
 
     @After
     fun teardown() {
+        database.clearAllTables()
         database.close()
     }
 
     @Test
     fun insertAndRetrieveRollerCoaster() = runTest {
         dao.insertRollerCoasters(
-            pictures = picturesRoom,
+            pictures = picturesRoomModel,
             rollerCoasters = rollerCoastersRoom,
         )
 
         val result: RollerCoasterRoomModel? =
-            dao.getRollerCoasterById(rollerCoasterRoom.id)
+            dao.getRollerCoasterById(rollerCoasterRoomModel.id)
 
-        assertThat(result).isEqualTo(rollerCoasterRoom)
+        Truth.assertThat(result).isEqualTo(rollerCoasterRoomModel)
     }
 
     @Test
     fun insertAndRetrievePictures() = runTest {
-        dao.insertPictures(picturesRoom)
+        dao.insertPictures(picturesRoomModel)
 
         val result: List<PictureRoomModel> =
-            dao.getPicturesByRollerCoasterId(rollerCoasterRoom.id)
+            dao.getPicturesByRollerCoasterId(rollerCoasterRoomModel.id)
 
-        assertThat(result).isEqualTo(picturesRoom)
+        Truth.assertThat(result).isEqualTo(picturesRoomModel)
     }
 
     @Test
     fun insertAndReplaceRollerCoaster() = runTest {
-        val updatedCoaster = rollerCoasterRoom.copy(
-            name = rollerCoasterRoom.name.copy(current = "Updated Name"),
+        val updatedCoaster = rollerCoasterRoomModel.copy(
+            name = rollerCoasterRoomModel.name.copy(current = "Updated Name"),
         )
 
         dao.insertRollerCoasters(
-            pictures = picturesRoom,
-            rollerCoasters = listOf(rollerCoasterRoom),
+            pictures = picturesRoomModel,
+            rollerCoasters = listOf(rollerCoasterRoomModel),
         )
         dao.insertRollerCoasters(
-            pictures = picturesRoom,
+            pictures = picturesRoomModel,
             rollerCoasters = listOf(updatedCoaster),
         )
 
         val result = dao.getRollerCoasterById(updatedCoaster.id)
 
-        assertThat(result).isEqualTo(updatedCoaster)
-        assertThat(result).isNotEqualTo(rollerCoasterRoom)
+        Truth.assertThat(result).isEqualTo(updatedCoaster)
+        Truth.assertThat(result).isNotEqualTo(rollerCoasterRoomModel)
     }
 
     @Test
     fun retrieveNonExistentRollerCoaster() = runTest {
         val result = dao.getRollerCoasterById(9999)
-        assertThat(result).isNull()
+        Truth.assertThat(result).isNull()
     }
 
     @Test
     fun retrieveNonExistentPictures() = runTest {
         val result = dao.getPicturesByRollerCoasterId(9999)
-        assertThat(result).isEmpty()
+        Truth.assertThat(result).isEmpty()
     }
 }
