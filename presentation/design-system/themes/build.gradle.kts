@@ -17,7 +17,7 @@ dependencies {
     api(project(module.presentation.designSystem.colors))
     api(project(module.utils.device))
     implementation(libs.compose.material)
-    implementation(libs.core.ktx)
+    implementation(libs.core)
     implementation(libs.material)
     implementation(libs.splashscreen)
     implementation(platform(libs.compose.bom))

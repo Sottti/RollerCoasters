@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    api(libs.kotlin.result)
+    api(libs.result)
 }
