@@ -23,7 +23,8 @@ internal object DatabaseModule {
             context = context,
             klass = RollerCoastersDatabase::class.java,
             name = ROLLER_COASTERS_DATABASE_NAME,
-        ).fallbackToDestructiveMigration()
+        )
+            .fallbackToDestructiveMigration()
             .build()
 
     @Provides

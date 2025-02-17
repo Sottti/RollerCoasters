@@ -85,6 +85,3 @@ private val mainPictureIncomplete = mainPictureApiModel.copy(
 
 private fun decode(jsonElement: JsonElement): PictureApiModel? =
     json.decodeFromJsonElement(PictureSerializer, jsonElement)
-
-private fun encode(value: PictureApiModel?): JsonElement =
-    json.encodeToJsonElement(PictureSerializer, value)

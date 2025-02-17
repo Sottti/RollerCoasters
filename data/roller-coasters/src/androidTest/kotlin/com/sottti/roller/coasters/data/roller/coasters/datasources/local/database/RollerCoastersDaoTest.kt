@@ -3,9 +3,14 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local.databa
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.converters.ListConverters
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherPaginatedRollerCoastersRoom
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.emptyPaginatedRollerCoastersRoom
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.pageNumber
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.paginatedRollerCoastersRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.picturesRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoastersRoom
@@ -52,7 +57,7 @@ internal class RollerCoastersDaoTest {
         val result: RollerCoasterRoomModel? =
             dao.getRollerCoasterById(rollerCoasterRoomModel.id)
 
-        Truth.assertThat(result).isEqualTo(rollerCoasterRoomModel)
+        assertThat(result).isEqualTo(rollerCoasterRoomModel)
     }
 
     @Test
@@ -62,7 +67,7 @@ internal class RollerCoastersDaoTest {
         val result: List<PictureRoomModel> =
             dao.getPicturesByRollerCoasterId(rollerCoasterRoomModel.id)
 
-        Truth.assertThat(result).isEqualTo(picturesRoomModel)
+        assertThat(result).isEqualTo(picturesRoomModel)
     }
 
     @Test
@@ -82,19 +87,74 @@ internal class RollerCoastersDaoTest {
 
         val result = dao.getRollerCoasterById(updatedCoaster.id)
 
-        Truth.assertThat(result).isEqualTo(updatedCoaster)
-        Truth.assertThat(result).isNotEqualTo(rollerCoasterRoomModel)
+        assertThat(result).isEqualTo(updatedCoaster)
+        assertThat(result).isNotEqualTo(rollerCoasterRoomModel)
     }
 
     @Test
     fun retrieveNonExistentRollerCoaster() = runTest {
         val result = dao.getRollerCoasterById(9999)
-        Truth.assertThat(result).isNull()
+        assertThat(result).isNull()
     }
 
     @Test
     fun retrieveNonExistentPictures() = runTest {
         val result = dao.getPicturesByRollerCoasterId(9999)
-        Truth.assertThat(result).isEmpty()
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun insertAndRetrievePaginatedRollerCoasters() = runTest {
+        dao.insertPaginatedRollerCoasters(paginatedRollerCoastersRoom)
+
+        val result = dao
+            .getPaginatedRollerCoasters(pageNumber.value)
+            ?.let(ListConverters::toIntList)
+
+        assertThat(result).isEqualTo(paginatedRollerCoastersRoom.rollerCoasterIds)
+    }
+
+    @Test
+    fun insertAndReplacePaginatedRollerCoasters() = runTest {
+        dao.insertPaginatedRollerCoasters(paginatedRollerCoastersRoom)
+        dao.insertPaginatedRollerCoasters(anotherPaginatedRollerCoastersRoom)
+
+        val resultList = dao
+            .getPaginatedRollerCoasters(pageNumber.value)
+            ?.let(ListConverters::toIntList)
+
+        assertThat(resultList).isEqualTo(anotherPaginatedRollerCoastersRoom.rollerCoasterIds)
+    }
+
+    @Test
+    fun retrieveNonExistentPaginatedRollerCoasters() = runTest {
+        val resultList = dao
+            .getPaginatedRollerCoasters(9999)
+            ?.let(ListConverters::toIntList)
+
+        assertThat(resultList).isNull()
+    }
+
+    @Test
+    fun deletePaginatedRollerCoasters() = runTest {
+        dao.insertPaginatedRollerCoasters(paginatedRollerCoastersRoom)
+        dao.deletePaginatedRollerCoasters(pageNumber.value)
+
+        val resultList = dao
+            .getPaginatedRollerCoasters(pageNumber.value)
+            ?.let(ListConverters::toIntList)
+
+        assertThat(resultList).isNull()
+    }
+
+    @Test
+    fun insertAndRetrieveEmptyPaginatedRollerCoasters() = runTest {
+        dao.insertPaginatedRollerCoasters(emptyPaginatedRollerCoastersRoom)
+
+        val resultList = dao
+            .getPaginatedRollerCoasters(pageNumber.value)
+            ?.let(ListConverters::toIntList)
+
+        assertThat(resultList).isEqualTo(emptyList<Int>())
     }
 }

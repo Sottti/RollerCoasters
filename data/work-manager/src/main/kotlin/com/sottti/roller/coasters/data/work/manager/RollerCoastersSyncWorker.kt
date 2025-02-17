@@ -14,11 +14,12 @@ internal class RollerCoastersSyncWorker @AssistedInject constructor(
     @Assisted params: WorkerParameters,
 ) : CoroutineWorker(context, params) {
 
-    override suspend fun doWork(): Result {
-        val result = provideRollerCoastersRepository(context).syncAllRollerCoasters()
-        return when {
-            result.isOk -> Result.success()
+    override suspend fun doWork(): Result =
+        when {
+            provideRollerCoastersRepository(context)
+                .syncAllRollerCoasters()
+                .isOk -> Result.success()
+
             else -> Result.retry()
         }
-    }
 }

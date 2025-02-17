@@ -40,7 +40,7 @@ private val oneTimeWorkRequest =
 
 private val periodicWorkRequest =
     PeriodicWorkRequestBuilder<RollerCoastersSyncWorker>(
-        repeatInterval = 6,
+        repeatInterval = 72,
         repeatIntervalTimeUnit = TimeUnit.HOURS
     )
         .setConstraints(constraints())
@@ -48,4 +48,6 @@ private val periodicWorkRequest =
 
 private fun constraints(): Constraints = Constraints.Builder()
     .setRequiresBatteryNotLow(true)
+    .setRequiresCharging(true)
+    .setRequiresDeviceIdle(true)
     .build()
