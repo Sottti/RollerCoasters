@@ -3,15 +3,20 @@ package com.sottti.roller.coasters.data.roller.coasters.stubs
 import com.sottti.roller.coasters.domain.model.AmusementPark
 import com.sottti.roller.coasters.domain.model.Arrangement
 import com.sottti.roller.coasters.domain.model.Author
+import com.sottti.roller.coasters.domain.model.Capacity
 import com.sottti.roller.coasters.domain.model.City
 import com.sottti.roller.coasters.domain.model.Coordinates
+import com.sottti.roller.coasters.domain.model.Cost
 import com.sottti.roller.coasters.domain.model.Country
 import com.sottti.roller.coasters.domain.model.Date
+import com.sottti.roller.coasters.domain.model.Degrees
 import com.sottti.roller.coasters.domain.model.Design
 import com.sottti.roller.coasters.domain.model.Designer
 import com.sottti.roller.coasters.domain.model.Drop
 import com.sottti.roller.coasters.domain.model.Duration
 import com.sottti.roller.coasters.domain.model.Element
+import com.sottti.roller.coasters.domain.model.Euros
+import com.sottti.roller.coasters.domain.model.GForce
 import com.sottti.roller.coasters.domain.model.Height
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.domain.model.Inversions
@@ -21,6 +26,7 @@ import com.sottti.roller.coasters.domain.model.Length
 import com.sottti.roller.coasters.domain.model.Location
 import com.sottti.roller.coasters.domain.model.Longitude
 import com.sottti.roller.coasters.domain.model.Manufacturer
+import com.sottti.roller.coasters.domain.model.MaxVertical
 import com.sottti.roller.coasters.domain.model.Meters
 import com.sottti.roller.coasters.domain.model.Model
 import com.sottti.roller.coasters.domain.model.Name
@@ -33,6 +39,8 @@ import com.sottti.roller.coasters.domain.model.PictureId
 import com.sottti.roller.coasters.domain.model.PictureName
 import com.sottti.roller.coasters.domain.model.Pictures
 import com.sottti.roller.coasters.domain.model.Region
+import com.sottti.roller.coasters.domain.model.Restraints
+import com.sottti.roller.coasters.domain.model.RidersPerHour
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.model.RollerCoasterName
@@ -49,7 +57,7 @@ import java.time.LocalDate
 internal val rollerCoasterId = RollerCoasterId(COASTER_ID)
 internal val parkId = ParkId(PARK_ID)
 
-private val coordinates: Coordinates =
+internal val coordinates: Coordinates =
     Coordinates(Latitude(LATITUDE), Longitude(LONGITUDE))
 
 internal val park = AmusementPark(
@@ -68,7 +76,7 @@ internal val mainPicture = Picture(
     url = ImageUrl(MAIN_PICTURE_URL),
     copyright = PictureCopyright(
         author = Author(PICTURE_AUTHOR),
-        date = null,
+        date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
     )
 )
 
@@ -79,7 +87,7 @@ internal val otherPictures = listOf(
         url = ImageUrl(OTHER_PICTURE_URL),
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
-            date = null,
+            date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
         )
     )
 )
@@ -94,7 +102,7 @@ internal val design = Design(
     train = Train(COASTER_TRAIN),
     elements = Element(COASTER_ELEMENT),
     arrangement = Arrangement(COASTER_ARRANGEMENT),
-    restraints = null,
+    restraints = Restraints(RESTRAINTS),
     designer = Designer(COASTER_DESIGNER),
 )
 
@@ -104,18 +112,18 @@ internal val ride = SingleTrackRide(
     speed = Speed(Kmh(SPEED)),
     duration = Duration(Seconds(DURATION_IN_SECONDS)),
     inversions = Inversions(INVERSIONS),
-    gForce = null,
+    gForce = GForce(GFORCE),
     drop = Drop(Meters(DROP)),
-    maxVertical = null,
+    maxVertical = MaxVertical(Degrees(DEGREES)),
 )
 
 internal val specs = Specs(
     design = design,
     model = Model(MODEL),
     manufacturer = Manufacturer(MANUFACTURER),
-    cost = null,
+    cost = Cost(Euros(COST)),
     dimensions = null,
-    capacity = null,
+    capacity = Capacity(RidersPerHour(RIDERS_PER_HOUR)),
     ride = ride,
 )
 

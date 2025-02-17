@@ -17,9 +17,13 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_ID
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_NAME
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_TRAIN
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_TYPE
+import com.sottti.roller.coasters.data.roller.coasters.stubs.COPYRIGHT_DATE
+import com.sottti.roller.coasters.data.roller.coasters.stubs.COST
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COUNTRY
+import com.sottti.roller.coasters.data.roller.coasters.stubs.DEGREES
 import com.sottti.roller.coasters.data.roller.coasters.stubs.DROP
 import com.sottti.roller.coasters.data.roller.coasters.stubs.DURATION_IN_MMSS
+import com.sottti.roller.coasters.data.roller.coasters.stubs.GFORCE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.HEIGHT
 import com.sottti.roller.coasters.data.roller.coasters.stubs.INVERSIONS
 import com.sottti.roller.coasters.data.roller.coasters.stubs.LATITUDE
@@ -36,14 +40,16 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.PARK_ID
 import com.sottti.roller.coasters.data.roller.coasters.stubs.PARK_NAME
 import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_AUTHOR
 import com.sottti.roller.coasters.data.roller.coasters.stubs.REGION
+import com.sottti.roller.coasters.data.roller.coasters.stubs.RESTRAINTS
+import com.sottti.roller.coasters.data.roller.coasters.stubs.RIDERS_PER_HOUR
 import com.sottti.roller.coasters.data.roller.coasters.stubs.SPEED
 import com.sottti.roller.coasters.data.roller.coasters.stubs.STATE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.STATUS
 
-private val pictures: List<PictureApiModel> =
+private val picturesApiModel: List<PictureApiModel> =
     listOf(
         PictureApiModel(
-            copyDate = "",
+            copyDate = COPYRIGHT_DATE,
             copyName = PICTURE_AUTHOR,
             id = OTHER_PICTURE_ID,
             name = COASTER_NAME,
@@ -51,16 +57,16 @@ private val pictures: List<PictureApiModel> =
         )
     )
 
-private val mainPicture: PictureApiModel =
+internal val mainPictureApiModel: PictureApiModel =
     PictureApiModel(
-        copyDate = "",
+        copyDate = COPYRIGHT_DATE,
         copyName = PICTURE_AUTHOR,
         id = MAIN_PICTURE_ID,
         name = COASTER_NAME,
         url = MAIN_PICTURE_URL,
     )
 
-private val coordinatesApiModel: CoordinatesApiModel =
+internal val coordinatesApiModel: CoordinatesApiModel =
     CoordinatesApiModel(
         lat = LATITUDE,
         lng = LONGITUDE,
@@ -70,8 +76,8 @@ private val statsApiModel: RollerCoasterStatsApiModel =
     RollerCoasterStatsApiModel(
         arrangement = COASTER_ARRANGEMENT,
         builtBy = MANUFACTURER,
-        capacity = null,
-        cost = null,
+        capacity = RIDERS_PER_HOUR,
+        cost = COST,
         designer = COASTER_DESIGNER,
         dimensions = null,
         drop = listOf(DROP),
@@ -79,15 +85,15 @@ private val statsApiModel: RollerCoasterStatsApiModel =
         elements = listOf(COASTER_ELEMENT),
         formerNames = null,
         formerStatus = null,
-        gForce = null,
+        gForce = listOf(GFORCE),
         height = listOf(HEIGHT),
         inversions = listOf(INVERSIONS),
         length = listOf(LENGTH),
         name = null,
         relocations = null,
-        restraints = null,
+        restraints = RESTRAINTS,
         speed = listOf(SPEED),
-        verticalAngle = null,
+        verticalAngle = listOf(DEGREES),
     )
 
 private val parkApiModel: AmusementParkApiModel =
@@ -109,12 +115,12 @@ internal val rollerCoasterApiModel = RollerCoasterApiModel(
     design = COASTER_TRAIN,
     id = COASTER_ID,
     link = "/$COASTER_ID.htm",
-    mainPicture = mainPicture,
+    mainPicture = mainPictureApiModel,
     make = MANUFACTURER,
     model = MODEL,
     name = COASTER_NAME,
     park = parkApiModel,
-    pictures = pictures,
+    pictures = picturesApiModel,
     region = REGION,
     state = STATE,
     stats = statsApiModel,

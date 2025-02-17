@@ -26,8 +26,10 @@ dependencies {
 
     testImplementation(libs.coroutines.test)
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
+
 
     androidTestImplementation(libs.core)
     androidTestImplementation(libs.coroutines.test)

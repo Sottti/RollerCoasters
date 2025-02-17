@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.data.roller.coasters.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi
 import org.junit.Test
 

@@ -10,7 +10,7 @@ import io.ktor.client.HttpClient
 import javax.inject.Inject
 
 internal class RollerCoastersApiCalls @Inject constructor(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
 ) {
     suspend fun getRollerCoasters(
         offset: Int,

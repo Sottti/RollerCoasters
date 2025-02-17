@@ -6,9 +6,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.stubs.picturesRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoastersRoom
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoastersRoom
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.InternalSerializationApi

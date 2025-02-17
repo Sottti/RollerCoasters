@@ -17,7 +17,12 @@ internal class ListConvertersTest {
         val result = converters.toStringList(json)
 
         Truth.assertThat(json)
-            .isEqualTo(Json.Default.encodeToString(ListSerializer(String.Companion.serializer()), original))
+            .isEqualTo(
+                Json.Default.encodeToString(
+                    ListSerializer(String.Companion.serializer()),
+                    original
+                )
+            )
         Truth.assertThat(result).isEqualTo(original)
     }
 

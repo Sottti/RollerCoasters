@@ -3,12 +3,12 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 import com.github.michaelbull.result.Err
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoastersRoom
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasters
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoastersRoom
 import com.sottti.roller.coasters.domain.model.NotFound
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -35,8 +35,12 @@ internal class RollerCoastersLocalDataSourceTest {
     @Test
     @OptIn(InternalSerializationApi::class)
     fun `Get roller coaster - Exists in DB`() = runTest {
-        coEvery { dao.getRollerCoasterById(rollerCoasterId.value) } returns rollerCoasterRoomModel
-        coEvery { dao.getPicturesByRollerCoasterId(rollerCoasterId.value) } returns picturesRoomModel
+        coEvery {
+            dao.getRollerCoasterById(rollerCoasterId.value)
+        } returns rollerCoasterRoomModel
+        coEvery {
+            dao.getPicturesByRollerCoasterId(rollerCoasterId.value)
+        } returns picturesRoomModel
 
         val result = dataSource.getRollerCoaster(rollerCoasterId)
 
