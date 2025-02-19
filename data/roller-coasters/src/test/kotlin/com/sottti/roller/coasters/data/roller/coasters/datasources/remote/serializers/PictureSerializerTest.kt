@@ -5,9 +5,9 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.mainPictureApiModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_NAME
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COPYRIGHT_DATE
-import com.sottti.roller.coasters.data.roller.coasters.stubs.MAIN_PICTURE_ID
-import com.sottti.roller.coasters.data.roller.coasters.stubs.MAIN_PICTURE_URL
 import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_AUTHOR
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_ID_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_URL
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
@@ -65,18 +65,18 @@ private fun completePictureJson(): JsonObject =
     buildJsonObject {
         put("copyDate", COPYRIGHT_DATE)
         put("copyName", PICTURE_AUTHOR)
-        put("id", MAIN_PICTURE_ID)
+        put("id", PICTURE_ID_MAIN)
         put("name", COASTER_NAME)
-        put("url", MAIN_PICTURE_URL)
+        put("url", PICTURE_URL)
     }
 
 private fun incompletePictureJson(): JsonObject =
     buildJsonObject {
         put("copyDate", "")
         put("copyName", PICTURE_AUTHOR)
-        put("id", MAIN_PICTURE_ID)
+        put("id", PICTURE_ID_MAIN)
         put("name", COASTER_NAME)
-        put("url", MAIN_PICTURE_URL)
+        put("url", PICTURE_URL)
     }
 
 private val mainPictureIncomplete = mainPictureApiModel.copy(

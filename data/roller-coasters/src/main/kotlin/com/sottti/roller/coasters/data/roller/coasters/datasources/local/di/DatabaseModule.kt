@@ -27,7 +27,9 @@ internal object DatabaseModule {
             .fallbackToDestructiveMigration()
             .build()
 
+
     @Provides
-    fun provideDao(database: RollerCoastersDatabase): RollerCoastersDao =
-        database.rollerCoastersDao()
+    fun provideDao(
+        database: RollerCoastersDatabase,
+    ): RollerCoastersDao = database.dao()
 }

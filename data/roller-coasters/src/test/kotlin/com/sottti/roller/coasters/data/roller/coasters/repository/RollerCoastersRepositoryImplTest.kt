@@ -4,21 +4,25 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.pageNumber
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.stubs.networkErrorException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.notFoundException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasters
 import com.sottti.roller.coasters.data.roller.coasters.stubs.syncFailedException
-import com.sottti.roller.coasters.domain.model.NotFound
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
@@ -26,10 +30,24 @@ internal class RollerCoastersRepositoryImplTest {
     private lateinit var repository: RollerCoastersRepositoryImpl
     private val localDataSource: RollerCoastersLocalDataSource = mockk()
     private val remoteDataSource: RollerCoastersRemoteDataSource = mockk()
+    private val remoteMediator: RollerCoastersRemoteMediator = mockk()
 
     @Before
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun setup() {
-        repository = RollerCoastersRepositoryImpl(localDataSource, remoteDataSource)
+        Dispatchers.setMain(StandardTestDispatcher())
+
+        repository = RollerCoastersRepositoryImpl(
+            localDataSource = localDataSource,
+            remoteDataSource = remoteDataSource,
+            remoteMediator = remoteMediator,
+        )
+    }
+
+    @After
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
@@ -106,51 +124,5 @@ internal class RollerCoastersRepositoryImplTest {
         assertThat(result).isEqualTo(Err(syncFailedException))
         coVerify(exactly = 1) { remoteDataSource.syncRollerCoasters(any()) }
         coVerify(exactly = 0) { localDataSource.storeRollerCoasters(any()) }
-    }
-
-
-
-
-
-
-    @Test
-    fun `Get roller coasters - returns local data when available`() = runTest {
-        coEvery { localDataSource.getRollerCoasters(pageNumber) } returns Ok(rollerCoasters)
-
-        val result = repository.getRollerCoasters(pageNumber)
-
-        assertThat(result).isEqualTo(Ok(rollerCoasters))
-
-        coVerify(exactly = 1) { localDataSource.getRollerCoasters(pageNumber) }
-        coVerify(exactly = 0) { remoteDataSource.getRollerCoastersPage(any()) }
-    }
-
-    @Test
-    fun `Get roller coasters - fetches from remote when local data is missing`() = runTest {
-        coEvery { localDataSource.getRollerCoasters(pageNumber) } returns Err(NotFound)
-        coEvery { remoteDataSource.getRollerCoastersPage(pageNumber) } returns Ok(rollerCoasters)
-        coEvery { localDataSource.storeRollerCoasters(rollerCoasters, pageNumber) } just runs
-
-        val result = repository.getRollerCoasters(pageNumber)
-
-        assertThat(result).isEqualTo(Ok(rollerCoasters))
-
-        coVerify(exactly = 1) { localDataSource.getRollerCoasters(pageNumber) }
-        coVerify(exactly = 1) { remoteDataSource.getRollerCoastersPage(pageNumber) }
-        coVerify(exactly = 1) { localDataSource.storeRollerCoasters(rollerCoasters, pageNumber) }
-    }
-
-    @Test
-    fun `Get roller coasters - returns error when both local and remote fail`() = runTest {
-        coEvery { localDataSource.getRollerCoasters(pageNumber) } returns Err(NotFound)
-        coEvery { remoteDataSource.getRollerCoastersPage(pageNumber) } returns Err(NotFound)
-
-        val result = repository.getRollerCoasters(pageNumber)
-
-        assertThat(result).isEqualTo(Err(NotFound))
-
-        coVerify(exactly = 1) { localDataSource.getRollerCoasters(pageNumber) }
-        coVerify(exactly = 1) { remoteDataSource.getRollerCoastersPage(pageNumber) }
-        coVerify(exactly = 0) { localDataSource.storeRollerCoasters(any(), any()) }
     }
 }

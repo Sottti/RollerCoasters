@@ -12,5 +12,4 @@ internal class RollerCoastersApiMapperTest {
         val result = rollerCoasterApiModel.toDomain()
         assertThat(result).isEqualTo(rollerCoaster)
     }
-
 }

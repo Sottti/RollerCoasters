@@ -1,225 +1,155 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.converters.ListConverters
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.pageNumber
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.pageSize
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.picturesRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.PAGE_NUMBER_INITIAL
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.pagedRollerCoastersRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoastersRoom
-import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl.Companion.PAGE_SIZE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasters
 import com.sottti.roller.coasters.domain.model.NotFound
 import com.sottti.roller.coasters.domain.model.PageNumber
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.InternalSerializationApi
 import org.junit.Before
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 internal class RollerCoastersLocalDataSourceTest {
 
-    private lateinit var dataSource: RollerCoastersLocalDataSource
-    private val dao: RollerCoastersDao = mockk()
+    private lateinit var dao: RollerCoastersDao
+    private lateinit var localDataSource: RollerCoastersLocalDataSource
+    private lateinit var pagingSourceFactory: RollerCoastersPagingSource.Factory
 
     @Before
     fun setup() {
-        dataSource = RollerCoastersLocalDataSource(dao)
+        dao = mockk()
+        pagingSourceFactory = mockk()
+        localDataSource = RollerCoastersLocalDataSource(dao, pagingSourceFactory)
     }
 
     @Test
     @OptIn(InternalSerializationApi::class)
-    fun `Get roller coaster - Exists in DB`() = runTest {
-        coEvery {
-            dao.getRollerCoasterById(rollerCoasterId.value)
-        } returns rollerCoasterRoomModel
-        coEvery {
-            dao.getPicturesByRollerCoasterId(rollerCoasterId.value)
-        } returns picturesRoomModel
-
-        val result = dataSource.getRollerCoaster(rollerCoasterId)
-
-        assertThat(result.value).isEqualTo(rollerCoaster)
-
-        coVerify(exactly = 1) {
-            dao.getRollerCoasterById(rollerCoasterId.value)
-            dao.getPicturesByRollerCoasterId(rollerCoasterId.value)
-        }
-    }
-
-    @Test
-    @OptIn(InternalSerializationApi::class)
-    fun `Get roller coaster - Not found`() = runTest {
-        coEvery { dao.getRollerCoasterById(rollerCoasterId.value) } returns null
-
-        val result = dataSource.getRollerCoaster(rollerCoasterId)
-
-        assertThat(result).isEqualTo(Err(NotFound))
-
-        coVerify(exactly = 1) { dao.getRollerCoasterById(rollerCoasterId.value) }
-    }
-
-    @Test
-    @OptIn(InternalSerializationApi::class)
-    fun `Store roller coaster - Stores successfully`() = runTest {
+    fun `store roller coaster calls store roller coaster with single item`() = runTest {
         coEvery {
             dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
+                pictures = listOf(notMainPictureRoomModel),
                 rollerCoasters = listOf(rollerCoasterRoomModel),
             )
         } just runs
 
-        dataSource.storeRollerCoaster(rollerCoaster)
+        localDataSource.storeRollerCoaster(rollerCoaster)
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = listOf(rollerCoasterRoomModel)
+                pictures = listOf(notMainPictureRoomModel),
+                rollerCoasters = listOf(rollerCoasterRoomModel),
             )
         }
     }
 
     @Test
     @OptIn(InternalSerializationApi::class)
-    fun `Store multiple roller coasters - Stores successfully without page number`() = runTest {
-        coEvery {
-            dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = rollerCoastersRoom,
-            )
-        } just runs
-
-        dataSource.storeRollerCoasters(rollerCoasters, pageNumber = null)
-
-        coVerify(exactly = 1) {
-            dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = rollerCoastersRoom,
-            )
-        }
-
-        coVerify(exactly = 0) { dao.insertPaginatedRollerCoasters(any()) }
-    }
-
-    @Test
-    @OptIn(InternalSerializationApi::class)
-    fun `Store multiple roller coasters - Stores successfully with page number`() = runTest {
-        coEvery {
-            dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = rollerCoastersRoom,
-            )
-        } just runs
-
-        coEvery {
-            dao.insertPaginatedRollerCoasters(any())
-        } just runs
-
-        val pageNumber = PageNumber(1)
-        dataSource.storeRollerCoasters(rollerCoasters, pageNumber)
-
-        coVerify(exactly = 1) {
-            dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = rollerCoastersRoom,
-            )
-            dao.insertPaginatedRollerCoasters(withArg {
-                assertThat(it.pageNumber).isEqualTo(pageNumber.value)
-                assertThat(it.rollerCoasterIds)
-                    .isEqualTo(rollerCoasters.map { coaster -> coaster.id.value })
-            })
-        }
-    }
-
-
-    @Test
-    @OptIn(InternalSerializationApi::class)
-    fun `Get roller coasters page - Successfully retrieves full page`() = runTest {
-
-        val rollerCoasterIds = rollerCoasters.map { rollerCoaster -> rollerCoaster.id.value }
-        val rollerCoasterIdsString: String? = ListConverters.fromIntList(rollerCoasterIds)
-
-        coEvery { dao.getPaginatedRollerCoasters(pageNumber.value) } returns rollerCoasterIdsString
-
-        rollerCoasters.forEach { coaster ->
-            coEvery { dao.getRollerCoasterById(coaster.id.value) } returns rollerCoasterRoomModel
-            coEvery { dao.getPicturesByRollerCoasterId(coaster.id.value) } returns picturesRoomModel
-        }
-
-        val result = dataSource.getRollerCoasters(pageNumber, pageSize)
-
-        assertThat(result.value).isEqualTo(rollerCoasters)
-
-        coVerify(exactly = 1) { dao.getPaginatedRollerCoasters(pageNumber.value) }
-
-        rollerCoasters.forEach { coaster ->
-            coVerify(exactly = 1) {
-                dao.getRollerCoasterById(coaster.id.value)
-                dao.getPicturesByRollerCoasterId(coaster.id.value)
-            }
-        }
-    }
-
-    @Test
-    @OptIn(InternalSerializationApi::class)
-    fun `Get roller coasters - No stored coasters for page`() = runTest {
-        coEvery { dao.getPaginatedRollerCoasters(pageNumber.value) } returns null
-
-        val result = dataSource.getRollerCoasters(pageNumber)
-
-        assertThat(result).isEqualTo(Err(NotFound))
-
-        coVerify(exactly = 1) { dao.getPaginatedRollerCoasters(pageNumber.value) }
-    }
-
-    @Test
-    @OptIn(InternalSerializationApi::class)
-    fun `Get roller coasters - Stored IDs count does not match expected size`() =
+    fun `store roller coasters inserts roller coasters and pages when page is provided`() =
         runTest {
-            val coasterIds = rollerCoasters.take(PAGE_SIZE - 1)
-                .map { rollerCoaster -> rollerCoaster.id.value }
+            val page = PageNumber(PAGE_NUMBER_INITIAL)
 
             coEvery {
-                dao.getPaginatedRollerCoasters(pageNumber.value)
-            } returns ListConverters.fromIntList(coasterIds)
+                dao.insertRollerCoasters(
+                    pictures = listOf(notMainPictureRoomModel),
+                    rollerCoasters = listOf(rollerCoasterRoomModel),
+                )
+            } just runs
 
-            val result = dataSource.getRollerCoasters(pageNumber)
+            coEvery {
+                dao.insertAndReplacePagedRollerCoasters(
+                    page = page.value,
+                    pictures = listOf(notMainPictureRoomModel),
+                    rollerCoasters = listOf(rollerCoasterRoomModel),
+                    pagedRollerCoasters = pagedRollerCoastersRoom,
+                )
+            } just runs
 
-            assertThat(result).isEqualTo(Err(NotFound))
+            localDataSource.storeRollerCoasters(listOf(rollerCoaster), page)
 
-            coVerify(exactly = 1) { dao.getPaginatedRollerCoasters(pageNumber.value) }
+            coVerify(exactly = 1) {
+                dao.insertRollerCoasters(
+                    pictures = listOf(notMainPictureRoomModel),
+                    rollerCoasters = listOf(rollerCoasterRoomModel),
+                )
+            }
+            coVerify(exactly = 1) {
+                dao.insertAndReplacePagedRollerCoasters(
+                    page = page.value,
+                    pictures = listOf(notMainPictureRoomModel),
+                    rollerCoasters = listOf(rollerCoasterRoomModel),
+                    pagedRollerCoasters = pagedRollerCoastersRoom,
+                )
+            }
         }
 
     @Test
     @OptIn(InternalSerializationApi::class)
-    fun `Get roller coasters - At least one missing coaster`() = runTest {
-        val coasterIds = rollerCoasters.map { rollerCoaster -> rollerCoaster.id.value }
-
+    fun `store roller coasters inserts roller coasters without pages`() = runTest {
         coEvery {
-            dao.getPaginatedRollerCoasters(pageNumber.value)
-        } returns ListConverters.fromIntList(coasterIds)
+            dao.insertRollerCoasters(
+                pictures = listOf(notMainPictureRoomModel),
+                rollerCoasters = listOf(rollerCoasterRoomModel),
+            )
+        } just runs
 
-        coEvery { dao.getRollerCoasterById(rollerCoasters[0].id.value) } returns null
-        rollerCoasters.drop(1).forEach { coaster ->
-            coEvery { dao.getRollerCoasterById(coaster.id.value) } returns rollerCoasterRoomModel
-            coEvery { dao.getPicturesByRollerCoasterId(coaster.id.value) } returns picturesRoomModel
+        localDataSource.storeRollerCoasters(listOf(rollerCoaster))
+
+        coVerify(exactly = 1) {
+            dao.insertRollerCoasters(
+                pictures = listOf(notMainPictureRoomModel),
+                rollerCoasters = listOf(rollerCoasterRoomModel),
+            )
         }
+    }
 
-        val result = dataSource.getRollerCoasters(pageNumber)
+    @Test
+    @OptIn(InternalSerializationApi::class)
+    fun `get roller coaster returns roller coaster when data exists`() = runTest {
+        coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns rollerCoasterRoomModel
+        coEvery { dao.getPictures(rollerCoasterId.value) } returns listOf(notMainPictureRoomModel)
+
+        val result = localDataSource.getRollerCoaster(rollerCoasterId)
+
+        assertThat(result).isEqualTo(Ok(rollerCoaster))
+    }
+
+    @Test
+    @OptIn(InternalSerializationApi::class)
+    fun `ger roller coaster returns error when not found`() = runTest {
+        coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns null
+
+        val result = localDataSource.getRollerCoaster(rollerCoasterId)
 
         assertThat(result).isEqualTo(Err(NotFound))
+    }
 
-        coVerify(exactly = 1) { dao.getPaginatedRollerCoasters(pageNumber.value) }
-        coVerify(exactly = 0) { dao.getRollerCoasterById(rollerCoasters[0].id.value) }
+    @Test
+    fun `ger paged roller coasters calls factory create`() {
+        val pagingSource: RollerCoastersPagingSource = mockk()
+
+        every { pagingSourceFactory.create() } returns pagingSource
+
+        val result = localDataSource.getPagedRollerCoasters()
+
+        assertThat(result).isEqualTo(pagingSource)
+        verify(exactly = 1) { pagingSourceFactory.create() }
     }
 }

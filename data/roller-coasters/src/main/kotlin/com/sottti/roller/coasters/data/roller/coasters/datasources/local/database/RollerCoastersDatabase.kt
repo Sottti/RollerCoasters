@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.converters.ListConverters
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PaginatedRollerCoasters
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PagedRollerCoasters
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi
@@ -14,7 +14,7 @@ import kotlinx.serialization.InternalSerializationApi
     entities = [
         PictureRoomModel::class,
         RollerCoasterRoomModel::class,
-        PaginatedRollerCoasters::class,
+        PagedRollerCoasters::class,
     ],
     version = 1,
     exportSchema = false,
@@ -25,5 +25,5 @@ internal abstract class RollerCoastersDatabase : RoomDatabase() {
         const val ROLLER_COASTERS_DATABASE_NAME: String = "roller_coasters_db"
     }
 
-    abstract fun rollerCoastersDao(): RollerCoastersDao
+    abstract fun dao(): RollerCoastersDao
 }

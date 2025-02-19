@@ -5,6 +5,7 @@ import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.NoInternet
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.ServerError
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.PAGE_NUMBER_SECOND
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoastersApiModelPage1
@@ -12,7 +13,6 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl.Companion.PAGE_SIZE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasters
 import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import io.mockk.coEvery
@@ -36,24 +36,24 @@ internal class RollerCoastersRemoteDataSourceTest {
 
     @Test
     fun `Get roller coasters page - Returns correct data on success`() = runTest {
-        val pageNumber = PageNumber(2)
-        val expectedOffset = pageNumber * PAGE_SIZE
-        val expectedResult = Ok(rollerCoasters)
+        val pageNumber = PageNumber(PAGE_NUMBER_SECOND)
+        val offset = pageNumber * PAGE_SIZE
+        val expectedResult = Ok(listOf(rollerCoaster))
 
         coEvery {
-            api.getRollerCoasters(offset = expectedOffset, limit = PAGE_SIZE)
+            api.getRollerCoasters(offset = offset, limit = PAGE_SIZE)
         } returns Ok(rollerCoastersApiModelPage2)
 
         val result = dataSource.getRollerCoastersPage(pageNumber)
 
         assertThat(result).isEqualTo(expectedResult)
 
-        coVerify(exactly = 1) { api.getRollerCoasters(offset = expectedOffset, limit = PAGE_SIZE) }
+        coVerify(exactly = 1) { api.getRollerCoasters(offset = offset, limit = PAGE_SIZE) }
     }
 
     @Test
     fun `Get roller coasters page - Returns error when API call fails`() = runTest {
-        val pageNumber = PageNumber(2)
+        val pageNumber = PageNumber(PAGE_NUMBER_SECOND)
         val expectedOffset = pageNumber * PAGE_SIZE
         val error = NoInternet
 
@@ -65,7 +65,12 @@ internal class RollerCoastersRemoteDataSourceTest {
 
         assertThat(result).isEqualTo(Err(error))
 
-        coVerify(exactly = 1) { api.getRollerCoasters(offset = expectedOffset, limit = PAGE_SIZE) }
+        coVerify(exactly = 1) {
+            api.getRollerCoasters(
+                offset = expectedOffset,
+                limit = PAGE_SIZE
+            )
+        }
     }
 
     @Test

@@ -4,10 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "roller_coaster_page")
-internal data class PaginatedRollerCoasters(
+@Entity(tableName = "paged_roller_coasters")
+internal data class PagedRollerCoasters(
     @PrimaryKey(autoGenerate = false)
-    val pageNumber: Int,
+    val page: Int,
 
     @ColumnInfo(name = "roller_coaster_ids")
     val rollerCoasterIds: List<Int>,

@@ -55,6 +55,7 @@ import com.sottti.roller.coasters.domain.model.Type
 import java.time.LocalDate
 
 internal val rollerCoasterId = RollerCoasterId(COASTER_ID)
+internal val anotherRollerCoasterId = RollerCoasterId(COASTER_ID_ANOTHER)
 internal val parkId = ParkId(PARK_ID)
 
 internal val coordinates: Coordinates =
@@ -71,31 +72,46 @@ internal val name = RollerCoasterName(
 )
 
 internal val mainPicture = Picture(
-    id = PictureId(MAIN_PICTURE_ID),
+    id = PictureId(PICTURE_ID_MAIN),
     name = PictureName(COASTER_NAME),
-    url = ImageUrl(MAIN_PICTURE_URL),
+    url = ImageUrl(PICTURE_URL),
     copyright = PictureCopyright(
         author = Author(PICTURE_AUTHOR),
         date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
     )
 )
 
-internal val otherPictures = listOf(
+internal val anotherMainPicture = Picture(
+    id = PictureId(PICTURE_ID_ANOTHER_MAIN),
+    name = PictureName(COASTER_NAME),
+    url = ImageUrl(PICTURE_URL),
+    copyright = PictureCopyright(
+        author = Author(PICTURE_AUTHOR),
+        date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
+    )
+)
+
+internal val notMainPicture =
     Picture(
-        id = PictureId(OTHER_PICTURE_ID),
+        id = PictureId(PICTURE_ID_NOT_MAIN),
         name = PictureName(COASTER_NAME),
-        url = ImageUrl(OTHER_PICTURE_URL),
+        url = ImageUrl(PICTURE_URL),
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
             date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
         )
     )
-)
 
-internal val pictures = Pictures(
-    main = mainPicture,
-    other = otherPictures,
-)
+internal val anotherNotMainPicture =
+    Picture(
+        id = PictureId(PICTURE_ID_ANOTHER_NOT_MAIN),
+        name = PictureName(COASTER_NAME),
+        url = ImageUrl(PICTURE_URL),
+        copyright = PictureCopyright(
+            author = Author(PICTURE_AUTHOR),
+            date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
+        )
+    )
 
 internal val design = Design(
     type = Type(COASTER_TYPE),
@@ -148,9 +164,18 @@ internal val rollerCoaster = RollerCoaster(
     location = location,
     name = name,
     park = park,
-    pictures = pictures,
+    pictures = Pictures(
+        main = mainPicture,
+        other = listOf(notMainPicture),
+    ),
     specs = specs,
     status = status,
 )
 
-internal val rollerCoasters = listOf(rollerCoaster)
+internal val anotherRollerCoaster = rollerCoaster.copy(
+    id = anotherRollerCoasterId,
+    pictures = Pictures(
+        main = anotherMainPicture,
+        other = listOf(anotherNotMainPicture),
+    )
+)

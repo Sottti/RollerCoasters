@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PaginatedRollerCoasters
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PagedRollerCoasters
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi
@@ -25,27 +25,54 @@ internal interface RollerCoastersDao {
 
     @OptIn(InternalSerializationApi::class)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRollerCoastersWithoutPictures(rollerCoasters: List<RollerCoasterRoomModel>)
+    suspend fun insertRollerCoastersWithoutPictures(
+        rollerCoasters: List<RollerCoasterRoomModel>,
+    )
 
     @OptIn(InternalSerializationApi::class)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPictures(pictures: List<PictureRoomModel>)
 
-    @Transaction
     @OptIn(InternalSerializationApi::class)
     @Query("SELECT * FROM roller_coasters WHERE id = :id")
-    suspend fun getRollerCoasterById(id: Int): RollerCoasterRoomModel?
+    suspend fun getRollerCoaster(id: Int): RollerCoasterRoomModel?
+
+    @OptIn(InternalSerializationApi::class)
+    @Query("SELECT * FROM roller_coasters WHERE id IN (:ids) ORDER BY id ASC")
+    suspend fun getRollerCoasters(ids: List<Int>): List<RollerCoasterRoomModel>
 
     @OptIn(InternalSerializationApi::class)
     @Query("SELECT * FROM pictures WHERE rollerCoasterId = :id")
-    suspend fun getPicturesByRollerCoasterId(id: Int): List<PictureRoomModel>
+    suspend fun getPictures(id: Int): List<PictureRoomModel>
+
+    @Transaction
+    @OptIn(InternalSerializationApi::class)
+    suspend fun insertAndReplacePagedRollerCoasters(
+        page: Int,
+        pictures: List<PictureRoomModel>,
+        rollerCoasters: List<RollerCoasterRoomModel>,
+        pagedRollerCoasters: PagedRollerCoasters,
+    ) {
+        clearPage(page)
+        insertRollerCoasters(pictures, rollerCoasters)
+        insertPagedRollerCoasters(pagedRollerCoasters)
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPaginatedRollerCoasters(page: PaginatedRollerCoasters)
+    suspend fun insertPagedRollerCoasters(page: PagedRollerCoasters)
 
-    @Query("SELECT roller_coaster_ids FROM roller_coaster_page WHERE pageNumber = :pageNumber")
-    suspend fun getPaginatedRollerCoasters(pageNumber: Int): String?
+    @Query("SELECT * FROM paged_roller_coasters WHERE page = :page")
+    suspend fun getPagedRollerCoasters(page: Int): PagedRollerCoasters?
 
-    @Query("DELETE FROM roller_coaster_page WHERE pageNumber = :pageNumber")
-    suspend fun deletePaginatedRollerCoasters(pageNumber: Int)
+    @Transaction
+    suspend fun clearPageWithCleanup(page: Int) {
+        clearPage(page)
+        deleteOrphanedRollerCoasters()
+    }
+
+    @Query("DELETE FROM paged_roller_coasters WHERE page = :page")
+    suspend fun clearPage(page: Int)
+
+    @Query("DELETE FROM roller_coasters WHERE id NOT IN (SELECT rollerCoasterId FROM paged_roller_coasters)")
+    suspend fun deleteOrphanedRollerCoasters()
 }

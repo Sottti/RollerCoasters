@@ -90,7 +90,7 @@ private fun LocationRoomModel.toDomain() =
         coordinates = coordinates?.toDomain(),
         country = Country(country),
         region = Region(region),
-        relocations = relocations?.let { Relocations(it) },
+        relocations = relocations?.let(::Relocations),
         state = State(state),
     )
 
@@ -105,7 +105,7 @@ private fun CoordinatesRoomModel.toDomain() =
 private fun NameRoomModel.toDomain() =
     RollerCoasterName(
         current = Name(current),
-        former = former?.let { Name(it) },
+        former = former?.let(::Name),
     )
 
 @OptIn(InternalSerializationApi::class)
@@ -121,7 +121,7 @@ private fun List<PictureRoomModel>.toDomain(
 ): Pictures =
     Pictures(
         main = mainPicture?.toDomain(),
-        other = map { it.toDomain() }
+        other = map(PictureRoomModel::toDomain)
     )
 
 @OptIn(InternalSerializationApi::class)
@@ -143,37 +143,34 @@ private fun SpecsRoomModel.toDomain() =
         cost = cost?.let { Cost(Euros(it)) },
         design = design.toDomain(),
         dimensions = dimensions?.let { Dimensions(Meters(it)) },
-        manufacturer = manufacturer?.let { Manufacturer(it) },
+        manufacturer = manufacturer?.let(::Manufacturer),
         model = Model(model),
         ride = ride?.toDomain(),
     )
 
 @OptIn(InternalSerializationApi::class)
-private fun DesignRoomModel.toDomain(): Design =
+private fun DesignRoomModel.toDomain() =
     Design(
-        arrangement = arrangement?.let { Arrangement(it) },
-        designer = designer?.let { Designer(it) },
-        elements = elements?.let { Element(it) },
-        restraints = restraints?.let { Restraints(it) },
+        arrangement = arrangement?.let(::Arrangement),
+        designer = designer?.let(::Designer),
+        elements = elements?.let(::Element),
+        restraints = restraints?.let(::Restraints),
         train = Train(train),
         type = Type(type),
     )
 
 @OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toDomain(): Ride =
-    when {
-        trackNames.isNullOrEmpty() -> toSingleTrackRide()
-        else -> toMultiTrackRide(trackNames)
-    }
+    if (trackNames.isNullOrEmpty()) toSingleTrackRide() else toMultiTrackRide(trackNames)
 
 @OptIn(InternalSerializationApi::class)
-private fun RideRoomModel.toSingleTrackRide(): SingleTrackRide =
+private fun RideRoomModel.toSingleTrackRide() =
     SingleTrackRide(
         drop = drop?.firstOrNull()?.let { Drop(Meters(it)) },
         duration = duration?.firstOrNull()?.let { Duration(Seconds(it)) },
-        gForce = gForce?.firstOrNull()?.let { GForce(it) },
+        gForce = gForce?.firstOrNull()?.let(::GForce),
         height = height?.firstOrNull()?.let { Height(Meters(it)) },
-        inversions = inversions?.firstOrNull()?.let { Inversions(it) },
+        inversions = inversions?.firstOrNull()?.let(::Inversions),
         length = length?.firstOrNull()?.let { Length(Meters(it)) },
         maxVertical = maxVertical?.firstOrNull()?.let { MaxVertical(Degrees(it)) },
         speed = speed?.firstOrNull()?.let { Speed(Kmh(it)) },
@@ -182,23 +179,22 @@ private fun RideRoomModel.toSingleTrackRide(): SingleTrackRide =
 @OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toMultiTrackRide(
     trackNames: List<String>,
-): MultiTrackRide = MultiTrackRide(
+) = MultiTrackRide(
     drop = drop?.map { Drop(Meters(it)) },
     duration = duration?.map { Duration(Seconds(it)) },
-    gForce = gForce?.map { GForce(it) },
+    gForce = gForce?.map(::GForce),
     height = height?.map { Height(Meters(it)) },
-    inversions = inversions?.map { Inversions(it) },
+    inversions = inversions?.map(::Inversions),
     length = length?.map { Length(Meters(it)) },
     maxVertical = maxVertical?.map { MaxVertical(Degrees(it)) },
     speed = speed?.map { Speed(Kmh(it)) },
-    trackNames = trackNames.map { Name(it) },
+    trackNames = trackNames.map(::Name),
 )
-
 
 @OptIn(InternalSerializationApi::class)
 private fun StatusRoomModel.toDomain() = Status(
-    closedDate = closedDate?.toDate()?.let { ClosedDate(it) },
+    closedDate = closedDate?.toDate()?.let(::ClosedDate),
     current = OperationalState(current),
-    former = former?.let { FormerStatus(it) },
-    openedDate = openedDate?.toDate()?.let { OpenedDate(it) },
+    former = former?.let(::FormerStatus),
+    openedDate = openedDate?.toDate()?.let(::OpenedDate),
 )

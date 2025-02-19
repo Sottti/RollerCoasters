@@ -26,17 +26,17 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
 ) {
     suspend fun getRollerCoastersPage(
         pageNumber: PageNumber,
-    ): Result<List<RollerCoaster>> {
-        val limit = PAGE_SIZE
-        val offset = pageNumber * limit
+    ): Result<List<RollerCoaster>> =
+        api
+            .getRollerCoasters(pageNumber * PAGE_SIZE, PAGE_SIZE)
+            .mapBoth(
+                success = { page -> Ok(page.rollerCoasters.map { it.toDomain() }) },
+                failure = { exception -> Err(exception) }
+            )
 
-        return api.getRollerCoasters(offset, PAGE_SIZE).mapBoth(
-            success = { page -> Ok(page.rollerCoasters.map { it.toDomain() }) },
-            failure = { exception -> Err(exception) }
-        )
-    }
-
-    suspend fun getRollerCoaster(id: RollerCoasterId): Result<RollerCoaster> =
+    suspend fun getRollerCoaster(
+        id: RollerCoasterId,
+    ): Result<RollerCoaster> =
         api
             .getRollerCoaster(id)
             .mapBoth(

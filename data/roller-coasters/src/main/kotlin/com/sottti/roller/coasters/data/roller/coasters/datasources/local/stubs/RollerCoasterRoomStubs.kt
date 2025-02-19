@@ -15,6 +15,7 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_ARRANGEMENT
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_DESIGNER
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_ELEMENT
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_ID
+import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_ID_ANOTHER
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_NAME
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_TRAIN
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_TYPE
@@ -30,16 +31,17 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.INVERSIONS
 import com.sottti.roller.coasters.data.roller.coasters.stubs.LATITUDE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.LENGTH
 import com.sottti.roller.coasters.data.roller.coasters.stubs.LONGITUDE
-import com.sottti.roller.coasters.data.roller.coasters.stubs.MAIN_PICTURE_ID
-import com.sottti.roller.coasters.data.roller.coasters.stubs.MAIN_PICTURE_URL
 import com.sottti.roller.coasters.data.roller.coasters.stubs.MANUFACTURER
 import com.sottti.roller.coasters.data.roller.coasters.stubs.MODEL
 import com.sottti.roller.coasters.data.roller.coasters.stubs.OPENED_DATE
-import com.sottti.roller.coasters.data.roller.coasters.stubs.OTHER_PICTURE_ID
-import com.sottti.roller.coasters.data.roller.coasters.stubs.OTHER_PICTURE_URL
 import com.sottti.roller.coasters.data.roller.coasters.stubs.PARK_ID
 import com.sottti.roller.coasters.data.roller.coasters.stubs.PARK_NAME
 import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_AUTHOR
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_ID_ANOTHER_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_ID_ANOTHER_NOT_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_ID_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_ID_NOT_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.stubs.PICTURE_URL
 import com.sottti.roller.coasters.data.roller.coasters.stubs.REGION
 import com.sottti.roller.coasters.data.roller.coasters.stubs.RESTRAINTS
 import com.sottti.roller.coasters.data.roller.coasters.stubs.RIDERS_PER_HOUR
@@ -66,25 +68,46 @@ internal val nameRoomModel = NameRoomModel(
 
 @OptIn(InternalSerializationApi::class)
 internal val mainPictureRoomModel = PictureRoomModel(
-    id = MAIN_PICTURE_ID,
+    id = PICTURE_ID_MAIN,
     name = COASTER_NAME,
     rollerCoasterId = COASTER_ID,
-    url = MAIN_PICTURE_URL,
+    url = PICTURE_URL,
     copyrightName = PICTURE_AUTHOR,
     copyrightDate = COPYRIGHT_DATE,
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val picturesRoomModel = listOf(
+internal val anotherMainPictureRoomModel =
     PictureRoomModel(
-        id = OTHER_PICTURE_ID,
+        id = PICTURE_ID_ANOTHER_MAIN,
         name = COASTER_NAME,
-        rollerCoasterId = COASTER_ID,
-        url = OTHER_PICTURE_URL,
+        rollerCoasterId = COASTER_ID_ANOTHER,
+        url = PICTURE_URL,
         copyrightName = PICTURE_AUTHOR,
         copyrightDate = COPYRIGHT_DATE,
     )
-)
+
+@OptIn(InternalSerializationApi::class)
+internal val notMainPictureRoomModel =
+    PictureRoomModel(
+        id = PICTURE_ID_NOT_MAIN,
+        name = COASTER_NAME,
+        rollerCoasterId = COASTER_ID,
+        url = PICTURE_URL,
+        copyrightName = PICTURE_AUTHOR,
+        copyrightDate = COPYRIGHT_DATE,
+    )
+
+@OptIn(InternalSerializationApi::class)
+internal val anotherNotMainPictureRoomModel =
+    PictureRoomModel(
+        id = PICTURE_ID_ANOTHER_NOT_MAIN,
+        name = COASTER_NAME,
+        rollerCoasterId = COASTER_ID_ANOTHER,
+        url = PICTURE_URL,
+        copyrightName = PICTURE_AUTHOR,
+        copyrightDate = COPYRIGHT_DATE,
+    )
 
 @OptIn(InternalSerializationApi::class)
 internal val statusRoomModel = StatusRoomModel(
@@ -139,15 +162,20 @@ internal val locationRoomModel = LocationRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val rollerCoasterRoomModel = RollerCoasterRoomModel(
-    id = COASTER_ID,
-    location = locationRoomModel,
-    park = parkRoomModel,
-    name = nameRoomModel,
-    status = statusRoomModel,
-    specs = specsRoomModel,
-    mainPicture = mainPictureRoomModel,
-)
+internal val rollerCoasterRoomModel =
+    RollerCoasterRoomModel(
+        id = COASTER_ID,
+        location = locationRoomModel,
+        park = parkRoomModel,
+        name = nameRoomModel,
+        status = statusRoomModel,
+        specs = specsRoomModel,
+        mainPicture = mainPictureRoomModel,
+    )
 
 @OptIn(InternalSerializationApi::class)
-internal val rollerCoastersRoom = listOf(rollerCoasterRoomModel)
+internal val anotherRollerCoasterRoomModel =
+    rollerCoasterRoomModel.copy(
+        id = COASTER_ID_ANOTHER,
+        mainPicture = anotherMainPictureRoomModel,
+    )
