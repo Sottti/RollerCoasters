@@ -4,7 +4,6 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.networkErrorException
@@ -12,7 +11,6 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.notFoundException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.data.roller.coasters.stubs.syncFailedException
-import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -33,7 +31,6 @@ internal class RollerCoastersRepositoryImplTest {
     private lateinit var repository: RollerCoastersRepositoryImpl
     private val localDataSource: RollerCoastersLocalDataSource = mockk()
     private val remoteDataSource: RollerCoastersRemoteDataSource = mockk()
-    private val remoteMediator: RollerCoastersRemoteMediator = mockk()
 
     @Before
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -43,7 +40,6 @@ internal class RollerCoastersRepositoryImplTest {
         repository = RollerCoastersRepositoryImpl(
             localDataSource = localDataSource,
             remoteDataSource = remoteDataSource,
-            remoteMediator = remoteMediator,
         )
     }
 
@@ -99,24 +95,23 @@ internal class RollerCoastersRepositoryImplTest {
 
     @Test
     fun `Sync roller coasters - Calls remote and stores data`() = runTest {
-        val pageNumber = PageNumber.initial()
         val rollerCoasters = listOf(rollerCoaster, anotherRollerCoaster)
 
         coEvery {
             remoteDataSource.syncRollerCoasters(any())
         } coAnswers {
-            val lambda = firstArg<suspend (PageNumber, List<RollerCoaster>) -> Unit>()
-            lambda(pageNumber, rollerCoasters)
+            val lambda = firstArg<suspend (List<RollerCoaster>) -> Unit>()
+            lambda(rollerCoasters)
             Ok(Unit)
         }
 
-        coEvery { localDataSource.storeRollerCoasters(pageNumber, rollerCoasters) } just runs
+        coEvery { localDataSource.storeRollerCoasters(rollerCoasters) } just runs
 
         val result = repository.syncAllRollerCoasters()
 
         assertThat(result).isEqualTo(Ok(Unit))
         coVerify(exactly = 1) { remoteDataSource.syncRollerCoasters(any()) }
-        coVerify(exactly = 1) { localDataSource.storeRollerCoasters(pageNumber, rollerCoasters) }
+        coVerify(exactly = 1) { localDataSource.storeRollerCoasters(rollerCoasters) }
     }
 
     @Test
@@ -127,6 +122,6 @@ internal class RollerCoastersRepositoryImplTest {
 
         assertThat(result).isEqualTo(Err(syncFailedException))
         coVerify(exactly = 1) { remoteDataSource.syncRollerCoasters(any()) }
-        coVerify(exactly = 0) { localDataSource.storeRollerCoasters(any(), any()) }
+        coVerify(exactly = 0) { localDataSource.storeRollerCoasters(any()) }
     }
 }

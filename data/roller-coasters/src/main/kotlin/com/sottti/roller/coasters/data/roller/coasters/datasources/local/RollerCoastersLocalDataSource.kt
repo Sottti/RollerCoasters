@@ -1,16 +1,12 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
-import androidx.paging.PagingSource
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPagedRollerCoastersRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
 import com.sottti.roller.coasters.domain.model.NotFound
-import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
@@ -21,19 +17,17 @@ import javax.inject.Inject
 
 internal class RollerCoastersLocalDataSource @Inject constructor(
     private val dao: RollerCoastersDao,
-    private val pagingSourceFactory: RollerCoastersPagingSource.Factory,
 ) {
 
     @OptIn(InternalSerializationApi::class)
     suspend fun storeRollerCoaster(
         rollerCoaster: RollerCoaster,
     ) {
-        storeRollerCoasters(null, listOf(rollerCoaster))
+        storeRollerCoasters(listOf(rollerCoaster))
     }
 
     @OptIn(InternalSerializationApi::class)
     suspend fun storeRollerCoasters(
-        page: PageNumber?,
         rollerCoasters: List<RollerCoaster>,
     ) {
         withContext(Dispatchers.Default) {
@@ -43,19 +37,10 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
             val picturesRoomModel =
                 rollerCoasters.flatMap { rollerCoaster -> rollerCoaster.toPicturesRoom() }
 
-            when (page) {
-                null -> dao.insertRollerCoasters(
-                    pictures = picturesRoomModel,
-                    rollerCoasters = rollerCoastersRoomModel,
-                )
-
-                else -> dao.insertAndReplacePagedRollerCoasters(
-                    page = page.value,
-                    pagedRollerCoasters = rollerCoasters.toPagedRollerCoastersRoom(page),
-                    pictures = picturesRoomModel,
-                    rollerCoasters = rollerCoastersRoomModel,
-                )
-            }
+            dao.insertRollerCoasters(
+                pictures = picturesRoomModel,
+                rollerCoasters = rollerCoastersRoomModel,
+            )
         }
     }
 
@@ -73,7 +58,4 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
             Ok(rollerCoaster.toDomain(pictures))
         }
     }
-
-    fun getPagedRollerCoasters(): PagingSource<PageNumber, RollerCoaster> =
-        pagingSourceFactory.create()
 }

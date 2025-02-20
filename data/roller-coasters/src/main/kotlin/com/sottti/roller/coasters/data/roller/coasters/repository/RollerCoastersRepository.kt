@@ -1,14 +1,10 @@
 package com.sottti.roller.coasters.data.roller.coasters.repository
 
-import androidx.paging.PagingData
-import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
-import kotlinx.coroutines.flow.Flow
 
 public interface RollerCoastersRepository {
-    public fun getRollerCoastersPaged(page: PageNumber): Flow<PagingData<RollerCoaster>>
     public suspend fun getRollerCoaster(id: RollerCoasterId): Result<RollerCoaster>
     public suspend fun syncAllRollerCoasters(): Result<Unit>
 }

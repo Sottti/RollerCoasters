@@ -6,10 +6,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherNotMainPictureRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherPagedRollerCoastersRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.pagedRollerCoastersRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_NAME_ANOTHER
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -98,151 +96,6 @@ internal class RollerCoastersDaoTest {
     }
 
     @Test
-    fun insertAndRetrievePagedRollerCoasters() = runTest {
-
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        val result = dao
-            .getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-            ?.rollerCoasterIds
-
-        assertThat(result).isEqualTo(pagedRollerCoastersRoom.rollerCoasterIds)
-    }
-
-    @Test
-    fun retrieveWhenEmptyPagedRollerCoasters() = runTest {
-
-        val result = dao
-            .getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-            ?.rollerCoasterIds
-
-        assertThat(result).isNull()
-    }
-
-    @Test
-    fun insertAndReplacePagedRollerCoasters_shouldClearOldAndInsertNew() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        val newPagedRollerCoasters =
-            pagedRollerCoastersRoom.copy(rollerCoasterIds = listOf(NON_EXISTENT_ID))
-
-        dao.insertAndReplacePagedRollerCoasters(
-            page = pagedRollerCoastersRoom.page,
-            pictures = listOf(notMainPictureRoomModel),
-            rollerCoasters = listOf(rollerCoasterRoomModel),
-            pagedRollerCoasters = newPagedRollerCoasters
-        )
-
-        val result = dao
-            .getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-            ?.rollerCoasterIds
-
-        assertThat(result).isEqualTo(newPagedRollerCoasters.rollerCoasterIds)
-    }
-
-    @Test
-    fun replacePagedRollerCoasters_shouldInsertAndReplaceMultiplePages() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-        dao.insertPagedRollerCoasters(anotherPagedRollerCoastersRoom)
-
-        val newPagedRollerCoasters =
-            pagedRollerCoastersRoom.copy(rollerCoasterIds = listOf(1111))
-
-        val newSecondPagedRollerCoasters =
-            anotherPagedRollerCoastersRoom.copy(rollerCoasterIds = listOf(2222))
-
-        dao.insertAndReplacePagedRollerCoasters(
-            page = pagedRollerCoastersRoom.page,
-            pictures = listOf(notMainPictureRoomModel),
-            rollerCoasters = listOf(rollerCoasterRoomModel),
-            pagedRollerCoasters = newPagedRollerCoasters
-        )
-        dao.insertAndReplacePagedRollerCoasters(
-            page = anotherPagedRollerCoastersRoom.page,
-            pictures = listOf(anotherNotMainPictureRoomModel),
-            rollerCoasters = listOf(anotherRollerCoasterRoomModel),
-            pagedRollerCoasters = newSecondPagedRollerCoasters
-        )
-
-        val resultFirstPage = dao
-            .getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-            ?.rollerCoasterIds
-
-        val resultSecondPage = dao
-            .getPagedRollerCoasters(anotherPagedRollerCoastersRoom.page)
-            ?.rollerCoasterIds
-
-        assertThat(resultFirstPage).isEqualTo(newPagedRollerCoasters.rollerCoasterIds)
-        assertThat(resultSecondPage).isEqualTo(newSecondPagedRollerCoasters.rollerCoasterIds)
-    }
-
-
-    @Test
-    fun clearPage_shouldRemovePagedRollerCoasters() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        dao.clearPage(pagedRollerCoastersRoom.page)
-
-        val result = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-
-        assertThat(result).isNull()
-    }
-
-    @Test
-    fun clearPage_shouldNotAffectOtherPages() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-        dao.insertPagedRollerCoasters(anotherPagedRollerCoastersRoom)
-
-        dao.clearPage(pagedRollerCoastersRoom.page)
-
-        val resultFirstPage = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-        val resultSecondPage = dao.getPagedRollerCoasters(anotherPagedRollerCoastersRoom.page)
-
-        assertThat(resultFirstPage).isNull()
-        assertThat(resultSecondPage).isNotNull()
-    }
-
-    @Test
-    fun getPagedRollerCoasters_afterClearPage_shouldReturnNull() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-        dao.clearPage(pagedRollerCoastersRoom.page)
-
-        val result = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-
-        assertThat(result).isNull()
-    }
-
-    @Test
-    fun clearPage_shouldNotDeleteRollerCoastersOrPictures() = runTest {
-        dao.insertRollerCoasters(listOf(notMainPictureRoomModel), listOf(rollerCoasterRoomModel))
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        dao.clearPage(pagedRollerCoastersRoom.page)
-
-        val coasterResult = dao.getRollerCoaster(rollerCoasterRoomModel.id)
-        val picturesResult = dao.getPictures(rollerCoasterRoomModel.id)
-
-        assertThat(coasterResult).isNotNull()
-        assertThat(picturesResult).isNotEmpty()
-    }
-
-    @Test
-    fun insertPagedRollerCoasters_shouldReplaceExistingPage() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        val newPagedRollerCoasters = pagedRollerCoastersRoom
-            .copy(rollerCoasterIds = listOf(8888))
-
-        dao.insertPagedRollerCoasters(newPagedRollerCoasters)
-
-        val result = dao
-            .getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-            ?.rollerCoasterIds
-
-        assertThat(result).isEqualTo(newPagedRollerCoasters.rollerCoasterIds)
-    }
-
-    @Test
     fun getRollerCoasters_shouldReturnCorrectResults() = runTest {
         dao.insertRollerCoasters(listOf(notMainPictureRoomModel), listOf(rollerCoasterRoomModel))
 
@@ -260,40 +113,6 @@ internal class RollerCoastersDaoTest {
 
         val result = dao.getRollerCoaster(NON_EXISTENT_ID)
         assertThat(result).isNull()
-    }
-
-    @Test
-    fun getPagedRollerCoasters_shouldReturnCorrectPage() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-        dao.insertPagedRollerCoasters(anotherPagedRollerCoastersRoom)
-
-        val resultFirstPage = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-        val resultSecondPage = dao.getPagedRollerCoasters(anotherPagedRollerCoastersRoom.page)
-
-        assertThat(resultFirstPage?.rollerCoasterIds)
-            .isEqualTo(pagedRollerCoastersRoom.rollerCoasterIds)
-
-        assertThat(resultSecondPage?.rollerCoasterIds)
-            .isEqualTo(anotherPagedRollerCoastersRoom.rollerCoasterIds)
-    }
-
-    @Test
-    fun insertAndReplacePagedRollerCoasters_withEmptyList_shouldClearPage() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        val emptyPagedRollerCoasters =
-            pagedRollerCoastersRoom.copy(rollerCoasterIds = emptyList())
-
-        dao.insertAndReplacePagedRollerCoasters(
-            page = pagedRollerCoastersRoom.page,
-            pictures = emptyList(),
-            rollerCoasters = emptyList(),
-            pagedRollerCoasters = emptyPagedRollerCoasters
-        )
-
-        val result = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-
-        assertThat(result).isEqualTo(emptyPagedRollerCoasters)
     }
 
     @Test
@@ -316,79 +135,6 @@ internal class RollerCoastersDaoTest {
         val result = dao.getRollerCoasters(emptyList())
 
         assertThat(result).isEmpty()
-    }
-
-    @Test
-    fun clearPage_shouldOnlyAffectSpecificPage() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-        dao.insertPagedRollerCoasters(anotherPagedRollerCoastersRoom)
-
-        dao.clearPage(pagedRollerCoastersRoom.page)
-
-        val resultFirstPage = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)
-        val resultSecondPage = dao.getPagedRollerCoasters(anotherPagedRollerCoastersRoom.page)
-
-        assertThat(resultFirstPage).isNull()
-        assertThat(resultSecondPage).isNotNull()
-    }
-
-    @Test
-    fun insertPagedRollerCoasters_shouldInsertNewPageIfNotExists() = runTest {
-        val newPagedRollerCoasters = pagedRollerCoastersRoom.copy(page = 100)
-
-        dao.insertPagedRollerCoasters(newPagedRollerCoasters)
-
-        val result = dao.getPagedRollerCoasters(100)
-
-        assertThat(result).isNotNull()
-        assertThat(result?.rollerCoasterIds).isEqualTo(newPagedRollerCoasters.rollerCoasterIds)
-    }
-
-    @Test
-    fun insertAndReplacePagedRollerCoasters_shouldInsertIfPageDidNotExist() = runTest {
-        val newPagedRollerCoasters = pagedRollerCoastersRoom.copy(page = 777)
-
-        dao.insertAndReplacePagedRollerCoasters(
-            page = 777,
-            pictures = listOf(notMainPictureRoomModel),
-            rollerCoasters = listOf(rollerCoasterRoomModel),
-            pagedRollerCoasters = newPagedRollerCoasters
-        )
-
-        val result = dao.getPagedRollerCoasters(777)
-
-        assertThat(result).isNotNull()
-        assertThat(result?.rollerCoasterIds)
-            .isEqualTo(newPagedRollerCoasters.rollerCoasterIds)
-    }
-
-    @Test
-    fun clearPage_onNonExistentPage_shouldNotCrash() = runTest {
-        dao.clearPage(NON_EXISTENT_ID)
-
-        val result = dao.getPagedRollerCoasters(NON_EXISTENT_ID)
-
-        assertThat(result).isNull()
-    }
-
-    @Test
-    fun insertAndReplacePagedRollerCoasters_shouldNotDuplicateExistingIds() = runTest {
-        dao.insertPagedRollerCoasters(pagedRollerCoastersRoom)
-
-        val sameIdsPagedRollerCoasters = pagedRollerCoastersRoom.copy(
-            rollerCoasterIds = pagedRollerCoastersRoom.rollerCoasterIds + listOf(8888)
-        )
-
-        dao.insertAndReplacePagedRollerCoasters(
-            page = pagedRollerCoastersRoom.page,
-            pictures = listOf(notMainPictureRoomModel),
-            rollerCoasters = listOf(rollerCoasterRoomModel),
-            pagedRollerCoasters = sameIdsPagedRollerCoasters
-        )
-
-        val result = dao.getPagedRollerCoasters(pagedRollerCoastersRoom.page)?.rollerCoasterIds
-
-        assertThat(result).containsExactlyElementsIn(sameIdsPagedRollerCoasters.rollerCoasterIds)
     }
 
     @Test

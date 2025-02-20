@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 
-import androidx.annotation.IntRange
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.mapBoth
@@ -9,7 +8,6 @@ import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl.Companion.PAGE_SIZE
-import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
@@ -25,16 +23,6 @@ import javax.inject.Inject
 internal class RollerCoastersRemoteDataSource @Inject constructor(
     private val api: RollerCoastersApiCalls,
 ) {
-    suspend fun getRollerCoastersPage(
-        pageNumber: PageNumber,
-    ): Result<List<RollerCoaster>> =
-        api
-            .getRollerCoasters(pageNumber * PAGE_SIZE, PAGE_SIZE)
-            .mapBoth(
-                success = { page -> Ok(page.rollerCoasters.map { it.toDomain() }) },
-                failure = { exception -> Err(exception) }
-            )
-
     suspend fun getRollerCoaster(
         id: RollerCoasterId,
     ): Result<RollerCoaster> =
@@ -46,7 +34,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
             )
 
     suspend fun syncRollerCoasters(
-        onStoreRollerCoasters: suspend (PageNumber, List<RollerCoaster>) -> Unit
+        onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
     ): Result<Unit> {
         val limit = PAGE_SIZE
         var successfulCalls = 0
@@ -61,7 +49,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         val rollerCoasters = withContext(Dispatchers.Default) {
             rollerCoastersPage.rollerCoasters.map { it.toDomain() }
         }
-        onStoreRollerCoasters(PageNumber.initial(), rollerCoasters)
+        onStoreRollerCoasters(rollerCoasters)
 
         val offsets = (limit until totalItems step limit).toList()
         val expectedSuccessfulCalls = offsets.size + 1
@@ -83,7 +71,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                             val mappedCoasters = withContext(Dispatchers.Default) {
                                 page.rollerCoasters.map { it.toDomain() }
                             }
-                            onStoreRollerCoasters(pageNumber(offset), mappedCoasters)
+                            onStoreRollerCoasters(mappedCoasters)
                             Ok(Unit)
                         },
                         failure = { exception -> Err(exception) }
@@ -98,11 +86,4 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
             else Err(error ?: Exception("Error syncing roller coasters"))
         }
     }
-}
-
-private fun pageNumber(
-    @IntRange(from = 0) offset: Int,
-): PageNumber = when (offset) {
-    0 -> PageNumber.initial()
-    else -> PageNumber(PAGE_SIZE.mod(offset) - 1)
 }

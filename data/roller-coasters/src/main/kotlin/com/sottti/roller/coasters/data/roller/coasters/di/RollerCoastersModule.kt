@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.di
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl
@@ -20,10 +19,8 @@ internal object RollerCoastersModule {
     fun provideRepository(
         localDataSource: RollerCoastersLocalDataSource,
         remoteDataSource: RollerCoastersRemoteDataSource,
-        remoteMediator: RollerCoastersRemoteMediator,
     ): RollerCoastersRepository = RollerCoastersRepositoryImpl(
         localDataSource = localDataSource,
         remoteDataSource = remoteDataSource,
-        remoteMediator = remoteMediator,
     )
 }

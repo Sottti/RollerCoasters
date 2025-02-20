@@ -1,26 +1,19 @@
 package com.sottti.roller.coasters.data.roller.coasters.repository
 
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
-import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class RollerCoastersRepositoryImpl @Inject constructor(
     private val localDataSource: RollerCoastersLocalDataSource,
     private val remoteDataSource: RollerCoastersRemoteDataSource,
-    private val remoteMediator: RollerCoastersRemoteMediator,
 ) : RollerCoastersRepository {
 
     companion object {
@@ -33,16 +26,6 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             prefetchDistance = PREFETCH_DISTANCE,
         )
     }
-
-    @OptIn(ExperimentalPagingApi::class)
-    override fun getRollerCoastersPaged(
-        page: PageNumber,
-    ): Flow<PagingData<RollerCoaster>> =
-        Pager(
-            config = pagerConfig,
-            pagingSourceFactory = { localDataSource.getPagedRollerCoasters() },
-            remoteMediator = remoteMediator,
-        ).flow
 
     override suspend fun getRollerCoaster(
         id: RollerCoasterId,
@@ -57,7 +40,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
 
     override suspend fun syncAllRollerCoasters(): Result<Unit> =
-        remoteDataSource.syncRollerCoasters { pageNumber, rollerCoasters ->
-            localDataSource.storeRollerCoasters(pageNumber, rollerCoasters)
+        remoteDataSource.syncRollerCoasters { rollerCoasters ->
+            localDataSource.storeRollerCoasters(rollerCoasters)
         }
 }
