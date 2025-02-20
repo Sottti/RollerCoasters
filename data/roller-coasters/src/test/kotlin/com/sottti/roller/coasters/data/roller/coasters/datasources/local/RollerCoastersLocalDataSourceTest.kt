@@ -82,9 +82,9 @@ internal class RollerCoastersLocalDataSourceTest {
                 )
             } just runs
 
-            localDataSource.storeRollerCoasters(listOf(rollerCoaster), page)
+            localDataSource.storeRollerCoasters(page = page, rollerCoasters = listOf(rollerCoaster))
 
-            coVerify(exactly = 1) {
+            coVerify(exactly = 0) {
                 dao.insertRollerCoasters(
                     pictures = listOf(notMainPictureRoomModel),
                     rollerCoasters = listOf(rollerCoasterRoomModel),
@@ -110,12 +110,21 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoasters(listOf(rollerCoaster))
+        localDataSource.storeRollerCoasters(page = null, rollerCoasters = listOf(rollerCoaster))
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
                 pictures = listOf(notMainPictureRoomModel),
                 rollerCoasters = listOf(rollerCoasterRoomModel),
+            )
+        }
+
+        coVerify(exactly = 0) {
+            dao.insertAndReplacePagedRollerCoasters(
+                page = any(),
+                pictures = listOf(notMainPictureRoomModel),
+                rollerCoasters = listOf(rollerCoasterRoomModel),
+                pagedRollerCoasters = pagedRollerCoastersRoom,
             )
         }
     }

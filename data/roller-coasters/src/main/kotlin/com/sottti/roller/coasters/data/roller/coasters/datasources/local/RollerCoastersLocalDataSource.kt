@@ -28,13 +28,13 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     suspend fun storeRollerCoaster(
         rollerCoaster: RollerCoaster,
     ) {
-        storeRollerCoasters(listOf(rollerCoaster))
+        storeRollerCoasters(null, listOf(rollerCoaster))
     }
 
     @OptIn(InternalSerializationApi::class)
     suspend fun storeRollerCoasters(
+        page: PageNumber?,
         rollerCoasters: List<RollerCoaster>,
-        page: PageNumber? = null,
     ) {
         withContext(Dispatchers.Default) {
             val rollerCoastersRoomModel =
@@ -43,13 +43,13 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
             val picturesRoomModel =
                 rollerCoasters.flatMap { rollerCoaster -> rollerCoaster.toPicturesRoom() }
 
-            dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = rollerCoastersRoomModel,
-            )
+            when (page) {
+                null -> dao.insertRollerCoasters(
+                    pictures = picturesRoomModel,
+                    rollerCoasters = rollerCoastersRoomModel,
+                )
 
-            page?.let {
-                dao.insertAndReplacePagedRollerCoasters(
+                else -> dao.insertAndReplacePagedRollerCoasters(
                     page = page.value,
                     pagedRollerCoasters = rollerCoasters.toPagedRollerCoastersRoom(page),
                     pictures = picturesRoomModel,

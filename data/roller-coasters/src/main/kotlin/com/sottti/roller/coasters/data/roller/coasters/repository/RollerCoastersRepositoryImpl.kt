@@ -8,7 +8,7 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersRemoteMediator
+import com.sottti.roller.coasters.data.roller.coasters.datasources.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.domain.model.PageNumber
 import com.sottti.roller.coasters.domain.model.Result
@@ -24,8 +24,8 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
 ) : RollerCoastersRepository {
 
     companion object {
-        const val PREFETCH_DISTANCE = 10
-        const val PAGE_SIZE = 200
+        const val PREFETCH_DISTANCE = 5
+        const val PAGE_SIZE = 25
         val pagerConfig = PagingConfig(
             enablePlaceholders = true,
             initialLoadSize = PAGE_SIZE,
@@ -57,7 +57,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
 
     override suspend fun syncAllRollerCoasters(): Result<Unit> =
-        remoteDataSource.syncRollerCoasters { rollerCoasters ->
-            localDataSource.storeRollerCoasters(rollerCoasters)
+        remoteDataSource.syncRollerCoasters { pageNumber, rollerCoasters ->
+            localDataSource.storeRollerCoasters(pageNumber, rollerCoasters)
         }
 }

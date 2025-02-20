@@ -15,8 +15,11 @@ android {
 
 dependencies {
     implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
     implementation(project(module.data.rollerCoasters))
     implementation(project(module.presentation.imageLoading))

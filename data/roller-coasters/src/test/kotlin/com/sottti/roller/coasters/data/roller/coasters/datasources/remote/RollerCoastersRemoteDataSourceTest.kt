@@ -3,13 +3,13 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.NoInternet
-import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.ServerError
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.PAGE_NUMBER_SECOND
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.noInterNetException
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoastersApiModelPage1
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoastersApiModelPage2
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.serverErrorException
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl.Companion.PAGE_SIZE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
@@ -55,15 +55,14 @@ internal class RollerCoastersRemoteDataSourceTest {
     fun `Get roller coasters page - Returns error when API call fails`() = runTest {
         val pageNumber = PageNumber(PAGE_NUMBER_SECOND)
         val expectedOffset = pageNumber * PAGE_SIZE
-        val error = NoInternet
 
         coEvery {
             api.getRollerCoasters(offset = expectedOffset, limit = PAGE_SIZE)
-        } returns Err(error)
+        } returns Err(noInterNetException)
 
         val result = dataSource.getRollerCoastersPage(pageNumber)
 
-        assertThat(result).isEqualTo(Err(error))
+        assertThat(result).isEqualTo(Err(noInterNetException))
 
         coVerify(exactly = 1) {
             api.getRollerCoasters(
@@ -87,54 +86,51 @@ internal class RollerCoastersRemoteDataSourceTest {
 
     @Test
     fun `Get roller coaster - API returns error`() = runTest {
-        coEvery { api.getRollerCoaster(rollerCoasterId) } returns Err(NoInternet)
+        coEvery { api.getRollerCoaster(rollerCoasterId) } returns Err(noInterNetException)
 
         val result = dataSource.getRollerCoaster(rollerCoasterId)
 
         assertThat(result.isErr).isTrue()
-        assertThat(result.error.message).isEqualTo(NoInternet.message)
+        assertThat(result.error.message).isEqualTo(noInterNetException.message)
 
         coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId) }
     }
 
     @Test
     fun `Sync roller coasters - API returns error on first call`() = runTest {
-        val serverError = ServerError(503)
         coEvery {
             api.getRollerCoasters(offset = 0, limit = PAGE_SIZE)
-        } returns Err(serverError)
+        } returns Err(serverErrorException)
 
         val storedCoasters = mutableListOf<List<RollerCoaster>>()
-        val onStore: suspend (List<RollerCoaster>) -> Unit = { storedCoasters.add(it) }
+        val onStore: suspend (PageNumber, List<RollerCoaster>) -> Unit =
+            { page, rollerCoasters -> storedCoasters.add(rollerCoasters) }
 
         val result = dataSource.syncRollerCoasters(onStore)
 
-        assertThat(result.error.message).isEqualTo(serverError.message)
+        assertThat(result.error.message).isEqualTo(serverErrorException.message)
         assertThat(storedCoasters.flatten()).isEmpty()
 
         coVerify(exactly = 1) { api.getRollerCoasters(offset = 0, limit = PAGE_SIZE) }
     }
 
     @Test
-    fun `Sync roller coasters - API returns error on second call`() = runTest {
-        val serverError = ServerError(503)
+    fun `Sync roller coasters - API returns error on some call`() = runTest {
         coEvery {
-            api.getRollerCoasters(offset = 0, limit = PAGE_SIZE)
+            api.getRollerCoasters(offset = any(), limit = PAGE_SIZE)
         } returns Ok(rollerCoastersApiModelPage1)
 
         coEvery {
             api.getRollerCoasters(offset = PAGE_SIZE, limit = PAGE_SIZE)
-        } returns Err(serverError)
+        } returns Err(serverErrorException)
 
         val storedCoasters = mutableListOf<List<RollerCoaster>>()
-        val onStore: suspend (List<RollerCoaster>) -> Unit = { storedCoasters.add(it) }
+        val onStore: suspend (PageNumber, List<RollerCoaster>) -> Unit =
+            { page, rollerCoasters -> storedCoasters.add(rollerCoasters) }
 
         val result = dataSource.syncRollerCoasters(onStore)
 
-        assertThat(result.error.message).isEqualTo(serverError.message)
-        assertThat(storedCoasters.flatten().size)
-            .isEqualTo(rollerCoastersApiModelPage1.rollerCoasters.size)
-
+        assertThat(result.error.message).isEqualTo(serverErrorException.message)
         coVerify(exactly = 1) { api.getRollerCoasters(offset = 0, limit = PAGE_SIZE) }
         coVerify(exactly = 1) { api.getRollerCoasters(offset = PAGE_SIZE, limit = PAGE_SIZE) }
     }
@@ -143,15 +139,12 @@ internal class RollerCoastersRemoteDataSourceTest {
     @Test
     fun `Sync roller coasters - Fetches and stores all pages`() = runTest {
         coEvery {
-            api.getRollerCoasters(offset = 0, limit = PAGE_SIZE)
+            api.getRollerCoasters(offset = any(), limit = PAGE_SIZE)
         } returns Ok(rollerCoastersApiModelPage1)
 
-        coEvery {
-            api.getRollerCoasters(offset = PAGE_SIZE, limit = PAGE_SIZE)
-        } returns Ok(rollerCoastersApiModelPage2)
-
         val storedCoasters = mutableListOf<List<RollerCoaster>>()
-        val onStore: suspend (List<RollerCoaster>) -> Unit = { storedCoasters.add(it) }
+        val onStore: suspend (PageNumber, List<RollerCoaster>) -> Unit =
+            { page, rollerCoasters -> storedCoasters.add(rollerCoasters) }
 
         val result = dataSource.syncRollerCoasters(onStore)
 

@@ -12,6 +12,7 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.PAGE_NUMBER_INITIAL
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.PAGE_NUMBER_SECOND
+import com.sottti.roller.coasters.data.roller.coasters.datasources.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl.Companion.PAGE_SIZE
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
@@ -45,7 +46,12 @@ internal class RollerCoastersRemoteMediatorTest {
     fun `refresh load fetches data from API and stores it in DB`() = runTest {
         val page = PageNumber(PAGE_NUMBER_INITIAL)
         coEvery { remoteDataSource.getRollerCoastersPage(page) } returns Ok(listOf(rollerCoaster))
-        coEvery { localDataSource.storeRollerCoasters(listOf(rollerCoaster)) } just runs
+        coEvery {
+            localDataSource.storeRollerCoasters(
+                page = page,
+                rollerCoasters = listOf(rollerCoaster),
+            )
+        } just runs
 
         val pagingState = PagingState<PageNumber, RollerCoaster>(
             pages = emptyList(),
@@ -58,14 +64,24 @@ internal class RollerCoastersRemoteMediatorTest {
 
         assertThat(result).isInstanceOf(RemoteMediator.MediatorResult.Success::class.java)
         coVerify(exactly = 1) { remoteDataSource.getRollerCoastersPage(page) }
-        coVerify(exactly = 1) { localDataSource.storeRollerCoasters(listOf(rollerCoaster)) }
+        coVerify(exactly = 1) {
+            localDataSource.storeRollerCoasters(
+                page = page,
+                rollerCoasters = listOf(rollerCoaster),
+            )
+        }
     }
 
     @Test
     fun `append load fetches next page correctly`() = runTest {
         val page = PageNumber(PAGE_NUMBER_SECOND)
         coEvery { remoteDataSource.getRollerCoastersPage(page) } returns Ok(listOf(rollerCoaster))
-        coEvery { localDataSource.storeRollerCoasters(listOf(rollerCoaster)) } just runs
+        coEvery {
+            localDataSource.storeRollerCoasters(
+                page = page,
+                rollerCoasters = listOf(rollerCoaster),
+            )
+        } just runs
 
         val pagingState = PagingState<PageNumber, RollerCoaster>(
             anchorPosition = null,
@@ -78,7 +94,12 @@ internal class RollerCoastersRemoteMediatorTest {
 
         assertThat(result).isInstanceOf(RemoteMediator.MediatorResult.Success::class.java)
         coVerify(exactly = 1) { remoteDataSource.getRollerCoastersPage(page) }
-        coVerify(exactly = 1) { localDataSource.storeRollerCoasters(listOf(rollerCoaster)) }
+        coVerify(exactly = 1) {
+            localDataSource.storeRollerCoasters(
+                page = page,
+                rollerCoasters = listOf(rollerCoaster),
+            )
+        }
     }
 
     @Test
@@ -86,7 +107,12 @@ internal class RollerCoastersRemoteMediatorTest {
         val page = PageNumber(PAGE_NUMBER_SECOND)
         val fewerElementsStub = listOf(rollerCoaster).take(1)
         coEvery { remoteDataSource.getRollerCoastersPage(page) } returns Ok(fewerElementsStub)
-        coEvery { localDataSource.storeRollerCoasters(fewerElementsStub) } just runs
+        coEvery {
+            localDataSource.storeRollerCoasters(
+                page = page,
+                rollerCoasters = fewerElementsStub,
+            )
+        } just runs
 
         val pagingState = PagingState<PageNumber, RollerCoaster>(
             anchorPosition = null,

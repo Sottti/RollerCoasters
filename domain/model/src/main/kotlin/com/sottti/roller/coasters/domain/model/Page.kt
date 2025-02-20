@@ -7,4 +7,8 @@ public data class PageNumber(public val value: Int) {
     public operator fun minus(other: Int): PageNumber = PageNumber(value - other)
     public operator fun plus(other: Int): PageNumber = PageNumber(value + other)
     public operator fun times(other: Int): Int = value * other
+
+    public companion object {
+        public fun initial(): PageNumber = PageNumber(0)
+    }
 }

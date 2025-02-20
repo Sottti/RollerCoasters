@@ -2,29 +2,29 @@ package com.sottti.roller.coasters.data.network.model
 
 public sealed class ExceptionApiModel(
     override val message: String,
-) : Exception(message) {
 
-    public object NoInternet : ExceptionApiModel("No Internet connection.") {
-        @Suppress("unused")
-        private fun readResolve(): Any = NoInternet
-    }
+    ) : Exception(message) {
+
+    public data class NoInternet(
+        override val message: String,
+    ) : ExceptionApiModel(message)
 
     public data class ClientError(
+        override val message: String,
         val code: Int,
         val errorBody: String?,
-    ) : ExceptionApiModel("Client error: HTTP $code")
+    ) : ExceptionApiModel(message)
 
     public data class ServerError(
+        override val message: String,
         val code: Int,
-    ) : ExceptionApiModel("Server error: HTTP $code")
+    ) : ExceptionApiModel(message)
 
-    public object Timeout : ExceptionApiModel("Request timed out.") {
-        @Suppress("unused")
-        private fun readResolve(): Any = Timeout
-    }
+    public data class Timeout(
+        override val message: String,
+    ) : ExceptionApiModel(message)
 
-    public data object Unknown : ExceptionApiModel("Unknown error occurred.") {
-        @Suppress("unused")
-        private fun readResolve(): Any = Unknown
-    }
+    public data class Unknown(
+        override val message: String,
+    ) : ExceptionApiModel(message)
 }

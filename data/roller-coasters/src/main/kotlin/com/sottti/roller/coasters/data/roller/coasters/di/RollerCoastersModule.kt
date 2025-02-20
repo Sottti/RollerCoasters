@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.roller.coasters.di
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersRemoteMediator
+import com.sottti.roller.coasters.data.roller.coasters.datasources.paging.RollerCoastersRemoteMediator
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl

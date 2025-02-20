@@ -18,7 +18,7 @@ internal class RollerCoastersPagingSource @Inject constructor(
     override suspend fun load(
         params: LoadParams<PageNumber>,
     ): LoadResult<PageNumber, RollerCoaster> = try {
-        val currentPage = params.key ?: PageNumber(0)
+        val currentPage = params.key ?: PageNumber.initial()
 
         val pagedRollerCoasters = dao
             .getPagedRollerCoasters(currentPage.value)
