@@ -7,7 +7,6 @@ import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
-import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl.Companion.PAGE_SIZE
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
@@ -36,7 +35,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
     suspend fun syncRollerCoasters(
         onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
     ): Result<Unit> {
-        val limit = PAGE_SIZE
+        val limit = 250
         var successfulCalls = 0
         val rollerCoastersPage = api
             .getRollerCoasters(offset = 0, limit = limit)
@@ -64,7 +63,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                     mutex.withLock {
                         result
                             .onSuccess { successfulCalls++ }
-                            .onFailure { error = it }
+                            .onFailure { exceptionApi -> error = exceptionApi }
                     }
                     result.mapBoth(
                         success = { page ->
@@ -80,7 +79,9 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
             }
 
             val results = deferredResults.awaitAll()
-            results.firstOrNull { it.isErr }?.let { return@coroutineScope it }
+            results
+                .firstOrNull { result -> result.isErr }
+                ?.let { result -> return@coroutineScope result }
 
             if (successfulCalls == expectedSuccessfulCalls) Ok(Unit)
             else Err(error ?: Exception("Error syncing roller coasters"))

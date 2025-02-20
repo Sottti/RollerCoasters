@@ -126,6 +126,7 @@ private fun Ride.toRoom(): RideRoomModel =
         height = toRoomHeight(),
         inversions = toRoomInversions(),
         length = toRoomLength(),
+        maxHeight = toRoomMaxHeight(),
         maxVertical = toRoomMaxVertical(),
         speed = toRoomSpeed(),
         trackNames = toRoomTrackNames(),
@@ -149,6 +150,11 @@ private fun Ride.toRoomGForce(): List<Double>? = when (this) {
 private fun Ride.toRoomHeight(): List<Double>? = when (this) {
     is SingleTrackRide -> height?.let { listOf(it.meters.value) }
     is MultiTrackRide -> height?.map { it.meters.value }
+}
+
+private fun Ride.toRoomMaxHeight(): Double? = when (this) {
+    is SingleTrackRide -> height?.meters?.value
+    is MultiTrackRide -> height?.maxOfOrNull { it.meters.value }
 }
 
 private fun Ride.toRoomInversions(): List<Int>? = when (this) {

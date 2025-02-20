@@ -1,11 +1,13 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
+import androidx.paging.PagingSource
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
 import com.sottti.roller.coasters.domain.model.NotFound
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
@@ -58,4 +60,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
             Ok(rollerCoaster.toDomain(pictures))
         }
     }
+
+    fun getPagedRollerCoastersSortedByHeight(): PagingSource<Int, RollerCoaster> =
+        RollerCoastersPagingSource(dao)
 }

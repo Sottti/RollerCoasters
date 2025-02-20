@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.data.roller.coasters.repository
 
+import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
@@ -9,6 +11,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.Roller
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class RollerCoastersRepositoryImpl @Inject constructor(
@@ -17,7 +20,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
 ) : RollerCoastersRepository {
 
     companion object {
-        const val PREFETCH_DISTANCE = 5
+        const val PREFETCH_DISTANCE = 25
         const val PAGE_SIZE = 25
         val pagerConfig = PagingConfig(
             enablePlaceholders = true,
@@ -26,6 +29,12 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             prefetchDistance = PREFETCH_DISTANCE,
         )
     }
+
+    override fun getRollerCoastersSortedByHeight(): Flow<PagingData<RollerCoaster>> =
+        Pager(
+            config = pagerConfig,
+            pagingSourceFactory = { localDataSource.getPagedRollerCoastersSortedByHeight() }
+        ).flow
 
     override suspend fun getRollerCoaster(
         id: RollerCoasterId,

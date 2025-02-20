@@ -12,6 +12,7 @@ internal data class RideRoomModel(
     val height: List<Double>?,
     val inversions: List<Int>?,
     val length: List<Double>?,
+    val maxHeight: Double?,
     val maxVertical: List<Int>?,
     val speed: List<Double>?,
     val trackNames: List<String>?,
