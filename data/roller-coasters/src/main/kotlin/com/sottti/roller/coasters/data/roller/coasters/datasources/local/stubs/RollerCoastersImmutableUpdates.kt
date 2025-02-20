@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.roller.coasters.stubs
+package com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi

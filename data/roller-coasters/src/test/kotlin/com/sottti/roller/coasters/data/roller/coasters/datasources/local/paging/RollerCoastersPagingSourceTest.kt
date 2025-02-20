@@ -9,7 +9,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.withId
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.withId
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import io.mockk.coEvery
 import io.mockk.mockk

@@ -9,6 +9,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.a
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.withId
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.withMaxHeight
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_NAME_ANOTHER
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
