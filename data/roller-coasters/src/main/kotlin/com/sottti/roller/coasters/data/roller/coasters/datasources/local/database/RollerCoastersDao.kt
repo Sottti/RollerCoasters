@@ -43,4 +43,11 @@ internal interface RollerCoastersDao {
     @OptIn(InternalSerializationApi::class)
     @Query("SELECT * FROM pictures WHERE rollerCoasterId = :id")
     suspend fun getPictures(id: Int): List<PictureRoomModel>
+
+    @OptIn(InternalSerializationApi::class)
+    @Query("SELECT * FROM roller_coasters ORDER BY maxHeight DESC LIMIT :limit OFFSET :offset")
+    suspend fun getPagedRollerCoastersSortedByHeight(
+        limit: Int,
+        offset: Int,
+    ): List<RollerCoasterRoomModel>
 }

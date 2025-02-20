@@ -97,7 +97,10 @@ internal class RollerCoastersDaoTest {
 
     @Test
     fun getRollerCoasters_shouldReturnCorrectResults() = runTest {
-        dao.insertRollerCoasters(listOf(notMainPictureRoomModel), listOf(rollerCoasterRoomModel))
+        dao.insertRollerCoasters(
+            listOf(notMainPictureRoomModel),
+            listOf(rollerCoasterRoomModel),
+        )
 
         val result = dao.getRollerCoasters(listOf(rollerCoasterRoomModel).map { it.id })
 
@@ -117,7 +120,10 @@ internal class RollerCoastersDaoTest {
 
     @Test
     fun insertAndReplaceRollerCoaster_shouldKeepPictures() = runTest {
-        dao.insertRollerCoasters(listOf(notMainPictureRoomModel), listOf(rollerCoasterRoomModel))
+        dao.insertRollerCoasters(
+            listOf(notMainPictureRoomModel),
+            listOf(rollerCoasterRoomModel),
+        )
 
         val updatedRollerCoaster = rollerCoasterRoomModel.copy(
             name = rollerCoasterRoomModel.name.copy(current = COASTER_NAME_ANOTHER)
@@ -129,8 +135,30 @@ internal class RollerCoastersDaoTest {
     }
 
     @Test
+    fun insertDuplicateRollerCoaster_shouldReplaceOldPictures() = runTest {
+        dao.insertRollerCoasters(
+            pictures = listOf(notMainPictureRoomModel),
+            rollerCoasters = listOf(rollerCoasterRoomModel),
+        )
+
+        val updatedPicture =
+            anotherNotMainPictureRoomModel.copy(rollerCoasterId = rollerCoasterRoomModel.id)
+        dao.insertRollerCoasters(
+            pictures = listOf(updatedPicture),
+            rollerCoasters = listOf(rollerCoasterRoomModel)
+        )
+
+        val result = dao.getPictures(rollerCoasterRoomModel.id)
+
+        assertThat(result).containsExactly(updatedPicture)
+    }
+
+    @Test
     fun getRollerCoasters_withEmptyList_shouldReturnEmptyList() = runTest {
-        dao.insertRollerCoasters(listOf(notMainPictureRoomModel), listOf(rollerCoasterRoomModel))
+        dao.insertRollerCoasters(
+            listOf(notMainPictureRoomModel),
+            listOf(rollerCoasterRoomModel),
+        )
 
         val result = dao.getRollerCoasters(emptyList())
 
@@ -139,12 +167,43 @@ internal class RollerCoastersDaoTest {
 
     @Test
     fun getRollerCoasters_withSomeInvalidIds_shouldReturnOnlyValidOnes() = runTest {
-        dao.insertRollerCoasters(listOf(notMainPictureRoomModel), listOf(rollerCoasterRoomModel))
+        dao.insertRollerCoasters(
+            listOf(notMainPictureRoomModel),
+            listOf(rollerCoasterRoomModel),
+        )
 
         val mixedIds = listOf(rollerCoasterRoomModel).map { it.id } + listOf(NON_EXISTENT_ID)
         val result = dao.getRollerCoasters(mixedIds)
 
         assertThat(result.map { it.id }).isEqualTo(listOf(rollerCoasterRoomModel).map { it.id })
+    }
+
+    @Test
+    fun getPagedRollerCoastersSortedByHeight_shouldReturnPagedResults() = runTest {
+        val rollerCoasters = listOf(
+            rollerCoasterRoomModel.withId(1).withMaxHeight(maxHeight = 100.0),
+            rollerCoasterRoomModel.withId(2).withMaxHeight(maxHeight = 200.0),
+            rollerCoasterRoomModel.withId(3).withMaxHeight(maxHeight = 150.0),
+        )
+
+        dao.insertRollerCoasters(pictures = emptyList(), rollerCoasters = rollerCoasters)
+
+        val result = dao.getPagedRollerCoastersSortedByHeight(limit = 2, offset = 0)
+
+        assertThat(result).hasSize(2)
+        assertThat(result.map { rollerCoaster -> rollerCoaster.id }).isEqualTo(listOf(2, 3))
+    }
+
+    @Test
+    fun getPagedRollerCoastersSortedByHeight_withHighOffset_shouldReturnEmptyList() = runTest {
+        dao.insertRollerCoasters(
+            pictures = emptyList(),
+            rollerCoasters = listOf(rollerCoasterRoomModel),
+        )
+
+        val result = dao.getPagedRollerCoastersSortedByHeight(limit = 10, offset = 100)
+
+        assertThat(result).isEmpty()
     }
 }
 
