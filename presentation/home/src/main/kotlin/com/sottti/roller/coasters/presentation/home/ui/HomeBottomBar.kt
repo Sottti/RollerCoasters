@@ -21,7 +21,7 @@ internal fun BottomBar(
         navigationBarItems.items.forEach { item ->
             NavigationBarItem(
                 icon = { Icon(item.icon) },
-                label = { Text(item.labelResId) },
+                label = { Text.Vanilla(item.labelResId) },
                 selected = navigationBarItems.selectedItem.route == item.destination.route,
                 onClick = { onClick(actions = actions, item = item, navController = navController) }
             )

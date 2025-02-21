@@ -17,7 +17,7 @@ internal fun TopBar(
     state: TopBarState,
 ) {
     TopAppBar(
-        title = { Text(state.title) },
+        title = { Text.Vanilla(state.title) },
         scrollBehavior = scrollBehavior,
         navigationIcon = {
             Icon(

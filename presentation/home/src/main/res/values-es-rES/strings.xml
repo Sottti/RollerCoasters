@@ -1,5 +1,5 @@
 <resources>
     <string name="navigation_bar_item_label_about_me">Sobre mí</string>>
-    <string name="navigation_bar_item_label_explore">Inicio</string>>
+    <string name="navigation_bar_item_label_explore">Explorar</string>>
     <string name="navigation_bar_item_label_favourites">Favoritos</string>>
 </resources>

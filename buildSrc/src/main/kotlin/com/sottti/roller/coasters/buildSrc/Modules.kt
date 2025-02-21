@@ -9,7 +9,9 @@ object module {
         const val favourites = ":presentation:favourites"
         const val home = ":presentation:home"
         const val imageLoading = ":presentation:image-loading"
+        const val previews = ":presentation:previews"
         const val settings = ":presentation:settings"
+        const val utils = ":presentation:utils"
 
         object designSystem {
             const val colors = ":presentation:design-system:colors"
@@ -18,6 +20,7 @@ object module {
             const val icons = ":presentation:design-system:icons"
             const val loading = ":presentation:design-system:loading"
             const val playground = ":presentation:design-system:playground"
+            const val rollerCoasterCard = ":presentation:design-system:roller-coaster-card"
             const val switch = ":presentation:design-system:switch"
             const val text = ":presentation:design-system:text"
             const val themes = ":presentation:design-system:themes"

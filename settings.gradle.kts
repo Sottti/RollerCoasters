@@ -31,6 +31,7 @@ include(
     ":presentation:design-system:icons",
     ":presentation:design-system:loading",
     ":presentation:design-system:playground",
+    ":presentation:design-system:roller-coaster-card",
     ":presentation:design-system:switch",
     ":presentation:design-system:text",
     ":presentation:design-system:themes",
@@ -39,7 +40,9 @@ include(
     ":presentation:favourites",
     ":presentation:home",
     ":presentation:image-loading",
+    ":presentation:previews",
     ":presentation:settings",
+    ":presentation:utils",
     ":utils:dates",
     ":utils:device",
 )

@@ -121,9 +121,9 @@ private fun DynamicColorSetting(
     state: DynamicColorState,
 ) {
     ListItem(
-        headlineContent = { Text(state.headline) },
+        headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
-        supportingContent = { Text(state.supporting) },
+        supportingContent = { Text.Vanilla(state.supporting) },
         trailingContent = { DynamicColorTrailingContent(state, onDynamicColorCheckedChange) },
     )
 }
@@ -150,9 +150,9 @@ private fun ThemeSetting(
 ) {
     ListItem(
         modifier = Modifier.clickable { onLaunchThemePicker() },
-        headlineContent = { Text(state.headline) },
+        headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
-        supportingContent = { Text(state.supporting) },
+        supportingContent = { Text.Vanilla(state.supporting) },
         trailingContent = { ThemeTrailingContent(state.selectedTheme) },
     )
 }
@@ -160,7 +160,7 @@ private fun ThemeSetting(
 @Composable
 private fun ThemeTrailingContent(state: SelectedThemeState) {
     when (state) {
-        is SelectedThemeState.Loaded -> Text(state.theme.text)
+        is SelectedThemeState.Loaded -> Text.Vanilla(state.theme.text)
         SelectedThemeState.Loading -> SmallLoadingIndicator()
     }
 }
@@ -172,9 +172,9 @@ private fun ColorContrastSetting(
 ) {
     ListItem(
         modifier = Modifier.clickable { onLaunchColorContrastPicker() },
-        headlineContent = { Text(state.headline) },
+        headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
-        supportingContent = { Text(state.supporting) },
+        supportingContent = { Text.Vanilla(state.supporting) },
         trailingContent = { ColorContrastTrailingContent(state.selectedColorContrast) },
     )
 }
@@ -182,7 +182,7 @@ private fun ColorContrastSetting(
 @Composable
 private fun ColorContrastTrailingContent(state: SelectedColorContrastState) {
     when (state) {
-        is SelectedColorContrastState.Loaded -> Text(state.colorContrast.text)
+        is SelectedColorContrastState.Loaded -> Text.Vanilla(state.colorContrast.text)
         SelectedColorContrastState.Loading -> SmallLoadingIndicator()
     }
 }
@@ -194,9 +194,9 @@ private fun LanguageSetting(
 ) {
     ListItem(
         modifier = Modifier.clickable { onLaunchLanguagePicker() },
-        headlineContent = { Text(state.headline) },
+        headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
-        supportingContent = { Text(state.supporting) },
+        supportingContent = { Text.Vanilla(state.supporting) },
         trailingContent = { LanguageTrailingContent(state.selectedLanguage) },
     )
 }
@@ -204,7 +204,7 @@ private fun LanguageSetting(
 @Composable
 private fun LanguageTrailingContent(state: SelectedLanguageState) {
     when (state) {
-        is SelectedLanguageState.Loaded -> Text(state.language.text)
+        is SelectedLanguageState.Loaded -> Text.Vanilla(state.language.text)
         SelectedLanguageState.Loading -> SmallLoadingIndicator()
     }
 }

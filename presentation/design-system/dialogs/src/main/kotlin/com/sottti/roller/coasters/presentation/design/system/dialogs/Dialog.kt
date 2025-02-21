@@ -28,8 +28,8 @@ public object Dialog {
     ) {
         AlertDialog(
             onDismissRequest = onDismiss,
-            title = { Text(title) },
-            text = { Text(text) },
+            title = { Text.Vanilla(title) },
+            text = { Text.Vanilla(text) },
             confirmButton = { DismissButton(text = dismiss, onDismiss = onDismiss) },
         )
     }
@@ -46,7 +46,7 @@ public object Dialog {
     ) {
         AlertDialog(
             onDismissRequest = onDismiss,
-            title = { Text(title) },
+            title = { Text.Vanilla(title) },
             text = {
                 OptionsList(
                     options = options,
@@ -83,7 +83,7 @@ private fun RadioButtonRow(
 ) {
     ListItem(
         leadingContent = { Icon(option.icon, crossfade = true) },
-        headlineContent = { Text(option.text) },
+        headlineContent = { Text.Vanilla(option.text) },
         trailingContent = {
             RadioButton(
                 selected = option.selected,
@@ -103,7 +103,7 @@ private fun ConfirmButton(
     onConfirm: () -> Unit,
 ) {
     TextButton(onClick = { onConfirm() }) {
-        Text(text)
+        Text.Vanilla(text)
     }
 }
 
@@ -113,6 +113,6 @@ private fun DismissButton(
     onDismiss: () -> Unit,
 ) {
     TextButton(onClick = { onDismiss() }) {
-        Text(text)
+        Text.Vanilla(text)
     }
 }

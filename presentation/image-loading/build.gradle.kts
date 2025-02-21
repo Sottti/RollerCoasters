@@ -16,7 +16,8 @@ dependencies {
     api(project(module.domain.model))
     implementation(libs.coil.compose)
     implementation(libs.coil.network.ktor3)
+    implementation(libs.compose.ui.tooling)
     implementation(libs.startup.runtime)
     implementation(project(module.data.network))
-
+    implementation(project(module.presentation.previews))
 }
