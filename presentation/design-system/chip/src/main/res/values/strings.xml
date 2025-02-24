@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chip_label" translatable="false">Chip</string>
+    <string name="chip_label_long" translatable="false">Long Chip Label</string>
+</resources>

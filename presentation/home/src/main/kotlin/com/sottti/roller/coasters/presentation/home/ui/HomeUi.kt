@@ -6,8 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
-import com.sottti.roller.coasters.presentation.home.navigation.HomeNavigationDestination
-import com.sottti.roller.coasters.presentation.settings.ui.SettingsUi
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
 @Composable
 internal fun HomeUi(
@@ -17,14 +16,10 @@ internal fun HomeUi(
 
     NavHost(
         navController = navController,
-        startDestination = HomeNavigationDestination.NavigationBar.route,
+        startDestination = NavigationDestination.Home.route,
     ) {
-        composable(HomeNavigationDestination.NavigationBar.route) {
-            NavigationBar(navHostController = navController, viewModel = viewModel)
-        }
-
-        composable(HomeNavigationDestination.Settings.route) {
-            SettingsUi(navController = navController)
+        composable(NavigationDestination.Home.route) {
+            NavigationBar(viewModel = viewModel)
         }
     }
 }

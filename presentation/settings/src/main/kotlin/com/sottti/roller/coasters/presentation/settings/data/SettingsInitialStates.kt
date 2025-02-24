@@ -47,7 +47,7 @@ private fun dynamicColorInitialState() = DynamicColorState(
 private fun languageInitialState() = LanguageState(
     listItem = LanguageListItemState(
         headline = R.string.language_headline,
-        icon = Icons.Language.Rounded,
+        icon = Icons.Language.Outlined,
         supporting = R.string.language_supporting,
         selectedLanguage = SelectedLanguageState.Loading,
     ),
@@ -66,4 +66,4 @@ private fun themeInitialState() = ThemeState(
 )
 
 private fun topBarInitialState(): TopBarState =
-    TopBarState(title = R.string.title, icon = Icons.ArrowBack.Rounded)
+    TopBarState(title = R.string.title, icon = Icons.ArrowBack.Filled)

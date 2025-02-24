@@ -4,10 +4,10 @@ import co.cuvva.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.home.R
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItems
-import com.sottti.roller.coasters.presentation.home.navigation.HomeNavigationBarDestination
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
 internal fun navigationBarItems(
-    selectedItem: HomeNavigationBarDestination = HomeNavigationBarDestination.Explore,
+    selectedItem: NavigationDestination = NavigationDestination.Explore,
 ): HomeNavigationBarItems =
     HomeNavigationBarItems(
         items = listOf(explore(selectedItem), favourites(selectedItem), aboutMe(selectedItem)),
@@ -16,34 +16,34 @@ internal fun navigationBarItems(
 
 
 private fun explore(
-    selectedItem: HomeNavigationBarDestination,
+    selectedItem: NavigationDestination,
 ) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_explore,
     icon = when (selectedItem) {
-        HomeNavigationBarDestination.Explore -> Icons.Explore.Filled
+        NavigationDestination.Explore -> Icons.Explore.Filled
         else -> Icons.Explore.Outlined
     },
-    destination = HomeNavigationBarDestination.Explore,
+    destination = NavigationDestination.Explore,
 )
 
 private fun favourites(
-    selectedItem: HomeNavigationBarDestination,
+    selectedItem: NavigationDestination,
 ) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_favourites,
     icon = when (selectedItem) {
-        HomeNavigationBarDestination.Favourites -> Icons.Star.Filled
+        NavigationDestination.Favourites -> Icons.Star.Filled
         else -> Icons.Star.Outlined
     },
-    destination = HomeNavigationBarDestination.Favourites,
+    destination = NavigationDestination.Favourites,
 )
 
 private fun aboutMe(
-    selectedItem: HomeNavigationBarDestination,
+    selectedItem: NavigationDestination,
 ) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_about_me,
     icon = when (selectedItem) {
-        HomeNavigationBarDestination.AboutMe -> Icons.AccountCircle.Filled
+        NavigationDestination.AboutMe -> Icons.AccountCircle.Filled
         else -> Icons.AccountCircle.Outlined
     },
-    destination = HomeNavigationBarDestination.AboutMe,
+    destination = NavigationDestination.AboutMe,
 )

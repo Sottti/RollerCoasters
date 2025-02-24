@@ -82,7 +82,7 @@ private fun RadioButtonRow(
     onOptionSelected: (DialogRadioButtonOption) -> Unit,
 ) {
     ListItem(
-        leadingContent = { Icon(option.icon, crossfade = true) },
+        leadingContent = { Icon(state = option.icon, crossfade = true) },
         headlineContent = { Text.Vanilla(option.text) },
         trailingContent = {
             RadioButton(

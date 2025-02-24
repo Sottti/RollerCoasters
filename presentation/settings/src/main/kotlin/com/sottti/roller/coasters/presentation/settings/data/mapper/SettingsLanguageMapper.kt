@@ -23,19 +23,19 @@ internal fun Language.toPresentationModel(isSelected: Boolean): LanguageUi =
     when (this) {
         Language.EnglishGbLanguage -> EnglishGbLanguage(
             text = R.string.language_english_gb,
-            icon = Icons.LanguageEnglishGb.Rounded,
+            icon = Icons.LanguageEnglishGb.Outlined,
             selected = isSelected,
         )
 
         Language.SpanishSpainLanguage -> SpanishSpainLanguage(
             text = R.string.language_spanish_spain,
-            icon = Icons.LanguageSpanish.Rounded,
+            icon = Icons.LanguageSpanish.Outlinled,
             selected = isSelected,
         )
 
         Language.GalicianLanguage -> GalicianLanguage(
             text = R.string.language_galician,
-            icon = Icons.Language.Rounded,
+            icon = Icons.Language.Outlined,
             selected = isSelected,
         )
 

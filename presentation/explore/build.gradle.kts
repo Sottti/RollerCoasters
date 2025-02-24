@@ -22,9 +22,12 @@ dependencies {
     implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
     implementation(project(module.data.rollerCoasters))
+    implementation(project(module.presentation.designSystem.chip))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
+    implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.imageLoading))
+    implementation(project(module.presentation.topBars))
     implementation(project(module.presentation.utils))
     ksp(libs.hilt.compiler)
 }

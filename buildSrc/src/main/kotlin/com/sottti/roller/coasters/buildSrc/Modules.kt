@@ -9,11 +9,14 @@ object module {
         const val favourites = ":presentation:favourites"
         const val home = ":presentation:home"
         const val imageLoading = ":presentation:image-loading"
+        const val navigation = ":presentation:navigation"
         const val previews = ":presentation:previews"
         const val settings = ":presentation:settings"
+        const val topBars = ":presentation:top-bars"
         const val utils = ":presentation:utils"
 
         object designSystem {
+            const val chip = ":presentation:design-system:chip"
             const val colors = ":presentation:design-system:colors"
             const val dialogs = ":presentation:design-system:dialogs"
             const val dimensions = ":presentation:design-system:dimensions"

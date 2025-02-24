@@ -2,10 +2,13 @@
 <resources>
     <string name="description_icon_account_circle">Sobre mí</string>
     <string name="description_icon_arrow_back">Flecha atras</string>
+    <string name="description_icon_arrow_drop_down">Flecha de desplegable</string>
+    <string name="description_icon_arrow_drop_up">Flecha de cierre de desplegable</string>
     <string name="description_icon_brightness_auto">Brillo automático</string>
     <string name="description_icon_brightness_high">Brillo alto</string>
     <string name="description_icon_brightness_medium">Brillo medio</string>
     <string name="description_icon_brightness_standard">Brillo normal</string>
+    <string name="description_icon_check">Seleccionado</string>
     <string name="description_icon_dark_mode">Modo oscuro</string>
     <string name="description_icon_explore">Explorar</string>
     <string name="description_icon_language">Idioma</string>

@@ -1,0 +1,34 @@
+package com.sottti.roller.coasters.presentation.explore.ui
+
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun ExploreTopBar(
+    lazyListState: LazyListState,
+    navController: NavHostController
+) {
+    val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
+    val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
+    val isScrolled by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset > 0 } }
+    val backgroundColor by animateColorAsState(
+        targetValue = if (isScrolled) scrolledContainerColor else containerColor,
+        label = "expandable top bar background color animation",
+    )
+    Column(modifier = Modifier.background(backgroundColor)) {
+        MainTopBar(navController = navController)
+        FilterChips(lazyListState)
+    }
+}

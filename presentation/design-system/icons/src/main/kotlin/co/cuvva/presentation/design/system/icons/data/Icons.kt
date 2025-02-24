@@ -18,8 +18,24 @@ public object Icons {
 
     public object ArrowBack {
         public val Description: Int = R.string.description_icon_arrow_back
-        public val Rounded: IconState = IconState(
+        public val Filled: IconState = IconState(
             resId = R.drawable.ic_arrow_back_rounded,
+            descriptionResId = Description,
+        )
+    }
+
+    public object ArrowDropDown {
+        public val Description: Int = R.string.description_icon_arrow_drop_down
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_arrow_drop_down_rounded,
+            descriptionResId = Description,
+        )
+    }
+
+    public object ArrowDropUp {
+        public val Description: Int = R.string.description_icon_arrow_drop_up
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_arrow_drop_up_rounded,
             descriptionResId = Description,
         )
     }
@@ -72,6 +88,14 @@ public object Icons {
         )
     }
 
+    public object CheckSmall {
+        public val Description: Int = R.string.description_icon_check
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_check_small_rounded,
+            descriptionResId = Description,
+        )
+    }
+
     public object DarkMode {
         public val Description: Int = R.string.description_icon_dark_mode
         public val Filled: IconState = IconState(
@@ -98,7 +122,7 @@ public object Icons {
 
     public object Language {
         public val Description: Int = R.string.description_icon_language
-        public val Rounded: IconState = IconState(
+        public val Outlined: IconState = IconState(
             resId = R.drawable.ic_language_rounded,
             descriptionResId = Description,
         )
@@ -106,7 +130,7 @@ public object Icons {
 
     public object LanguageEnglishGb {
         public val Description: Int = R.string.description_icon_language_english_gb
-        public val Rounded: IconState = IconState(
+        public val Outlined: IconState = IconState(
             resId = R.drawable.ic_language_gb_english_rounded,
             descriptionResId = Description,
         )
@@ -114,7 +138,7 @@ public object Icons {
 
     public object LanguageSpanish {
         public val Description: Int = R.string.description_icon_language_spanish
-        public val Rounded: IconState = IconState(
+        public val Outlinled: IconState = IconState(
             resId = R.drawable.ic_language_spanish_rounded,
             descriptionResId = Description,
         )
