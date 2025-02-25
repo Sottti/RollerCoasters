@@ -18,13 +18,13 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 public fun Chip(
     @StringRes labelResId: Int,
     selected: Boolean,
-    expanded: Boolean,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
+    expanded: Boolean? = null,
 ) {
     FilterChip(
         label = { Text.Vanilla(stringResource(labelResId)) },
         leadingIcon = { LeadingIcon(selected) },
-        trailingIcon = { TrailingIcon(expanded) },
+        trailingIcon = { expanded?.let { TrailingIcon(expanded) } },
         onClick = onClick,
         selected = selected,
     )
@@ -44,8 +44,9 @@ private fun LeadingIcon(selected: Boolean) =
 @Composable
 private fun TrailingIcon(expanded: Boolean) =
     Icon(
-        state = if (expanded) Icons.ArrowDropUp.Filled else Icons.ArrowDropDown.Filled,
+        crossfade = true,
         modifier = Modifier.size(FilterChipDefaults.IconSize),
+        state = if (expanded) Icons.ArrowDropUp.Filled else Icons.ArrowDropDown.Filled,
     )
 
 

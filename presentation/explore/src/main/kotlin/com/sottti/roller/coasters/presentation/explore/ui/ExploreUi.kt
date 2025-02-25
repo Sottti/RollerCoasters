@@ -26,9 +26,17 @@ private fun ExploreUiInternal(
     viewModel: ExploreViewModel = hiltViewModel(),
 ) {
     val lazyListState = rememberLazyListState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { ExploreTopBar(lazyListState, navController) },
+        topBar = {
+            ExploreTopBar(
+                filters = state.filters,
+                lazyListState = lazyListState,
+                navController = navController,
+                onAction = viewModel.onAction,
+            )
+        },
     ) { paddingValues ->
         val state by viewModel.state.collectAsStateWithLifecycle()
         Column(modifier = Modifier.padding(paddingValues)) {

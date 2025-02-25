@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="chip_label_type">Tipo</string>
+    <string name="chip_label_type_steel">Aceiro</string>
+    <string name="chip_label_type_wood">Madeira</string>
 </resources>

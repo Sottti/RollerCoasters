@@ -12,13 +12,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
+import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ExploreTopBar(
+    filters: Filters,
     lazyListState: LazyListState,
-    navController: NavHostController
+    navController: NavHostController,
+    onAction: (ExploreAction) -> Unit,
 ) {
     val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
     val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
@@ -29,6 +33,6 @@ internal fun ExploreTopBar(
     )
     Column(modifier = Modifier.background(backgroundColor)) {
         MainTopBar(navController = navController)
-        FilterChips(lazyListState)
+        FilterChips(filters = filters, listState = lazyListState, onAction = onAction)
     }
 }
