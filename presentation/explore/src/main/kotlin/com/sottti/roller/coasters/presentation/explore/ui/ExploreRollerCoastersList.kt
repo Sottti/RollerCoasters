@@ -15,15 +15,15 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
+import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreState
-import com.sottti.roller.coasters.presentation.explore.model.RollerCoasterUiModel
 
 @Composable
 internal fun RollerCoastersList(
     listState: LazyListState,
     state: ExploreState,
 ) {
-    val rollerCoasters: LazyPagingItems<RollerCoasterUiModel> =
+    val rollerCoasters: LazyPagingItems<ExploreRollerCoaster> =
         state.rollerCoastersFlow.collectAsLazyPagingItems()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -41,7 +41,7 @@ internal fun RollerCoastersList(
 @Composable
 private fun RollerCoasters(
     listState: LazyListState,
-    rollerCoasters: LazyPagingItems<RollerCoasterUiModel>,
+    rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     LazyColumn(
         state = listState,
@@ -56,7 +56,7 @@ private fun RollerCoasters(
 
 @Composable
 private fun RollerCoaster(
-    rollerCoaster: RollerCoasterUiModel,
+    rollerCoaster: ExploreRollerCoaster,
 ) {
     RollerCoasterCard(
         imageUrl = rollerCoaster.imageUrl,

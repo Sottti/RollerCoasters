@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.chip
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -26,7 +27,8 @@ public fun Chip(
         leadingIcon = { LeadingIcon(selected) },
         trailingIcon = { expanded?.let { TrailingIcon(expanded) } },
         onClick = onClick,
-        selected = selected,
+        selected = selected || expanded == true,
+        modifier = Modifier.animateContentSize()
     )
 }
 

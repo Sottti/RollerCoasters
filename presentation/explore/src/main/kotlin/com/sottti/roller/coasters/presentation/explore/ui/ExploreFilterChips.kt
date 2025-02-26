@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -14,9 +13,9 @@ import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.chip.Chip
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
-import com.sottti.roller.coasters.presentation.explore.model.Filter.PrimaryFilter
-import com.sottti.roller.coasters.presentation.explore.model.Filter.SecondaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.Filters
+import com.sottti.roller.coasters.presentation.explore.model.PrimaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,8 +25,8 @@ internal fun FilterChips(
     onAction: (ExploreAction) -> Unit,
 ) {
     Column {
-        PrimaryFilters(filters.primaryFilters, onAction)
-        SecondaryFilters(filters.secondaryFilters, onAction)
+        PrimaryFilters(filters.primary, onAction)
+        SecondaryFilters(filters.secondary, onAction)
     }
 }
 
@@ -42,38 +41,30 @@ private fun PrimaryFilters(
             .padding(horizontal = dimensions.padding.medium),
         horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
     ) {
-        filters.forEach { filter ->
-            when (filter) {
-                else -> PrimaryFilterChip(onAction, filter)
-            }
-        }
+        filters.forEach { filter -> PrimaryFilterChip(filter = filter, onAction = onAction) }
     }
 }
 
 @Composable
 private fun SecondaryFilters(
-    filters: List<SecondaryFilter>?,
+    filters: List<SecondaryFilter>,
     onAction: (ExploreAction) -> Unit
 ) {
-    val isVisible = filters?.isNotEmpty() == true
-
     FlowRow(
         modifier = Modifier
             .fillMaxWidth()
-            .animateContentSize(animationSpec = tween(300))
+            .animateContentSize()
             .padding(horizontal = dimensions.padding.medium),
         horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
     ) {
-        if (isVisible) {
-            filters.forEach { filter -> SecondaryFilterChip(onAction, filter) }
-        }
+        filters.forEach { filter -> SecondaryFilterChip(onAction, filter) }
     }
 }
 
 @Composable
 private fun PrimaryFilterChip(
-    onAction: (ExploreAction) -> Unit,
     filter: PrimaryFilter,
+    onAction: (ExploreAction) -> Unit,
 ) {
     Chip(
         labelResId = filter.labelResId,
@@ -88,9 +79,11 @@ private fun SecondaryFilterChip(
     onAction: (ExploreAction) -> Unit,
     filter: SecondaryFilter,
 ) {
-    Chip(
-        labelResId = filter.labelResId,
-        selected = filter.selected,
-        onClick = { onAction(filter.action) },
-    )
+    if (filter.visible) {
+        Chip(
+            labelResId = filter.labelResId,
+            selected = filter.selected,
+            onClick = { onAction(filter.action) },
+        )
+    }
 }

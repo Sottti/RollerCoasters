@@ -6,24 +6,16 @@ import androidx.paging.PagingData
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction
-import com.sottti.roller.coasters.presentation.explore.model.Filter.PrimaryFilter
-import com.sottti.roller.coasters.presentation.explore.model.Filter.SecondaryFilter
 import kotlinx.coroutines.flow.Flow
 
 @Immutable
 internal data class ExploreState(
-    val rollerCoastersFlow: Flow<PagingData<RollerCoasterUiModel>>,
+    val rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>>,
     val filters: Filters,
 )
 
 @Immutable
-internal data class Filters(
-    val primaryFilters: List<PrimaryFilter>,
-    val secondaryFilters: List<SecondaryFilter>?,
-)
-
-@Immutable
-internal data class RollerCoasterUiModel(
+internal data class ExploreRollerCoaster(
     val imageUrl: ImageUrl?,
     val parkName: String,
     val rollerCoasterName: String,
@@ -32,42 +24,77 @@ internal data class RollerCoasterUiModel(
 )
 
 @Immutable
-internal sealed class Filter(
+internal data class Filters(
+    val primary: List<PrimaryFilter>,
+    val secondary: List<SecondaryFilter>
+)
+
+@Immutable
+internal sealed class PrimaryFilter(
     @StringRes open val labelResId: Int,
-    open val action: ExploreAction,
+    open val expanded: Boolean,
+    open val action: PrimaryFilterAction,
     open val selected: Boolean,
 ) {
-    @Immutable
-    internal sealed class PrimaryFilter(
+    data class SortByPrimaryFilter(
         @StringRes override val labelResId: Int,
-        open val expanded: Boolean,
         override val action: PrimaryFilterAction,
+        override val expanded: Boolean,
         override val selected: Boolean,
-    ) : Filter(labelResId, action, selected) {
-        data class TypeFilter(
-            @StringRes override val labelResId: Int,
-            override val action: PrimaryFilterAction,
-            override val expanded: Boolean,
-            override val selected: Boolean,
-        ) : PrimaryFilter(labelResId, expanded, action, selected)
-    }
+    ) : PrimaryFilter(labelResId, expanded, action, selected)
 
+    data class TypePrimaryFilter(
+        @StringRes override val labelResId: Int,
+        override val action: PrimaryFilterAction,
+        override val expanded: Boolean,
+        override val selected: Boolean,
+    ) : PrimaryFilter(labelResId, expanded, action, selected)
+}
+
+@Immutable
+internal sealed class SecondaryFilter(
+    @StringRes open val labelResId: Int,
+    open val action: SecondaryFilterAction,
+    open val selected: Boolean,
+    open val visible: Boolean
+) {
     @Immutable
-    internal sealed class SecondaryFilter(
+    internal sealed class SortBySecondaryFilter(
         @StringRes override val labelResId: Int,
         override val action: SecondaryFilterAction,
         override val selected: Boolean,
-    ) : Filter(labelResId, action, selected) {
-        data class Steel(
+        override val visible: Boolean
+    ) : SecondaryFilter(labelResId, action, selected, visible) {
+        @Immutable
+        data class HeightFilter(
             @StringRes override val labelResId: Int,
             override val action: SecondaryFilterAction,
             override val selected: Boolean,
-        ) : SecondaryFilter(labelResId, action, selected)
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+    }
 
-        data class Wood(
+    @Immutable
+    internal sealed class TypeSecondaryFilter(
+        @StringRes override val labelResId: Int,
+        override val action: SecondaryFilterAction,
+        override val selected: Boolean,
+        override val visible: Boolean
+    ) : SecondaryFilter(labelResId, action, selected, visible) {
+        @Immutable
+        data class SteelFilter(
             @StringRes override val labelResId: Int,
             override val action: SecondaryFilterAction,
             override val selected: Boolean,
-        ) : SecondaryFilter(labelResId, action, selected)
+            override val visible: Boolean
+        ) : TypeSecondaryFilter(labelResId, action, selected, visible)
+
+        @Immutable
+        data class WoodFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : TypeSecondaryFilter(labelResId, action, selected, visible)
     }
 }
