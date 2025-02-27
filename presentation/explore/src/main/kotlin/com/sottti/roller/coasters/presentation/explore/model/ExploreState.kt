@@ -36,6 +36,7 @@ internal sealed class PrimaryFilter(
     open val action: PrimaryFilterAction,
     open val selected: Boolean,
 ) {
+    @Immutable
     data class SortByPrimaryFilter(
         @StringRes override val labelResId: Int,
         override val action: PrimaryFilterAction,
@@ -43,6 +44,7 @@ internal sealed class PrimaryFilter(
         override val selected: Boolean,
     ) : PrimaryFilter(labelResId, expanded, action, selected)
 
+    @Immutable
     data class TypePrimaryFilter(
         @StringRes override val labelResId: Int,
         override val action: PrimaryFilterAction,
@@ -65,8 +67,57 @@ internal sealed class SecondaryFilter(
         override val selected: Boolean,
         override val visible: Boolean
     ) : SecondaryFilter(labelResId, action, selected, visible) {
+
+        @Immutable
+        data class DropFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+
+        @Immutable
+        data class GForceFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+
         @Immutable
         data class HeightFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+
+        @Immutable
+        data class InversionsFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+
+        @Immutable
+        data class LengthFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+
+        @Immutable
+        data class MaxVerticalFilter(
+            @StringRes override val labelResId: Int,
+            override val action: SecondaryFilterAction,
+            override val selected: Boolean,
+            override val visible: Boolean
+        ) : SortBySecondaryFilter(labelResId, action, selected, visible)
+
+        @Immutable
+        data class SpeedFilter(
             @StringRes override val labelResId: Int,
             override val action: SecondaryFilterAction,
             override val selected: Boolean,
@@ -82,7 +133,7 @@ internal sealed class SecondaryFilter(
         override val visible: Boolean
     ) : SecondaryFilter(labelResId, action, selected, visible) {
         @Immutable
-        data class SteelFilter(
+        data class WoodFilter(
             @StringRes override val labelResId: Int,
             override val action: SecondaryFilterAction,
             override val selected: Boolean,
@@ -90,7 +141,7 @@ internal sealed class SecondaryFilter(
         ) : TypeSecondaryFilter(labelResId, action, selected, visible)
 
         @Immutable
-        data class WoodFilter(
+        data class SteelFilter(
             @StringRes override val labelResId: Int,
             override val action: SecondaryFilterAction,
             override val selected: Boolean,

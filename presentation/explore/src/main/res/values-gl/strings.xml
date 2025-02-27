@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="chip_label_sort_by">Ordear por</string>
+    <string name="chip_label_sort_by_drop">Caída</string>
+    <string name="chip_label_sort_by_g_force">Forza G</string>
     <string name="chip_label_sort_by_height">Altura</string>
+    <string name="chip_label_sort_by_inversions">Inversions</string>
+    <string name="chip_label_sort_by_length">Lonxitude</string>
+    <string name="chip_label_sort_by_max_vertical">Máxima vertical</string>
+    <string name="chip_label_sort_by_speed">Velocidade</string>
     <string name="chip_label_type">Tipo</string>
     <string name="chip_label_type_steel">Aceiro</string>
     <string name="chip_label_type_wood">Madeira</string>

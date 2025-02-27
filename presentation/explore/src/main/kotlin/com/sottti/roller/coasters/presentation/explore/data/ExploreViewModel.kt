@@ -12,10 +12,15 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Prima
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowTypeFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearSortHeight
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearTypeSteel
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearTypeWood
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortHeight
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearSortBySecondaryFilters
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearTypeSecondaryFilters
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByDrop
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByGForce
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByHeight
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByInversions
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByLength
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByMaxVertical
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortBySpeed
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeSteel
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeWood
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
@@ -38,7 +43,7 @@ internal class ExploreViewModel @Inject constructor(
             .toUiModel()
             .cachedIn(viewModelScope)
 
-    private val _state = MutableStateFlow(initialState(_rollerCoastersFlow))
+    private val _state = MutableStateFlow(ExploreInitialStates.state(_rollerCoastersFlow))
 
     val state: StateFlow<ExploreState> = _state.asStateFlow()
 
@@ -55,11 +60,11 @@ internal class ExploreViewModel @Inject constructor(
         action: PrimaryFilterAction,
     ) {
         when (action) {
-            ShowSortFilters -> _state.showSortByFilters()
-            HideSortFilters -> _state.hideSortFilters()
+            ShowSortFilters -> _state.expandSortByPrimaryFilter()
+            HideSortFilters -> _state.collapseSortByPrimaryFilter()
 
-            ShowTypeFilters -> _state.showTypeFilters()
-            HideTypeFilters -> _state.hideTypeFilters()
+            ShowTypeFilters -> _state.expandTypePrimaryFilter()
+            HideTypeFilters -> _state.collapseTypePrimaryFilter()
         }
 
     }
@@ -68,14 +73,17 @@ internal class ExploreViewModel @Inject constructor(
         action: SecondaryFilterAction,
     ) {
         when (action) {
-            SelectSortHeight -> _state.selectSortByHeight()
-            ClearSortHeight -> _state.clearSortByHeight()
-
-            SelectTypeSteel -> TODO()
-            ClearTypeSteel -> TODO()
-
-            SelectTypeWood -> TODO()
-            ClearTypeWood -> TODO()
+            ClearSortBySecondaryFilters -> _state.clearSortByFilters()
+            ClearTypeSecondaryFilters -> _state.clearTypeFilters()
+            SelectSortByDrop -> _state.selectSortByDrop()
+            SelectSortByGForce -> _state.selectSortByGForce()
+            SelectSortByHeight -> _state.selectSortByHeight()
+            SelectSortByInversions -> _state.selectSortByInversions()
+            SelectSortByLength -> _state.selectSortByLength()
+            SelectSortByMaxVertical -> _state.selectSortByMaxVertical()
+            SelectSortBySpeed -> _state.selectSortBySpeed()
+            SelectTypeSteel -> _state.selectTypeSteel()
+            SelectTypeWood -> _state.selectTypeWood()
         }
 
     }
