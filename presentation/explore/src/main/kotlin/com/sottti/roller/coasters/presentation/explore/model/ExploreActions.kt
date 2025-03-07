@@ -6,16 +6,15 @@ import androidx.compose.runtime.Immutable
 internal sealed class ExploreAction {
     @Immutable
     sealed class PrimaryFilterAction : ExploreAction() {
-        data object HideSortFilters : PrimaryFilterAction()
-        data object HideTypeFilters : PrimaryFilterAction()
         data object ShowSortFilters : PrimaryFilterAction()
+        data object HideSortFilters : PrimaryFilterAction()
         data object ShowTypeFilters : PrimaryFilterAction()
+        data object HideTypeFilters : PrimaryFilterAction()
     }
 
     @Immutable
     sealed class SecondaryFilterAction : ExploreAction() {
-        data object ClearSortBySecondaryFilters : SecondaryFilterAction()
-        data object ClearTypeSecondaryFilters : SecondaryFilterAction()
+        data object SelectSortByAlphabetical : SecondaryFilterAction()
         data object SelectSortByDrop : SecondaryFilterAction()
         data object SelectSortByGForce : SecondaryFilterAction()
         data object SelectSortByHeight : SecondaryFilterAction()
@@ -23,6 +22,7 @@ internal sealed class ExploreAction {
         data object SelectSortByLength : SecondaryFilterAction()
         data object SelectSortByMaxVertical : SecondaryFilterAction()
         data object SelectSortBySpeed : SecondaryFilterAction()
+        data object SelectTypeAll : SecondaryFilterAction()
         data object SelectTypeSteel : SecondaryFilterAction()
         data object SelectTypeWood : SecondaryFilterAction()
     }

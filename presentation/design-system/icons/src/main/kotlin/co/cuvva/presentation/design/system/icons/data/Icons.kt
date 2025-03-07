@@ -19,7 +19,7 @@ public object Icons {
     public object ArrowBack {
         public val Description: Int = R.string.description_icon_arrow_back
         public val Filled: IconState = IconState(
-            resId = R.drawable.ic_arrow_back_rounded,
+            resId = R.drawable.ic_arrow_back_rounded_filled,
             descriptionResId = Description,
         )
     }
@@ -27,7 +27,7 @@ public object Icons {
     public object ArrowDropDown {
         public val Description: Int = R.string.description_icon_arrow_drop_down
         public val Filled: IconState = IconState(
-            resId = R.drawable.ic_arrow_drop_down_rounded,
+            resId = R.drawable.ic_arrow_drop_down_rounded_filled,
             descriptionResId = Description,
         )
     }
@@ -35,7 +35,7 @@ public object Icons {
     public object ArrowDropUp {
         public val Description: Int = R.string.description_icon_arrow_drop_up
         public val Filled: IconState = IconState(
-            resId = R.drawable.ic_arrow_drop_up_rounded,
+            resId = R.drawable.ic_arrow_drop_up_rounded_filled,
             descriptionResId = Description,
         )
     }
@@ -91,7 +91,7 @@ public object Icons {
     public object CheckSmall {
         public val Description: Int = R.string.description_icon_check
         public val Filled: IconState = IconState(
-            resId = R.drawable.ic_check_small_rounded,
+            resId = R.drawable.ic_check_small_rounded_filled,
             descriptionResId = Description,
         )
     }
@@ -120,10 +120,18 @@ public object Icons {
         )
     }
 
+    public object FilterList {
+        public val Description: Int = R.string.description_icon_filter_list
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_filter_list_rounded_filled,
+            descriptionResId = Description,
+        )
+    }
+
     public object Language {
         public val Description: Int = R.string.description_icon_language
         public val Outlined: IconState = IconState(
-            resId = R.drawable.ic_language_rounded,
+            resId = R.drawable.ic_language_rounded_outlined,
             descriptionResId = Description,
         )
     }
@@ -131,15 +139,15 @@ public object Icons {
     public object LanguageEnglishGb {
         public val Description: Int = R.string.description_icon_language_english_gb
         public val Outlined: IconState = IconState(
-            resId = R.drawable.ic_language_gb_english_rounded,
+            resId = R.drawable.ic_language_gb_english_rounded_outlined,
             descriptionResId = Description,
         )
     }
 
     public object LanguageSpanish {
         public val Description: Int = R.string.description_icon_language_spanish
-        public val Outlinled: IconState = IconState(
-            resId = R.drawable.ic_language_spanish_rounded,
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_language_spanish_rounded_outlined,
             descriptionResId = Description,
         )
     }
@@ -184,8 +192,16 @@ public object Icons {
         )
     }
 
+    public object Sort {
+        public val Description: Int = R.string.description_icon_sort
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_sort_rounded_filled,
+            descriptionResId = Description,
+        )
+    }
+
     public object Star {
-        public val Description: Int = R.string.description_icon_star
+        public val Description: Int = R.string.description_icon_sort
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_star_rounded_filled,
             descriptionResId = Description,

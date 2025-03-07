@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.presentation.design.system.icons.data.Icons
+import co.cuvva.presentation.design.system.icons.model.IconState
 import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
@@ -20,11 +21,12 @@ public fun Chip(
     @StringRes labelResId: Int,
     selected: Boolean,
     onClick: () -> Unit,
+    leadingIcon: IconState? = null,
     expanded: Boolean? = null,
 ) {
     FilterChip(
         label = { Text.Vanilla(stringResource(labelResId)) },
-        leadingIcon = { LeadingIcon(selected) },
+        leadingIcon = leadingIcon?.let { { LeadingIcon(leadingIcon) } },
         trailingIcon = { expanded?.let { TrailingIcon(expanded) } },
         onClick = onClick,
         selected = selected || expanded == true,
@@ -33,15 +35,12 @@ public fun Chip(
 }
 
 @Composable
-private fun LeadingIcon(selected: Boolean) =
-    when {
-        selected -> Icon(
-            state = Icons.CheckSmall.Filled,
-            modifier = Modifier.size(FilterChipDefaults.IconSize),
-        )
-
-        else -> null
-    }
+private fun LeadingIcon(
+    state: IconState,
+) = Icon(
+    state = state,
+    modifier = Modifier.size(FilterChipDefaults.IconSize),
+)
 
 @Composable
 private fun TrailingIcon(expanded: Boolean) =
@@ -62,6 +61,7 @@ private fun ChipPreview(
         Chip(
             expanded = state.expanded,
             labelResId = state.labelResId,
+            leadingIcon = state.leadingIcon,
             onClick = state.onClick,
             selected = state.selected,
         )

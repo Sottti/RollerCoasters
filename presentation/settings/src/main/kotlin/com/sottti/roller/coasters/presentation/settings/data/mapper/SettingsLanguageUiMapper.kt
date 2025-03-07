@@ -29,7 +29,7 @@ internal fun Language.toPresentationModel(isSelected: Boolean): LanguageUi =
 
         Language.SpanishSpainLanguage -> SpanishSpainLanguage(
             text = R.string.language_spanish_spain,
-            icon = Icons.LanguageSpanish.Outlinled,
+            icon = Icons.LanguageSpanish.Outlined,
             selected = isSelected,
         )
 

@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
+import com.sottti.roller.coasters.domain.model.SortByFilter
+import com.sottti.roller.coasters.domain.model.TypeFilter
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
@@ -12,8 +14,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Prima
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowTypeFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearSortBySecondaryFilters
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.ClearTypeSecondaryFilters
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByAlphabetical
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByDrop
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByGForce
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByHeight
@@ -21,15 +22,30 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Secon
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByLength
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByMaxVertical
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortBySpeed
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeAll
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeSteel
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeWood
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreState
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.AlphabeticalFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.DropFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.GForceFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.HeightFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.InversionsFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.LengthFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.MaxVerticalFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.SpeedFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.AllFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.SteelFilter
+import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.WoodFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,13 +53,19 @@ internal class ExploreViewModel @Inject constructor(
     rollerCoastersRepository: RollerCoastersRepository,
 ) : ViewModel() {
 
+    private val _sortByFilter = MutableStateFlow(SortByFilter.ALPHABETICAL)
+    private val _typeFilter = MutableStateFlow(TypeFilter.ALL)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val _rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>> =
-        rollerCoastersRepository
-            .getRollerCoastersSortedByHeight()
-            .toUiModel()
+        combine(_typeFilter, _sortByFilter) { typeFilter, sortByFilter ->
+            rollerCoastersRepository
+                .getRollerCoasters(sortByFilter = sortByFilter, typeFilter = typeFilter)
+                .toUiModel()
+        }.flatMapLatest { it }
             .cachedIn(viewModelScope)
 
-    private val _state = MutableStateFlow(ExploreInitialStates.state(_rollerCoastersFlow))
+    private val _state = MutableStateFlow(initialState(_rollerCoastersFlow))
 
     val state: StateFlow<ExploreState> = _state.asStateFlow()
 
@@ -72,19 +94,42 @@ internal class ExploreViewModel @Inject constructor(
     private fun processSecondaryFilterAction(
         action: SecondaryFilterAction,
     ) {
+        updateSecondaryFilterQuery(action)
+        updateSecondaryFilterUi(action)
+    }
+
+    private fun updateSecondaryFilterUi(
+        action: SecondaryFilterAction,
+    ) {
         when (action) {
-            ClearSortBySecondaryFilters -> _state.clearSortByFilters()
-            ClearTypeSecondaryFilters -> _state.clearTypeFilters()
-            SelectSortByDrop -> _state.selectSortByDrop()
-            SelectSortByGForce -> _state.selectSortByGForce()
-            SelectSortByHeight -> _state.selectSortByHeight()
-            SelectSortByInversions -> _state.selectSortByInversions()
-            SelectSortByLength -> _state.selectSortByLength()
-            SelectSortByMaxVertical -> _state.selectSortByMaxVertical()
-            SelectSortBySpeed -> _state.selectSortBySpeed()
-            SelectTypeSteel -> _state.selectTypeSteel()
-            SelectTypeWood -> _state.selectTypeWood()
+            SelectSortByAlphabetical -> _state.select<AlphabeticalFilter>()
+            SelectSortByDrop -> _state.select<DropFilter>()
+            SelectSortByGForce -> _state.select<GForceFilter>()
+            SelectSortByHeight -> _state.select<HeightFilter>()
+            SelectSortByInversions -> _state.select<InversionsFilter>()
+            SelectSortByLength -> _state.select<LengthFilter>()
+            SelectSortByMaxVertical -> _state.select<MaxVerticalFilter>()
+            SelectSortBySpeed -> _state.select<SpeedFilter>()
+            SelectTypeAll -> _state.select<AllFilter>()
+            SelectTypeSteel -> _state.select<SteelFilter>()
+            SelectTypeWood -> _state.select<WoodFilter>()
         }
 
+    }
+
+    private fun updateSecondaryFilterQuery(action: SecondaryFilterAction) {
+        when (action) {
+            SelectSortByAlphabetical -> _sortByFilter.value = SortByFilter.ALPHABETICAL
+            SelectSortByDrop -> _sortByFilter.value = SortByFilter.DROP
+            SelectSortByGForce -> _sortByFilter.value = SortByFilter.G_FORCE
+            SelectSortByHeight -> _sortByFilter.value = SortByFilter.HEIGHT
+            SelectSortByInversions -> _sortByFilter.value = SortByFilter.INVERSIONS
+            SelectSortByLength -> _sortByFilter.value = SortByFilter.LENGTH
+            SelectSortByMaxVertical -> _sortByFilter.value = SortByFilter.MAX_VERTICAL
+            SelectSortBySpeed -> _sortByFilter.value = SortByFilter.SPEED
+            SelectTypeAll -> _typeFilter.value = TypeFilter.ALL
+            SelectTypeSteel -> _typeFilter.value = TypeFilter.STEEL
+            SelectTypeWood -> _typeFilter.value = TypeFilter.WOOD
+        }
     }
 }

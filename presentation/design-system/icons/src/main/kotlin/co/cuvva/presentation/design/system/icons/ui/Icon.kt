@@ -17,36 +17,43 @@ public fun Icon(
     onClick: (() -> Unit)? = null,
 ) {
     when {
-        crossfade -> Crossfade(targetState = state) { targetState -> Icon(targetState, onClick) }
-        else -> Icon(state, onClick)
+        crossfade -> Crossfade(targetState = state) { targetState ->
+            Icon(modifier, targetState, onClick)
+        }
+
+        else -> Icon(modifier, state, onClick)
     }
 }
 
 @Composable
 private fun Icon(
+    modifier: Modifier,
     state: IconState,
     onClick: (() -> Unit)? = null,
 ) {
     when {
-        onClick != null -> IconWithClick(state, onClick = onClick)
-        else -> StaticIcon(state)
+        onClick != null -> IconWithClick(modifier, state, onClick = onClick)
+        else -> StaticIcon(modifier, state)
     }
 }
 
 @Composable
 private fun IconWithClick(
+    modifier: Modifier,
     state: IconState,
     onClick: (() -> Unit),
 ) {
-    IconButton(onClick = onClick) { StaticIcon(state) }
+    IconButton(onClick = onClick) { StaticIcon(modifier, state) }
 }
 
 @Composable
 private fun StaticIcon(
+    modifier: Modifier,
     state: IconState,
 ) {
     MaterialIcon(
-        painter = painterResource(state.resId),
         contentDescription = stringResource(state.descriptionResId),
+        modifier = modifier,
+        painter = painterResource(state.resId),
     )
 }

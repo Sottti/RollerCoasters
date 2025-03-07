@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="chip_label_sort_by">Sort by</string>
+    <string name="chip_label_sort_by_alphabetical">Alphabetical</string>
     <string name="chip_label_sort_by_drop">Drop</string>
     <string name="chip_label_sort_by_g_force">G-Force</string>
     <string name="chip_label_sort_by_height">Height</string>
@@ -9,6 +10,7 @@
     <string name="chip_label_sort_by_max_vertical">Max vertical</string>
     <string name="chip_label_sort_by_speed">Speed</string>
     <string name="chip_label_type">Type</string>
+    <string name="chip_label_type_all">All</string>
     <string name="chip_label_type_steel">Steel</string>
     <string name="chip_label_type_wood">Wood</string>
 </resources>

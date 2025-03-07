@@ -67,10 +67,11 @@ private fun PrimaryFilterChip(
     onAction: (ExploreAction) -> Unit,
 ) {
     Chip(
-        labelResId = filter.labelResId,
-        selected = filter.selected,
         expanded = filter.expanded,
+        labelResId = filter.labelResId,
+        leadingIcon = filter.leadingIcon,
         onClick = { onAction(filter.action) },
+        selected = filter.selected,
     )
 }
 
@@ -82,8 +83,9 @@ private fun SecondaryFilterChip(
     if (filter.visible) {
         Chip(
             labelResId = filter.labelResId,
-            selected = filter.selected,
+            leadingIcon = filter.leadingIcon,
             onClick = { onAction(filter.action) },
+            selected = filter.selected,
         )
     }
 }

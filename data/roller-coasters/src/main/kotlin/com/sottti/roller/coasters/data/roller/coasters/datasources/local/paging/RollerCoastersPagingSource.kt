@@ -5,11 +5,15 @@ import androidx.paging.PagingState
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.domain.model.RollerCoaster
+import com.sottti.roller.coasters.domain.model.SortByFilter
+import com.sottti.roller.coasters.domain.model.TypeFilter
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
 internal class RollerCoastersPagingSource(
-    private val dao: RollerCoastersDao
+    private val dao: RollerCoastersDao,
+    private val sortByFilter: SortByFilter?,
+    private val typeFilter: TypeFilter?
 ) : PagingSource<Int, RollerCoaster>() {
 
     override suspend fun load(

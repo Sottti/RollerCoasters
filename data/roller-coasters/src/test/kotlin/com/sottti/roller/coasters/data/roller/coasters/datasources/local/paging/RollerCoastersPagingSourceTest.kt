@@ -24,11 +24,17 @@ internal class RollerCoastersPagingSourceTest {
 
     private lateinit var dao: RollerCoastersDao
     private lateinit var pagingSource: RollerCoastersPagingSource
+    private val sortByFilter = null
+    private val typeFilter = null
 
     @Before
     fun setup() {
         dao = mockk()
-        pagingSource = RollerCoastersPagingSource(dao)
+        pagingSource = RollerCoastersPagingSource(
+            dao = dao,
+            sortByFilter = sortByFilter,
+            typeFilter = typeFilter,
+        )
     }
 
     @Test

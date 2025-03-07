@@ -11,6 +11,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.Roller
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.model.SortByFilter
+import com.sottti.roller.coasters.domain.model.TypeFilter
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -30,10 +32,18 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getRollerCoastersSortedByHeight(): Flow<PagingData<RollerCoaster>> =
+    override fun getRollerCoasters(
+        sortByFilter: SortByFilter?,
+        typeFilter: TypeFilter?,
+    ): Flow<PagingData<RollerCoaster>> =
         Pager(
             config = pagerConfig,
-            pagingSourceFactory = { localDataSource.getPagedRollerCoastersSortedByHeight() }
+            pagingSourceFactory = {
+                localDataSource.getPagedRollerCoasters(
+                    sortByFilter = sortByFilter,
+                    typeFilter = typeFilter,
+                )
+            }
         ).flow
 
     override suspend fun getRollerCoaster(

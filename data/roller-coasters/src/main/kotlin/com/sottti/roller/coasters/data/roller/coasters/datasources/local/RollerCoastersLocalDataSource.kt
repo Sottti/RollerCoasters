@@ -12,6 +12,8 @@ import com.sottti.roller.coasters.domain.model.NotFound
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.model.SortByFilter
+import com.sottti.roller.coasters.domain.model.TypeFilter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
@@ -61,6 +63,13 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         }
     }
 
-    fun getPagedRollerCoastersSortedByHeight(): PagingSource<Int, RollerCoaster> =
-        RollerCoastersPagingSource(dao)
+    fun getPagedRollerCoasters(
+        sortByFilter: SortByFilter?,
+        typeFilter: TypeFilter?,
+    ): PagingSource<Int, RollerCoaster> =
+        RollerCoastersPagingSource(
+            dao = dao,
+            sortByFilter = sortByFilter,
+            typeFilter = typeFilter,
+        )
 }
