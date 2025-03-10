@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @InternalSerializationApi
 internal data class LocationRoomModel(
-    @ColumnInfo(name = "location_state") val state: String,
+    @ColumnInfo(name = RollerCoasterRoomModelConstants.COL_LOCATION_STATE) val state: String,
     @Embedded val coordinates: CoordinatesRoomModel?,
     val city: String,
     val country: String,

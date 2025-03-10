@@ -11,4 +11,8 @@ android {
 
 dependencies {
     api(project(module.domain.model))
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.truth)
 }

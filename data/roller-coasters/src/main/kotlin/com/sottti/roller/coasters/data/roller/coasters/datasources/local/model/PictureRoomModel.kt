@@ -8,10 +8,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @InternalSerializationApi
-@Entity(tableName = "pictures")
+@Entity(tableName = RollerCoasterRoomModelConstants.TABLE_PICTURES)
 internal data class PictureRoomModel(
-    @ColumnInfo(name = "picture_id") @PrimaryKey val id: Int,
-    @ColumnInfo(name = "picture_name") val name: String,
+    @ColumnInfo(name = RollerCoasterRoomModelConstants.COL_PICTURE_ID) @PrimaryKey val id: Int,
+    @ColumnInfo(name = RollerCoasterRoomModelConstants.COL_PICTURE_NAME) val name: String,
     val copyrightDate: String?,
     val copyrightName: String,
     val rollerCoasterId: Int,

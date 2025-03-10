@@ -23,7 +23,7 @@ import com.sottti.roller.coasters.domain.model.RollerCoasterName
 import com.sottti.roller.coasters.domain.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.model.Specs
 import com.sottti.roller.coasters.domain.model.Status
-import com.sottti.roller.coasters.utils.dates.mappers.toOriginalString
+import com.sottti.roller.coasters.utils.dates.mappers.toSortableString
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
@@ -59,7 +59,7 @@ private fun Coordinates.toRoom(): CoordinatesRoomModel =
 @OptIn(InternalSerializationApi::class)
 private fun Picture.toRoom(rollerCoasterId: RollerCoasterId) =
     PictureRoomModel(
-        copyrightDate = copyright.date?.toOriginalString(),
+        copyrightDate = copyright.date?.toSortableString(),
         copyrightName = copyright.author.value,
         id = id.value,
         name = name.value,
@@ -88,10 +88,10 @@ internal fun RollerCoaster.toPicturesRoom(): List<PictureRoomModel> =
 @OptIn(InternalSerializationApi::class)
 private fun Status.toRoom(): StatusRoomModel =
     StatusRoomModel(
-        closedDate = closedDate?.date?.toOriginalString(),
+        closedDate = closedDate?.date?.toSortableString(),
         current = current.value,
         former = former?.value,
-        openedDate = openedDate?.date?.toOriginalString(),
+        openedDate = openedDate?.date?.toSortableString(),
     )
 
 @OptIn(InternalSerializationApi::class)

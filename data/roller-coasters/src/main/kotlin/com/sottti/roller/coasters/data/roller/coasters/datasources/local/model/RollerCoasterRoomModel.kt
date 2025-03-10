@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @InternalSerializationApi
-@Entity(tableName = "roller_coasters")
+@Entity(tableName = RollerCoasterRoomModelConstants.TABLE_ROLLER_COASTERS)
 internal data class RollerCoasterRoomModel(
     @Embedded val location: LocationRoomModel,
     @Embedded val mainPicture: PictureRoomModel?,
