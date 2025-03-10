@@ -38,8 +38,8 @@
             <option value="$PROJECT_DIR$/presentation/design-system/dialogs" />
             <option value="$PROJECT_DIR$/presentation/design-system/dimensions" />
             <option value="$PROJECT_DIR$/presentation/design-system/icons" />
-            <option value="$PROJECT_DIR$/presentation/design-system/loading" />
             <option value="$PROJECT_DIR$/presentation/design-system/playground" />
+            <option value="$PROJECT_DIR$/presentation/design-system/progress-indicators" />
             <option value="$PROJECT_DIR$/presentation/design-system/roller-coaster-card" />
             <option value="$PROJECT_DIR$/presentation/design-system/switch" />
             <option value="$PROJECT_DIR$/presentation/design-system/text" />

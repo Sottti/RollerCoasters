@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.presentation.design.system.roller.coaster.car
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,13 +33,15 @@ public fun RollerCoasterCard(
     rollerCoasterName: String,
     stat: String?,
     statDetail: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    foreverLoading: Boolean = false,
 ) {
     Card(
         modifier = modifier,
-        onClick = {},
+        onClick = onClick,
     ) {
-        imageUrl?.let { Image(imageUrl) }
+        imageUrl?.let { Image(imageUrl = imageUrl, foreverLoading = foreverLoading) }
         Footer(
             parkName = parkName,
             rollerCoasterName = rollerCoasterName,
@@ -49,11 +52,17 @@ public fun RollerCoasterCard(
 }
 
 @Composable
-private fun Image(imageUrl: ImageUrl) {
+private fun Image(
+    imageUrl: ImageUrl,
+    foreverLoading: Boolean,
+) {
     Image(
         url = imageUrl,
         contentDescription = stringResource(R.string.image_content_description),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1.75f),
+        foreverLoading = foreverLoading,
     )
 }
 
@@ -99,7 +108,7 @@ private fun Footer(
 
 @Composable
 @PreviewLightDark
-private fun RollerCoasterCardPreview() {
+private fun RollerCoasterCardImageLoadedPreview() {
     RollerCoastersPreviewTheme {
         RollerCoasterCard(
             imageUrl = imageUrl,
@@ -107,6 +116,24 @@ private fun RollerCoasterCardPreview() {
             rollerCoasterName = rollerCoasterName,
             stat = stat,
             statDetail = statDetail,
+            foreverLoading = false,
+            onClick = {},
+        )
+    }
+}
+
+@Composable
+@PreviewLightDark
+private fun RollerCoasterCardImageLoadingPreview() {
+    RollerCoastersPreviewTheme {
+        RollerCoasterCard(
+            imageUrl = imageUrl,
+            parkName = parkName,
+            rollerCoasterName = rollerCoasterName,
+            stat = stat,
+            statDetail = statDetail,
+            foreverLoading = true,
+            onClick = {},
         )
     }
 }

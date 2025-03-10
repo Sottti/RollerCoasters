@@ -24,7 +24,7 @@ dependencies {
     implementation(project(module.data.rollerCoasters))
     implementation(project(module.presentation.designSystem.chip))
     implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.loading))
+    implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.imageLoading))

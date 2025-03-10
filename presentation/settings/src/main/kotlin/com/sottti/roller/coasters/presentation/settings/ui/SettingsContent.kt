@@ -11,8 +11,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicator
-import com.sottti.roller.coasters.presentation.design.system.loading.LoadingIndicatorSize
+import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
+import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastListItemState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
@@ -139,7 +139,7 @@ private fun DynamicColorTrailingContent(
             onCheckedChange = { onDynamicColorCheckedChange(it) },
         )
 
-        DynamicColorCheckedState.Loading -> SmallLoadingIndicator()
+        DynamicColorCheckedState.Loading -> SmallProgressIndicator()
     }
 }
 
@@ -161,7 +161,7 @@ private fun ThemeSetting(
 private fun ThemeTrailingContent(state: SelectedThemeState) {
     when (state) {
         is SelectedThemeState.Loaded -> Text.Vanilla(state.theme.text)
-        SelectedThemeState.Loading -> SmallLoadingIndicator()
+        SelectedThemeState.Loading -> SmallProgressIndicator()
     }
 }
 
@@ -183,7 +183,7 @@ private fun ColorContrastSetting(
 private fun ColorContrastTrailingContent(state: SelectedColorContrastState) {
     when (state) {
         is SelectedColorContrastState.Loaded -> Text.Vanilla(state.colorContrast.text)
-        SelectedColorContrastState.Loading -> SmallLoadingIndicator()
+        SelectedColorContrastState.Loading -> SmallProgressIndicator()
     }
 }
 
@@ -205,11 +205,11 @@ private fun LanguageSetting(
 private fun LanguageTrailingContent(state: SelectedLanguageState) {
     when (state) {
         is SelectedLanguageState.Loaded -> Text.Vanilla(state.language.text)
-        SelectedLanguageState.Loading -> SmallLoadingIndicator()
+        SelectedLanguageState.Loading -> SmallProgressIndicator()
     }
 }
 
 @Composable
-private fun SmallLoadingIndicator() {
-    LoadingIndicator(size = LoadingIndicatorSize.Small)
+private fun SmallProgressIndicator() {
+    ProgressIndicator(size = ProgressIndicatorSize.Small)
 }

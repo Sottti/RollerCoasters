@@ -16,7 +16,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
-import com.sottti.roller.coasters.presentation.design.system.loading.LoadingFullScreen
+import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import kotlinx.coroutines.flow.Flow
@@ -29,11 +29,13 @@ internal fun RollerCoastersList(
 ) {
     val rollerCoasters: LazyPagingItems<ExploreRollerCoaster> = state.collectAsLazyPagingItems()
 
-    Column(modifier = Modifier
-        .padding(paddingValues)
-        .fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxSize()
+    ) {
         when (rollerCoasters.loadState.refresh) {
-            is LoadState.Loading -> LoadingFullScreen()
+            is LoadState.Loading -> ProgressIndicator(modifier = Modifier.fillMaxSize())
             is LoadState.Error -> Error()
             else -> RollerCoasters(listState = listState, rollerCoasters = rollerCoasters)
         }
@@ -67,6 +69,7 @@ private fun RollerCoaster(
         rollerCoasterName = rollerCoaster.rollerCoasterName,
         stat = rollerCoaster.stat,
         statDetail = rollerCoaster.statDetail,
+        onClick = {},
     )
 }
 

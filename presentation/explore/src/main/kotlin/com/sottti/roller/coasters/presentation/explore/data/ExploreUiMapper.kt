@@ -23,8 +23,25 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     sortByFilter: SortByFilter,
 ): Flow<PagingData<ExploreRollerCoaster>> =
     map { pagingData ->
-        var indexCounter = 1
-        pagingData.map { rollerCoaster -> rollerCoaster.toUiModel(indexCounter++, sortByFilter) }
+        var currentRank = 1
+        var previousStat: String? = null
+        var itemsWithSameStat = 0
+
+        pagingData.map { rollerCoaster ->
+            val currentStat = rollerCoaster.contextualStat(sortByFilter)
+
+            when {
+                currentStat != null && currentStat == previousStat -> itemsWithSameStat++
+                else -> {
+                    currentRank += itemsWithSameStat
+                    itemsWithSameStat = 1
+                }
+            }
+
+            previousStat = currentStat
+
+            rollerCoaster.toUiModel(currentRank, sortByFilter)
+        }
     }
 
 private fun RollerCoaster.toUiModel(

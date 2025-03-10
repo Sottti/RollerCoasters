@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "co.sottti.roller.coasters.presentation.design.system.loading"
+    namespace = "co.sottti.roller.coasters.presentation.design.system.progress.indicators"
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }

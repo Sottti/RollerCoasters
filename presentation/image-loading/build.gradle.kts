@@ -19,5 +19,7 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.startup.runtime)
     implementation(project(module.data.network))
+    implementation(project(module.presentation.designSystem.progressIndicators))
+    implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
 }
