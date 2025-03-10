@@ -16,6 +16,7 @@ internal fun BottomBar(
     actions: HomeActions,
     navController: NavController,
     navigationBarItems: HomeNavigationBarItems,
+    onNavigationBarItemClick: (item: HomeNavigationBarItem) -> Unit,
 ) {
     NavigationBar {
         navigationBarItems.items.forEach { item ->
@@ -23,7 +24,14 @@ internal fun BottomBar(
                 icon = { Icon(item.icon) },
                 label = { Text.Vanilla(item.labelResId) },
                 selected = navigationBarItems.selectedItem.route == item.destination.route,
-                onClick = { onClick(actions = actions, item = item, navController = navController) }
+                onClick = {
+                    onClick(
+                        actions = actions,
+                        item = item,
+                        navController = navController,
+                        onNavigationBarItemClick = onNavigationBarItemClick,
+                    )
+                }
             )
         }
     }
@@ -33,7 +41,9 @@ private fun onClick(
     actions: HomeActions,
     item: HomeNavigationBarItem,
     navController: NavController,
+    onNavigationBarItemClick: (item: HomeNavigationBarItem) -> Unit,
 ) {
+    onNavigationBarItemClick(item)
     actions.onDestinationSelected(item.destination)
     navController.navigate(item.destination.route) {
         popUpTo(navController.graph.findStartDestination().id) { saveState = true }

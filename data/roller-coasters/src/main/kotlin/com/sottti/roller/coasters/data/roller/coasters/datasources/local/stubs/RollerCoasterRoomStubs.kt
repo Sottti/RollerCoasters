@@ -130,14 +130,20 @@ internal val designRoomModel = DesignRoomModel(
 @OptIn(InternalSerializationApi::class)
 internal val rideRoomModel = RideRoomModel(
     drop = listOf(DROP),
+    dropMax = DROP,
     duration = listOf(DURATION_IN_SECONDS),
     gForce = listOf(GFORCE),
+    gForceMax = GFORCE,
     height = listOf(HEIGHT),
+    heightMax = HEIGHT,
     inversions = listOf(INVERSIONS),
+    inversionsMax = INVERSIONS,
     length = listOf(LENGTH),
-    maxHeight = HEIGHT,
+    lengthMax = LENGTH,
     maxVertical = listOf(DEGREES),
+    maxVerticalMax = DEGREES,
     speed = listOf(SPEED),
+    speedMax = SPEED,
     trackNames = null,
 )
 

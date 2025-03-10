@@ -10,9 +10,10 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 
 @Composable
 public fun LoadingIndicator(
-    size: LoadingIndicatorSize = LoadingIndicatorSize.Medium
+    modifier: Modifier = Modifier,
+    size: LoadingIndicatorSize = LoadingIndicatorSize.Medium,
 ) {
-    CircularProgressIndicator(modifier = Modifier.size(loadingIndicatorSize(size)))
+    CircularProgressIndicator(modifier = modifier then modifier.size(loadingIndicatorSize(size)))
 }
 
 @Composable

@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.Flow
 
 public interface RollerCoastersRepository {
     public fun getRollerCoasters(
-        sortByFilter: SortByFilter? = null,
-        typeFilter: TypeFilter? = null,
+        sortByFilter: SortByFilter,
+        typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>>
 
     public suspend fun getRollerCoaster(id: RollerCoasterId): Result<RollerCoaster>

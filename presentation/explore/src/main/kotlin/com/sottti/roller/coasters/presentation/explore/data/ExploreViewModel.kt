@@ -61,7 +61,7 @@ internal class ExploreViewModel @Inject constructor(
         combine(_typeFilter, _sortByFilter) { typeFilter, sortByFilter ->
             rollerCoastersRepository
                 .getRollerCoasters(sortByFilter = sortByFilter, typeFilter = typeFilter)
-                .toUiModel()
+                .toUiModel(sortByFilter)
         }.flatMapLatest { it }
             .cachedIn(viewModelScope)
 

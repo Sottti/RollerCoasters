@@ -5,35 +5,37 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import co.cuvva.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sottti.roller.coasters.presentation.design.system.loading.LoadingFullScreen
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import com.sottti.roller.coasters.presentation.explore.model.ExploreState
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 internal fun RollerCoastersList(
     listState: LazyListState,
-    state: ExploreState,
+    paddingValues: PaddingValues,
+    state: Flow<PagingData<ExploreRollerCoaster>>,
 ) {
-    val rollerCoasters: LazyPagingItems<ExploreRollerCoaster> =
-        state.rollerCoastersFlow.collectAsLazyPagingItems()
+    val rollerCoasters: LazyPagingItems<ExploreRollerCoaster> = state.collectAsLazyPagingItems()
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier
+        .padding(paddingValues)
+        .fillMaxSize()) {
         when (rollerCoasters.loadState.refresh) {
-            is LoadState.Loading -> Loading()
+            is LoadState.Loading -> LoadingFullScreen()
             is LoadState.Error -> Error()
-            else -> RollerCoasters(
-                listState = listState,
-                rollerCoasters = rollerCoasters,
-            )
+            else -> RollerCoasters(listState = listState, rollerCoasters = rollerCoasters)
         }
     }
 }
@@ -66,11 +68,6 @@ private fun RollerCoaster(
         stat = rollerCoaster.stat,
         statDetail = rollerCoaster.statDetail,
     )
-}
-
-@Composable
-private fun Loading() {
-    Text.Vanilla("Loading...")
 }
 
 @Composable

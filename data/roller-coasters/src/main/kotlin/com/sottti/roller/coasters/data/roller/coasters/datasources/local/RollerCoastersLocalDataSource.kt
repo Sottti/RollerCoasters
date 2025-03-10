@@ -64,8 +64,8 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     }
 
     fun getPagedRollerCoasters(
-        sortByFilter: SortByFilter?,
-        typeFilter: TypeFilter?,
+        sortByFilter: SortByFilter,
+        typeFilter: TypeFilter,
     ): PagingSource<Int, RollerCoaster> =
         RollerCoastersPagingSource(
             dao = dao,

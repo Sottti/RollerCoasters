@@ -6,6 +6,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
@@ -26,8 +28,11 @@ import com.sottti.roller.coasters.presentation.settings.ui.SettingsUi
 internal fun NavigationBar(
     viewModel: HomeViewModel,
 ) {
+    val startDestination = Explore.route
     val state by viewModel.state.collectAsStateWithLifecycle()
     val navController = rememberNavController()
+    val selectedTab by remember { mutableStateOf(startDestination) }
+    val scrollToTopCallbacks = remember { mutableMapOf<String, () -> Unit>() }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     Scaffold(
@@ -37,25 +42,27 @@ internal fun NavigationBar(
                 navController = navController,
                 navigationBarItems = state.items,
                 actions = viewModel.actions,
+                onNavigationBarItemClick = { homeNavigationBarItem ->
+                    if (selectedTab == homeNavigationBarItem.destination.route) {
+                        scrollToTopCallbacks[homeNavigationBarItem.destination.route]?.invoke()
+                    }
+                },
             )
         },
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Explore.route,
+            startDestination = startDestination,
         ) {
             composable(Explore.route) {
-                ExploreUi(navController)
+                ExploreUi(
+                    navController = navController,
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore.route] = callback },
+                )
             }
-            composable(Favourites.route) {
-                FavouritesUi()
-            }
-            composable(AboutMe.route) {
-                AboutMeUi()
-            }
-            composable(Settings.route) {
-                SettingsUi(navController)
-            }
+            composable(Favourites.route) { FavouritesUi() }
+            composable(AboutMe.route) { AboutMeUi() }
+            composable(Settings.route) { SettingsUi(navController) }
         }
     }
 }

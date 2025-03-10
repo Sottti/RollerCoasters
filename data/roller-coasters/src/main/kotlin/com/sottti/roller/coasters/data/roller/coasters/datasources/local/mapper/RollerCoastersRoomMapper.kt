@@ -121,20 +121,31 @@ private fun Design.toRoom(): DesignRoomModel =
 private fun Ride.toRoom(): RideRoomModel =
     RideRoomModel(
         drop = toRoomDrop(),
+        dropMax = toRoomMaxDrop(),
         duration = toRoomDuration(),
         gForce = toRoomGForce(),
+        gForceMax = toRoomMaxGForce(),
         height = toRoomHeight(),
+        heightMax = toRoomMaxHeight(),
         inversions = toRoomInversions(),
+        inversionsMax = toRoomMaxInversions(),
         length = toRoomLength(),
-        maxHeight = toRoomMaxHeight(),
+        lengthMax = toRoomMaxLength(),
         maxVertical = toRoomMaxVertical(),
+        maxVerticalMax = toRoomMaxVerticalMax(),
         speed = toRoomSpeed(),
+        speedMax = toRoomMaxSpeed(),
         trackNames = toRoomTrackNames(),
     )
 
 private fun Ride.toRoomDrop(): List<Double>? = when (this) {
     is SingleTrackRide -> drop?.let { listOf(it.meters.value) }
     is MultiTrackRide -> drop?.map { it.meters.value }
+}
+
+private fun Ride.toRoomMaxDrop(): Double? = when (this) {
+    is SingleTrackRide -> drop?.meters?.value
+    is MultiTrackRide -> drop?.maxOfOrNull { it.meters.value }
 }
 
 private fun Ride.toRoomDuration(): List<Int>? = when (this) {
@@ -145,6 +156,11 @@ private fun Ride.toRoomDuration(): List<Int>? = when (this) {
 private fun Ride.toRoomGForce(): List<Double>? = when (this) {
     is SingleTrackRide -> gForce?.let { listOf(it.value) }
     is MultiTrackRide -> gForce?.map { it.value }
+}
+
+private fun Ride.toRoomMaxGForce(): Double? = when (this) {
+    is SingleTrackRide -> gForce?.value
+    is MultiTrackRide -> gForce?.maxOfOrNull { it.value }
 }
 
 private fun Ride.toRoomHeight(): List<Double>? = when (this) {
@@ -162,9 +178,19 @@ private fun Ride.toRoomInversions(): List<Int>? = when (this) {
     is MultiTrackRide -> inversions?.map { it.value }
 }
 
+private fun Ride.toRoomMaxInversions(): Int? = when (this) {
+    is SingleTrackRide -> inversions?.value
+    is MultiTrackRide -> inversions?.maxOfOrNull { it.value }
+}
+
 private fun Ride.toRoomLength(): List<Double>? = when (this) {
     is SingleTrackRide -> length?.let { listOf(it.meters.value) }
     is MultiTrackRide -> length?.map { it.meters.value }
+}
+
+private fun Ride.toRoomMaxLength(): Double? = when (this) {
+    is SingleTrackRide -> length?.meters?.value
+    is MultiTrackRide -> length?.maxOfOrNull { it.meters.value }
 }
 
 private fun Ride.toRoomMaxVertical(): List<Int>? = when (this) {
@@ -172,9 +198,19 @@ private fun Ride.toRoomMaxVertical(): List<Int>? = when (this) {
     is MultiTrackRide -> maxVertical?.map { it.degrees.value }
 }
 
+private fun Ride.toRoomMaxVerticalMax(): Int? = when (this) {
+    is SingleTrackRide -> maxVertical?.degrees?.value
+    is MultiTrackRide -> maxVertical?.maxOfOrNull { it.degrees.value }
+}
+
 private fun Ride.toRoomSpeed(): List<Double>? = when (this) {
     is SingleTrackRide -> speed?.let { listOf(it.kmh.value) }
     is MultiTrackRide -> speed?.map { it.kmh.value }
+}
+
+private fun Ride.toRoomMaxSpeed(): Double? = when (this) {
+    is SingleTrackRide -> speed?.kmh?.value
+    is MultiTrackRide -> speed?.maxOfOrNull { it.kmh.value }
 }
 
 private fun Ride.toRoomTrackNames(): List<String>? = when (this) {

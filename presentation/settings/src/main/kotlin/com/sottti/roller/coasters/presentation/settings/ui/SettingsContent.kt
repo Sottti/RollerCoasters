@@ -211,5 +211,5 @@ private fun LanguageTrailingContent(state: SelectedLanguageState) {
 
 @Composable
 private fun SmallLoadingIndicator() {
-    LoadingIndicator(LoadingIndicatorSize.Small)
+    LoadingIndicator(size = LoadingIndicatorSize.Small)
 }

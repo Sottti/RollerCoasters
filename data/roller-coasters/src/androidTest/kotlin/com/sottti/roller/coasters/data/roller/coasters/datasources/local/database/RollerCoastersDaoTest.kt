@@ -9,8 +9,6 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.a
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.withId
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.withMaxHeight
 import com.sottti.roller.coasters.data.roller.coasters.stubs.COASTER_NAME_ANOTHER
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -178,34 +176,6 @@ internal class RollerCoastersDaoTest {
         val result = dao.getRollerCoasters(mixedIds)
 
         assertThat(result.map { it.id }).isEqualTo(listOf(rollerCoasterRoomModel).map { it.id })
-    }
-
-    @Test
-    fun getPagedRollerCoastersSortedByHeight_shouldReturnPagedResults() = runTest {
-        val rollerCoasters = listOf(
-            rollerCoasterRoomModel.withId(1).withMaxHeight(maxHeight = 100.0),
-            rollerCoasterRoomModel.withId(2).withMaxHeight(maxHeight = 200.0),
-            rollerCoasterRoomModel.withId(3).withMaxHeight(maxHeight = 150.0),
-        )
-
-        dao.insertRollerCoasters(pictures = emptyList(), rollerCoasters = rollerCoasters)
-
-        val result = dao.getPagedRollerCoastersSortedByHeight(limit = 2, offset = 0)
-
-        assertThat(result).hasSize(2)
-        assertThat(result.map { rollerCoaster -> rollerCoaster.id }).isEqualTo(listOf(2, 3))
-    }
-
-    @Test
-    fun getPagedRollerCoastersSortedByHeight_withHighOffset_shouldReturnEmptyList() = runTest {
-        dao.insertRollerCoasters(
-            pictures = emptyList(),
-            rollerCoasters = listOf(rollerCoasterRoomModel),
-        )
-
-        val result = dao.getPagedRollerCoastersSortedByHeight(limit = 10, offset = 100)
-
-        assertThat(result).isEmpty()
     }
 }
 

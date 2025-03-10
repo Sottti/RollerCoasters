@@ -4,7 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RawQuery
 import androidx.room.Transaction
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi
@@ -44,10 +46,7 @@ internal interface RollerCoastersDao {
     @Query("SELECT * FROM pictures WHERE rollerCoasterId = :id")
     suspend fun getPictures(id: Int): List<PictureRoomModel>
 
+    @RawQuery
     @OptIn(InternalSerializationApi::class)
-    @Query("SELECT * FROM roller_coasters ORDER BY maxHeight DESC LIMIT :limit OFFSET :offset")
-    suspend fun getPagedRollerCoastersSortedByHeight(
-        limit: Int,
-        offset: Int,
-    ): List<RollerCoasterRoomModel>
+    suspend fun getPagedRollerCoasters(query: SupportSQLiteQuery): List<RollerCoasterRoomModel>
 }

@@ -33,8 +33,8 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     }
 
     override fun getRollerCoasters(
-        sortByFilter: SortByFilter?,
-        typeFilter: TypeFilter?,
+        sortByFilter: SortByFilter,
+        typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>> =
         Pager(
             config = pagerConfig,

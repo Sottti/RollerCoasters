@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.createRollerCoastersQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.SortByFilter
@@ -12,8 +13,8 @@ import kotlinx.serialization.InternalSerializationApi
 @OptIn(InternalSerializationApi::class)
 internal class RollerCoastersPagingSource(
     private val dao: RollerCoastersDao,
-    private val sortByFilter: SortByFilter?,
-    private val typeFilter: TypeFilter?
+    private val sortByFilter: SortByFilter,
+    private val typeFilter: TypeFilter,
 ) : PagingSource<Int, RollerCoaster>() {
 
     override suspend fun load(
@@ -23,16 +24,16 @@ internal class RollerCoastersPagingSource(
             val page = params.key ?: 0
             val pageSize = params.loadSize
 
-            val rollerCoastersDomain =
-                dao
-                    .getPagedRollerCoastersSortedByHeight(
-                        limit = pageSize,
-                        offset = page * pageSize,
-                    )
-                    .map { rollerCoaster ->
-                        val pictures = dao.getPictures(rollerCoaster.id)
-                        rollerCoaster.toDomain(pictures)
-                    }
+            val query = createRollerCoastersQuery(
+                limit = pageSize,
+                offset = page * pageSize,
+                sortByFilter = sortByFilter,
+                typeFilter = typeFilter,
+            )
+
+            val rollerCoastersDomain = dao
+                .getPagedRollerCoasters(query = query)
+                .map { rollerCoaster -> rollerCoaster.toDomain(dao.getPictures(rollerCoaster.id)) }
 
             LoadResult.Page(
                 data = rollerCoastersDomain,
