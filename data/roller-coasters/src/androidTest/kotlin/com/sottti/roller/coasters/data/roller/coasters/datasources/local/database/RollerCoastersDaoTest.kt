@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local.database
 
 import androidx.room.Room
+import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
@@ -84,6 +85,13 @@ internal class RollerCoastersDaoTest {
     }
 
     @Test
+    fun insertRollerCoastersWithoutPicturesDirectly() = runTest {
+        dao.insertRollerCoastersWithoutPictures(listOf(rollerCoasterRoomModel))
+        val result = dao.getRollerCoaster(rollerCoasterRoomModel.id)
+        assertThat(result).isEqualTo(rollerCoasterRoomModel)
+    }
+
+    @Test
     fun retrieveNonExistentRollerCoaster() = runTest {
         val result = dao.getRollerCoaster(NON_EXISTENT_ID)
         assertThat(result).isNull()
@@ -142,7 +150,9 @@ internal class RollerCoastersDaoTest {
         )
 
         val updatedPicture =
-            anotherNotMainPictureRoomModel.copy(rollerCoasterId = rollerCoasterRoomModel.id)
+            anotherNotMainPictureRoomModel
+                .copy(rollerCoasterId = rollerCoasterRoomModel.id)
+
         dao.insertRollerCoasters(
             pictures = listOf(updatedPicture),
             rollerCoasters = listOf(rollerCoasterRoomModel)
@@ -151,6 +161,20 @@ internal class RollerCoastersDaoTest {
         val result = dao.getPictures(rollerCoasterRoomModel.id)
 
         assertThat(result).containsExactly(updatedPicture)
+    }
+
+    @Test
+    fun insertMultipleRollerCoastersAndPictures() = runTest {
+        val rollerCoasters = listOf(rollerCoasterRoomModel, anotherRollerCoasterRoomModel)
+        val pictures = listOf(notMainPictureRoomModel, anotherNotMainPictureRoomModel)
+
+        dao.insertRollerCoasters(pictures, rollerCoasters)
+
+        val retrievedCoasters = dao.getRollerCoasters(rollerCoasters.map { it.id })
+        val retrievedPictures = dao.getPictures(rollerCoasterRoomModel.id)
+
+        assertThat(retrievedCoasters).containsExactlyElementsIn(rollerCoasters)
+        assertThat(retrievedPictures).contains(notMainPictureRoomModel)
     }
 
     @Test
@@ -176,6 +200,28 @@ internal class RollerCoastersDaoTest {
         val result = dao.getRollerCoasters(mixedIds)
 
         assertThat(result.map { it.id }).isEqualTo(listOf(rollerCoasterRoomModel).map { it.id })
+    }
+
+    @Test
+    fun getRollerCoasters_shouldReturnSortedById() = runTest {
+        val rollerCoasters = listOf(
+            rollerCoasterRoomModel.copy(id = 2),
+            anotherRollerCoasterRoomModel.copy(id = 1),
+        )
+        dao.insertRollerCoasters(emptyList(), rollerCoasters)
+        val result = dao.getRollerCoasters(listOf(1, 2))
+        assertThat(result.map { it.id }).isEqualTo(listOf(1, 2)) // Ascending order
+    }
+
+    @Test
+    fun getPagedRollerCoasters_shouldReturnPagedResults() = runTest {
+        dao.insertRollerCoasters(
+            pictures = listOf(notMainPictureRoomModel),
+            rollerCoasters = listOf(rollerCoasterRoomModel, anotherRollerCoasterRoomModel)
+        )
+        val query = SimpleSQLiteQuery("SELECT * FROM roller_coasters LIMIT 1 OFFSET 0")
+        val result = dao.getPagedRollerCoasters(query)
+        assertThat(result).containsExactly(rollerCoasterRoomModel)
     }
 }
 

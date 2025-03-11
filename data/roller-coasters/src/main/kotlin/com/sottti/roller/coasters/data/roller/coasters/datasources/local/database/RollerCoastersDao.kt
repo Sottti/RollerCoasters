@@ -21,6 +21,7 @@ internal interface RollerCoastersDao {
         rollerCoasters: List<RollerCoasterRoomModel>,
     ) {
         insertRollerCoastersWithoutPictures(rollerCoasters)
+        rollerCoasters.forEach { rollerCoaster -> deletePictures(rollerCoaster.id) }
         insertPictures(pictures)
     }
 
@@ -33,6 +34,9 @@ internal interface RollerCoastersDao {
     @OptIn(InternalSerializationApi::class)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPictures(pictures: List<PictureRoomModel>)
+
+    @Query("DELETE FROM pictures WHERE rollerCoasterId = :rollerCoasterId")
+    suspend fun deletePictures(rollerCoasterId: Int)
 
     @OptIn(InternalSerializationApi::class)
     @Query("SELECT * FROM roller_coasters WHERE id = :id")

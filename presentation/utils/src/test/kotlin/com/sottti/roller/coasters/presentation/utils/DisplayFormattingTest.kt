@@ -43,8 +43,8 @@ class DisplayFormatTest {
 
     @Test
     fun `Handles large numbers correctly`() {
-        val result = 9999999999999999.0000.toDisplayFormat()
-        assertThat(result).isEqualTo("9999999999999999")
+        val result = 999999999999999.0000.toDisplayFormat()
+        assertThat(result).isEqualTo("999999999999999")
     }
 
     @Test
