@@ -23,7 +23,7 @@ import com.sottti.roller.coasters.domain.model.RollerCoasterName
 import com.sottti.roller.coasters.domain.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.model.Specs
 import com.sottti.roller.coasters.domain.model.Status
-import com.sottti.roller.coasters.utils.dates.mappers.toSortableString
+import com.sottti.roller.coasters.utils.time.dates.mappers.toSortableString
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)

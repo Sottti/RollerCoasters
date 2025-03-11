@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api
 
 import com.sottti.roller.coasters.data.network.fetch
 import com.sottti.roller.coasters.data.network.model.ResultApiModel
-import com.sottti.roller.coasters.data.network.model.safeApiCall
+import com.sottti.roller.coasters.data.network.safeApiCall
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoastersApiModel
 import com.sottti.roller.coasters.domain.model.RollerCoasterId

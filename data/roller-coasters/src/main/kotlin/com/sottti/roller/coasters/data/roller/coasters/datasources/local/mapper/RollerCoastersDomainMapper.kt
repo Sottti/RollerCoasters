@@ -67,7 +67,7 @@ import com.sottti.roller.coasters.domain.model.State
 import com.sottti.roller.coasters.domain.model.Status
 import com.sottti.roller.coasters.domain.model.Train
 import com.sottti.roller.coasters.domain.model.Type
-import com.sottti.roller.coasters.utils.dates.mappers.toDate
+import com.sottti.roller.coasters.utils.time.dates.mappers.toDate
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)

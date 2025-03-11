@@ -10,7 +10,7 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.Test
 
-internal class ColorContrastTest {
+internal class SystemSettingsTest {
 
     @Test
     fun `contrast below 0 returns low contrast on sdk level 34`() {

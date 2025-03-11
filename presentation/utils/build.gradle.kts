@@ -7,3 +7,8 @@ plugins {
 android {
     namespace = "com.sottti.roller.coasters.presentation.utils"
 }
+
+dependencies {
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+}

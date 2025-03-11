@@ -22,7 +22,7 @@ dependencies {
     implementation(libs.room)
     implementation(libs.room.paging)
     implementation(project(module.data.network))
-    implementation(project(module.utils.dates))
+    implementation(project(module.utils.dateTime))
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)
 

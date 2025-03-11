@@ -46,6 +46,6 @@ include(
     ":presentation:settings",
     ":presentation:top-bars",
     ":presentation:utils",
-    ":utils:dates",
+    ":utils:time-dates",
     ":utils:device",
 )
