@@ -35,7 +35,7 @@
       <SelectionState runConfigName="presentation.about-me">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="getPagedRollerCoasters_shouldReturnPagedResults()">
+      <SelectionState runConfigName="SettingsLocalDataSourceTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="RollerCoastersDaoTest">

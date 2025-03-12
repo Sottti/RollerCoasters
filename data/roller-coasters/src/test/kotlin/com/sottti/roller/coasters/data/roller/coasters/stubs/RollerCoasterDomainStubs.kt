@@ -1,5 +1,43 @@
 package com.sottti.roller.coasters.data.roller.coasters.stubs
 
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.CITY
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ARRANGEMENT
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_DESIGNER
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ELEMENT
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ID
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ID_ANOTHER
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_NAME
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_TRAIN
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_TYPE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COPYRIGHT_DATE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COST
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COUNTRY
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DEGREES
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DROP
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DURATION_IN_SECONDS
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.GFORCE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.HEIGHT
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.INVERSIONS
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LATITUDE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LENGTH
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LONGITUDE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.MANUFACTURER
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.MODEL
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.OPENED_DATE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PARK_ID
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PARK_NAME
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_AUTHOR
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_ANOTHER_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_ANOTHER_NOT_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_NOT_MAIN
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_URL
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.REGION
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.RESTRAINTS
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.RIDERS_PER_HOUR
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.SPEED
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.STATE
+import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.STATUS
 import com.sottti.roller.coasters.domain.model.AmusementPark
 import com.sottti.roller.coasters.domain.model.Arrangement
 import com.sottti.roller.coasters.domain.model.Author
@@ -171,6 +209,9 @@ internal val rollerCoaster = RollerCoaster(
     specs = specs,
     status = status,
 )
+
+internal val rollerCoasterWithoutOtherPictures =
+    rollerCoaster.copy(pictures = rollerCoaster.pictures.copy(other = emptyList()))
 
 internal val anotherRollerCoaster = rollerCoaster.copy(
     id = anotherRollerCoasterId,

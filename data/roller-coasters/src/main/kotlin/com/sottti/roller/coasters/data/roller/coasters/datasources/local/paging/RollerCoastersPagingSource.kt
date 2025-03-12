@@ -31,14 +31,14 @@ internal class RollerCoastersPagingSource(
                 typeFilter = typeFilter,
             )
 
-            val rollerCoastersDomain = dao
+            val rollerCoasters = dao
                 .getPagedRollerCoasters(query = query)
                 .map { rollerCoaster -> rollerCoaster.toDomain(dao.getPictures(rollerCoaster.id)) }
 
             LoadResult.Page(
-                data = rollerCoastersDomain,
+                data = rollerCoasters,
                 prevKey = if (page == 0) null else page - 1,
-                nextKey = if (rollerCoastersDomain.size < pageSize) null else page + 1,
+                nextKey = if (rollerCoasters.size < pageSize) null else page + 1,
             )
 
         } catch (e: Exception) {

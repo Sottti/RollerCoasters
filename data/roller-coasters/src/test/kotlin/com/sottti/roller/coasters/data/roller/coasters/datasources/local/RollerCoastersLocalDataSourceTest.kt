@@ -4,11 +4,18 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherNotMainPictureRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
+import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterWithoutOtherPictures
 import com.sottti.roller.coasters.domain.model.NotFound
+import com.sottti.roller.coasters.domain.model.SortByFilter.ALPHABETICAL
+import com.sottti.roller.coasters.domain.model.TypeFilter.ALL
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
@@ -34,7 +41,7 @@ internal class RollerCoastersLocalDataSourceTest {
 
     @Test
     @OptIn(InternalSerializationApi::class)
-    fun `store roller coaster calls store roller coaster with single item`() = runTest {
+    fun `store roller coaster with single item`() = runTest {
         coEvery {
             dao.insertRollerCoasters(
                 pictures = listOf(notMainPictureRoomModel),
@@ -54,6 +61,33 @@ internal class RollerCoastersLocalDataSourceTest {
 
     @Test
     @OptIn(InternalSerializationApi::class)
+    fun `store roller coasters with multiple items`() = runTest {
+        coEvery {
+            dao.insertRollerCoasters(
+                pictures = listOf(notMainPictureRoomModel, anotherNotMainPictureRoomModel),
+                rollerCoasters = listOf(rollerCoasterRoomModel, anotherRollerCoasterRoomModel),
+            )
+        } just runs
+
+        localDataSource.storeRollerCoasters(listOf(rollerCoaster, anotherRollerCoaster))
+
+        coVerify(exactly = 1) {
+            dao.insertRollerCoasters(
+                pictures = listOf(notMainPictureRoomModel, anotherNotMainPictureRoomModel),
+                rollerCoasters = listOf(rollerCoasterRoomModel, anotherRollerCoasterRoomModel),
+            )
+        }
+    }
+
+    @Test
+    @OptIn(InternalSerializationApi::class)
+    fun `store roller coasters when list is empty`() = runTest {
+        localDataSource.storeRollerCoasters(emptyList())
+        coVerify(exactly = 0) { dao.insertRollerCoasters(any(), any()) }
+    }
+
+    @Test
+    @OptIn(InternalSerializationApi::class)
     fun `get roller coaster returns roller coaster when data exists`() = runTest {
         coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns rollerCoasterRoomModel
         coEvery { dao.getPictures(rollerCoasterId.value) } returns listOf(notMainPictureRoomModel)
@@ -65,11 +99,28 @@ internal class RollerCoastersLocalDataSourceTest {
 
     @Test
     @OptIn(InternalSerializationApi::class)
-    fun `ger roller coaster returns error when not found`() = runTest {
+    fun `get roller coaster when not found`() = runTest {
         coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns null
 
         val result = localDataSource.getRollerCoaster(rollerCoasterId)
 
         assertThat(result).isEqualTo(Err(NotFound))
+    }
+
+    @Test
+    @OptIn(InternalSerializationApi::class)
+    fun `get roller coaster when pictures are missing`() = runTest {
+        coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns rollerCoasterRoomModel
+        coEvery { dao.getPictures(rollerCoasterId.value) } returns emptyList()
+
+        val result = localDataSource.getRollerCoaster(rollerCoasterId)
+
+        assertThat(result).isEqualTo(Ok(rollerCoasterWithoutOtherPictures))
+    }
+
+    @Test
+    fun `get paged roller coasters returns a paging source`() {
+        val result = localDataSource.getPagedRollerCoasters(ALPHABETICAL, ALL)
+        assertThat(result).isInstanceOf(RollerCoastersPagingSource::class.java)
     }
 }

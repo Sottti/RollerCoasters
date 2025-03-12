@@ -1,18 +1,18 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper
 
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_DROP_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_G_FORCE_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_HEIGHT_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_INVERSIONS_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_LENGTH_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_MAX_VERTICAL_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_NAME_CURRENT
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_OPENED_DATE
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_SPEED_MAX
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.COL_TYPE
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModelConstants.TABLE_ROLLER_COASTERS
-import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModelConstants
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_DROP_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_G_FORCE_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_HEIGHT_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_INVERSIONS_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_LENGTH_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_MAX_VERTICAL_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_NAME_CURRENT
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_OPENED_DATE
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_SPEED_MAX
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_TYPE
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.TABLE_ROLLER_COASTERS
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoasterApiConstants
 import com.sottti.roller.coasters.domain.model.SortByFilter
 import com.sottti.roller.coasters.domain.model.TypeFilter
 
@@ -56,6 +56,6 @@ private fun SortByFilter.toSqlValue(): String =
 private fun TypeFilter.toSqlValue(): String =
     when (this) {
         TypeFilter.ALL -> error("Should not reach this branch")
-        TypeFilter.STEEL -> RollerCoasterApiModelConstants.VALUE_TYPE_STEEL
-        TypeFilter.WOOD -> RollerCoasterApiModelConstants.VALUE_TYPE_WOOD
+        TypeFilter.STEEL -> RollerCoasterApiConstants.VALUE_TYPE_STEEL
+        TypeFilter.WOOD -> RollerCoasterApiConstants.VALUE_TYPE_WOOD
     }

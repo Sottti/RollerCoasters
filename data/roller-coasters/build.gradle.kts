@@ -37,6 +37,6 @@ dependencies {
     androidTestImplementation(libs.coroutines.test)
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.room.testing)
-    androidTestImplementation(libs.truth)
     androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.truth)
 }

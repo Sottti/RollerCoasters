@@ -1,14 +1,18 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
+import androidx.annotation.VisibleForTesting
 import androidx.core.os.LocaleListCompat
 import androidx.core.os.LocaleListCompat.forLanguageTags
 import androidx.core.os.LocaleListCompat.getEmptyLocaleList
 import com.sottti.roller.coasters.domain.model.Language
 import java.util.Locale
 
-private const val LOCALE_GALICIA_TAG = "gl-ES"
-private const val LOCALE_SPAIN_TAG = "es-ES"
-private const val LOCALE_UK_TAG = "en-GB"
+@VisibleForTesting
+internal const val LOCALE_GALICIA_TAG = "gl-ES"
+@VisibleForTesting
+internal const val LOCALE_SPAIN_TAG = "es-ES"
+@VisibleForTesting
+internal const val LOCALE_UK_TAG = "en-GB"
 
 internal fun Locale?.toLanguage(): Language = when (this?.toLanguageTag()) {
     LOCALE_UK_TAG -> Language.EnglishGbLanguage

@@ -5,13 +5,20 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherMainPictureRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.mainPictureRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.domain.model.RollerCoaster
 import com.sottti.roller.coasters.domain.model.SortByFilter
 import com.sottti.roller.coasters.domain.model.TypeFilter
+import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.InternalSerializationApi
 import org.junit.Before
 import org.junit.Test
@@ -32,6 +39,81 @@ internal class RollerCoastersPagingSourceTest {
             sortByFilter = sortByFilter,
             typeFilter = typeFilter,
         )
+    }
+
+    @Test
+    fun `load - returns correctly when successful`() = runBlocking {
+        coEvery {
+            dao.getPagedRollerCoasters(any())
+        } returns listOf(rollerCoasterRoomModel, anotherRollerCoasterRoomModel)
+
+        coEvery {
+            dao.getPictures(rollerCoasterRoomModel.id)
+        } returns listOf(mainPictureRoomModel)
+
+        coEvery {
+            dao.getPictures(anotherRollerCoasterRoomModel.id)
+        } returns listOf(anotherMainPictureRoomModel)
+
+        val params = PagingSource.LoadParams.Refresh(
+            key = 0,
+            loadSize = 2,
+            placeholdersEnabled = false,
+        )
+
+        val result = pagingSource.load(params)
+
+        assertThat(result).isInstanceOf(PagingSource.LoadResult.Page::class.java)
+
+        val page = result as PagingSource.LoadResult.Page
+
+        assertThat(page.data)
+            .containsExactly(
+                rollerCoasterRoomModel.toDomain(listOf(mainPictureRoomModel)),
+                anotherRollerCoasterRoomModel.toDomain(listOf(anotherMainPictureRoomModel)),
+            )
+        assertThat(page.prevKey).isNull()
+        assertThat(page.nextKey).isEqualTo(1)
+    }
+
+    @Test
+    fun `load - returns correctly when no data`() = runBlocking {
+        coEvery { dao.getPagedRollerCoasters(any()) } returns emptyList()
+        coEvery { dao.getPictures(any()) } returns emptyList()
+
+        val params = PagingSource.LoadParams.Refresh(
+            key = 0,
+            loadSize = 2,
+            placeholdersEnabled = false,
+        )
+
+        val result = pagingSource.load(params)
+
+        assertThat(result).isInstanceOf(PagingSource.LoadResult.Page::class.java)
+
+        val page = result as PagingSource.LoadResult.Page
+        assertThat(page.data).isEmpty()
+        assertThat(page.prevKey).isNull()
+        assertThat(page.nextKey).isNull()
+    }
+
+    @Test
+    fun `load - returns correctly when exception occurs`() = runBlocking {
+        coEvery { dao.getPagedRollerCoasters(any()) } throws RuntimeException("DB Error")
+
+        val params = PagingSource.LoadParams.Refresh(
+            key = 0,
+            loadSize = 2,
+            placeholdersEnabled = false,
+        )
+
+        val result = pagingSource.load(params)
+
+        assertThat(result).isInstanceOf(PagingSource.LoadResult.Error::class.java)
+
+        val error = result as PagingSource.LoadResult.Error
+        assertThat(error.throwable).isInstanceOf(RuntimeException::class.java)
+        assertThat(error.throwable.message).isEqualTo("DB Error")
     }
 
     @Test

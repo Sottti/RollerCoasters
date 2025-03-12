@@ -1,6 +1,6 @@
-package com.sottti.roller.coasters.data.roller.coasters.datasources.local.model
+package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
-internal object RollerCoasterRoomModelConstants {
+internal object RollerCoasterRoomConstants {
     const val COL_AMUSEMENT_PARK_ID = "amusement_park_id"
     const val COL_AMUSEMENT_PARK_NAME = "amusement_park_name"
     const val COL_DROP_MAX = "dropMax"

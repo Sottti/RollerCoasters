@@ -1,12 +1,6 @@
 package com.sottti.roller.coasters.data.work.manager
 
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,44 +8,24 @@ import javax.inject.Singleton
 internal class RollerCoasterSyncScheduler @Inject constructor(
     private val workManager: WorkManager
 ) {
-
     fun scheduleSync() {
-        workManager.enqueueUniqueWork(
-            uniqueWorkName = INITIAL_ROLLER_COASTERS_SYNC,
-            existingWorkPolicy = ExistingWorkPolicy.KEEP,
-            request = oneTimeWorkRequest,
-        )
-
-        workManager.enqueueUniquePeriodicWork(
-            uniqueWorkName = PERIODIC_ROLLER_COASTERS_SYNC,
-            existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
-            request = periodicWorkRequest,
-        )
+        workManager.scheduleUniqueWork()
+        workManager.schedulePeriodicWork()
     }
 }
 
-private const val INITIAL_ROLLER_COASTERS_SYNC = "initial_roller_coasters_sync"
-private const val PERIODIC_ROLLER_COASTERS_SYNC = "periodic_roller_coasters_sync"
-
-private val oneTimeWorkRequest =
-    OneTimeWorkRequestBuilder<RollerCoastersSyncWorker>()
-        .setConstraints(onTimeWorkRequestConstraints())
-        .build()
-
-private val periodicWorkRequest =
-    PeriodicWorkRequestBuilder<RollerCoastersSyncWorker>(
-        repeatInterval = 72,
-        repeatIntervalTimeUnit = TimeUnit.HOURS
+private fun WorkManager.schedulePeriodicWork() {
+    enqueueUniquePeriodicWork(
+        existingPeriodicWorkPolicy = RollerCoastersSyncPeriodicWork.existingWorkPolicy,
+        request = RollerCoastersSyncPeriodicWork.request,
+        uniqueWorkName = RollerCoastersSyncPeriodicWork.NAME,
     )
-        .setConstraints(periodicWorkRequestConstraints())
-        .build()
+}
 
-private fun onTimeWorkRequestConstraints(): Constraints =
-    Constraints.Builder().build()
-
-private fun periodicWorkRequestConstraints(): Constraints =
-    Constraints.Builder()
-        .setRequiresBatteryNotLow(true)
-        .setRequiresCharging(true)
-        .setRequiresDeviceIdle(true)
-        .build()
+private fun WorkManager.scheduleUniqueWork() {
+    enqueueUniqueWork(
+        existingWorkPolicy = RollerCoastersSyncUniqueWork.existingWorkPolicy,
+        request = RollerCoastersSyncUniqueWork.request,
+        uniqueWorkName = RollerCoastersSyncUniqueWork.NAME,
+    )
+}

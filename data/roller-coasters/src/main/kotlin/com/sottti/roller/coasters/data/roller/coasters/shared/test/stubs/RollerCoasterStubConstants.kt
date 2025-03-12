@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.roller.coasters.stubs
+package com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs
 
 internal const val CITY = "Salou"
 internal const val COASTER_ARRANGEMENT = "3 trains with 7 cars per train. Riders are " +

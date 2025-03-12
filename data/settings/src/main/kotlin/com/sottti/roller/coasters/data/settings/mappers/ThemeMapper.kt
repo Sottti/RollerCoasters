@@ -3,12 +3,16 @@ package com.sottti.roller.coasters.data.settings.mappers
 import android.app.UiModeManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatDelegate
 import com.sottti.roller.coasters.domain.model.Theme
 
-private const val THEME_KEY_DARK = "dark"
-private const val THEME_KEY_LIGHT = "light"
-private const val THEME_KEY_SYSTEM = "system"
+@VisibleForTesting
+internal const val THEME_KEY_DARK = "dark"
+@VisibleForTesting
+internal const val THEME_KEY_LIGHT = "light"
+@VisibleForTesting
+internal const val THEME_KEY_SYSTEM = "system"
 
 @RequiresApi(Build.VERSION_CODES.R)
 internal fun Theme.toUiModeManagerNightMode() = when (this) {

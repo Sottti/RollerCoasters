@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.data.work.manager
 
 import android.content.Context
 import androidx.startup.Initializer
+import androidx.work.WorkManagerInitializer
 import com.sottti.roller.coasters.data.work.manager.di.provideScheduler
 
 internal class RollerCoastersSyncInitializer : Initializer<Unit> {
@@ -11,5 +12,5 @@ internal class RollerCoastersSyncInitializer : Initializer<Unit> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> =
-        listOf(androidx.work.WorkManagerInitializer::class.java)
+        listOf(WorkManagerInitializer::class.java)
 }

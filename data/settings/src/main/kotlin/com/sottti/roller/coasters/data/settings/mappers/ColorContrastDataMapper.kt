@@ -1,11 +1,16 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.sottti.roller.coasters.domain.model.ColorContrast
+import org.jetbrains.annotations.VisibleForTesting
 
-private const val COLOR_CONTRAST_KEY_HIGH = "high"
-private const val COLOR_CONTRAST_KEY_MEDIUM = "medium"
-private const val COLOR_CONTRAST_KEY_STANDARD = "standard"
-private const val COLOR_CONTRAST_KEY_SYSTEM = "system"
+@VisibleForTesting
+internal const val COLOR_CONTRAST_KEY_HIGH = "high"
+@VisibleForTesting
+internal const val COLOR_CONTRAST_KEY_MEDIUM = "medium"
+@VisibleForTesting
+internal const val COLOR_CONTRAST_KEY_STANDARD = "standard"
+@VisibleForTesting
+internal const val COLOR_CONTRAST_KEY_SYSTEM = "system"
 
 internal val ColorContrast.key: String
     get() = when (this) {

@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.data.settings.datasource
 
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -29,8 +30,12 @@ internal class SettingsLocalDataSource @Inject constructor(
     companion object {
         internal const val DATA_STORE_NAME = "settings"
         private val dynamicColorKey = booleanPreferencesKey("dynamic_color")
-        private val themeKey = stringPreferencesKey("theme")
-        private val colorContrastKey = stringPreferencesKey("color_contrast")
+
+        @VisibleForTesting
+        internal val themeKey = stringPreferencesKey("theme")
+
+        @VisibleForTesting
+        internal val colorContrastKey = stringPreferencesKey("color_contrast")
     }
 
     private val dynamicColorDefault = when {

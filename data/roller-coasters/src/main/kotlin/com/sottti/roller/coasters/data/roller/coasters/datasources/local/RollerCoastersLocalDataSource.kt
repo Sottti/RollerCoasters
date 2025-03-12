@@ -34,17 +34,19 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     suspend fun storeRollerCoasters(
         rollerCoasters: List<RollerCoaster>,
     ) {
-        withContext(Dispatchers.Default) {
-            val rollerCoastersRoomModel =
-                rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoom() }
+        if (rollerCoasters.isNotEmpty()) {
+            withContext(Dispatchers.Default) {
+                val rollerCoastersRoomModel =
+                    rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoom() }
 
-            val picturesRoomModel =
-                rollerCoasters.flatMap { rollerCoaster -> rollerCoaster.toPicturesRoom() }
+                val picturesRoomModel =
+                    rollerCoasters.flatMap { rollerCoaster -> rollerCoaster.toPicturesRoom() }
 
-            dao.insertRollerCoasters(
-                pictures = picturesRoomModel,
-                rollerCoasters = rollerCoastersRoomModel,
-            )
+                dao.insertRollerCoasters(
+                    pictures = picturesRoomModel,
+                    rollerCoasters = rollerCoastersRoomModel,
+                )
+            }
         }
     }
 
