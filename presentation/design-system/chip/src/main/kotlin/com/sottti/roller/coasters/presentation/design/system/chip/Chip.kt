@@ -53,7 +53,7 @@ private fun TrailingIcon(expanded: Boolean) =
 
 @Composable
 @PreviewLightDark
-private fun ChipPreview(
+internal fun ChipPreview(
     @PreviewParameter(ChipPreviewProvider::class)
     state: ChipState,
 ) {
