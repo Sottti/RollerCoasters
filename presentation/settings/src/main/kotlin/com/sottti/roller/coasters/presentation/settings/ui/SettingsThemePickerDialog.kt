@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.settings.ui
 
 import androidx.compose.runtime.Composable
-import com.sottti.roller.coasters.presentation.design.system.dialogs.Dialog
+import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogWithRadioButtons
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
@@ -17,7 +17,7 @@ internal fun ThemePickerDialog(
     onAction: (SettingsAction) -> Unit,
 ) {
 
-    Dialog.WithRadioButtons(
+    DialogWithRadioButtons(
         title = state.title,
         confirm = state.confirm,
         dismiss = state.dismiss,

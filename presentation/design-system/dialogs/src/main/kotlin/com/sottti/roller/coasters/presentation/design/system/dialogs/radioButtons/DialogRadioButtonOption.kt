@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.design.system.dialogs
+package com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons
 
 import androidx.annotation.StringRes
 import co.cuvva.presentation.design.system.icons.model.IconState
