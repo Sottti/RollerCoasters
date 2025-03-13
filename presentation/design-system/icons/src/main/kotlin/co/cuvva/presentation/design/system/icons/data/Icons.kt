@@ -201,7 +201,7 @@ public object Icons {
     }
 
     public object Star {
-        public val Description: Int = R.string.description_icon_sort
+        public val Description: Int = R.string.description_icon_star
         public val Filled: IconState = IconState(
             resId = R.drawable.ic_star_rounded_filled,
             descriptionResId = Description,

@@ -133,14 +133,6 @@ private val paginationApiModelPage1: PaginationApiModel =
         total = 400,
     )
 
-private val paginationApiModelPage2: PaginationApiModel =
-    PaginationApiModel(
-        count = 200,
-        limit = 200,
-        offset = 200,
-        total = 400,
-    )
-
 internal val rollerCoastersApiModelPage1 =
     RollerCoastersApiModel(
         rollerCoasters = listOf(rollerCoasterApiModel),
