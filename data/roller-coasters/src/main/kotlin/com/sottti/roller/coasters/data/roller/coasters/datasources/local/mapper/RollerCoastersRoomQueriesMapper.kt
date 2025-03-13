@@ -30,10 +30,13 @@ internal fun createRollerCoastersQuery(
         args += typeFilter.toSqlValue()
     }
 
+    val direction = if (sortByFilter == SortByFilter.ALPHABETICAL) "ASC" else "DESC"
+
     query.append(" ORDER BY ")
         .append(sortByFilter.toSqlValue())
-        .append(" DESC, $COL_OPENED_DATE ASC, $COL_NAME_CURRENT ASC")
-        .append(" LIMIT ? OFFSET ?")
+        .append(" $direction, ")
+        .append("$COL_OPENED_DATE ASC, $COL_NAME_CURRENT ASC ")
+        .append("LIMIT ? OFFSET ?")
 
     args += limit
     args += offset
