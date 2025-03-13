@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.sottti.roller.coasters.presentation.explore.data.ExploreViewModel
+import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent.ScrollToTop
 import kotlinx.coroutines.launch
 
 @Composable
@@ -35,7 +36,17 @@ private fun ExploreUiInternal(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        onScrollToTop { coroutineScope.launch { lazyListState.animateScrollToItem(0) } }
+        onScrollToTop {
+            coroutineScope.launch { lazyListState.animateScrollToItem(0) }
+        }
+    }
+
+    LaunchedEffect(viewModel) {
+        viewModel.events.collect { event ->
+            when (event) {
+                ScrollToTop -> coroutineScope.launch { lazyListState.scrollToItem(0) }
+            }
+        }
     }
 
     Scaffold(

@@ -4,8 +4,10 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -24,8 +26,9 @@ internal fun FilterChips(
     listState: LazyListState,
     onAction: (ExploreAction) -> Unit,
 ) {
-    Column {
+    Column(modifier = Modifier.padding(vertical = dimensions.padding.small)) {
         PrimaryFilters(filters.primary, onAction)
+        Spacer(modifier = Modifier.size(dimensions.padding.small))
         SecondaryFilters(filters.secondary, onAction)
     }
 }

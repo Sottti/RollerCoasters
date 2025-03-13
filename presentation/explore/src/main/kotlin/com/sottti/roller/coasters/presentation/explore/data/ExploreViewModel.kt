@@ -25,6 +25,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Secon
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeAll
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeSteel
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeWood
+import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreState
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.AlphabeticalFilter
@@ -41,11 +42,15 @@ import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.Typ
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -66,10 +71,22 @@ internal class ExploreViewModel @Inject constructor(
             .cachedIn(viewModelScope)
 
     private val _state = MutableStateFlow(initialState(_rollerCoastersFlow))
-
     val state: StateFlow<ExploreState> = _state.asStateFlow()
 
+    private val _events = MutableSharedFlow<ExploreEvent>()
+    val events = _events.asSharedFlow()
+
     internal val onAction: (ExploreAction) -> Unit = { action -> processAction(action) }
+
+    init {
+        viewModelScope.launch {
+            combine(
+                _sortByFilter.distinctUntilChanged { old, new -> old == new },
+                _typeFilter.distinctUntilChanged { old, new -> old == new },
+            ) { sortBy, type -> sortBy to type }
+                .collect { _events.emit(ExploreEvent.ScrollToTop) }
+        }
+    }
 
     private fun processAction(action: ExploreAction) {
         when (action) {
@@ -114,7 +131,6 @@ internal class ExploreViewModel @Inject constructor(
             SelectTypeSteel -> _state.select<SteelFilter>()
             SelectTypeWood -> _state.select<WoodFilter>()
         }
-
     }
 
     private fun updateSecondaryFilterQuery(action: SecondaryFilterAction) {
