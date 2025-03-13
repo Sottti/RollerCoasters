@@ -9,8 +9,10 @@ import com.sottti.roller.coasters.domain.model.Theme
 
 @VisibleForTesting
 internal const val THEME_KEY_DARK = "dark"
+
 @VisibleForTesting
 internal const val THEME_KEY_LIGHT = "light"
+
 @VisibleForTesting
 internal const val THEME_KEY_SYSTEM = "system"
 

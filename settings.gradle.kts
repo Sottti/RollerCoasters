@@ -45,7 +45,7 @@ include(
     ":presentation:previews",
     ":presentation:settings",
     ":presentation:top-bars",
-    ":presentation:utils",
-    ":utils:time-dates",
+    ":presentation:utils:format",
     ":utils:device",
+    ":utils:time-dates",
 )

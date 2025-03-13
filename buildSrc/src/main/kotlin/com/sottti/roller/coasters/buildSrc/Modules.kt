@@ -13,7 +13,6 @@ object module {
         const val previews = ":presentation:previews"
         const val settings = ":presentation:settings"
         const val topBars = ":presentation:top-bars"
-        const val utils = ":presentation:utils"
 
         object designSystem {
             const val chip = ":presentation:design-system:chip"
@@ -28,6 +27,10 @@ object module {
             const val text = ":presentation:design-system:text"
             const val themes = ":presentation:design-system:themes"
             const val typography = ":presentation:design-system:typography"
+        }
+
+        object utils {
+            const val format = ":presentation:utils:format"
         }
     }
 

@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.design.system.switchh
 
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -29,24 +28,7 @@ internal fun SwitchWithDynamicColorPreview(
     @PreviewParameter(SwitchPreviewProvider::class)
     state: SwitchState,
 ) {
-    RollerCoastersPreviewTheme(
-        dynamicColor = true,
-        windowWidthSizeClass = WindowWidthSizeClass.Compact,
-    ) {
-        SwitchPreview(state)
-    }
-}
-
-@Composable
-@PreviewLightDark
-internal fun SwitchWithoutDynamicColorPreview(
-    @PreviewParameter(SwitchPreviewProvider::class)
-    state: SwitchState,
-) {
-    RollerCoastersPreviewTheme(
-        dynamicColor = false,
-        windowWidthSizeClass = WindowWidthSizeClass.Compact,
-    ) {
+    RollerCoastersPreviewTheme {
         SwitchPreview(state)
     }
 }

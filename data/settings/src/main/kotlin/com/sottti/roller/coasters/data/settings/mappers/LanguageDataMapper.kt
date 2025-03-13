@@ -9,8 +9,10 @@ import java.util.Locale
 
 @VisibleForTesting
 internal const val LOCALE_GALICIA_TAG = "gl-ES"
+
 @VisibleForTesting
 internal const val LOCALE_SPAIN_TAG = "es-ES"
+
 @VisibleForTesting
 internal const val LOCALE_UK_TAG = "en-GB"
 

@@ -15,7 +15,7 @@ import com.sottti.roller.coasters.domain.model.SortByFilter.LENGTH
 import com.sottti.roller.coasters.domain.model.SortByFilter.MAX_VERTICAL
 import com.sottti.roller.coasters.domain.model.SortByFilter.SPEED
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import com.sottti.roller.coasters.presentation.utils.toDisplayFormat
+import com.sottti.roller.coasters.presentation.utils.format.toDisplayFormat
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

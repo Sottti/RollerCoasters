@@ -29,6 +29,6 @@ dependencies {
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.imageLoading))
     implementation(project(module.presentation.topBars))
-    implementation(project(module.presentation.utils))
+    implementation(project(module.presentation.utils.format))
     ksp(libs.hilt.compiler)
 }

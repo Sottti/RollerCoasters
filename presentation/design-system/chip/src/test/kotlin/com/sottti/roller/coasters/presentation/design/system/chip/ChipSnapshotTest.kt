@@ -4,7 +4,6 @@ import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_6_PRO
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,9 +26,7 @@ internal class ChipSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            RollerCoastersPreviewTheme {
-                ChipPreview(state)
-            }
+            ChipPreview(state)
         }
     }
 

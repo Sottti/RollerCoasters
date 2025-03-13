@@ -5,10 +5,13 @@ import org.jetbrains.annotations.VisibleForTesting
 
 @VisibleForTesting
 internal const val COLOR_CONTRAST_KEY_HIGH = "high"
+
 @VisibleForTesting
 internal const val COLOR_CONTRAST_KEY_MEDIUM = "medium"
+
 @VisibleForTesting
 internal const val COLOR_CONTRAST_KEY_STANDARD = "standard"
+
 @VisibleForTesting
 internal const val COLOR_CONTRAST_KEY_SYSTEM = "system"
 

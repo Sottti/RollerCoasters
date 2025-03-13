@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.presentation.design.system.text.Text
 import co.sottti.roller.coasters.presentation.design.system.roller.coaster.card.R
 import com.sottti.roller.coasters.domain.model.ImageUrl
@@ -108,7 +109,10 @@ private fun Footer(
 
 @Composable
 @PreviewLightDark
-private fun RollerCoasterCardImageLoadedPreview() {
+internal fun RollerCoasterCardPreview(
+    @PreviewParameter(RollerCoasterCardPreviewProvider::class)
+    foreverLoading: Boolean,
+) {
     RollerCoastersPreviewTheme {
         RollerCoasterCard(
             imageUrl = imageUrl,
@@ -116,23 +120,7 @@ private fun RollerCoasterCardImageLoadedPreview() {
             rollerCoasterName = rollerCoasterName,
             stat = stat,
             statDetail = statDetail,
-            foreverLoading = false,
-            onClick = {},
-        )
-    }
-}
-
-@Composable
-@PreviewLightDark
-private fun RollerCoasterCardImageLoadingPreview() {
-    RollerCoastersPreviewTheme {
-        RollerCoasterCard(
-            imageUrl = imageUrl,
-            parkName = parkName,
-            rollerCoasterName = rollerCoasterName,
-            stat = stat,
-            statDetail = statDetail,
-            foreverLoading = true,
+            foreverLoading = foreverLoading,
             onClick = {},
         )
     }
