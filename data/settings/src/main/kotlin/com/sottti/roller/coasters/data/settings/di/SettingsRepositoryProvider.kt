@@ -10,4 +10,4 @@ public fun provideSettingsRepository(
     EntryPointAccessors.fromApplication(
         context = context.applicationContext,
         entryPoint = SettingsRepositoryEntryPoint::class.java,
-    ).getSeettingsRepository()
+    ).getSettingsRepository()
