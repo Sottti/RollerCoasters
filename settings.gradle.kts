@@ -43,6 +43,7 @@ include(
     ":presentation:image-loading",
     ":presentation:navigation",
     ":presentation:previews",
+    ":presentation:roller-coaster-details",
     ":presentation:settings",
     ":presentation:top-bars",
     ":presentation:utils:format",

@@ -11,6 +11,7 @@ object module {
         const val imageLoading = ":presentation:image-loading"
         const val navigation = ":presentation:navigation"
         const val previews = ":presentation:previews"
+        const val rollerCoasterDetails = ":presentation:roller-coaster-details"
         const val settings = ":presentation:settings"
         const val topBars = ":presentation:top-bars"
 
