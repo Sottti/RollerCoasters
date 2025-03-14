@@ -49,7 +49,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
         val expectedSql =
             "SELECT * FROM roller_coasters WHERE LOWER(type) = ? ORDER BY " +
-                    "name_current DESC, openedDate ASC, name_current ASC LIMIT ? OFFSET ?"
+                    "name_current ASC, openedDate ASC, name_current ASC LIMIT ? OFFSET ?"
         assertEquals(expectedSql, actual.sql)
         assertEquals(3, actual.argCount)
     }
@@ -144,7 +144,7 @@ class RollerCoastersRoomQueriesMapperTest {
         )
 
         val expectedSql =
-            "SELECT * FROM roller_coasters ORDER BY name_current DESC, " +
+            "SELECT * FROM roller_coasters ORDER BY name_current ASC, " +
                     "openedDate ASC, name_current ASC LIMIT ? OFFSET ?"
         assertEquals(expectedSql, actual.sql)
         assertEquals(2, actual.argCount)
