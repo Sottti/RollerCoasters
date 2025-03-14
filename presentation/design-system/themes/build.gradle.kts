@@ -9,15 +9,14 @@ plugins {
 android {
     namespace = "co.sottti.roller.coasters.presentation.design.system.themes"
     buildFeatures { compose = true }
+    @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
 dependencies {
     api(libs.compose.window.size)
     api(project(module.presentation.designSystem.colors))
-    api(project(module.utils.device))
     implementation(libs.compose.material)
-    implementation(libs.core)
     implementation(libs.material)
     implementation(libs.splashscreen)
     implementation(platform(libs.compose.bom))
@@ -25,4 +24,5 @@ dependencies {
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.typography))
+    implementation(project(module.utils.device))
 }

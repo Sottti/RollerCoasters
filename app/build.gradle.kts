@@ -32,11 +32,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
     implementation(libs.hilt)
     implementation(libs.hilt.work)
     implementation(libs.splashscreen)
-    implementation(libs.work.runtime)
     implementation(project(module.data.settings))
     implementation(project(module.data.workManager))
     implementation(project(module.presentation.home))
