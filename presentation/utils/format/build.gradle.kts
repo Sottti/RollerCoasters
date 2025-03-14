@@ -1,11 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.ksp)
-}
-
-android {
-    namespace = "com.sottti.roller.coasters.presentation.utils.format"
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
