@@ -10,6 +10,7 @@ plugins {
 android {
     namespace = "com.sottti.roller.coasters.presentation.settings"
     buildFeatures { compose = true }
+    @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
@@ -17,7 +18,6 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
-    implementation(libs.lifecycle.process)
     implementation(platform(libs.compose.bom))
     implementation(project(module.data.settings))
     implementation(project(module.presentation.designSystem.dialogs))
@@ -27,5 +27,6 @@ dependencies {
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.utils.device))
     ksp(libs.hilt.compiler)
+    runtimeOnly(libs.lifecycle.process)
 
 }

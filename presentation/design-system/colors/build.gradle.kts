@@ -9,14 +9,14 @@ plugins {
 android {
     namespace = "co.sottti.roller.coasters.presentation.design.system.colors"
     buildFeatures { compose = true }
+    @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
 dependencies {
+    api(project(module.utils.device))
     implementation(libs.compose.material)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.data.settings))
-    implementation(project(module.utils.device))
 }

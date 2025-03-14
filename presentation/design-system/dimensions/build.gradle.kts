@@ -7,11 +7,11 @@ plugins {
 android {
     namespace = "co.sottti.roller.coasters.presentation.design.system.dimensions"
     buildFeatures { compose = true }
+    @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
 dependencies {
-    implementation(libs.compose.material)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
     implementation(libs.compose.window.size)

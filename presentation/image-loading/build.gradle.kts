@@ -9,6 +9,7 @@ plugins {
 android {
     namespace = "com.sottti.roller.coasters.presentation.image.loading"
     buildFeatures { compose = true }
+    @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
@@ -17,9 +18,8 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.ktor3)
     implementation(libs.compose.ui.tooling)
-    implementation(libs.startup.runtime)
-    implementation(project(module.data.network))
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
+    runtimeOnly(libs.startup.runtime)
 }

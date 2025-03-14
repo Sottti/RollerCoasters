@@ -9,6 +9,7 @@ plugins {
 android {
     namespace = "com.sottti.roller.coasters.presentation.previews"
     buildFeatures { compose = true }
+    @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
