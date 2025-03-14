@@ -28,8 +28,8 @@ dependencies {
         exclude(group = "org.junit.jupiter")
         exclude(group = "org.junit.vintage")
     }
-    androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.truth)
+    androidTestRuntimeOnly(libs.test.runner)
 
     testImplementation(libs.coroutines.test)
     testImplementation(libs.junit)
