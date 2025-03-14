@@ -11,6 +11,7 @@ android {
     namespace = "com.sottti.roller.coasters"
 
     androidResources {
+        @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
     }
 
