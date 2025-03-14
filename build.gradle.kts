@@ -7,7 +7,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.dependency.analysis) apply false
     alias(libs.plugins.dependency.versions) apply true
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.android) apply false
@@ -19,8 +18,6 @@ plugins {
 }
 
 subprojects {
-    pluginManager.apply("com.autonomousapps.dependency-analysis")
-
     afterEvaluate {
         when {
             plugins.hasPlugin("com.android.application") -> {
