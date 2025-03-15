@@ -11,6 +11,7 @@ public class SdkFeatures @Inject constructor() {
     public fun colorContrastAvailable(): Boolean = isAtLeastSdk34()
     public fun dynamicColorAvailable(): Boolean = isAtLeastSdk31()
     public fun lightDarkSystemThemingAvailable(): Boolean = isAtLeastSdk29()
+    public fun measurementSystemAvailable(): Boolean = isAtLeastSdk34()
     public fun setPersistentNightModeAvailable(): Boolean = isAtLeastSdk31()
 }
 

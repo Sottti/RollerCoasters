@@ -4,6 +4,7 @@ import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSour
 import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
 import com.sottti.roller.coasters.domain.model.ColorContrast
 import com.sottti.roller.coasters.domain.model.Language
+import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.model.Theme
 import com.sottti.roller.coasters.utils.device.system.SystemSettings
@@ -58,4 +59,14 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun getLanguage(): Language =
         localDataSource.getLanguage()
+
+    override suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem) {
+        localDataSource.setMeasurementSystem(measurementSystem)
+    }
+
+    override suspend fun getMeasurementSystem(): MeasurementSystem =
+        localDataSource.getMeasurementSystem()
+
+    override fun observeMeasurementSystem(): Flow<MeasurementSystem> =
+        localDataSource.observeMeasurementSystem()
 }

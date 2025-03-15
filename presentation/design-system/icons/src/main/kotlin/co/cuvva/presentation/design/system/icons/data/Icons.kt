@@ -212,6 +212,18 @@ public object Icons {
         )
     }
 
+    public object Straighten {
+        public val Description: Int = R.string.description_icon_straighten
+        public val Filled: IconState = IconState(
+            resId = R.drawable.ic_straighten_rounded_filled,
+            descriptionResId = Description,
+        )
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_straighten_rounded_outlined,
+            descriptionResId = Description,
+        )
+    }
+
     public object Visibility {
         public val Description: Int = R.string.description_icon_visibility
         public val Filled: IconState = IconState(

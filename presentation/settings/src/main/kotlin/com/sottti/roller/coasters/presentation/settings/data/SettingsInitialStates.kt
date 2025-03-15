@@ -8,8 +8,11 @@ import com.sottti.roller.coasters.presentation.settings.model.DynamicColorChecke
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.LanguageListItemState
 import com.sottti.roller.coasters.presentation.settings.model.LanguageState
+import com.sottti.roller.coasters.presentation.settings.model.MeasurementSystemListItemState
+import com.sottti.roller.coasters.presentation.settings.model.MeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedLanguageState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedMeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeListItemState
@@ -22,6 +25,7 @@ internal fun initialState(
     colorContrast = colorContrastInitialState(),
     dynamicColor = dynamicColorInitialState().takeIf { dynamicColorAvailable },
     language = languageInitialState(),
+    measurementSystem = measurementSystemInitialState(),
     theme = themeInitialState(),
     topBar = topBarInitialState(),
 )
@@ -61,6 +65,16 @@ private fun themeInitialState() = ThemeState(
         supporting = R.string.theme_supporting,
         selectedTheme = SelectedThemeState.Loading,
         icon = Icons.BrightnessMedium.Outlined
+    ),
+    picker = null,
+)
+
+private fun measurementSystemInitialState() = MeasurementSystemState(
+    listItem = MeasurementSystemListItemState(
+        headline = R.string.measurement_system_headline,
+        supporting = R.string.measurement_system_supporting,
+        icon = Icons.Straighten.Outlined,
+        selectedMeasurementSystem = SelectedMeasurementSystemState.Loading,
     ),
     picker = null,
 )

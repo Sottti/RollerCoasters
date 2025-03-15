@@ -21,5 +21,6 @@
     <string name="description_icon_smartphone">Teléfono</string>
     <string name="description_icon_sort">Ordenar</string>
     <string name="description_icon_star">Favoritos</string>
+    <string name="description_icon_straighten">Regla</string>
     <string name="description_icon_visibility">Visibilidad</string>
 </resources>

@@ -12,31 +12,39 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentati
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastNotAvailableMessage
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideThemePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.showMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showThemePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateColorContrast
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynamicColor
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateLanguage
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateMeasurementSystem
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateTheme
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ColorContrastPickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmLanguagePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmMeasurementSystemPickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemePickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastNotAvailableMessage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LanguagePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.MeasurementSystemPickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
@@ -69,6 +77,7 @@ internal class SettingsViewModel @Inject constructor(
         observeTheme()
         observeColorContrast()
         updateLanguage()
+        observeMeasurementSystem()
         registerForConfigChanges()
     }
 
@@ -112,6 +121,14 @@ internal class SettingsViewModel @Inject constructor(
     private fun updateLanguage() {
         viewModelScope.launch {
             _state.updateLanguage(settingsRepository.getLanguage())
+        }
+    }
+
+    private fun observeMeasurementSystem() {
+        viewModelScope.launch {
+            settingsRepository
+                .observeMeasurementSystem()
+                .collect { measurementSystem -> _state.updateMeasurementSystem(measurementSystem) }
         }
     }
 
@@ -168,12 +185,14 @@ internal class SettingsViewModel @Inject constructor(
                 }
 
                 DismissColorContrastPicker -> _state.hideColorContrastPicker()
+
                 DismissColorContrastNotAvailableMessage ->
                     _state.hideColorContrastNotAvailableMessage()
 
                 LaunchLanguagePicker -> _state.showLanguagePicker(settingsRepository.getLanguage())
 
                 is LanguagePickerSelectionChange -> _state.updateLanguagePicker(action.language)
+
                 is ConfirmLanguagePickerSelection -> {
                     _state.hideLanguagePicker()
                     settingsRepository.setLanguage(action.language.toDomain())
@@ -181,6 +200,20 @@ internal class SettingsViewModel @Inject constructor(
                 }
 
                 DismissLanguagePicker -> _state.hideLanguagePicker()
+
+                LaunchMeasurementSystemPicker ->
+                    _state.showMeasurementSystemPicker(settingsRepository.getMeasurementSystem())
+
+                is MeasurementSystemPickerSelectionChange ->
+                    _state.updateMeasurementSystemPicker(action.measurementSystem)
+
+                is ConfirmMeasurementSystemPickerSelection -> {
+                    _state.hideMeasurementSystemPicker()
+                    settingsRepository.setMeasurementSystem(action.measurementSystem.toDomain())
+                }
+
+                DismissMeasurementSystemPicker -> _state.hideMeasurementSystemPicker()
+
             }
         }
     }

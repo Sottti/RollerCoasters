@@ -73,7 +73,7 @@ private fun languagePickerState(
 
 private fun languagesList(
     selectedLanguage: LanguageUi,
-) = listOfNotNull(
+) = listOf(
     SystemLanguage.toPresentationModel(isSelected = selectedLanguage is LanguageUi.SystemLanguage),
     EnglishGbLanguage.toPresentationModel(
         isSelected = selectedLanguage is LanguageUi.EnglishGbLanguage,

@@ -21,5 +21,6 @@
     <string name="description_icon_smartphone">Smartphone</string>
     <string name="description_icon_sort">Sort</string>
     <string name="description_icon_star">Favourites</string>
+    <string name="description_icon_straighten">Ruler</string>
     <string name="description_icon_visibility">Visibility</string>
 </resources>

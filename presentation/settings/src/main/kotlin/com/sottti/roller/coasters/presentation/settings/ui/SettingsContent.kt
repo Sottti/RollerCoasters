@@ -18,13 +18,16 @@ import com.sottti.roller.coasters.presentation.settings.model.ColorContrastListI
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
 import com.sottti.roller.coasters.presentation.settings.model.LanguageListItemState
+import com.sottti.roller.coasters.presentation.settings.model.MeasurementSystemListItemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedLanguageState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedMeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.ThemeListItemState
@@ -77,6 +80,12 @@ private fun SettingsList(
                 onLaunchLanguagePicker = { onAction(LaunchLanguagePicker) },
             )
         }
+        item {
+            MeasurementSystemSetting(
+                state = state.measurementSystem.listItem,
+                onLaunchMeasurementSystemPicker = { onAction(LaunchMeasurementSystemPicker) },
+            )
+        }
     }
 }
 
@@ -109,6 +118,13 @@ private fun Dialogs(
     state.language.picker?.let { languagePickerState ->
         LanguagePickerDialog(
             state = languagePickerState,
+            onAction = onAction,
+        )
+    }
+
+    state.measurementSystem.picker?.let { measurementSystemPickerState ->
+        MeasurementSystemPickerDialog(
+            state = measurementSystemPickerState,
             onAction = onAction,
         )
     }
@@ -212,4 +228,26 @@ private fun LanguageTrailingContent(state: SelectedLanguageState) {
 @Composable
 private fun SmallProgressIndicator() {
     ProgressIndicator(size = ProgressIndicatorSize.Small)
+}
+
+@Composable
+private fun MeasurementSystemSetting(
+    state: MeasurementSystemListItemState,
+    onLaunchMeasurementSystemPicker: () -> Unit,
+) {
+    ListItem(
+        modifier = Modifier.clickable { onLaunchMeasurementSystemPicker() },
+        headlineContent = { Text.Vanilla(state.headline) },
+        leadingContent = { Icon(state.icon) },
+        supportingContent = { Text.Vanilla(state.supporting) },
+        trailingContent = { MeasurementSystemTrailingContent(state.selectedMeasurementSystem) },
+    )
+}
+
+@Composable
+private fun MeasurementSystemTrailingContent(state: SelectedMeasurementSystemState) {
+    when (state) {
+        is SelectedMeasurementSystemState.Loaded -> Text.Vanilla(state.measurementSystem.text)
+        SelectedMeasurementSystemState.Loading -> SmallProgressIndicator()
+    }
 }

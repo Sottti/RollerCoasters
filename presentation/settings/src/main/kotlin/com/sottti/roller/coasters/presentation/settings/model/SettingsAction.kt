@@ -21,4 +21,15 @@ internal sealed class SettingsAction {
     data class LanguagePickerSelectionChange(val language: LanguageUi) : SettingsAction()
     data class ConfirmLanguagePickerSelection(val language: LanguageUi) : SettingsAction()
     data object DismissLanguagePicker : SettingsAction()
+
+    data object LaunchMeasurementSystemPicker : SettingsAction()
+    data class MeasurementSystemPickerSelectionChange(
+        val measurementSystem: MeasurementSystemUi,
+    ) : SettingsAction()
+
+    data class ConfirmMeasurementSystemPickerSelection(
+        val measurementSystem: MeasurementSystemUi,
+    ) : SettingsAction()
+
+    data object DismissMeasurementSystemPicker : SettingsAction()
 }

@@ -16,6 +16,7 @@ import com.sottti.roller.coasters.domain.model.ColorContrast.MediumContrast
 import com.sottti.roller.coasters.domain.model.ColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.domain.model.Language
+import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import kotlinx.coroutines.flow.Flow
@@ -36,19 +37,28 @@ internal class SettingsLocalDataSource @Inject constructor(
 
         @VisibleForTesting
         internal val colorContrastKey = stringPreferencesKey("color_contrast")
+
+        internal val measurementSystemKey = stringPreferencesKey("measurement_system")
     }
 
     private val dynamicColorDefault = when {
         sdkFeatures.dynamicColorAvailable() -> true
         else -> false
     }
+
     private val themeDefaultValue = when {
         sdkFeatures.lightDarkSystemThemingAvailable() -> Theme.SystemTheme.key
         else -> Theme.LightTheme.key
     }
+
     private val colorContrastDefaultValue = when {
         sdkFeatures.colorContrastAvailable() -> SystemContrast.key
         else -> StandardContrast.key
+    }
+
+    private val measurementSystemDefaultValue = when {
+        sdkFeatures.measurementSystemAvailable() -> MeasurementSystem.System.key
+        else -> MeasurementSystem.Metric.key
     }
 
     private val themeFlow: Flow<Theme> = dataStore.data.map { preferences ->
@@ -66,6 +76,16 @@ internal class SettingsLocalDataSource @Inject constructor(
             HighContrast.key -> HighContrast
             SystemContrast.key -> SystemContrast
             else -> SystemContrast
+        }
+    }
+
+    private val measurementSystemFlow: Flow<MeasurementSystem> = dataStore.data.map { preferences ->
+        when (preferences[measurementSystemKey] ?: measurementSystemDefaultValue) {
+            MeasurementSystem.System.key -> MeasurementSystem.System
+            MeasurementSystem.Metric.key -> MeasurementSystem.Metric
+            MeasurementSystem.ImperialUS.key -> MeasurementSystem.ImperialUS
+            MeasurementSystem.ImperialUK.key -> MeasurementSystem.ImperialUK
+            else -> MeasurementSystem.System
         }
     }
 
@@ -111,4 +131,14 @@ internal class SettingsLocalDataSource @Inject constructor(
         val currentLocale = localeList[0]
         return currentLocale.toLanguage()
     }
+
+    suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem) {
+        dataStore.edit { preferences ->
+            preferences[measurementSystemKey] = measurementSystem.key
+        }
+    }
+
+    suspend fun getMeasurementSystem(): MeasurementSystem = measurementSystemFlow.first()
+
+    fun observeMeasurementSystem(): Flow<MeasurementSystem> = measurementSystemFlow
 }
