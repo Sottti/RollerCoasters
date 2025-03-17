@@ -41,6 +41,9 @@
       <SelectionState runConfigName="RollerCoastersDaoTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="testDefaultThemeWhenFeatureUnavailable()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

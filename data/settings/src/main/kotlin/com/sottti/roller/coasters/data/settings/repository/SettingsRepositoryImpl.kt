@@ -1,20 +1,16 @@
 package com.sottti.roller.coasters.data.settings.repository
 
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
-import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
 import com.sottti.roller.coasters.domain.model.ColorContrast
 import com.sottti.roller.coasters.domain.model.Language
 import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.model.Theme
-import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class SettingsRepositoryImpl @Inject constructor(
     private val localDataSource: SettingsLocalDataSource,
-    private val systemSettings: SystemSettings,
-    private val uiModeManager: UiModeManager,
 ) : SettingsRepository {
 
     override suspend fun setDynamicColor(enabled: Boolean) {
@@ -25,7 +21,6 @@ internal class SettingsRepositoryImpl @Inject constructor(
         localDataSource.observeDynamicColor()
 
     override suspend fun setTheme(theme: Theme) {
-        uiModeManager.setTheme(theme)
         localDataSource.setTheme(theme)
     }
 
@@ -34,8 +29,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun observeTheme(): Flow<Theme> = localDataSource.observeTheme()
 
     override suspend fun applyStoredTheme() {
-        val theme = localDataSource.getTheme()
-        uiModeManager.setTheme(theme)
+        localDataSource.applyStoredTheme()
     }
 
     override suspend fun setColorContrast(
@@ -51,7 +45,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
         localDataSource.observeColorContrast()
 
     override fun getSystemColorContrast(): SystemColorContrast =
-        systemSettings.colorContrast
+        localDataSource.getSystemColorContrast()
 
     override fun setLanguage(language: Language) {
         localDataSource.setLanguage(language)

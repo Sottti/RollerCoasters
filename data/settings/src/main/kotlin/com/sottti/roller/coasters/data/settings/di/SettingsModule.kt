@@ -26,12 +26,8 @@ internal object SettingsModule {
     @Singleton
     fun provideRepository(
         localDataSource: SettingsLocalDataSource,
-        systemSettings: SystemSettings,
-        uiModeManager: UiModeManager,
     ): SettingsRepository = SettingsRepositoryImpl(
         localDataSource = localDataSource,
-        systemSettings = systemSettings,
-        uiModeManager = uiModeManager,
     )
 
     @Provides
@@ -39,9 +35,13 @@ internal object SettingsModule {
     fun provideLocalDataSource(
         @ApplicationContext context: Context,
         sdkFeatures: SdkFeatures,
+        systemSettings: SystemSettings,
+        uiModeManager: UiModeManager,
     ): SettingsLocalDataSource = SettingsLocalDataSource(
         dataStore = context.dataStore,
         sdkFeatures = sdkFeatures,
+        systemSettings = systemSettings,
+        uiModeManager = uiModeManager,
     )
 }
 
