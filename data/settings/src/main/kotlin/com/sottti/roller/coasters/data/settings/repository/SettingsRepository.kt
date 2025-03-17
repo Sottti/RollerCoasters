@@ -4,6 +4,7 @@ import com.sottti.roller.coasters.domain.model.ColorContrast
 import com.sottti.roller.coasters.domain.model.Language
 import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme
 import kotlinx.coroutines.flow.Flow
 
@@ -29,4 +30,6 @@ public interface SettingsRepository {
     public fun observeMeasurementSystem(): Flow<MeasurementSystem>
     public suspend fun getMeasurementSystem(): MeasurementSystem
     public suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem)
+
+    public fun getSystemMeasurementSystem(): SystemMeasurementSystem
 }

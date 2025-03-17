@@ -20,6 +20,7 @@ import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.domain.model.Language
 import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import com.sottti.roller.coasters.utils.device.system.SystemSettings
@@ -93,11 +94,8 @@ internal class SettingsLocalDataSource @Inject constructor(
         AppCompatDelegate.setApplicationLocales(language.toLocaleList())
     }
 
-    fun getLanguage(): Language {
-        val localeList = AppCompatDelegate.getApplicationLocales()
-        val currentLocale = localeList[0]
-        return currentLocale.toLanguage()
-    }
+    fun getLanguage(): Language =
+        systemSettings.locale.toLanguage()
 
     suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem) {
         dataStore.edit { preferences ->
@@ -108,6 +106,9 @@ internal class SettingsLocalDataSource @Inject constructor(
     suspend fun getMeasurementSystem(): MeasurementSystem = measurementSystemFlow.first()
 
     fun observeMeasurementSystem(): Flow<MeasurementSystem> = measurementSystemFlow
+
+    fun getSystemMeasurementSystem(): SystemMeasurementSystem =
+        systemSettings.measurementSystem
 
     private val dynamicColorDefault by lazy {
         sdkFeatures.dynamicColorAvailable()

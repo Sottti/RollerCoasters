@@ -1,11 +1,15 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
+import android.icu.util.LocaleData
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.Metric
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.System
+import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 
 @VisibleForTesting
 internal const val MEASUREMENT_SYSTEM_METRIC = "metric"

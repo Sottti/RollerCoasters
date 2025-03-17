@@ -13,8 +13,9 @@ import org.junit.Test
 internal class SystemSettingsTest {
 
     @Test
-    fun `contrast below 0 returns low contrast on sdk level 34`() {
+    fun `contrast below 0 returns low contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns -0.1f },
         )
@@ -22,8 +23,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast below 0 returns standard contrast on sdk level 33`() {
+    fun `contrast below 0 returns standard contrast when color contrast not available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns false },
             uiModeManager = mockk { every { contrast } returns -0.1f },
         )
@@ -31,8 +33,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast 0_0 returns standard contrast on sdk level 34`() {
+    fun `contrast 0_0 returns standard contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.0f },
         )
@@ -40,8 +43,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast 0_4 returns standard contrast on sdk level 34`() {
+    fun `contrast 0_4 returns standard contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.4f },
         )
@@ -49,8 +53,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast 0_5 returns medium contrast on sdk level 34`() {
+    fun `contrast 0_5 returns medium contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.5f },
         )
@@ -58,8 +63,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast 0_99 returns medium contrast on sdk level 34`() {
+    fun `contrast 0_99 returns medium contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 0.99f },
         )
@@ -67,8 +73,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast 1_0 returns high contrast on sdk level 34`() {
+    fun `contrast 1_0 returns high contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = mockk { every { contrast } returns 1.0f },
         )
@@ -76,8 +83,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast 1_0 returns high contrast on sdk level 33`() {
+    fun `contrast 1_0 returns high contrast when color contrast not available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns false },
             uiModeManager = mockk { every { contrast } returns 1.0f },
         )
@@ -85,8 +93,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast null returns standard contrast on sdk level 34`() {
+    fun `contrast null returns standard contrast when color contrast available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns true },
             uiModeManager = null,
         )
@@ -94,8 +103,9 @@ internal class SystemSettingsTest {
     }
 
     @Test
-    fun `contrast null returns standard contrast on sdk level 33`() {
+    fun `contrast null returns standard contrast when color contrast not available`() {
         val systemSettings = SystemSettings(
+            localeProvider = mockk(),
             sdkFeatures = mockk { every { colorContrastAvailable() } returns false },
             uiModeManager = null,
         )

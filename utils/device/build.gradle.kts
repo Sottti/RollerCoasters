@@ -9,15 +9,29 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.utils.device"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
     api(project(module.domain.model))
     implementation(libs.annotations)
+    implementation(libs.appcompat)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+
+    androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.mockk.android) {
+        exclude(group = "org.junit.jupiter")
+        exclude(group = "org.junit.vintage")
+    }
+    androidTestImplementation(libs.truth)
+    androidTestRuntimeOnly(libs.test.runner)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
+
 }
