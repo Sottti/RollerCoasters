@@ -26,6 +26,7 @@ import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.Metric
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.System
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme.DarkTheme
 import com.sottti.roller.coasters.domain.model.Theme.LightTheme
 import com.sottti.roller.coasters.domain.model.Theme.SystemTheme
@@ -195,6 +196,17 @@ internal class SettingsLocalDataSourceTest {
     }
 
     @Test
+    fun testApplyStoredThemeWhenNoStoredThemeUsesDefaultTheme() = runTest {
+        every { uiModeManager.setTheme(SystemTheme) } just runs
+
+        dataStore.edit { it.clear() }
+
+        dataSource.applyStoredTheme()
+
+        verify { uiModeManager.setTheme(SystemTheme) }
+    }
+
+    @Test
     fun testSetAndGetColorContrast() = runTest {
         dataSource.setColorContrast(HighContrast)
         assertThat(dataSource.getColorContrast()).isEqualTo(HighContrast)
@@ -310,5 +322,15 @@ internal class SettingsLocalDataSourceTest {
 
         context.dataStore.edit { it.clear() }
         assertThat(customDataSource.getMeasurementSystem()).isEqualTo(Metric)
+    }
+
+    @Test
+    fun testGetSystemMeasurementSystemReturnsSystemSettingsValue() {
+        every { systemSettings.measurementSystem } returns SystemMeasurementSystem.ImperialUs
+
+        val result = dataSource.getSystemMeasurementSystem()
+
+        assertThat(result).isEqualTo(SystemMeasurementSystem.ImperialUs)
+        verify { systemSettings.measurementSystem }
     }
 }
