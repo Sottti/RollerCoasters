@@ -1,29 +1,26 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.model.Language.EnglishGbLanguage
-import com.sottti.roller.coasters.domain.model.Language.GalicianLanguage
-import com.sottti.roller.coasters.domain.model.Language.SpanishSpainLanguage
-import com.sottti.roller.coasters.domain.model.Language.SystemLanguage
+import com.sottti.roller.coasters.domain.model.Language.*
 import org.junit.Test
 import java.util.Locale
 
 internal class LanguageMapperTest {
 
     @Test
-    fun `locale en-GB maps to english gb`() {
+    fun `locale en-GB maps to English`() {
         val locale = Locale.UK
         assertThat(locale.toLanguage()).isEqualTo(EnglishGbLanguage)
     }
 
     @Test
-    fun `locale gl-ES maps to galician`() {
+    fun `locale gl-ES maps to Galician`() {
         val locale = Locale("gl", "ES")
         assertThat(locale.toLanguage()).isEqualTo(GalicianLanguage)
     }
 
     @Test
-    fun `locale es-ES maps to spanish from spain`() {
+    fun `locale es-ES maps to Spanish`() {
         val locale = Locale("es", "ES")
         assertThat(locale.toLanguage()).isEqualTo(SpanishSpainLanguage)
     }
@@ -41,25 +38,25 @@ internal class LanguageMapperTest {
     }
 
     @Test
-    fun `english gb converts correctly`() {
+    fun `English converts correctly to locale list`() {
         val localeList = EnglishGbLanguage.toLocaleList()
-        assertThat(localeList.toLanguageTags()).isEqualTo("en-GB")
+        assertThat(localeList.toLanguageTags()).isEqualTo(LOCALE_UK_TAG)
     }
 
     @Test
-    fun `galician converts correctly`() {
+    fun `Galician converts correctly to locale list`() {
         val localeList = GalicianLanguage.toLocaleList()
-        assertThat(localeList.toLanguageTags()).isEqualTo("gl-ES,es-ES")
+        assertThat(localeList.toLanguageTags()).isEqualTo("$LOCALE_GALICIA_TAG,$LOCALE_SPAIN_TAG")
     }
 
     @Test
-    fun `spanish from spain converts correctly`() {
+    fun `Spanish converts correctly to locale list`() {
         val localeList = SpanishSpainLanguage.toLocaleList()
-        assertThat(localeList.toLanguageTags()).isEqualTo("es-ES")
+        assertThat(localeList.toLanguageTags()).isEqualTo(LOCALE_SPAIN_TAG)
     }
 
     @Test
-    fun `system language converts correctly`() {
+    fun `system language converts correctly to empty locale list`() {
         val localeList = SystemLanguage.toLocaleList()
         assertThat(localeList.isEmpty).isTrue()
     }

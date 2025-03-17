@@ -23,13 +23,13 @@ internal fun MeasurementSystem.toPresentationModel(isSelected: Boolean): Measure
             selected = isSelected,
         )
 
-        MeasurementSystem.ImperialUS -> MeasurementSystemUi.ImperialUS(
+        MeasurementSystem.ImperialUs -> MeasurementSystemUi.ImperialUS(
             text = R.string.measurement_system_imperial_united_states,
             icon = if (isSelected) Icons.Straighten.Filled else Icons.Straighten.Outlined,
             selected = isSelected,
         )
 
-        MeasurementSystem.ImperialUK -> MeasurementSystemUi.ImperialUK(
+        MeasurementSystem.ImperialUk -> MeasurementSystemUi.ImperialUK(
             text = R.string.measurement_system_imperial_united_kingdom,
             icon = if (isSelected) Icons.Straighten.Filled else Icons.Straighten.Outlined,
             selected = isSelected,
@@ -44,8 +44,8 @@ internal fun MeasurementSystem.toPresentationModel(isSelected: Boolean): Measure
 
 internal fun MeasurementSystemUi.toDomain(): MeasurementSystem =
     when (this) {
-        is MeasurementSystemUi.ImperialUK -> MeasurementSystem.ImperialUK
-        is MeasurementSystemUi.ImperialUS -> MeasurementSystem.ImperialUS
+        is MeasurementSystemUi.ImperialUK -> MeasurementSystem.ImperialUk
+        is MeasurementSystemUi.ImperialUS -> MeasurementSystem.ImperialUs
         is MeasurementSystemUi.Metric -> MeasurementSystem.Metric
         is MeasurementSystemUi.System -> MeasurementSystem.System
     }

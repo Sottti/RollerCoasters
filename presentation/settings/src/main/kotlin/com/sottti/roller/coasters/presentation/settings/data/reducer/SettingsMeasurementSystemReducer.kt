@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
 import com.sottti.roller.coasters.domain.model.MeasurementSystem
-import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUK
-import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUS
+import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.model.MeasurementSystem.Metric
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
@@ -83,10 +83,10 @@ private fun measurementSystemsList(
     Metric.toPresentationModel(
         isSelected = selectedMeasurementSystem is MeasurementSystemUi.Metric,
     ),
-    ImperialUS.toPresentationModel(
+    ImperialUs.toPresentationModel(
         isSelected = selectedMeasurementSystem is MeasurementSystemUi.ImperialUS,
     ),
-    ImperialUK.toPresentationModel(
+    ImperialUk.toPresentationModel(
         isSelected = selectedMeasurementSystem is MeasurementSystemUi.ImperialUK,
     ),
 )

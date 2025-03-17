@@ -35,3 +35,10 @@ internal val Theme.key: String
         Theme.LightTheme -> THEME_KEY_LIGHT
         Theme.SystemTheme -> THEME_KEY_SYSTEM
     }
+
+internal fun String.toTheme(): Theme =
+    when (this) {
+        THEME_KEY_DARK -> Theme.DarkTheme
+        THEME_KEY_LIGHT -> Theme.LightTheme
+        else -> Theme.SystemTheme
+    }

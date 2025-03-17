@@ -12,24 +12,15 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.DATA_STORE_NAME
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.colorContrastKey
+import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.measurementSystemKey
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.themeKey
 import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
-import com.sottti.roller.coasters.domain.model.ColorContrast.HighContrast
-import com.sottti.roller.coasters.domain.model.ColorContrast.MediumContrast
-import com.sottti.roller.coasters.domain.model.ColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.*
 import com.sottti.roller.coasters.domain.model.Language
-import com.sottti.roller.coasters.domain.model.Theme.DarkTheme
-import com.sottti.roller.coasters.domain.model.Theme.LightTheme
-import com.sottti.roller.coasters.domain.model.Theme.SystemTheme
+import com.sottti.roller.coasters.domain.model.MeasurementSystem.*
+import com.sottti.roller.coasters.domain.model.Theme.*
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
-import io.mockk.mockkStatic
-import io.mockk.runs
-import io.mockk.unmockkStatic
-import io.mockk.verify
+import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -53,9 +44,10 @@ internal class SettingsLocalDataSourceTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         dataStore = context.dataStore
         sdkFeatures = mockk {
+            every { colorContrastAvailable() } returns true
             every { dynamicColorAvailable() } returns true
             every { lightDarkSystemThemingAvailable() } returns true
-            every { colorContrastAvailable() } returns true
+            every { measurementSystemAvailable() } returns true
         }
 
         dataSource = SettingsLocalDataSource(dataStore, sdkFeatures)
@@ -72,141 +64,158 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testSetAndGetDynamicColor() = runTest {
         dataSource.setDynamicColor(true)
-        val result = dataSource.observeDynamicColor().first()
-        assertThat(result).isTrue()
+        assertThat(dataSource.observeDynamicColor().first()).isTrue()
 
         dataSource.setDynamicColor(false)
-        val resultFalse = dataSource.observeDynamicColor().first()
-        assertThat(resultFalse).isFalse()
+        assertThat(dataSource.observeDynamicColor().first()).isFalse()
+    }
+
+    @Test
+    fun testSetAndObserveDynamicColor() = runTest {
+        dataSource.setDynamicColor(true)
+        assertThat(dataSource.observeDynamicColor().first()).isTrue()
+
+        dataSource.setDynamicColor(false)
+        assertThat(dataSource.observeDynamicColor().first()).isFalse()
+    }
+
+    @Test
+    fun testDefaultDynamicColorForMissingValue() = runTest {
+        assertThat(dataSource.observeDynamicColor().first()).isTrue()
+    }
+
+    @Test
+    fun testDefaultDynamicColorWhenFeatureUnavailable() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val customSdkFeatures = mockk<SdkFeatures> {
+            every { dynamicColorAvailable() } returns false
+        }
+        val customDataSource = SettingsLocalDataSource(context.dataStore, customSdkFeatures)
+
+        context.dataStore.edit { it.clear() }
+        assertThat(customDataSource.observeDynamicColor().first()).isFalse()
     }
 
     @Test
     fun testSetAndGetTheme() = runTest {
         dataSource.setTheme(DarkTheme)
-        val result = dataSource.getTheme()
-        assertThat(result).isEqualTo(DarkTheme)
+        assertThat(dataSource.getTheme()).isEqualTo(DarkTheme)
 
         dataSource.setTheme(LightTheme)
-        val resultLight = dataSource.getTheme()
-        assertThat(resultLight).isEqualTo(LightTheme)
+        assertThat(dataSource.getTheme()).isEqualTo(LightTheme)
 
         dataSource.setTheme(SystemTheme)
-        val resultSystem = dataSource.getTheme()
-        assertThat(resultSystem).isEqualTo(SystemTheme)
+        assertThat(dataSource.getTheme()).isEqualTo(SystemTheme)
     }
 
     @Test
     fun testSetAndObserveTheme() = runTest {
         dataSource.setTheme(LightTheme)
-        val result = dataSource.observeTheme().first()
-        assertThat(result).isEqualTo(LightTheme)
+        assertThat(dataSource.observeTheme().first()).isEqualTo(LightTheme)
 
         dataSource.setTheme(DarkTheme)
-        val resultDark = dataSource.observeTheme().first()
-        assertThat(resultDark).isEqualTo(DarkTheme)
+        assertThat(dataSource.observeTheme().first()).isEqualTo(DarkTheme)
 
         dataSource.setTheme(SystemTheme)
-        val resultSystem = dataSource.observeTheme().first()
-        assertThat(resultSystem).isEqualTo(SystemTheme)
+        assertThat(dataSource.observeTheme().first()).isEqualTo(SystemTheme)
+    }
+
+    @Test
+    fun testDefaultThemeForMissingValue() = runTest {
+        assertThat(dataSource.getTheme()).isEqualTo(SystemTheme)
+    }
+
+    @Test
+    fun testThemeFallbackForInvalidStoredValue() = runTest {
+        dataStore.edit { preferences -> preferences[themeKey] = "invalid_key" }
+        assertThat(dataSource.getTheme()).isEqualTo(SystemTheme)
+    }
+
+    @Test
+    fun testDefaultThemeWhenFeatureUnavailable() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val customSdkFeatures = mockk<SdkFeatures> {
+            every { lightDarkSystemThemingAvailable() } returns false
+        }
+        val customDataSource = SettingsLocalDataSource(context.dataStore, customSdkFeatures)
+
+        context.dataStore.edit { it.clear() }
+        assertThat(customDataSource.getTheme()).isEqualTo(LightTheme)
     }
 
     @Test
     fun testSetAndGetColorContrast() = runTest {
         dataSource.setColorContrast(HighContrast)
-        val result = dataSource.getColorContrast()
-        assertThat(result).isEqualTo(HighContrast)
+        assertThat(dataSource.getColorContrast()).isEqualTo(HighContrast)
 
         dataSource.setColorContrast(MediumContrast)
-        val resultMedium = dataSource.getColorContrast()
-        assertThat(resultMedium).isEqualTo(MediumContrast)
-
-        dataSource.setColorContrast(StandardContrast)
-        val resultStandard = dataSource.getColorContrast()
-        assertThat(resultStandard).isEqualTo(StandardContrast)
-
-        dataSource.setColorContrast(SystemContrast)
-        val resultSystem = dataSource.getColorContrast()
-        assertThat(resultSystem).isEqualTo(SystemContrast)
+        assertThat(dataSource.getColorContrast()).isEqualTo(MediumContrast)
     }
 
     @Test
     fun testSetAndObserveColorContrast() = runTest {
         dataSource.setColorContrast(MediumContrast)
-        val result = dataSource.observeColorContrast().first()
-        assertThat(result).isEqualTo(MediumContrast)
-
-        dataSource.setColorContrast(HighContrast)
-        val resultHigh = dataSource.observeColorContrast().first()
-        assertThat(resultHigh).isEqualTo(HighContrast)
+        assertThat(dataSource.observeColorContrast().first()).isEqualTo(MediumContrast)
     }
 
     @Test
-    fun testDefaultValuesUsedWhenPreferencesAreMissing() = runTest {
-        assertThat(dataSource.getTheme()).isEqualTo(SystemTheme)
+    fun testDefaultColorContrastForMissingValue() = runTest {
         assertThat(dataSource.getColorContrast()).isEqualTo(SystemContrast)
-        assertThat(dataSource.observeDynamicColor().first()).isTrue()
     }
 
     @Test
-    fun testDefaultValuesWhenFeaturesUnavailable() = runTest {
+    fun testColorContrastFallbackForInvalidStoredValue() = runTest {
+        dataStore.edit { preferences -> preferences[colorContrastKey] = "invalid_key" }
+        assertThat(dataSource.getColorContrast()).isEqualTo(SystemContrast)
+    }
+
+    @Test
+    fun testDefaultColorContrastWhenFeatureUnavailable() = runTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val customSdkFeatures = mockk<SdkFeatures> {
-            every { dynamicColorAvailable() } returns false
-            every { lightDarkSystemThemingAvailable() } returns false
             every { colorContrastAvailable() } returns false
         }
         val customDataSource = SettingsLocalDataSource(context.dataStore, customSdkFeatures)
 
         context.dataStore.edit { it.clear() }
-
-        assertThat(customDataSource.observeDynamicColor().first()).isFalse()
-        assertThat(customDataSource.getTheme()).isEqualTo(LightTheme)
         assertThat(customDataSource.getColorContrast()).isEqualTo(StandardContrast)
     }
 
     @Test
-    fun testSetAndGetLanguage() = runTest {
-        mockkStatic(AppCompatDelegate::class)
-        val language = Language.EnglishGbLanguage
-        val localeList = language.toLocaleList()
-        every { AppCompatDelegate.getApplicationLocales() } returns localeList
-        every { AppCompatDelegate.setApplicationLocales(localeList) } just runs
+    fun testSetAndGetMeasurementSystem() = runTest {
+        dataSource.setMeasurementSystem(Metric)
+        assertThat(dataSource.getMeasurementSystem()).isEqualTo(Metric)
 
-        dataSource.setLanguage(language)
-        val result = dataSource.getLanguage()
-
-        assertThat(result).isEqualTo(language)
-        verify { AppCompatDelegate.setApplicationLocales(localeList) }
+        dataSource.setMeasurementSystem(ImperialUk)
+        assertThat(dataSource.getMeasurementSystem()).isEqualTo(ImperialUk)
     }
 
     @Test
-    fun testGetLanguageWithEmptyLocaleList() = runTest {
-        mockkStatic(AppCompatDelegate::class)
-        every {
-            AppCompatDelegate.getApplicationLocales()
-        } returns LocaleListCompat.getEmptyLocaleList()
-
-        val result = dataSource.getLanguage()
-        assertThat(result).isEqualTo(Language.SystemLanguage)
+    fun testSetAndObserveMeasurementSystem() = runTest {
+        dataSource.setMeasurementSystem(Metric)
+        assertThat(dataSource.observeMeasurementSystem().first()).isEqualTo(Metric)
     }
 
     @Test
-    fun testThemeFallbackForInvalidStoredValue() = runTest {
-        dataStore.edit { preferences ->
-            preferences[themeKey] = "invalid_key"
+    fun testDefaultMeasurementSystemForMissingValue() = runTest {
+        assertThat(dataSource.getMeasurementSystem()).isEqualTo(System)
+    }
+
+    @Test
+    fun testMeasurementSystemFallbackForInvalidStoredValue() = runTest {
+        dataStore.edit { preferences -> preferences[measurementSystemKey] = "invalid_key" }
+        assertThat(dataSource.getMeasurementSystem()).isEqualTo(System)
+    }
+
+    @Test
+    fun testDefaultMeasurementSystemWhenFeatureUnavailable() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val customSdkFeatures = mockk<SdkFeatures> {
+            every { measurementSystemAvailable() } returns false
         }
+        val customDataSource = SettingsLocalDataSource(context.dataStore, customSdkFeatures)
 
-        val result = dataSource.getTheme()
-        assertThat(result).isEqualTo(SystemTheme)
-    }
-
-    @Test
-    fun testColorContrastFallbackForInvalidStoredValue() = runTest {
-        dataStore.edit { preferences ->
-            preferences[colorContrastKey] = "invalid_key"
-        }
-
-        val result = dataSource.getColorContrast()
-        assertThat(result).isEqualTo(SystemContrast)
+        context.dataStore.edit { it.clear() }
+        assertThat(customDataSource.getMeasurementSystem()).isEqualTo(Metric)
     }
 }

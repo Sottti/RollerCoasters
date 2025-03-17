@@ -22,3 +22,10 @@ internal val ColorContrast.key: String
         ColorContrast.StandardContrast -> COLOR_CONTRAST_KEY_STANDARD
         ColorContrast.SystemContrast -> COLOR_CONTRAST_KEY_SYSTEM
     }
+
+internal fun String.toColorContrast() = when (this) {
+    COLOR_CONTRAST_KEY_HIGH -> ColorContrast.HighContrast
+    COLOR_CONTRAST_KEY_MEDIUM -> ColorContrast.MediumContrast
+    COLOR_CONTRAST_KEY_STANDARD -> ColorContrast.StandardContrast
+    else -> ColorContrast.SystemContrast
+}
