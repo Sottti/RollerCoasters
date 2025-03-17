@@ -15,12 +15,26 @@ import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSour
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.measurementSystemKey
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.themeKey
 import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
-import com.sottti.roller.coasters.domain.model.ColorContrast.*
-import com.sottti.roller.coasters.domain.model.Language
-import com.sottti.roller.coasters.domain.model.MeasurementSystem.*
-import com.sottti.roller.coasters.domain.model.Theme.*
+import com.sottti.roller.coasters.domain.model.ColorContrast.HighContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.MediumContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.StandardContrast
+import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.model.Language.EnglishGbLanguage
+import com.sottti.roller.coasters.domain.model.Language.SystemLanguage
+import com.sottti.roller.coasters.domain.model.MeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.model.MeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.model.MeasurementSystem.System
+import com.sottti.roller.coasters.domain.model.Theme.DarkTheme
+import com.sottti.roller.coasters.domain.model.Theme.LightTheme
+import com.sottti.roller.coasters.domain.model.Theme.SystemTheme
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
-import io.mockk.*
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.mockkStatic
+import io.mockk.runs
+import io.mockk.unmockkStatic
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -179,6 +193,32 @@ internal class SettingsLocalDataSourceTest {
 
         context.dataStore.edit { it.clear() }
         assertThat(customDataSource.getColorContrast()).isEqualTo(StandardContrast)
+    }
+
+    @Test
+    fun testSetAndGetLanguage() = runTest {
+        mockkStatic(AppCompatDelegate::class)
+        val language = EnglishGbLanguage
+        val localeList = language.toLocaleList()
+        every { AppCompatDelegate.getApplicationLocales() } returns localeList
+        every { AppCompatDelegate.setApplicationLocales(localeList) } just runs
+
+        dataSource.setLanguage(language)
+        val result = dataSource.getLanguage()
+
+        assertThat(result).isEqualTo(language)
+        verify { AppCompatDelegate.setApplicationLocales(localeList) }
+    }
+
+    @Test
+    fun testGetLanguageWithEmptyLocaleList() = runTest {
+        mockkStatic(AppCompatDelegate::class)
+        every {
+            AppCompatDelegate.getApplicationLocales()
+        } returns LocaleListCompat.getEmptyLocaleList()
+
+        val result = dataSource.getLanguage()
+        assertThat(result).isEqualTo(SystemLanguage)
     }
 
     @Test
