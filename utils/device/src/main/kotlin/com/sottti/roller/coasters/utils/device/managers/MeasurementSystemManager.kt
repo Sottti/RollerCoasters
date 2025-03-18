@@ -1,40 +1,23 @@
-package com.sottti.roller.coasters.utils.device.system
+package com.sottti.roller.coasters.utils.device.managers
 
-import android.app.UiModeManager
 import android.icu.util.LocaleData
 import android.icu.util.ULocale
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
-import com.sottti.roller.coasters.utils.device.mappers.toSystemColorContrast
 import com.sottti.roller.coasters.utils.device.mappers.toSystemMeasurementSystem
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import java.util.Locale
 import javax.inject.Inject
 
-public class SystemSettings @Inject constructor(
-    private val localeProvider: LocaleProvider,
+public class MeasurementSystemManager @Inject constructor(
     private val sdkFeatures: SdkFeatures,
-    private val uiModeManager: UiModeManager?,
+    private val languageManager: LanguageManager,
 ) {
     private companion object {
         private val imperialUsRegions = setOf("US", "LR", "MM")
         private val imperialUkRegions = setOf("GB")
     }
-
-    public val locale: Locale
-        get() = localeProvider.getAppLocale() ?: localeProvider.getDefaultLocale()
-
-    public val colorContrast: SystemColorContrast
-        get() = when {
-            sdkFeatures.colorContrastAvailable() -> {
-                val contrast = uiModeManager?.contrast ?: 0f
-                toSystemColorContrast(contrast)
-            }
-
-            else -> SystemColorContrast.StandardContrast
-        }
 
     public val measurementSystem: SystemMeasurementSystem
         get() = when {
@@ -45,11 +28,11 @@ public class SystemSettings @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     private fun getPreferredMeasurementSystem(): SystemMeasurementSystem =
         LocaleData
-            .getMeasurementSystem(ULocale.forLocale(locale))
+            .getMeasurementSystem(ULocale.forLocale(languageManager.locale))
             .toSystemMeasurementSystem()
 
     private fun inferMeasurementSystem(): SystemMeasurementSystem =
-        when (locale.country.uppercase(Locale.US)) {
+        when (languageManager.locale.country.uppercase(Locale.US)) {
             in imperialUsRegions -> SystemMeasurementSystem.ImperialUs
             in imperialUkRegions -> SystemMeasurementSystem.ImperialUk
             else -> SystemMeasurementSystem.Metric

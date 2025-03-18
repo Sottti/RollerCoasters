@@ -35,16 +35,13 @@
       <SelectionState runConfigName="presentation.about-me">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="SystemSettingsMeasurementSystemTest">
+      <SelectionState runConfigName="LanguageManagerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="returnsMetric_whenLocaleIsNull_andDefaultLocalIsUs_andFeatureAvailable()">
+      <SelectionState runConfigName="MeasurementSystemManagerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="returnsImperialUs_whenLocaleIsUs_andFeatureUnavailable()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="RollerCoastersDaoTest">
+      <SelectionState runConfigName="ThemeManagerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

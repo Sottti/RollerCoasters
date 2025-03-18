@@ -49,10 +49,10 @@ internal fun MutableStateFlow<SettingsState>.updateMeasurementSystemPicker(
     update { currentState ->
         currentState.copy(
             measurementSystem = currentState.measurementSystem.copy(
-                    picker = measurementSystemPickerState(
-                        selectedMeasurementSystem
-                    )
-                ),
+                picker = measurementSystemPickerState(
+                    selectedMeasurementSystem
+                )
+            ),
         )
     }
 }

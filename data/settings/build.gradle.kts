@@ -16,10 +16,9 @@ android {
 
 dependencies {
     api(project(module.domain.model))
-    api(project(module.utils.device))
-    implementation(libs.appcompat)
     implementation(libs.datastore.preferences)
     implementation(libs.hilt)
+    implementation(project(module.utils.device))
     ksp(libs.hilt.compiler)
 
     androidTestImplementation(libs.coroutines.test)

@@ -1,17 +1,13 @@
 package com.sottti.roller.coasters.data.settings.datasource
 
 import androidx.annotation.VisibleForTesting
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
 import com.sottti.roller.coasters.data.settings.mappers.key
 import com.sottti.roller.coasters.data.settings.mappers.toColorContrast
-import com.sottti.roller.coasters.data.settings.mappers.toLanguage
-import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
 import com.sottti.roller.coasters.data.settings.mappers.toMeasurementSystem
 import com.sottti.roller.coasters.data.settings.mappers.toTheme
 import com.sottti.roller.coasters.domain.model.ColorContrast
@@ -22,17 +18,22 @@ import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme
+import com.sottti.roller.coasters.utils.device.managers.ColorContrastManager
+import com.sottti.roller.coasters.utils.device.managers.LanguageManager
+import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
-import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class SettingsLocalDataSource @Inject constructor(
+    private val colorContrastManager: ColorContrastManager,
     private val dataStore: DataStore<Preferences>,
-    private val systemSettings: SystemSettings,
-    private val uiModeManager: UiModeManager,
+    private val languageManager: LanguageManager,
+    private val measurementSystemManager: MeasurementSystemManager,
+    private val themeManager: ThemeManager,
     sdkFeatures: SdkFeatures,
 ) {
     companion object {
@@ -63,7 +64,7 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
 
     suspend fun setTheme(theme: Theme) {
-        uiModeManager.setTheme(theme)
+        themeManager.setTheme(theme)
         dataStore.edit { preferences ->
             preferences[themeKey] = theme.key
         }
@@ -74,7 +75,7 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun observeTheme(): Flow<Theme> = themeFlow
 
     suspend fun applyStoredTheme() {
-        uiModeManager.setTheme(themeFlow.first())
+        themeManager.setTheme(themeFlow.first())
     }
 
     suspend fun setColorContrast(colorContrast: ColorContrast) {
@@ -88,14 +89,14 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun observeColorContrast(): Flow<ColorContrast> = colorContrastFlow
 
     fun getSystemColorContrast(): SystemColorContrast =
-        systemSettings.colorContrast
+        colorContrastManager.colorContrast
 
     fun setLanguage(language: Language) {
-        AppCompatDelegate.setApplicationLocales(language.toLocaleList())
+        languageManager.setLanguage(language)
     }
 
     fun getLanguage(): Language =
-        systemSettings.locale.toLanguage()
+        languageManager.language
 
     suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem) {
         dataStore.edit { preferences ->
@@ -108,11 +109,29 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun observeMeasurementSystem(): Flow<MeasurementSystem> = measurementSystemFlow
 
     fun getSystemMeasurementSystem(): SystemMeasurementSystem =
-        systemSettings.measurementSystem
+        measurementSystemManager.measurementSystem
 
     private val dynamicColorDefault by lazy {
         sdkFeatures.dynamicColorAvailable()
     }
+
+    private val themeFlow: Flow<Theme> =
+        dataStore.data.map { preferences ->
+            val key = (preferences[themeKey] ?: themeDefaultValue)
+            key.toTheme()
+        }
+
+    private val colorContrastFlow: Flow<ColorContrast> =
+        dataStore.data.map { preferences ->
+            val key = preferences[colorContrastKey] ?: colorContrastDefaultValue
+            key.toColorContrast()
+        }
+
+    private val measurementSystemFlow: Flow<MeasurementSystem> =
+        dataStore.data.map { preferences ->
+            val key = preferences[measurementSystemKey] ?: measurementSystemDefaultValue
+            key.toMeasurementSystem()
+        }
 
     private val themeDefaultValue by lazy {
         when {
@@ -129,24 +148,6 @@ internal class SettingsLocalDataSource @Inject constructor(
     }
 
     private val measurementSystemDefaultValue by lazy {
-        when {
-            sdkFeatures.measurementSystemAvailable() -> MeasurementSystem.System.key
-            else -> MeasurementSystem.Metric.key
-        }
-    }
-
-    private val themeFlow: Flow<Theme> = dataStore.data.map { preferences ->
-        val key = (preferences[themeKey] ?: themeDefaultValue)
-        key.toTheme()
-    }
-
-    private val colorContrastFlow: Flow<ColorContrast> = dataStore.data.map { preferences ->
-        val key = preferences[colorContrastKey] ?: colorContrastDefaultValue
-        key.toColorContrast()
-    }
-
-    private val measurementSystemFlow: Flow<MeasurementSystem> = dataStore.data.map { preferences ->
-        val key = preferences[measurementSystemKey] ?: measurementSystemDefaultValue
-        key.toMeasurementSystem()
+        MeasurementSystem.System.key
     }
 }

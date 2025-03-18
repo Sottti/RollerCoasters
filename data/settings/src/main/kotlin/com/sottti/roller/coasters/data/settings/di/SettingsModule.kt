@@ -1,16 +1,15 @@
 package com.sottti.roller.coasters.data.settings.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
-import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.DATA_STORE_NAME
-import com.sottti.roller.coasters.data.settings.helpers.UiModeManager
+import com.sottti.roller.coasters.data.settings.datasource.dataStore
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
+import com.sottti.roller.coasters.utils.device.managers.ColorContrastManager
+import com.sottti.roller.coasters.utils.device.managers.LanguageManager
+import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
-import com.sottti.roller.coasters.utils.device.system.SystemSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,15 +33,17 @@ internal object SettingsModule {
     @Singleton
     fun provideLocalDataSource(
         @ApplicationContext context: Context,
+        colorContrastManager: ColorContrastManager,
+        languageManager: LanguageManager,
+        measurementSystemManager: MeasurementSystemManager,
         sdkFeatures: SdkFeatures,
-        systemSettings: SystemSettings,
-        uiModeManager: UiModeManager,
+        themeManager: ThemeManager,
     ): SettingsLocalDataSource = SettingsLocalDataSource(
+        colorContrastManager = colorContrastManager,
         dataStore = context.dataStore,
+        languageManager = languageManager,
+        measurementSystemManager = measurementSystemManager,
         sdkFeatures = sdkFeatures,
-        systemSettings = systemSettings,
-        uiModeManager = uiModeManager,
+        themeManager = themeManager,
     )
 }
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(DATA_STORE_NAME)
