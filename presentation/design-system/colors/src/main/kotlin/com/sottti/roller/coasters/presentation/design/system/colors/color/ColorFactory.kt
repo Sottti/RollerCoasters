@@ -7,11 +7,14 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
+import com.sottti.roller.coasters.presentation.design.system.colors.mappers.darkColorScheme
+import com.sottti.roller.coasters.presentation.design.system.colors.mappers.lightColorScheme
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 
 @Composable
 public fun colors(
-    colorContrast: AppColorContrast,
+    colorContrast: ResolvedColorContrast,
     darkTheme: Boolean,
     dynamicColor: Boolean,
     sdkFeatures: SdkFeatures?,
@@ -20,8 +23,8 @@ public fun colors(
             sdkFeatures.dynamicColorAvailable() &&
             dynamicColor -> dynamicColorScheme(darkTheme)
 
-    darkTheme -> darkColorScheme(colorContrast)
-    else -> lightColorScheme(colorContrast)
+    darkTheme -> colorContrast.darkColorScheme()
+    else -> colorContrast.lightColorScheme()
 }
 
 @Composable
@@ -30,20 +33,4 @@ private fun dynamicColorScheme(darkTheme: Boolean): ColorScheme =
     when {
         darkTheme -> dynamicDarkColorScheme(LocalContext.current)
         else -> dynamicLightColorScheme(LocalContext.current)
-    }
-
-@Composable
-private fun darkColorScheme(colorContrast: AppColorContrast): ColorScheme =
-    when (colorContrast) {
-        AppColorContrast.HighContrast -> ColorSchemes.Dark.highContrast
-        AppColorContrast.MediumContrast -> ColorSchemes.Dark.mediumContrast
-        AppColorContrast.StandardContrast -> ColorSchemes.Dark.standardContrast
-    }
-
-@Composable
-private fun lightColorScheme(colorContrast: AppColorContrast): ColorScheme =
-    when (colorContrast) {
-        AppColorContrast.HighContrast -> ColorSchemes.Light.highContrast
-        AppColorContrast.MediumContrast -> ColorSchemes.Light.mediumContrast
-        AppColorContrast.StandardContrast -> ColorSchemes.Light.standardContrast
     }

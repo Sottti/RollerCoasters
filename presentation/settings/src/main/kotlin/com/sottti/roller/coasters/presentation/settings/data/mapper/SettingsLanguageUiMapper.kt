@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.settings.data.mapper
 
 import androidx.compose.runtime.Composable
 import co.cuvva.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.domain.settings.model.Language
+import com.sottti.roller.coasters.domain.settings.model.language.Language
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.LanguageUi

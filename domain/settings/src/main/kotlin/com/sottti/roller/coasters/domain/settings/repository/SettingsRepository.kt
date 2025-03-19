@@ -1,11 +1,11 @@
 package com.sottti.roller.coasters.domain.settings.repository
 
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast
-import com.sottti.roller.coasters.domain.settings.model.Language
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
-import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.language.Language
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 import kotlinx.coroutines.flow.Flow
 
 public interface SettingsRepository {
@@ -18,9 +18,9 @@ public interface SettingsRepository {
 
     public suspend fun applyStoredTheme()
 
-    public suspend fun setColorContrast(contrast: ColorContrast)
-    public suspend fun getColorContrast(): ColorContrast
-    public fun observeColorContrast(): Flow<ColorContrast>
+    public suspend fun setAppColorContrast(contrast: AppColorContrast)
+    public suspend fun getAppColorContrast(): AppColorContrast
+    public fun observeAppColorContrast(): Flow<AppColorContrast>
 
     public fun getSystemColorContrast(): SystemColorContrast
 

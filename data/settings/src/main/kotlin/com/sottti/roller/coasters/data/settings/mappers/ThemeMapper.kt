@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import androidx.annotation.VisibleForTesting
-import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 
 @VisibleForTesting
 internal const val THEME_KEY_DARK = "dark"

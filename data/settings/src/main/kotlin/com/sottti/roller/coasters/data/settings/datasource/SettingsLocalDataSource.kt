@@ -7,22 +7,22 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.sottti.roller.coasters.data.settings.mappers.key
-import com.sottti.roller.coasters.data.settings.mappers.toColorContrast
+import com.sottti.roller.coasters.data.settings.mappers.toAppColorContrast
 import com.sottti.roller.coasters.data.settings.mappers.toLanguage
 import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
 import com.sottti.roller.coasters.data.settings.mappers.toMeasurementSystem
 import com.sottti.roller.coasters.data.settings.mappers.toTheme
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.SystemContrast
-import com.sottti.roller.coasters.domain.settings.model.Language
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
-import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.Theme
-import com.sottti.roller.coasters.utils.device.managers.ColorContrastManager
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.language.Language
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 import com.sottti.roller.coasters.utils.device.managers.LocaleManager
 import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.utils.device.managers.SystemColorContrastManager
 import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import kotlinx.coroutines.flow.Flow
@@ -31,10 +31,10 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class SettingsLocalDataSource @Inject constructor(
-    private val colorContrastManager: ColorContrastManager,
     private val dataStore: DataStore<Preferences>,
     private val localeManager: LocaleManager,
     private val measurementSystemManager: MeasurementSystemManager,
+    private val systemColorContrastManager: SystemColorContrastManager,
     private val themeManager: ThemeManager,
     sdkFeatures: SdkFeatures,
 ) {
@@ -45,7 +45,7 @@ internal class SettingsLocalDataSource @Inject constructor(
         internal val dynamicColorKey = booleanPreferencesKey("dynamic_color")
 
         @VisibleForTesting
-        internal val colorContrastKey = stringPreferencesKey("color_contrast")
+        internal val appColorContrastKey = stringPreferencesKey("app_color_contrast")
 
         @VisibleForTesting
         internal val measurementSystemKey = stringPreferencesKey("measurement_system")
@@ -80,18 +80,18 @@ internal class SettingsLocalDataSource @Inject constructor(
         themeManager.setTheme(themeFlow.first())
     }
 
-    suspend fun setColorContrast(colorContrast: ColorContrast) {
+    suspend fun setAppColorContrast(appColorContrast: AppColorContrast) {
         dataStore.edit { preferences ->
-            preferences[colorContrastKey] = colorContrast.key
+            preferences[appColorContrastKey] = appColorContrast.key
         }
     }
 
-    suspend fun getColorContrast(): ColorContrast = colorContrastFlow.first()
+    suspend fun getAppColorContrast(): AppColorContrast = appAppColorContrastFlow.first()
 
-    fun observeColorContrast(): Flow<ColorContrast> = colorContrastFlow
+    fun observeAppColorContrast(): Flow<AppColorContrast> = appAppColorContrastFlow
 
     fun getSystemColorContrast(): SystemColorContrast =
-        colorContrastManager.colorContrast
+        systemColorContrastManager.systemColorContrast
 
     fun setLanguage(language: Language) {
         localeManager.setLocaleList(language.toLocaleList())
@@ -123,10 +123,10 @@ internal class SettingsLocalDataSource @Inject constructor(
             key.toTheme()
         }
 
-    private val colorContrastFlow: Flow<ColorContrast> =
+    private val appAppColorContrastFlow: Flow<AppColorContrast> =
         dataStore.data.map { preferences ->
-            val key = preferences[colorContrastKey] ?: colorContrastDefaultValue
-            key.toColorContrast()
+            val key = preferences[appColorContrastKey] ?: appColorContrastDefaultValue
+            key.toAppColorContrast()
         }
 
     private val measurementSystemFlow: Flow<MeasurementSystem> =
@@ -142,7 +142,7 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
-    private val colorContrastDefaultValue by lazy {
+    private val appColorContrastDefaultValue by lazy {
         when {
             sdkFeatures.colorContrastAvailable() -> SystemContrast.key
             else -> StandardContrast.key

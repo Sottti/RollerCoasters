@@ -5,22 +5,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.sottti.roller.coasters.domain.settings.di.provideGetSystemColorContrast
-import com.sottti.roller.coasters.domain.settings.di.provideObserveColorContrast
-import com.sottti.roller.coasters.domain.settings.di.provideObserveDynamicColor
-import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
+import com.sottti.roller.coasters.domain.settings.di.colorContrast.provideObserveResolvedColorContrast
+import com.sottti.roller.coasters.domain.settings.di.dynamicColor.provideObserveDynamicColor
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
 import com.sottti.roller.coasters.utils.device.di.provideSdkFeatures
-import kotlinx.coroutines.flow.map
 
 @Composable
 public fun RollerCoastersTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
-    val getSystemColorContrast = remember { provideGetSystemColorContrast(context) }
-    val observeColorContrast = remember { provideObserveColorContrast(context) }
+    val observeResolvedColorContrast = remember { provideObserveResolvedColorContrast(context) }
     val observeDynamicColor = remember { provideObserveDynamicColor(context) }
     val sdkFeatures = remember { provideSdkFeatures(context) }
 
@@ -32,14 +29,13 @@ public fun RollerCoastersTheme(
         else -> false
     }
 
-    val colorContrast = observeColorContrast()
-        .map { colorContrast ->
-            colorContrast.toAppColorContrast(getSystemColorContrast())
-        }
-        .collectAsState(initial = AppColorContrast.StandardContrast).value
+    val resolvedColorContrast =
+        observeResolvedColorContrast
+            .invoke()
+            .collectAsState(initial = ResolvedColorContrast.StandardContrast).value
 
     val colors = colors(
-        colorContrast = colorContrast,
+        colorContrast = resolvedColorContrast,
         darkTheme = isSystemInDarkTheme(),
         dynamicColor = dynamicColor,
         sdkFeatures = sdkFeatures,

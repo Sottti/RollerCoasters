@@ -1,10 +1,10 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.Metric
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.System
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.System
 import org.junit.Test
 
 internal class MeasurementSystemMapperTest {

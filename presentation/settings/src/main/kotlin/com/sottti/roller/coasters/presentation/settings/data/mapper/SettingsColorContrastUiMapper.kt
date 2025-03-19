@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.settings.data.mapper
 
 import androidx.compose.runtime.Composable
 import co.cuvva.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastUi
@@ -19,12 +19,12 @@ internal fun DialogRadioButtonOption.toColorContrastUi(
     contrasts: List<ColorContrastUi>,
 ): ColorContrastUi = contrasts.find { it.text == text } ?: contrasts.first()
 
-internal fun ColorContrast.toPresentationModel(isSelected: Boolean): ColorContrastUi =
+internal fun AppColorContrast.toPresentationModel(isSelected: Boolean): ColorContrastUi =
     when (this) {
-        ColorContrast.SystemContrast -> systemContrast(isSelected)
-        ColorContrast.StandardContrast -> standardContrast(isSelected)
-        ColorContrast.MediumContrast -> mediumContrast(isSelected)
-        ColorContrast.HighContrast -> highContrast(isSelected)
+        AppColorContrast.SystemContrast -> systemContrast(isSelected)
+        AppColorContrast.StandardContrast -> standardContrast(isSelected)
+        AppColorContrast.MediumContrast -> mediumContrast(isSelected)
+        AppColorContrast.HighContrast -> highContrast(isSelected)
     }
 
 private fun systemContrast(
@@ -59,10 +59,10 @@ private fun highContrast(
     text = R.string.color_contrast_high_contrast,
 )
 
-internal fun ColorContrastUi.toDomain(): ColorContrast =
+internal fun ColorContrastUi.toDomain(): AppColorContrast =
     when (this) {
-        is HighContrast -> ColorContrast.HighContrast
-        is MediumContrast -> ColorContrast.MediumContrast
-        is StandardContrast -> ColorContrast.StandardContrast
-        is SystemContrast -> ColorContrast.SystemContrast
+        is HighContrast -> AppColorContrast.HighContrast
+        is MediumContrast -> AppColorContrast.MediumContrast
+        is StandardContrast -> AppColorContrast.StandardContrast
+        is SystemContrast -> AppColorContrast.SystemContrast
     }

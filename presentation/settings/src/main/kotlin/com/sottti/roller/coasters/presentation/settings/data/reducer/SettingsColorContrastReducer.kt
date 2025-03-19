@@ -1,10 +1,10 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.HighContrast
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.MediumContrast
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.ColorContrastNotAvailableMessageState
@@ -17,14 +17,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 internal fun MutableStateFlow<SettingsState>.updateColorContrast(
-    colorContrast: ColorContrast,
+    appColorContrast: AppColorContrast,
 ) {
     update { currentState ->
         currentState.copy(
             colorContrast = currentState.colorContrast.copy(
                 listItem = currentState.colorContrast.listItem.copy(
                     selectedColorContrast = SelectedColorContrastState.Loaded(
-                        colorContrast.toPresentationModel(isSelected = true),
+                        appColorContrast.toPresentationModel(isSelected = true),
                     )
                 ),
             )
@@ -33,7 +33,7 @@ internal fun MutableStateFlow<SettingsState>.updateColorContrast(
 }
 
 internal fun MutableStateFlow<SettingsState>.showColorContrastPicker(
-    colorContrast: ColorContrast,
+    appColorContrast: AppColorContrast,
     colorContrastAvailable: Boolean,
 ) {
     update { currentState ->
@@ -50,7 +50,7 @@ internal fun MutableStateFlow<SettingsState>.showColorContrastPicker(
                     notAvailableMessage = null,
                     picker = colorContrastPickerState(
                         colorContrastAvailable = colorContrastAvailable,
-                        selectedColorContrast = colorContrast.toPresentationModel(isSelected = true)
+                        selectedColorContrast = appColorContrast.toPresentationModel(isSelected = true)
                     )
                 )
             )

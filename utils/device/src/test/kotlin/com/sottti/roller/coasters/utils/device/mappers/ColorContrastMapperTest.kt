@@ -1,10 +1,10 @@
 package com.sottti.roller.coasters.utils.device.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast.HighContrast
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast.LowContrast
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast.MediumContrast
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast.StandardContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast.HighContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast.LowContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast.MediumContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast.StandardContrast
 import org.junit.Test
 
 internal class ColorContrastMapperTest {

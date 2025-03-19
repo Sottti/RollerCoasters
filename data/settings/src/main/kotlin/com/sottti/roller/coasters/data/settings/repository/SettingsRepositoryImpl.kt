@@ -1,12 +1,12 @@
 package com.sottti.roller.coasters.data.settings.repository
 
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast
-import com.sottti.roller.coasters.domain.settings.model.Language
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
-import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.language.Language
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -34,17 +34,17 @@ internal class SettingsRepositoryImpl @Inject constructor(
         localDataSource.applyStoredTheme()
     }
 
-    override suspend fun setColorContrast(
-        contrast: ColorContrast,
+    override suspend fun setAppColorContrast(
+        contrast: AppColorContrast,
     ) {
-        localDataSource.setColorContrast(contrast)
+        localDataSource.setAppColorContrast(contrast)
     }
 
-    override suspend fun getColorContrast(): ColorContrast =
-        localDataSource.getColorContrast()
+    override suspend fun getAppColorContrast(): AppColorContrast =
+        localDataSource.getAppColorContrast()
 
-    override fun observeColorContrast(): Flow<ColorContrast> =
-        localDataSource.observeColorContrast()
+    override fun observeAppColorContrast(): Flow<AppColorContrast> =
+        localDataSource.observeAppColorContrast()
 
     override fun getSystemColorContrast(): SystemColorContrast =
         localDataSource.getSystemColorContrast()

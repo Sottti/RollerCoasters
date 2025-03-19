@@ -5,19 +5,19 @@ import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast.SystemContrast
-import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.GetColorContrast
-import com.sottti.roller.coasters.domain.settings.usecase.language.GetLanguage
-import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.usecase.theme.GetTheme
-import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.GetAppColorContrast
+import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveAppColorContrast
+import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveDynamicColor
-import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveTheme
-import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.language.GetLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.SetLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.SetMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.theme.GetTheme
+import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveTheme
 import com.sottti.roller.coasters.domain.settings.usecase.theme.SetTheme
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
@@ -70,16 +70,16 @@ import javax.inject.Inject
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
     private val application: Application,
-    private val getColorContrast: GetColorContrast,
+    private val getAppColorContrast: GetAppColorContrast,
     private val getLanguage: GetLanguage,
     private val getMeasurementSystem: GetMeasurementSystem,
     private val getTheme: GetTheme,
-    private val observeColorContrast: ObserveColorContrast,
+    private val observeAppColorContrast: ObserveAppColorContrast,
     private val observeDynamicColor: ObserveDynamicColor,
     private val observeMeasurementSystem: ObserveMeasurementSystem,
     private val observeTheme: ObserveTheme,
     private val sdkFeatures: SdkFeatures,
-    private val setColorContrast: SetColorContrast,
+    private val setAppColorContrast: SetAppColorContrast,
     private val setDynamicColor: SetDynamicColor,
     private val setLanguage: SetLanguage,
     private val setMeasurementSystem: SetMeasurementSystem,
@@ -134,7 +134,7 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun collectColorContrast() {
         viewModelScope.launch {
-            observeColorContrast()
+            observeAppColorContrast()
                 .collect { colorContrast -> _state.updateColorContrast(colorContrast) }
         }
     }
@@ -158,7 +158,7 @@ internal class SettingsViewModel @Inject constructor(
                 is DynamicColorCheckedChange -> {
                     setDynamicColor(action.checked)
                     if (action.checked == true) {
-                        setColorContrast(SystemContrast)
+                        setAppColorContrast(SystemContrast)
                     }
                 }
 
@@ -187,7 +187,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 LaunchColorContrastPicker -> {
                     _state.showColorContrastPicker(
-                        colorContrast = getColorContrast(),
+                        appColorContrast = getAppColorContrast(),
                         colorContrastAvailable = sdkFeatures.colorContrastAvailable(),
                     )
                 }
@@ -201,7 +201,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 is ConfirmColorContrastPickerSelection -> {
                     _state.hideColorContrastPicker()
-                    setColorContrast(action.contrast.toDomain())
+                    setAppColorContrast(action.contrast.toDomain())
                 }
 
                 DismissColorContrastPicker -> _state.hideColorContrastPicker()

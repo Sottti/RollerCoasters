@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
-import com.sottti.roller.coasters.domain.settings.model.ColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import org.jetbrains.annotations.VisibleForTesting
 
 @VisibleForTesting
@@ -15,17 +15,17 @@ internal const val COLOR_CONTRAST_KEY_STANDARD = "standard"
 @VisibleForTesting
 internal const val COLOR_CONTRAST_KEY_SYSTEM = "system"
 
-internal val ColorContrast.key: String
+internal val AppColorContrast.key: String
     get() = when (this) {
-        ColorContrast.HighContrast -> COLOR_CONTRAST_KEY_HIGH
-        ColorContrast.MediumContrast -> COLOR_CONTRAST_KEY_MEDIUM
-        ColorContrast.StandardContrast -> COLOR_CONTRAST_KEY_STANDARD
-        ColorContrast.SystemContrast -> COLOR_CONTRAST_KEY_SYSTEM
+        AppColorContrast.HighContrast -> COLOR_CONTRAST_KEY_HIGH
+        AppColorContrast.MediumContrast -> COLOR_CONTRAST_KEY_MEDIUM
+        AppColorContrast.StandardContrast -> COLOR_CONTRAST_KEY_STANDARD
+        AppColorContrast.SystemContrast -> COLOR_CONTRAST_KEY_SYSTEM
     }
 
-internal fun String.toColorContrast() = when (this) {
-    COLOR_CONTRAST_KEY_HIGH -> ColorContrast.HighContrast
-    COLOR_CONTRAST_KEY_MEDIUM -> ColorContrast.MediumContrast
-    COLOR_CONTRAST_KEY_STANDARD -> ColorContrast.StandardContrast
-    else -> ColorContrast.SystemContrast
+internal fun String.toAppColorContrast() = when (this) {
+    COLOR_CONTRAST_KEY_HIGH -> AppColorContrast.HighContrast
+    COLOR_CONTRAST_KEY_MEDIUM -> AppColorContrast.MediumContrast
+    COLOR_CONTRAST_KEY_STANDARD -> AppColorContrast.StandardContrast
+    else -> AppColorContrast.SystemContrast
 }

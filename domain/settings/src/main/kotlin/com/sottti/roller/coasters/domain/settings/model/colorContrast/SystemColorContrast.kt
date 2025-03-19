@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.settings.model
+package com.sottti.roller.coasters.domain.settings.model.colorContrast
 
 public enum class SystemColorContrast {
     HighContrast,

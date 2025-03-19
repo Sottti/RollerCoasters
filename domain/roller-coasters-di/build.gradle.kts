@@ -11,6 +11,7 @@ android {
 }
 
 dependencies {
+    api(libs.result)
     api(project(module.domain.rollerCoasters))
     implementation(libs.hilt)
     implementation(project(module.data.rollerCoasters))

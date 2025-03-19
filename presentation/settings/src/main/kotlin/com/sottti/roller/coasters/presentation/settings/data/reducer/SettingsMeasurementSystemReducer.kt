@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.Metric
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.MeasurementSystemPickerState

@@ -3,9 +3,9 @@ package com.sottti.roller.coasters.utils.device.mappers
 import android.icu.util.LocaleData
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 
 @RequiresApi(Build.VERSION_CODES.P)
 internal fun LocaleData.MeasurementSystem.toSystemMeasurementSystem() =

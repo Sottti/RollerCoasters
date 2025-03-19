@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.domain.settings.usecase.theme
 
-import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

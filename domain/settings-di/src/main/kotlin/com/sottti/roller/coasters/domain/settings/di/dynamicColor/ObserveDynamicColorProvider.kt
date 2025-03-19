@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.settings.di
+package com.sottti.roller.coasters.domain.settings.di.dynamicColor
 
 import android.content.Context
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveDynamicColor

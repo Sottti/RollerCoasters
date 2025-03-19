@@ -5,9 +5,9 @@ import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSour
 import com.sottti.roller.coasters.data.settings.datasource.dataStore
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
-import com.sottti.roller.coasters.utils.device.managers.ColorContrastManager
 import com.sottti.roller.coasters.utils.device.managers.LocaleManager
 import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.utils.device.managers.SystemColorContrastManager
 import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import dagger.Module
@@ -33,13 +33,13 @@ internal object SettingsModule {
     @Singleton
     fun provideLocalDataSource(
         @ApplicationContext context: Context,
-        colorContrastManager: ColorContrastManager,
+        systemColorContrastManager: SystemColorContrastManager,
         localeManager: LocaleManager,
         measurementSystemManager: MeasurementSystemManager,
         sdkFeatures: SdkFeatures,
         themeManager: ThemeManager,
     ): SettingsLocalDataSource = SettingsLocalDataSource(
-        colorContrastManager = colorContrastManager,
+        systemColorContrastManager = systemColorContrastManager,
         dataStore = context.dataStore,
         localeManager = localeManager,
         measurementSystemManager = measurementSystemManager,

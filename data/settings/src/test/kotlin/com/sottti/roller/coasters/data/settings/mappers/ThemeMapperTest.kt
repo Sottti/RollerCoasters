@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 import org.junit.Test
 
 internal class ThemeMapperTest {
