@@ -1,11 +1,11 @@
-package com.sottti.roller.coasters.utils.device.mappers
+package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.model.Language
 import org.junit.Test
 import java.util.Locale
 
-internal class LanguageMapperTest {
+internal class LocaleMapperTest {
 
     companion object {
         private const val UNMAPPED_LOCALE_TAG = "fr-FR"

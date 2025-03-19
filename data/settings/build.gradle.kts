@@ -15,14 +15,14 @@ android {
 }
 
 dependencies {
-    api(project(module.domain.model))
     implementation(libs.datastore.preferences)
     implementation(libs.hilt)
+    implementation(project(module.domain.settings))
     implementation(project(module.utils.device))
     ksp(libs.hilt.compiler)
 
-    androidTestImplementation(libs.coroutines.test)
     androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.kotlin.coroutines.test)
     androidTestImplementation(libs.mockk.android) {
         exclude(group = "org.junit.jupiter")
         exclude(group = "org.junit.vintage")
@@ -30,8 +30,8 @@ dependencies {
     androidTestImplementation(libs.truth)
     androidTestRuntimeOnly(libs.test.runner)
 
-    testImplementation(libs.coroutines.test)
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
 }

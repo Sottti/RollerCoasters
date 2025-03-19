@@ -24,6 +24,8 @@ include(
     ":data:settings",
     ":data:work-manager",
     ":domain:model",
+    ":domain:settings",
+    ":domain:settings-di",
     ":presentation:about-me",
     ":presentation:design-system:chip",
     ":presentation:design-system:colors",

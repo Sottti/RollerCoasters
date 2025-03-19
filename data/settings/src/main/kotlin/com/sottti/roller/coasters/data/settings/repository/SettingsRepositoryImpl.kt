@@ -7,6 +7,7 @@ import com.sottti.roller.coasters.domain.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme
+import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

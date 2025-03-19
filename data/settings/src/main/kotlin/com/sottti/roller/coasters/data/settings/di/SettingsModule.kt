@@ -3,10 +3,10 @@ package com.sottti.roller.coasters.data.settings.di
 import android.content.Context
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.datasource.dataStore
-import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
+import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.utils.device.managers.ColorContrastManager
-import com.sottti.roller.coasters.utils.device.managers.LanguageManager
+import com.sottti.roller.coasters.utils.device.managers.LocaleManager
 import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
 import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
@@ -34,14 +34,14 @@ internal object SettingsModule {
     fun provideLocalDataSource(
         @ApplicationContext context: Context,
         colorContrastManager: ColorContrastManager,
-        languageManager: LanguageManager,
+        localeManager: LocaleManager,
         measurementSystemManager: MeasurementSystemManager,
         sdkFeatures: SdkFeatures,
         themeManager: ThemeManager,
     ): SettingsLocalDataSource = SettingsLocalDataSource(
         colorContrastManager = colorContrastManager,
         dataStore = context.dataStore,
-        languageManager = languageManager,
+        localeManager = localeManager,
         measurementSystemManager = measurementSystemManager,
         sdkFeatures = sdkFeatures,
         themeManager = themeManager,

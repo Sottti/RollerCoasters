@@ -8,6 +8,8 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.sottti.roller.coasters.data.settings.mappers.key
 import com.sottti.roller.coasters.data.settings.mappers.toColorContrast
+import com.sottti.roller.coasters.data.settings.mappers.toLanguage
+import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
 import com.sottti.roller.coasters.data.settings.mappers.toMeasurementSystem
 import com.sottti.roller.coasters.data.settings.mappers.toTheme
 import com.sottti.roller.coasters.domain.model.ColorContrast
@@ -19,7 +21,7 @@ import com.sottti.roller.coasters.domain.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.model.Theme
 import com.sottti.roller.coasters.utils.device.managers.ColorContrastManager
-import com.sottti.roller.coasters.utils.device.managers.LanguageManager
+import com.sottti.roller.coasters.utils.device.managers.LocaleManager
 import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
 import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
@@ -31,7 +33,7 @@ import javax.inject.Inject
 internal class SettingsLocalDataSource @Inject constructor(
     private val colorContrastManager: ColorContrastManager,
     private val dataStore: DataStore<Preferences>,
-    private val languageManager: LanguageManager,
+    private val localeManager: LocaleManager,
     private val measurementSystemManager: MeasurementSystemManager,
     private val themeManager: ThemeManager,
     sdkFeatures: SdkFeatures,
@@ -92,11 +94,11 @@ internal class SettingsLocalDataSource @Inject constructor(
         colorContrastManager.colorContrast
 
     fun setLanguage(language: Language) {
-        languageManager.setLanguage(language)
+        localeManager.setLocaleList(language.toLocaleList())
     }
 
     fun getLanguage(): Language =
-        languageManager.language
+        localeManager.appLocale.toLanguage()
 
     suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem) {
         dataStore.edit { preferences ->

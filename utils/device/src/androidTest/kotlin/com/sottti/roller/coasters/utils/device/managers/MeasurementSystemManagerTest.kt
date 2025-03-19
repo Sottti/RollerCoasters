@@ -20,7 +20,6 @@ import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 internal class MeasurementSystemManagerTest {
-
     private companion object {
         private const val LOCALE_SPAIN_TAG = "es-ES"
         private const val LOCALE_UK_TAG = "en-GB"
@@ -33,27 +32,26 @@ internal class MeasurementSystemManagerTest {
     }
 
     private lateinit var sdkFeatures: SdkFeatures
-    private lateinit var languageManager: LanguageManager
+    private lateinit var localeManager: LocaleManager
     private lateinit var manager: MeasurementSystemManager
 
     @Before
     fun setup() {
         sdkFeatures = mockk()
-        languageManager = mockk()
-        manager = MeasurementSystemManager(sdkFeatures, languageManager)
-        mockkStatic(LocaleData::class, ULocale::class)
+        localeManager = mockk()
+        manager = MeasurementSystemManager(sdkFeatures, localeManager)
+        mockkStatic(LocaleData::class) // Removed ULocale mocking
     }
 
     @After
     fun tearDown() {
-        unmockkStatic(LocaleData::class, ULocale::class)
+        unmockkStatic(LocaleData::class)
     }
 
     @Test
     fun testMeasurementSystemWhenFeatureAvailableAndMetric() {
         every { sdkFeatures.measurementSystemAvailable() } returns true
-        every { languageManager.locale } returns LOCALE_SPAIN
-        every { ULocale.forLocale(LOCALE_SPAIN) } returns ULocale(LOCALE_SPAIN_TAG)
+        every { localeManager.systemULocale } returns ULocale(LOCALE_SPAIN_TAG)
         every {
             LocaleData.getMeasurementSystem(ULocale(LOCALE_SPAIN_TAG))
         } returns LocaleData.MeasurementSystem.SI
@@ -64,8 +62,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureAvailableAndImperialUk() {
         every { sdkFeatures.measurementSystemAvailable() } returns true
-        every { languageManager.locale } returns LOCALE_UK
-        every { ULocale.forLocale(LOCALE_UK) } returns ULocale(LOCALE_UK_TAG)
+        every { localeManager.systemULocale } returns ULocale(LOCALE_UK_TAG)
         every {
             LocaleData.getMeasurementSystem(ULocale(LOCALE_UK_TAG))
         } returns LocaleData.MeasurementSystem.UK
@@ -76,8 +73,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureAvailableAndImperialUs() {
         every { sdkFeatures.measurementSystemAvailable() } returns true
-        every { languageManager.locale } returns LOCALE_US
-        every { ULocale.forLocale(LOCALE_US) } returns ULocale(LOCALE_US_TAG)
+        every { localeManager.systemULocale } returns ULocale(LOCALE_US_TAG)
         every {
             LocaleData.getMeasurementSystem(ULocale(LOCALE_US_TAG))
         } returns LocaleData.MeasurementSystem.US
@@ -88,7 +84,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndImperialUsRegion() {
         every { sdkFeatures.measurementSystemAvailable() } returns false
-        every { languageManager.locale } returns LOCALE_US
+        every { localeManager.systemLocale } returns LOCALE_US
 
         assertThat(manager.measurementSystem).isEqualTo(ImperialUs)
     }
@@ -96,7 +92,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndImperialUkRegion() {
         every { sdkFeatures.measurementSystemAvailable() } returns false
-        every { languageManager.locale } returns LOCALE_UK
+        every { localeManager.systemLocale } returns LOCALE_UK
 
         assertThat(manager.measurementSystem).isEqualTo(ImperialUk)
     }
@@ -104,7 +100,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndMetricRegion() {
         every { sdkFeatures.measurementSystemAvailable() } returns false
-        every { languageManager.locale } returns LOCALE_SPAIN
+        every { localeManager.systemLocale } returns LOCALE_SPAIN
 
         assertThat(manager.measurementSystem).isEqualTo(Metric)
     }
@@ -112,7 +108,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndOtherImperialUsRegion() {
         every { sdkFeatures.measurementSystemAvailable() } returns false
-        every { languageManager.locale } returns LOCALE_LIBERIA
+        every { localeManager.systemLocale } returns LOCALE_LIBERIA
 
         assertThat(manager.measurementSystem).isEqualTo(ImperialUs)
     }

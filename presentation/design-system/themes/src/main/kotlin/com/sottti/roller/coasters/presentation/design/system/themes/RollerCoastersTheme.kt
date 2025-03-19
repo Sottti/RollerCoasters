@@ -5,7 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.sottti.roller.coasters.data.settings.di.provideSettingsRepository
+import com.sottti.roller.coasters.di.settings.provideGetSystemColorContrast
+import com.sottti.roller.coasters.di.settings.provideObserveColorContrast
+import com.sottti.roller.coasters.di.settings.provideObserveDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
@@ -17,25 +19,24 @@ public fun RollerCoastersTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
+    val getSystemColorContrast = remember { provideGetSystemColorContrast(context) }
+    val observeColorContrast = remember { provideObserveColorContrast(context) }
+    val observeDynamicColor = remember { provideObserveDynamicColor(context) }
     val sdkFeatures = remember { provideSdkFeatures(context) }
-    val settingsRepository = remember { provideSettingsRepository(context) }
 
     val dynamicColor = when (sdkFeatures.dynamicColorAvailable()) {
-        true -> settingsRepository
-            .observeDynamicColor()
+        true -> observeDynamicColor()
             .collectAsState(initial = true)
             .value
 
         else -> false
     }
 
-    val colorContrast =
-        settingsRepository
-            .observeColorContrast()
-            .map { colorContrast ->
-                colorContrast.toAppColorContrast(settingsRepository.getSystemColorContrast())
-            }
-            .collectAsState(initial = AppColorContrast.StandardContrast).value
+    val colorContrast = observeColorContrast()
+        .map { colorContrast ->
+            colorContrast.toAppColorContrast(getSystemColorContrast())
+        }
+        .collectAsState(initial = AppColorContrast.StandardContrast).value
 
     val colors = colors(
         colorContrast = colorContrast,

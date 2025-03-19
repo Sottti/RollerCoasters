@@ -5,8 +5,20 @@ import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.data.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.usecase.GetColorContrast
+import com.sottti.roller.coasters.domain.settings.usecase.GetLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.GetMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.GetTheme
+import com.sottti.roller.coasters.domain.settings.usecase.ObserveColorContrast
+import com.sottti.roller.coasters.domain.settings.usecase.ObserveDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.ObserveMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.ObserveTheme
+import com.sottti.roller.coasters.domain.settings.usecase.SetColorContrast
+import com.sottti.roller.coasters.domain.settings.usecase.SetDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.SetLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.SetMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.SetTheme
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastNotAvailableMessage
@@ -58,8 +70,20 @@ import javax.inject.Inject
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
     private val application: Application,
+    private val getColorContrast: GetColorContrast,
+    private val getLanguage: GetLanguage,
+    private val getMeasurementSystem: GetMeasurementSystem,
+    private val getTheme: GetTheme,
+    private val observeColorContrast: ObserveColorContrast,
+    private val observeDynamicColor: ObserveDynamicColor,
+    private val observeMeasurementSystem: ObserveMeasurementSystem,
+    private val observeTheme: ObserveTheme,
     private val sdkFeatures: SdkFeatures,
-    private val settingsRepository: SettingsRepository,
+    private val setColorContrast: SetColorContrast,
+    private val setDynamicColor: SetDynamicColor,
+    private val setLanguage: SetLanguage,
+    private val setMeasurementSystem: SetMeasurementSystem,
+    private val setTheme: SetTheme,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState(sdkFeatures.dynamicColorAvailable()))
@@ -72,12 +96,12 @@ internal class SettingsViewModel @Inject constructor(
 
     init {
         if (sdkFeatures.dynamicColorAvailable()) {
-            observeDynamicColor()
+            collectDynamicColor()
         }
-        observeTheme()
-        observeColorContrast()
+        collectTheme()
+        collectColorContrast()
         updateLanguage()
-        observeMeasurementSystem()
+        collectMeasurementSystem()
         registerForConfigChanges()
     }
 
@@ -94,40 +118,36 @@ internal class SettingsViewModel @Inject constructor(
         application.unregisterComponentCallbacks(configObserver)
     }
 
-    private fun observeDynamicColor() {
+    private fun collectDynamicColor() {
         viewModelScope.launch {
-            settingsRepository
-                .observeDynamicColor()
+            observeDynamicColor()
                 .collect { dynamicColorChecked -> _state.updateDynamicColor(dynamicColorChecked) }
         }
     }
 
-    private fun observeTheme() {
+    private fun collectTheme() {
         viewModelScope.launch {
-            settingsRepository
-                .observeTheme()
+            observeTheme()
                 .collect { theme -> _state.updateTheme(theme) }
         }
     }
 
-    private fun observeColorContrast() {
+    private fun collectColorContrast() {
         viewModelScope.launch {
-            settingsRepository
-                .observeColorContrast()
+            observeColorContrast()
                 .collect { colorContrast -> _state.updateColorContrast(colorContrast) }
         }
     }
 
     private fun updateLanguage() {
         viewModelScope.launch {
-            _state.updateLanguage(settingsRepository.getLanguage())
+            _state.updateLanguage(getLanguage())
         }
     }
 
-    private fun observeMeasurementSystem() {
+    private fun collectMeasurementSystem() {
         viewModelScope.launch {
-            settingsRepository
-                .observeMeasurementSystem()
+            observeMeasurementSystem()
                 .collect { measurementSystem -> _state.updateMeasurementSystem(measurementSystem) }
         }
     }
@@ -136,16 +156,16 @@ internal class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             when (action) {
                 is DynamicColorCheckedChange -> {
-                    settingsRepository.setDynamicColor(action.checked)
+                    setDynamicColor(action.checked)
                     if (action.checked == true) {
-                        settingsRepository.setColorContrast(SystemContrast)
+                        setColorContrast(SystemContrast)
                     }
                 }
 
                 LaunchThemePicker -> {
                     val lightDarkSystemThemingAvailable =
                         sdkFeatures.lightDarkSystemThemingAvailable()
-                    val theme = settingsRepository.getTheme().toPresentationModel(isSelected = true)
+                    val theme = getTheme().toPresentationModel(isSelected = true)
                     _state
                         .showThemePicker(
                             lightDarkThemeThemingAvailable = lightDarkSystemThemingAvailable,
@@ -160,14 +180,14 @@ internal class SettingsViewModel @Inject constructor(
 
                 is ConfirmThemePickerSelection -> {
                     _state.hideThemePicker()
-                    settingsRepository.setTheme(action.theme.toDomain())
+                    setTheme(action.theme.toDomain())
                 }
 
                 DismissThemePicker -> _state.hideThemePicker()
 
                 LaunchColorContrastPicker -> {
                     _state.showColorContrastPicker(
-                        colorContrast = settingsRepository.getColorContrast(),
+                        colorContrast = getColorContrast(),
                         colorContrastAvailable = sdkFeatures.colorContrastAvailable(),
                     )
                 }
@@ -181,7 +201,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 is ConfirmColorContrastPickerSelection -> {
                     _state.hideColorContrastPicker()
-                    settingsRepository.setColorContrast(action.contrast.toDomain())
+                    setColorContrast(action.contrast.toDomain())
                 }
 
                 DismissColorContrastPicker -> _state.hideColorContrastPicker()
@@ -189,27 +209,27 @@ internal class SettingsViewModel @Inject constructor(
                 DismissColorContrastNotAvailableMessage ->
                     _state.hideColorContrastNotAvailableMessage()
 
-                LaunchLanguagePicker -> _state.showLanguagePicker(settingsRepository.getLanguage())
+                LaunchLanguagePicker -> _state.showLanguagePicker(getLanguage())
 
                 is LanguagePickerSelectionChange -> _state.updateLanguagePicker(action.language)
 
                 is ConfirmLanguagePickerSelection -> {
                     _state.hideLanguagePicker()
-                    settingsRepository.setLanguage(action.language.toDomain())
+                    setLanguage(action.language.toDomain())
                     updateLanguage()
                 }
 
                 DismissLanguagePicker -> _state.hideLanguagePicker()
 
                 LaunchMeasurementSystemPicker ->
-                    _state.showMeasurementSystemPicker(settingsRepository.getMeasurementSystem())
+                    _state.showMeasurementSystemPicker(getMeasurementSystem())
 
                 is MeasurementSystemPickerSelectionChange ->
                     _state.updateMeasurementSystemPicker(action.measurementSystem)
 
                 is ConfirmMeasurementSystemPickerSelection -> {
                     _state.hideMeasurementSystemPicker()
-                    settingsRepository.setMeasurementSystem(action.measurementSystem.toDomain())
+                    setMeasurementSystem(action.measurementSystem.toDomain())
                 }
 
                 DismissMeasurementSystemPicker -> _state.hideMeasurementSystemPicker()

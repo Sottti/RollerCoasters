@@ -35,9 +35,6 @@
       <SelectionState runConfigName="presentation.about-me">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LanguageManagerTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="MeasurementSystemManagerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -48,6 +45,9 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="RollerCoastersDaoTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ColorContrastManagerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

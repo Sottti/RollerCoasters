@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.settings.repository
+package com.sottti.roller.coasters.domain.settings.repository
 
 import com.sottti.roller.coasters.domain.model.ColorContrast
 import com.sottti.roller.coasters.domain.model.Language

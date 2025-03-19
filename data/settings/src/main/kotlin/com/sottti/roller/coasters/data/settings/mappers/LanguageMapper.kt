@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.utils.device.mappers
+package com.sottti.roller.coasters.data.settings.mappers
 
 import androidx.annotation.VisibleForTesting
 import androidx.core.os.LocaleListCompat
