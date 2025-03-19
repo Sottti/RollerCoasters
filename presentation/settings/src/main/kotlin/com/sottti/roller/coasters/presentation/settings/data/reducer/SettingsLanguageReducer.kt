@@ -1,10 +1,10 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.model.Language
-import com.sottti.roller.coasters.domain.model.Language.EnglishGbLanguage
-import com.sottti.roller.coasters.domain.model.Language.GalicianLanguage
-import com.sottti.roller.coasters.domain.model.Language.SpanishSpainLanguage
-import com.sottti.roller.coasters.domain.model.Language.SystemLanguage
+import com.sottti.roller.coasters.domain.settings.model.Language
+import com.sottti.roller.coasters.domain.settings.model.Language.EnglishGbLanguage
+import com.sottti.roller.coasters.domain.settings.model.Language.GalicianLanguage
+import com.sottti.roller.coasters.domain.settings.model.Language.SpanishSpainLanguage
+import com.sottti.roller.coasters.domain.settings.model.Language.SystemLanguage
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.LanguagePickerState

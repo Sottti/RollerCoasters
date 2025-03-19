@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.domain.settings.usecase
 
-import com.sottti.roller.coasters.domain.model.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import javax.inject.Inject
 

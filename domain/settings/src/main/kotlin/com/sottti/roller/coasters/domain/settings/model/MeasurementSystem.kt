@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.model
+package com.sottti.roller.coasters.domain.settings.model
 
 public enum class MeasurementSystem {
     ImperialUk,

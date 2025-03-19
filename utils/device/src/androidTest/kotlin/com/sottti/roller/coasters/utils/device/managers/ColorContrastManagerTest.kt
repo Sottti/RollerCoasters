@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.utils.device.managers
 import android.app.UiModeManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import io.mockk.every
 import io.mockk.mockk

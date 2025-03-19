@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.utils.device.managers
 import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.sottti.roller.coasters.domain.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.Theme
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import io.mockk.every
 import io.mockk.just

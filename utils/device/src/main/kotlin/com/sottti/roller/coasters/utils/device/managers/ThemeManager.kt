@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.utils.device.managers
 
 import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatDelegate
-import com.sottti.roller.coasters.domain.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.Theme
 import com.sottti.roller.coasters.utils.device.mappers.toAppCompatDelegateNightMode
 import com.sottti.roller.coasters.utils.device.mappers.toUiModeManagerNightMode
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures

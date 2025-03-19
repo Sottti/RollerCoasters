@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
-import com.sottti.roller.coasters.domain.model.ColorContrast
+import com.sottti.roller.coasters.domain.settings.model.ColorContrast
 import org.jetbrains.annotations.VisibleForTesting
 
 @VisibleForTesting

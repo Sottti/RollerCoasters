@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.model.Language
+import com.sottti.roller.coasters.domain.settings.model.Language
 import org.junit.Test
 import java.util.Locale
 

@@ -5,7 +5,7 @@ import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.domain.model.ColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.ColorContrast.SystemContrast
 import com.sottti.roller.coasters.domain.settings.usecase.GetColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.GetLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.GetMeasurementSystem

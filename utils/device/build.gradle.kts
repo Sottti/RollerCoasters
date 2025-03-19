@@ -16,7 +16,7 @@ android {
 }
 
 dependencies {
-    api(project(module.domain.model))
+    api(project(module.domain.settings))
     implementation(libs.annotations)
     implementation(libs.appcompat)
     implementation(libs.hilt)

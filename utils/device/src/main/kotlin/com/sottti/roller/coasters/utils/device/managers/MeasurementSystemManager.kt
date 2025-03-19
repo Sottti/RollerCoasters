@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.utils.device.managers
 import android.icu.util.LocaleData
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem
 import com.sottti.roller.coasters.utils.device.mappers.toSystemMeasurementSystem
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import javax.inject.Inject

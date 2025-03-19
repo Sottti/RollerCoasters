@@ -6,7 +6,7 @@ import android.app.UiModeManager.MODE_NIGHT_YES
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.Theme
 import org.junit.Test
 
 internal class ThemeMappersTest {

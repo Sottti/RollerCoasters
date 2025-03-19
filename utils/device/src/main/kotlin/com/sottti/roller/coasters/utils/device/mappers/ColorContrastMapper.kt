@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.utils.device.mappers
 
 import androidx.annotation.FloatRange
-import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
 
 internal fun toSystemColorContrast(
     @FloatRange(from = -1.0, to = 1.0) contrast: Float,

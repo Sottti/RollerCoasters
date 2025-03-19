@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.utils.device.managers
 
 import android.app.UiModeManager
-import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
 import com.sottti.roller.coasters.utils.device.mappers.toSystemColorContrast
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import javax.inject.Inject

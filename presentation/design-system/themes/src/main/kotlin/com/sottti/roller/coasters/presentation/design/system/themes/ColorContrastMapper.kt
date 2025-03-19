@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.themes
 
-import com.sottti.roller.coasters.domain.model.ColorContrast
-import com.sottti.roller.coasters.domain.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.ColorContrast
+import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
 
 internal fun ColorContrast.toAppColorContrast(

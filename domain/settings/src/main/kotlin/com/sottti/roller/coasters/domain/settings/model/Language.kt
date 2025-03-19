@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.model
+package com.sottti.roller.coasters.domain.settings.model
 
 public sealed class Language {
     public data object EnglishGbLanguage : Language()

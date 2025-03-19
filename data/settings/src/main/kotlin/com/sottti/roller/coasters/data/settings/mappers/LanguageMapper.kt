@@ -4,7 +4,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.os.LocaleListCompat
 import androidx.core.os.LocaleListCompat.forLanguageTags
 import androidx.core.os.LocaleListCompat.getEmptyLocaleList
-import com.sottti.roller.coasters.domain.model.Language
+import com.sottti.roller.coasters.domain.settings.model.Language
 import java.util.Locale
 
 @VisibleForTesting

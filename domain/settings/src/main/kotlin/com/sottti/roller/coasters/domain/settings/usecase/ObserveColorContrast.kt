@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.domain.settings.usecase
 
-import com.sottti.roller.coasters.domain.model.ColorContrast
+import com.sottti.roller.coasters.domain.settings.model.ColorContrast
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

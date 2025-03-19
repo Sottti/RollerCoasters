@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.model.Theme
-import com.sottti.roller.coasters.domain.model.Theme.DarkTheme
-import com.sottti.roller.coasters.domain.model.Theme.LightTheme
-import com.sottti.roller.coasters.domain.model.Theme.SystemTheme
+import com.sottti.roller.coasters.domain.settings.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.Theme.DarkTheme
+import com.sottti.roller.coasters.domain.settings.model.Theme.LightTheme
+import com.sottti.roller.coasters.domain.settings.model.Theme.SystemTheme
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState

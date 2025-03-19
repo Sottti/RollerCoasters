@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.utils.device.mappers
 
 import android.icu.util.LocaleData
 import com.google.common.truth.Truth
-import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem
 import org.junit.Test
 
 internal class MeasurementSystemMapperTest {

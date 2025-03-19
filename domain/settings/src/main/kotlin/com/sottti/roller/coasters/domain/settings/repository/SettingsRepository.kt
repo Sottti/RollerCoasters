@@ -1,11 +1,11 @@
 package com.sottti.roller.coasters.domain.settings.repository
 
-import com.sottti.roller.coasters.domain.model.ColorContrast
-import com.sottti.roller.coasters.domain.model.Language
-import com.sottti.roller.coasters.domain.model.MeasurementSystem
-import com.sottti.roller.coasters.domain.model.SystemColorContrast
-import com.sottti.roller.coasters.domain.model.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.model.Theme
+import com.sottti.roller.coasters.domain.settings.model.ColorContrast
+import com.sottti.roller.coasters.domain.settings.model.Language
+import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.Theme
 import kotlinx.coroutines.flow.Flow
 
 public interface SettingsRepository {
