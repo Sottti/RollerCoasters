@@ -14,7 +14,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard

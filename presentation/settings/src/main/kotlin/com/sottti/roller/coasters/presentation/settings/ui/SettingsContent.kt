@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import co.cuvva.presentation.design.system.icons.ui.Icon
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch

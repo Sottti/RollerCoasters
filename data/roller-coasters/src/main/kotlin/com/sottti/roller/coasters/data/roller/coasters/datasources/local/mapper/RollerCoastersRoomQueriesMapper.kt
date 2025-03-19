@@ -13,8 +13,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerC
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_TYPE
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.TABLE_ROLLER_COASTERS
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoasterApiConstants
-import com.sottti.roller.coasters.domain.model.SortByFilter
-import com.sottti.roller.coasters.domain.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 
 internal fun createRollerCoastersQuery(
     limit: Int,

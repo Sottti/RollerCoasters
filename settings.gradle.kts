@@ -24,6 +24,8 @@ include(
     ":data:settings",
     ":data:work-manager",
     ":domain:model",
+    ":domain:roller-coasters",
+    ":domain:roller-coasters-di",
     ":domain:settings",
     ":domain:settings-di",
     ":presentation:about-me",

@@ -5,7 +5,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DismissButton
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 

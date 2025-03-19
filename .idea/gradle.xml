@@ -30,6 +30,8 @@
             <option value="$PROJECT_DIR$/data/work-manager" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/model" />
+            <option value="$PROJECT_DIR$/domain/roller-coasters" />
+            <option value="$PROJECT_DIR$/domain/roller-coasters-di" />
             <option value="$PROJECT_DIR$/domain/settings" />
             <option value="$PROJECT_DIR$/domain/settings-di" />
             <option value="$PROJECT_DIR$/presentation" />

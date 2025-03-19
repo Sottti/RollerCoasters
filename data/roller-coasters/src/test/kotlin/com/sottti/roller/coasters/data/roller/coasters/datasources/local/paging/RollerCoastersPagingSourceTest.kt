@@ -12,9 +12,9 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.m
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
-import com.sottti.roller.coasters.domain.model.RollerCoaster
-import com.sottti.roller.coasters.domain.model.SortByFilter
-import com.sottti.roller.coasters.domain.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi

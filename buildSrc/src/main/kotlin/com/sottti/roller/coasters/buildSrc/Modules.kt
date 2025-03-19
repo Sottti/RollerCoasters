@@ -37,6 +37,8 @@ object module {
 
     object domain {
         const val model = ":domain:model"
+        const val rollerCoasters = ":domain:roller-coasters"
+        const val rollerCoastersDi = ":domain:roller-coasters-di"
         const val settings = ":domain:settings"
         const val settingsDi = ":domain:settings-di"
     }

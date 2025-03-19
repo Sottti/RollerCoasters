@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.presentation.design.system.icons.ui.Icon
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 
 @Composable

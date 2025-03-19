@@ -9,10 +9,11 @@ import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.domain.model.Result
-import com.sottti.roller.coasters.domain.model.RollerCoaster
-import com.sottti.roller.coasters.domain.model.RollerCoasterId
-import com.sottti.roller.coasters.domain.model.SortByFilter
-import com.sottti.roller.coasters.domain.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -32,14 +33,14 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getRollerCoasters(
+    override fun observeRollerCoasters(
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>> =
         Pager(
             config = pagerConfig,
             pagingSourceFactory = {
-                localDataSource.getPagedRollerCoasters(
+                localDataSource.observePagedRollerCoasters(
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,
                 )

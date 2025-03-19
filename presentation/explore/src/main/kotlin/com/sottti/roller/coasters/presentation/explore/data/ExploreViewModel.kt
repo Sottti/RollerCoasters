@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
-import com.sottti.roller.coasters.domain.model.SortByFilter
-import com.sottti.roller.coasters.domain.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
+import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
@@ -56,6 +57,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class ExploreViewModel @Inject constructor(
     rollerCoastersRepository: RollerCoastersRepository,
+    observeRollerCoasters: ObserveRollerCoasters
 ) : ViewModel() {
 
     private val _sortByFilter = MutableStateFlow(SortByFilter.ALPHABETICAL)
@@ -64,9 +66,10 @@ internal class ExploreViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     private val _rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>> =
         combine(_typeFilter, _sortByFilter) { typeFilter, sortByFilter ->
-            rollerCoastersRepository
-                .getRollerCoasters(sortByFilter = sortByFilter, typeFilter = typeFilter)
-                .toUiModel(sortByFilter)
+            observeRollerCoasters(
+                sortByFilter = sortByFilter,
+                typeFilter = typeFilter,
+            ).toUiModel(sortByFilter)
         }.flatMapLatest { it }
             .cachedIn(viewModelScope)
 

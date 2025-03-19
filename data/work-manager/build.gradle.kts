@@ -15,6 +15,6 @@ dependencies {
     implementation(libs.hilt.work)
     implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
-    implementation(project(module.data.rollerCoasters))
+    implementation(project(module.domain.rollerCoastersDi))
     ksp(libs.hilt.compiler)
 }

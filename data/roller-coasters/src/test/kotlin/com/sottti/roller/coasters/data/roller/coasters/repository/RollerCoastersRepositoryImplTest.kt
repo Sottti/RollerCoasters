@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.notFoundException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.data.roller.coasters.stubs.syncFailedException
-import com.sottti.roller.coasters.domain.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just

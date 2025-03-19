@@ -5,9 +5,9 @@ import androidx.paging.PagingState
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.createRollerCoastersQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
-import com.sottti.roller.coasters.domain.model.RollerCoaster
-import com.sottti.roller.coasters.domain.model.SortByFilter
-import com.sottti.roller.coasters.domain.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)

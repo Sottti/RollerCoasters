@@ -8,8 +8,8 @@ import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
 import com.sottti.roller.coasters.domain.model.Result
-import com.sottti.roller.coasters.domain.model.RollerCoaster
-import com.sottti.roller.coasters.domain.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

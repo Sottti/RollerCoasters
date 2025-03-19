@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import co.cuvva.presentation.design.system.icons.ui.Icon
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.home.model.HomeActions
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItems

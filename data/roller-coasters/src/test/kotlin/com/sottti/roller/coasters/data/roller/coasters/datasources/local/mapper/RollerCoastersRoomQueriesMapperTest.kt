@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper
 
-import com.sottti.roller.coasters.domain.model.SortByFilter
-import com.sottti.roller.coasters.domain.model.TypeFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

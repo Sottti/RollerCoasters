@@ -22,7 +22,7 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.data.rollerCoasters))
+    implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.chip))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.progressIndicators))

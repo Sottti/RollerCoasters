@@ -14,8 +14,8 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterWithoutOtherPictures
 import com.sottti.roller.coasters.domain.model.NotFound
-import com.sottti.roller.coasters.domain.model.SortByFilter.ALPHABETICAL
-import com.sottti.roller.coasters.domain.model.TypeFilter.ALL
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.ALPHABETICAL
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter.ALL
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
@@ -120,7 +120,9 @@ internal class RollerCoastersLocalDataSourceTest {
 
     @Test
     fun `get paged roller coasters returns a paging source`() {
-        val result = localDataSource.getPagedRollerCoasters(ALPHABETICAL, ALL)
+        val result = localDataSource.observePagedRollerCoasters(
+            sortByFilter = ALPHABETICAL, typeFilter = ALL
+        )
         assertThat(result).isInstanceOf(RollerCoastersPagingSource::class.java)
     }
 }

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.data.remote.core"
+    namespace = "com.sottti.roller.coasters.data.network"
 }
 
 dependencies {

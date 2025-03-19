@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.sottti.roller.coasters.di.settings.provideGetSystemColorContrast
-import com.sottti.roller.coasters.di.settings.provideObserveColorContrast
-import com.sottti.roller.coasters.di.settings.provideObserveDynamicColor
+import com.sottti.roller.coasters.domain.settings.di.provideGetSystemColorContrast
+import com.sottti.roller.coasters.domain.settings.di.provideObserveColorContrast
+import com.sottti.roller.coasters.domain.settings.di.provideObserveDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.AppColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider

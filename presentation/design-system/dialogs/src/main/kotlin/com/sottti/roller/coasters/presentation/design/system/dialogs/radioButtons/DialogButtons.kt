@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.dialogs.radioButto
 
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 
 @Composable
 internal fun ConfirmButton(

@@ -6,7 +6,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import co.cuvva.presentation.design.system.icons.ui.Icon
-import co.cuvva.presentation.design.system.text.Text
+import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 
 @Composable

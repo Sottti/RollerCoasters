@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.text
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import co.cuvva.presentation.design.system.text.TextPreview
+import co.cuvva.roller.coasters.presentation.design.system.text.TextPreview
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import org.junit.Rule

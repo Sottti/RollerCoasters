@@ -16,12 +16,12 @@ android {
 }
 
 dependencies {
-    api(project(module.domain.model))
     implementation(libs.hilt)
     implementation(libs.paging.runtime)
     implementation(libs.room)
     implementation(libs.room.paging)
     implementation(project(module.data.network))
+    implementation(project(module.domain.rollerCoasters))
     implementation(project(module.utils.dateTime))
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)

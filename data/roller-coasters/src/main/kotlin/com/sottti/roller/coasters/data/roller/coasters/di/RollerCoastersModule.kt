@@ -2,8 +2,8 @@ package com.sottti.roller.coasters.data.roller.coasters.di
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
-import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoastersRepositoryImpl
+import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
