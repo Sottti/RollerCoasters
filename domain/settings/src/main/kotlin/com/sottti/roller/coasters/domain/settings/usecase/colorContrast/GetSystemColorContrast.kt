@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.settings.usecase
+package com.sottti.roller.coasters.domain.settings.usecase.colorContrast
 
 import com.sottti.roller.coasters.domain.settings.model.SystemColorContrast
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository

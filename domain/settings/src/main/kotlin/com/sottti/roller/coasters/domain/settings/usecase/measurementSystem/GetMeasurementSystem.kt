@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.settings.usecase
+package com.sottti.roller.coasters.domain.settings.usecase.measurementSystem
 
 import com.sottti.roller.coasters.domain.settings.model.MeasurementSystem
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository

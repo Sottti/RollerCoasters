@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.domain.settings.usecase
+package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow

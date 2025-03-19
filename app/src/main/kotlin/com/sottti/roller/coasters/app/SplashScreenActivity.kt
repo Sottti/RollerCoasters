@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.sottti.roller.coasters.domain.settings.usecase.ApplyStoredTheme
+import com.sottti.roller.coasters.domain.settings.usecase.theme.ApplyStoredTheme
 import com.sottti.roller.coasters.presentation.home.ui.startHomeActivity
 import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import dagger.hilt.android.AndroidEntryPoint
