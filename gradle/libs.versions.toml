@@ -2,6 +2,7 @@
 agp = "8.9.0"
 annotations = "1.9.1"
 appcompat = "1.7.0"
+build-health = "2.12.0"
 coil = "3.1.0"
 compileSdk = "35"
 compose-bom = "2025.03.00"
@@ -9,6 +10,7 @@ compose-navigation = "2.8.9"
 core = "1.15.0"
 coroutines = "1.10.1"
 datastore-preferences = "1.1.3"
+dependency-analysis = "2.12.0"
 dependency-versions = "0.52.0"
 hilt = "2.55"
 hilt-navigation-compose = "1.2.0"
@@ -88,6 +90,8 @@ work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+build-health = { id = "com.autonomousapps.build-health", version.ref = "build-health" }
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
 dependency-versions = { id = "com.github.ben-manes.versions", version.ref = "dependency-versions" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
