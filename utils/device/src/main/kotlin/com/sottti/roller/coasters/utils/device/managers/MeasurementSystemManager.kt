@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.utils.device.managers
 
 import android.icu.util.LocaleData
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.utils.device.mappers.toSystemMeasurementSystem
@@ -21,6 +23,7 @@ public class MeasurementSystemManager @Inject constructor(
             else -> inferMeasurementSystem()
         }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun getPreferredMeasurementSystem(): SystemMeasurementSystem =
         LocaleData
             .getMeasurementSystem(localeManager.systemULocale)
