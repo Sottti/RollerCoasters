@@ -51,7 +51,6 @@ object module {
     }
 
     object utils {
-        const val device = ":utils:device"
         const val timeDates = ":utils:time-dates"
     }
 

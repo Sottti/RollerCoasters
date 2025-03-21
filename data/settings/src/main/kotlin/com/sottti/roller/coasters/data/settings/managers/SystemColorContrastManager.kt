@@ -1,9 +1,9 @@
-package com.sottti.roller.coasters.utils.device.managers
+package com.sottti.roller.coasters.data.settings.managers
 
 import android.app.UiModeManager
+import com.sottti.roller.coasters.data.settings.mappers.toSystemColorContrast
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
-import com.sottti.roller.coasters.utils.device.mappers.toSystemColorContrast
 import javax.inject.Inject
 
 public class SystemColorContrastManager @Inject constructor(

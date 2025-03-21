@@ -16,7 +16,6 @@ dependencies {
     implementation(project(module.data.features))
     implementation(project(module.data.rollerCoasters))
     implementation(project(module.data.settings))
-    // implementation(project(module.data.workManager)) should be uncommented when other issues resolved
     implementation(project(module.domain.features))
     implementation(project(module.domain.settings))
     ksp(libs.hilt.compiler)

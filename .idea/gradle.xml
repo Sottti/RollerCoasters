@@ -62,7 +62,6 @@
             <option value="$PROJECT_DIR$/presentation/utils" />
             <option value="$PROJECT_DIR$/presentation/utils/format" />
             <option value="$PROJECT_DIR$/utils" />
-            <option value="$PROJECT_DIR$/utils/device" />
             <option value="$PROJECT_DIR$/utils/time-dates" />
           </set>
         </option>

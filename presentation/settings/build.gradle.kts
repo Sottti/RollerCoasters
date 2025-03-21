@@ -26,7 +26,6 @@ dependencies {
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.switch))
     implementation(project(module.presentation.designSystem.text))
-    implementation(project(module.utils.device))
     ksp(libs.hilt.compiler)
     runtimeOnly(libs.lifecycle.process)
 

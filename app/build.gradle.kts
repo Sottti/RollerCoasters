@@ -37,7 +37,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.work)
     implementation(libs.splashscreen)
-    implementation(project(module.data.workManager)) // should be removed when issues resolved
+    implementation(project(module.data.workManager))
     implementation(project(module.di))
     implementation(project(module.domain.features))
     implementation(project(module.domain.settings))

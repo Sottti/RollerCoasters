@@ -52,6 +52,5 @@ include(
     ":presentation:settings",
     ":presentation:top-bars",
     ":presentation:utils:format",
-    ":utils:device",
     ":utils:time-dates",
 )

@@ -6,6 +6,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.sottti.roller.coasters.data.settings.managers.LocaleManager
+import com.sottti.roller.coasters.data.settings.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastManager
+import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.mappers.key
 import com.sottti.roller.coasters.data.settings.mappers.toAppColorContrast
 import com.sottti.roller.coasters.data.settings.mappers.toLanguage
@@ -22,10 +26,6 @@ import com.sottti.roller.coasters.domain.settings.model.language.Language
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme
-import com.sottti.roller.coasters.utils.device.managers.LocaleManager
-import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
-import com.sottti.roller.coasters.utils.device.managers.SystemColorContrastManager
-import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map

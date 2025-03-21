@@ -1,11 +1,11 @@
-package com.sottti.roller.coasters.utils.device.mappers
+package com.sottti.roller.coasters.data.settings.mappers
 
 import android.icu.util.LocaleData
 import com.google.common.truth.Truth
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import org.junit.Test
 
-internal class MeasurementSystemMapperTest {
+internal class LocaleDataMeasurementSystemMapperTest {
 
     @Test
     fun siMapsToMetric() {

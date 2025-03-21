@@ -10,6 +10,10 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.appColorContrastKey
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.measurementSystemKey
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.themeKey
+import com.sottti.roller.coasters.data.settings.managers.LocaleManager
+import com.sottti.roller.coasters.data.settings.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastManager
+import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
@@ -26,10 +30,6 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.System
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme.DarkTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme.LightTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme.SystemTheme
-import com.sottti.roller.coasters.utils.device.managers.LocaleManager
-import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
-import com.sottti.roller.coasters.utils.device.managers.SystemColorContrastManager
-import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk

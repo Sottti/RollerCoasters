@@ -1,15 +1,16 @@
 package com.sottti.roller.coasters.data.settings.di
 
+import android.app.UiModeManager
 import android.content.Context
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.datasource.dataStore
+import com.sottti.roller.coasters.data.settings.managers.LocaleManager
+import com.sottti.roller.coasters.data.settings.managers.MeasurementSystemManager
+import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastManager
+import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
-import com.sottti.roller.coasters.utils.device.managers.LocaleManager
-import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
-import com.sottti.roller.coasters.utils.device.managers.SystemColorContrastManager
-import com.sottti.roller.coasters.utils.device.managers.ThemeManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +29,12 @@ internal object SettingsModule {
     ): SettingsRepository = SettingsRepositoryImpl(
         localDataSource = localDataSource,
     )
+
+    @Provides
+    @Singleton
+    fun provideUiModeManager(
+        @ApplicationContext context: Context
+    ): UiModeManager? = context.getSystemService(UiModeManager::class.java)
 
     @Provides
     @Singleton

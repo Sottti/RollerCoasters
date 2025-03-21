@@ -1,11 +1,11 @@
-package com.sottti.roller.coasters.utils.device.managers
+package com.sottti.roller.coasters.data.settings.managers
 
 import android.icu.util.LocaleData
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.sottti.roller.coasters.data.settings.mappers.toSystemMeasurementSystem
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
-import com.sottti.roller.coasters.utils.device.mappers.toSystemMeasurementSystem
 import javax.inject.Inject
 
 public class MeasurementSystemManager @Inject constructor(

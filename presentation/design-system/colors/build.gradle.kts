@@ -14,7 +14,7 @@ android {
 }
 
 dependencies {
-    api(project(module.utils.device))
+    api(project(module.domain.settings))
     implementation(libs.compose.material)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)

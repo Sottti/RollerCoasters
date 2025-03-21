@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.utils.device.sdk
+package com.sottti.roller.coasters.data.features
 
 import android.os.Build
 import android.os.Build.VERSION_CODES.Q

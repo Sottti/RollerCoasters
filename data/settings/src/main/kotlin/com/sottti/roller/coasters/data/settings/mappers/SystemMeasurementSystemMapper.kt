@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.utils.device.mappers
+package com.sottti.roller.coasters.data.settings.mappers
 
 import android.icu.util.LocaleData
 import android.os.Build

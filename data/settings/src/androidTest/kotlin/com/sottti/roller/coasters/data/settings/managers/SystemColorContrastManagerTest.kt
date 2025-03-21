@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.utils.device.managers
+package com.sottti.roller.coasters.data.settings.managers
 
 import android.app.UiModeManager
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,11 +1,11 @@
-package com.sottti.roller.coasters.utils.device.managers
+package com.sottti.roller.coasters.data.settings.managers
 
 import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatDelegate
+import com.sottti.roller.coasters.data.settings.mappers.toAppCompatDelegateNightMode
+import com.sottti.roller.coasters.data.settings.mappers.toUiModeManagerNightMode
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme
-import com.sottti.roller.coasters.utils.device.mappers.toAppCompatDelegateNightMode
-import com.sottti.roller.coasters.utils.device.mappers.toUiModeManagerNightMode
 import javax.inject.Inject
 
 public class ThemeManager @Inject constructor(
