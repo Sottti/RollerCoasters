@@ -23,7 +23,6 @@ include(
     ":data:network",
     ":data:roller-coasters",
     ":data:settings",
-    ":data:work-manager",
     ":di",
     ":domain:features",
     ":domain:model",

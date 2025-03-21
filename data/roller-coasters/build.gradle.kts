@@ -17,9 +17,12 @@ android {
 
 dependencies {
     implementation(libs.hilt)
+    implementation(libs.hilt.work)
     implementation(libs.paging.runtime)
     implementation(libs.room)
     implementation(libs.room.paging)
+    implementation(libs.startup.runtime)
+    implementation(libs.work.runtime)
     implementation(project(module.data.network))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.utils.timeDates))

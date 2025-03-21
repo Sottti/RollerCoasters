@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.data.work.manager
+package com.sottti.roller.coasters.data.roller.coasters.sync
 
 import androidx.work.WorkManager
 import javax.inject.Inject
