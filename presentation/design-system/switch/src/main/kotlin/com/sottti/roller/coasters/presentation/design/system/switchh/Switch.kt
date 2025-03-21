@@ -24,20 +24,15 @@ public fun Switch(
 
 @Composable
 @PreviewLightDark
-internal fun SwitchWithDynamicColorPreview(
+internal fun SwitchPreview(
     @PreviewParameter(SwitchPreviewProvider::class)
     state: SwitchState,
 ) {
     RollerCoastersPreviewTheme {
-        SwitchPreview(state)
+        Switch(
+            checked = state.checked,
+            enabled = state.enabled,
+            onCheckedChange = {},
+        )
     }
-}
-
-@Composable
-private fun SwitchPreview(state: SwitchState) {
-    Switch(
-        checked = state.checked,
-        enabled = state.enabled,
-        onCheckedChange = {},
-    )
 }

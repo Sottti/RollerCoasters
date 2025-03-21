@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.utils.device.managers
 import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme
-import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -20,15 +20,15 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class ThemeManagerTest {
 
-    private lateinit var sdkFeatures: SdkFeatures
+    private lateinit var features: Features
     private lateinit var uiModeManager: UiModeManager
     private lateinit var manager: ThemeManager
 
     @Before
     fun setup() {
-        sdkFeatures = mockk()
+        features = mockk()
         uiModeManager = mockk()
-        manager = ThemeManager(sdkFeatures, uiModeManager)
+        manager = ThemeManager(features, uiModeManager)
         mockkStatic(AppCompatDelegate::class)
     }
 
@@ -39,7 +39,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeDarkWhenFeatureAvailable() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns true
+        every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES) } just runs
 
         manager.setTheme(Theme.DarkTheme)
@@ -49,7 +49,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeLightWhenFeatureAvailable() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns true
+        every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO) } just runs
 
         manager.setTheme(Theme.LightTheme)
@@ -59,7 +59,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeSystemWhenFeatureAvailable() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns true
+        every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) } just runs
 
         manager.setTheme(Theme.SystemTheme)
@@ -69,8 +69,8 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeDarkWhenFeatureAvailableAndUiModeManagerNull() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns true
-        manager = ThemeManager(sdkFeatures, null)
+        every { features.setPersistentNightModeAvailable() } returns true
+        manager = ThemeManager(features, null)
 
         manager.setTheme(Theme.DarkTheme)
 
@@ -79,7 +79,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeDarkWhenFeatureUnavailable() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns false
+        every { features.setPersistentNightModeAvailable() } returns false
         every { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) } just runs
 
         manager.setTheme(Theme.DarkTheme)
@@ -89,7 +89,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeLightWhenFeatureUnavailable() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns false
+        every { features.setPersistentNightModeAvailable() } returns false
         every { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) } just runs
 
         manager.setTheme(Theme.LightTheme)
@@ -99,7 +99,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeSystemWhenFeatureUnavailable() {
-        every { sdkFeatures.setPersistentNightModeAvailable() } returns false
+        every { features.setPersistentNightModeAvailable() } returns false
         every {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         } just runs

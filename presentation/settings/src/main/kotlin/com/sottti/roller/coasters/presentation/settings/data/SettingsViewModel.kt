@@ -5,12 +5,14 @@ import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.GetAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetAppColorContrast
-import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveDynamicColor
-import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveAppDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetAppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.language.GetLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.SetLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetMeasurementSystem
@@ -30,7 +32,7 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.showColorCo
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showThemePicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateColorContrast
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppColorContrast
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynamicColor
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateLanguage
@@ -59,7 +61,6 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Lau
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.MeasurementSystemPickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
-import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -75,18 +76,18 @@ internal class SettingsViewModel @Inject constructor(
     private val getMeasurementSystem: GetMeasurementSystem,
     private val getTheme: GetTheme,
     private val observeAppColorContrast: ObserveAppColorContrast,
-    private val observeDynamicColor: ObserveDynamicColor,
+    private val observeAppDynamicColor: ObserveAppDynamicColor,
     private val observeMeasurementSystem: ObserveMeasurementSystem,
     private val observeTheme: ObserveTheme,
-    private val sdkFeatures: SdkFeatures,
+    private val features: Features,
     private val setAppColorContrast: SetAppColorContrast,
-    private val setDynamicColor: SetDynamicColor,
+    private val setAppDynamicColor: SetAppDynamicColor,
     private val setLanguage: SetLanguage,
     private val setMeasurementSystem: SetMeasurementSystem,
     private val setTheme: SetTheme,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(initialState(sdkFeatures.dynamicColorAvailable()))
+    private val _state = MutableStateFlow(initialState(features.systemDynamicColorAvailable()))
     internal val state: StateFlow<SettingsState> = _state.asStateFlow()
     internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
     private val configObserver = object : ComponentCallbacks {
@@ -95,11 +96,11 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     init {
-        if (sdkFeatures.dynamicColorAvailable()) {
-            collectDynamicColor()
+        if (features.systemDynamicColorAvailable()) {
+            collectAppDynamicColor()
         }
         collectTheme()
-        collectColorContrast()
+        collectAppColorContrast()
         updateLanguage()
         collectMeasurementSystem()
         registerForConfigChanges()
@@ -118,9 +119,9 @@ internal class SettingsViewModel @Inject constructor(
         application.unregisterComponentCallbacks(configObserver)
     }
 
-    private fun collectDynamicColor() {
+    private fun collectAppDynamicColor() {
         viewModelScope.launch {
-            observeDynamicColor()
+            observeAppDynamicColor()
                 .collect { dynamicColorChecked -> _state.updateDynamicColor(dynamicColorChecked) }
         }
     }
@@ -132,10 +133,10 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun collectColorContrast() {
+    private fun collectAppColorContrast() {
         viewModelScope.launch {
             observeAppColorContrast()
-                .collect { colorContrast -> _state.updateColorContrast(colorContrast) }
+                .collect { appColorContrast -> _state.updateAppColorContrast(appColorContrast) }
         }
     }
 
@@ -156,7 +157,7 @@ internal class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             when (action) {
                 is DynamicColorCheckedChange -> {
-                    setDynamicColor(action.checked)
+                    setAppDynamicColor(AppDynamicColor(action.checked))
                     if (action.checked == true) {
                         setAppColorContrast(SystemContrast)
                     }
@@ -164,7 +165,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 LaunchThemePicker -> {
                     val lightDarkSystemThemingAvailable =
-                        sdkFeatures.lightDarkSystemThemingAvailable()
+                        features.lightDarkSystemThemingAvailable()
                     val theme = getTheme().toPresentationModel(isSelected = true)
                     _state
                         .showThemePicker(
@@ -174,7 +175,7 @@ internal class SettingsViewModel @Inject constructor(
                 }
 
                 is ThemePickerSelectionChange -> _state.updateThemePicker(
-                    lightDarkThemeThemingAvailable = sdkFeatures.lightDarkSystemThemingAvailable(),
+                    lightDarkThemeThemingAvailable = features.lightDarkSystemThemingAvailable(),
                     theme = action.theme,
                 )
 
@@ -188,13 +189,13 @@ internal class SettingsViewModel @Inject constructor(
                 LaunchColorContrastPicker -> {
                     _state.showColorContrastPicker(
                         appColorContrast = getAppColorContrast(),
-                        colorContrastAvailable = sdkFeatures.colorContrastAvailable(),
+                        colorContrastAvailable = features.systemColorContrastAvailable(),
                     )
                 }
 
                 is ColorContrastPickerSelectionChange -> {
                     _state.updateColorContrastPicker(
-                        colorContrastAvailable = sdkFeatures.colorContrastAvailable(),
+                        colorContrastAvailable = features.systemColorContrastAvailable(),
                         selectedContrast = action.contrast,
                     )
                 }

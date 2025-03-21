@@ -1,15 +1,13 @@
 package com.sottti.roller.coasters.utils.device.managers
 
 import android.icu.util.LocaleData
-import android.os.Build
-import androidx.annotation.RequiresApi
+import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.utils.device.mappers.toSystemMeasurementSystem
-import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import javax.inject.Inject
 
 public class MeasurementSystemManager @Inject constructor(
-    private val sdkFeatures: SdkFeatures,
+    private val features: Features,
     private val localeManager: LocaleManager,
 ) {
     private companion object {
@@ -19,11 +17,10 @@ public class MeasurementSystemManager @Inject constructor(
 
     public val measurementSystem: SystemMeasurementSystem
         get() = when {
-            sdkFeatures.measurementSystemAvailable() -> getPreferredMeasurementSystem()
+            features.measurementSystemAvailable() -> getPreferredMeasurementSystem()
             else -> inferMeasurementSystem()
         }
 
-    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     private fun getPreferredMeasurementSystem(): SystemMeasurementSystem =
         LocaleData
             .getMeasurementSystem(localeManager.systemULocale)

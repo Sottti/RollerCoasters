@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
+    implementation(project(module.domain.features))
     implementation(project(module.domain.settings))
     implementation(project(module.presentation.designSystem.dialogs))
     implementation(project(module.presentation.designSystem.icons))

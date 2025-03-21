@@ -26,7 +26,7 @@ internal class SwitchSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            SwitchWithDynamicColorPreview(state)
+            SwitchPreview(state)
         }
     }
 

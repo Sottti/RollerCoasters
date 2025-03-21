@@ -36,14 +36,14 @@ object module {
     }
 
     object domain {
+        const val features = ":domain:features"
         const val model = ":domain:model"
         const val rollerCoasters = ":domain:roller-coasters"
-        const val rollerCoastersDi = ":domain:roller-coasters-di"
         const val settings = ":domain:settings"
-        const val settingsDi = ":domain:settings-di"
     }
 
     object data {
+        const val features = ":data:features"
         const val network = ":data:network"
         const val rollerCoasters = ":data:roller-coasters"
         const val settings = ":data:settings"
@@ -54,4 +54,6 @@ object module {
         const val device = ":utils:device"
         const val timeDates = ":utils:time-dates"
     }
+
+    const val di = ":di"
 }

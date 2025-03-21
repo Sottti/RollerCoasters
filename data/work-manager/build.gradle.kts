@@ -13,8 +13,9 @@ android {
 dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.work)
+    implementation(libs.result)
     implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
-    implementation(project(module.domain.rollerCoastersDi))
+    implementation(project(module.di))
     ksp(libs.hilt.compiler)
 }

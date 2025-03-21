@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.utils.device.managers
 import android.app.UiModeManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
-import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Before
@@ -14,20 +14,20 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class SystemColorContrastManagerTest {
 
-    private lateinit var sdkFeatures: SdkFeatures
+    private lateinit var features: Features
     private lateinit var uiModeManager: UiModeManager
     private lateinit var manager: SystemColorContrastManager
 
     @Before
     fun setup() {
-        sdkFeatures = mockk()
+        features = mockk()
         uiModeManager = mockk()
-        manager = SystemColorContrastManager(sdkFeatures, uiModeManager)
+        manager = SystemColorContrastManager(features, uiModeManager)
     }
 
     @Test
     fun testColorContrastWhenFeatureAvailableAndLowContrast() {
-        every { sdkFeatures.colorContrastAvailable() } returns true
+        every { features.systemColorContrastAvailable() } returns true
         every { uiModeManager.contrast } returns -0.5f
 
         assertThat(manager.systemColorContrast).isEqualTo(SystemColorContrast.LowContrast)
@@ -35,7 +35,7 @@ internal class SystemColorContrastManagerTest {
 
     @Test
     fun testColorContrastWhenFeatureAvailableAndStandardContrast() {
-        every { sdkFeatures.colorContrastAvailable() } returns true
+        every { features.systemColorContrastAvailable() } returns true
         every { uiModeManager.contrast } returns 0.2f
 
         assertThat(manager.systemColorContrast).isEqualTo(SystemColorContrast.StandardContrast)
@@ -43,7 +43,7 @@ internal class SystemColorContrastManagerTest {
 
     @Test
     fun testColorContrastWhenFeatureAvailableAndMediumContrast() {
-        every { sdkFeatures.colorContrastAvailable() } returns true
+        every { features.systemColorContrastAvailable() } returns true
         every { uiModeManager.contrast } returns 0.7f
 
         assertThat(manager.systemColorContrast).isEqualTo(SystemColorContrast.MediumContrast)
@@ -51,7 +51,7 @@ internal class SystemColorContrastManagerTest {
 
     @Test
     fun testColorContrastWhenFeatureAvailableAndHighContrast() {
-        every { sdkFeatures.colorContrastAvailable() } returns true
+        every { features.systemColorContrastAvailable() } returns true
         every { uiModeManager.contrast } returns 1.0f
 
         assertThat(manager.systemColorContrast).isEqualTo(SystemColorContrast.HighContrast)
@@ -59,15 +59,15 @@ internal class SystemColorContrastManagerTest {
 
     @Test
     fun testColorContrastWhenFeatureAvailableAndUiModeManagerNull() {
-        every { sdkFeatures.colorContrastAvailable() } returns true
-        manager = SystemColorContrastManager(sdkFeatures, null)
+        every { features.systemColorContrastAvailable() } returns true
+        manager = SystemColorContrastManager(features, null)
 
         assertThat(manager.systemColorContrast).isEqualTo(SystemColorContrast.StandardContrast)
     }
 
     @Test
     fun testColorContrastWhenFeatureUnavailable() {
-        every { sdkFeatures.colorContrastAvailable() } returns false
+        every { features.systemColorContrastAvailable() } returns false
 
         assertThat(manager.systemColorContrast).isEqualTo(SystemColorContrast.StandardContrast)
     }

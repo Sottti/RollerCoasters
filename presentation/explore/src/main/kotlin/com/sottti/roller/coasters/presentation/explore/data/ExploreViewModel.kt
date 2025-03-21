@@ -56,8 +56,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ExploreViewModel @Inject constructor(
+    observeRollerCoasters: ObserveRollerCoasters,
     rollerCoastersRepository: RollerCoastersRepository,
-    observeRollerCoasters: ObserveRollerCoasters
 ) : ViewModel() {
 
     private val _sortByFilter = MutableStateFlow(SortByFilter.ALPHABETICAL)

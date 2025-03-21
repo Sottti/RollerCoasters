@@ -17,6 +17,7 @@ android {
 dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.hilt)
+    implementation(project(module.domain.features))
     implementation(project(module.domain.settings))
     implementation(project(module.utils.device))
     ksp(libs.hilt.compiler)

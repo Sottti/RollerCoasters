@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.usecase.theme.ApplyStoredTheme
 import com.sottti.roller.coasters.presentation.home.ui.startHomeActivity
-import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,12 +20,12 @@ internal class SplashScreenActivity : ComponentActivity() {
     lateinit var applyStoredTheme: ApplyStoredTheme
 
     @Inject
-    lateinit var sdkFeatures: SdkFeatures
+    lateinit var features: Features
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null && !sdkFeatures.setPersistentNightModeAvailable()) {
+        if (savedInstanceState == null && !features.setPersistentNightModeAvailable()) {
             lifecycleScope.launch { applyStoredTheme() }
         }
         startHomeActivity(this)

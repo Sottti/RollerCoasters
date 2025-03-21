@@ -35,7 +35,7 @@ class RollerCoastersRoomQueriesMapperTest {
             "SELECT * FROM roller_coasters WHERE LOWER(type) = ? ORDER BY " +
                     "speedMax DESC, openedDate ASC, name_current ASC LIMIT ? OFFSET ?"
         assertEquals(expectedSql, actual.sql)
-        assertEquals(3, actual.argCount) // Type filter adds one more argument
+        assertEquals(3, actual.argCount)
     }
 
     @Test

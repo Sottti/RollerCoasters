@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.annotations)
     implementation(libs.appcompat)
     implementation(libs.hilt)
+    implementation(project(module.domain.features))
     ksp(libs.hilt.compiler)
 
     androidTestImplementation(libs.junit.ext)

@@ -210,7 +210,7 @@ internal class RollerCoastersDaoTest {
         )
         dao.insertRollerCoasters(emptyList(), rollerCoasters)
         val result = dao.getRollerCoasters(listOf(1, 2))
-        assertThat(result.map { it.id }).isEqualTo(listOf(1, 2)) // Ascending order
+        assertThat(result.map { it.id }).isEqualTo(listOf(1, 2))
     }
 
     @Test

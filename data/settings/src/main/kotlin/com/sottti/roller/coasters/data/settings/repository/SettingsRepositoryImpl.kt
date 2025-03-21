@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.data.settings.repository
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
+import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.language.Language
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
@@ -15,12 +16,12 @@ internal class SettingsRepositoryImpl @Inject constructor(
     private val localDataSource: SettingsLocalDataSource,
 ) : SettingsRepository {
 
-    override suspend fun setDynamicColor(enabled: Boolean) {
-        localDataSource.setDynamicColor(enabled)
+    override suspend fun setAppDynamicColor(appDynamicColor: AppDynamicColor) {
+        localDataSource.setAppDynamicColor(appDynamicColor)
     }
 
-    override fun observeDynamicColor(): Flow<Boolean> =
-        localDataSource.observeDynamicColor()
+    override fun observeAppDynamicColor(): Flow<AppDynamicColor> =
+        localDataSource.observeAppDynamicColor()
 
     override suspend fun setTheme(theme: Theme) {
         localDataSource.setTheme(theme)

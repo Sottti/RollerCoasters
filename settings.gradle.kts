@@ -19,15 +19,16 @@ dependencyResolutionManagement {
 }
 include(
     ":app",
+    ":data:features",
     ":data:network",
     ":data:roller-coasters",
     ":data:settings",
     ":data:work-manager",
+    ":di",
+    ":domain:features",
     ":domain:model",
     ":domain:roller-coasters",
-    ":domain:roller-coasters-di",
     ":domain:settings",
-    ":domain:settings-di",
     ":presentation:about-me",
     ":presentation:design-system:chip",
     ":presentation:design-system:colors",

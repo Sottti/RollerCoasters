@@ -16,7 +16,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-internal fun MutableStateFlow<SettingsState>.updateColorContrast(
+internal fun MutableStateFlow<SettingsState>.updateAppColorContrast(
     appColorContrast: AppColorContrast,
 ) {
     update { currentState ->

@@ -1,12 +1,9 @@
 package com.sottti.roller.coasters.utils.device.mappers
 
 import android.app.UiModeManager
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import com.sottti.roller.coasters.domain.settings.model.theme.Theme
 
-@RequiresApi(Build.VERSION_CODES.R)
 internal fun Theme.toUiModeManagerNightMode() = when (this) {
     Theme.DarkTheme -> UiModeManager.MODE_NIGHT_YES
     Theme.LightTheme -> UiModeManager.MODE_NIGHT_NO

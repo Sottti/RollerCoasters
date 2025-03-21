@@ -5,12 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.sottti.roller.coasters.domain.settings.di.colorContrast.provideObserveResolvedColorContrast
-import com.sottti.roller.coasters.domain.settings.di.dynamicColor.provideObserveDynamicColor
+import com.sottti.roller.coasters.di.settings.colorContrast.provideObserveResolvedColorContrast
+import com.sottti.roller.coasters.di.settings.dynamicColor.provideObserveResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
+import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
-import com.sottti.roller.coasters.utils.device.di.provideSdkFeatures
 
 @Composable
 public fun RollerCoastersTheme(
@@ -18,16 +18,12 @@ public fun RollerCoastersTheme(
 ) {
     val context = LocalContext.current
     val observeResolvedColorContrast = remember { provideObserveResolvedColorContrast(context) }
-    val observeDynamicColor = remember { provideObserveDynamicColor(context) }
-    val sdkFeatures = remember { provideSdkFeatures(context) }
+    val observeResolvedDynamicColor = remember { provideObserveResolvedDynamicColor(context) }
 
-    val dynamicColor = when (sdkFeatures.dynamicColorAvailable()) {
-        true -> observeDynamicColor()
-            .collectAsState(initial = true)
+    val resolvedDynamicColor =
+        observeResolvedDynamicColor()
+            .collectAsState(initial = ResolvedDynamicColor(true))
             .value
-
-        else -> false
-    }
 
     val resolvedColorContrast =
         observeResolvedColorContrast
@@ -37,8 +33,7 @@ public fun RollerCoastersTheme(
     val colors = colors(
         colorContrast = resolvedColorContrast,
         darkTheme = isSystemInDarkTheme(),
-        dynamicColor = dynamicColor,
-        sdkFeatures = sdkFeatures,
+        dynamicColor = resolvedDynamicColor,
     )
 
     DimensionsLocalProvider {

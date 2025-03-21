@@ -4,12 +4,12 @@ import android.content.Context
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.datasource.dataStore
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
+import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import com.sottti.roller.coasters.utils.device.managers.LocaleManager
 import com.sottti.roller.coasters.utils.device.managers.MeasurementSystemManager
 import com.sottti.roller.coasters.utils.device.managers.SystemColorContrastManager
 import com.sottti.roller.coasters.utils.device.managers.ThemeManager
-import com.sottti.roller.coasters.utils.device.sdk.SdkFeatures
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,14 +36,14 @@ internal object SettingsModule {
         systemColorContrastManager: SystemColorContrastManager,
         localeManager: LocaleManager,
         measurementSystemManager: MeasurementSystemManager,
-        sdkFeatures: SdkFeatures,
+        features: Features,
         themeManager: ThemeManager,
     ): SettingsLocalDataSource = SettingsLocalDataSource(
         systemColorContrastManager = systemColorContrastManager,
         dataStore = context.dataStore,
         localeManager = localeManager,
         measurementSystemManager = measurementSystemManager,
-        sdkFeatures = sdkFeatures,
+        features = features,
         themeManager = themeManager,
     )
 }
