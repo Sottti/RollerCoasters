@@ -18,7 +18,7 @@ public fun colors(
     darkTheme: Boolean,
     dynamicColor: ResolvedDynamicColor,
 ): ColorScheme = when {
-    dynamicColor.enabled() -> dynamicColorScheme(darkTheme)
+    dynamicColor.enabled -> dynamicColorScheme(darkTheme)
     darkTheme -> colorContrast.darkColorScheme()
     else -> colorContrast.lightColorScheme()
 }
