@@ -17,7 +17,6 @@ android {
 
 dependencies {
     implementation(libs.hilt)
-    implementation(libs.hilt.work)
     implementation(libs.paging.runtime)
     implementation(libs.room)
     implementation(libs.room.paging)

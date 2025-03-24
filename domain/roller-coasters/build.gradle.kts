@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    api(libs.result)
     api(project(module.domain.settings))
     implementation(libs.javax.inject)
     implementation(libs.kotlin.coroutines.core)

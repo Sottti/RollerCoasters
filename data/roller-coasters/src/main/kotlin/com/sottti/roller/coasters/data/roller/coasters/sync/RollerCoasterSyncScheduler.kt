@@ -1,16 +1,19 @@
 package com.sottti.roller.coasters.data.roller.coasters.sync
 
+import android.content.Context
 import androidx.work.WorkManager
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 internal class RollerCoasterSyncScheduler @Inject constructor(
-    private val workManager: WorkManager
+    private val context: Context,
 ) {
-    fun scheduleSync() {
-        workManager.scheduleUniqueWork()
-        workManager.schedulePeriodicWork()
+    fun schedule() {
+        with(receiver = WorkManager.getInstance(context)) {
+            scheduleUniqueWork()
+            schedulePeriodicWork()
+        }
     }
 }
 

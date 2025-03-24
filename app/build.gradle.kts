@@ -35,10 +35,10 @@ android {
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.hilt)
-    implementation(libs.hilt.work)
     implementation(libs.splashscreen)
     implementation(project(module.di))
     implementation(project(module.domain.features))
+    implementation(project(module.domain.rollerCoasters))
     implementation(project(module.domain.settings))
     implementation(project(module.presentation.home))
     ksp(libs.hilt.compiler)

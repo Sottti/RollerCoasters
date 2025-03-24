@@ -2,22 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application>
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.work-init"
-            android:enabled="true"
+            android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
-            tools:replace="android:authorities">
-
+            android:multiprocess="true">
             <meta-data
-                android:name="com.sottti.roller.coasters.data.roller.coasters.sync.RollerCoastersSyncInitializer"
-                android:value="androidx.startup" />
+                android:name="androidx.work.WorkManagerInitializer"
+                tools:node="remove" />
         </provider>
 
-        <meta-data
-            android:name="androidx.work.WorkManagerInitializer"
-            tools:node="remove" />
+        <provider
+            android:name=".sync.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:exported="false" />
     </application>
 
 </manifest>

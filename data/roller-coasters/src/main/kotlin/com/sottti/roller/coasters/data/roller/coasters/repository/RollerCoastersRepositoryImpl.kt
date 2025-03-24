@@ -8,6 +8,7 @@ import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
+import com.sottti.roller.coasters.data.roller.coasters.sync.RollerCoasterSyncScheduler
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
@@ -20,6 +21,7 @@ import javax.inject.Inject
 internal class RollerCoastersRepositoryImpl @Inject constructor(
     private val localDataSource: RollerCoastersLocalDataSource,
     private val remoteDataSource: RollerCoastersRemoteDataSource,
+    private val rollerCoasterSyncScheduler: RollerCoasterSyncScheduler,
 ) : RollerCoastersRepository {
 
     companion object {
@@ -58,6 +60,10 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
                     .onSuccess { localDataSource.storeRollerCoaster(it) }
             }
         )
+
+    override fun scheduleRollerCoastersSync() {
+        rollerCoasterSyncScheduler.schedule()
+    }
 
     override suspend fun syncAllRollerCoasters(): Result<Unit> =
         remoteDataSource.syncRollerCoasters { rollerCoasters ->

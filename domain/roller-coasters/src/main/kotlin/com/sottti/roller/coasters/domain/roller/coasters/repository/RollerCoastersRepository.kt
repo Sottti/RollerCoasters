@@ -18,5 +18,7 @@ public interface RollerCoastersRepository {
         id: RollerCoasterId,
     ): Result<RollerCoaster>
 
+    public fun scheduleRollerCoastersSync()
+
     public suspend fun syncAllRollerCoasters(): Result<Unit>
 }
