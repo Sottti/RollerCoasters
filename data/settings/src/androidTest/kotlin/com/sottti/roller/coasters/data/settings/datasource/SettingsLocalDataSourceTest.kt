@@ -54,7 +54,7 @@ internal class SettingsLocalDataSourceTest {
 
     @Before
     fun setup() {
-        context = ApplicationProvider.getApplicationContext<Context>()
+        context = ApplicationProvider.getApplicationContext()
         dataStore = context.dataStore
         runTest { dataStore.edit { it.clear() } }
     }

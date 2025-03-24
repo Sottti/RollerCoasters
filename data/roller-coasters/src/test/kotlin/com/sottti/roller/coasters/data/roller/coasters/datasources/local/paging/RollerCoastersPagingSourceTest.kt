@@ -154,7 +154,7 @@ internal class RollerCoastersPagingSourceTest {
     fun `getRefreshKey - should return next key minus one when available`() {
         val state = PagingState(
             pages = listOf(
-                PagingSource.LoadResult.Page<Int, RollerCoaster>(
+                PagingSource.LoadResult.Page(
                     data = listOf(rollerCoaster),
                     prevKey = null,
                     nextKey = 2,
