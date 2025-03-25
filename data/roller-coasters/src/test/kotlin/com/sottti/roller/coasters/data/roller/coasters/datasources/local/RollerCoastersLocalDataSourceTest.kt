@@ -50,7 +50,7 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoaster(rollerCoaster())
+        localDataSource.storeRollerCoaster(rollerCoaster)
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
@@ -70,7 +70,7 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoasters(listOf(rollerCoaster(), anotherRollerCoaster()))
+        localDataSource.storeRollerCoasters(listOf(rollerCoaster, anotherRollerCoaster))
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
