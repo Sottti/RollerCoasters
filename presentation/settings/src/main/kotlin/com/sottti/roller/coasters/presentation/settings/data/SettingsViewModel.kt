@@ -13,8 +13,8 @@ import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveA
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveAppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetAppDynamicColor
-import com.sottti.roller.coasters.domain.settings.usecase.language.GetLanguage
-import com.sottti.roller.coasters.domain.settings.usecase.language.SetLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.language.GetAppLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.language.SetAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetAppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveAppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.SetAppMeasurementSystem
@@ -72,7 +72,7 @@ import javax.inject.Inject
 internal class SettingsViewModel @Inject constructor(
     private val application: Application,
     private val getAppColorContrast: GetAppColorContrast,
-    private val getLanguage: GetLanguage,
+    private val getAppLanguage: GetAppLanguage,
     private val getAppMeasurementSystem: GetAppMeasurementSystem,
     private val getAppTheme: GetAppTheme,
     private val observeAppColorContrast: ObserveAppColorContrast,
@@ -82,7 +82,7 @@ internal class SettingsViewModel @Inject constructor(
     private val features: Features,
     private val setAppColorContrast: SetAppColorContrast,
     private val setAppDynamicColor: SetAppDynamicColor,
-    private val setLanguage: SetLanguage,
+    private val setAppLanguage: SetAppLanguage,
     private val setAppMeasurementSystem: SetAppMeasurementSystem,
     private val setAppTheme: SetAppTheme,
 ) : ViewModel() {
@@ -142,7 +142,7 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun updateLanguage() {
         viewModelScope.launch {
-            _state.updateLanguage(getLanguage())
+            _state.updateLanguage(getAppLanguage())
         }
     }
 
@@ -214,13 +214,13 @@ internal class SettingsViewModel @Inject constructor(
                 DismissColorContrastNotAvailableMessage ->
                     _state.hideColorContrastNotAvailableMessage()
 
-                LaunchLanguagePicker -> _state.showLanguagePicker(getLanguage())
+                LaunchLanguagePicker -> _state.showLanguagePicker(getAppLanguage())
 
                 is LanguagePickerSelectionChange -> _state.updateLanguagePicker(action.language)
 
                 is ConfirmLanguagePickerSelection -> {
                     _state.hideLanguagePicker()
-                    setLanguage(action.language.toDomain())
+                    setAppLanguage(action.language.toDomain())
                     updateLanguage()
                 }
 

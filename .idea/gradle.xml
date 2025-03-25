@@ -51,6 +51,7 @@
             <option value="$PROJECT_DIR$/presentation/design-system/typography" />
             <option value="$PROJECT_DIR$/presentation/explore" />
             <option value="$PROJECT_DIR$/presentation/favourites" />
+            <option value="$PROJECT_DIR$/presentation/format" />
             <option value="$PROJECT_DIR$/presentation/home" />
             <option value="$PROJECT_DIR$/presentation/image-loading" />
             <option value="$PROJECT_DIR$/presentation/navigation" />
@@ -58,8 +59,6 @@
             <option value="$PROJECT_DIR$/presentation/roller-coaster-details" />
             <option value="$PROJECT_DIR$/presentation/settings" />
             <option value="$PROJECT_DIR$/presentation/top-bars" />
-            <option value="$PROJECT_DIR$/presentation/utils" />
-            <option value="$PROJECT_DIR$/presentation/utils/format" />
             <option value="$PROJECT_DIR$/utils" />
             <option value="$PROJECT_DIR$/utils/time-dates" />
           </set>

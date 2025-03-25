@@ -8,6 +8,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
+import com.sottti.roller.coasters.domain.settings.usecase.language.GetAppLanguage
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
@@ -40,6 +41,7 @@ import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.Sor
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.AllFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.SteelFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.WoodFilter
+import com.sottti.roller.coasters.presentation.utils.format.UnitFormatter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -56,8 +58,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ExploreViewModel @Inject constructor(
+    getAppLanguage: GetAppLanguage,
     observeRollerCoasters: ObserveRollerCoasters,
     rollerCoastersRepository: RollerCoastersRepository,
+    unitFormatter: UnitFormatter,
 ) : ViewModel() {
 
     private val _sortByFilter = MutableStateFlow(SortByFilter.ALPHABETICAL)
@@ -69,7 +73,7 @@ internal class ExploreViewModel @Inject constructor(
             observeRollerCoasters(
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter,
-            ).toUiModel(sortByFilter)
+            ).toUiModel(getAppLanguage(), sortByFilter, unitFormatter)
         }.flatMapLatest { it }
             .cachedIn(viewModelScope)
 

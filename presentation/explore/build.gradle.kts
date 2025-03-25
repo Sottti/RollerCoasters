@@ -28,8 +28,8 @@ dependencies {
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
+    implementation(project(module.presentation.format))
     implementation(project(module.presentation.imageLoading))
     implementation(project(module.presentation.topBars))
-    implementation(project(module.presentation.utils.format))
     ksp(libs.hilt.compiler)
 }

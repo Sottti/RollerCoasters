@@ -43,6 +43,7 @@ include(
     ":presentation:design-system:typography",
     ":presentation:explore",
     ":presentation:favourites",
+    ":presentation:format",
     ":presentation:home",
     ":presentation:image-loading",
     ":presentation:navigation",
@@ -50,6 +51,5 @@ include(
     ":presentation:roller-coaster-details",
     ":presentation:settings",
     ":presentation:top-bars",
-    ":presentation:utils:format",
     ":utils:time-dates",
 )

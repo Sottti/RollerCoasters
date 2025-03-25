@@ -7,6 +7,7 @@ object module {
         const val aboutMe = ":presentation:about-me"
         const val explore = ":presentation:explore"
         const val favourites = ":presentation:favourites"
+        const val format = ":presentation:format"
         const val home = ":presentation:home"
         const val imageLoading = ":presentation:image-loading"
         const val navigation = ":presentation:navigation"
@@ -28,10 +29,6 @@ object module {
             const val text = ":presentation:design-system:text"
             const val themes = ":presentation:design-system:themes"
             const val typography = ":presentation:design-system:typography"
-        }
-
-        object utils {
-            const val format = ":presentation:utils:format"
         }
     }
 

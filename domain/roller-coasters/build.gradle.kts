@@ -6,9 +6,9 @@ plugins {
 
 dependencies {
     api(libs.result)
+    api(project(module.domain.model))
     api(project(module.domain.settings))
     implementation(libs.javax.inject)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.paging.common)
-    implementation(project(module.domain.model))
 }

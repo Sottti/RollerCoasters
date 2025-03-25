@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="distance_feet">%s pés</string>
+    <string name="distance_meters">%s m</string>
+    <string name="g_force">%s g</string>
+    <string name="inversions">%d inversións</string>
+    <string name="max_vertical">%d°</string>
+    <string name="speed_kph">%s km/h</string>
+    <string name="speed_mph">%s mph</string>
+</resources>

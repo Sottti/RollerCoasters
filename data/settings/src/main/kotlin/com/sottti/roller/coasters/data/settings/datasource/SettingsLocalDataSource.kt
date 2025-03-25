@@ -29,6 +29,7 @@ import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import java.util.Locale
 import javax.inject.Inject
 
 internal class SettingsLocalDataSource @Inject constructor(
@@ -106,6 +107,9 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     fun getAppLanguage(): AppLanguage =
         localeManager.appLocale.toLanguage()
+
+    fun getAppLocale(): Locale =
+        localeManager.appLocale
 
     suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
         dataStore.edit { preferences ->
