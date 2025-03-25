@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.data.settings.managers
 import android.icu.util.LocaleData
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.sottti.roller.coasters.data.settings.mappers.toSystemMeasurementSystem
+import com.sottti.roller.coasters.data.settings.mapper.toSystemMeasurementSystem
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import javax.inject.Inject
@@ -17,7 +17,7 @@ public class MeasurementSystemManager @Inject constructor(
         private val imperialUkRegions = setOf("GB")
     }
 
-    public val measurementSystem: SystemMeasurementSystem
+    public val systemMeasurementSystem: SystemMeasurementSystem
         get() = when {
             features.measurementSystemAvailable() -> getPreferredMeasurementSystem()
             else -> inferMeasurementSystem()

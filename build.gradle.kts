@@ -24,7 +24,7 @@ subprojects {
     afterEvaluate {
         when {
             plugins.hasPlugin("com.android.application") -> {
-                extensions.configure<ApplicationExtension> { androidApplicationConfig() }
+                configure<ApplicationExtension> { androidApplicationConfig() }
             }
 
             plugins.hasPlugin("com.android.library") -> androidLibraryConfig()

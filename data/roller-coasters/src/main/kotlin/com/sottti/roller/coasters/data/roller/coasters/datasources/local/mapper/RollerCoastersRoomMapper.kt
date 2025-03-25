@@ -10,6 +10,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.R
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.SpecsRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.StatusRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.mapper.toMetric
 import com.sottti.roller.coasters.domain.model.Coordinates
 import com.sottti.roller.coasters.domain.model.Picture
 import com.sottti.roller.coasters.domain.roller.coasters.model.AmusementPark
@@ -23,7 +24,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterName
 import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Specs
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
-import com.sottti.roller.coasters.utils.time.dates.mappers.toSortableString
+import com.sottti.roller.coasters.utils.time.dates.mapper.toSortableString
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
@@ -139,13 +140,13 @@ private fun Ride.toRoom(): RideRoomModel =
     )
 
 private fun Ride.toRoomDrop(): List<Double>? = when (this) {
-    is SingleTrackRide -> drop?.let { listOf(it.meters.value) }
-    is MultiTrackRide -> drop?.map { it.meters.value }
+    is SingleTrackRide -> drop?.let { listOf(it.toMetric().meters.value) }
+    is MultiTrackRide -> drop?.map { it.toMetric().meters.value }
 }
 
 private fun Ride.toRoomMaxDrop(): Double? = when (this) {
-    is SingleTrackRide -> drop?.meters?.value
-    is MultiTrackRide -> drop?.maxOfOrNull { it.meters.value }
+    is SingleTrackRide -> drop?.toMetric()?.meters?.value
+    is MultiTrackRide -> drop?.maxOfOrNull { it.toMetric().meters.value }
 }
 
 private fun Ride.toRoomDuration(): List<Int>? = when (this) {
@@ -164,13 +165,13 @@ private fun Ride.toRoomMaxGForce(): Double? = when (this) {
 }
 
 private fun Ride.toRoomHeight(): List<Double>? = when (this) {
-    is SingleTrackRide -> height?.let { listOf(it.meters.value) }
-    is MultiTrackRide -> height?.map { it.meters.value }
+    is SingleTrackRide -> height?.let { listOf(it.toMetric().meters.value) }
+    is MultiTrackRide -> height?.map { it.toMetric().meters.value }
 }
 
 private fun Ride.toRoomMaxHeight(): Double? = when (this) {
-    is SingleTrackRide -> height?.meters?.value
-    is MultiTrackRide -> height?.maxOfOrNull { it.meters.value }
+    is SingleTrackRide -> height?.toMetric()?.meters?.value
+    is MultiTrackRide -> height?.maxOfOrNull { it.toMetric().meters.value }
 }
 
 private fun Ride.toRoomInversions(): List<Int>? = when (this) {
@@ -184,13 +185,13 @@ private fun Ride.toRoomMaxInversions(): Int? = when (this) {
 }
 
 private fun Ride.toRoomLength(): List<Double>? = when (this) {
-    is SingleTrackRide -> length?.let { listOf(it.meters.value) }
-    is MultiTrackRide -> length?.map { it.meters.value }
+    is SingleTrackRide -> length?.let { listOf(it.toMetric().meters.value) }
+    is MultiTrackRide -> length?.map { it.toMetric().meters.value }
 }
 
 private fun Ride.toRoomMaxLength(): Double? = when (this) {
-    is SingleTrackRide -> length?.meters?.value
-    is MultiTrackRide -> length?.maxOfOrNull { it.meters.value }
+    is SingleTrackRide -> length?.toMetric()?.meters?.value
+    is MultiTrackRide -> length?.maxOfOrNull { it.toMetric().meters.value }
 }
 
 private fun Ride.toRoomMaxVertical(): List<Int>? = when (this) {
@@ -204,13 +205,13 @@ private fun Ride.toRoomMaxVerticalMax(): Int? = when (this) {
 }
 
 private fun Ride.toRoomSpeed(): List<Double>? = when (this) {
-    is SingleTrackRide -> speed?.let { listOf(it.kmh.value) }
-    is MultiTrackRide -> speed?.map { it.kmh.value }
+    is SingleTrackRide -> speed?.let { listOf(it.toMetric().kmh.value) }
+    is MultiTrackRide -> speed?.map { it.toMetric().kmh.value }
 }
 
 private fun Ride.toRoomMaxSpeed(): Double? = when (this) {
-    is SingleTrackRide -> speed?.kmh?.value
-    is MultiTrackRide -> speed?.maxOfOrNull { it.kmh.value }
+    is SingleTrackRide -> speed?.toMetric()?.kmh?.value
+    is MultiTrackRide -> speed?.maxOfOrNull { it.toMetric().kmh.value }
 }
 
 private fun Ride.toRoomTrackNames(): List<String>? = when (this) {

@@ -4,10 +4,10 @@ import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSour
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
-import com.sottti.roller.coasters.domain.settings.model.language.Language
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -23,16 +23,16 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun observeAppDynamicColor(): Flow<AppDynamicColor> =
         localDataSource.observeAppDynamicColor()
 
-    override suspend fun setTheme(theme: Theme) {
-        localDataSource.setTheme(theme)
+    override suspend fun setAppTheme(appTheme: AppTheme) {
+        localDataSource.setAppTheme(appTheme)
     }
 
-    override suspend fun getTheme(): Theme = localDataSource.getTheme()
+    override suspend fun getAppTheme(): AppTheme = localDataSource.getAppTheme()
 
-    override fun observeTheme(): Flow<Theme> = localDataSource.observeTheme()
+    override fun observeAppTheme(): Flow<AppTheme> = localDataSource.observeAppTheme()
 
-    override suspend fun applyStoredTheme() {
-        localDataSource.applyStoredTheme()
+    override suspend fun applyStoredAppTheme() {
+        localDataSource.applyStoredAppTheme()
     }
 
     override suspend fun setAppColorContrast(
@@ -50,22 +50,22 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun getSystemColorContrast(): SystemColorContrast =
         localDataSource.getSystemColorContrast()
 
-    override fun setLanguage(language: Language) {
-        localDataSource.setLanguage(language)
+    override fun setLanguage(appLanguage: AppLanguage) {
+        localDataSource.setAppLanguage(appLanguage)
     }
 
-    override suspend fun getLanguage(): Language =
-        localDataSource.getLanguage()
+    override suspend fun getLanguage(): AppLanguage =
+        localDataSource.getAppLanguage()
 
-    override suspend fun setMeasurementSystem(measurementSystem: MeasurementSystem) {
-        localDataSource.setMeasurementSystem(measurementSystem)
+    override suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
+        localDataSource.setAppMeasurementSystem(appMeasurementSystem)
     }
 
-    override suspend fun getMeasurementSystem(): MeasurementSystem =
-        localDataSource.getMeasurementSystem()
+    override suspend fun getAppMeasurementSystem(): AppMeasurementSystem =
+        localDataSource.getAppMeasurementSystem()
 
-    override fun observeMeasurementSystem(): Flow<MeasurementSystem> =
-        localDataSource.observeMeasurementSystem()
+    override fun observeAppMeasurementSystem(): Flow<AppMeasurementSystem> =
+        localDataSource.observeAppMeasurementSystem()
 
     override fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         localDataSource.getSystemMeasurementSystem()

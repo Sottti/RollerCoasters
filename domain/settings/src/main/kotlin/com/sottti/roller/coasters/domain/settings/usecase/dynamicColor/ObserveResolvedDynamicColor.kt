@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.settings.mapper.toResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +18,8 @@ public class ObserveResolvedDynamicColor @Inject constructor(
             features.systemDynamicColorAvailable() ->
                 settingsRepository
                     .observeAppDynamicColor()
-                    .map { appDynamicColor -> ResolvedDynamicColor(appDynamicColor.enabled) }
+                    .map { appDynamicColor -> appDynamicColor.toResolvedDynamicColor() }
 
-            else -> flowOf(ResolvedDynamicColor(false))
+            else -> flowOf(ResolvedDynamicColor(enabled = false))
         }
 }

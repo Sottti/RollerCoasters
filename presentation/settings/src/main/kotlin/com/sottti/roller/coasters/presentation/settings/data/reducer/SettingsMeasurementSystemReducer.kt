@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.Metric
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.MeasurementSystemPickerState
@@ -14,14 +14,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 internal fun MutableStateFlow<SettingsState>.updateMeasurementSystem(
-    measurementSystem: MeasurementSystem,
+    appMeasurementSystem: AppMeasurementSystem,
 ) {
     update { currentState ->
         currentState.copy(
             measurementSystem = currentState.measurementSystem.copy(
                 listItem = currentState.measurementSystem.listItem.copy(
                     selectedMeasurementSystem = SelectedMeasurementSystemState.Loaded(
-                        measurementSystem.toPresentationModel(isSelected = true),
+                        appMeasurementSystem.toPresentationModel(isSelected = true),
                     )
                 ),
             )
@@ -30,13 +30,13 @@ internal fun MutableStateFlow<SettingsState>.updateMeasurementSystem(
 }
 
 internal fun MutableStateFlow<SettingsState>.showMeasurementSystemPicker(
-    measurementSystem: MeasurementSystem,
+    appMeasurementSystem: AppMeasurementSystem,
 ) {
     update { currentState ->
         currentState.copy(
             measurementSystem = currentState.measurementSystem.copy(
                 picker = measurementSystemPickerState(
-                    measurementSystem.toPresentationModel(isSelected = true),
+                    appMeasurementSystem.toPresentationModel(isSelected = true),
                 ),
             )
         )
@@ -77,7 +77,7 @@ private fun measurementSystemPickerState(
 private fun measurementSystemsList(
     selectedMeasurementSystem: MeasurementSystemUi,
 ) = listOf(
-    MeasurementSystem.System.toPresentationModel(
+    AppMeasurementSystem.System.toPresentationModel(
         isSelected = selectedMeasurementSystem is MeasurementSystemUi.System,
     ),
     Metric.toPresentationModel(

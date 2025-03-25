@@ -7,7 +7,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ScheduleRollerCoastersSync
-import com.sottti.roller.coasters.domain.settings.usecase.theme.ApplyStoredTheme
+import com.sottti.roller.coasters.domain.settings.usecase.theme.ApplyStoredAppTheme
 import com.sottti.roller.coasters.presentation.home.ui.startHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ import javax.inject.Inject
 internal class SplashScreenActivity : ComponentActivity() {
 
     @Inject
-    lateinit var applyStoredTheme: ApplyStoredTheme
+    lateinit var applyStoredAppTheme: ApplyStoredAppTheme
 
     @Inject
     lateinit var features: Features
@@ -31,7 +31,7 @@ internal class SplashScreenActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null && !features.setPersistentNightModeAvailable()) {
-            lifecycleScope.launch { applyStoredTheme() }
+            lifecycleScope.launch { applyStoredAppTheme() }
         }
 
         scheduleRollerCoastersSync()

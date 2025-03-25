@@ -1,10 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.settings.model.language.Language
-import com.sottti.roller.coasters.domain.settings.model.language.Language.EnglishGbLanguage
-import com.sottti.roller.coasters.domain.settings.model.language.Language.GalicianLanguage
-import com.sottti.roller.coasters.domain.settings.model.language.Language.SpanishSpainLanguage
-import com.sottti.roller.coasters.domain.settings.model.language.Language.SystemLanguage
+import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.LanguagePickerState
@@ -15,14 +11,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 internal fun MutableStateFlow<SettingsState>.updateLanguage(
-    language: Language,
+    appLanguage: AppLanguage,
 ) {
     update { currentState ->
         currentState.copy(
             language = currentState.language.copy(
                 listItem = currentState.language.listItem.copy(
                     selectedLanguage = SelectedLanguageState.Loaded(
-                        language.toPresentationModel(isSelected = true),
+                        appLanguage.toPresentationModel(isSelected = true),
                     )
                 ),
             )
@@ -31,12 +27,12 @@ internal fun MutableStateFlow<SettingsState>.updateLanguage(
 }
 
 internal fun MutableStateFlow<SettingsState>.showLanguagePicker(
-    language: Language,
+    appLanguage: AppLanguage,
 ) {
     update { currentState ->
         currentState.copy(
             language = currentState.language.copy(
-                picker = languagePickerState(language.toPresentationModel(isSelected = true)),
+                picker = languagePickerState(appLanguage.toPresentationModel(isSelected = true)),
             )
         )
     }
@@ -74,14 +70,14 @@ private fun languagePickerState(
 private fun languagesList(
     selectedLanguage: LanguageUi,
 ) = listOf(
-    SystemLanguage.toPresentationModel(isSelected = selectedLanguage is LanguageUi.SystemLanguage),
-    EnglishGbLanguage.toPresentationModel(
+    AppLanguage.System.toPresentationModel(isSelected = selectedLanguage is LanguageUi.SystemLanguage),
+    AppLanguage.EnglishGb.toPresentationModel(
         isSelected = selectedLanguage is LanguageUi.EnglishGbLanguage,
     ),
-    SpanishSpainLanguage.toPresentationModel(
+    AppLanguage.SpanishSpain.toPresentationModel(
         isSelected = selectedLanguage is LanguageUi.SpanishSpainLanguage,
     ),
-    GalicianLanguage.toPresentationModel(
+    AppLanguage.Galician.toPresentationModel(
         isSelected = selectedLanguage is LanguageUi.GalicianLanguage,
     ),
 )

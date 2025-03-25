@@ -44,9 +44,6 @@
       <SelectionState runConfigName="SystemColorContrastManagerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MeasurementSystemManagerTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="RollerCoastersDaoTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>

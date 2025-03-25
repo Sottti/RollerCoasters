@@ -12,7 +12,12 @@ internal fun MutableStateFlow<SettingsState>.updateDynamicColor(
     update { currentState ->
         currentState.copy(
             dynamicColor = currentState.dynamicColor?.copy(
-                checkedState = DynamicColorCheckedState.Loaded(dynamicColorChecked.enabled)
+                checkedState = DynamicColorCheckedState.Loaded(
+                    when (dynamicColorChecked) {
+                        AppDynamicColor.Disabled -> false
+                        AppDynamicColor.Enabled -> true
+                    }
+                )
             )
         )
     }

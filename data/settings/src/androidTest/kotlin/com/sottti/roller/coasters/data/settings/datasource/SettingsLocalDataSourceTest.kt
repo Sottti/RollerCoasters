@@ -8,13 +8,13 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.appColorContrastKey
-import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.measurementSystemKey
-import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.themeKey
+import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.appMeasurementSystemKey
+import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource.Companion.appThemeKey
 import com.sottti.roller.coasters.data.settings.managers.LocaleManager
 import com.sottti.roller.coasters.data.settings.managers.MeasurementSystemManager
 import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastManager
 import com.sottti.roller.coasters.data.settings.managers.ThemeManager
-import com.sottti.roller.coasters.data.settings.mappers.toLocaleList
+import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
@@ -22,14 +22,14 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorCo
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
-import com.sottti.roller.coasters.domain.settings.model.language.Language
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.Metric
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.System
+import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.System
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme.DarkTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme.LightTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme.SystemTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.DarkAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.LightAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemAppTheme
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -70,8 +70,8 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { systemDynamicColorAvailable() } returns true }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        dataSource.setAppDynamicColor(AppDynamicColor(true))
-        assertThat(dataSource.observeAppDynamicColor().first().enabled).isTrue()
+        dataSource.setAppDynamicColor(AppDynamicColor.Enabled)
+        assertThat(dataSource.observeAppDynamicColor().first() == AppDynamicColor.Enabled).isTrue()
     }
 
     @Test
@@ -80,8 +80,8 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { systemDynamicColorAvailable() } returns true }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        dataSource.setAppDynamicColor(AppDynamicColor(false))
-        assertThat(dataSource.observeAppDynamicColor().first().enabled).isFalse()
+        dataSource.setAppDynamicColor(AppDynamicColor.Disabled)
+        assertThat(dataSource.observeAppDynamicColor().first() == AppDynamicColor.Enabled).isFalse()
     }
 
     @Test
@@ -90,7 +90,7 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { systemDynamicColorAvailable() } returns true }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        assertThat(dataSource.observeAppDynamicColor().first().enabled).isTrue()
+        assertThat(dataSource.observeAppDynamicColor().first() == AppDynamicColor.Enabled).isTrue()
     }
 
     @Test
@@ -99,43 +99,43 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { systemDynamicColorAvailable() } returns false }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        assertThat(dataSource.observeAppDynamicColor().first().enabled).isFalse()
+        assertThat(dataSource.observeAppDynamicColor().first() == AppDynamicColor.Enabled).isFalse()
     }
 
     @Test
-    fun testSetThemeDark() = runTest {
-        val themeManager = mockk<ThemeManager> { every { setTheme(DarkTheme) } just runs }
+    fun testSetAppThemeDark() = runTest {
+        val themeManager = mockk<ThemeManager> { every { setTheme(DarkAppTheme) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), themeManager, mockk())
-        dataSource.setTheme(DarkTheme)
-        assertThat(dataSource.observeTheme().first()).isEqualTo(DarkTheme)
+        dataSource.setAppTheme(DarkAppTheme)
+        assertThat(dataSource.observeAppTheme().first()).isEqualTo(DarkAppTheme)
     }
 
     @Test
-    fun testSetThemeLight() = runTest {
-        val themeManager = mockk<ThemeManager> { every { setTheme(LightTheme) } just runs }
+    fun testSetAppThemeLight() = runTest {
+        val themeManager = mockk<ThemeManager> { every { setTheme(LightAppTheme) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), themeManager, mockk())
-        dataSource.setTheme(LightTheme)
-        assertThat(dataSource.observeTheme().first()).isEqualTo(LightTheme)
+        dataSource.setAppTheme(LightAppTheme)
+        assertThat(dataSource.observeAppTheme().first()).isEqualTo(LightAppTheme)
     }
 
     @Test
-    fun testSetThemeSystem() = runTest {
-        val themeManager = mockk<ThemeManager> { every { setTheme(SystemTheme) } just runs }
+    fun testSetAppThemeSystem() = runTest {
+        val themeManager = mockk<ThemeManager> { every { setTheme(SystemAppTheme) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), themeManager, mockk())
-        dataSource.setTheme(SystemTheme)
-        assertThat(dataSource.observeTheme().first()).isEqualTo(SystemTheme)
+        dataSource.setAppTheme(SystemAppTheme)
+        assertThat(dataSource.observeAppTheme().first()).isEqualTo(SystemAppTheme)
     }
 
     @Test
     fun testThemeManagerCalledOnSetDark() = runTest {
-        val themeManager = mockk<ThemeManager> { every { setTheme(DarkTheme) } just runs }
+        val themeManager = mockk<ThemeManager> { every { setTheme(DarkAppTheme) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), themeManager, mockk())
-        dataSource.setTheme(DarkTheme)
-        verify { themeManager.setTheme(DarkTheme) }
+        dataSource.setAppTheme(DarkAppTheme)
+        verify { themeManager.setTheme(DarkAppTheme) }
     }
 
     @Test
@@ -144,7 +144,7 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { lightDarkSystemThemingAvailable() } returns true }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        assertThat(dataSource.getTheme()).isEqualTo(SystemTheme)
+        assertThat(dataSource.getAppTheme()).isEqualTo(SystemAppTheme)
     }
 
     @Test
@@ -153,8 +153,8 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { lightDarkSystemThemingAvailable() } returns true }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        dataStore.edit { preferences -> preferences[themeKey] = "invalid_key" }
-        assertThat(dataSource.getTheme()).isEqualTo(SystemTheme)
+        dataStore.edit { preferences -> preferences[appThemeKey] = "invalid_key" }
+        assertThat(dataSource.getAppTheme()).isEqualTo(SystemAppTheme)
     }
 
     @Test
@@ -163,29 +163,29 @@ internal class SettingsLocalDataSourceTest {
             mockk<Features> { every { lightDarkSystemThemingAvailable() } returns false }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), features)
-        assertThat(dataSource.getTheme()).isEqualTo(LightTheme)
+        assertThat(dataSource.getAppTheme()).isEqualTo(LightAppTheme)
     }
 
     @Test
-    fun testApplyStoredThemeWithStoredValue() = runTest {
-        val themeManager = mockk<ThemeManager> { every { setTheme(DarkTheme) } just runs }
+    fun testApplyStoredThemeWithStoredAppValue() = runTest {
+        val themeManager = mockk<ThemeManager> { every { setTheme(DarkAppTheme) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), themeManager, mockk())
-        dataSource.setTheme(DarkTheme)
-        dataSource.applyStoredTheme()
-        verify { themeManager.setTheme(DarkTheme) }
+        dataSource.setAppTheme(DarkAppTheme)
+        dataSource.applyStoredAppTheme()
+        verify { themeManager.setTheme(DarkAppTheme) }
     }
 
     @Test
-    fun testApplyStoredThemeWithDefault() = runTest {
+    fun testApplyStoredAppThemeWithDefault() = runTest {
         val features =
             mockk<Features> { every { lightDarkSystemThemingAvailable() } returns true }
-        val themeManager = mockk<ThemeManager> { every { setTheme(SystemTheme) } just runs }
+        val themeManager = mockk<ThemeManager> { every { setTheme(SystemAppTheme) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), themeManager, features)
         dataStore.edit { it.clear() }
-        dataSource.applyStoredTheme()
-        verify { themeManager.setTheme(SystemTheme) }
+        dataSource.applyStoredAppTheme()
+        verify { themeManager.setTheme(SystemAppTheme) }
     }
 
     @Test
@@ -278,71 +278,71 @@ internal class SettingsLocalDataSourceTest {
     }
 
     @Test
-    fun testSetLanguage() = runTest {
-        val language = Language.EnglishGbLanguage
-        val localeList = language.toLocaleList()
+    fun testSetAppLanguage() = runTest {
+        val appLanguage = AppLanguage.EnglishGb
+        val localeList = appLanguage.toLocaleList()
         val localeManager = mockk<LocaleManager> { every { setLocaleList(localeList) } just runs }
         dataSource =
             SettingsLocalDataSource(dataStore, localeManager, mockk(), mockk(), mockk(), mockk())
-        dataSource.setLanguage(language)
+        dataSource.setAppLanguage(appLanguage)
         verify { localeManager.setLocaleList(localeList) }
     }
 
     @Test
-    fun testGetLanguage() = runTest {
+    fun testGetAppLanguage() = runTest {
         val localeManager = mockk<LocaleManager> { every { appLocale } returns Locale.UK }
         dataSource =
             SettingsLocalDataSource(dataStore, localeManager, mockk(), mockk(), mockk(), mockk())
-        assertThat(dataSource.getLanguage()).isEqualTo(Language.EnglishGbLanguage)
+        assertThat(dataSource.getAppLanguage()).isEqualTo(AppLanguage.EnglishGb)
     }
 
     @Test
-    fun testGetLanguageManagerCall() = runTest {
+    fun testGetAppLanguageManagerCall() = runTest {
         val localeManager = mockk<LocaleManager> { every { appLocale } returns Locale.UK }
         dataSource =
             SettingsLocalDataSource(dataStore, localeManager, mockk(), mockk(), mockk(), mockk())
-        dataSource.getLanguage()
+        dataSource.getAppLanguage()
         verify { localeManager.appLocale }
     }
 
     @Test
-    fun testSetMeasurementSystemMetric() = runTest {
+    fun testSetAppMeasurementSystemMetric() = runTest {
         dataSource = SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), mockk())
-        dataSource.setMeasurementSystem(Metric)
-        assertThat(dataSource.observeMeasurementSystem().first()).isEqualTo(Metric)
+        dataSource.setAppMeasurementSystem(Metric)
+        assertThat(dataSource.observeAppMeasurementSystem().first()).isEqualTo(Metric)
     }
 
     @Test
-    fun testSetMeasurementSystemImperialUk() = runTest {
+    fun testSetAppMeasurementSystemImperialUk() = runTest {
         dataSource = SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), mockk())
-        dataSource.setMeasurementSystem(ImperialUk)
-        assertThat(dataSource.observeMeasurementSystem().first()).isEqualTo(ImperialUk)
+        dataSource.setAppMeasurementSystem(ImperialUk)
+        assertThat(dataSource.observeAppMeasurementSystem().first()).isEqualTo(ImperialUk)
     }
 
     @Test
-    fun testSetMeasurementSystemSystem() = runTest {
+    fun testSetAppMeasurementSystemSystem() = runTest {
         dataSource = SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), mockk())
-        dataSource.setMeasurementSystem(System)
-        assertThat(dataSource.observeMeasurementSystem().first()).isEqualTo(System)
+        dataSource.setAppMeasurementSystem(System)
+        assertThat(dataSource.observeAppMeasurementSystem().first()).isEqualTo(System)
     }
 
     @Test
     fun testMeasurementSystemDefaultWhenMissing() = runTest {
         dataSource = SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), mockk())
-        assertThat(dataSource.getMeasurementSystem()).isEqualTo(System)
+        assertThat(dataSource.getAppMeasurementSystem()).isEqualTo(System)
     }
 
     @Test
     fun testMeasurementSystemFallbackForInvalidValue() = runTest {
         dataSource = SettingsLocalDataSource(dataStore, mockk(), mockk(), mockk(), mockk(), mockk())
-        dataStore.edit { preferences -> preferences[measurementSystemKey] = "invalid_key" }
-        assertThat(dataSource.getMeasurementSystem()).isEqualTo(System)
+        dataStore.edit { preferences -> preferences[appMeasurementSystemKey] = "invalid_key" }
+        assertThat(dataSource.getAppMeasurementSystem()).isEqualTo(System)
     }
 
     @Test
     fun testGetSystemMeasurementSystem() = runTest {
         val measurementSystemManager = mockk<MeasurementSystemManager> {
-            every { measurementSystem } returns SystemMeasurementSystem.ImperialUs
+            every { systemMeasurementSystem } returns SystemMeasurementSystem.ImperialUs
         }
         dataSource = SettingsLocalDataSource(
             dataStore = dataStore,
@@ -360,7 +360,7 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testGetSystemMeasurementSystemManagerCall() = runTest {
         val measurementSystemManager = mockk<MeasurementSystemManager> {
-            every { measurementSystem } returns SystemMeasurementSystem.ImperialUs
+            every { systemMeasurementSystem } returns SystemMeasurementSystem.ImperialUs
         }
         dataSource = SettingsLocalDataSource(
             dataStore = dataStore,
@@ -371,6 +371,6 @@ internal class SettingsLocalDataSourceTest {
             features = mockk()
         )
         dataSource.getSystemMeasurementSystem()
-        verify { measurementSystemManager.measurementSystem }
+        verify { measurementSystemManager.systemMeasurementSystem }
     }
 }

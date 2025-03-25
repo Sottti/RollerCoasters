@@ -11,6 +11,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -34,7 +35,7 @@ internal class RollerCoastersRemoteDataSourceTest {
     fun `Get roller coaster - API returns success`() = runTest {
         coEvery { api.getRollerCoaster(rollerCoasterId) } returns Ok(rollerCoasterApiModel)
 
-        val result = dataSource.getRollerCoaster(rollerCoasterId)
+        val result = dataSource.getRollerCoaster(id = rollerCoasterId, measurementSystem = Metric)
 
         assertThat(result.isOk).isTrue()
         assertThat(result.value).isEqualTo(rollerCoaster)
@@ -46,7 +47,7 @@ internal class RollerCoastersRemoteDataSourceTest {
     fun `Get roller coaster - API returns error`() = runTest {
         coEvery { api.getRollerCoaster(rollerCoasterId) } returns Err(noInterNetException)
 
-        val result = dataSource.getRollerCoaster(rollerCoasterId)
+        val result = dataSource.getRollerCoaster(id = rollerCoasterId, measurementSystem = Metric)
 
         assertThat(result.isErr).isTrue()
         assertThat(result.error.message).isEqualTo(noInterNetException.message)

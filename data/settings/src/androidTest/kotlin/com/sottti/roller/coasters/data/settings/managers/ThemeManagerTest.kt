@@ -4,7 +4,7 @@ import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sottti.roller.coasters.domain.features.Features
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -42,7 +42,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES) } just runs
 
-        manager.setTheme(Theme.DarkTheme)
+        manager.setTheme(AppTheme.DarkAppTheme)
 
         verify { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES) }
     }
@@ -52,7 +52,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO) } just runs
 
-        manager.setTheme(Theme.LightTheme)
+        manager.setTheme(AppTheme.LightAppTheme)
 
         verify { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO) }
     }
@@ -62,7 +62,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) } just runs
 
-        manager.setTheme(Theme.SystemTheme)
+        manager.setTheme(AppTheme.SystemAppTheme)
 
         verify { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) }
     }
@@ -72,7 +72,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns true
         manager = ThemeManager(features, null)
 
-        manager.setTheme(Theme.DarkTheme)
+        manager.setTheme(AppTheme.DarkAppTheme)
 
         verify(exactly = 0) { AppCompatDelegate.setDefaultNightMode(any()) }
     }
@@ -82,7 +82,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns false
         every { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) } just runs
 
-        manager.setTheme(Theme.DarkTheme)
+        manager.setTheme(AppTheme.DarkAppTheme)
 
         verify { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
     }
@@ -92,7 +92,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns false
         every { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) } just runs
 
-        manager.setTheme(Theme.LightTheme)
+        manager.setTheme(AppTheme.LightAppTheme)
 
         verify { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
     }
@@ -104,7 +104,7 @@ internal class ThemeManagerTest {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         } just runs
 
-        manager.setTheme(Theme.SystemTheme)
+        manager.setTheme(AppTheme.SystemAppTheme)
 
         verify {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)

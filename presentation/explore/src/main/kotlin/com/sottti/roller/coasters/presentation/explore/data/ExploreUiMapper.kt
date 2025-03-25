@@ -2,20 +2,9 @@ package com.sottti.roller.coasters.presentation.explore.data
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.sottti.roller.coasters.domain.roller.coasters.model.MultiTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
-import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.ALPHABETICAL
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.DROP
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.G_FORCE
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.HEIGHT
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.INVERSIONS
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.LENGTH
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.MAX_VERTICAL
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.SPEED
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import com.sottti.roller.coasters.presentation.utils.format.toDisplayFormat
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -58,28 +47,30 @@ private fun RollerCoaster.toUiModel(
 
 private fun RollerCoaster.contextualStat(
     sortByFilter: SortByFilter,
-): String? = when (val ride = specs.ride) {
-    is MultiTrackRide -> when (sortByFilter) {
-        DROP -> ride.drop?.maxOfOrNull { it.meters.value.toDisplayFormat() } + " meters"
-        G_FORCE -> ride.gForce?.maxOfOrNull { it.value.toDisplayFormat() } + " G"
-        HEIGHT -> ride.height?.maxOfOrNull { it.meters.value.toDisplayFormat() } + " meters"
-        INVERSIONS -> ride.inversions?.maxOfOrNull { it.value.toString() } + " inversions"
-        LENGTH -> ride.length?.maxOfOrNull { it.meters.value.toDisplayFormat() } + " meters"
-        MAX_VERTICAL -> ride.maxVertical?.maxOfOrNull { it.degrees.value.toString() } + "°"
-        SPEED -> ride.speed?.maxOfOrNull { it.kmh.value.toDisplayFormat() } + " km/h"
-        ALPHABETICAL -> null
-    }
-
-    is SingleTrackRide -> when (sortByFilter) {
-        ALPHABETICAL -> null
-        DROP -> ride.drop?.meters?.value?.toDisplayFormat() + " meters"
-        G_FORCE -> ride.gForce?.value?.toDisplayFormat() + " G"
-        HEIGHT -> ride.height?.meters?.value?.toDisplayFormat() + " meters"
-        INVERSIONS -> ride.inversions?.value.toString() + " inversions"
-        LENGTH -> ride.length?.meters?.value?.toDisplayFormat() + " meters"
-        MAX_VERTICAL -> ride.maxVertical?.degrees?.value.toString() + "°"
-        SPEED -> ride.speed?.kmh?.value?.toDisplayFormat() + " km/h"
-    }
-
-    null -> null
-}
+): String? = "string"
+//when (val ride = specs.ride) {
+//    is MultiTrackRide -> when (sortByFilter) {
+//        DROP -> ride.drop?.maxOfOrNull { it.meters.value.toDisplayFormat() } + " meters"
+//        G_FORCE -> ride.gForce?.maxOfOrNull { it.value.toDisplayFormat() } + " G"
+//        HEIGHT -> ride.height?.maxOfOrNull { it.meters.value.toDisplayFormat() } + " meters"
+//        INVERSIONS -> ride.inversions?.maxOfOrNull { it.value.toString() } + " inversions"
+//        LENGTH -> ride.length?.maxOfOrNull { it.meters.value.toDisplayFormat() } + " meters"
+//        MAX_VERTICAL -> ride.maxVertical?.maxOfOrNull { it.degrees.value.toString() } + "°"
+//        SPEED -> ride.speed?.maxOfOrNull { it.kmh.value.toDisplayFormat() } + " km/h"
+//        ALPHABETICAL -> null
+//    }
+//
+//    is SingleTrackRide ->
+//        when (sortByFilter) {
+//        ALPHABETICAL -> null
+//        DROP -> ride.drop?.meters?.value?.toDisplayFormat() + " meters"
+//        G_FORCE -> ride.gForce?.value?.toDisplayFormat() + " G"
+//        HEIGHT -> ride.height?.meters?.value?.toDisplayFormat() + " meters"
+//        INVERSIONS -> ride.inversions?.value.toString() + " inversions"
+//        LENGTH -> ride.length?.meters?.value?.toDisplayFormat() + " meters"
+//        MAX_VERTICAL -> ride.maxVertical?.degrees?.value.toString() + "°"
+//        SPEED -> ride.speed?.kmh?.value?.toDisplayFormat() + " km/h"
+//    }
+//
+//    null -> null
+//}

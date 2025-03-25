@@ -5,12 +5,15 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatsApiModel
+import com.sottti.roller.coasters.data.roller.coasters.mapper.toDrop
+import com.sottti.roller.coasters.data.roller.coasters.mapper.toHeight
+import com.sottti.roller.coasters.data.roller.coasters.mapper.toLength
+import com.sottti.roller.coasters.data.roller.coasters.mapper.toSpeed
 import com.sottti.roller.coasters.domain.model.Author
 import com.sottti.roller.coasters.domain.model.City
 import com.sottti.roller.coasters.domain.model.Coordinates
 import com.sottti.roller.coasters.domain.model.Euros
 import com.sottti.roller.coasters.domain.model.ImageUrl
-import com.sottti.roller.coasters.domain.model.Kmh
 import com.sottti.roller.coasters.domain.model.Latitude
 import com.sottti.roller.coasters.domain.model.Longitude
 import com.sottti.roller.coasters.domain.model.Meters
@@ -31,14 +34,11 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Degrees
 import com.sottti.roller.coasters.domain.roller.coasters.model.Design
 import com.sottti.roller.coasters.domain.roller.coasters.model.Designer
 import com.sottti.roller.coasters.domain.roller.coasters.model.Dimensions
-import com.sottti.roller.coasters.domain.roller.coasters.model.Drop
 import com.sottti.roller.coasters.domain.roller.coasters.model.Duration
 import com.sottti.roller.coasters.domain.roller.coasters.model.Element
 import com.sottti.roller.coasters.domain.roller.coasters.model.FormerStatus
 import com.sottti.roller.coasters.domain.roller.coasters.model.GForce
-import com.sottti.roller.coasters.domain.roller.coasters.model.Height
 import com.sottti.roller.coasters.domain.roller.coasters.model.Inversions
-import com.sottti.roller.coasters.domain.roller.coasters.model.Length
 import com.sottti.roller.coasters.domain.roller.coasters.model.Location
 import com.sottti.roller.coasters.domain.roller.coasters.model.Manufacturer
 import com.sottti.roller.coasters.domain.roller.coasters.model.MaxVertical
@@ -57,22 +57,24 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterName
 import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Specs
-import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.roller.coasters.model.State
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.roller.coasters.model.Train
 import com.sottti.roller.coasters.domain.roller.coasters.model.Type
-import com.sottti.roller.coasters.utils.time.dates.mappers.toDate
-import com.sottti.roller.coasters.utils.time.dates.mappers.toSeconds
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
+import com.sottti.roller.coasters.utils.time.dates.mapper.toSeconds
 
-internal fun RollerCoasterApiModel.toDomain(): RollerCoaster =
+internal fun RollerCoasterApiModel.toDomain(
+    measurementSystem: SystemMeasurementSystem,
+): RollerCoaster =
     RollerCoaster(
         id = RollerCoasterId(id),
         location = toDomainLocation(),
         name = toDomainName(),
         park = park.toDomain(),
         pictures = toDomainPictures(),
-        specs = toDomainSpecs(),
+        specs = toDomainSpecs(measurementSystem),
         status = toDomainStatus(),
     )
 
@@ -121,14 +123,16 @@ private fun PictureApiModel.toDomainCopyright(): PictureCopyright =
         date = copyDate.toDate(),
     )
 
-private fun RollerCoasterApiModel.toDomainSpecs(): Specs = Specs(
+private fun RollerCoasterApiModel.toDomainSpecs(
+    measurementSystem: SystemMeasurementSystem,
+): Specs = Specs(
     capacity = stats?.capacity?.let { Capacity(RidersPerHour(it)) },
     cost = stats?.cost?.let { Cost(Euros(it)) },
     design = toDomainDesign(),
     dimensions = stats?.dimensions?.let { Dimensions(Meters(it)) },
     manufacturer = stats?.builtBy?.let { Manufacturer(it) },
     model = Model(model),
-    ride = stats?.toDomain(),
+    ride = stats?.toDomain(measurementSystem),
 )
 
 private fun RollerCoasterApiModel.toDomainDesign(): Design =
@@ -141,10 +145,12 @@ private fun RollerCoasterApiModel.toDomainDesign(): Design =
         type = Type(type),
     )
 
-private fun RollerCoasterStatsApiModel.toDomain(): Ride? =
+private fun RollerCoasterStatsApiModel.toDomain(
+    measurementSystem: SystemMeasurementSystem,
+): Ride? =
     when {
-        isMultiTrack() -> toDomainMultiTrack()
-        else -> toDomainSingleTrack()
+        isMultiTrack() -> toDomainMultiTrack(measurementSystem)
+        else -> toDomainSingleTrack(measurementSystem)
     }
 
 private fun RollerCoasterStatsApiModel.isMultiTrack(): Boolean =
@@ -157,29 +163,33 @@ private fun RollerCoasterStatsApiModel.isMultiTrack(): Boolean =
             (verticalAngle?.size ?: 0) > 1 ||
             (drop?.size ?: 0) > 1
 
-private fun RollerCoasterStatsApiModel.toDomainMultiTrack(): MultiTrackRide =
+private fun RollerCoasterStatsApiModel.toDomainMultiTrack(
+    measurementSystem: SystemMeasurementSystem,
+): MultiTrackRide =
     MultiTrackRide(
-        drop = drop?.map { Drop(Meters(it)) },
+        drop = drop?.map { it.toDrop(measurementSystem) },
         duration = duration?.map { Duration(Seconds(it.toSeconds())) },
         gForce = gForce?.map { GForce(it) },
-        height = height?.map { Height(Meters(it)) },
+        height = height?.map { it.toHeight(measurementSystem) },
         inversions = inversions?.map { Inversions(it) },
-        length = length?.map { Length(Meters(it)) },
+        length = length?.map { it.toLength(measurementSystem) },
         maxVertical = verticalAngle?.map { MaxVertical(Degrees(it)) },
         trackNames = name?.map { Name(it) },
-        speed = speed?.map { Speed(Kmh(it)) },
+        speed = speed?.map { it.toSpeed(measurementSystem) },
     )
 
-private fun RollerCoasterStatsApiModel.toDomainSingleTrack(): SingleTrackRide =
+private fun RollerCoasterStatsApiModel.toDomainSingleTrack(
+    measurementSystem: SystemMeasurementSystem,
+): SingleTrackRide =
     SingleTrackRide(
-        drop = drop?.let { Drop(Meters(it.first())) },
+        drop = drop?.first()?.toDrop(measurementSystem),
         duration = duration?.let { Duration(Seconds(it.first().toSeconds())) },
         gForce = gForce?.let { GForce(it.first()) },
-        height = height?.let { Height(Meters(it.first())) },
+        height = height?.first()?.toHeight(measurementSystem),
         inversions = inversions?.let { Inversions(it.first()) },
-        length = length?.let { Length(Meters(it.first())) },
+        length = length?.first()?.toLength(measurementSystem),
         maxVertical = verticalAngle?.let { MaxVertical(Degrees(it.first())) },
-        speed = speed?.let { Speed(Kmh(it.first())) },
+        speed = speed?.first()?.toSpeed(measurementSystem),
     )
 
 private fun RollerCoasterApiModel.toDomainStatus(): Status =

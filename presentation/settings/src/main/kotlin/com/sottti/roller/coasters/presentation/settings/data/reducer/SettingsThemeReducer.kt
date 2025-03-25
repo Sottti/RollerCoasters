@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme.DarkTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme.LightTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme.SystemTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.DarkAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.LightAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemAppTheme
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
@@ -14,14 +14,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 internal fun MutableStateFlow<SettingsState>.updateTheme(
-    theme: Theme,
+    appTheme: AppTheme,
 ) {
     update { currentState ->
         currentState.copy(
             theme = currentState.theme.copy(
                 currentState.theme.listItem.copy(
                     selectedTheme = SelectedThemeState.Loaded(
-                        theme.toPresentationModel(isSelected = true),
+                        appTheme.toPresentationModel(isSelected = true),
                     )
                 ),
             )
@@ -81,8 +81,8 @@ private fun themesList(
     lightDarkThemeThemingAvailable: Boolean,
     selectedTheme: ThemeUi,
 ) = listOfNotNull(
-    SystemTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme)
+    SystemAppTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.SystemTheme)
         .takeIf { lightDarkThemeThemingAvailable },
-    LightTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.LightTheme),
-    DarkTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.DarkTheme),
+    LightAppTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.LightTheme),
+    DarkAppTheme.toPresentationModel(isSelected = selectedTheme is ThemeUi.DarkTheme),
 )

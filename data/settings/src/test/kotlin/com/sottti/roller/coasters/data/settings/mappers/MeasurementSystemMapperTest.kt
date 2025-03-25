@@ -1,10 +1,16 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.Metric
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.MeasurementSystem.System
+import com.sottti.roller.coasters.data.settings.mapper.MEASUREMENT_SYSTEM_IMPERIAL_UK
+import com.sottti.roller.coasters.data.settings.mapper.MEASUREMENT_SYSTEM_IMPERIAL_US
+import com.sottti.roller.coasters.data.settings.mapper.MEASUREMENT_SYSTEM_METRIC
+import com.sottti.roller.coasters.data.settings.mapper.MEASUREMENT_SYSTEM_SYSTEM
+import com.sottti.roller.coasters.data.settings.mapper.key
+import com.sottti.roller.coasters.data.settings.mapper.toAppMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.System
 import org.junit.Test
 
 internal class MeasurementSystemMapperTest {
@@ -31,37 +37,37 @@ internal class MeasurementSystemMapperTest {
 
     @Test
     fun `imperial uk key maps to imperial uk`() {
-        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_UK.toMeasurementSystem())
+        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_UK.toAppMeasurementSystem())
             .isEqualTo(ImperialUk)
     }
 
     @Test
     fun `imperial us key maps to imperial us`() {
-        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_US.toMeasurementSystem())
+        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_US.toAppMeasurementSystem())
             .isEqualTo(ImperialUs)
     }
 
     @Test
     fun `metric key maps to metric`() {
-        assertThat(MEASUREMENT_SYSTEM_METRIC.toMeasurementSystem())
+        assertThat(MEASUREMENT_SYSTEM_METRIC.toAppMeasurementSystem())
             .isEqualTo(Metric)
     }
 
     @Test
     fun `system key maps to system`() {
-        assertThat(MEASUREMENT_SYSTEM_SYSTEM.toMeasurementSystem())
+        assertThat(MEASUREMENT_SYSTEM_SYSTEM.toAppMeasurementSystem())
             .isEqualTo(System)
     }
 
     @Test
     fun `unknown key maps to system`() {
-        assertThat("unknown_measurement".toMeasurementSystem())
+        assertThat("unknown_measurement".toAppMeasurementSystem())
             .isEqualTo(System)
     }
 
     @Test
     fun `empty key maps to system`() {
-        assertThat("".toMeasurementSystem())
+        assertThat("".toAppMeasurementSystem())
             .isEqualTo(System)
     }
 }

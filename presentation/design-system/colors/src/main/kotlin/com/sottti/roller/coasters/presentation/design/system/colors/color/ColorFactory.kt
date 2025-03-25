@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
-import com.sottti.roller.coasters.presentation.design.system.colors.mappers.darkColorScheme
-import com.sottti.roller.coasters.presentation.design.system.colors.mappers.lightColorScheme
+import com.sottti.roller.coasters.presentation.design.system.colors.mapper.darkColorScheme
+import com.sottti.roller.coasters.presentation.design.system.colors.mapper.lightColorScheme
 
 @Composable
 public fun colors(

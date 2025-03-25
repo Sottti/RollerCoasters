@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.domain.settings.usecase.colorContrast
 
-import com.sottti.roller.coasters.domain.settings.mappers.toResolvedColorContrast
+import com.sottti.roller.coasters.domain.settings.mapper.toResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository

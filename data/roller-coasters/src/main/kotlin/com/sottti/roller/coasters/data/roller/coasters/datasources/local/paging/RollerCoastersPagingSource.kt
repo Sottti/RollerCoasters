@@ -8,11 +8,13 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
 internal class RollerCoastersPagingSource(
     private val dao: RollerCoastersDao,
+    private val measurementSystem: SystemMeasurementSystem,
     private val sortByFilter: SortByFilter,
     private val typeFilter: TypeFilter,
 ) : PagingSource<Int, RollerCoaster>() {
@@ -33,7 +35,12 @@ internal class RollerCoastersPagingSource(
 
             val rollerCoasters = dao
                 .getPagedRollerCoasters(query = query)
-                .map { rollerCoaster -> rollerCoaster.toDomain(dao.getPictures(rollerCoaster.id)) }
+                .map { rollerCoaster ->
+                    rollerCoaster.toDomain(
+                        measurementSystem = measurementSystem,
+                        pictures = dao.getPictures(rollerCoaster.id),
+                    )
+                }
 
             LoadResult.Page(
                 data = rollerCoasters,

@@ -12,6 +12,7 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.data.roller.coasters.stubs.syncFailedException
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
@@ -54,49 +55,74 @@ internal class RollerCoastersRepositoryImplTest {
     fun `Get roller coaster by id - Exists locally`() = runTest {
         val localRollerCoaster = mockk<RollerCoaster>()
         coEvery {
-            localDataSource.getRollerCoaster(rollerCoasterId)
+            localDataSource.getRollerCoaster(rollerCoasterId, Metric)
         } returns Ok(localRollerCoaster)
 
-        val result = repository.getRollerCoaster(rollerCoasterId).value
+        val result = repository.getRollerCoaster(rollerCoasterId, Metric).value
 
         assertThat(result).isEqualTo(localRollerCoaster)
-        coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId) }
-        coVerify(exactly = 0) { remoteDataSource.getRollerCoaster(rollerCoasterId) }
+        coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId, Metric) }
+        coVerify(exactly = 0) {
+            remoteDataSource.getRollerCoaster(
+                id = rollerCoasterId,
+                measurementSystem = Metric,
+            )
+        }
     }
 
     @Test
     fun `Get roller coaster by id - Not found locally, exists remotely`() = runTest {
         val remoteRollerCoaster = mockk<RollerCoaster>()
         coEvery {
-            localDataSource.getRollerCoaster(rollerCoasterId)
+            localDataSource.getRollerCoaster(rollerCoasterId, Metric)
         } returns Err(notFoundException)
-        coEvery { remoteDataSource.getRollerCoaster(rollerCoasterId) } returns Ok(
+        coEvery {
+            remoteDataSource.getRollerCoaster(
+                id = rollerCoasterId,
+                measurementSystem = Metric,
+            )
+        } returns Ok(
             remoteRollerCoaster
         )
         coEvery { localDataSource.storeRollerCoaster(remoteRollerCoaster) } just runs
 
-        val result = repository.getRollerCoaster(rollerCoasterId).value
+        val result = repository.getRollerCoaster(rollerCoasterId, Metric).value
 
         assertThat(result).isEqualTo(remoteRollerCoaster)
-        coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId) }
-        coVerify(exactly = 1) { remoteDataSource.getRollerCoaster(rollerCoasterId) }
+        coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId, Metric) }
+        coVerify(exactly = 1) {
+            remoteDataSource.getRollerCoaster(
+                id = rollerCoasterId,
+                measurementSystem = Metric,
+            )
+        }
         coVerify(exactly = 1) { localDataSource.storeRollerCoaster(remoteRollerCoaster) }
     }
 
     @Test
     fun `Get roller coaster by id - Not found locally or remotely`() = runTest {
         coEvery {
-            localDataSource.getRollerCoaster(rollerCoasterId)
+            localDataSource.getRollerCoaster(id = rollerCoasterId, systemMeasurementSystem = Metric)
         } returns Err(notFoundException)
         coEvery {
-            remoteDataSource.getRollerCoaster(rollerCoasterId)
+            remoteDataSource.getRollerCoaster(id = rollerCoasterId, measurementSystem = Metric)
         } returns Err(networkErrorException)
 
-        val result = repository.getRollerCoaster(rollerCoasterId)
+        val result = repository.getRollerCoaster(id = rollerCoasterId, measurementSystem = Metric)
 
         assertThat(result).isEqualTo(Err(networkErrorException))
-        coVerify(exactly = 1) { localDataSource.getRollerCoaster(rollerCoasterId) }
-        coVerify(exactly = 1) { remoteDataSource.getRollerCoaster(rollerCoasterId) }
+        coVerify(exactly = 1) {
+            localDataSource.getRollerCoaster(
+                id = rollerCoasterId,
+                systemMeasurementSystem = Metric,
+            )
+        }
+        coVerify(exactly = 1) {
+            remoteDataSource.getRollerCoaster(
+                id = rollerCoasterId,
+                measurementSystem = Metric,
+            )
+        }
         coVerify(exactly = 0) { localDataSource.storeRollerCoaster(rollerCoaster = any()) }
     }
 

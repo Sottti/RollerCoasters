@@ -15,6 +15,7 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,6 +37,7 @@ internal class RollerCoastersPagingSourceTest {
         dao = mockk()
         pagingSource = RollerCoastersPagingSource(
             dao = dao,
+            measurementSystem = Metric,
             sortByFilter = sortByFilter,
             typeFilter = typeFilter,
         )
@@ -69,8 +71,8 @@ internal class RollerCoastersPagingSourceTest {
 
         assertThat(page.data)
             .containsExactly(
-                rollerCoasterRoomModel.toDomain(listOf(mainPictureRoomModel)),
-                anotherRollerCoasterRoomModel.toDomain(listOf(anotherMainPictureRoomModel)),
+                rollerCoasterRoomModel.toDomain(Metric, listOf(mainPictureRoomModel)),
+                anotherRollerCoasterRoomModel.toDomain(Metric, listOf(anotherMainPictureRoomModel)),
             )
         assertThat(page.prevKey).isNull()
         assertThat(page.nextKey).isEqualTo(1)

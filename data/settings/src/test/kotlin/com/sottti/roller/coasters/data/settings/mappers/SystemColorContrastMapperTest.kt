@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth
+import com.sottti.roller.coasters.data.settings.mapper.toSystemColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import org.junit.Test
 

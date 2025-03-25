@@ -15,12 +15,12 @@ import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveAp
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetAppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.language.GetLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.SetLanguage
-import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.SetMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.usecase.theme.GetTheme
-import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveTheme
-import com.sottti.roller.coasters.domain.settings.usecase.theme.SetTheme
+import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetAppMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveAppMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.SetAppMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.usecase.theme.GetAppTheme
+import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveAppTheme
+import com.sottti.roller.coasters.domain.settings.usecase.theme.SetAppTheme
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastNotAvailableMessage
@@ -73,18 +73,18 @@ internal class SettingsViewModel @Inject constructor(
     private val application: Application,
     private val getAppColorContrast: GetAppColorContrast,
     private val getLanguage: GetLanguage,
-    private val getMeasurementSystem: GetMeasurementSystem,
-    private val getTheme: GetTheme,
+    private val getAppMeasurementSystem: GetAppMeasurementSystem,
+    private val getAppTheme: GetAppTheme,
     private val observeAppColorContrast: ObserveAppColorContrast,
     private val observeAppDynamicColor: ObserveAppDynamicColor,
-    private val observeMeasurementSystem: ObserveMeasurementSystem,
-    private val observeTheme: ObserveTheme,
+    private val observeAppMeasurementSystem: ObserveAppMeasurementSystem,
+    private val observeAppTheme: ObserveAppTheme,
     private val features: Features,
     private val setAppColorContrast: SetAppColorContrast,
     private val setAppDynamicColor: SetAppDynamicColor,
     private val setLanguage: SetLanguage,
-    private val setMeasurementSystem: SetMeasurementSystem,
-    private val setTheme: SetTheme,
+    private val setAppMeasurementSystem: SetAppMeasurementSystem,
+    private val setAppTheme: SetAppTheme,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState(features.systemDynamicColorAvailable()))
@@ -128,7 +128,7 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun collectTheme() {
         viewModelScope.launch {
-            observeTheme()
+            observeAppTheme()
                 .collect { theme -> _state.updateTheme(theme) }
         }
     }
@@ -148,7 +148,7 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun collectMeasurementSystem() {
         viewModelScope.launch {
-            observeMeasurementSystem()
+            observeAppMeasurementSystem()
                 .collect { measurementSystem -> _state.updateMeasurementSystem(measurementSystem) }
         }
     }
@@ -157,8 +157,12 @@ internal class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             when (action) {
                 is DynamicColorCheckedChange -> {
-                    setAppDynamicColor(AppDynamicColor(action.checked))
-                    if (action.checked == true) {
+                    val appDynamicColor = when {
+                        action.checked -> AppDynamicColor.Enabled
+                        else -> AppDynamicColor.Disabled
+                    }
+                    setAppDynamicColor(appDynamicColor)
+                    if (action.checked) {
                         setAppColorContrast(SystemContrast)
                     }
                 }
@@ -166,7 +170,7 @@ internal class SettingsViewModel @Inject constructor(
                 LaunchThemePicker -> {
                     val lightDarkSystemThemingAvailable =
                         features.lightDarkSystemThemingAvailable()
-                    val theme = getTheme().toPresentationModel(isSelected = true)
+                    val theme = getAppTheme().toPresentationModel(isSelected = true)
                     _state
                         .showThemePicker(
                             lightDarkThemeThemingAvailable = lightDarkSystemThemingAvailable,
@@ -181,7 +185,7 @@ internal class SettingsViewModel @Inject constructor(
 
                 is ConfirmThemePickerSelection -> {
                     _state.hideThemePicker()
-                    setTheme(action.theme.toDomain())
+                    setAppTheme(action.theme.toDomain())
                 }
 
                 DismissThemePicker -> _state.hideThemePicker()
@@ -223,14 +227,14 @@ internal class SettingsViewModel @Inject constructor(
                 DismissLanguagePicker -> _state.hideLanguagePicker()
 
                 LaunchMeasurementSystemPicker ->
-                    _state.showMeasurementSystemPicker(getMeasurementSystem())
+                    _state.showMeasurementSystemPicker(getAppMeasurementSystem())
 
                 is MeasurementSystemPickerSelectionChange ->
                     _state.updateMeasurementSystemPicker(action.measurementSystem)
 
                 is ConfirmMeasurementSystemPickerSelection -> {
                     _state.hideMeasurementSystemPicker()
-                    setMeasurementSystem(action.measurementSystem.toDomain())
+                    setAppMeasurementSystem(action.measurementSystem.toDomain())
                 }
 
                 DismissMeasurementSystemPicker -> _state.hideMeasurementSystemPicker()

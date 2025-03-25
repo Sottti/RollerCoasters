@@ -10,6 +10,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -24,11 +26,12 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
 ) {
     suspend fun getRollerCoaster(
         id: RollerCoasterId,
+        measurementSystem: SystemMeasurementSystem,
     ): Result<RollerCoaster> =
         api
             .getRollerCoaster(id)
             .mapBoth(
-                success = { rollerCoaster -> Ok(rollerCoaster.toDomain()) },
+                success = { rollerCoaster -> Ok(rollerCoaster.toDomain(measurementSystem)) },
                 failure = { exception -> Err(exception) },
             )
 
@@ -46,7 +49,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         val totalItems = rollerCoastersPage.pagination.total
 
         val rollerCoasters = withContext(Dispatchers.Default) {
-            rollerCoastersPage.rollerCoasters.map { it.toDomain() }
+            rollerCoastersPage.rollerCoasters.map { it.toDomain(Metric) }
         }
         onStoreRollerCoasters(rollerCoasters)
 
@@ -68,7 +71,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                     result.mapBoth(
                         success = { page ->
                             val mappedCoasters = withContext(Dispatchers.Default) {
-                                page.rollerCoasters.map { it.toDomain() }
+                                page.rollerCoasters.map { it.toDomain(Metric) }
                             }
                             onStoreRollerCoasters(mappedCoasters)
                             Ok(Unit)

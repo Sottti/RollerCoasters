@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.utils.time.dates.mappers
 
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.utils.time.dates.mapper.toSeconds
 import org.junit.Test
 import kotlin.test.assertFailsWith
 

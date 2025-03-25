@@ -14,6 +14,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
@@ -53,6 +54,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     @OptIn(InternalSerializationApi::class)
     suspend fun getRollerCoaster(
         id: RollerCoasterId,
+        systemMeasurementSystem: SystemMeasurementSystem,
     ): Result<RollerCoaster> {
         val rollerCoaster = dao
             .getRollerCoaster(id.value)
@@ -61,16 +63,23 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         val pictures = dao.getPictures(id.value)
 
         return withContext(Dispatchers.Default) {
-            Ok(rollerCoaster.toDomain(pictures))
+            Ok(
+                rollerCoaster.toDomain(
+                    measurementSystem = systemMeasurementSystem,
+                    pictures = pictures,
+                )
+            )
         }
     }
 
     fun observePagedRollerCoasters(
+        measurementSystem: SystemMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): PagingSource<Int, RollerCoaster> =
         RollerCoastersPagingSource(
             dao = dao,
+            measurementSystem,
             sortByFilter = sortByFilter,
             typeFilter = typeFilter,
         )

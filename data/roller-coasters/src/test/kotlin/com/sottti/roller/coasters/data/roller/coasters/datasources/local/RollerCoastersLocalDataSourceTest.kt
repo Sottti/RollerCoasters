@@ -16,6 +16,7 @@ import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterWithou
 import com.sottti.roller.coasters.domain.model.NotFound
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.ALPHABETICAL
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter.ALL
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
@@ -49,7 +50,7 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoaster(rollerCoaster)
+        localDataSource.storeRollerCoaster(rollerCoaster())
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
@@ -69,7 +70,7 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoasters(listOf(rollerCoaster, anotherRollerCoaster))
+        localDataSource.storeRollerCoasters(listOf(rollerCoaster(), anotherRollerCoaster()))
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
@@ -92,9 +93,9 @@ internal class RollerCoastersLocalDataSourceTest {
         coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns rollerCoasterRoomModel
         coEvery { dao.getPictures(rollerCoasterId.value) } returns listOf(notMainPictureRoomModel)
 
-        val result = localDataSource.getRollerCoaster(rollerCoasterId)
+        val result = localDataSource.getRollerCoaster(rollerCoasterId, Metric)
 
-        assertThat(result).isEqualTo(Ok(rollerCoaster))
+        assertThat(result).isEqualTo(Ok(rollerCoaster(Metric)))
     }
 
     @Test
@@ -102,7 +103,7 @@ internal class RollerCoastersLocalDataSourceTest {
     fun `get roller coaster when not found`() = runTest {
         coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns null
 
-        val result = localDataSource.getRollerCoaster(rollerCoasterId)
+        val result = localDataSource.getRollerCoaster(rollerCoasterId, Metric)
 
         assertThat(result).isEqualTo(Err(NotFound))
     }
@@ -113,15 +114,17 @@ internal class RollerCoastersLocalDataSourceTest {
         coEvery { dao.getRollerCoaster(rollerCoasterId.value) } returns rollerCoasterRoomModel
         coEvery { dao.getPictures(rollerCoasterId.value) } returns emptyList()
 
-        val result = localDataSource.getRollerCoaster(rollerCoasterId)
+        val result = localDataSource.getRollerCoaster(rollerCoasterId, Metric)
 
-        assertThat(result).isEqualTo(Ok(rollerCoasterWithoutOtherPictures))
+        assertThat(result).isEqualTo(Ok(rollerCoasterWithoutOtherPictures(Metric)))
     }
 
     @Test
     fun `get paged roller coasters returns a paging source`() {
         val result = localDataSource.observePagedRollerCoasters(
-            sortByFilter = ALPHABETICAL, typeFilter = ALL
+            measurementSystem = Metric,
+            sortByFilter = ALPHABETICAL,
+            typeFilter = ALL,
         )
         assertThat(result).isInstanceOf(RollerCoastersPagingSource::class.java)
     }

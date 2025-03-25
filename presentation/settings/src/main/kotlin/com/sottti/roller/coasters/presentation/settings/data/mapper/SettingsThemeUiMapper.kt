@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.data.Icons.DarkMode
 import co.cuvva.presentation.design.system.icons.data.Icons.LightMode
-import com.sottti.roller.coasters.domain.settings.model.theme.Theme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.ThemeUi
@@ -17,11 +17,11 @@ internal fun DialogRadioButtonOption.toThemeUi(
     themes: List<ThemeUi>,
 ): ThemeUi = themes.find { it.text == text } ?: themes.first()
 
-internal fun Theme.toPresentationModel(isSelected: Boolean): ThemeUi =
+internal fun AppTheme.toPresentationModel(isSelected: Boolean): ThemeUi =
     when (this) {
-        is Theme.DarkTheme -> darkTheme(isSelected)
-        is Theme.LightTheme -> lightTheme(isSelected)
-        is Theme.SystemTheme -> systemTheme(isSelected)
+        AppTheme.LightAppTheme -> darkTheme(isSelected)
+        AppTheme.DarkAppTheme -> lightTheme(isSelected)
+        AppTheme.SystemAppTheme -> systemTheme(isSelected)
     }
 
 private fun systemTheme(
@@ -48,9 +48,9 @@ private fun darkTheme(
     selected = isSelected,
 )
 
-internal fun ThemeUi.toDomain(): Theme =
+internal fun ThemeUi.toDomain(): AppTheme =
     when (this) {
-        is ThemeUi.DarkTheme -> Theme.DarkTheme
-        is ThemeUi.LightTheme -> Theme.LightTheme
-        is ThemeUi.SystemTheme -> Theme.SystemTheme
+        is ThemeUi.DarkTheme -> AppTheme.DarkAppTheme
+        is ThemeUi.LightTheme -> AppTheme.LightAppTheme
+        is ThemeUi.SystemTheme -> AppTheme.SystemAppTheme
     }

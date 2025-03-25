@@ -15,6 +15,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -36,6 +37,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     }
 
     override fun observeRollerCoasters(
+        measurementSystem: SystemMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>> =
@@ -43,6 +45,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             config = pagerConfig,
             pagingSourceFactory = {
                 localDataSource.observePagedRollerCoasters(
+                    measurementSystem = measurementSystem,
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,
                 )
@@ -51,12 +54,13 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
 
     override suspend fun getRollerCoaster(
         id: RollerCoasterId,
+        measurementSystem: SystemMeasurementSystem,
     ): Result<RollerCoaster> =
-        localDataSource.getRollerCoaster(id).mapBoth(
+        localDataSource.getRollerCoaster(id, measurementSystem).mapBoth(
             success = { rollerCoaster -> Ok(rollerCoaster) },
             failure = {
                 remoteDataSource
-                    .getRollerCoaster(id)
+                    .getRollerCoaster(id = id, measurementSystem = measurementSystem)
                     .onSuccess { localDataSource.storeRollerCoaster(it) }
             }
         )

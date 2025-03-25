@@ -1,6 +1,12 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.data.settings.mapper.COLOR_CONTRAST_KEY_HIGH
+import com.sottti.roller.coasters.data.settings.mapper.COLOR_CONTRAST_KEY_MEDIUM
+import com.sottti.roller.coasters.data.settings.mapper.COLOR_CONTRAST_KEY_STANDARD
+import com.sottti.roller.coasters.data.settings.mapper.COLOR_CONTRAST_KEY_SYSTEM
+import com.sottti.roller.coasters.data.settings.mapper.key
+import com.sottti.roller.coasters.data.settings.mapper.toAppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import org.junit.Test
 

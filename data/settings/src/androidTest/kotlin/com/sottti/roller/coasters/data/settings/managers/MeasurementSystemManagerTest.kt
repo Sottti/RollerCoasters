@@ -56,7 +56,7 @@ internal class MeasurementSystemManagerTest {
             LocaleData.getMeasurementSystem(ULocale(LOCALE_SPAIN_TAG))
         } returns LocaleData.MeasurementSystem.SI
 
-        assertThat(manager.measurementSystem).isEqualTo(Metric)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(Metric)
     }
 
     @Test
@@ -67,7 +67,7 @@ internal class MeasurementSystemManagerTest {
             LocaleData.getMeasurementSystem(ULocale(LOCALE_UK_TAG))
         } returns LocaleData.MeasurementSystem.UK
 
-        assertThat(manager.measurementSystem).isEqualTo(ImperialUk)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUk)
     }
 
     @Test
@@ -78,7 +78,7 @@ internal class MeasurementSystemManagerTest {
             LocaleData.getMeasurementSystem(ULocale(LOCALE_US_TAG))
         } returns LocaleData.MeasurementSystem.US
 
-        assertThat(manager.measurementSystem).isEqualTo(ImperialUs)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUs)
     }
 
     @Test
@@ -86,7 +86,7 @@ internal class MeasurementSystemManagerTest {
         every { features.measurementSystemAvailable() } returns false
         every { localeManager.systemLocale } returns LOCALE_US
 
-        assertThat(manager.measurementSystem).isEqualTo(ImperialUs)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUs)
     }
 
     @Test
@@ -94,7 +94,7 @@ internal class MeasurementSystemManagerTest {
         every { features.measurementSystemAvailable() } returns false
         every { localeManager.systemLocale } returns LOCALE_UK
 
-        assertThat(manager.measurementSystem).isEqualTo(ImperialUk)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUk)
     }
 
     @Test
@@ -102,7 +102,7 @@ internal class MeasurementSystemManagerTest {
         every { features.measurementSystemAvailable() } returns false
         every { localeManager.systemLocale } returns LOCALE_SPAIN
 
-        assertThat(manager.measurementSystem).isEqualTo(Metric)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(Metric)
     }
 
     @Test
@@ -110,6 +110,6 @@ internal class MeasurementSystemManagerTest {
         every { features.measurementSystemAvailable() } returns false
         every { localeManager.systemLocale } returns LOCALE_LIBERIA
 
-        assertThat(manager.measurementSystem).isEqualTo(ImperialUs)
+        assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUs)
     }
 }
