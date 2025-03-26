@@ -9,14 +9,14 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.a
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterWithoutOtherPictures
 import com.sottti.roller.coasters.domain.model.NotFound
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.ALPHABETICAL
-import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter.ALL
+import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.Alphabetical
+import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter.All
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.utils.test.stubs.anotherRollerCoaster
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoasterId
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoasterWithoutOtherPictures
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
@@ -123,8 +123,8 @@ internal class RollerCoastersLocalDataSourceTest {
     fun `get paged roller coasters returns a paging source`() {
         val result = localDataSource.observePagedRollerCoasters(
             measurementSystem = Metric,
-            sortByFilter = ALPHABETICAL,
-            typeFilter = ALL,
+            sortByFilter = Alphabetical,
+            typeFilter = All,
         )
         assertThat(result).isInstanceOf(RollerCoastersPagingSource::class.java)
     }

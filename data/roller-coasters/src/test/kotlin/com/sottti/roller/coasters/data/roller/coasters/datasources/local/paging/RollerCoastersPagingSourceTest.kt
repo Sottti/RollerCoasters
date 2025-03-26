@@ -10,12 +10,12 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.a
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.mainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.utils.test.stubs.anotherRollerCoaster
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,8 +29,8 @@ internal class RollerCoastersPagingSourceTest {
 
     private lateinit var dao: RollerCoastersDao
     private lateinit var pagingSource: RollerCoastersPagingSource
-    private val sortByFilter = SortByFilter.ALPHABETICAL
-    private val typeFilter = TypeFilter.ALL
+    private val sortByFilter = SortByFilter.Alphabetical
+    private val typeFilter = TypeFilter.All
 
     @Before
     fun setup() {

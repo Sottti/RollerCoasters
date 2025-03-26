@@ -1,0 +1,43 @@
+package com.sottti.roller.coasters.utils.test.stubs
+
+public const val CITY: String = "Salou"
+public const val COASTER_ARRANGEMENT: String = "3 trains with 7 cars per train. Riders are " +
+        "arranged 4 across in a single row for a total of 28 riders per train."
+public const val COASTER_DESIGNER: String = "Ing.-Büro Stengel GmbH"
+public const val COASTER_ELEMENT: String = "Chain Lift Hill"
+public const val COASTER_ID: Int = 760
+public const val COASTER_ID_ANOTHER: Int = 761
+public const val COASTER_NAME: String = "Dragon Khan"
+public const val COASTER_NAME_ANOTHER: String = "Shambhala"
+public const val COASTER_TRAIN: String = "Sit Down"
+public const val COASTER_TYPE: String = "Steel"
+public const val COPYRIGHT_DATE: String = "1996-06-06"
+public const val COST: Long = 6000000L
+public const val COUNTRY: String = "Spain"
+public const val DEGREES: Int = 45
+public const val DROP: Double = 49.1
+public const val DURATION_IN_MMSS: String = "1:45"
+public const val DURATION_IN_SECONDS: Int = 105
+public const val GFORCE: Double = 4.0
+public const val HEIGHT: Double = 45.1
+public const val INVERSIONS: Int = 8
+public const val LATITUDE: Double = 41.087482
+public const val LENGTH: Double = 1269.5
+public const val LONGITUDE: Double = 1.160768
+public const val MANUFACTURER: String = "Bolliger & Mabillard"
+public const val MODEL: String = "All Models"
+public const val OPENED_DATE: String = "1995-05-02"
+public const val PARK_ID: Int = 4792
+public const val PARK_NAME: String = "PortAventura Park"
+public const val PICTURE_AUTHOR: String = "Latin Coasters"
+public const val PICTURE_ID_ANOTHER_MAIN: Int = 1446
+public const val PICTURE_ID_ANOTHER_NOT_MAIN: Int = 1448
+public const val PICTURE_ID_MAIN: Int = 1445
+public const val PICTURE_ID_NOT_MAIN: Int = 1447
+public const val PICTURE_URL: String = "https://rcdb.com/aaacdpa"
+public const val REGION: String = "Catalonia"
+public const val RESTRAINTS: String = "Over-the-shoulder restraints"
+public const val RIDERS_PER_HOUR: Int = 1300
+public const val SPEED: Double = 104.6
+public const val STATE: String = "Tarragona"
+public const val STATUS: String = "Operating"

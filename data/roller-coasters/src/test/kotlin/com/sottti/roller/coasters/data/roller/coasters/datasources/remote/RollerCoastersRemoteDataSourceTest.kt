@@ -8,10 +8,10 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoastersApiModelPage1
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.serverErrorException
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoasterId
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

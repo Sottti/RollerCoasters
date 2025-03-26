@@ -10,58 +10,54 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.R
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.SpecsRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.StatusRoomModel
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.CITY
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ARRANGEMENT
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_DESIGNER
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ELEMENT
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ID
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ID_ANOTHER
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_NAME
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_TRAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_TYPE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COPYRIGHT_DATE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COST
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COUNTRY
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DEGREES
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DROP
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DURATION_IN_SECONDS
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.GFORCE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.HEIGHT
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.INVERSIONS
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LATITUDE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LENGTH
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LONGITUDE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.MANUFACTURER
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.MODEL
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.OPENED_DATE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PARK_ID
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PARK_NAME
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_AUTHOR
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_ANOTHER_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_ANOTHER_NOT_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_NOT_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_URL
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.REGION
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.RESTRAINTS
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.RIDERS_PER_HOUR
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.SPEED
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.STATE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.STATUS
+import com.sottti.roller.coasters.utils.test.stubs.CITY
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_ARRANGEMENT
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_DESIGNER
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_ELEMENT
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_ID
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_ID_ANOTHER
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_NAME
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_TRAIN
+import com.sottti.roller.coasters.utils.test.stubs.COASTER_TYPE
+import com.sottti.roller.coasters.utils.test.stubs.COPYRIGHT_DATE
+import com.sottti.roller.coasters.utils.test.stubs.COST
+import com.sottti.roller.coasters.utils.test.stubs.COUNTRY
+import com.sottti.roller.coasters.utils.test.stubs.DEGREES
+import com.sottti.roller.coasters.utils.test.stubs.DROP
+import com.sottti.roller.coasters.utils.test.stubs.DURATION_IN_SECONDS
+import com.sottti.roller.coasters.utils.test.stubs.GFORCE
+import com.sottti.roller.coasters.utils.test.stubs.HEIGHT
+import com.sottti.roller.coasters.utils.test.stubs.INVERSIONS
+import com.sottti.roller.coasters.utils.test.stubs.LATITUDE
+import com.sottti.roller.coasters.utils.test.stubs.LENGTH
+import com.sottti.roller.coasters.utils.test.stubs.LONGITUDE
+import com.sottti.roller.coasters.utils.test.stubs.MANUFACTURER
+import com.sottti.roller.coasters.utils.test.stubs.MODEL
+import com.sottti.roller.coasters.utils.test.stubs.OPENED_DATE
+import com.sottti.roller.coasters.utils.test.stubs.PARK_ID
+import com.sottti.roller.coasters.utils.test.stubs.PARK_NAME
+import com.sottti.roller.coasters.utils.test.stubs.PICTURE_AUTHOR
+import com.sottti.roller.coasters.utils.test.stubs.PICTURE_ID_ANOTHER_MAIN
+import com.sottti.roller.coasters.utils.test.stubs.PICTURE_ID_ANOTHER_NOT_MAIN
+import com.sottti.roller.coasters.utils.test.stubs.PICTURE_ID_MAIN
+import com.sottti.roller.coasters.utils.test.stubs.PICTURE_ID_NOT_MAIN
+import com.sottti.roller.coasters.utils.test.stubs.PICTURE_URL
+import com.sottti.roller.coasters.utils.test.stubs.REGION
+import com.sottti.roller.coasters.utils.test.stubs.RESTRAINTS
+import com.sottti.roller.coasters.utils.test.stubs.RIDERS_PER_HOUR
+import com.sottti.roller.coasters.utils.test.stubs.SPEED
+import com.sottti.roller.coasters.utils.test.stubs.STATE
+import com.sottti.roller.coasters.utils.test.stubs.STATUS
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
-private val coordinatesRoomModel: CoordinatesRoomModel =
-    CoordinatesRoomModel(latitude = LATITUDE, longitude = LONGITUDE)
-
-@OptIn(InternalSerializationApi::class)
-internal val parkRoomModel = ParkRoomModel(
+private val parkRoomModel = ParkRoomModel(
     id = PARK_ID,
     name = PARK_NAME,
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val nameRoomModel = NameRoomModel(
+private val nameRoomModel = NameRoomModel(
     current = COASTER_NAME,
     former = null,
 )
@@ -110,7 +106,7 @@ internal val anotherNotMainPictureRoomModel =
     )
 
 @OptIn(InternalSerializationApi::class)
-internal val statusRoomModel = StatusRoomModel(
+private val statusRoomModel = StatusRoomModel(
     current = STATUS,
     former = null,
     openedDate = OPENED_DATE,
@@ -118,7 +114,7 @@ internal val statusRoomModel = StatusRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val designRoomModel = DesignRoomModel(
+private val designRoomModel = DesignRoomModel(
     type = COASTER_TYPE,
     train = COASTER_TRAIN,
     elements = COASTER_ELEMENT,
@@ -128,7 +124,7 @@ internal val designRoomModel = DesignRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val rideRoomModel = RideRoomModel(
+private val rideRoomModel = RideRoomModel(
     drop = listOf(DROP),
     dropMax = DROP,
     duration = listOf(DURATION_IN_SECONDS),
@@ -148,7 +144,7 @@ internal val rideRoomModel = RideRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val specsRoomModel = SpecsRoomModel(
+private val specsRoomModel = SpecsRoomModel(
     model = MODEL,
     manufacturer = MANUFACTURER,
     cost = COST,
@@ -159,7 +155,11 @@ internal val specsRoomModel = SpecsRoomModel(
 )
 
 @OptIn(InternalSerializationApi::class)
-internal val locationRoomModel = LocationRoomModel(
+private val coordinatesRoomModel: CoordinatesRoomModel =
+    CoordinatesRoomModel(latitude = LATITUDE, longitude = LONGITUDE)
+
+@OptIn(InternalSerializationApi::class)
+private val locationRoomModel = LocationRoomModel(
     city = CITY,
     country = COUNTRY,
     region = REGION,

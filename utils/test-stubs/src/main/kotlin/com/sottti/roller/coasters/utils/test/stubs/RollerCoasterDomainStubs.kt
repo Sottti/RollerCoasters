@@ -1,43 +1,5 @@
-package com.sottti.roller.coasters.data.roller.coasters.stubs
+package com.sottti.roller.coasters.utils.test.stubs
 
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.CITY
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ARRANGEMENT
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_DESIGNER
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ELEMENT
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ID
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_ID_ANOTHER
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_NAME
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_TRAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COASTER_TYPE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COPYRIGHT_DATE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COST
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.COUNTRY
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DEGREES
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DROP
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.DURATION_IN_SECONDS
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.GFORCE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.HEIGHT
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.INVERSIONS
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LATITUDE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LENGTH
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.LONGITUDE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.MANUFACTURER
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.MODEL
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.OPENED_DATE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PARK_ID
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PARK_NAME
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_AUTHOR
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_ANOTHER_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_ANOTHER_NOT_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_ID_NOT_MAIN
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.PICTURE_URL
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.REGION
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.RESTRAINTS
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.RIDERS_PER_HOUR
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.SPEED
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.STATE
-import com.sottti.roller.coasters.data.roller.coasters.shared.test.stubs.STATUS
 import com.sottti.roller.coasters.domain.model.Author
 import com.sottti.roller.coasters.domain.model.City
 import com.sottti.roller.coasters.domain.model.Coordinates
@@ -102,44 +64,48 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.System
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
 import java.time.LocalDate
 
-internal val rollerCoasterId = RollerCoasterId(COASTER_ID)
-internal val anotherRollerCoasterId = RollerCoasterId(COASTER_ID_ANOTHER)
-internal val parkId = ParkId(PARK_ID)
+public val rollerCoasterId: RollerCoasterId = RollerCoasterId(COASTER_ID)
+public val anotherRollerCoasterId: RollerCoasterId = RollerCoasterId(COASTER_ID_ANOTHER)
+public val parkId: ParkId = ParkId(PARK_ID)
 
-internal val coordinates: Coordinates =
+public val coordinates: Coordinates =
     Coordinates(Latitude(LATITUDE), Longitude(LONGITUDE))
 
-internal val park = AmusementPark(
-    id = parkId,
-    name = Name(PARK_NAME),
-)
-
-internal val name = RollerCoasterName(
-    current = Name(COASTER_NAME),
-    former = null,
-)
-
-internal val mainPicture = Picture(
-    id = PictureId(PICTURE_ID_MAIN),
-    name = PictureName(COASTER_NAME),
-    url = ImageUrl(PICTURE_URL),
-    copyright = PictureCopyright(
-        author = Author(PICTURE_AUTHOR),
-        date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
+public val park: AmusementPark =
+    AmusementPark(
+        id = parkId,
+        name = Name(PARK_NAME),
     )
-)
 
-internal val anotherMainPicture = Picture(
-    id = PictureId(PICTURE_ID_ANOTHER_MAIN),
-    name = PictureName(COASTER_NAME),
-    url = ImageUrl(PICTURE_URL),
-    copyright = PictureCopyright(
-        author = Author(PICTURE_AUTHOR),
-        date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
+public val name: RollerCoasterName =
+    RollerCoasterName(
+        current = Name(COASTER_NAME),
+        former = null,
     )
-)
 
-internal val notMainPicture =
+public val mainPicture: Picture =
+    Picture(
+        id = PictureId(PICTURE_ID_MAIN),
+        name = PictureName(COASTER_NAME),
+        url = ImageUrl(PICTURE_URL),
+        copyright = PictureCopyright(
+            author = Author(PICTURE_AUTHOR),
+            date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
+        )
+    )
+
+public val anotherMainPicture: Picture =
+    Picture(
+        id = PictureId(PICTURE_ID_ANOTHER_MAIN),
+        name = PictureName(COASTER_NAME),
+        url = ImageUrl(PICTURE_URL),
+        copyright = PictureCopyright(
+            author = Author(PICTURE_AUTHOR),
+            date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
+        )
+    )
+
+public val notMainPicture: Picture =
     Picture(
         id = PictureId(PICTURE_ID_NOT_MAIN),
         name = PictureName(COASTER_NAME),
@@ -150,7 +116,7 @@ internal val notMainPicture =
         )
     )
 
-internal val anotherNotMainPicture =
+public val anotherNotMainPicture: Picture =
     Picture(
         id = PictureId(PICTURE_ID_ANOTHER_NOT_MAIN),
         name = PictureName(COASTER_NAME),
@@ -161,47 +127,50 @@ internal val anotherNotMainPicture =
         )
     )
 
-internal val design = Design(
-    type = Type(COASTER_TYPE),
-    train = Train(COASTER_TRAIN),
-    elements = Element(COASTER_ELEMENT),
-    arrangement = Arrangement(COASTER_ARRANGEMENT),
-    restraints = Restraints(RESTRAINTS),
-    designer = Designer(COASTER_DESIGNER),
-)
+public val design: Design =
+    Design(
+        type = Type(COASTER_TYPE),
+        train = Train(COASTER_TRAIN),
+        elements = Element(COASTER_ELEMENT),
+        arrangement = Arrangement(COASTER_ARRANGEMENT),
+        restraints = Restraints(RESTRAINTS),
+        designer = Designer(COASTER_DESIGNER),
+    )
 
-internal fun ride(
+public fun ride(
     measurementSystem: SystemMeasurementSystem,
-) = when (measurementSystem) {
+): SingleTrackRide = when (measurementSystem) {
     ImperialUk, ImperialUs -> singleTrackRideImperial()
     Metric -> singleTrackRideMetric()
 }
 
-private fun singleTrackRideMetric(): SingleTrackRide = SingleTrackRide(
-    height = MetricHeight(Meters(HEIGHT)),
-    length = MetricLength(Meters(LENGTH)),
-    speed = MetricSpeed(Kmh(SPEED)),
-    duration = Duration(Seconds(DURATION_IN_SECONDS)),
-    inversions = Inversions(INVERSIONS),
-    gForce = GForce(GFORCE),
-    drop = MetricDrop(Meters(DROP)),
-    maxVertical = MaxVertical(Degrees(DEGREES)),
-)
+private fun singleTrackRideMetric(): SingleTrackRide =
+    SingleTrackRide(
+        height = MetricHeight(Meters(HEIGHT)),
+        length = MetricLength(Meters(LENGTH)),
+        speed = MetricSpeed(Kmh(SPEED)),
+        duration = Duration(Seconds(DURATION_IN_SECONDS)),
+        inversions = Inversions(INVERSIONS),
+        gForce = GForce(GFORCE),
+        drop = MetricDrop(Meters(DROP)),
+        maxVertical = MaxVertical(Degrees(DEGREES)),
+    )
 
-private fun singleTrackRideImperial(): SingleTrackRide = SingleTrackRide(
-    height = ImperialHeight(Feet.fromMeters(Meters(HEIGHT))),
-    length = ImperialLength(Feet.fromMeters(Meters(LENGTH))),
-    speed = ImperialSpeed(Mph.fromKph(Kmh(SPEED))),
-    duration = Duration(Seconds(DURATION_IN_SECONDS)),
-    inversions = Inversions(INVERSIONS),
-    gForce = GForce(GFORCE),
-    drop = ImperialDrop(Feet.fromMeters(Meters(DROP))),
-    maxVertical = MaxVertical(Degrees(DEGREES)),
-)
+private fun singleTrackRideImperial(): SingleTrackRide =
+    SingleTrackRide(
+        height = ImperialHeight(Feet.fromMeters(Meters(HEIGHT))),
+        length = ImperialLength(Feet.fromMeters(Meters(LENGTH))),
+        speed = ImperialSpeed(Mph.fromKph(Kmh(SPEED))),
+        duration = Duration(Seconds(DURATION_IN_SECONDS)),
+        inversions = Inversions(INVERSIONS),
+        gForce = GForce(GFORCE),
+        drop = ImperialDrop(Feet.fromMeters(Meters(DROP))),
+        maxVertical = MaxVertical(Degrees(DEGREES)),
+    )
 
-internal fun specs(
+public fun specs(
     measurementSystem: SystemMeasurementSystem,
-) = Specs(
+): Specs = Specs(
     design = design,
     model = Model(MODEL),
     manufacturer = Manufacturer(MANUFACTURER),
@@ -211,27 +180,29 @@ internal fun specs(
     ride = ride(measurementSystem),
 )
 
-internal val status = Status(
-    current = OperationalState(STATUS),
-    former = null,
-    openedDate = OpenedDate(Date.FullDate(LocalDate.parse(OPENED_DATE))),
-    closedDate = null,
-)
+public val status: Status =
+    Status(
+        current = OperationalState(STATUS),
+        former = null,
+        openedDate = OpenedDate(Date.FullDate(LocalDate.parse(OPENED_DATE))),
+        closedDate = null,
+    )
 
-internal val location = Location(
-    city = City(CITY),
-    country = Country(COUNTRY),
-    region = Region(REGION),
-    state = State(STATE),
-    coordinates = coordinates,
-    relocations = null,
-)
+public val location: Location =
+    Location(
+        city = City(CITY),
+        country = Country(COUNTRY),
+        region = Region(REGION),
+        state = State(STATE),
+        coordinates = coordinates,
+        relocations = null,
+    )
 
-internal val rollerCoaster = rollerCoaster()
+public val rollerCoaster: RollerCoaster = rollerCoaster()
 
-internal fun rollerCoaster(
+public fun rollerCoaster(
     measurementSystem: SystemMeasurementSystem = Metric,
-) = RollerCoaster(
+): RollerCoaster = RollerCoaster(
     id = rollerCoasterId,
     location = location,
     name = name,
@@ -244,18 +215,18 @@ internal fun rollerCoaster(
     status = status,
 )
 
-internal fun rollerCoasterWithoutOtherPictures(
+public fun rollerCoasterWithoutOtherPictures(
     measurementSystem: SystemMeasurementSystem,
 ): RollerCoaster =
     rollerCoaster(measurementSystem).let { coaster ->
         coaster.copy(pictures = coaster.pictures.copy(other = emptyList()))
     }
 
-internal val anotherRollerCoaster = anotherRollerCoaster()
+public val anotherRollerCoaster: RollerCoaster = anotherRollerCoaster()
 
-internal fun anotherRollerCoaster(
+public fun anotherRollerCoaster(
     measurementSystem: SystemMeasurementSystem = Metric,
-) = rollerCoaster(measurementSystem = measurementSystem).copy(
+): RollerCoaster = rollerCoaster(measurementSystem = measurementSystem).copy(
     id = anotherRollerCoasterId,
     pictures = Pictures(
         main = anotherMainPicture,

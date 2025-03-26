@@ -51,5 +51,6 @@ include(
     ":presentation:roller-coaster-details",
     ":presentation:settings",
     ":presentation:top-bars",
+    ":utils:test-stubs",
     ":utils:time-dates",
 )

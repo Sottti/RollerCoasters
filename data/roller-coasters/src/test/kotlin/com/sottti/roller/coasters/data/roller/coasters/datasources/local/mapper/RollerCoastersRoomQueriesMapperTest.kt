@@ -12,8 +12,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 10,
             offset = 0,
-            sortByFilter = SortByFilter.HEIGHT,
-            typeFilter = TypeFilter.ALL,
+            sortByFilter = SortByFilter.Height,
+            typeFilter = TypeFilter.All,
         )
 
         val expectedSql = "SELECT * FROM roller_coasters ORDER BY heightMax " +
@@ -27,8 +27,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 5,
             offset = 10,
-            sortByFilter = SortByFilter.SPEED,
-            typeFilter = TypeFilter.STEEL,
+            sortByFilter = SortByFilter.Speed,
+            typeFilter = TypeFilter.Steel,
         )
 
         val expectedSql =
@@ -43,8 +43,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 20,
             offset = 40,
-            sortByFilter = SortByFilter.ALPHABETICAL,
-            typeFilter = TypeFilter.WOOD,
+            sortByFilter = SortByFilter.Alphabetical,
+            typeFilter = TypeFilter.Wood,
         )
 
         val expectedSql =
@@ -59,8 +59,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 15,
             offset = 5,
-            sortByFilter = SortByFilter.DROP,
-            typeFilter = TypeFilter.ALL,
+            sortByFilter = SortByFilter.Drop,
+            typeFilter = TypeFilter.All,
         )
 
         val expectedSql =
@@ -75,8 +75,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 8,
             offset = 2,
-            sortByFilter = SortByFilter.MAX_VERTICAL,
-            typeFilter = TypeFilter.WOOD,
+            sortByFilter = SortByFilter.MaxVertical,
+            typeFilter = TypeFilter.Wood,
         )
 
         val expectedSql =
@@ -91,8 +91,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 12,
             offset = 6,
-            sortByFilter = SortByFilter.INVERSIONS,
-            typeFilter = TypeFilter.STEEL,
+            sortByFilter = SortByFilter.Inversions,
+            typeFilter = TypeFilter.Steel,
         )
 
         val expectedSql =
@@ -107,8 +107,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 25,
             offset = 15,
-            sortByFilter = SortByFilter.LENGTH,
-            typeFilter = TypeFilter.ALL,
+            sortByFilter = SortByFilter.Length,
+            typeFilter = TypeFilter.All,
         )
 
         val expectedSql =
@@ -123,8 +123,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 30,
             offset = 0,
-            sortByFilter = SortByFilter.G_FORCE,
-            typeFilter = TypeFilter.ALL
+            sortByFilter = SortByFilter.GForce,
+            typeFilter = TypeFilter.All
         )
 
         val expectedSql =
@@ -139,8 +139,8 @@ class RollerCoastersRoomQueriesMapperTest {
         val actual = createRollerCoastersQuery(
             limit = 50,
             offset = 25,
-            sortByFilter = SortByFilter.ALPHABETICAL,
-            typeFilter = TypeFilter.ALL
+            sortByFilter = SortByFilter.Alphabetical,
+            typeFilter = TypeFilter.All
         )
 
         val expectedSql =

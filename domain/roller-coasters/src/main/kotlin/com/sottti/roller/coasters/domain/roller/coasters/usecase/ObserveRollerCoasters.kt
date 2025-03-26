@@ -27,7 +27,7 @@ public class ObserveRollerCoasters @Inject constructor(
             .flatMapLatest { measurementSystem ->
                 rollerCoastersRepository.observeRollerCoasters(
                     measurementSystem = measurementSystem
-                        .toSystemMeasurementSystem(getSystemMeasurementSystem()),
+                        .toSystemMeasurementSystem { getSystemMeasurementSystem() },
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,
                 )

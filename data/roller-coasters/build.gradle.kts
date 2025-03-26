@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.work.runtime)
     implementation(project(module.data.network))
     implementation(project(module.domain.rollerCoasters))
+    implementation(project(module.utils.testStubs))
     implementation(project(module.utils.timeDates))
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)

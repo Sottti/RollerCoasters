@@ -5,14 +5,14 @@ import com.github.michaelbull.result.Ok
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
-import com.sottti.roller.coasters.data.roller.coasters.stubs.anotherRollerCoaster
 import com.sottti.roller.coasters.data.roller.coasters.stubs.networkErrorException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.notFoundException
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoaster
-import com.sottti.roller.coasters.data.roller.coasters.stubs.rollerCoasterId
 import com.sottti.roller.coasters.data.roller.coasters.stubs.syncFailedException
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.utils.test.stubs.anotherRollerCoaster
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
+import com.sottti.roller.coasters.utils.test.stubs.rollerCoasterId
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just

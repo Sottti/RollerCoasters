@@ -64,8 +64,8 @@ internal class ExploreViewModel @Inject constructor(
     unitFormatter: UnitFormatter,
 ) : ViewModel() {
 
-    private val _sortByFilter = MutableStateFlow(SortByFilter.ALPHABETICAL)
-    private val _typeFilter = MutableStateFlow(TypeFilter.ALL)
+    private val _sortByFilter = MutableStateFlow(SortByFilter.Alphabetical)
+    private val _typeFilter = MutableStateFlow(TypeFilter.All)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val _rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>> =
@@ -142,17 +142,17 @@ internal class ExploreViewModel @Inject constructor(
 
     private fun updateSecondaryFilterQuery(action: SecondaryFilterAction) {
         when (action) {
-            SelectSortByAlphabetical -> _sortByFilter.value = SortByFilter.ALPHABETICAL
-            SelectSortByDrop -> _sortByFilter.value = SortByFilter.DROP
-            SelectSortByGForce -> _sortByFilter.value = SortByFilter.G_FORCE
-            SelectSortByHeight -> _sortByFilter.value = SortByFilter.HEIGHT
-            SelectSortByInversions -> _sortByFilter.value = SortByFilter.INVERSIONS
-            SelectSortByLength -> _sortByFilter.value = SortByFilter.LENGTH
-            SelectSortByMaxVertical -> _sortByFilter.value = SortByFilter.MAX_VERTICAL
-            SelectSortBySpeed -> _sortByFilter.value = SortByFilter.SPEED
-            SelectTypeAll -> _typeFilter.value = TypeFilter.ALL
-            SelectTypeSteel -> _typeFilter.value = TypeFilter.STEEL
-            SelectTypeWood -> _typeFilter.value = TypeFilter.WOOD
+            SelectSortByAlphabetical -> _sortByFilter.value = SortByFilter.Alphabetical
+            SelectSortByDrop -> _sortByFilter.value = SortByFilter.Drop
+            SelectSortByGForce -> _sortByFilter.value = SortByFilter.GForce
+            SelectSortByHeight -> _sortByFilter.value = SortByFilter.Height
+            SelectSortByInversions -> _sortByFilter.value = SortByFilter.Inversions
+            SelectSortByLength -> _sortByFilter.value = SortByFilter.Length
+            SelectSortByMaxVertical -> _sortByFilter.value = SortByFilter.MaxVertical
+            SelectSortBySpeed -> _sortByFilter.value = SortByFilter.Speed
+            SelectTypeAll -> _typeFilter.value = TypeFilter.All
+            SelectTypeSteel -> _typeFilter.value = TypeFilter.Steel
+            SelectTypeWood -> _typeFilter.value = TypeFilter.Wood
         }
     }
 }

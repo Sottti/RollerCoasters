@@ -25,12 +25,12 @@ internal fun createRollerCoastersQuery(
     val args = mutableListOf<Any>()
     val query = StringBuilder("SELECT * FROM $TABLE_ROLLER_COASTERS")
 
-    if (typeFilter != TypeFilter.ALL) {
+    if (typeFilter != TypeFilter.All) {
         query.append(" WHERE LOWER($COL_TYPE) = ?")
         args += typeFilter.toSqlValue()
     }
 
-    val direction = if (sortByFilter == SortByFilter.ALPHABETICAL) "ASC" else "DESC"
+    val direction = if (sortByFilter == SortByFilter.Alphabetical) "ASC" else "DESC"
 
     query.append(" ORDER BY ")
         .append(sortByFilter.toSqlValue())
@@ -46,19 +46,19 @@ internal fun createRollerCoastersQuery(
 
 private fun SortByFilter.toSqlValue(): String =
     when (this) {
-        SortByFilter.ALPHABETICAL -> COL_NAME_CURRENT
-        SortByFilter.DROP -> COL_DROP_MAX
-        SortByFilter.G_FORCE -> COL_G_FORCE_MAX
-        SortByFilter.HEIGHT -> COL_HEIGHT_MAX
-        SortByFilter.INVERSIONS -> COL_INVERSIONS_MAX
-        SortByFilter.LENGTH -> COL_LENGTH_MAX
-        SortByFilter.MAX_VERTICAL -> COL_MAX_VERTICAL_MAX
-        SortByFilter.SPEED -> COL_SPEED_MAX
+        SortByFilter.Alphabetical -> COL_NAME_CURRENT
+        SortByFilter.Drop -> COL_DROP_MAX
+        SortByFilter.GForce -> COL_G_FORCE_MAX
+        SortByFilter.Height -> COL_HEIGHT_MAX
+        SortByFilter.Inversions -> COL_INVERSIONS_MAX
+        SortByFilter.Length -> COL_LENGTH_MAX
+        SortByFilter.MaxVertical -> COL_MAX_VERTICAL_MAX
+        SortByFilter.Speed -> COL_SPEED_MAX
     }
 
 private fun TypeFilter.toSqlValue(): String =
     when (this) {
-        TypeFilter.ALL -> error("Should not reach this branch")
-        TypeFilter.STEEL -> RollerCoasterApiConstants.VALUE_TYPE_STEEL
-        TypeFilter.WOOD -> RollerCoasterApiConstants.VALUE_TYPE_WOOD
+        TypeFilter.All -> error("Should not reach this branch")
+        TypeFilter.Steel -> RollerCoasterApiConstants.VALUE_TYPE_STEEL
+        TypeFilter.Wood -> RollerCoasterApiConstants.VALUE_TYPE_WOOD
     }

@@ -6,6 +6,7 @@ import javax.inject.Inject
 public class ScheduleRollerCoastersSync @Inject constructor(
     private val rollerCoastersRepository: RollerCoastersRepository,
 ) {
-    public operator fun invoke(): Unit =
+    public operator fun invoke() {
         rollerCoastersRepository.scheduleRollerCoastersSync()
+    }
 }

@@ -48,6 +48,7 @@ object module {
 
     object utils {
         const val timeDates = ":utils:time-dates"
+        const val testStubs = ":utils:test-stubs"
     }
 
     const val di = ":di"
