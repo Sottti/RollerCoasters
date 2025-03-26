@@ -8,53 +8,72 @@ import kotlin.test.assertFailsWith
 internal class TimeMapperTest {
 
     @Test
-    fun `map to seconds converts 02_30 to 150 seconds`() {
-        val result = "02:30".toSeconds()
-        assertThat(result).isEqualTo(150)
+    fun `converts 02 colon 30 to 150 seconds`() {
+        assertThat("02:30".toSeconds()).isEqualTo(150)
     }
 
     @Test
-    fun `map to seconds converts 00_00 to 0 seconds`() {
-        val result = "00:00".toSeconds()
-        assertThat(result).isEqualTo(0)
+    fun `converts 00 colon 00 to 0 seconds`() {
+        assertThat("00:00".toSeconds()).isEqualTo(0)
     }
 
     @Test
-    fun `map to seconds converts 59_59 to 3599 seconds`() {
-        val result = "59:59".toSeconds()
-        assertThat(result).isEqualTo(3599)
+    fun `converts 59 colon 59 to 3599 seconds`() {
+        assertThat("59:59".toSeconds()).isEqualTo(3599)
     }
 
     @Test
-    fun `map to seconds converts 01_00 to 60 seconds`() {
-        val result = "01:00".toSeconds()
-        assertThat(result).isEqualTo(60)
+    fun `converts 01 colon 00 to 60 seconds`() {
+        assertThat("01:00".toSeconds()).isEqualTo(60)
     }
 
     @Test
-    fun `map to seconds greater than 59 rolls over to minutes`() {
-        val result = "10:61".toSeconds()
-        assertThat(result).isEqualTo(661)
+    fun `converts 10 colon 61 to 661 seconds`() {
+        assertThat("10:61".toSeconds()).isEqualTo(661)
     }
 
     @Test
-    fun `invalid format without colon throws exception`() {
-        assertFailsWith<Exception> {
-            "5".toSeconds()
-        }
+    fun `handles single digit minutes`() {
+        assertThat("5:30".toSeconds()).isEqualTo(330)
     }
 
     @Test
-    fun `invalid non-numeric input throws exception`() {
-        assertFailsWith<NumberFormatException> {
-            "abc:30".toSeconds()
-        }
+    fun `handles whitespace`() {
+        assertThat(" 01:30 ".toSeconds()).isEqualTo(90)
     }
 
     @Test
-    fun `empty string throws exception`() {
-        assertFailsWith<Exception> {
-            "".toSeconds()
-        }
+    fun `throws on missing colon`() {
+        val exception = assertFailsWith<IllegalArgumentException> { "5".toSeconds() }
+        assertThat(exception.message).contains("MM:SS")
+    }
+
+    @Test
+    fun `throws on non-numeric input`() {
+        assertFailsWith<NumberFormatException> { "abc:30".toSeconds() }
+    }
+
+    @Test
+    fun `throws on empty string`() {
+        val exception = assertFailsWith<IllegalArgumentException> { "".toSeconds() }
+        assertThat(exception.message).contains("MM:SS")
+    }
+
+    @Test
+    fun `throws on negative seconds`() {
+        val exception = assertFailsWith<IllegalArgumentException> { "10:-5".toSeconds() }
+        assertThat(exception.message).isEqualTo("Minutes and seconds must be non-negative")
+    }
+
+    @Test
+    fun `throws on negative minutes`() {
+        val exception = assertFailsWith<IllegalArgumentException> { "-1:30".toSeconds() }
+        assertThat(exception.message).isEqualTo("Minutes and seconds must be non-negative")
+    }
+
+    @Test
+    fun `throws on both negative`() {
+        val exception = assertFailsWith<IllegalArgumentException> { "-1:-5".toSeconds() }
+        assertThat(exception.message).isEqualTo("Minutes and seconds must be non-negative")
     }
 }

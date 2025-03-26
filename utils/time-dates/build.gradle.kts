@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     api(project(module.domain.model))
+    implementation(libs.annotations)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)

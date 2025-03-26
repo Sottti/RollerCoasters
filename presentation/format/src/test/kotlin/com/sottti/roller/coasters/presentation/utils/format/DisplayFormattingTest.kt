@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import org.junit.Test
 
-class DisplayFormatTest {
+internal class DisplayFormatTest {
 
     @Test
     fun `Removes trailing zeros from decimal`() {

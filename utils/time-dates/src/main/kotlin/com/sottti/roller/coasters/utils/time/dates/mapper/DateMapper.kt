@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.utils.time.dates.mapper
 
+import androidx.annotation.VisibleForTesting
 import com.sottti.roller.coasters.domain.model.Date
 import com.sottti.roller.coasters.domain.model.Date.FullDate
 import com.sottti.roller.coasters.domain.model.Date.YearAndMonth
@@ -9,37 +10,24 @@ import java.time.Year
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
+@VisibleForTesting
+internal const val YEAR_ONLY_SORTABLE_SUFFIX = "-00-00"
 private const val YEAR_AND_MONTH_SORTABLE_SUFFIX = "-00"
-private const val YEAR_ONLY_SORTABLE_SUFFIX = "-00-00"
 
-private const val FULL_DATE_REGEX = """\d{4}-\d{2}-\d{2}"""  // yyyy-MM-dd
-private const val YEAR_MONTH_REGEX = """\d{4}-\d{2}"""       // yyyy-MM
-private const val YEAR_ONLY_REGEX = """\d{4}"""              // yyyy
+private val FULL_DATE_REGEX_PATTERN = Regex("""\d{4}-\d{2}-\d{2}""")
+private val YEAR_MONTH_REGEX_PATTERN = Regex("""\d{4}-\d{1,2}""")
+private val YEAR_ONLY_REGEX_PATTERN = Regex("""-?\d{4}""")
 
-private const val FULL_DATE_PATTERN = "yyyy-MM-dd"
-private const val YEAR_MONTH_PATTERN = "yyyy-MM"
-private val fullDateFormatter: DateTimeFormatter =
-    DateTimeFormatter.ofPattern(FULL_DATE_PATTERN)
-private val yearMonthFormatter: DateTimeFormatter =
-    DateTimeFormatter.ofPattern(YEAR_MONTH_PATTERN)
+private val fullDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+private val yearMonthFormatter = DateTimeFormatter.ofPattern("yyyy-M")
+private val yearMonthSortableFormatter = DateTimeFormatter.ofPattern("yyyy-MM")
 
-public fun String.toDate(): Date? {
-    if (isEmpty()) return null
-
-    val cleanedDate = removeSuffix(YEAR_ONLY_SORTABLE_SUFFIX)
-        .removeSuffix(YEAR_AND_MONTH_SORTABLE_SUFFIX)
-
-
+public fun String.toDate(): Date {
+    val cleanedDate = cleanDate()
     return when {
-        cleanedDate.matches(Regex(FULL_DATE_REGEX)) ->
-            FullDate(LocalDate.parse(cleanedDate, fullDateFormatter))
-
-        cleanedDate.matches(Regex(YEAR_MONTH_REGEX)) ->
-            YearAndMonth(YearMonth.parse(cleanedDate, yearMonthFormatter))
-
-        cleanedDate.matches(Regex(YEAR_ONLY_REGEX)) ->
-            YearOnly(Year.of(cleanedDate.toInt()))
-
+        cleanedDate.matches(FULL_DATE_REGEX_PATTERN) -> cleanedDate.toFullDate()
+        cleanedDate.matches(YEAR_MONTH_REGEX_PATTERN) -> cleanedDate.toYearAndMonth()
+        cleanedDate.matches(YEAR_ONLY_REGEX_PATTERN) -> cleanedDate.toYearOnly()
         else -> throw IllegalArgumentException("Invalid date format: $this")
     }
 }
@@ -47,6 +35,24 @@ public fun String.toDate(): Date? {
 public fun Date.toSortableString(): String =
     when (this) {
         is FullDate -> localDate.format(fullDateFormatter)
-        is YearAndMonth -> "${yearMonth.format(yearMonthFormatter)}$YEAR_AND_MONTH_SORTABLE_SUFFIX"
+        is YearAndMonth -> "${yearMonth.format(yearMonthSortableFormatter)}$YEAR_AND_MONTH_SORTABLE_SUFFIX"
         is YearOnly -> "${year.value}$YEAR_ONLY_SORTABLE_SUFFIX"
     }
+
+private fun String.cleanDate(): String =
+    trim()
+        .removeSuffix(YEAR_ONLY_SORTABLE_SUFFIX)
+        .removeSuffix(YEAR_AND_MONTH_SORTABLE_SUFFIX)
+        .also { if (it.isEmpty()) throw IllegalArgumentException("Input date string cannot be empty or blank") }
+
+private fun String.toFullDate(): Date = runCatching {
+    FullDate(LocalDate.parse(this, fullDateFormatter))
+}.getOrElse { throw IllegalArgumentException("Invalid full date value: $this", it) }
+
+private fun String.toYearAndMonth(): Date = runCatching {
+    YearAndMonth(YearMonth.parse(this, yearMonthFormatter))
+}.getOrElse { throw IllegalArgumentException("Invalid year-month value: $this", it) }
+
+private fun String.toYearOnly(): Date = runCatching {
+    YearOnly(Year.of(this.toInt()))
+}.getOrElse { throw IllegalArgumentException("Invalid year value: $this", it) }

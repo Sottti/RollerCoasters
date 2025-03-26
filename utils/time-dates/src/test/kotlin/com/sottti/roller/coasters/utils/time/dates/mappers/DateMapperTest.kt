@@ -4,7 +4,6 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSortableString
 import org.junit.Test
-import java.time.format.DateTimeParseException
 import kotlin.test.assertFailsWith
 
 internal class DateMapperTest {
@@ -46,22 +45,154 @@ internal class DateMapperTest {
     }
 
     @Test
-    fun `map empty string to date returns null`() {
-        val result = "".toDate()
-        assertThat(result).isNull()
+    fun `map to date full date with leading whitespace parses correctly`() {
+        val result = whitespaceFullDateString.toDate()
+        assertThat(result).isEqualTo(fullDate)
     }
 
     @Test
-    fun `invalid date format throws exception`() {
-        assertFailsWith<DateTimeParseException> {
-            invalidDate.toDate()
+    fun `map to date leap year full date parses correctly`() {
+        val result = leapYearFullDateString.toDate()
+        assertThat(result).isEqualTo(leapYearFullDate)
+    }
+
+    @Test
+    fun `map to date max valid year only parses correctly`() {
+        val result = maxYearOnlyString.toDate()
+        assertThat(result).isEqualTo(maxYearOnly)
+    }
+
+    @Test
+    fun `map to date maximum full date parses correctly`() {
+        val result = maxFullDateSortableString.toDate()
+        assertThat(result).isEqualTo(maxFullDate)
+    }
+
+    @Test
+    fun `map to date min valid year only parses correctly`() {
+        val result = minYearOnlyString.toDate()
+        assertThat(result).isEqualTo(minYearOnly)
+    }
+
+    @Test
+    fun `map to date minimum full date parses correctly`() {
+        val result = minFullDateSortableString.toDate()
+        assertThat(result).isEqualTo(minFullDate)
+    }
+
+    @Test
+    fun `map to date negative year parses correctly`() {
+        val result = negativeYearSortableString.toDate()
+        assertThat(result).isEqualTo(negativeYearOnly)
+    }
+
+    @Test
+    fun `map to date year and month with single digit month parses correctly`() {
+        val result = singleDigitMonthString.toDate()
+        assertThat(result).isEqualTo(singleDigitMonth)
+    }
+
+    @Test
+    fun `map to date year and month with trailing whitespace parses correctly`() {
+        val result = whitespaceYearMonthString.toDate()
+        assertThat(result).isEqualTo(yearAndMonth)
+    }
+
+    @Test
+    fun `map to date year and month without suffix parses correctly`() {
+        val result = noSuffixYearMonthString.toDate()
+        assertThat(result).isEqualTo(yearAndMonth)
+    }
+
+    @Test
+    fun `map to date year only with surrounding whitespace parses correctly`() {
+        val result = whitespaceYearString.toDate()
+        assertThat(result).isEqualTo(yearOnly)
+    }
+
+    @Test
+    fun `map to date year only without suffix parses correctly`() {
+        val result = noSuffixYearString.toDate()
+        assertThat(result).isEqualTo(yearOnly)
+    }
+
+    @Test
+    fun `map to date zero year parses correctly`() {
+        val result = zeroYearSortableString.toDate()
+        assertThat(result).isEqualTo(zeroYearOnly)
+    }
+
+    @Test
+    fun `map to date empty string throws illegal argument exception`() {
+        val exception = assertFailsWith<IllegalArgumentException> {
+            emptyString.toDate()
+        }
+        assertThat(exception.message).contains("cannot be empty or blank")
+    }
+
+    @Test
+    fun `map to date extreme negative year throws illegal argument exception`() {
+        assertFailsWith<IllegalArgumentException> {
+            extremeNegativeYearSortableString.toDate()
         }
     }
 
     @Test
-    fun `random text throws exception`() {
+    fun `map to date extreme positive year throws illegal argument exception`() {
+        val exception = assertFailsWith<IllegalArgumentException> {
+            extremePositiveYearSortableString.toDate()
+        }
+        assertThat(exception.message).contains("Invalid date format")
+    }
+
+    @Test
+    fun `map to date full date with invalid day throws exception`() {
+        val exception = assertFailsWith<IllegalArgumentException> {
+            invalidDayFullDateString.toDate()
+        }
+        assertThat(exception.message).contains("Invalid full date value")
+    }
+
+    @Test
+    fun `map to date full date with partial suffix throws exception`() {
         assertFailsWith<IllegalArgumentException> {
+            partialSuffixFullDateString.toDate()
+        }
+    }
+
+    @Test
+    fun `map to date internal whitespace throws exception`() {
+        assertFailsWith<IllegalArgumentException> {
+            internalWhitespaceDate.toDate()
+        }
+    }
+
+    @Test
+    fun `map to date invalid month in year-month throws illegal argument exception`() {
+        val exception = assertFailsWith<IllegalArgumentException> {
+            invalidYearMonthInvalidMonth.toDate()
+        }
+        assertThat(exception.message).contains("Invalid year-month value")
+    }
+
+    @Test
+    fun `map to date random text throws exception with correct message`() {
+        val exception = assertFailsWith<IllegalArgumentException> {
             randomText.toDate()
+        }
+        assertThat(exception.message).isEqualTo("Invalid date format: $randomText")
+    }
+
+    @Test
+    fun `map to date year and month with invalid month parses as year only`() {
+        val result = invalidMonthYearMonth.toDate()
+        assertThat(result).isEqualTo(yearOnly)
+    }
+
+    @Test
+    fun `map to date year and month with partial suffix throws exception`() {
+        assertFailsWith<IllegalArgumentException> {
+            partialSuffixYearMonth.toDate()
         }
     }
 
@@ -70,9 +201,18 @@ internal class DateMapperTest {
         val result = unsortedMixedDates
             .sortedBy { it.toSortableString() }
             .map { it.toSortableString() }
-
         assertThat(result)
             .containsExactly(*sortedMixedDates)
+            .inOrder()
+    }
+
+    @Test
+    fun `sorting works correctly with mixed suffix and no-suffix dates`() {
+        val result = unsortedMixedSuffixDates
+            .sortedBy { it.toSortableString() }
+            .map { it.toSortableString() }
+        assertThat(result)
+            .containsExactly(*sortedMixedSuffixDates)
             .inOrder()
     }
 }
