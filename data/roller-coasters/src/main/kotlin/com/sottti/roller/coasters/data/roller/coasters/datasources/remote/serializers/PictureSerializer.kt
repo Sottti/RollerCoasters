@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers
 
+import androidx.annotation.VisibleForTesting
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -10,6 +11,9 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
+
+@VisibleForTesting
+internal const val UNEXPECTED_PICTURE_FORMAT_MESSAGE = "Unexpected format for mainPicture: %s"
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = PictureApiModel::class)

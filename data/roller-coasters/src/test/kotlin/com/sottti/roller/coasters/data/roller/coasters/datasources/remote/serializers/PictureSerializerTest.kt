@@ -57,7 +57,8 @@ internal class PictureSerializerTest {
             decode(jsonElement)
         }
 
-        assertThat(exception.message).contains("Unexpected format for mainPicture")
+        assertThat(exception.message)
+            .isEqualTo(UNEXPECTED_PICTURE_FORMAT_MESSAGE.format(jsonElement))
     }
 }
 

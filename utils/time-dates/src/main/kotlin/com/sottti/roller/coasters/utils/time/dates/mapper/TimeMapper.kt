@@ -1,11 +1,19 @@
 package com.sottti.roller.coasters.utils.time.dates.mapper
 
+import androidx.annotation.VisibleForTesting
+
+
+@VisibleForTesting
+internal const val INVALID_TIME_FORMAT_MESSAGE = "Time must be in MM:SS format"
+@VisibleForTesting
+internal const val NEGATIVE_TIME_MESSAGE = "Minutes and seconds must be non-negative"
+
 public fun String.toSeconds(): Int {
     val parts = trim().split(":")
     if (parts.size != 2)
-        throw IllegalArgumentException("Time must be in MM:SS format")
+        throw IllegalArgumentException(INVALID_TIME_FORMAT_MESSAGE)
     val (minutes, seconds) = parts.map { it.toInt() }
     if (minutes < 0 || seconds < 0)
-        throw IllegalArgumentException("Minutes and seconds must be non-negative")
+        throw IllegalArgumentException(NEGATIVE_TIME_MESSAGE)
     return (minutes * 60) + seconds
 }

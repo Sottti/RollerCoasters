@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.utils.time.dates.mappers
 
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.utils.time.dates.mapper.INVALID_TIME_FORMAT_MESSAGE
+import com.sottti.roller.coasters.utils.time.dates.mapper.NEGATIVE_TIME_MESSAGE
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSeconds
 import org.junit.Test
 import kotlin.test.assertFailsWith
@@ -45,7 +47,7 @@ internal class TimeMapperTest {
     @Test
     fun `throws on missing colon`() {
         val exception = assertFailsWith<IllegalArgumentException> { "5".toSeconds() }
-        assertThat(exception.message).contains("MM:SS")
+        assertThat(exception.message).isEqualTo(INVALID_TIME_FORMAT_MESSAGE)
     }
 
     @Test
@@ -56,24 +58,24 @@ internal class TimeMapperTest {
     @Test
     fun `throws on empty string`() {
         val exception = assertFailsWith<IllegalArgumentException> { "".toSeconds() }
-        assertThat(exception.message).contains("MM:SS")
+        assertThat(exception.message).isEqualTo(INVALID_TIME_FORMAT_MESSAGE)
     }
 
     @Test
     fun `throws on negative seconds`() {
         val exception = assertFailsWith<IllegalArgumentException> { "10:-5".toSeconds() }
-        assertThat(exception.message).isEqualTo("Minutes and seconds must be non-negative")
+        assertThat(exception.message).isEqualTo(NEGATIVE_TIME_MESSAGE)
     }
 
     @Test
     fun `throws on negative minutes`() {
         val exception = assertFailsWith<IllegalArgumentException> { "-1:30".toSeconds() }
-        assertThat(exception.message).isEqualTo("Minutes and seconds must be non-negative")
+        assertThat(exception.message).isEqualTo(NEGATIVE_TIME_MESSAGE)
     }
 
     @Test
     fun `throws on both negative`() {
         val exception = assertFailsWith<IllegalArgumentException> { "-1:-5".toSeconds() }
-        assertThat(exception.message).isEqualTo("Minutes and seconds must be non-negative")
+        assertThat(exception.message).isEqualTo(NEGATIVE_TIME_MESSAGE)
     }
 }

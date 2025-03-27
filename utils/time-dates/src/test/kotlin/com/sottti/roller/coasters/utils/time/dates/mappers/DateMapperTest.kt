@@ -1,6 +1,11 @@
 package com.sottti.roller.coasters.utils.time.dates.mappers
 
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.utils.time.dates.mapper.EMPTY_OR_BLANK_DATE_MESSAGE
+import com.sottti.roller.coasters.utils.time.dates.mapper.INVALID_DATE_FORMAT_MESSAGE
+import com.sottti.roller.coasters.utils.time.dates.mapper.invalidFullDateMessage
+import com.sottti.roller.coasters.utils.time.dates.mapper.invalidYearMonthMessage
+import com.sottti.roller.coasters.utils.time.dates.mapper.invalidYearOnlyMessage
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSortableString
 import org.junit.Test
@@ -127,14 +132,16 @@ internal class DateMapperTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             emptyString.toDate()
         }
-        assertThat(exception.message).contains("cannot be empty or blank")
+        assertThat(exception.message).isEqualTo(EMPTY_OR_BLANK_DATE_MESSAGE)
     }
 
     @Test
     fun `map to date extreme negative year throws illegal argument exception`() {
-        assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IllegalArgumentException> {
             extremeNegativeYearSortableString.toDate()
         }
+        assertThat(exception.message)
+            .isEqualTo(INVALID_DATE_FORMAT_MESSAGE.format(extremeNegativeYearSortableString))
     }
 
     @Test
@@ -142,7 +149,10 @@ internal class DateMapperTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             extremePositiveYearSortableString.toDate()
         }
-        assertThat(exception.message).contains("Invalid date format")
+        assertThat(exception.message)
+            .isEqualTo(
+                INVALID_DATE_FORMAT_MESSAGE.format(extremePositiveYearSortableString)
+            )
     }
 
     @Test
@@ -150,21 +160,29 @@ internal class DateMapperTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             invalidDayFullDateString.toDate()
         }
-        assertThat(exception.message).contains("Invalid full date value")
+        assertThat(exception.message).isEqualTo(invalidFullDateMessage(invalidDayFullDateString))
     }
 
     @Test
     fun `map to date full date with partial suffix throws exception`() {
-        assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IllegalArgumentException> {
             partialSuffixFullDateString.toDate()
         }
+        assertThat(exception.message)
+            .isEqualTo(
+                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixFullDateString)
+            )
     }
 
     @Test
     fun `map to date internal whitespace throws exception`() {
-        assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IllegalArgumentException> {
             internalWhitespaceDate.toDate()
         }
+        assertThat(exception.message)
+            .isEqualTo(
+                INVALID_DATE_FORMAT_MESSAGE.format(internalWhitespaceDate)
+            )
     }
 
     @Test
@@ -172,7 +190,8 @@ internal class DateMapperTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             invalidYearMonthInvalidMonth.toDate()
         }
-        assertThat(exception.message).contains("Invalid year-month value")
+        assertThat(exception.message)
+            .isEqualTo(invalidYearMonthMessage(invalidYearMonthInvalidMonth))
     }
 
     @Test
@@ -180,7 +199,7 @@ internal class DateMapperTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             randomText.toDate()
         }
-        assertThat(exception.message).isEqualTo("Invalid date format: $randomText")
+        assertThat(exception.message).isEqualTo(INVALID_DATE_FORMAT_MESSAGE.format(randomText))
     }
 
     @Test
@@ -191,9 +210,13 @@ internal class DateMapperTest {
 
     @Test
     fun `map to date year and month with partial suffix throws exception`() {
-        assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IllegalArgumentException> {
             partialSuffixYearMonth.toDate()
         }
+        assertThat(exception.message)
+            .isEqualTo(
+                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixYearMonth)
+            )
     }
 
     @Test
@@ -201,6 +224,7 @@ internal class DateMapperTest {
         val result = unsortedMixedDates
             .sortedBy { it.toSortableString() }
             .map { it.toSortableString() }
+
         assertThat(result)
             .containsExactly(*sortedMixedDates)
             .inOrder()
