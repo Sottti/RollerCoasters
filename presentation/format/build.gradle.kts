@@ -17,6 +17,7 @@ android {
 dependencies {
     implementation(libs.hilt)
     implementation(project(module.domain.rollerCoasters))
+    implementation(project(module.utils.testStubs))
     ksp(libs.hilt.compiler)
 
     androidTestImplementation(libs.junit.ext)
@@ -24,5 +25,6 @@ dependencies {
     androidTestRuntimeOnly(libs.test.runner)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     testImplementation(libs.truth)
 }

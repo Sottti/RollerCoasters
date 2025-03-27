@@ -14,7 +14,8 @@ internal fun Double.toDisplayFormat(
     val symbols = DecimalFormatSymbols(appLanguage.toLocale(defaultLocale))
     formatter.decimalFormatSymbols = symbols
     val decimalSeparator = Regex.escape(symbols.decimalSeparator.toString())
-    return formatter.format(this)
+    return formatter
+        .format(this)
         .replace("(\\d*[1-9])0+$".toRegex(), "$1")
         .replace("^0${decimalSeparator}0+$".toRegex(), "0")
 }

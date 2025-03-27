@@ -21,13 +21,14 @@ import java.util.Locale
 import javax.inject.Inject
 
 
-public class UnitFormatter @Inject constructor(
+public class UnitDisplayFormatter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
     public fun toDisplayFormat(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
         gForce: GForce,
-    ): String = gForce.toDisplayFormatGForce(appLanguage)
+    ): String = gForce.toDisplayFormatGForce(appLanguage, defaultLocale)
 
     public fun toDisplayFormat(
         inversions: Inversions,
@@ -39,40 +40,45 @@ public class UnitFormatter @Inject constructor(
 
     public fun toDisplayFormat(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
         height: Height,
     ): String = when (height) {
-        is ImperialHeight -> height.feet.toDisplayFormatFeet(appLanguage)
-        is MetricHeight -> height.meters.toDisplayFormatMeters(appLanguage)
+        is ImperialHeight -> height.feet.toDisplayFormatFeet(appLanguage, defaultLocale)
+        is MetricHeight -> height.meters.toDisplayFormatMeters(appLanguage, defaultLocale)
     }
 
     public fun toDisplayFormat(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
         drop: Drop,
     ): String = when (drop) {
-        is Drop.ImperialDrop -> drop.feet.toDisplayFormatFeet(appLanguage)
-        is Drop.MetricDrop -> drop.meters.toDisplayFormatMeters(appLanguage)
+        is Drop.ImperialDrop -> drop.feet.toDisplayFormatFeet(appLanguage, defaultLocale)
+        is Drop.MetricDrop -> drop.meters.toDisplayFormatMeters(appLanguage, defaultLocale)
     }
 
     public fun toDisplayFormat(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
         length: Length,
     ): String = when (length) {
-        is Length.ImperialLength -> length.feet.toDisplayFormatFeet(appLanguage)
-        is Length.MetricLength -> length.meters.toDisplayFormatMeters(appLanguage)
+        is Length.ImperialLength -> length.feet.toDisplayFormatFeet(appLanguage, defaultLocale)
+        is Length.MetricLength -> length.meters.toDisplayFormatMeters(appLanguage, defaultLocale)
     }
 
     public fun toDisplayFormat(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
         speed: Speed,
     ): String = when (speed) {
-        is Speed.ImperialSpeed -> speed.mph.toDisplayFormatMph(appLanguage)
-        is Speed.MetricSpeed -> speed.kmh.toDisplayFormatKmh(appLanguage)
+        is Speed.ImperialSpeed -> speed.mph.toDisplayFormatMph(appLanguage, defaultLocale)
+        is Speed.MetricSpeed -> speed.kmh.toDisplayFormatKmh(appLanguage, defaultLocale)
     }
 
     private fun GForce.toDisplayFormatGForce(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
     ): String = context.getString(
-        R.string.g_force, value.toDisplayFormat(appLanguage, Locale.getDefault())
+        R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale)
     )
 
     private fun Inversions.toDisplayFormatInversions(): String =
@@ -83,29 +89,33 @@ public class UnitFormatter @Inject constructor(
 
     private fun Feet.toDisplayFormatFeet(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
     ): String = context.getString(
         R.string.distance_feet,
-        value.toDisplayFormat(appLanguage, Locale.getDefault())
+        value.toDisplayFormat(appLanguage, defaultLocale)
     )
 
     private fun Meters.toDisplayFormatMeters(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
     ): String = context.getString(
         R.string.distance_meters,
-        value.toDisplayFormat(appLanguage, Locale.getDefault())
+        value.toDisplayFormat(appLanguage, defaultLocale)
     )
 
     private fun Mph.toDisplayFormatMph(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
     ): String = context.getString(
         R.string.speed_mph,
-        value.toDisplayFormat(appLanguage, Locale.getDefault())
+        value.toDisplayFormat(appLanguage, defaultLocale)
     )
 
     private fun Kmh.toDisplayFormatKmh(
         appLanguage: AppLanguage,
+        defaultLocale: Locale,
     ): String = context.getString(
         R.string.speed_kph,
-        value.toDisplayFormat(appLanguage, Locale.getDefault())
+        value.toDisplayFormat(appLanguage, defaultLocale)
     )
 }

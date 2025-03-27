@@ -233,3 +233,15 @@ public fun anotherRollerCoaster(
         other = listOf(anotherNotMainPicture),
     )
 )
+
+public val gForce: GForce = GForce(GFORCE)
+public val imperialDrop: ImperialDrop = ImperialDrop(Feet.fromMeters(Meters(DROP)))
+public val imperialHeight: ImperialHeight = ImperialHeight(Feet.fromMeters(Meters(HEIGHT)))
+public val imperialLength: ImperialLength = ImperialLength(Feet.fromMeters(Meters(LENGTH)))
+public val imperialSpeed: ImperialSpeed = ImperialSpeed(Mph.fromKph(Kmh(SPEED)))
+public val inversions: Inversions = Inversions(INVERSIONS)
+public val maxVertical: MaxVertical = MaxVertical(Degrees(DEGREES))
+public val metricDrop: MetricDrop = MetricDrop(Meters(SPEED))
+public val metricHeight: MetricHeight = MetricHeight(Meters(HEIGHT))
+public val metricLength: MetricLength = MetricLength(Meters(LENGTH))
+public val metricSpeed: MetricSpeed = MetricSpeed(Kmh(SPEED))
