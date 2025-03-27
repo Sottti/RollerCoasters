@@ -8,7 +8,6 @@ import javax.inject.Inject
 public class ObserveAppMeasurementSystem @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public operator fun invoke(): Flow<AppMeasurementSystem> {
-        return settingsRepository.observeAppMeasurementSystem()
-    }
+    public operator fun invoke(): Flow<AppMeasurementSystem> =
+        settingsRepository.observeAppMeasurementSystem()
 }

@@ -36,7 +36,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
             )
 
     suspend fun syncRollerCoasters(
-        onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit
+        onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit,
     ): Result<Unit> {
         val limit = 250
         var successfulCalls = 0

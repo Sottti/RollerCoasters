@@ -10,7 +10,7 @@ internal class ListConvertersTest {
     private inline fun <reified T> testConversion(
         original: List<T>?,
         fromList: (List<T>?) -> String?,
-        toList: (String?) -> List<T>?
+        toList: (String?) -> List<T>?,
     ) {
         val json = fromList(original)
         val result = toList(json)

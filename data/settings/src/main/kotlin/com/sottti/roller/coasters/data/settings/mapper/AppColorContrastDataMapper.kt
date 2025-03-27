@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.settings.mapper
 
+import androidx.annotation.VisibleForTesting
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
-import org.jetbrains.annotations.VisibleForTesting
 
 @VisibleForTesting
 internal const val COLOR_CONTRAST_KEY_HIGH = "high"

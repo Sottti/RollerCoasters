@@ -36,7 +36,7 @@ internal fun FilterChips(
 @Composable
 private fun PrimaryFilters(
     filters: List<PrimaryFilter>,
-    onAction: (ExploreAction) -> Unit
+    onAction: (ExploreAction) -> Unit,
 ) {
     FlowRow(
         modifier = Modifier
@@ -51,7 +51,7 @@ private fun PrimaryFilters(
 @Composable
 private fun SecondaryFilters(
     filters: List<SecondaryFilter>,
-    onAction: (ExploreAction) -> Unit
+    onAction: (ExploreAction) -> Unit,
 ) {
     FlowRow(
         modifier = Modifier

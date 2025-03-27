@@ -244,9 +244,11 @@ private val SecondaryFilter.secondaryFilterClass: KClass<out SecondaryFilter>
         is InversionsFilter,
         is LengthFilter,
         is MaxVerticalFilter,
-        is SpeedFilter -> SortBySecondaryFilter::class
+        is SpeedFilter,
+            -> SortBySecondaryFilter::class
 
         is AllFilter,
         is SteelFilter,
-        is WoodFilter -> TypeSecondaryFilter::class
+        is WoodFilter,
+            -> TypeSecondaryFilter::class
     }

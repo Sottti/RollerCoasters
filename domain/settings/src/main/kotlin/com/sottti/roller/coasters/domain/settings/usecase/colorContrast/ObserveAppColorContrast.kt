@@ -8,7 +8,6 @@ import javax.inject.Inject
 public class ObserveAppColorContrast @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public operator fun invoke(): Flow<AppColorContrast> {
-        return settingsRepository.observeAppColorContrast()
-    }
+    public operator fun invoke(): Flow<AppColorContrast> =
+        settingsRepository.observeAppColorContrast()
 }

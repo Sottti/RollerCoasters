@@ -27,7 +27,7 @@ internal data class ExploreRollerCoaster(
 @Immutable
 internal data class Filters(
     val primary: List<PrimaryFilter>,
-    val secondary: List<SecondaryFilter>
+    val secondary: List<SecondaryFilter>,
 )
 
 @Immutable
@@ -71,7 +71,7 @@ internal sealed class SecondaryFilter(
         override val action: SecondaryFilterAction,
         override val leadingIcon: IconState?,
         override val selected: Boolean,
-        override val visible: Boolean
+        override val visible: Boolean,
     ) : SecondaryFilter(labelResId, action, leadingIcon, selected, visible) {
 
         @Immutable
@@ -80,7 +80,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -89,7 +89,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -98,7 +98,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -107,7 +107,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -116,7 +116,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -125,7 +125,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -134,7 +134,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -143,7 +143,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : SortBySecondaryFilter(labelResId, action, leadingIcon, selected, visible)
     }
 
@@ -153,7 +153,7 @@ internal sealed class SecondaryFilter(
         override val action: SecondaryFilterAction,
         override val leadingIcon: IconState?,
         override val selected: Boolean,
-        override val visible: Boolean
+        override val visible: Boolean,
     ) : SecondaryFilter(labelResId, action, leadingIcon, selected, visible) {
         @Immutable
         data class AllFilter(
@@ -161,7 +161,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : TypeSecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -170,7 +170,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : TypeSecondaryFilter(labelResId, action, leadingIcon, selected, visible)
 
         @Immutable
@@ -179,7 +179,7 @@ internal sealed class SecondaryFilter(
             override val action: SecondaryFilterAction,
             override val leadingIcon: IconState?,
             override val selected: Boolean,
-            override val visible: Boolean
+            override val visible: Boolean,
         ) : TypeSecondaryFilter(labelResId, action, leadingIcon, selected, visible)
     }
 }

@@ -85,7 +85,7 @@ private fun RadioButtonRow(
 @PreviewLightDark
 internal fun DialogWithRadioButtonsPreview(
     @PreviewParameter(DialogWithRadioButtonsPreviewProvider::class)
-    state: DialogWithRadioButtonsState
+    state: DialogWithRadioButtonsState,
 ) {
     RollerCoastersPreviewTheme {
         DialogWithRadioButtons(

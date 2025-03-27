@@ -2,7 +2,9 @@ package com.sottti.roller.coasters.domain.roller.coasters.usecase
 
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
+import io.mockk.runs
 import io.mockk.verify
 import org.junit.Before
 import org.junit.Test
@@ -15,7 +17,7 @@ internal class ScheduleRollerCoastersSyncTest {
     @Before
     fun setUp() {
         rollerCoastersRepository = mockk<RollerCoastersRepository> {
-            every { scheduleRollerCoastersSync() } returns Unit
+            every { scheduleRollerCoastersSync() } just runs
         }
         scheduleRollerCoastersSync = ScheduleRollerCoastersSync(rollerCoastersRepository)
     }

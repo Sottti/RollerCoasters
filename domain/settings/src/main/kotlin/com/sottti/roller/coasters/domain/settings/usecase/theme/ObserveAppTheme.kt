@@ -8,7 +8,6 @@ import javax.inject.Inject
 public class ObserveAppTheme @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public operator fun invoke(): Flow<AppTheme> {
-        return settingsRepository.observeAppTheme()
-    }
+    public operator fun invoke(): Flow<AppTheme> =
+        settingsRepository.observeAppTheme()
 }

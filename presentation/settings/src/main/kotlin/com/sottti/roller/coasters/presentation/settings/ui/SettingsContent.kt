@@ -48,7 +48,7 @@ private fun SettingsList(
     nestedScrollConnection: NestedScrollConnection,
     paddingValues: PaddingValues,
     state: SettingsState,
-    onAction: (SettingsAction) -> Unit
+    onAction: (SettingsAction) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -92,7 +92,7 @@ private fun SettingsList(
 @Composable
 private fun Dialogs(
     state: SettingsState,
-    onAction: (SettingsAction) -> Unit
+    onAction: (SettingsAction) -> Unit,
 ) {
     state.theme.picker?.let { themePickerState ->
         ThemePickerDialog(
@@ -147,7 +147,7 @@ private fun DynamicColorSetting(
 @Composable
 private fun DynamicColorTrailingContent(
     state: DynamicColorState,
-    onDynamicColorCheckedChange: (Boolean) -> Unit
+    onDynamicColorCheckedChange: (Boolean) -> Unit,
 ) {
     when (state.checkedState) {
         is DynamicColorCheckedState.Loaded -> Switch(

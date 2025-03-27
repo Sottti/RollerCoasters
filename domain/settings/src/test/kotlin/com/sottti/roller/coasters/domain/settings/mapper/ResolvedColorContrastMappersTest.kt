@@ -7,7 +7,7 @@ import org.junit.Assert
 import org.junit.Test
 import kotlin.test.assertFailsWith
 
-internal class ColorContrastMappersTest {
+internal class ResolvedColorContrastMappersTest {
 
     @Test
     fun `app high contrast maps to resolved high contrast`() {
@@ -30,6 +30,14 @@ internal class ColorContrastMappersTest {
     @Test
     fun `app system contrast throws exception for unresolved state`() {
         assertFailsWith<IllegalStateException> { AppColorContrast.SystemContrast.toResolvedColorContrast() }
+    }
+
+    @Test
+    fun `app system contrast throws exception with specific message`() {
+        val exception = assertFailsWith<IllegalStateException> {
+            AppColorContrast.SystemContrast.toResolvedColorContrast()
+        }
+        Assert.assertEquals(SYSTEM_CONTRAST_UNRESOLVED_MESSAGE, exception.message)
     }
 
     @Test

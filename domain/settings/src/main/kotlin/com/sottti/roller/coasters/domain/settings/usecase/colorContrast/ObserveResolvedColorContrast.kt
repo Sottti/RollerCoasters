@@ -20,7 +20,8 @@ public class ObserveResolvedColorContrast @Inject constructor(
         when (this) {
             AppColorContrast.HighContrast,
             AppColorContrast.MediumContrast,
-            AppColorContrast.StandardContrast -> toResolvedColorContrast()
+            AppColorContrast.StandardContrast,
+                -> toResolvedColorContrast()
 
             AppColorContrast.SystemContrast ->
                 settingsRepository.getSystemColorContrast().toResolvedColorContrast()

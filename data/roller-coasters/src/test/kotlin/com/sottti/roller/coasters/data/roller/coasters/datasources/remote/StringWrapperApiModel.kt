@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal data class StringWrapperApiModel(
     @Serializable(with = TrimmingStringSerializer::class)
-    val value: String
+    val value: String,
 )

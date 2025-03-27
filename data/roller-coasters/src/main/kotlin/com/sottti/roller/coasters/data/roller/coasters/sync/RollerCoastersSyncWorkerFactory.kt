@@ -8,12 +8,12 @@ import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoaste
 import javax.inject.Inject
 
 internal class RollerCoastersSyncWorkerFactory @Inject constructor(
-    private val rollerCoasterRepository: RollerCoastersRepository
+    private val rollerCoasterRepository: RollerCoastersRepository,
 ) : WorkerFactory() {
     override fun createWorker(
         appContext: Context,
         workerClassName: String,
-        workerParameters: WorkerParameters
+        workerParameters: WorkerParameters,
     ): ListenableWorker? =
         when (workerClassName) {
             RollerCoastersSyncWorker::class.java.name ->

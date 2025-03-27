@@ -7,7 +7,6 @@ import javax.inject.Inject
 public class GetAppTheme @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public suspend operator fun invoke(): AppTheme {
-        return settingsRepository.getAppTheme()
-    }
+    public suspend operator fun invoke(): AppTheme =
+        settingsRepository.getAppTheme()
 }

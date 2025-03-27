@@ -33,7 +33,7 @@ internal object SettingsModule {
     @Provides
     @Singleton
     fun provideUiModeManager(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): UiModeManager? = context.getSystemService(UiModeManager::class.java)
 
     @Provides

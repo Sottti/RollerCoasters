@@ -7,7 +7,6 @@ import javax.inject.Inject
 public class GetAppMeasurementSystem @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public suspend operator fun invoke(): AppMeasurementSystem {
-        return settingsRepository.getAppMeasurementSystem()
-    }
+    public suspend operator fun invoke(): AppMeasurementSystem =
+        settingsRepository.getAppMeasurementSystem()
 }

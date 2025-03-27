@@ -34,7 +34,7 @@ internal object RollerCoastersModule {
     @Provides
     @Singleton
     fun provideSyncScheduler(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): RollerCoasterSyncScheduler = RollerCoasterSyncScheduler(context)
 
     @Provides

@@ -89,10 +89,10 @@ public class UnitFormatter @Inject constructor(
     ): String = context.getString(R.string.distance_meters, value.toDisplayFormat(appLanguage))
 
     private fun Mph.toDisplayFormatMph(
-        appLanguage: AppLanguage
+        appLanguage: AppLanguage,
     ): String = context.getString(R.string.speed_mph, value.toDisplayFormat(appLanguage))
 
     private fun Kmh.toDisplayFormatKmh(
-        appLanguage: AppLanguage
+        appLanguage: AppLanguage,
     ): String = context.getString(R.string.speed_kph, value.toDisplayFormat(appLanguage))
 }

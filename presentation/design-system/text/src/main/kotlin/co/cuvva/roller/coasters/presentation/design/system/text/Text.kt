@@ -21,7 +21,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -37,7 +37,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Large(
                 text = stringResource(textResId),
@@ -52,7 +52,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -68,7 +68,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Medium(
                 text = stringResource(textResId),
@@ -83,7 +83,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -99,7 +99,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Small(
                 text = stringResource(textResId),
@@ -116,7 +116,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -132,7 +132,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Large(
                 text = stringResource(textResId),
@@ -147,7 +147,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -163,7 +163,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Medium(
                 text = stringResource(textResId),
@@ -178,7 +178,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -194,7 +194,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Small(
                 text = stringResource(textResId),
@@ -211,7 +211,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -227,7 +227,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Large(
                 text = stringResource(textResId),
@@ -242,7 +242,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -258,7 +258,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Medium(
                 text = stringResource(textResId),
@@ -273,7 +273,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -289,7 +289,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Small(
                 text = stringResource(textResId),
@@ -306,7 +306,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -322,7 +322,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Large(
                 text = stringResource(textResId),
@@ -337,7 +337,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -353,7 +353,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Medium(
                 text = stringResource(textResId),
@@ -368,7 +368,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -384,7 +384,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Small(
                 text = stringResource(textResId),
@@ -401,7 +401,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -417,7 +417,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Large(
                 text = stringResource(textResId),
@@ -432,7 +432,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -448,7 +448,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Medium(
                 text = stringResource(textResId),
@@ -463,7 +463,7 @@ public object Text {
             text: String,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             ThemedText(
                 text = text,
@@ -479,7 +479,7 @@ public object Text {
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
-            textColor: Color = Color.Unspecified
+            textColor: Color = Color.Unspecified,
         ) {
             Small(
                 text = stringResource(textResId),
@@ -494,7 +494,7 @@ public object Text {
     public fun Vanilla(
         text: String,
         modifier: Modifier = Modifier,
-        textAlign: TextAlign? = null
+        textAlign: TextAlign? = null,
     ) {
         MaterialText(
             text = text,
@@ -507,7 +507,7 @@ public object Text {
     public fun Vanilla(
         @StringRes textResId: Int,
         modifier: Modifier = Modifier,
-        textAlign: TextAlign? = null
+        textAlign: TextAlign? = null,
     ) {
         Vanilla(
             text = stringResource(textResId),
@@ -522,7 +522,7 @@ public object Text {
         textStyle: TextStyle,
         textColor: Color = Color.Unspecified,
         modifier: Modifier = Modifier,
-        textAlign: TextAlign? = null
+        textAlign: TextAlign? = null,
     ) {
         MaterialText(
             text = text,

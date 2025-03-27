@@ -8,7 +8,6 @@ import javax.inject.Inject
 public class ObserveAppDynamicColor @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public operator fun invoke(): Flow<AppDynamicColor> {
-        return settingsRepository.observeAppDynamicColor()
-    }
+    public operator fun invoke(): Flow<AppDynamicColor> =
+        settingsRepository.observeAppDynamicColor()
 }
