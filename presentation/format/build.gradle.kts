@@ -8,12 +8,20 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.format"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
     implementation(libs.hilt)
     implementation(project(module.domain.rollerCoasters))
     ksp(libs.hilt.compiler)
+
+    androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.truth)
+    androidTestRuntimeOnly(libs.test.runner)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)

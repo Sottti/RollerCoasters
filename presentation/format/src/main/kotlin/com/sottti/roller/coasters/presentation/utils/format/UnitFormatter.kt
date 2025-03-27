@@ -17,6 +17,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.format.R
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -71,7 +72,7 @@ public class UnitFormatter @Inject constructor(
     private fun GForce.toDisplayFormatGForce(
         appLanguage: AppLanguage,
     ): String = context.getString(
-        R.string.g_force, value.toDisplayFormat(appLanguage)
+        R.string.g_force, value.toDisplayFormat(appLanguage, Locale.getDefault())
     )
 
     private fun Inversions.toDisplayFormatInversions(): String =
@@ -82,17 +83,29 @@ public class UnitFormatter @Inject constructor(
 
     private fun Feet.toDisplayFormatFeet(
         appLanguage: AppLanguage,
-    ): String = context.getString(R.string.distance_feet, value.toDisplayFormat(appLanguage))
+    ): String = context.getString(
+        R.string.distance_feet,
+        value.toDisplayFormat(appLanguage, Locale.getDefault())
+    )
 
     private fun Meters.toDisplayFormatMeters(
         appLanguage: AppLanguage,
-    ): String = context.getString(R.string.distance_meters, value.toDisplayFormat(appLanguage))
+    ): String = context.getString(
+        R.string.distance_meters,
+        value.toDisplayFormat(appLanguage, Locale.getDefault())
+    )
 
     private fun Mph.toDisplayFormatMph(
         appLanguage: AppLanguage,
-    ): String = context.getString(R.string.speed_mph, value.toDisplayFormat(appLanguage))
+    ): String = context.getString(
+        R.string.speed_mph,
+        value.toDisplayFormat(appLanguage, Locale.getDefault())
+    )
 
     private fun Kmh.toDisplayFormatKmh(
         appLanguage: AppLanguage,
-    ): String = context.getString(R.string.speed_kph, value.toDisplayFormat(appLanguage))
+    ): String = context.getString(
+        R.string.speed_kph,
+        value.toDisplayFormat(appLanguage, Locale.getDefault())
+    )
 }

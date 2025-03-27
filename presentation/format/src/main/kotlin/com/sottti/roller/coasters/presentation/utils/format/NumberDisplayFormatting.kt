@@ -4,11 +4,14 @@ import android.icu.text.DecimalFormat
 import android.icu.text.DecimalFormatSymbols
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.utils.format.mapper.toLocale
+import java.util.Locale
 
-private val formatter = DecimalFormat("#,###").apply { maximumFractionDigits = 3 }
-
-internal fun Double.toDisplayFormat(appLanguage: AppLanguage): String {
-    val symbols = DecimalFormatSymbols(appLanguage.toLocale())
+internal fun Double.toDisplayFormat(
+    appLanguage: AppLanguage,
+    defaultLocale: Locale,
+): String {
+    val formatter = DecimalFormat("#,###").apply { maximumFractionDigits = 3 }
+    val symbols = DecimalFormatSymbols(appLanguage.toLocale(defaultLocale))
     formatter.decimalFormatSymbols = symbols
     val decimalSeparator = Regex.escape(symbols.decimalSeparator.toString())
     return formatter.format(this)

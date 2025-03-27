@@ -36,7 +36,8 @@ internal fun invalidYearMonthMessage(input: String) = "Invalid year-month value:
 @VisibleForTesting
 internal fun invalidYearOnlyMessage(input: String) = "Invalid year value: $input"
 
-public fun String.toDate(): Date {
+public fun String.toDate(): Date? {
+    if (this.isBlank()) return null
     val cleanedDate = cleanDate()
     return when {
         cleanedDate.matches(FULL_DATE_REGEX_PATTERN) -> cleanedDate.toFullDate()

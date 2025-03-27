@@ -9,10 +9,6 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.data.roller.coasters"
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 }
 
 dependencies {
@@ -35,11 +31,4 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.paging.common)
     testImplementation(libs.truth)
-
-    androidTestImplementation(libs.core)
-    androidTestImplementation(libs.junit.ext)
-    androidTestImplementation(libs.kotlin.coroutines.test)
-    androidTestImplementation(libs.room.testing)
-    androidTestImplementation(libs.truth)
-    androidTestRuntimeOnly(libs.test.runner)
 }

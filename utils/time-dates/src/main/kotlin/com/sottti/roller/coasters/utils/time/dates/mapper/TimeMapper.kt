@@ -5,6 +5,7 @@ import androidx.annotation.VisibleForTesting
 
 @VisibleForTesting
 internal const val INVALID_TIME_FORMAT_MESSAGE = "Time must be in MM:SS format"
+
 @VisibleForTesting
 internal const val NEGATIVE_TIME_MESSAGE = "Minutes and seconds must be non-negative"
 

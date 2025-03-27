@@ -6,11 +6,11 @@ import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import javax.inject.Inject
 
-public class SystemColorContrastManager @Inject constructor(
+internal class SystemColorContrastManager @Inject constructor(
     private val features: Features,
     private val uiModeManager: UiModeManager?,
 ) {
-    public val systemColorContrast: SystemColorContrast
+    val systemColorContrast: SystemColorContrast
         get() = when {
             features.systemColorContrastAvailable() -> {
                 val contrast = uiModeManager?.contrast ?: 0f

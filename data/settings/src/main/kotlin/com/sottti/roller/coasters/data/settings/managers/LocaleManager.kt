@@ -6,19 +6,19 @@ import androidx.core.os.LocaleListCompat
 import java.util.Locale
 import javax.inject.Inject
 
-public class LocaleManager @Inject constructor(
+internal class LocaleManager @Inject constructor(
     private val localeProvider: LocaleProvider,
 ) {
-    public val appLocale: Locale
+    val appLocale: Locale
         get() = localeProvider.getAppLocale()
 
-    public val systemLocale: Locale
+    val systemLocale: Locale
         get() = localeProvider.getSystemLocale()
 
-    public val systemULocale: ULocale
+    val systemULocale: ULocale
         get() = localeProvider.getSystemULocale()
 
-    public fun setLocaleList(localeList: LocaleListCompat) {
+    fun setLocaleList(localeList: LocaleListCompat) {
         AppCompatDelegate.setApplicationLocales(localeList)
     }
 }

@@ -8,7 +8,7 @@ import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import javax.inject.Inject
 
-public class MeasurementSystemManager @Inject constructor(
+internal class MeasurementSystemManager @Inject constructor(
     private val features: Features,
     private val localeManager: LocaleManager,
 ) {
@@ -17,7 +17,7 @@ public class MeasurementSystemManager @Inject constructor(
         private val imperialUkRegions = setOf("GB")
     }
 
-    public val systemMeasurementSystem: SystemMeasurementSystem
+    val systemMeasurementSystem: SystemMeasurementSystem
         get() = when {
             features.measurementSystemAvailable() -> getPreferredMeasurementSystem()
             else -> inferMeasurementSystem()

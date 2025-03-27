@@ -13,26 +13,26 @@ internal class LocaleMapperTest {
 
     @Test
     fun `english gb maps to locale en_gb`() {
-        val locale = AppLanguage.EnglishGb.toLocale()
+        val locale = AppLanguage.EnglishGb.toLocale(Locale.US)
         assertThat(locale.toLanguageTag()).isEqualTo(LOCALE_UK_TAG)
     }
 
     @Test
     fun `galician maps to locale gl_es`() {
-        val locale = AppLanguage.Galician.toLocale()
+        val locale = AppLanguage.Galician.toLocale(Locale.US)
         assertThat(locale.toLanguageTag()).isEqualTo(LOCALE_GALICIA_TAG)
     }
 
     @Test
     fun `spanish spain maps to locale es_es`() {
-        val locale = AppLanguage.SpanishSpain.toLocale()
+        val locale = AppLanguage.SpanishSpain.toLocale(Locale.US)
         assertThat(locale.toLanguageTag()).isEqualTo(LOCALE_SPAIN_TAG)
     }
 
     @Test
     fun `system language maps to default locale`() {
-        val default = Locale.getDefault()
-        val locale = AppLanguage.System.toLocale()
-        assertThat(locale).isEqualTo(default)
+        val defaultLocale = Locale.US
+        val locale = AppLanguage.System.toLocale(defaultLocale)
+        assertThat(locale).isEqualTo(defaultLocale)
     }
 }

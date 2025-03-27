@@ -13,9 +13,9 @@ internal const val LOCALE_SPAIN_TAG = "es-ES"
 @VisibleForTesting
 internal const val LOCALE_UK_TAG = "en-GB"
 
-internal fun AppLanguage.toLocale(): Locale = when (this) {
+internal fun AppLanguage.toLocale(defaultLocale: Locale): Locale = when (this) {
     AppLanguage.EnglishGb -> Locale.forLanguageTag(LOCALE_UK_TAG)
     AppLanguage.Galician -> Locale.forLanguageTag(LOCALE_GALICIA_TAG)
     AppLanguage.SpanishSpain -> Locale.forLanguageTag(LOCALE_SPAIN_TAG)
-    AppLanguage.System -> Locale.getDefault()
+    AppLanguage.System -> defaultLocale
 }

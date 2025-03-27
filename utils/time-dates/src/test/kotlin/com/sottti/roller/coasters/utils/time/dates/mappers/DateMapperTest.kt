@@ -1,11 +1,9 @@
 package com.sottti.roller.coasters.utils.time.dates.mappers
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.utils.time.dates.mapper.EMPTY_OR_BLANK_DATE_MESSAGE
 import com.sottti.roller.coasters.utils.time.dates.mapper.INVALID_DATE_FORMAT_MESSAGE
 import com.sottti.roller.coasters.utils.time.dates.mapper.invalidFullDateMessage
 import com.sottti.roller.coasters.utils.time.dates.mapper.invalidYearMonthMessage
-import com.sottti.roller.coasters.utils.time.dates.mapper.invalidYearOnlyMessage
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSortableString
 import org.junit.Test
@@ -129,10 +127,7 @@ internal class DateMapperTest {
 
     @Test
     fun `map to date empty string throws illegal argument exception`() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            emptyString.toDate()
-        }
-        assertThat(exception.message).isEqualTo(EMPTY_OR_BLANK_DATE_MESSAGE)
+        assertThat(emptyString.toDate()).isNull()
     }
 
     @Test

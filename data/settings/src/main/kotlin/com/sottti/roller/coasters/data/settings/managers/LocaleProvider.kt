@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import java.util.Locale
 import javax.inject.Inject
 
-public class LocaleProvider @Inject constructor() {
-    public fun getAppLocale(): Locale =
+internal class LocaleProvider @Inject constructor() {
+    fun getAppLocale(): Locale =
         AppCompatDelegate.getApplicationLocales().get(0) ?: getSystemLocale()
 
-    public fun getSystemLocale(): Locale = Locale.getDefault()
+    fun getSystemLocale(): Locale = Locale.getDefault()
 
-    public fun getSystemULocale(): ULocale = ULocale.getDefault()
+    fun getSystemULocale(): ULocale = ULocale.getDefault()
 }
