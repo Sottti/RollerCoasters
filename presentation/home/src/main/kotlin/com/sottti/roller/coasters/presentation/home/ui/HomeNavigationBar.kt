@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,17 +21,16 @@ import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
-import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Settings
-import com.sottti.roller.coasters.presentation.settings.ui.SettingsUi
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun NavigationBar(
     viewModel: HomeViewModel,
+    rootNavController: NavHostController,
 ) {
+    val navController = rememberNavController()
     val startDestination = Explore.route
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val navController = rememberNavController()
     val selectedTab by remember { mutableStateOf(startDestination) }
     val scrollToTopCallbacks = remember { mutableMapOf<String, () -> Unit>() }
 
@@ -56,13 +56,12 @@ internal fun NavigationBar(
         ) {
             composable(Explore.route) {
                 ExploreUi(
-                    navController = navController,
+                    navController = rootNavController,
                     onScrollToTop = { callback -> scrollToTopCallbacks[Explore.route] = callback },
                 )
             }
             composable(Favourites.route) { FavouritesUi() }
             composable(AboutMe.route) { AboutMeUi() }
-            composable(Settings.route) { SettingsUi(navController) }
         }
     }
 }
