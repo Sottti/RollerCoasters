@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.utils.format
+package com.sottti.roller.coasters.presentation.format
 
 import android.content.Context
 import com.sottti.roller.coasters.domain.model.Feet
@@ -15,11 +15,9 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Length
 import com.sottti.roller.coasters.domain.roller.coasters.model.MaxVertical
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
-import com.sottti.roller.coasters.presentation.format.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Locale
 import javax.inject.Inject
-
 
 public class UnitDisplayFormatter @Inject constructor(
     @ApplicationContext private val context: Context,

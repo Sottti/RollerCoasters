@@ -1,9 +1,9 @@
-package com.sottti.roller.coasters.presentation.utils.format
+package com.sottti.roller.coasters.presentation.format
 
 import android.icu.text.DecimalFormat
 import android.icu.text.DecimalFormatSymbols
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
-import com.sottti.roller.coasters.presentation.utils.format.mapper.toLocale
+import com.sottti.roller.coasters.presentation.format.mapper.toLocale
 import java.util.Locale
 
 internal fun Double.toDisplayFormat(

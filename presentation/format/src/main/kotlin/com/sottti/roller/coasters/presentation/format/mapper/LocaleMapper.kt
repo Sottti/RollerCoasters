@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.utils.format.mapper
+package com.sottti.roller.coasters.presentation.format.mapper
 
 import androidx.annotation.VisibleForTesting
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage

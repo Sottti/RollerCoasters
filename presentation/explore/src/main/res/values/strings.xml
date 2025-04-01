@@ -13,4 +13,5 @@
     <string name="chip_label_type_all">All</string>
     <string name="chip_label_type_steel">Steel</string>
     <string name="chip_label_type_wood">Wood</string>
+    <string name="roller_coaster_ranking">Ranked #%1$d</string>
 </resources>

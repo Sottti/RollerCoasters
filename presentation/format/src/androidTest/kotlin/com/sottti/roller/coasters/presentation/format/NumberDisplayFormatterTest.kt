@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.utils.format
+package com.sottti.roller.coasters.presentation.format
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat

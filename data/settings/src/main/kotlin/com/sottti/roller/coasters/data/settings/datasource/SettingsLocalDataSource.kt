@@ -124,6 +124,8 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         measurementSystemManager.systemMeasurementSystem
 
+    fun getDefaultLocale(): Locale = localeManager.systemLocale
+
     private val appDynamicColorDefault by lazy {
         features.systemDynamicColorAvailable()
     }

@@ -14,6 +14,7 @@ object module {
         const val previews = ":presentation:previews"
         const val rollerCoasterDetails = ":presentation:roller-coaster-details"
         const val settings = ":presentation:settings"
+        const val stringProvider = ":presentation:string-provider"
         const val topBars = ":presentation:top-bars"
 
         object designSystem {

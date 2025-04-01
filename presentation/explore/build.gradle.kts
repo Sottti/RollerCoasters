@@ -30,6 +30,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.format))
     implementation(project(module.presentation.imageLoading))
+    implementation(project(module.presentation.stringProvider))
     implementation(project(module.presentation.topBars))
     ksp(libs.hilt.compiler)
 }

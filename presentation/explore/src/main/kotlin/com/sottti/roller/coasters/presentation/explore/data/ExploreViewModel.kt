@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
 import com.sottti.roller.coasters.domain.settings.usecase.language.GetAppLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.locale.GetDefaultLocale
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
@@ -41,7 +42,8 @@ import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.Sor
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.AllFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.SteelFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.WoodFilter
-import com.sottti.roller.coasters.presentation.utils.format.UnitDisplayFormatter
+import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
+import com.sottti.roller.coasters.presentation.string.provider.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -59,8 +61,10 @@ import javax.inject.Inject
 @HiltViewModel
 internal class ExploreViewModel @Inject constructor(
     getAppLanguage: GetAppLanguage,
+    getDefaultLocale: GetDefaultLocale,
     observeRollerCoasters: ObserveRollerCoasters,
     rollerCoastersRepository: RollerCoastersRepository,
+    stringProvider: StringProvider,
     unitDisplayFormatter: UnitDisplayFormatter,
 ) : ViewModel() {
 
@@ -73,7 +77,13 @@ internal class ExploreViewModel @Inject constructor(
             observeRollerCoasters(
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter,
-            ).toUiModel(getAppLanguage(), sortByFilter, unitDisplayFormatter)
+            ).toUiModel(
+                appLanguage = getAppLanguage(),
+                defaultLocale = getDefaultLocale(),
+                sortByFilter = sortByFilter,
+                stringProvider = stringProvider,
+                unitDisplayFormatter = unitDisplayFormatter,
+            )
         }.flatMapLatest { it }
             .cachedIn(viewModelScope)
 

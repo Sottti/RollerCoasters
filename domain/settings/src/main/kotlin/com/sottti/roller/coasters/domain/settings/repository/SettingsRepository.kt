@@ -8,6 +8,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import kotlinx.coroutines.flow.Flow
+import java.util.Locale
 
 public interface SettingsRepository {
     public suspend fun setAppDynamicColor(appDynamicColor: AppDynamicColor)
@@ -33,4 +34,6 @@ public interface SettingsRepository {
     public suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem)
 
     public fun getSystemMeasurementSystem(): SystemMeasurementSystem
+
+    public fun getDefaultLocale(): Locale
 }

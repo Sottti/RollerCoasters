@@ -50,6 +50,7 @@ include(
     ":presentation:previews",
     ":presentation:roller-coaster-details",
     ":presentation:settings",
+    ":presentation:string-provider",
     ":presentation:top-bars",
     ":utils:test-stubs",
     ":utils:time-dates",

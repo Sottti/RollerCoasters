@@ -10,6 +10,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.System
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
+import java.util.Locale
 import javax.inject.Inject
 
 internal class SettingsRepositoryImpl @Inject constructor(
@@ -69,4 +70,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         localDataSource.getSystemMeasurementSystem()
+
+    override fun getDefaultLocale(): Locale =
+        localDataSource.getDefaultLocale()
 }
