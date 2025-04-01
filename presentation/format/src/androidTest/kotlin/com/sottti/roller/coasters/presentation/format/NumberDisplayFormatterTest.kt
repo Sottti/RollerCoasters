@@ -11,173 +11,158 @@ import java.util.Locale
 internal class DisplayFormatTest {
 
     @Test
-    fun formats_positive_number_with_English_GB_locale() {
-        val result = 1234.567.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1,234.567")
-    }
-
-    @Test
-    fun formats_positive_number_with_Galician_locale() {
-        val result = 1234.567.toDisplayFormat(
-            appLanguage = AppLanguage.Galician,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1.234,567")
-    }
-
-    @Test
-    fun formats_positive_number_with_Spanish_Spain_locale() {
-        val result = 1234.567.toDisplayFormat(
-            appLanguage = AppLanguage.SpanishSpain,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1.234,567")
-    }
-
-    @Test
-    fun formats_positive_number_with_System_locale_as_US() {
-        val result = 1234.567.toDisplayFormat(
-            appLanguage = AppLanguage.System,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1,234.567")
-    }
-
-    @Test
-    fun formats_positive_number_with_System_locale_as_France() {
-        val result = 1234.567.toDisplayFormat(
-            appLanguage = AppLanguage.System,
-            defaultLocale = Locale.FRANCE,
-        )
-        assertThat(result).isEqualTo("1\u202F234,567") // Narrow no-break space
-    }
-
-    @Test
-    fun removes_trailing_zeros_after_decimal_in_English_GB() {
-        val result = 123.500.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("123.5")
-    }
-
-    @Test
-    fun removes_trailing_zeros_after_decimal_in_Galician() {
-        val result = 123.500.toDisplayFormat(
-            appLanguage = AppLanguage.Galician,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("123,5")
-    }
-
-    @Test
-    fun simplifies_zero_with_trailing_zeros_in_English_GB() {
-        val result = 0.000.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("0")
-    }
-
-    @Test
-    fun simplifies_zero_with_trailing_zeros_in_Spanish_Spain() {
-        val result = 0.000.toDisplayFormat(
-            appLanguage = AppLanguage.SpanishSpain,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("0")
-    }
-
-    @Test
-    fun formats_large_number_with_grouping_in_English_GB() {
-        val result = 1234567.89.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1,234,567.89")
-    }
-
-    @Test
-    fun formats_large_number_with_grouping_in_Galician() {
-        val result = 1234567.89.toDisplayFormat(
-            appLanguage = AppLanguage.Galician,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1.234.567,89")
-    }
-
-    @Test
-    fun formats_negative_number_in_English_GB() {
-        val result = (-123.45).toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("-123.45")
-    }
-
-    @Test
-    fun formats_negative_number_in_Spanish_Spain() {
-        val result = (-123.45).toDisplayFormat(
-            appLanguage = AppLanguage.SpanishSpain,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("-123,45")
-    }
-
-    @Test
-    fun limits_precision_to_3_digits_in_English_GB() {
-        val result = 1.123456.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1.123")
-    }
-
-    @Test
-    fun limits_precision_to_3_digits_in_Galician() {
-        val result = 1.123456.toDisplayFormat(
-            appLanguage = AppLanguage.Galician,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("1,123")
-    }
-
-    @Test
-    fun formats_very_small_number_in_English_GB() {
-        val result = 0.001.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("0.001")
-    }
-
-    @Test
-    fun formats_very_small_number_in_Spanish_Spain() {
-        val result = 0.001.toDisplayFormat(
-            appLanguage = AppLanguage.SpanishSpain,
-            defaultLocale = Locale.US,
-        )
-        assertThat(result).isEqualTo("0,001")
-    }
-
-    @Test
-    fun formats_integer_in_English_GB() {
-        val result = 1234.0.toDisplayFormat(
-            appLanguage = AppLanguage.EnglishGb,
-            defaultLocale = Locale.US,
-        )
+    fun to_display_format_integer_returnsCorrect_inEnglishGb() {
+        val result = 1234.0.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
         assertThat(result).isEqualTo("1,234")
     }
 
     @Test
-    fun formats_integer_in_Galician() {
-        val result = 1234.0.toDisplayFormat(
-            appLanguage = AppLanguage.Galician,
-            defaultLocale = Locale.US,
-        )
+    fun to_display_format_integer_returnsCorrect_inGalician() {
+        val result = 1234.0.toDisplayFormat(AppLanguage.Galician, Locale.US)
         assertThat(result).isEqualTo("1.234")
+    }
+
+    @Test
+    fun to_display_format_decimal_returnsCorrect_inGalician() {
+        val result = 250.5.toDisplayFormat(AppLanguage.Galician, Locale.US)
+        assertThat(result).isEqualTo("250,5")
+    }
+
+    @Test
+    fun to_display_format_decimal_returnsCorrect_inEnglishGb() {
+        val result = 123.5.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("123.5")
+    }
+
+    @Test
+    fun to_display_format_zero_returnsCorrect_inEnglishGb() {
+        val result = 0.0.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("0")
+    }
+
+    @Test
+    fun to_display_format_zero_returnsCorrect_inSpanishSpain() {
+        val result = 0.0.toDisplayFormat(AppLanguage.SpanishSpain, Locale.US)
+        assertThat(result).isEqualTo("0")
+    }
+
+    @Test
+    fun to_display_format_positiveNumber_formatsCorrectly_inEnglishGb() {
+        val result = 1234.567.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("1,234.567")
+    }
+
+    @Test
+    fun to_display_format_positiveNumber_formatsCorrectly_inGalician() {
+        val result = 1234.567.toDisplayFormat(AppLanguage.Galician, Locale.US)
+        assertThat(result).isEqualTo("1.234,567")
+    }
+
+    @Test
+    fun to_display_format_positiveNumber_formatsCorrectly_inSpanishSpain() {
+        val result = 1234.567.toDisplayFormat(AppLanguage.SpanishSpain, Locale.US)
+        assertThat(result).isEqualTo("1.234,567")
+    }
+
+    @Test
+    fun to_display_format_positiveNumber_formatsCorrectly_withSystemLocaleUs() {
+        val result = 1234.567.toDisplayFormat(AppLanguage.System, Locale.US)
+        assertThat(result).isEqualTo("1,234.567")
+    }
+
+    @Test
+    fun to_display_format_positiveNumber_formatsCorrectly_withSystemLocaleFrance() {
+        val result = 1234.567.toDisplayFormat(AppLanguage.System, Locale.FRANCE)
+        assertThat(result).isEqualTo("1\u202F234,567")
+    }
+
+    @Test
+    fun to_display_format_removesTrailingZeros_inEnglishGb() {
+        val result = 123.500.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("123.5")
+    }
+
+    @Test
+    fun to_display_format_removesTrailingZeros_inGalician() {
+        val result = 123.500.toDisplayFormat(AppLanguage.Galician, Locale.US)
+        assertThat(result).isEqualTo("123,5")
+    }
+
+    @Test
+    fun to_display_format_removesTrailingZeros_inThreeDecimalPlaces_inEnglishGb() {
+        val result = 1234.500.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("1,234.5")
+    }
+
+    @Test
+    fun to_display_format_removesTrailingZeros_fromLargeNumber_inEnglishGb() {
+        val result = 1000.2000.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("1,000.2")
+    }
+
+    @Test
+    fun to_display_format_largeNumber_formatsCorrectly_inEnglishGb() {
+        val result = 1234567.89.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("1,234,567.89")
+    }
+
+    @Test
+    fun to_display_format_largeNumber_formatsCorrectly_inGalician() {
+        val result = 1234567.89.toDisplayFormat(AppLanguage.Galician, Locale.US)
+        assertThat(result).isEqualTo("1.234.567,89")
+    }
+
+    @Test
+    fun to_display_format_largeNumber_formatsCorrectly_inSpanishSpain() {
+        val result = 1234567.89.toDisplayFormat(AppLanguage.SpanishSpain, Locale.US)
+        assertThat(result).isEqualTo("1.234.567,89")
+    }
+
+    @Test
+    fun to_display_format_largeNumber_withoutDecimals_formatsCorrectly_inGalician() {
+        val result = 12345.0.toDisplayFormat(AppLanguage.Galician, Locale.US)
+        assertThat(result).isEqualTo("12.345")
+    }
+
+    @Test
+    fun to_display_format_limitsPrecisionToThreeDigits_inEnglishGb() {
+        val result = 1.123456.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("1.123")
+    }
+
+    @Test
+    fun to_display_format_limitsPrecisionToThreeDigits_inGalician() {
+        val result = 1.123456.toDisplayFormat(AppLanguage.Galician, Locale.US)
+        assertThat(result).isEqualTo("1,123")
+    }
+
+    @Test
+    fun to_display_format_roundsUpCorrectly_inEnglishGb() {
+        val result = 999.9999.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("1,000")
+    }
+
+    @Test
+    fun to_display_format_negativeNumber_formatsCorrectly_inEnglishGb() {
+        val result = (-123.45).toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("-123.45")
+    }
+
+    @Test
+    fun to_display_format_negativeNumber_formatsCorrectly_inSpanishSpain() {
+        val result = (-123.45).toDisplayFormat(AppLanguage.SpanishSpain, Locale.US)
+        assertThat(result).isEqualTo("-123,45")
+    }
+
+    @Test
+    fun to_display_format_verySmallNumber_formatsCorrectly_inEnglishGb() {
+        val result = 0.001.toDisplayFormat(AppLanguage.EnglishGb, Locale.US)
+        assertThat(result).isEqualTo("0.001")
+    }
+
+    @Test
+    fun to_display_format_verySmallNumber_formatsCorrectly_inSpanishSpain() {
+        val result = 0.001.toDisplayFormat(AppLanguage.SpanishSpain, Locale.US)
+        assertThat(result).isEqualTo("0,001")
     }
 }

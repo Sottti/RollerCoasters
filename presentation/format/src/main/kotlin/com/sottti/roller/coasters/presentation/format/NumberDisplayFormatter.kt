@@ -1,21 +1,20 @@
 package com.sottti.roller.coasters.presentation.format
 
-import android.icu.text.DecimalFormat
-import android.icu.text.DecimalFormatSymbols
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.format.mapper.toLocale
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.util.Locale
 
 internal fun Double.toDisplayFormat(
     appLanguage: AppLanguage,
     defaultLocale: Locale,
 ): String {
-    val formatter = DecimalFormat("#,###").apply { maximumFractionDigits = 3 }
-    val symbols = DecimalFormatSymbols(appLanguage.toLocale(defaultLocale))
-    formatter.decimalFormatSymbols = symbols
+    val locale = appLanguage.toLocale(defaultLocale)
+    val symbols = DecimalFormatSymbols(locale)
+    val formatter = DecimalFormat("#,##0.###", symbols)
     val decimalSeparator = Regex.escape(symbols.decimalSeparator.toString())
     return formatter
         .format(this)
-        .replace("(\\d*[1-9])0+$".toRegex(), "$1")
-        .replace("^0${decimalSeparator}0+$".toRegex(), "0")
+        .replace("${decimalSeparator}0+$".toRegex(), "")
 }

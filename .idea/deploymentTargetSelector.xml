@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-04-01T16:05:49.888009Z">
+        <DropdownSelection timestamp="2025-04-01T20:27:14.654446Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/sotti/.android/avd/Pixel_9_Pro_XL.avd" />
@@ -35,10 +35,13 @@
       <SelectionState runConfigName="presentation.about-me">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="SettingsLocalDataSourceTest">
+      <SelectionState runConfigName="DisplayFormatTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="DisplayFormatTest">
+      <SelectionState runConfigName="fails()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="to_display_format_verySmallNumber_formatsCorrectly_inSpanishSpain()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

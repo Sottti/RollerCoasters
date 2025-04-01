@@ -61,7 +61,7 @@ internal fun MutableStateFlow<SettingsState>.hideLanguagePicker() {
 private fun languagePickerState(
     selectedLanguage: LanguageUi,
 ) = LanguagePickerState(
-    title = R.string.color_contrast_picker_title,
+    title = R.string.language_picker_title,
     confirm = R.string.picker_confirm,
     dismiss = R.string.picker_dismiss,
     languages = languagesList(selectedLanguage),
