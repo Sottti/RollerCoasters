@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import java.util.Locale
 import javax.inject.Inject
 
@@ -115,6 +116,7 @@ internal class SettingsLocalDataSource @Inject constructor(
             .activityCreatedFlow
             .map { localeManager.appLocale.toLanguage() }
             .distinctUntilChanged()
+            .onStart { emit(localeManager.appLocale.toLanguage()) }
 
     fun getAppLocale(): Locale = localeManager.appLocale
 
