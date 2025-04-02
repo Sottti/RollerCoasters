@@ -4,7 +4,9 @@ import android.icu.util.ULocale
 import androidx.appcompat.app.AppCompatDelegate
 import java.util.Locale
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class LocaleProvider @Inject constructor() {
     fun getAppLocale(): Locale =
         AppCompatDelegate.getApplicationLocales().get(0) ?: getSystemLocale()

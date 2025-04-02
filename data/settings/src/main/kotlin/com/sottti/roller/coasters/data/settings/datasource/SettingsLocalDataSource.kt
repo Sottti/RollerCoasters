@@ -27,12 +27,14 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.util.Locale
 import javax.inject.Inject
 
 internal class SettingsLocalDataSource @Inject constructor(
+    private val activityLifecycleEmitter: ActivityLifecycleEmitter,
     private val dataStore: DataStore<Preferences>,
     private val localeManager: LocaleManager,
     private val measurementSystemManager: MeasurementSystemManager,
@@ -44,10 +46,10 @@ internal class SettingsLocalDataSource @Inject constructor(
         internal const val DATA_STORE_NAME = "settings"
 
         @VisibleForTesting
-        internal val appDynamicColorKey = booleanPreferencesKey("app_dynamic_color")
+        internal val appColorContrastKey = stringPreferencesKey("app_color_contrast")
 
         @VisibleForTesting
-        internal val appColorContrastKey = stringPreferencesKey("app_color_contrast")
+        internal val appDynamicColorKey = booleanPreferencesKey("app_dynamic_color")
 
         @VisibleForTesting
         internal val appMeasurementSystemKey = stringPreferencesKey("app_measurement_system")
@@ -105,11 +107,17 @@ internal class SettingsLocalDataSource @Inject constructor(
         localeManager.setLocaleList(appLanguage.toLocaleList())
     }
 
-    fun getAppLanguage(): AppLanguage =
-        localeManager.appLocale.toLanguage()
+    suspend fun getAppLanguage(): AppLanguage = appLanguageFlow.first()
 
-    fun getAppLocale(): Locale =
-        localeManager.appLocale
+    fun observeAppLanguage(): Flow<AppLanguage> =
+        activityLifecycleEmitter
+            .activityCreatedFlow
+            .map { localeManager.appLocale.toLanguage() }
+            .distinctUntilChanged()
+
+    fun getAppLocale(): Locale = localeManager.appLocale
+
+    fun getDefaultLocale(): Locale = localeManager.systemLocale
 
     suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
         dataStore.edit { preferences ->
@@ -117,22 +125,20 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
-    suspend fun getAppMeasurementSystem(): AppMeasurementSystem = appMeasurementSystemFlow.first()
+    suspend fun getAppMeasurementSystem(): AppMeasurementSystem =
+        appMeasurementSystemFlow.first()
 
-    fun observeAppMeasurementSystem(): Flow<AppMeasurementSystem> = appMeasurementSystemFlow
+    fun observeAppMeasurementSystem(): Flow<AppMeasurementSystem> =
+        appMeasurementSystemFlow
 
     fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         measurementSystemManager.systemMeasurementSystem
 
-    fun getDefaultLocale(): Locale = localeManager.systemLocale
-
-    private val appDynamicColorDefault by lazy {
-        features.systemDynamicColorAvailable()
-    }
+    private val appDynamicColorDefault by lazy { features.systemDynamicColorAvailable() }
 
     private val appThemeFlow: Flow<AppTheme> =
         dataStore.data.map { preferences ->
-            val key = (preferences[appThemeKey] ?: appThemeDefaultValue)
+            val key = preferences[appThemeKey] ?: appThemeDefaultValue
             key.toTheme()
         }
 
@@ -141,6 +147,8 @@ internal class SettingsLocalDataSource @Inject constructor(
             val key = preferences[appColorContrastKey] ?: appColorContrastDefaultValue
             key.toAppColorContrast()
         }
+
+    private val appLanguageFlow: Flow<AppLanguage> = observeAppLanguage()
 
     private val appMeasurementSystemFlow: Flow<AppMeasurementSystem> =
         dataStore.data.map { preferences ->
@@ -162,7 +170,5 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
-    private val appMeasurementSystemDefaultValue by lazy {
-        AppMeasurementSystem.System.key
-    }
+    private val appMeasurementSystemDefaultValue by lazy { AppMeasurementSystem.System.key }
 }

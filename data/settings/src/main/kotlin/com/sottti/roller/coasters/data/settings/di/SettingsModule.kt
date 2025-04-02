@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.data.settings.di
 
 import android.app.UiModeManager
 import android.content.Context
+import com.sottti.roller.coasters.data.settings.datasource.ActivityLifecycleEmitter
 import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
 import com.sottti.roller.coasters.data.settings.datasource.dataStore
 import com.sottti.roller.coasters.data.settings.managers.LocaleManager
@@ -40,17 +41,19 @@ internal object SettingsModule {
     @Singleton
     fun provideLocalDataSource(
         @ApplicationContext context: Context,
-        systemColorContrastManager: SystemColorContrastManager,
+        activityLifecycleEmitter: ActivityLifecycleEmitter,
+        features: Features,
         localeManager: LocaleManager,
         measurementSystemManager: MeasurementSystemManager,
-        features: Features,
+        systemColorContrastManager: SystemColorContrastManager,
         themeManager: ThemeManager,
     ): SettingsLocalDataSource = SettingsLocalDataSource(
-        systemColorContrastManager = systemColorContrastManager,
+        activityLifecycleEmitter = activityLifecycleEmitter,
         dataStore = context.dataStore,
+        features = features,
         localeManager = localeManager,
         measurementSystemManager = measurementSystemManager,
-        features = features,
+        systemColorContrastManager = systemColorContrastManager,
         themeManager = themeManager,
     )
 }

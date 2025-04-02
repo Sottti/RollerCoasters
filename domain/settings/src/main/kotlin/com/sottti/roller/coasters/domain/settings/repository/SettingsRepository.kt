@@ -24,16 +24,17 @@ public interface SettingsRepository {
     public suspend fun getAppColorContrast(): AppColorContrast
     public fun observeAppColorContrast(): Flow<AppColorContrast>
 
-    public fun getSystemColorContrast(): SystemColorContrast
+    public fun getAppSystemColorContrast(): SystemColorContrast
 
-    public fun setLanguage(appLanguage: AppLanguage)
-    public suspend fun getLanguage(): AppLanguage
+    public suspend fun setAppLanguage(appLanguage: AppLanguage)
+    public suspend fun getAppLanguage(): AppLanguage
+    public fun observeAppLanguage(): Flow<AppLanguage>
+
+    public fun getDefaultLocale(): Locale
 
     public fun observeAppMeasurementSystem(): Flow<AppMeasurementSystem>
     public suspend fun getAppMeasurementSystem(): AppMeasurementSystem
     public suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem)
 
     public fun getSystemMeasurementSystem(): SystemMeasurementSystem
-
-    public fun getDefaultLocale(): Locale
 }

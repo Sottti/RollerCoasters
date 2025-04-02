@@ -7,7 +7,9 @@ import com.sottti.roller.coasters.data.settings.mapper.toUiModeManagerNightMode
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class ThemeManager @Inject constructor(
     private val features: Features,
     private val uiModeManager: UiModeManager?,

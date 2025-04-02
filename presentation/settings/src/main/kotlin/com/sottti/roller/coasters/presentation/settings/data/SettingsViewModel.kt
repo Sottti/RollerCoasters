@@ -1,8 +1,5 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
-import android.app.Application
-import android.content.ComponentCallbacks
-import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sottti.roller.coasters.domain.features.Features
@@ -14,6 +11,7 @@ import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetAppCo
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveAppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetAppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.language.GetAppLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.SetAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetAppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveAppMeasurementSystem
@@ -74,7 +72,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
-    private val application: Application,
     private val features: Features,
     private val getAppColorContrast: GetAppColorContrast,
     private val getAppLanguage: GetAppLanguage,
@@ -82,6 +79,7 @@ internal class SettingsViewModel @Inject constructor(
     private val getAppTheme: GetAppTheme,
     private val observeAppColorContrast: ObserveAppColorContrast,
     private val observeAppDynamicColor: ObserveAppDynamicColor,
+    private val observeAppLanguage: ObserveAppLanguage,
     private val observeAppMeasurementSystem: ObserveAppMeasurementSystem,
     private val observeAppTheme: ObserveAppTheme,
     private val setAppColorContrast: SetAppColorContrast,
@@ -94,10 +92,6 @@ internal class SettingsViewModel @Inject constructor(
     private val _state = MutableStateFlow(initialState(features.systemDynamicColorAvailable()))
     internal val state: StateFlow<SettingsState> = _state.asStateFlow()
     internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
-    private val configObserver = object : ComponentCallbacks {
-        override fun onConfigurationChanged(newConfig: Configuration) = updateLanguage()
-        override fun onLowMemory() = Unit
-    }
 
     init {
         if (features.systemDynamicColorAvailable()) {
@@ -105,22 +99,8 @@ internal class SettingsViewModel @Inject constructor(
         }
         collectTheme()
         collectAppColorContrast()
-        updateLanguage()
+        collectAppLanguage()
         collectMeasurementSystem()
-        registerForConfigChanges()
-    }
-
-    override fun onCleared() {
-        unregisterForConfigChanges()
-        super.onCleared()
-    }
-
-    private fun registerForConfigChanges() {
-        application.registerComponentCallbacks(configObserver)
-    }
-
-    private fun unregisterForConfigChanges() {
-        application.unregisterComponentCallbacks(configObserver)
     }
 
     private fun collectAppDynamicColor() {
@@ -144,9 +124,10 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun updateLanguage() {
+    private fun collectAppLanguage() {
         viewModelScope.launch {
-            _state.updateAppLanguage(getAppLanguage())
+            observeAppLanguage()
+                .collect { appLanguage -> _state.updateAppLanguage(appLanguage) }
         }
     }
 
@@ -242,7 +223,6 @@ internal class SettingsViewModel @Inject constructor(
             is ConfirmAppLanguagePickerSelection -> {
                 _state.hideAppLanguagePicker()
                 setAppLanguage(action.appLanguage.toDomain())
-                updateLanguage()
             }
 
             is DismissAppLanguagePicker -> _state.hideAppLanguagePicker()

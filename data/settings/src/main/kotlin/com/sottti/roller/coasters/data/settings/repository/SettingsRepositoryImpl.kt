@@ -48,15 +48,21 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun observeAppColorContrast(): Flow<AppColorContrast> =
         localDataSource.observeAppColorContrast()
 
-    override fun getSystemColorContrast(): SystemColorContrast =
+    override fun getAppSystemColorContrast(): SystemColorContrast =
         localDataSource.getSystemColorContrast()
 
-    override fun setLanguage(appLanguage: AppLanguage) {
+    override suspend fun setAppLanguage(appLanguage: AppLanguage) {
         localDataSource.setAppLanguage(appLanguage)
     }
 
-    override suspend fun getLanguage(): AppLanguage =
+    override suspend fun getAppLanguage(): AppLanguage =
         localDataSource.getAppLanguage()
+
+    override fun observeAppLanguage(): Flow<AppLanguage> =
+        localDataSource.observeAppLanguage()
+
+    override fun getDefaultLocale(): Locale =
+        localDataSource.getDefaultLocale()
 
     override suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
         localDataSource.setAppMeasurementSystem(appMeasurementSystem)
@@ -70,7 +76,4 @@ internal class SettingsRepositoryImpl @Inject constructor(
 
     override fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         localDataSource.getSystemMeasurementSystem()
-
-    override fun getDefaultLocale(): Locale =
-        localDataSource.getDefaultLocale()
 }
