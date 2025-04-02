@@ -16,7 +16,6 @@ internal fun AppThemePickerDialog(
     state: ThemePickerState,
     onAction: (SettingsAction) -> Unit,
 ) {
-
     DialogWithRadioButtons(
         title = state.title,
         confirm = state.confirm,

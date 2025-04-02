@@ -19,8 +19,8 @@ internal fun DialogRadioButtonOption.toAppThemeUi(
 
 internal fun AppTheme.toPresentationModel(selected: Boolean): AppThemeUi =
     when (this) {
-        AppTheme.LightAppTheme -> darkTheme(selected)
-        AppTheme.DarkAppTheme -> lightTheme(selected)
+        AppTheme.LightAppTheme -> lightTheme(selected)
+        AppTheme.DarkAppTheme -> darkTheme(selected)
         AppTheme.SystemAppTheme -> systemTheme(selected)
     }
 
