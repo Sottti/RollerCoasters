@@ -5,35 +5,35 @@ import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
-internal data class LanguageState(
-    val listItem: LanguageListItemState,
-    val picker: LanguagePickerState?,
+internal data class AppLanguageState(
+    val listItem: AppLanguageListItemState,
+    val picker: AppLanguagePickerState?,
 )
 
 @Immutable
-internal data class LanguageListItemState(
+internal data class AppLanguageListItemState(
     @StringRes val headline: Int,
     @StringRes val supporting: Int,
-    val selectedLanguage: SelectedLanguageState,
+    val selectedAppLanguage: AppSelectedLanguageState,
     val icon: IconState,
 )
 
 @Immutable
-internal sealed class SelectedLanguageState {
-    data object Loading : SelectedLanguageState()
-    data class Loaded(val language: LanguageUi) : SelectedLanguageState()
+internal sealed class AppSelectedLanguageState {
+    data object Loading : AppSelectedLanguageState()
+    data class Loaded(val appLanguage: AppLanguageUi) : AppSelectedLanguageState()
 }
 
 @Immutable
-internal data class LanguagePickerState(
+internal data class AppLanguagePickerState(
     @StringRes val confirm: Int,
     @StringRes val dismiss: Int,
     @StringRes val title: Int,
-    val languages: List<LanguageUi>,
+    val appLanguages: List<AppLanguageUi>,
 )
 
 @Immutable
-internal sealed class LanguageUi(
+internal sealed class AppLanguageUi(
     @StringRes val text: Int,
     val icon: IconState,
     val selected: Boolean,
@@ -42,23 +42,23 @@ internal sealed class LanguageUi(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : LanguageUi(text, icon, selected)
+    ) : AppLanguageUi(text, icon, selected)
 
     class EnglishGbLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : LanguageUi(text, icon, selected)
+    ) : AppLanguageUi(text, icon, selected)
 
     class GalicianLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : LanguageUi(text, icon, selected)
+    ) : AppLanguageUi(text, icon, selected)
 
     class SystemLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : LanguageUi(text, icon, selected)
+    ) : AppLanguageUi(text, icon, selected)
 }

@@ -14,23 +14,23 @@ import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
-import com.sottti.roller.coasters.presentation.settings.model.ColorContrastListItemState
+import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastListItemState
+import com.sottti.roller.coasters.presentation.settings.model.AppLanguageListItemState
+import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemListItemState
+import com.sottti.roller.coasters.presentation.settings.model.AppSelectedLanguageState
+import com.sottti.roller.coasters.presentation.settings.model.AppThemeListItemState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorState
-import com.sottti.roller.coasters.presentation.settings.model.LanguageListItemState
-import com.sottti.roller.coasters.presentation.settings.model.MeasurementSystemListItemState
-import com.sottti.roller.coasters.presentation.settings.model.SelectedColorContrastState
-import com.sottti.roller.coasters.presentation.settings.model.SelectedLanguageState
-import com.sottti.roller.coasters.presentation.settings.model.SelectedMeasurementSystemState
-import com.sottti.roller.coasters.presentation.settings.model.SelectedThemeState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorContrastState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasurementSystemState
+import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
-import com.sottti.roller.coasters.presentation.settings.model.ThemeListItemState
 
 @Composable
 internal fun SettingsContent(
@@ -65,25 +65,25 @@ private fun SettingsList(
         }
         item {
             ThemeSetting(
-                state = state.theme.listItem,
-                onLaunchThemePicker = { onAction(LaunchThemePicker) })
+                state = state.appTheme.listItem,
+                onLaunchThemePicker = { onAction(LaunchAppThemePicker) })
         }
         item {
             ColorContrastSetting(
-                state = state.colorContrast.listItem,
-                onLaunchColorContrastPicker = { onAction(LaunchColorContrastPicker) },
+                state = state.appColorContrast.listItem,
+                onLaunchColorContrastPicker = { onAction(LaunchAppColorContrastPicker) },
             )
         }
         item {
             LanguageSetting(
-                state = state.language.listItem,
-                onLaunchLanguagePicker = { onAction(LaunchLanguagePicker) },
+                state = state.appLanguage.listItem,
+                onLaunchLanguagePicker = { onAction(LaunchAppLanguagePicker) },
             )
         }
         item {
             MeasurementSystemSetting(
-                state = state.measurementSystem.listItem,
-                onLaunchMeasurementSystemPicker = { onAction(LaunchMeasurementSystemPicker) },
+                state = state.appMeasurementSystem.listItem,
+                onLaunchMeasurementSystemPicker = { onAction(LaunchAppMeasurementSystemPicker) },
             )
         }
     }
@@ -94,36 +94,36 @@ private fun Dialogs(
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
 ) {
-    state.theme.picker?.let { themePickerState ->
-        ThemePickerDialog(
+    state.appTheme.picker?.let { themePickerState ->
+        AppThemePickerDialog(
             state = themePickerState,
             onAction = onAction,
         )
     }
 
-    state.colorContrast.picker?.let { colorContrastPickerState ->
-        ColorContrastPickerDialog(
+    state.appColorContrast.picker?.let { colorContrastPickerState ->
+        AppColorContrastPickerDialog(
             state = colorContrastPickerState,
             onAction = onAction,
         )
     }
 
-    state.colorContrast.notAvailableMessage?.let { colorContrastNotAvailableMessageState ->
-        ColorContrastNotAvailableDialog(
+    state.appColorContrast.notAvailableMessage?.let { colorContrastNotAvailableMessageState ->
+        AppColorContrastNotAvailableDialog(
             state = colorContrastNotAvailableMessageState,
             onAction = onAction,
         )
     }
 
-    state.language.picker?.let { languagePickerState ->
+    state.appLanguage.picker?.let { languagePickerState ->
         LanguagePickerDialog(
             state = languagePickerState,
             onAction = onAction,
         )
     }
 
-    state.measurementSystem.picker?.let { measurementSystemPickerState ->
-        MeasurementSystemPickerDialog(
+    state.appMeasurementSystem.picker?.let { measurementSystemPickerState ->
+        AppMeasurementSystemPickerDialog(
             state = measurementSystemPickerState,
             onAction = onAction,
         )
@@ -161,7 +161,7 @@ private fun DynamicColorTrailingContent(
 
 @Composable
 private fun ThemeSetting(
-    state: ThemeListItemState,
+    state: AppThemeListItemState,
     onLaunchThemePicker: () -> Unit,
 ) {
     ListItem(
@@ -169,21 +169,21 @@ private fun ThemeSetting(
         headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text.Vanilla(state.supporting) },
-        trailingContent = { ThemeTrailingContent(state.selectedTheme) },
+        trailingContent = { ThemeTrailingContent(state.selectedAppTheme) },
     )
 }
 
 @Composable
-private fun ThemeTrailingContent(state: SelectedThemeState) {
+private fun ThemeTrailingContent(state: SelectedAppThemeState) {
     when (state) {
-        is SelectedThemeState.Loaded -> Text.Vanilla(state.theme.text)
-        SelectedThemeState.Loading -> SmallProgressIndicator()
+        is SelectedAppThemeState.Loaded -> Text.Vanilla(state.appTheme.text)
+        SelectedAppThemeState.Loading -> SmallProgressIndicator()
     }
 }
 
 @Composable
 private fun ColorContrastSetting(
-    state: ColorContrastListItemState,
+    state: AppColorContrastListItemState,
     onLaunchColorContrastPicker: () -> Unit,
 ) {
     ListItem(
@@ -191,21 +191,21 @@ private fun ColorContrastSetting(
         headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text.Vanilla(state.supporting) },
-        trailingContent = { ColorContrastTrailingContent(state.selectedColorContrast) },
+        trailingContent = { ColorContrastTrailingContent(state.selectedAppColorContrast) },
     )
 }
 
 @Composable
-private fun ColorContrastTrailingContent(state: SelectedColorContrastState) {
+private fun ColorContrastTrailingContent(state: SelectedAppColorContrastState) {
     when (state) {
-        is SelectedColorContrastState.Loaded -> Text.Vanilla(state.colorContrast.text)
-        SelectedColorContrastState.Loading -> SmallProgressIndicator()
+        is SelectedAppColorContrastState.Loaded -> Text.Vanilla(state.appColorContrast.text)
+        SelectedAppColorContrastState.Loading -> SmallProgressIndicator()
     }
 }
 
 @Composable
 private fun LanguageSetting(
-    state: LanguageListItemState,
+    state: AppLanguageListItemState,
     onLaunchLanguagePicker: () -> Unit,
 ) {
     ListItem(
@@ -213,15 +213,15 @@ private fun LanguageSetting(
         headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text.Vanilla(state.supporting) },
-        trailingContent = { LanguageTrailingContent(state.selectedLanguage) },
+        trailingContent = { LanguageTrailingContent(state.selectedAppLanguage) },
     )
 }
 
 @Composable
-private fun LanguageTrailingContent(state: SelectedLanguageState) {
+private fun LanguageTrailingContent(state: AppSelectedLanguageState) {
     when (state) {
-        is SelectedLanguageState.Loaded -> Text.Vanilla(state.language.text)
-        SelectedLanguageState.Loading -> SmallProgressIndicator()
+        is AppSelectedLanguageState.Loaded -> Text.Vanilla(state.appLanguage.text)
+        AppSelectedLanguageState.Loading -> SmallProgressIndicator()
     }
 }
 
@@ -232,7 +232,7 @@ private fun SmallProgressIndicator() {
 
 @Composable
 private fun MeasurementSystemSetting(
-    state: MeasurementSystemListItemState,
+    state: AppMeasurementSystemListItemState,
     onLaunchMeasurementSystemPicker: () -> Unit,
 ) {
     ListItem(
@@ -240,14 +240,14 @@ private fun MeasurementSystemSetting(
         headlineContent = { Text.Vanilla(state.headline) },
         leadingContent = { Icon(state.icon) },
         supportingContent = { Text.Vanilla(state.supporting) },
-        trailingContent = { MeasurementSystemTrailingContent(state.selectedMeasurementSystem) },
+        trailingContent = { MeasurementSystemTrailingContent(state.selectedAppMeasurementSystem) },
     )
 }
 
 @Composable
-private fun MeasurementSystemTrailingContent(state: SelectedMeasurementSystemState) {
+private fun MeasurementSystemTrailingContent(state: SelectedAppMeasurementSystemState) {
     when (state) {
-        is SelectedMeasurementSystemState.Loaded -> Text.Vanilla(state.measurementSystem.text)
-        SelectedMeasurementSystemState.Loading -> SmallProgressIndicator()
+        is SelectedAppMeasurementSystemState.Loaded -> Text.Vanilla(state.appMeasurementSystem.text)
+        SelectedAppMeasurementSystemState.Loading -> SmallProgressIndicator()
     }
 }

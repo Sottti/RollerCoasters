@@ -6,30 +6,36 @@ import androidx.compose.runtime.Immutable
 internal sealed class SettingsAction {
     data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction()
 
-    data object LaunchThemePicker : SettingsAction()
-    data class ThemePickerSelectionChange(val theme: ThemeUi) : SettingsAction()
-    data class ConfirmThemePickerSelection(val theme: ThemeUi) : SettingsAction()
-    data object DismissThemePicker : SettingsAction()
+    data object LaunchAppThemePicker : SettingsAction()
+    data class AppThemePickerSelectionChange(val appTheme: AppThemeUi) : SettingsAction()
+    data class ConfirmAppThemePickerSelection(val appTheme: AppThemeUi) : SettingsAction()
+    data object DismissAppThemePicker : SettingsAction()
 
-    data object LaunchColorContrastPicker : SettingsAction()
-    data class ColorContrastPickerSelectionChange(val contrast: ColorContrastUi) : SettingsAction()
-    data class ConfirmColorContrastPickerSelection(val contrast: ColorContrastUi) : SettingsAction()
-    data object DismissColorContrastPicker : SettingsAction()
-    data object DismissColorContrastNotAvailableMessage : SettingsAction()
-
-    data object LaunchLanguagePicker : SettingsAction()
-    data class LanguagePickerSelectionChange(val language: LanguageUi) : SettingsAction()
-    data class ConfirmLanguagePickerSelection(val language: LanguageUi) : SettingsAction()
-    data object DismissLanguagePicker : SettingsAction()
-
-    data object LaunchMeasurementSystemPicker : SettingsAction()
-    data class MeasurementSystemPickerSelectionChange(
-        val measurementSystem: MeasurementSystemUi,
+    data object LaunchAppColorContrastPicker : SettingsAction()
+    data class AppColorContrastPickerSelectionChange(
+        val appColorContrast: AppColorContrastUi,
     ) : SettingsAction()
 
-    data class ConfirmMeasurementSystemPickerSelection(
-        val measurementSystem: MeasurementSystemUi,
+    data class ConfirmColorContrastPickerSelection(
+        val appColorContrast: AppColorContrastUi,
     ) : SettingsAction()
 
-    data object DismissMeasurementSystemPicker : SettingsAction()
+    data object DismissAppColorContrastPicker : SettingsAction()
+    data object DismissAppColorContrastNotAvailableMessage : SettingsAction()
+
+    data object LaunchAppLanguagePicker : SettingsAction()
+    data class AppLanguagePickerSelectionChange(val appLanguage: AppLanguageUi) : SettingsAction()
+    data class ConfirmAppLanguagePickerSelection(val appLanguage: AppLanguageUi) : SettingsAction()
+    data object DismissAppLanguagePicker : SettingsAction()
+
+    data object LaunchAppMeasurementSystemPicker : SettingsAction()
+    data class AppMeasurementSystemPickerSelectionChange(
+        val appMeasurementSystem: AppMeasurementSystemUi,
+    ) : SettingsAction()
+
+    data class ConfirmAppMeasurementSystemPickerSelection(
+        val appMeasurementSystem: AppMeasurementSystemUi,
+    ) : SettingsAction()
+
+    data object DismissAppMeasurementSystemPicker : SettingsAction()
 }

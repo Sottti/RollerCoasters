@@ -5,35 +5,37 @@ import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
-internal data class MeasurementSystemState(
-    val listItem: MeasurementSystemListItemState,
-    val picker: MeasurementSystemPickerState?,
+internal data class AppMeasurementSystemState(
+    val listItem: AppMeasurementSystemListItemState,
+    val picker: AppMeasurementSystemPickerState?,
 )
 
 @Immutable
-internal data class MeasurementSystemListItemState(
+internal data class AppMeasurementSystemListItemState(
     @StringRes val headline: Int,
     @StringRes val supporting: Int,
-    val selectedMeasurementSystem: SelectedMeasurementSystemState,
+    val selectedAppMeasurementSystem: SelectedAppMeasurementSystemState,
     val icon: IconState,
 )
 
 @Immutable
-internal sealed class SelectedMeasurementSystemState {
-    data object Loading : SelectedMeasurementSystemState()
-    data class Loaded(val measurementSystem: MeasurementSystemUi) : SelectedMeasurementSystemState()
+internal sealed class SelectedAppMeasurementSystemState {
+    data object Loading : SelectedAppMeasurementSystemState()
+    data class Loaded(
+        val appMeasurementSystem: AppMeasurementSystemUi,
+    ) : SelectedAppMeasurementSystemState()
 }
 
 @Immutable
-internal data class MeasurementSystemPickerState(
+internal data class AppMeasurementSystemPickerState(
     @StringRes val confirm: Int,
     @StringRes val dismiss: Int,
     @StringRes val title: Int,
-    val measurementSystems: List<MeasurementSystemUi>,
+    val appMeasurementSystems: List<AppMeasurementSystemUi>,
 )
 
 @Immutable
-internal sealed class MeasurementSystemUi(
+internal sealed class AppMeasurementSystemUi(
     @StringRes val text: Int,
     val icon: IconState,
     val selected: Boolean,
@@ -42,23 +44,23 @@ internal sealed class MeasurementSystemUi(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : MeasurementSystemUi(text, icon, selected)
+    ) : AppMeasurementSystemUi(text, icon, selected)
 
     class ImperialUS(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : MeasurementSystemUi(text, icon, selected)
+    ) : AppMeasurementSystemUi(text, icon, selected)
 
     class ImperialUK(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : MeasurementSystemUi(text, icon, selected)
+    ) : AppMeasurementSystemUi(text, icon, selected)
 
-    class System(
+    class SystemApp(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : MeasurementSystemUi(text, icon, selected)
+    ) : AppMeasurementSystemUi(text, icon, selected)
 }

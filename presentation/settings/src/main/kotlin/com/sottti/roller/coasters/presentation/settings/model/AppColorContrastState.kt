@@ -5,43 +5,43 @@ import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
-internal data class ColorContrastState(
-    val listItem: ColorContrastListItemState,
-    val notAvailableMessage: ColorContrastNotAvailableMessageState?,
-    val picker: ColorContrastPickerState?,
+internal data class AppColorContrastState(
+    val listItem: AppColorContrastListItemState,
+    val notAvailableMessage: AppColorContrastNotAvailableMessageState?,
+    val picker: AppColorContrastPickerState?,
 )
 
 @Immutable
-internal data class ColorContrastListItemState(
+internal data class AppColorContrastListItemState(
     @StringRes val headline: Int,
     @StringRes val supporting: Int,
-    val selectedColorContrast: SelectedColorContrastState,
+    val selectedAppColorContrast: SelectedAppColorContrastState,
     val icon: IconState,
 )
 
 @Immutable
-internal sealed class SelectedColorContrastState {
-    data object Loading : SelectedColorContrastState()
-    data class Loaded(val colorContrast: ColorContrastUi) : SelectedColorContrastState()
+internal sealed class SelectedAppColorContrastState {
+    data object Loading : SelectedAppColorContrastState()
+    data class Loaded(val appColorContrast: AppColorContrastUi) : SelectedAppColorContrastState()
 }
 
 @Immutable
-internal data class ColorContrastNotAvailableMessageState(
+internal data class AppColorContrastNotAvailableMessageState(
     @StringRes val dismiss: Int,
     @StringRes val text: Int,
     @StringRes val title: Int,
 )
 
 @Immutable
-internal data class ColorContrastPickerState(
+internal data class AppColorContrastPickerState(
     @StringRes val confirm: Int,
     @StringRes val dismiss: Int,
     @StringRes val title: Int,
-    val contrasts: List<ColorContrastUi>,
+    val appColorContrasts: List<AppColorContrastUi>,
 )
 
 @Immutable
-internal sealed class ColorContrastUi(
+internal sealed class AppColorContrastUi(
     @StringRes val text: Int,
     val icon: IconState,
     val selected: Boolean,
@@ -50,23 +50,23 @@ internal sealed class ColorContrastUi(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ColorContrastUi(text, icon, selected)
+    ) : AppColorContrastUi(text, icon, selected)
 
     class MediumContrast(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ColorContrastUi(text, icon, selected)
+    ) : AppColorContrastUi(text, icon, selected)
 
     class HighContrast(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ColorContrastUi(text, icon, selected)
+    ) : AppColorContrastUi(text, icon, selected)
 
     class SystemContrast(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ColorContrastUi(text, icon, selected)
+    ) : AppColorContrastUi(text, icon, selected)
 }

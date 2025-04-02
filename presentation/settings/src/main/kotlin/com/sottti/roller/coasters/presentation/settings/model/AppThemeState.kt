@@ -5,23 +5,23 @@ import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
 
 @Immutable
-internal data class ThemeState(
-    val listItem: ThemeListItemState,
+internal data class AppThemeState(
+    val listItem: AppThemeListItemState,
     val picker: ThemePickerState?,
 )
 
 @Immutable
-internal data class ThemeListItemState(
+internal data class AppThemeListItemState(
     @StringRes val headline: Int,
     @StringRes val supporting: Int,
-    val selectedTheme: SelectedThemeState,
+    val selectedAppTheme: SelectedAppThemeState,
     val icon: IconState,
 )
 
 @Immutable
-internal sealed class SelectedThemeState {
-    data object Loading : SelectedThemeState()
-    data class Loaded(val theme: ThemeUi) : SelectedThemeState()
+internal sealed class SelectedAppThemeState {
+    data object Loading : SelectedAppThemeState()
+    data class Loaded(val appTheme: AppThemeUi) : SelectedAppThemeState()
 }
 
 @Immutable
@@ -29,11 +29,11 @@ internal data class ThemePickerState(
     @StringRes val confirm: Int,
     @StringRes val dismiss: Int,
     @StringRes val title: Int,
-    val themes: List<ThemeUi>,
+    val appThemes: List<AppThemeUi>,
 )
 
 @Immutable
-internal sealed class ThemeUi(
+internal sealed class AppThemeUi(
     @StringRes val text: Int,
     val icon: IconState,
     val selected: Boolean,
@@ -42,17 +42,17 @@ internal sealed class ThemeUi(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ThemeUi(text, icon, selected)
+    ) : AppThemeUi(text, icon, selected)
 
     class LightTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ThemeUi(text, icon, selected)
+    ) : AppThemeUi(text, icon, selected)
 
     class SystemTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
-    ) : ThemeUi(text, icon, selected)
+    ) : AppThemeUi(text, icon, selected)
 }

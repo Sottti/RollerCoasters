@@ -23,43 +23,43 @@ import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveAppTheme
 import com.sottti.roller.coasters.domain.settings.usecase.theme.SetAppTheme
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
-import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastNotAvailableMessage
-import com.sottti.roller.coasters.presentation.settings.data.reducer.hideColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.hideLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.hideMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.hideThemePicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.showColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.showLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.showMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.showThemePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppColorContrastNotAvailableMessage
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppColorContrast
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppLanguage
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMeasurementSystem
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppTheme
+import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynamicColor
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateLanguage
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateMeasurementSystem
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateTheme
-import com.sottti.roller.coasters.presentation.settings.data.reducer.updateThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ColorContrastPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguagePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppLanguagePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppMeasurementSystemPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppThemePickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmLanguagePickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmMeasurementSystemPickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmThemePickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastNotAvailableMessage
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppColorContrastNotAvailableMessage
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LanguagePickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchThemePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.MeasurementSystemPickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ThemePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,6 +71,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class SettingsViewModel @Inject constructor(
     private val application: Application,
+    private val features: Features,
     private val getAppColorContrast: GetAppColorContrast,
     private val getAppLanguage: GetAppLanguage,
     private val getAppMeasurementSystem: GetAppMeasurementSystem,
@@ -79,7 +80,6 @@ internal class SettingsViewModel @Inject constructor(
     private val observeAppDynamicColor: ObserveAppDynamicColor,
     private val observeAppMeasurementSystem: ObserveAppMeasurementSystem,
     private val observeAppTheme: ObserveAppTheme,
-    private val features: Features,
     private val setAppColorContrast: SetAppColorContrast,
     private val setAppDynamicColor: SetAppDynamicColor,
     private val setAppLanguage: SetAppLanguage,
@@ -129,7 +129,7 @@ internal class SettingsViewModel @Inject constructor(
     private fun collectTheme() {
         viewModelScope.launch {
             observeAppTheme()
-                .collect { theme -> _state.updateTheme(theme) }
+                .collect { theme -> _state.updateAppTheme(theme) }
         }
     }
 
@@ -142,14 +142,14 @@ internal class SettingsViewModel @Inject constructor(
 
     private fun updateLanguage() {
         viewModelScope.launch {
-            _state.updateLanguage(getAppLanguage())
+            _state.updateAppLanguage(getAppLanguage())
         }
     }
 
     private fun collectMeasurementSystem() {
         viewModelScope.launch {
             observeAppMeasurementSystem()
-                .collect { measurementSystem -> _state.updateMeasurementSystem(measurementSystem) }
+                .collect { measurementSystem -> _state.updateAppMeasurementSystem(measurementSystem) }
         }
     }
 
@@ -167,77 +167,77 @@ internal class SettingsViewModel @Inject constructor(
                     }
                 }
 
-                LaunchThemePicker -> {
+                LaunchAppThemePicker -> {
                     val lightDarkSystemThemingAvailable =
                         features.lightDarkSystemThemingAvailable()
-                    val theme = getAppTheme().toPresentationModel(isSelected = true)
+                    val theme = getAppTheme().toPresentationModel(selected = true)
                     _state
-                        .showThemePicker(
-                            lightDarkThemeThemingAvailable = lightDarkSystemThemingAvailable,
+                        .showAppThemePicker(
+                            selectedLightDarkAppThemingAvailable = lightDarkSystemThemingAvailable,
                             theme = theme,
                         )
                 }
 
-                is ThemePickerSelectionChange -> _state.updateThemePicker(
-                    lightDarkThemeThemingAvailable = features.lightDarkSystemThemingAvailable(),
-                    theme = action.theme,
+                is AppThemePickerSelectionChange -> _state.updateAppThemePicker(
+                    selectedLightDarkAppThemingAvailable = features.lightDarkSystemThemingAvailable(),
+                    theme = action.appTheme,
                 )
 
-                is ConfirmThemePickerSelection -> {
-                    _state.hideThemePicker()
-                    setAppTheme(action.theme.toDomain())
+                is ConfirmAppThemePickerSelection -> {
+                    _state.hideAppThemePicker()
+                    setAppTheme(action.appTheme.toDomain())
                 }
 
-                DismissThemePicker -> _state.hideThemePicker()
+                DismissAppThemePicker -> _state.hideAppThemePicker()
 
-                LaunchColorContrastPicker -> {
-                    _state.showColorContrastPicker(
+                LaunchAppColorContrastPicker -> {
+                    _state.showAppColorContrastPicker(
                         appColorContrast = getAppColorContrast(),
-                        colorContrastAvailable = features.systemColorContrastAvailable(),
+                        appColorContrastAvailable = features.systemColorContrastAvailable(),
                     )
                 }
 
-                is ColorContrastPickerSelectionChange -> {
-                    _state.updateColorContrastPicker(
-                        colorContrastAvailable = features.systemColorContrastAvailable(),
-                        selectedContrast = action.contrast,
+                is AppColorContrastPickerSelectionChange -> {
+                    _state.updateAppColorContrastPicker(
+                        appColorContrastAvailable = features.systemColorContrastAvailable(),
+                        selectedAppColorContrast = action.appColorContrast,
                     )
                 }
 
                 is ConfirmColorContrastPickerSelection -> {
-                    _state.hideColorContrastPicker()
-                    setAppColorContrast(action.contrast.toDomain())
+                    _state.hideAppColorContrastPicker()
+                    setAppColorContrast(action.appColorContrast.toDomain())
                 }
 
-                DismissColorContrastPicker -> _state.hideColorContrastPicker()
+                DismissAppColorContrastPicker -> _state.hideAppColorContrastPicker()
 
-                DismissColorContrastNotAvailableMessage ->
-                    _state.hideColorContrastNotAvailableMessage()
+                DismissAppColorContrastNotAvailableMessage ->
+                    _state.hideAppColorContrastNotAvailableMessage()
 
-                LaunchLanguagePicker -> _state.showLanguagePicker(getAppLanguage())
+                LaunchAppLanguagePicker -> _state.showAppLanguagePicker(getAppLanguage())
 
-                is LanguagePickerSelectionChange -> _state.updateLanguagePicker(action.language)
+                is AppLanguagePickerSelectionChange -> _state.updateAppLanguagePicker(action.appLanguage)
 
-                is ConfirmLanguagePickerSelection -> {
-                    _state.hideLanguagePicker()
-                    setAppLanguage(action.language.toDomain())
+                is ConfirmAppLanguagePickerSelection -> {
+                    _state.hideAppLanguagePicker()
+                    setAppLanguage(action.appLanguage.toDomain())
                     updateLanguage()
                 }
 
-                DismissLanguagePicker -> _state.hideLanguagePicker()
+                DismissAppLanguagePicker -> _state.hideAppLanguagePicker()
 
-                LaunchMeasurementSystemPicker ->
-                    _state.showMeasurementSystemPicker(getAppMeasurementSystem())
+                LaunchAppMeasurementSystemPicker ->
+                    _state.showAppMeasurementSystemPicker(getAppMeasurementSystem())
 
-                is MeasurementSystemPickerSelectionChange ->
-                    _state.updateMeasurementSystemPicker(action.measurementSystem)
+                is AppMeasurementSystemPickerSelectionChange ->
+                    _state.updateAppMeasurementSystemPicker(action.appMeasurementSystem)
 
-                is ConfirmMeasurementSystemPickerSelection -> {
-                    _state.hideMeasurementSystemPicker()
-                    setAppMeasurementSystem(action.measurementSystem.toDomain())
+                is ConfirmAppMeasurementSystemPickerSelection -> {
+                    _state.hideAppMeasurementSystemPicker()
+                    setAppMeasurementSystem(action.appMeasurementSystem.toDomain())
                 }
 
-                DismissMeasurementSystemPicker -> _state.hideMeasurementSystemPicker()
+                DismissAppMeasurementSystemPicker -> _state.hideAppMeasurementSystemPicker()
 
             }
         }
