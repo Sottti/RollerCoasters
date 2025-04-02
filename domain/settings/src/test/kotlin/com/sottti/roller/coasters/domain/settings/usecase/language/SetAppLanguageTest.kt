@@ -22,15 +22,15 @@ internal class SetAppLanguageTest {
 
     @Test
     fun `sets english in repository when invoked with english`() {
-        every { settingsRepository.setLanguage(EnglishGb) } returns Unit
+        every { settingsRepository.setAppLanguage(EnglishGb) } returns Unit
         setAppLanguage(EnglishGb)
-        verify { settingsRepository.setLanguage(EnglishGb) }
+        verify { settingsRepository.setAppLanguage(EnglishGb) }
     }
 
     @Test
     fun `sets spanish in repository when invoked with spanish`() {
-        every { settingsRepository.setLanguage(SpanishSpain) } returns Unit
+        every { settingsRepository.setAppLanguage(SpanishSpain) } returns Unit
         setAppLanguage(SpanishSpain)
-        verify { settingsRepository.setLanguage(SpanishSpain) }
+        verify { settingsRepository.setAppLanguage(SpanishSpain) }
     }
 }

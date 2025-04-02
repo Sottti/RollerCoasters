@@ -8,5 +8,5 @@ public class GetAppLanguage @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
     public suspend operator fun invoke(): AppLanguage =
-        settingsRepository.getLanguage()
+        settingsRepository.getAppLanguage()
 }

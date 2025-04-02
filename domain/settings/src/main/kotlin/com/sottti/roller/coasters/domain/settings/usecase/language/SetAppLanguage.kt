@@ -8,6 +8,6 @@ public class SetAppLanguage @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
     public operator fun invoke(appLanguage: AppLanguage) {
-        settingsRepository.setLanguage(appLanguage)
+        settingsRepository.setAppLanguage(appLanguage)
     }
 }

@@ -23,14 +23,14 @@ internal class GetAppLanguageTest {
 
     @Test
     fun `returns english when repository provides english`() = runTest {
-        coEvery { settingsRepository.getLanguage() } returns EnglishGb
+        coEvery { settingsRepository.getAppLanguage() } returns EnglishGb
         val result = getAppLanguage()
         assertEquals(EnglishGb, result)
     }
 
     @Test
     fun `returns spanish when repository provides spanish`() = runTest {
-        coEvery { settingsRepository.getLanguage() } returns SpanishSpain
+        coEvery { settingsRepository.getAppLanguage() } returns SpanishSpain
         val result = getAppLanguage()
         assertEquals(SpanishSpain, result)
     }
