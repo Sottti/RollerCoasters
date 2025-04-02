@@ -107,7 +107,8 @@ internal class SettingsLocalDataSource @Inject constructor(
         localeManager.setLocaleList(appLanguage.toLocaleList())
     }
 
-    suspend fun getAppLanguage(): AppLanguage = appLanguageFlow.first()
+    fun getAppLanguage(): AppLanguage =
+        localeManager.appLocale.toLanguage()
 
     fun observeAppLanguage(): Flow<AppLanguage> =
         activityLifecycleEmitter
@@ -147,8 +148,6 @@ internal class SettingsLocalDataSource @Inject constructor(
             val key = preferences[appColorContrastKey] ?: appColorContrastDefaultValue
             key.toAppColorContrast()
         }
-
-    private val appLanguageFlow: Flow<AppLanguage> = observeAppLanguage()
 
     private val appMeasurementSystemFlow: Flow<AppMeasurementSystem> =
         dataStore.data.map { preferences ->

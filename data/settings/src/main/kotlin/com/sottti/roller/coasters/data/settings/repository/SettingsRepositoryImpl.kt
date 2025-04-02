@@ -51,7 +51,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun getAppSystemColorContrast(): SystemColorContrast =
         localDataSource.getSystemColorContrast()
 
-    override suspend fun setAppLanguage(appLanguage: AppLanguage) {
+    override fun setAppLanguage(appLanguage: AppLanguage) {
         localDataSource.setAppLanguage(appLanguage)
     }
 

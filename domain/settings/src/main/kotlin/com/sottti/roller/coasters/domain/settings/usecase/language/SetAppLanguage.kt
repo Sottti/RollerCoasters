@@ -7,7 +7,7 @@ import javax.inject.Inject
 public class SetAppLanguage @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public suspend operator fun invoke(appLanguage: AppLanguage) {
+    public operator fun invoke(appLanguage: AppLanguage) {
         settingsRepository.setAppLanguage(appLanguage)
     }
 }

@@ -44,6 +44,9 @@
       <SelectionState runConfigName="to_display_format_verySmallNumber_formatsCorrectly_inSpanishSpain()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="SettingsLocalDataSourceTest">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

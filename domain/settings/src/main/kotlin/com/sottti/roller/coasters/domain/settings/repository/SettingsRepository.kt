@@ -26,7 +26,7 @@ public interface SettingsRepository {
 
     public fun getAppSystemColorContrast(): SystemColorContrast
 
-    public suspend fun setAppLanguage(appLanguage: AppLanguage)
+    public fun setAppLanguage(appLanguage: AppLanguage)
     public suspend fun getAppLanguage(): AppLanguage
     public fun observeAppLanguage(): Flow<AppLanguage>
 
