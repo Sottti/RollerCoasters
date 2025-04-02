@@ -7,7 +7,9 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButto
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.AppColorContrastPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.ConfirmColorContrastPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastPicker
 
 @Composable
 internal fun AppColorContrastPickerDialog(
@@ -21,7 +23,7 @@ internal fun AppColorContrastPickerDialog(
         options = state.appColorContrasts.map { contrast -> contrast.toRadioButtonOption() },
         onOptionSelected = { selectedOption ->
             onAction(
-                SettingsAction.AppColorContrastPickerSelectionChange(
+                AppColorContrastPickerSelectionChange(
                     selectedOption.toAppColorContrastUi(state.appColorContrasts)
                 ),
             )
@@ -33,7 +35,7 @@ internal fun AppColorContrastPickerDialog(
                 )
             )
         },
-        onDismiss = { onAction(SettingsAction.DismissAppColorContrastPicker) },
+        onDismiss = { onAction(DismissAppColorContrastPicker) },
     )
 }
 

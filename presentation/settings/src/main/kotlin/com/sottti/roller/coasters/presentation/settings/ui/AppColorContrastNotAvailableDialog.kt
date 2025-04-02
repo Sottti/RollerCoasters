@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.dialogs.informative.DialogInformative
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastNotAvailableMessageState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppColorContrastNotAvailableMessage
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastNotAvailableMessage
 
 @Composable
 internal fun AppColorContrastNotAvailableDialog(

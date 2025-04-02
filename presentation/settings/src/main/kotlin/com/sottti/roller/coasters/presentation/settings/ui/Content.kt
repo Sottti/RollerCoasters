@@ -25,11 +25,11 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorCo
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.LaunchAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.LaunchAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 
 @Composable

@@ -6,9 +6,9 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toAppThemeUi
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemePickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppThemePickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.AppThemePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.ConfirmAppThemePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.DismissAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 
 @Composable

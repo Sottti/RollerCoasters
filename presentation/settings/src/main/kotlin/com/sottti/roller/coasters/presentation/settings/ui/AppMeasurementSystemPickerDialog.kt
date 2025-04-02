@@ -7,8 +7,9 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButto
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemPickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemPickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppMeasurementSystemPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.AppMeasurementSystemPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.ConfirmAppMeasurementSystemPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.DismissAppMeasurementSystemPicker
 
 @Composable
 internal fun AppMeasurementSystemPickerDialog(
@@ -34,7 +35,7 @@ internal fun AppMeasurementSystemPickerDialog(
                 ),
             )
         },
-        onDismiss = { onAction(SettingsAction.DismissAppMeasurementSystemPicker) },
+        onDismiss = { onAction(DismissAppMeasurementSystemPicker) },
     )
 }
 
