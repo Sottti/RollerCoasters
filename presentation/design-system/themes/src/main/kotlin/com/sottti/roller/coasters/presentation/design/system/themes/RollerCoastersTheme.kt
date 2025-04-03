@@ -22,7 +22,7 @@ public fun RollerCoastersTheme(
 
     val resolvedDynamicColor =
         observeResolvedDynamicColor()
-            .collectAsState(initial = ResolvedDynamicColor(true))
+            .collectAsState(initial = ResolvedDynamicColor(false))
             .value
 
     val resolvedColorContrast =

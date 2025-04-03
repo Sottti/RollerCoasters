@@ -16,7 +16,7 @@ import com.sottti.roller.coasters.data.settings.mapper.toUiModeManagerNightMode
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import org.junit.Test
 
-internal class ThemeMapperTest {
+internal class AppThemeMapperTest {
 
     @Test
     fun `dark theme maps to its key`() {

@@ -12,7 +12,9 @@ import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastMana
 import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.mapper.key
 import com.sottti.roller.coasters.data.settings.mapper.toAppColorContrast
+import com.sottti.roller.coasters.data.settings.mapper.toAppDynamicColor
 import com.sottti.roller.coasters.data.settings.mapper.toAppMeasurementSystem
+import com.sottti.roller.coasters.data.settings.mapper.toBoolean
 import com.sottti.roller.coasters.data.settings.mapper.toLanguage
 import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
 import com.sottti.roller.coasters.data.settings.mapper.toTheme
@@ -61,20 +63,11 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     suspend fun setAppDynamicColor(appDynamicColor: AppDynamicColor) {
         dataStore.edit { preferences ->
-            preferences[appDynamicColorKey] = when (appDynamicColor) {
-                AppDynamicColor.Enabled -> true
-                AppDynamicColor.Disabled -> false
-            }
+            preferences[appDynamicColorKey] = appDynamicColor.toBoolean()
         }
     }
 
-    fun observeAppDynamicColor(): Flow<AppDynamicColor> =
-        dataStore.data.map { preferences ->
-            when (preferences[appDynamicColorKey] ?: appDynamicColorDefault) {
-                true -> AppDynamicColor.Enabled
-                false -> AppDynamicColor.Disabled
-            }
-        }
+    fun observeAppDynamicColor(): Flow<AppDynamicColor> = appDynamicColorFlow
 
     suspend fun setAppTheme(appTheme: AppTheme) {
         themeManager.setTheme(appTheme)
@@ -137,7 +130,11 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         measurementSystemManager.systemMeasurementSystem
 
-    private val appDynamicColorDefault by lazy { features.systemDynamicColorAvailable() }
+    private val appDynamicColorFlow: Flow<AppDynamicColor> =
+        dataStore.data.map { preferences ->
+            val key = preferences[appDynamicColorKey] ?: appDynamicColorDefault
+            key.toAppDynamicColor()
+        }
 
     private val appThemeFlow: Flow<AppTheme> =
         dataStore.data.map { preferences ->
@@ -156,6 +153,8 @@ internal class SettingsLocalDataSource @Inject constructor(
             val key = preferences[appMeasurementSystemKey] ?: appMeasurementSystemDefaultValue
             key.toAppMeasurementSystem()
         }
+
+    private val appDynamicColorDefault by lazy { features.systemDynamicColorAvailable() }
 
     private val appThemeDefaultValue by lazy {
         when {

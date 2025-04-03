@@ -10,7 +10,7 @@ import com.sottti.roller.coasters.data.settings.mapper.toAppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import org.junit.Test
 
-internal class ColorContrastMapperTest {
+internal class AppColorContrastMapperTest {
 
     @Test
     fun `high contrast maps to its key`() {

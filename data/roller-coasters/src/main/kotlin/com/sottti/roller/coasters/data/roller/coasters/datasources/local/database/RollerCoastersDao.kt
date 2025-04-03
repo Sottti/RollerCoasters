@@ -11,6 +11,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.P
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi
 
+// TODO: Create a test class
+
 @Dao
 internal interface RollerCoastersDao {
 

@@ -21,6 +21,7 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 internal class MeasurementSystemManagerTest {
     private companion object {
+        // TODO: Move to a common test file
         private const val LOCALE_SPAIN_TAG = "es-ES"
         private const val LOCALE_UK_TAG = "en-GB"
         private const val LOCALE_US_TAG = "en-US"

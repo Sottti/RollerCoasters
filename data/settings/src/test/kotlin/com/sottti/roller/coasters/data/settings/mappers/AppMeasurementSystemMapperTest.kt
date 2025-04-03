@@ -13,7 +13,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem.System
 import org.junit.Test
 
-internal class MeasurementSystemMapperTest {
+internal class AppMeasurementSystemMapperTest {
 
     @Test
     fun `metric maps to its key`() {

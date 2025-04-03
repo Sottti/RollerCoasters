@@ -274,9 +274,9 @@ internal class SettingsLocalDataSourceTest {
         assertThat(initialValue).isEqualTo(AppLanguage.Galician)
     }
 
+    // TODO make this test not hang forever
     @Test
     fun testObserveAppLanguageEmitsDistinctValues() = runTest {
-        // Arrange
         val localeManager = mockk<LocaleManager> {
             every { appLocale } returnsMany listOf(Locale.UK, Locale.UK, Locale("es", "ES"))
         }
@@ -289,7 +289,6 @@ internal class SettingsLocalDataSourceTest {
             localeManager = localeManager,
         )
 
-        // Act
         val job = launch {
             val emittedValues = dataSource.observeAppLanguage().take(2).toList()
             assertThat(emittedValues)
@@ -300,7 +299,7 @@ internal class SettingsLocalDataSourceTest {
         activityFlow.emit(Unit) // EnglishGb (duplicate, filtered)
         activityFlow.emit(Unit) // SpanishSpain
         advanceUntilIdle() // Ensure all emissions are processed
-        job.join() // Wait for collection to complete
+        job.join()
     }
 
     @Test
