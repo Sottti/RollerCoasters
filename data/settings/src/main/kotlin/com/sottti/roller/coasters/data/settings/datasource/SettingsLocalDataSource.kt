@@ -104,16 +104,13 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun getAppLanguage(): AppLanguage =
         localeManager.appLocale.toLanguage()
 
-    fun observeAppLanguage(): Flow<AppLanguage> =
-        activityLifecycleEmitter
-            .activityCreatedFlow
-            .map { localeManager.appLocale.toLanguage() }
-            .distinctUntilChanged()
-            .onStart { emit(localeManager.appLocale.toLanguage()) }
+    fun observeAppLanguage(): Flow<AppLanguage> = observeLifecycle(
+        transform = { localeManager.appLocale.toLanguage() }
+    )
 
-    fun getAppLocale(): Locale = localeManager.appLocale
-
-    fun getDefaultLocale(): Locale = localeManager.systemLocale
+    fun observeSystemLocale(): Flow<Locale> = observeLifecycle(
+        transform = { Locale.getDefault() }
+    )
 
     suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
         dataStore.edit { preferences ->
@@ -129,6 +126,15 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         measurementSystemManager.systemMeasurementSystem
+
+    private inline fun <T> observeLifecycle(
+        crossinline transform: () -> T,
+    ): Flow<T> =
+        activityLifecycleEmitter
+            .activityCreatedFlow
+            .map { transform() }
+            .onStart { emit(transform()) }
+            .distinctUntilChanged()
 
     private val appDynamicColorFlow: Flow<AppDynamicColor> =
         dataStore.data.map { preferences ->

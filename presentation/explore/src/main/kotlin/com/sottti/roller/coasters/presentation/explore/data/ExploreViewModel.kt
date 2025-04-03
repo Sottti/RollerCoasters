@@ -8,8 +8,8 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
-import com.sottti.roller.coasters.domain.settings.usecase.language.GetAppLanguage
-import com.sottti.roller.coasters.domain.settings.usecase.locale.GetDefaultLocale
+import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
+import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
@@ -60,8 +60,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ExploreViewModel @Inject constructor(
-    getAppLanguage: GetAppLanguage,
-    getDefaultLocale: GetDefaultLocale,
+    observeAppLanguage: ObserveAppLanguage,
+    observeSystemLocale: ObserveSystemLocale,
     observeRollerCoasters: ObserveRollerCoasters,
     rollerCoastersRepository: RollerCoastersRepository,
     stringProvider: StringProvider,
@@ -73,15 +73,20 @@ internal class ExploreViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val _rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>> =
-        combine(_typeFilter, _sortByFilter) { typeFilter, sortByFilter ->
+        combine(
+            flow = _typeFilter,
+            flow2 = _sortByFilter,
+            flow3 = observeAppLanguage(),
+            flow4 = observeSystemLocale()
+        ) { typeFilter, sortByFilter, appLanguage, systemLocale ->
             observeRollerCoasters(
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter,
             ).toUiModel(
-                appLanguage = getAppLanguage(),
-                defaultLocale = getDefaultLocale(),
+                appLanguage = appLanguage,
                 sortByFilter = sortByFilter,
                 stringProvider = stringProvider,
+                systemLocale = systemLocale,
                 unitDisplayFormatter = unitDisplayFormatter,
             )
         }.flatMapLatest { it }

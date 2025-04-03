@@ -32,9 +32,9 @@ import java.util.Locale
 
 internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     appLanguage: AppLanguage,
-    defaultLocale: Locale,
     sortByFilter: SortByFilter,
     stringProvider: StringProvider,
+    systemLocale: Locale,
     unitDisplayFormatter: UnitDisplayFormatter,
 ): Flow<PagingData<ExploreRollerCoaster>> = map { pagingData ->
     var currentRank = 1
@@ -44,7 +44,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     pagingData.map { rollerCoaster ->
         val currentStat = rollerCoaster.contextualStat(
             appLanguage = appLanguage,
-            defaultLocale = defaultLocale,
+            systemLocale = systemLocale,
             sortByFilter = sortByFilter,
             unitDisplayFormatter = unitDisplayFormatter
         )
@@ -61,7 +61,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
 
         rollerCoaster.toUiModel(
             appLanguage = appLanguage,
-            defaultLocale = defaultLocale,
+            systemLocale = systemLocale,
             ranking = currentRank,
             sortByFilter = sortByFilter,
             stringProvider = stringProvider,
@@ -72,7 +72,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
 
 private fun RollerCoaster.toUiModel(
     appLanguage: AppLanguage,
-    defaultLocale: Locale,
+    systemLocale: Locale,
     ranking: Int,
     sortByFilter: SortByFilter,
     stringProvider: StringProvider,
@@ -81,19 +81,19 @@ private fun RollerCoaster.toUiModel(
     imageUrl = pictures.main?.url,
     parkName = park.name.value,
     rollerCoasterName = name.current.value,
-    stat = contextualStat(appLanguage, defaultLocale, sortByFilter, unitDisplayFormatter),
+    stat = contextualStat(appLanguage, systemLocale, sortByFilter, unitDisplayFormatter),
     statDetail = stringProvider.getString(R.string.roller_coaster_ranking, ranking),
 )
 
 private fun RollerCoaster.contextualStat(
     appLanguage: AppLanguage,
-    defaultLocale: Locale,
+    systemLocale: Locale,
     sortByFilter: SortByFilter,
     unitDisplayFormatter: UnitDisplayFormatter,
 ): String? {
     val formatContext = FormatContext(
         appLanguage = appLanguage,
-        defaultLocale = defaultLocale,
+        systemLocale = systemLocale,
         unitDisplayFormatter = unitDisplayFormatter,
     )
     return when (val ride = specs.ride) {
@@ -125,24 +125,24 @@ private fun RollerCoaster.contextualStat(
 
 private data class FormatContext(
     val appLanguage: AppLanguage,
-    val defaultLocale: Locale,
+    val systemLocale: Locale,
     val unitDisplayFormatter: UnitDisplayFormatter,
 )
 
 private fun FormatContext.formatDrop(drop: Drop) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, defaultLocale, drop)
+    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, drop)
 
 private fun FormatContext.formatGForce(gForce: GForce) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, defaultLocale, gForce)
+    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, gForce)
 
 private fun FormatContext.formatHeight(height: Height) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, defaultLocale, height)
+    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, height)
 
 private fun FormatContext.formatLength(length: Length) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, defaultLocale, length)
+    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, length)
 
 private fun FormatContext.formatSpeed(speed: Speed) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, defaultLocale, speed)
+    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, speed)
 
 private fun FormatContext.formatInversions(inversions: Inversions) =
     unitDisplayFormatter.toDisplayFormat(inversions)

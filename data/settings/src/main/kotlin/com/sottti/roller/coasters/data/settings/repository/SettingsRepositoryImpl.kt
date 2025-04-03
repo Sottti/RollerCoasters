@@ -61,8 +61,8 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun observeAppLanguage(): Flow<AppLanguage> =
         localDataSource.observeAppLanguage()
 
-    override fun getDefaultLocale(): Locale =
-        localDataSource.getDefaultLocale()
+    override fun observeSystemLocale(): Flow<Locale> =
+        localDataSource.observeSystemLocale()
 
     override suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
         localDataSource.setAppMeasurementSystem(appMeasurementSystem)

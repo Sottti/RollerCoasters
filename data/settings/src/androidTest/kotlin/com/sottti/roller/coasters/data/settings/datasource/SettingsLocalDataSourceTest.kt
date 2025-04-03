@@ -33,7 +33,9 @@ import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemApp
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.mockkStatic
 import io.mockk.runs
+import io.mockk.unmockkStatic
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -274,7 +276,6 @@ internal class SettingsLocalDataSourceTest {
         assertThat(initialValue).isEqualTo(AppLanguage.Galician)
     }
 
-    // TODO make this test not hang forever
     @Test
     fun testObserveAppLanguageEmitsDistinctValues() = runTest {
         val localeManager = mockk<LocaleManager> {
@@ -289,33 +290,28 @@ internal class SettingsLocalDataSourceTest {
             localeManager = localeManager,
         )
 
+        val emittedValues = mutableListOf<AppLanguage>()
         val job = launch {
-            val emittedValues = dataSource.observeAppLanguage().take(2).toList()
-            assertThat(emittedValues)
-                .containsExactly(AppLanguage.EnglishGb, AppLanguage.SpanishSpain)
-                .inOrder()
+            dataSource.observeAppLanguage()
+                .take(2)
+                .toList(emittedValues)
         }
+
         activityFlow.emit(Unit) // EnglishGb
-        activityFlow.emit(Unit) // EnglishGb (duplicate, filtered)
+        advanceUntilIdle()
+
+        activityFlow.emit(Unit) // EnglishGb (duplicate, filtered out by distinctUntilChanged)
+        advanceUntilIdle()
+
         activityFlow.emit(Unit) // SpanishSpain
-        advanceUntilIdle() // Ensure all emissions are processed
+        advanceUntilIdle()
+
+        // Wait for the flow to collect the second distinct item
         job.join()
-    }
 
-    @Test
-    fun testGetAppLocaleDelegatesToLocaleManager() = runTest {
-        val localeManager = mockk<LocaleManager> { every { appLocale } returns Locale.UK }
-        dataSource = createDataSource(localeManager = localeManager)
-        assertThat(dataSource.getAppLocale()).isEqualTo(Locale.UK)
-        verify { localeManager.appLocale }
-    }
-
-    @Test
-    fun testGetDefaultLocaleDelegatesToLocaleManager() = runTest {
-        val localeManager = mockk<LocaleManager> { every { systemLocale } returns Locale.US }
-        dataSource = createDataSource(localeManager = localeManager)
-        assertThat(dataSource.getDefaultLocale()).isEqualTo(Locale.US)
-        verify { localeManager.systemLocale }
+        assertThat(emittedValues)
+            .containsExactly(AppLanguage.EnglishGb, AppLanguage.SpanishSpain)
+            .inOrder()
     }
 
     @Test
@@ -370,6 +366,62 @@ internal class SettingsLocalDataSourceTest {
         dataSource = createDataSource(measurementSystemManager = measurementSystemManager)
         dataSource.getSystemMeasurementSystem()
         verify { measurementSystemManager.systemMeasurementSystem }
+    }
+
+    @Test
+    fun testObserveSystemLocaleEmitsInitialValue() = runTest {
+        val activityFlow = MutableSharedFlow<Unit>(replay = 0)
+        val activityLifecycleEmitter = mockk<ActivityLifecycleEmitter> {
+            every { activityCreatedFlow } returns activityFlow
+        }
+        mockkStatic(Locale::class)
+        every { Locale.getDefault() } returns Locale.FRANCE
+
+        dataSource = createDataSource(activityLifecycleEmitter = activityLifecycleEmitter)
+
+        val initialValue = dataSource.observeSystemLocale().first()
+        assertThat(initialValue).isEqualTo(Locale.FRANCE)
+
+        unmockkStatic(Locale::class)
+    }
+
+    @Test
+    fun testObserveSystemLocaleEmitsDistinctValues() = runTest {
+        val activityFlow = MutableSharedFlow<Unit>(replay = 0)
+        val activityLifecycleEmitter = mockk<ActivityLifecycleEmitter> {
+            every { activityCreatedFlow } returns activityFlow
+        }
+
+        mockkStatic(Locale::class)
+        every { Locale.getDefault() } returnsMany listOf(
+            Locale.FRANCE,
+            Locale.FRANCE,
+            Locale.FRANCE,
+            Locale.GERMANY,
+        )
+
+        dataSource = createDataSource(activityLifecycleEmitter = activityLifecycleEmitter)
+
+        val emittedLocales = mutableListOf<Locale>()
+        val job = launch {
+            dataSource.observeSystemLocale()
+                .take(2)
+                .collect { emittedLocales.add(it) }
+        }
+
+        advanceUntilIdle()
+        activityFlow.emit(Unit)
+        advanceUntilIdle()
+        activityFlow.emit(Unit)
+        advanceUntilIdle()
+        activityFlow.emit(Unit)
+        advanceUntilIdle()
+
+        job.join()
+
+        assertThat(emittedLocales).containsExactly(Locale.FRANCE, Locale.GERMANY).inOrder()
+
+        unmockkStatic(Locale::class)
     }
 
     private fun createDataSource(

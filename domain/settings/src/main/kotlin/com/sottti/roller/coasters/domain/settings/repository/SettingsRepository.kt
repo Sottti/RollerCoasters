@@ -30,7 +30,7 @@ public interface SettingsRepository {
     public suspend fun getAppLanguage(): AppLanguage
     public fun observeAppLanguage(): Flow<AppLanguage>
 
-    public fun getDefaultLocale(): Locale
+    public fun observeSystemLocale(): Flow<Locale>
 
     public fun observeAppMeasurementSystem(): Flow<AppMeasurementSystem>
     public suspend fun getAppMeasurementSystem(): AppMeasurementSystem

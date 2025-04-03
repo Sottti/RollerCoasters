@@ -18,7 +18,7 @@ internal class ActivityLifecycleEmitter @Inject constructor(
 ) {
     private val _activityCreatedFlow =
         MutableSharedFlow<Unit>(
-            replay = 1,
+            replay = 0,
             onBufferOverflow = BufferOverflow.DROP_OLDEST
         )
     val activityCreatedFlow: Flow<Unit> = _activityCreatedFlow
