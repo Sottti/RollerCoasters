@@ -15,6 +15,7 @@ android {
 }
 
 dependencies {
+    api(project(module.domain.rollerCoasters))
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
     implementation(libs.hilt)
@@ -22,12 +23,12 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.chip))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
+    implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.format))
     implementation(project(module.presentation.imageLoading))
     implementation(project(module.presentation.stringProvider))
