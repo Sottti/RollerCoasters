@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
-import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
@@ -63,7 +62,6 @@ internal class ExploreViewModel @Inject constructor(
     observeAppLanguage: ObserveAppLanguage,
     observeSystemLocale: ObserveSystemLocale,
     observeRollerCoasters: ObserveRollerCoasters,
-    rollerCoastersRepository: RollerCoastersRepository,
     stringProvider: StringProvider,
     unitDisplayFormatter: UnitDisplayFormatter,
 ) : ViewModel() {

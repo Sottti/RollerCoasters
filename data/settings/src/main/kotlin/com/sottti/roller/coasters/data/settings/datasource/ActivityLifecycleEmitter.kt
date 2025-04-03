@@ -6,7 +6,6 @@ import android.app.Application.ActivityLifecycleCallbacks
 import android.content.Context
 import android.os.Bundle
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import javax.inject.Inject
@@ -16,11 +15,7 @@ import javax.inject.Singleton
 internal class ActivityLifecycleEmitter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    private val _activityCreatedFlow =
-        MutableSharedFlow<Unit>(
-            replay = 0,
-            onBufferOverflow = BufferOverflow.DROP_OLDEST
-        )
+    private val _activityCreatedFlow = MutableSharedFlow<Unit>()
     val activityCreatedFlow: Flow<Unit> = _activityCreatedFlow
 
     init {

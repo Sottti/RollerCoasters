@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,7 +22,6 @@ import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FilterChips(
     filters: Filters,
-    listState: LazyListState,
     onAction: (ExploreAction) -> Unit,
 ) {
     Column(modifier = Modifier.padding(vertical = dimensions.padding.small)) {

@@ -33,6 +33,6 @@ internal fun ExploreTopBar(
     )
     Column(modifier = Modifier.background(backgroundColor)) {
         MainTopBar(navController = navController)
-        FilterChips(filters = filters, listState = lazyListState, onAction = onAction)
+        FilterChips(filters = filters, onAction = onAction)
     }
 }
