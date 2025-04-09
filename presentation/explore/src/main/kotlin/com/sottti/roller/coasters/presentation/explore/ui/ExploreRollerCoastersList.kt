@@ -11,33 +11,30 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
-import androidx.paging.PagingData
+import androidx.paging.LoadState.Loading
+import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import kotlinx.coroutines.flow.Flow
 
 @Composable
 internal fun RollerCoastersList(
     listState: LazyListState,
     paddingValues: PaddingValues,
-    state: Flow<PagingData<ExploreRollerCoaster>>,
+    rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
-    val rollerCoasters: LazyPagingItems<ExploreRollerCoaster> = state.collectAsLazyPagingItems()
-
     Column(
         modifier = Modifier
             .padding(paddingValues)
             .fillMaxSize()
     ) {
         when (rollerCoasters.loadState.refresh) {
-            is LoadState.Loading -> ProgressIndicator(modifier = Modifier.fillMaxSize())
+            is Loading -> FillMaxWidthProgressIndicator()
             is LoadState.Error -> Error()
-            else -> RollerCoasters(listState = listState, rollerCoasters = rollerCoasters)
+            is NotLoading -> RollerCoasters(listState = listState, rollerCoasters = rollerCoasters)
         }
     }
 }
@@ -52,8 +49,16 @@ private fun RollerCoasters(
         contentPadding = PaddingValues(dimensions.padding.medium),
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium)
     ) {
+        if (rollerCoasters.loadState.prepend is Loading) {
+            item { FillMaxWidthProgressIndicator() }
+        }
+
         items(rollerCoasters.itemCount) { index ->
             rollerCoasters[index]?.let { RollerCoaster(it) }
+        }
+
+        if (rollerCoasters.loadState.append is Loading) {
+            item { FillMaxWidthProgressIndicator() }
         }
     }
 }
@@ -76,4 +81,13 @@ private fun RollerCoaster(
 @Composable
 private fun Error() {
     Text.Vanilla("Error loading data")
+}
+
+@Composable
+private fun FillMaxWidthProgressIndicator() {
+    ProgressIndicator(
+        modifier = Modifier
+            .padding(vertical = dimensions.padding.medium)
+            .fillMaxSize()
+    )
 }

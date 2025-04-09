@@ -35,11 +35,11 @@ import kotlinx.coroutines.flow.Flow
 internal fun initialState(
     rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>>,
 ): ExploreState = ExploreState(
-    rollerCoastersFlow = rollerCoastersFlow,
+    rollerCoasters = rollerCoastersFlow,
     filters = filtersInitialState(),
 )
 
-private fun filtersInitialState(): Filters =
+internal fun filtersInitialState(): Filters =
     Filters(
         primary = primaryFiltersInitialState(),
         secondary = secondaryFiltersInitialState(),

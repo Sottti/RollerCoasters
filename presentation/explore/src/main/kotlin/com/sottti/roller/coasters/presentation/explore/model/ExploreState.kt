@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Immutable
 internal data class ExploreState(
-    val rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>>,
     val filters: Filters,
+    val rollerCoasters: Flow<PagingData<ExploreRollerCoaster>>,
 )
 
 @Immutable

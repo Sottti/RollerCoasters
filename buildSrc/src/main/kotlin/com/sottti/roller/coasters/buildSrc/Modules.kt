@@ -7,9 +7,11 @@ object module {
         const val aboutMe = ":presentation:about-me"
         const val explore = ":presentation:explore"
         const val favourites = ":presentation:favourites"
+        const val fixtures = ":presentation:fixtures"
         const val format = ":presentation:format"
         const val home = ":presentation:home"
         const val imageLoading = ":presentation:image-loading"
+        const val informative = ":presentation:informative"
         const val navigation = ":presentation:navigation"
         const val previews = ":presentation:previews"
         const val rollerCoasterDetails = ":presentation:roller-coaster-details"
@@ -23,6 +25,7 @@ object module {
             const val dialogs = ":presentation:design-system:dialogs"
             const val dimensions = ":presentation:design-system:dimensions"
             const val icons = ":presentation:design-system:icons"
+            const val illustrations = ":presentation:design-system:illustrations"
             const val playground = ":presentation:design-system:playground"
             const val progressIndicators = ":presentation:design-system:progress-indicators"
             const val rollerCoasterCard = ":presentation:design-system:roller-coaster-card"
@@ -35,6 +38,7 @@ object module {
 
     object domain {
         const val features = ":domain:features"
+        const val fixtures = ":domain:fixtures"
         const val model = ":domain:model"
         const val rollerCoasters = ":domain:roller-coasters"
         const val settings = ":domain:settings"
@@ -49,7 +53,6 @@ object module {
 
     object utils {
         const val timeDates = ":utils:time-dates"
-        const val testStubs = ":utils:test-stubs"
     }
 
     const val di = ":di"

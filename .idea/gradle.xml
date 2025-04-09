@@ -31,6 +31,7 @@
             <option value="$PROJECT_DIR$/di" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/features" />
+            <option value="$PROJECT_DIR$/domain/fixtures" />
             <option value="$PROJECT_DIR$/domain/model" />
             <option value="$PROJECT_DIR$/domain/roller-coasters" />
             <option value="$PROJECT_DIR$/domain/settings" />
@@ -51,17 +52,16 @@
             <option value="$PROJECT_DIR$/presentation/design-system/typography" />
             <option value="$PROJECT_DIR$/presentation/explore" />
             <option value="$PROJECT_DIR$/presentation/favourites" />
+            <option value="$PROJECT_DIR$/presentation/fixtures" />
             <option value="$PROJECT_DIR$/presentation/format" />
             <option value="$PROJECT_DIR$/presentation/home" />
             <option value="$PROJECT_DIR$/presentation/image-loading" />
             <option value="$PROJECT_DIR$/presentation/navigation" />
-            <option value="$PROJECT_DIR$/presentation/previews" />
             <option value="$PROJECT_DIR$/presentation/roller-coaster-details" />
             <option value="$PROJECT_DIR$/presentation/settings" />
             <option value="$PROJECT_DIR$/presentation/string-provider" />
             <option value="$PROJECT_DIR$/presentation/top-bars" />
             <option value="$PROJECT_DIR$/utils" />
-            <option value="$PROJECT_DIR$/utils/test-stubs" />
             <option value="$PROJECT_DIR$/utils/time-dates" />
           </set>
         </option>

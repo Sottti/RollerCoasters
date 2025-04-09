@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.dialogs.radioButto
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import co.cuvva.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.presentation.previews.data.PreviewsR
+import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class DialogWithRadioButtonsPreviewProvider :
     PreviewParameterProvider<DialogWithRadioButtonsState> {
@@ -25,27 +25,27 @@ internal class DialogWithRadioButtonsPreviewProvider :
 }
 
 private fun confirmValues() = listOf(
-    PreviewsR.confirm,
+    FixturesR.confirm,
 )
 
 private fun dismissValues() = listOf(
-    PreviewsR.dismiss,
+    FixturesR.dismiss,
 )
 
 private fun optionsValues() = listOf(
     DialogRadioButtonOption(
         icon = Icons.BrightnessAuto.Outlined,
         selected = false,
-        text = PreviewsR.option_a,
+        text = FixturesR.option_a,
     ),
     DialogRadioButtonOption(
         icon = Icons.Sort.Filled,
         selected = true,
-        text = PreviewsR.option_b,
+        text = FixturesR.option_b,
     ),
 )
 
 private fun titleValues() = listOf(
-    PreviewsR.title,
-    PreviewsR.title_long,
+    FixturesR.title,
+    FixturesR.title_long,
 )

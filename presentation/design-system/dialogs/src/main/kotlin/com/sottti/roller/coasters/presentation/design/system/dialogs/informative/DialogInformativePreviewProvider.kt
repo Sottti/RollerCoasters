@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.dialogs.informative
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.sottti.roller.coasters.presentation.previews.data.PreviewsR
+import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class DialogInformativePreviewProvider : PreviewParameterProvider<DialogInformativeState> {
     override val values = buildList {
@@ -22,15 +22,15 @@ internal class DialogInformativePreviewProvider : PreviewParameterProvider<Dialo
 }
 
 private fun dismissValues() = listOf(
-    PreviewsR.dismiss,
+    FixturesR.dismiss,
 )
 
 private fun textValues() = listOf(
-    PreviewsR.text,
-    PreviewsR.text_long,
+    FixturesR.text,
+    FixturesR.text_long,
 )
 
 private fun titleValues() = listOf(
-    PreviewsR.title,
-    PreviewsR.title_long,
+    FixturesR.title,
+    FixturesR.title_long,
 )

@@ -18,8 +18,8 @@ import coil3.request.crossfade
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.data.contentDescription
-import com.sottti.roller.coasters.presentation.previews.data.imageUrl
+import com.sottti.roller.coasters.presentation.fixtures.contentDescription
+import com.sottti.roller.coasters.presentation.fixtures.imageUrl
 
 @Composable
 public fun Image(

@@ -4,8 +4,8 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.API_FIELD_LATITUDE
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.API_FIELD_LONGITUDE
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.coordinatesApiModel
-import com.sottti.roller.coasters.utils.test.stubs.LATITUDE
-import com.sottti.roller.coasters.utils.test.stubs.LONGITUDE
+import com.sottti.roller.coasters.domain.fixtures.LATITUDE
+import com.sottti.roller.coasters.domain.fixtures.LONGITUDE
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

@@ -3,11 +3,11 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.seria
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.mainPictureApiModel
-import com.sottti.roller.coasters.utils.test.stubs.COASTER_NAME
-import com.sottti.roller.coasters.utils.test.stubs.COPYRIGHT_DATE
-import com.sottti.roller.coasters.utils.test.stubs.PICTURE_AUTHOR
-import com.sottti.roller.coasters.utils.test.stubs.PICTURE_ID_MAIN
-import com.sottti.roller.coasters.utils.test.stubs.PICTURE_URL
+import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
+import com.sottti.roller.coasters.domain.fixtures.COPYRIGHT_DATE
+import com.sottti.roller.coasters.domain.fixtures.PICTURE_AUTHOR
+import com.sottti.roller.coasters.domain.fixtures.PICTURE_ID_MAIN
+import com.sottti.roller.coasters.domain.fixtures.PICTURE_URL
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject

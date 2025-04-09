@@ -8,11 +8,11 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.Roller
 import com.sottti.roller.coasters.data.roller.coasters.stubs.networkErrorException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.notFoundException
 import com.sottti.roller.coasters.data.roller.coasters.stubs.syncFailedException
+import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
+import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
+import com.sottti.roller.coasters.domain.fixtures.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
-import com.sottti.roller.coasters.utils.test.stubs.anotherRollerCoaster
-import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
-import com.sottti.roller.coasters.utils.test.stubs.rollerCoasterId
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just

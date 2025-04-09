@@ -20,12 +20,12 @@ import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.fixtures.imageUrl
+import com.sottti.roller.coasters.presentation.fixtures.parkName
+import com.sottti.roller.coasters.presentation.fixtures.rollerCoasterName
+import com.sottti.roller.coasters.presentation.fixtures.stat
+import com.sottti.roller.coasters.presentation.fixtures.statDetail
 import com.sottti.roller.coasters.presentation.image.loading.Image
-import com.sottti.roller.coasters.presentation.previews.data.imageUrl
-import com.sottti.roller.coasters.presentation.previews.data.parkName
-import com.sottti.roller.coasters.presentation.previews.data.rollerCoasterName
-import com.sottti.roller.coasters.presentation.previews.data.stat
-import com.sottti.roller.coasters.presentation.previews.data.statDetail
 
 @Composable
 public fun RollerCoasterCard(

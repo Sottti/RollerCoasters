@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.domain.roller.coasters.usecase
 
 import androidx.paging.PagingData
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
@@ -9,7 +10,6 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.GetSystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.ObserveAppMeasurementSystem
-import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

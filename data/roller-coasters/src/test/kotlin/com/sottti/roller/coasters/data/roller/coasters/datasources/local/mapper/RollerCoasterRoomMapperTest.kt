@@ -5,8 +5,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.a
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
-import com.sottti.roller.coasters.utils.test.stubs.anotherRollerCoaster
-import com.sottti.roller.coasters.utils.test.stubs.rollerCoaster
+import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
+import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import kotlinx.serialization.InternalSerializationApi
 import org.junit.Test
 

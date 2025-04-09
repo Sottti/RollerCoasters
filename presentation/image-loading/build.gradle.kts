@@ -20,6 +20,6 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.previews))
+    implementation(project(module.presentation.fixtures))
     runtimeOnly(libs.startup.runtime)
 }
