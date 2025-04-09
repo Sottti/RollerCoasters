@@ -40,7 +40,7 @@ public fun InformativeUi(
             state = BrokenTrack.state,
             modifier = Modifier
                 .weight(0.5f)
-                .fillMaxSize()
+                .fillMaxWidth()
         )
         Column(
             modifier = modifier
