@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.informative
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,39 +31,31 @@ public fun InformativeUi(
     onButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
-        Box(
-            modifier = modifier
-                .fillMaxWidth()
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(dimensions.padding.medium)
+    ) {
+        Illustration(
+            state = BrokenTrack.state,
+            modifier = Modifier
                 .weight(0.5f)
-                .padding(dimensions.padding.large),
-            contentAlignment = Alignment.Center,
-        ) {
-            Illustration(
-                state = BrokenTrack.state,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-        Box(
+                .fillMaxSize()
+        )
+        Column(
             modifier = modifier
                 .fillMaxWidth()
                 .weight(0.25f),
-            contentAlignment = Alignment.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
         ) {
-            Column(
-                modifier = modifier
-                    .padding(dimensions.padding.medium),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                PrimaryText(primaryText)
-                Spacer(modifier = Modifier.height(dimensions.padding.small))
-                SecondaryText(secondaryText)
-            }
+            PrimaryText(primaryText)
+            Spacer(modifier = Modifier.height(dimensions.padding.medium))
+            SecondaryText(secondaryText)
         }
         Box(
             contentAlignment = Alignment.BottomCenter,
             modifier = modifier
-                .fillMaxWidth()
                 .padding(dimensions.padding.medium)
                 .weight(0.25f),
         ) {
@@ -78,7 +71,7 @@ public fun InformativeUi(
 
 @Composable
 private fun PrimaryText(primaryText: Int) {
-    Text.Headline.Medium(
+    Text.Display.Small(
         text = stringResource(primaryText),
         textColor = colors.onBackground,
     )
@@ -86,7 +79,7 @@ private fun PrimaryText(primaryText: Int) {
 
 @Composable
 private fun SecondaryText(secondaryText: Int) {
-    Text.Body.Large(
+    Text.Body.Medium(
         text = stringResource(secondaryText),
         textColor = colors.onBackground,
         textAlign = TextAlign.Center,

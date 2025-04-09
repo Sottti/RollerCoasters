@@ -1,5 +1,5 @@
 <resources>
     <string name="primary_text">Vaia!</string>
-    <string name="secondary_text">Algo saíu dos raíles. Intentaremos arranxalo canto antes.</string>
+    <string name="secondary_text">Algo saíu dos raíles. \nIntentaremos arranxalo canto antes.</string>
     <string name="button_text">Tentar de novo</string>
 </resources>

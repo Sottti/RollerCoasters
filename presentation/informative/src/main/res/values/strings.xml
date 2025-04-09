@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="primary_text">Oops!</string>
-    <string name="secondary_text">Something went off the rails. We\'ll try to fix it as soon as possible.</string>
+    <string name="secondary_text">Something went off the rails. \nWe\'ll try to fix it as soon as possible.</string>
     <string name="button_text">Retry</string>
 </resources>

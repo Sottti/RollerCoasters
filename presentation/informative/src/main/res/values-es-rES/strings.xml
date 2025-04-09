@@ -1,5 +1,5 @@
 <resources>
     <string name="primary_text">¡Vaya!</string>
-    <string name="secondary_text">Algo se salió de las vias. Intentaremos solucionarlo lo antes posible.</string>
+    <string name="secondary_text">Algo se salió de las vias. \nIntentaremos solucionarlo lo antes posible.</string>
     <string name="button_text">Reintentar</string>
 </resources>
