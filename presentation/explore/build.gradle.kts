@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -31,6 +32,8 @@ dependencies {
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
+    implementation(project(module.presentation.empty))
+    implementation(project(module.presentation.error))
     implementation(project(module.presentation.fixtures))
     implementation(project(module.presentation.format))
     implementation(project(module.presentation.imageLoading))

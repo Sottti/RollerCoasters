@@ -14,10 +14,11 @@ import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
-import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
+import com.sottti.roller.coasters.presentation.error.ErrorButton
+import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 
 @Composable
@@ -80,7 +81,7 @@ private fun RollerCoaster(
 
 @Composable
 private fun Error() {
-    Text.Vanilla("Error loading data")
+    ErrorUi(button = ErrorButton(onClick = {}))
 }
 
 @Composable
