@@ -25,9 +25,8 @@ public fun InformativeUi(
     illustration: IllustrationState,
     @StringRes primaryText: Int,
     @StringRes secondaryText: Int,
-    @StringRes buttonText: Int,
-    onButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
+    button: InformativeButton? = null,
 ) {
     Column(
         modifier = modifier
@@ -43,7 +42,7 @@ public fun InformativeUi(
                 .fillMaxWidth()
         )
 
-        Text.Display.Small(
+        Text.Headline.Medium(
             text = stringResource(primaryText),
             textColor = colors.onBackground,
         )
@@ -55,11 +54,13 @@ public fun InformativeUi(
         )
 
         Spacer(modifier = Modifier.weight(0.25f))
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = onButtonClick
-        ) {
-            Text.Vanilla(buttonText)
+        button?.let {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = button.onClick
+            ) {
+                Text.Vanilla(button.text)
+            }
         }
     }
 }

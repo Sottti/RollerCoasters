@@ -12,4 +12,12 @@ public object Illustrations {
                 descriptionResId = Description,
             )
     }
+    public object EmptyTrack {
+        public val Description: Int = R.string.description_illustration_empty_track
+        public val state: IllustrationState =
+            IllustrationState(
+                resId = R.drawable.il_empty_track,
+                descriptionResId = Description,
+            )
+    }
 }

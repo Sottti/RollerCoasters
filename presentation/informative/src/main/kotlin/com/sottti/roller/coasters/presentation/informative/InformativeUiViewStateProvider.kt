@@ -7,13 +7,21 @@ import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 internal class InformativeUiViewStateProvider : PreviewParameterProvider<InformativeViewState> {
     override val values: Sequence<InformativeViewState> =
         sequenceOf(
-            informativeError,
+            informativeWithButton,
+            informativeWithoutButton,
         )
 }
 
-private val informativeError = InformativeViewState(
+private val informativeWithButton = InformativeViewState(
     illustration = Illustrations.BrokenTrack.state,
     primaryText = FixturesR.fixture_primary_text,
     secondaryText = FixturesR.fixture_secondary_text,
     buttonText = FixturesR.fixture_button_text,
+)
+
+private val informativeWithoutButton = InformativeViewState(
+    illustration = Illustrations.BrokenTrack.state,
+    primaryText = FixturesR.fixture_primary_text,
+    secondaryText = FixturesR.fixture_secondary_text,
+    buttonText = null,
 )

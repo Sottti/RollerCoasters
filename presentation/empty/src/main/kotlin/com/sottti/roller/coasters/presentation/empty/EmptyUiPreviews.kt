@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.error
+package com.sottti.roller.coasters.presentation.empty
 
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
@@ -11,28 +11,18 @@ import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 @Composable
 @LightDarkThemePreview
 internal fun StandardPreview(
-    @PreviewParameter(ErrorUiViewStateProvider::class)
-    viewState: ErrorViewState?,
+    @PreviewParameter(EmptyUiViewStateProvider::class)
+    viewState: EmptyViewState?,
 ) {
     RollerCoastersPreviewTheme {
         when (viewState) {
-            null -> ErrorUi(
-                ErrorButton(
-                    text = R.string.button_text_default,
-                    onClick = {},
-                ),
-                modifier = Modifier.background(colors.background),
-            )
+            null -> EmptyUi(modifier = Modifier.background(colors.background))
 
-            else -> ErrorUi(
+            else -> EmptyUi(
                 modifier = Modifier.background(colors.background),
                 illustration = viewState.illustration,
                 primaryText = viewState.primaryText,
                 secondaryText = viewState.secondaryText,
-                button = ErrorButton(
-                    text = viewState.buttonText,
-                    onClick = {},
-                ),
             )
         }
     }

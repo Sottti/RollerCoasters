@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.informative
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,8 +21,16 @@ internal fun StandardPreview(
             illustration = viewState.illustration,
             primaryText = viewState.primaryText,
             secondaryText = viewState.secondaryText,
-            buttonText = viewState.buttonText,
-            onButtonClick = {},
+            button = toButton(viewState.buttonText),
         )
     }
 }
+
+@Composable
+private fun toButton(@StringRes text: Int?): InformativeButton? =
+    text?.let {
+        InformativeButton(
+            text = text,
+            onClick = {},
+        )
+    }
