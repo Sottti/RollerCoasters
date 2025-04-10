@@ -6,11 +6,11 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 
 @Composable
@@ -36,7 +36,7 @@ private fun progressIndicatorSize(size: ProgressIndicatorSize): Dp =
     }
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 internal fun ProgressIndicatorPreview(
     @PreviewParameter(ProgressIndicatorPreviewProvider::class)
     modifier: Modifier,

@@ -51,6 +51,8 @@
             <option value="$PROJECT_DIR$/presentation/design-system/text" />
             <option value="$PROJECT_DIR$/presentation/design-system/themes" />
             <option value="$PROJECT_DIR$/presentation/design-system/typography" />
+            <option value="$PROJECT_DIR$/presentation/empty" />
+            <option value="$PROJECT_DIR$/presentation/error" />
             <option value="$PROJECT_DIR$/presentation/explore" />
             <option value="$PROJECT_DIR$/presentation/favourites" />
             <option value="$PROJECT_DIR$/presentation/fixtures" />

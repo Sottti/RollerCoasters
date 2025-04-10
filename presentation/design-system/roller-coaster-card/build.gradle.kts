@@ -24,4 +24,5 @@ dependencies {
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.fixtures))
     implementation(project(module.presentation.imageLoading))
+    implementation(project(module.presentation.previews))
 }

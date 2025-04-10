@@ -22,15 +22,15 @@ internal class DialogInformativePreviewProvider : PreviewParameterProvider<Dialo
 }
 
 private fun dismissValues() = listOf(
-    FixturesR.dismiss,
+    FixturesR.fixture_dismiss,
 )
 
 private fun textValues() = listOf(
-    FixturesR.text,
-    FixturesR.text_long,
+    FixturesR.fixture_text_explainer,
+    FixturesR.fixture_text_explainer_long,
 )
 
 private fun titleValues() = listOf(
-    FixturesR.title,
-    FixturesR.title_long,
+    FixturesR.fixture_title,
+    FixturesR.fixture_title_long,
 )

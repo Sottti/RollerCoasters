@@ -8,13 +8,13 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.model.IconState
 import co.cuvva.presentation.design.system.icons.ui.Icon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
 public fun Chip(
@@ -52,7 +52,7 @@ private fun TrailingIcon(expanded: Boolean) =
 
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 internal fun ChipPreview(
     @PreviewParameter(ChipPreviewProvider::class)
     state: ChipState,

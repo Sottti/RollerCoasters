@@ -2,9 +2,9 @@ package com.sottti.roller.coasters.presentation.design.system.switchh
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import androidx.compose.material3.Switch as MaterialSwitch
 
 @Composable
@@ -23,7 +23,7 @@ public fun Switch(
 }
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 internal fun SwitchPreview(
     @PreviewParameter(SwitchPreviewProvider::class)
     state: SwitchState,

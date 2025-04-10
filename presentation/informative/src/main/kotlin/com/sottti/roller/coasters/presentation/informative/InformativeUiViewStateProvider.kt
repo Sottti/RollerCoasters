@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.presentation.informative
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.roller.coasters.presentation.design.system.illustrations.data.Illustrations
+import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class InformativeUiViewStateProvider : PreviewParameterProvider<InformativeViewState> {
     override val values: Sequence<InformativeViewState> =
@@ -12,7 +13,7 @@ internal class InformativeUiViewStateProvider : PreviewParameterProvider<Informa
 
 private val informativeError = InformativeViewState(
     illustration = Illustrations.BrokenTrack.state,
-    primaryText = R.string.primary_text,
-    secondaryText = R.string.secondary_text,
-    buttonText = R.string.button_text,
+    primaryText = FixturesR.fixture_primary_text,
+    secondaryText = FixturesR.fixture_secondary_text,
+    buttonText = FixturesR.fixture_button_text,
 )

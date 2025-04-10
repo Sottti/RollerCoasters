@@ -3,11 +3,11 @@ package com.sottti.roller.coasters.presentation.design.system.dialogs.informativ
 import androidx.annotation.StringRes
 import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DismissButton
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
 public fun DialogInformative(
@@ -25,7 +25,7 @@ public fun DialogInformative(
 }
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 internal fun DialogInformativePreview(
     @PreviewParameter(DialogInformativePreviewProvider::class)
     state: DialogInformativeState,

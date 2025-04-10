@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import co.sottti.roller.coasters.presentation.design.system.roller.coaster.card.R
@@ -26,6 +25,7 @@ import com.sottti.roller.coasters.presentation.fixtures.rollerCoasterName
 import com.sottti.roller.coasters.presentation.fixtures.stat
 import com.sottti.roller.coasters.presentation.fixtures.statDetail
 import com.sottti.roller.coasters.presentation.image.loading.Image
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
 public fun RollerCoasterCard(
@@ -108,7 +108,7 @@ private fun Footer(
 
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 internal fun RollerCoasterCardPreview(
     @PreviewParameter(RollerCoasterCardPreviewProvider::class)
     foreverLoading: Boolean,

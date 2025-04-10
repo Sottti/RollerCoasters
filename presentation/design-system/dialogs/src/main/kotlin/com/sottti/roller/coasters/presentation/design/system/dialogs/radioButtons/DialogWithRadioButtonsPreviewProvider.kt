@@ -25,27 +25,27 @@ internal class DialogWithRadioButtonsPreviewProvider :
 }
 
 private fun confirmValues() = listOf(
-    FixturesR.confirm,
+    FixturesR.fixture_confirm,
 )
 
 private fun dismissValues() = listOf(
-    FixturesR.dismiss,
+    FixturesR.fixture_dismiss,
 )
 
 private fun optionsValues() = listOf(
     DialogRadioButtonOption(
         icon = Icons.BrightnessAuto.Outlined,
         selected = false,
-        text = FixturesR.option_a,
+        text = FixturesR.fixture_option_a,
     ),
     DialogRadioButtonOption(
         icon = Icons.Sort.Filled,
         selected = true,
-        text = FixturesR.option_b,
+        text = FixturesR.fixture_option_b,
     ),
 )
 
 private fun titleValues() = listOf(
-    FixturesR.title,
-    FixturesR.title_long,
+    FixturesR.fixture_title,
+    FixturesR.fixture_title_long,
 )

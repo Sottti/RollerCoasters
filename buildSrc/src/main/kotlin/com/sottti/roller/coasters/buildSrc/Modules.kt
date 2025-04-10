@@ -5,6 +5,8 @@ package com.sottti.roller.coasters.buildSrc
 object module {
     object presentation {
         const val aboutMe = ":presentation:about-me"
+        const val empty = ":presentation:empty"
+        const val error = ":presentation:error"
         const val explore = ":presentation:explore"
         const val favourites = ":presentation:favourites"
         const val fixtures = ":presentation:fixtures"

@@ -8,7 +8,7 @@
     <string name="color_contrast_medium_contrast">Medio</string>
     <string name="color_contrast_not_available_message_text">
         A configuración do contraste de cor na aplicación só está dispoñible cando a cor
-        dinámica está desactivada.\n\nCando a cor dinámica está activada, o contraste sempre
+        dinámica está desactivada.&#10;&#10;Cando a cor dinámica está activada, o contraste sempre
         segue a configuración de contraste do sistema cando sexa posible.
     </string>
     <string name="color_contrast_not_available_message_title">Contraste de cor</string>

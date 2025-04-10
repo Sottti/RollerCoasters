@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
@@ -20,6 +19,7 @@ import com.sottti.roller.coasters.presentation.design.system.progress.indicators
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.fixtures.contentDescription
 import com.sottti.roller.coasters.presentation.fixtures.imageUrl
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
 public fun Image(
@@ -74,7 +74,7 @@ private fun imageRequest(
 private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 private fun ImageLoadedPreview() {
     RollerCoastersPreviewTheme {
         Image(
@@ -87,7 +87,7 @@ private fun ImageLoadedPreview() {
 }
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 private fun ImageLoadingPreview() {
     RollerCoastersPreviewTheme {
         Image(

@@ -8,7 +8,7 @@
     <string name="color_contrast_medium_contrast">Medium</string>
     <string name="color_contrast_not_available_message_text">
         Color contrast in app setting is only available when dynamic color is disabled.
-        \n\nWhen dynamic color is enabled the contrast always follows the system contrast
+        &#10;&#10;When dynamic color is enabled the contrast always follows the system contrast
         settings when possible.</string>
     <string name="color_contrast_not_available_message_title">Color Contrast</string>
     <string name="color_contrast_picker_title">Pick contrast</string>

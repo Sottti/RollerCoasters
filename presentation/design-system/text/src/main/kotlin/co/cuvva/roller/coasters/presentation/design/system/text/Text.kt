@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import androidx.compose.material3.Text as MaterialText
 
 @Stable
@@ -535,7 +535,7 @@ public object Text {
 }
 
 @Composable
-@PreviewLightDark
+@LightDarkThemePreview
 public fun TextPreview() {
     TextPreviewContent()
 }

@@ -1,0 +1,5 @@
+<resources>
+    <string name="button_text_default">Tentar de novo</string>
+    <string name="primary_text_default">Vaia!</string>
+    <string name="secondary_text_default">Algo saíu dos raíles.&#10;Intentaremos arranxalo canto antes.</string>
+</resources>
