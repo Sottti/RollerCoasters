@@ -14,7 +14,7 @@ internal fun StandardPreview(
     state: ExplorePreviewState,
 ) {
     RollerCoastersPreviewTheme {
-        ExploreUiContent(
+        ExploreUi(
             filters = state.filters,
             navigator = state.navigator,
             onAction = state.onAction,

@@ -10,6 +10,7 @@ import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.presentation.explore.data.filtersInitialState
+import com.sottti.roller.coasters.presentation.explore.fixtures.exploreRollerCoasters
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigator
@@ -92,28 +93,4 @@ private fun exploreRollerCoastersPagingDataFlow(
                 append = appendState,
             )
         )
-    )
-
-private fun exploreRollerCoasters() =
-    listOf(
-        exploreRollerCoaster(),
-        anotherExploreRollerCoaster(),
-    )
-
-private fun exploreRollerCoaster(): ExploreRollerCoaster =
-    ExploreRollerCoaster(
-        imageUrl = rollerCoaster.pictures.main?.url,
-        parkName = rollerCoaster.park.name.value,
-        rollerCoasterName = rollerCoaster.name.current.value,
-        stat = stat,
-        statDetail = statDetail,
-    )
-
-private fun anotherExploreRollerCoaster(): ExploreRollerCoaster =
-    ExploreRollerCoaster(
-        imageUrl = anotherRollerCoaster.pictures.main?.url,
-        parkName = anotherRollerCoaster.park.name.value,
-        rollerCoasterName = anotherRollerCoaster.name.current.value,
-        stat = anotherStat,
-        statDetail = anotherStatDetail,
     )
