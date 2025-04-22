@@ -25,6 +25,7 @@ internal class ExploreUiViewStateProvider : PreviewParameterProvider<ExplorePrev
         loadedStateAppendEndReached,
         loadedStatePrependEndReached,
         loadedStateAppendPrependBothEndsReached,
+        emptyState,
         errorState,
     )
 }
@@ -47,6 +48,13 @@ private val loadedStatePrependEndReached = explorePreviewState(
 private val loadedStateAppendPrependBothEndsReached = explorePreviewState(
     appendState = NotLoading(endOfPaginationReached = true),
     prependState = NotLoading(endOfPaginationReached = true)
+)
+
+private val emptyState = explorePreviewState(
+    refreshState = NotLoading(endOfPaginationReached = true),
+    appendState = NotLoading(endOfPaginationReached = true),
+    prependState = NotLoading(endOfPaginationReached = true),
+    data = emptyList(),
 )
 
 private val errorState = explorePreviewState(

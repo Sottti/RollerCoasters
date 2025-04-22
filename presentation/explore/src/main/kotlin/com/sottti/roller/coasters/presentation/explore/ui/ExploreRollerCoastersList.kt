@@ -17,6 +17,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
+import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
@@ -35,7 +36,12 @@ internal fun RollerCoastersList(
         when (rollerCoasters.loadState.refresh) {
             is Loading -> FillMaxWidthProgressIndicator()
             is LoadState.Error -> Error()
-            is NotLoading -> RollerCoasters(listState = listState, rollerCoasters = rollerCoasters)
+            is NotLoading -> {
+                when (rollerCoasters.itemCount) {
+                    0 -> Empty()
+                    else -> RollerCoasters(listState = listState, rollerCoasters = rollerCoasters)
+                }
+            }
         }
     }
 }
@@ -77,6 +83,11 @@ private fun RollerCoaster(
         statDetail = rollerCoaster.statDetail,
         onClick = {},
     )
+}
+
+@Composable
+private fun Empty() {
+    EmptyUi()
 }
 
 @Composable
