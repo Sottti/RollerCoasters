@@ -16,6 +16,8 @@ dependencies {
     testImplementation(libs.kotlin.coroutines.test)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.mockk)
+    testImplementation(libs.paging.common)
+    testImplementation(libs.paging.testing)
     testImplementation(libs.truth)
     testImplementation(project(module.domain.fixtures))
 }

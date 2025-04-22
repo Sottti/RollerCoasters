@@ -3,8 +3,6 @@ package com.sottti.roller.coasters.data.roller.coasters.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
@@ -15,8 +13,10 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 internal class RollerCoastersRepositoryImpl @Inject constructor(
@@ -37,7 +37,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     }
 
     override fun observeRollerCoasters(
-        measurementSystem: SystemMeasurementSystem,
+        measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>> =
@@ -52,18 +52,20 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             }
         ).flow
 
-    override suspend fun getRollerCoaster(
+
+    override fun observeRollerCoaster(
         id: RollerCoasterId,
-        measurementSystem: SystemMeasurementSystem,
-    ): Result<RollerCoaster> =
-        localDataSource.getRollerCoaster(id, measurementSystem).mapBoth(
-            success = { rollerCoaster -> Ok(rollerCoaster) },
-            failure = {
-                remoteDataSource
-                    .getRollerCoaster(id = id, measurementSystem = measurementSystem)
-                    .onSuccess { localDataSource.storeRollerCoaster(it) }
-            }
-        )
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Flow<RollerCoaster> =
+        localDataSource
+            .observeRollerCoaster(id, measurementSystem)
+            .onEach { rollerCoaster ->
+                if (rollerCoaster == null) {
+                    remoteDataSource
+                        .getRollerCoaster(id, measurementSystem)
+                        .onSuccess { localDataSource.storeRollerCoaster(it) }
+                }
+            }.filterNotNull()
 
     override fun scheduleRollerCoastersSync() {
         rollerCoasterSyncScheduler.schedule()

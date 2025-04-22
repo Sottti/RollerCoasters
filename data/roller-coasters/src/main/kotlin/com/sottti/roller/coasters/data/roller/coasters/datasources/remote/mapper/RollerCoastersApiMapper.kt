@@ -61,12 +61,12 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.State
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.roller.coasters.model.Train
 import com.sottti.roller.coasters.domain.roller.coasters.model.Type
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSeconds
 
 internal fun RollerCoasterApiModel.toDomain(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): RollerCoaster =
     RollerCoaster(
         id = RollerCoasterId(id),
@@ -124,7 +124,7 @@ private fun PictureApiModel.toDomainCopyright(): PictureCopyright =
     )
 
 private fun RollerCoasterApiModel.toDomainSpecs(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Specs = Specs(
     capacity = stats?.capacity?.let { Capacity(RidersPerHour(it)) },
     cost = stats?.cost?.let { Cost(Euros(it)) },
@@ -146,7 +146,7 @@ private fun RollerCoasterApiModel.toDomainDesign(): Design =
     )
 
 private fun RollerCoasterStatsApiModel.toDomain(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Ride? =
     when {
         isMultiTrack() -> toDomainMultiTrack(measurementSystem)
@@ -164,7 +164,7 @@ private fun RollerCoasterStatsApiModel.isMultiTrack(): Boolean =
             (drop?.size ?: 0) > 1
 
 private fun RollerCoasterStatsApiModel.toDomainMultiTrack(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): MultiTrackRide =
     MultiTrackRide(
         drop = drop?.map { it.toDrop(measurementSystem) },
@@ -179,7 +179,7 @@ private fun RollerCoasterStatsApiModel.toDomainMultiTrack(
     )
 
 private fun RollerCoasterStatsApiModel.toDomainSingleTrack(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): SingleTrackRide =
     SingleTrackRide(
         drop = drop?.first()?.toDrop(measurementSystem),

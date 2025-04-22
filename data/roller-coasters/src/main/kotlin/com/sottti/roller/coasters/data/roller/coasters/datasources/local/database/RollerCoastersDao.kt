@@ -9,6 +9,7 @@ import androidx.room.Transaction
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.InternalSerializationApi
 
 // TODO: Create a test class
@@ -42,15 +43,19 @@ internal interface RollerCoastersDao {
 
     @OptIn(InternalSerializationApi::class)
     @Query("SELECT * FROM roller_coasters WHERE id = :id")
-    suspend fun getRollerCoaster(id: Int): RollerCoasterRoomModel?
+    fun observeRollerCoaster(id: Int): Flow<RollerCoasterRoomModel?>
 
     @OptIn(InternalSerializationApi::class)
     @Query("SELECT * FROM roller_coasters WHERE id IN (:ids) ORDER BY id ASC")
     suspend fun getRollerCoasters(ids: List<Int>): List<RollerCoasterRoomModel>
 
     @OptIn(InternalSerializationApi::class)
-    @Query("SELECT * FROM pictures WHERE rollerCoasterId = :id")
-    suspend fun getPictures(id: Int): List<PictureRoomModel>
+    @Query("SELECT * FROM pictures WHERE rollerCoasterId = :rollerCoasterId")
+    suspend fun getPictures(rollerCoasterId: Int): List<PictureRoomModel>
+
+    @OptIn(InternalSerializationApi::class)
+    @Query("SELECT * FROM pictures WHERE rollerCoasterId = :rollerCoasterId")
+    fun observePictures(rollerCoasterId: Int): Flow<List<PictureRoomModel>>
 
     @RawQuery
     @OptIn(InternalSerializationApi::class)

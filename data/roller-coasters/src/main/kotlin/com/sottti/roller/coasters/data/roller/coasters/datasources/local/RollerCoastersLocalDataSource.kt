@@ -1,21 +1,19 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import androidx.paging.PagingSource
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
-import com.sottti.roller.coasters.domain.model.NotFound
-import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
 import javax.inject.Inject
@@ -52,28 +50,21 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     }
 
     @OptIn(InternalSerializationApi::class)
-    suspend fun getRollerCoaster(
+    fun observeRollerCoaster(
         id: RollerCoasterId,
-        systemMeasurementSystem: SystemMeasurementSystem,
-    ): Result<RollerCoaster> {
-        val rollerCoaster = dao
-            .getRollerCoaster(id.value)
-            ?: return Err(NotFound)
-
-        val pictures = dao.getPictures(id.value)
-
-        return withContext(Dispatchers.Default) {
-            Ok(
-                rollerCoaster.toDomain(
-                    measurementSystem = systemMeasurementSystem,
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Flow<RollerCoaster?> =
+        dao
+            .observeRollerCoaster(id.value)
+            .combine(dao.observePictures(rollerCoasterId = id.value)) { rollerCoaster, pictures ->
+                rollerCoaster?.toDomain(
+                    measurementSystem = measurementSystem,
                     pictures = pictures,
                 )
-            )
-        }
-    }
+            }
 
     fun observePagedRollerCoasters(
-        measurementSystem: SystemMeasurementSystem,
+        measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): PagingSource<Int, RollerCoaster> =

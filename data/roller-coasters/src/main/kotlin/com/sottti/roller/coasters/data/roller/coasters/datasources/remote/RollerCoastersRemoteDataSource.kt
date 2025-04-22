@@ -10,8 +10,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -26,7 +26,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
 ) {
     suspend fun getRollerCoaster(
         id: RollerCoasterId,
-        measurementSystem: SystemMeasurementSystem,
+        measurementSystem: ResolvedMeasurementSystem,
     ): Result<RollerCoaster> =
         api
             .getRollerCoaster(id)

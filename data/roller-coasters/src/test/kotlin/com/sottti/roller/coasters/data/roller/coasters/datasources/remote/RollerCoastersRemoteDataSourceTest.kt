@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

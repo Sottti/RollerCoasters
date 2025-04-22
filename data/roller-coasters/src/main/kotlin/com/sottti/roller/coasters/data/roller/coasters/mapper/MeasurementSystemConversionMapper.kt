@@ -16,34 +16,34 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Length.MetricLeng
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed.ImperialSpeed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed.MetricSpeed
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 
 internal fun Double.toSpeed(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Speed = when (measurementSystem) {
     ImperialUk, ImperialUs -> ImperialSpeed(Mph.fromKph(Kmh(this)))
     Metric -> MetricSpeed(Kmh(this))
 }
 
 internal fun Double.toHeight(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Height = when (measurementSystem) {
     ImperialUk, ImperialUs -> ImperialHeight(Feet.fromMeters(Meters(this)))
     Metric -> MetricHeight(Meters(this))
 }
 
 internal fun Double.toDrop(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Drop = when (measurementSystem) {
     ImperialUk, ImperialUs -> ImperialDrop(Feet.fromMeters(Meters(this)))
     Metric -> MetricDrop(Meters(this))
 }
 
 internal fun Double.toLength(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Length = when (measurementSystem) {
     ImperialUk, ImperialUs -> ImperialLength(Feet.fromMeters(Meters(this)))
     Metric -> MetricLength(Meters(this))

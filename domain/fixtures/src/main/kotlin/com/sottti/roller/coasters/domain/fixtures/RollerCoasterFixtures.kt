@@ -58,10 +58,10 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.State
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.roller.coasters.model.Train
 import com.sottti.roller.coasters.domain.roller.coasters.model.Type
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUk
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUs
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import java.time.LocalDate
 
 public val rollerCoasterId: RollerCoasterId = RollerCoasterId(COASTER_ID)
@@ -138,7 +138,7 @@ public val design: Design =
     )
 
 public fun ride(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): SingleTrackRide = when (measurementSystem) {
     ImperialUk, ImperialUs -> singleTrackRideImperial()
     Metric -> singleTrackRideMetric()
@@ -169,7 +169,7 @@ private fun singleTrackRideImperial(): SingleTrackRide =
     )
 
 public fun specs(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Specs = Specs(
     design = design,
     model = Model(MODEL),
@@ -201,7 +201,7 @@ public val location: Location =
 public val rollerCoaster: RollerCoaster = rollerCoaster()
 
 public fun rollerCoaster(
-    measurementSystem: SystemMeasurementSystem = Metric,
+    measurementSystem: ResolvedMeasurementSystem = Metric,
 ): RollerCoaster = RollerCoaster(
     id = rollerCoasterId,
     location = location,
@@ -216,7 +216,7 @@ public fun rollerCoaster(
 )
 
 public fun rollerCoasterWithoutOtherPictures(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): RollerCoaster =
     rollerCoaster(measurementSystem).let { coaster ->
         coaster.copy(pictures = coaster.pictures.copy(other = emptyList()))
@@ -225,7 +225,7 @@ public fun rollerCoasterWithoutOtherPictures(
 public val anotherRollerCoaster: RollerCoaster = anotherRollerCoaster()
 
 public fun anotherRollerCoaster(
-    measurementSystem: SystemMeasurementSystem = Metric,
+    measurementSystem: ResolvedMeasurementSystem = Metric,
 ): RollerCoaster = rollerCoaster(measurementSystem = measurementSystem).copy(
     id = anotherRollerCoasterId,
     pictures = Pictures(

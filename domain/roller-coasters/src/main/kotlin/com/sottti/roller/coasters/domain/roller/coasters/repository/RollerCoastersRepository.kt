@@ -6,20 +6,20 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import kotlinx.coroutines.flow.Flow
 
 public interface RollerCoastersRepository {
     public fun observeRollerCoasters(
-        measurementSystem: SystemMeasurementSystem,
+        measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>>
 
-    public suspend fun getRollerCoaster(
+    public fun observeRollerCoaster(
         id: RollerCoasterId,
-        measurementSystem: SystemMeasurementSystem,
-    ): Result<RollerCoaster>
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Flow<RollerCoaster>
 
     public fun scheduleRollerCoastersSync()
 

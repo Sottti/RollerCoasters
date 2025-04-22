@@ -24,6 +24,8 @@ import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigat
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
+// TODO() Remove filters when state is loading/empty/error
+
 @Composable
 public fun ExploreUi(
     navigator: ExploreNavigator,

@@ -66,13 +66,13 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.State
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.roller.coasters.model.Train
 import com.sottti.roller.coasters.domain.roller.coasters.model.Type
-import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
 internal fun RollerCoasterRoomModel.toDomain(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
     pictures: List<PictureRoomModel>,
 ) = RollerCoaster(
     id = RollerCoasterId(id),
@@ -138,7 +138,7 @@ private fun PictureRoomModel.toDomain() =
 
 @OptIn(InternalSerializationApi::class)
 private fun SpecsRoomModel.toDomain(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ) = Specs(
     capacity = capacity?.let { Capacity(RidersPerHour(it)) },
     cost = cost?.let { Cost(Euros(it)) },
@@ -162,7 +162,7 @@ private fun DesignRoomModel.toDomain() =
 
 @OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toDomain(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ): Ride =
     when {
         trackNames.isNullOrEmpty() -> toSingleTrackRide(measurementSystem)
@@ -171,7 +171,7 @@ private fun RideRoomModel.toDomain(
 
 @OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toSingleTrackRide(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
 ) = SingleTrackRide(
     drop = drop?.firstOrNull()?.toDrop(measurementSystem),
     duration = duration?.firstOrNull()?.let { Duration(Seconds(it)) },
@@ -185,7 +185,7 @@ private fun RideRoomModel.toSingleTrackRide(
 
 @OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toMultiTrackRide(
-    measurementSystem: SystemMeasurementSystem,
+    measurementSystem: ResolvedMeasurementSystem,
     trackNames: List<String>,
 ) = MultiTrackRide(
     drop = drop?.map { it.toDrop(measurementSystem) },
