@@ -6,18 +6,12 @@ import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.LoadStates
 import androidx.paging.PagingData
-import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
-import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.presentation.explore.data.filtersInitialState
 import com.sottti.roller.coasters.presentation.explore.fixtures.exploreRollerCoasters
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigator
-import com.sottti.roller.coasters.presentation.fixtures.anotherStat
-import com.sottti.roller.coasters.presentation.fixtures.anotherStatDetail
-import com.sottti.roller.coasters.presentation.fixtures.stat
-import com.sottti.roller.coasters.presentation.fixtures.statDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -31,6 +25,7 @@ internal class ExploreUiViewStateProvider : PreviewParameterProvider<ExplorePrev
         loadedStateAppendEndReached,
         loadedStatePrependEndReached,
         loadedStateAppendPrependBothEndsReached,
+        errorState,
     )
 }
 
@@ -52,6 +47,11 @@ private val loadedStatePrependEndReached = explorePreviewState(
 private val loadedStateAppendPrependBothEndsReached = explorePreviewState(
     appendState = NotLoading(endOfPaginationReached = true),
     prependState = NotLoading(endOfPaginationReached = true)
+)
+
+private val errorState = explorePreviewState(
+    refreshState = LoadState.Error(Exception()),
+    data = emptyList(),
 )
 
 private fun explorePreviewState(

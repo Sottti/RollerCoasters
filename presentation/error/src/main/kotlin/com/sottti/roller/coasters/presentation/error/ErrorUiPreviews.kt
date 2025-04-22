@@ -18,7 +18,7 @@ internal fun StandardPreview(
         when (viewState) {
             null -> ErrorUi(
                 ErrorButton(
-                    text = R.string.button_text_default,
+                    text = R.string.error_button_text_default,
                     onClick = {},
                 ),
                 modifier = Modifier.background(colors.background),

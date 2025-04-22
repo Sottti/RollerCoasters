@@ -1,4 +1,4 @@
 <resources>
-    <string name="primary_text_default">Ninguna montaña rusa a la vista</string>
-    <string name="secondary_text_default">No pudimos encontrar ninguna montaña rusa. ¿Quizás están de descanso?</string>
+    <string name="empty_primary_text_default">Ninguna montaña rusa a la vista</string>
+    <string name="empty_secondary_text_default">No pudimos encontrar ninguna montaña rusa. ¿Quizás están de descanso?</string>
 </resources>

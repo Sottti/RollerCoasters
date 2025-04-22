@@ -13,8 +13,8 @@ public fun ErrorUi(
     button: ErrorButton,
     modifier: Modifier = Modifier,
     illustration: IllustrationState = Illustrations.BrokenTrack.state,
-    @StringRes primaryText: Int = R.string.primary_text_default,
-    @StringRes secondaryText: Int = R.string.secondary_text_default,
+    @StringRes primaryText: Int = R.string.error_primary_text_default,
+    @StringRes secondaryText: Int = R.string.error_secondary_text_default,
 ) {
     InformativeUi(
         illustration = illustration,

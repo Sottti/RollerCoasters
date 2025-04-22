@@ -11,8 +11,8 @@ import com.sottti.roller.coasters.presentation.informative.InformativeUi
 public fun EmptyUi(
     modifier: Modifier = Modifier,
     illustration: IllustrationState = Illustrations.EmptyTrack.state,
-    @StringRes primaryText: Int = R.string.primary_text_default,
-    @StringRes secondaryText: Int = R.string.secondary_text_default,
+    @StringRes primaryText: Int = R.string.empty_primary_text_default,
+    @StringRes secondaryText: Int = R.string.empty_secondary_text_default,
 ) {
     InformativeUi(
         illustration = illustration,
