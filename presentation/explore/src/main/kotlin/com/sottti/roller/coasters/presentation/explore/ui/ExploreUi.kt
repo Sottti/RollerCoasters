@@ -29,22 +29,23 @@ public fun ExploreUi(
     navigator: ExploreNavigator,
     onScrollToTop: (() -> Unit) -> Unit,
 ) {
-    ExploreUiWrapper(
+    ExploreUi(
         navigator = navigator,
         onScrollToTop = onScrollToTop,
+        viewModel = hiltViewModel(),
     )
 }
 
 @Composable
-private fun ExploreUiWrapper(
+private fun ExploreUi(
     navigator: ExploreNavigator,
     onScrollToTop: (() -> Unit) -> Unit,
-    viewModel: ExploreViewModel = hiltViewModel(),
+    viewModel: ExploreViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems()
 
-    ExploreUiContent(
+    ExploreUi(
         filters = state.filters,
         navigator = navigator,
         onAction = viewModel.onAction,
@@ -80,7 +81,7 @@ private fun ExploreUiEffects(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun ExploreUiContent(
+internal fun ExploreUi(
     filters: Filters,
     navigator: ExploreNavigator,
     onAction: (ExploreAction) -> Unit,

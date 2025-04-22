@@ -14,13 +14,16 @@ import com.sottti.roller.coasters.presentation.settings.data.SettingsViewModel
 public fun SettingsUi(
     navController: NavHostController,
 ) {
-    SettingsUiInternal(navController = navController)
+    SettingsUi(
+        viewModel = hiltViewModel(),
+        navController = navController,
+    )
 }
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun SettingsUiInternal(
-    viewModel: SettingsViewModel = hiltViewModel(),
+internal fun SettingsUi(
+    viewModel: SettingsViewModel,
     navController: NavHostController,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -36,11 +39,12 @@ internal fun SettingsUiInternal(
             )
         },
     ) { paddingValues ->
-        SettingsContent(
+        SettingsList(
             nestedScrollConnection = nestedScrollConnection,
-            onAction = viewModel.onAction,
             paddingValues = paddingValues,
             state = state,
+            onAction = viewModel.onAction
         )
+        Dialogs(state = state, onAction = viewModel.onAction)
     }
 }

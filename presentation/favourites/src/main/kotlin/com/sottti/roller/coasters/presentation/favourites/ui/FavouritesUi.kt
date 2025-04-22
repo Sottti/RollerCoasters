@@ -9,12 +9,12 @@ import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewMod
 
 @Composable
 public fun FavouritesUi() {
-    FavouritesUiInternal()
+    FavouritesUi(viewModel = hiltViewModel())
 }
 
 @Composable
-private fun FavouritesUiInternal(
-    viewModel: FavouritesViewModel = hiltViewModel(),
+private fun FavouritesUi(
+    viewModel: FavouritesViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

@@ -10,12 +10,12 @@ import com.sottti.roller.coasters.presentation.design.system.playground.RainbowL
 @Composable
 public fun AboutMeUi(
 ) {
-    AboutMeUiInternal()
+    AboutMeUi(viewModel = hiltViewModel())
 }
 
 @Composable
-private fun AboutMeUiInternal(
-    viewModel: AboutMeViewModel = hiltViewModel(),
+private fun AboutMeUi(
+    viewModel: AboutMeViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
