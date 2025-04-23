@@ -78,6 +78,7 @@ private fun RollerCoaster.toUiModel(
     stringProvider: StringProvider,
     unitDisplayFormatter: UnitDisplayFormatter,
 ) = ExploreRollerCoaster(
+    id = id.value,
     imageUrl = pictures.main?.url,
     parkName = park.name.value,
     rollerCoasterName = name.current.value,

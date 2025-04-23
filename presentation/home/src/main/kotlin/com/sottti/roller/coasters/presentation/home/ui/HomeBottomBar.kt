@@ -23,7 +23,7 @@ internal fun BottomBar(
             NavigationBarItem(
                 icon = { Icon(item.icon) },
                 label = { Text.Vanilla(item.labelResId) },
-                selected = navigationBarItems.selectedItem.route == item.destination.route,
+                selected = navigationBarItems.selectedItem == item.destination,
                 onClick = {
                     onClick(
                         actions = actions,
@@ -45,7 +45,7 @@ private fun onClick(
 ) {
     onNavigationBarItemClick(item)
     actions.onDestinationSelected(item.destination)
-    navController.navigate(item.destination.route) {
+    navController.navigate(item.destination) {
         popUpTo(navController.graph.findStartDestination().id) { saveState = true }
         launchSingleTop = true
         restoreState = true

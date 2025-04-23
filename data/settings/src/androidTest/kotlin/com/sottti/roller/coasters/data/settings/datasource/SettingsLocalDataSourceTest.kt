@@ -270,7 +270,8 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testObserveAppLanguageEmitsInitialValue() = runTest {
-        val localeManager = mockk<LocaleManager> { every { appLocale } returns Locale("gl", "ES") }
+        val localeManager =
+            mockk<LocaleManager> { every { appLocale } returns Locale.forLanguageTag("gl-ES") }
         dataSource = createDataSource(localeManager = localeManager)
         val initialValue = dataSource.observeAppLanguage().first()
         assertThat(initialValue).isEqualTo(AppLanguage.Galician)
@@ -279,7 +280,11 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testObserveAppLanguageEmitsDistinctValues() = runTest {
         val localeManager = mockk<LocaleManager> {
-            every { appLocale } returnsMany listOf(Locale.UK, Locale.UK, Locale("es", "ES"))
+            every { appLocale } returnsMany listOf(
+                Locale.UK,
+                Locale.UK,
+                Locale.forLanguageTag("es-ES"),
+            )
         }
         val activityFlow = MutableSharedFlow<Unit>(replay = 0)
         val activityLifecycleEmitter = mockk<ActivityLifecycleEmitter> {

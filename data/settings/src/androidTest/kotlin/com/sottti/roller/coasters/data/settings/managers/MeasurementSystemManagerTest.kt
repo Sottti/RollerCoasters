@@ -26,10 +26,10 @@ internal class MeasurementSystemManagerTest {
         private const val LOCALE_UK_TAG = "en-GB"
         private const val LOCALE_US_TAG = "en-US"
 
-        private val LOCALE_SPAIN = Locale("es", "ES")
-        private val LOCALE_UK = Locale("en", "GB")
-        private val LOCALE_US = Locale("en", "US")
-        private val LOCALE_LIBERIA = Locale("en", "LR")
+        private val LOCALE_SPAIN = Locale.forLanguageTag("es-ES")
+        private val LOCALE_UK = Locale.forLanguageTag("en-GB")
+        private val LOCALE_US = Locale.forLanguageTag("en-US")
+        private val LOCALE_LIBERIA = Locale.forLanguageTag("en-LR")
     }
 
     private lateinit var features: Features

@@ -20,6 +20,7 @@ import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigat
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUi
 import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesUi
 import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
@@ -32,10 +33,10 @@ internal fun NavigationBar(
     rootNavController: NavHostController,
 ) {
     val navController = rememberNavController()
-    val startDestination = Explore.route
+    val startDestination = Explore
     val state by viewModel.state.collectAsStateWithLifecycle()
     val selectedTab by remember { mutableStateOf(startDestination) }
-    val scrollToTopCallbacks = remember { mutableMapOf<String, () -> Unit>() }
+    val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     Scaffold(
@@ -46,8 +47,8 @@ internal fun NavigationBar(
                 navigationBarItems = state.items,
                 actions = viewModel.actions,
                 onNavigationBarItemClick = { homeNavigationBarItem ->
-                    if (selectedTab == homeNavigationBarItem.destination.route) {
-                        scrollToTopCallbacks[homeNavigationBarItem.destination.route]?.invoke()
+                    if (selectedTab == homeNavigationBarItem.destination) {
+                        scrollToTopCallbacks[homeNavigationBarItem.destination]?.invoke()
                     }
                 },
             )
@@ -57,14 +58,14 @@ internal fun NavigationBar(
             navController = navController,
             startDestination = startDestination,
         ) {
-            composable(Explore.route) {
+            composable<Explore> {
                 ExploreUi(
                     navigator = navigator(navController, rootNavController),
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore.route] = callback },
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
                 )
             }
-            composable(Favourites.route) { FavouritesUi() }
-            composable(AboutMe.route) { AboutMeUi() }
+            composable<Favourites> { FavouritesUi() }
+            composable<AboutMe> { AboutMeUi() }
         }
     }
 }
@@ -82,6 +83,6 @@ private fun navigator(
     }
 
     override fun navigateToSettings() {
-        rootNavController.navigate(Settings.route)
+        rootNavController.navigate(Settings)
     }
 }

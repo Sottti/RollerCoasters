@@ -64,8 +64,6 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.Resolv
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import java.time.LocalDate
 
-public val rollerCoasterId: RollerCoasterId = RollerCoasterId(COASTER_ID)
-public val anotherRollerCoasterId: RollerCoasterId = RollerCoasterId(COASTER_ID_ANOTHER)
 public val parkId: ParkId = ParkId(PARK_ID)
 
 public val coordinates: Coordinates =
@@ -199,6 +197,7 @@ public val location: Location =
     )
 
 public val rollerCoaster: RollerCoaster = rollerCoaster()
+public val rollerCoasterId: RollerCoasterId = rollerCoaster.id
 
 public fun rollerCoaster(
     measurementSystem: ResolvedMeasurementSystem = Metric,
@@ -223,6 +222,7 @@ public fun rollerCoasterWithoutOtherPictures(
     }
 
 public val anotherRollerCoaster: RollerCoaster = anotherRollerCoaster()
+public val anotherRollerCoasterId: RollerCoasterId = anotherRollerCoaster.id
 
 public fun anotherRollerCoaster(
     measurementSystem: ResolvedMeasurementSystem = Metric,
