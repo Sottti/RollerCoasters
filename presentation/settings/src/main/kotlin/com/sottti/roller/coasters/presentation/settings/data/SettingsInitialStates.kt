@@ -17,7 +17,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorCo
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
-import com.sottti.roller.coasters.presentation.settings.model.TopBarState
+import com.sottti.roller.coasters.presentation.settings.model.SettingsTopBarState
 
 internal fun initialState(
     dynamicColorAvailable: Boolean,
@@ -79,5 +79,5 @@ private fun appMeasurementSystemInitialState() = AppMeasurementSystemState(
     picker = null,
 )
 
-private fun topBarInitialState(): TopBarState =
-    TopBarState(title = R.string.title, icon = Icons.ArrowBack.Filled)
+private fun topBarInitialState(): SettingsTopBarState =
+    SettingsTopBarState(title = R.string.title, icon = Icons.ArrowBack.Filled)

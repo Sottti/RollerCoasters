@@ -9,5 +9,5 @@ internal data class SettingsState(
     val appMeasurementSystem: AppMeasurementSystemState,
     val appTheme: AppThemeState,
     val dynamicColor: DynamicColorState?,
-    val topBar: TopBarState,
+    val topBar: SettingsTopBarState,
 )

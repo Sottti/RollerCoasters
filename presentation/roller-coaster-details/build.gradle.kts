@@ -21,8 +21,10 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.dimensions))
+    implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.imageLoading))
+    implementation(project(module.presentation.navigation))
     ksp(libs.hilt.compiler)
 }

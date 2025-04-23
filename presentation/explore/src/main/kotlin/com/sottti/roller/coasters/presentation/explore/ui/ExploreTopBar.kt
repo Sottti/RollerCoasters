@@ -21,7 +21,7 @@ internal fun ExploreTopBar(
     filters: Filters,
     lazyListState: LazyListState,
     onAction: (ExploreAction) -> Unit,
-    onNavigateToSettings : () -> Unit,
+    onNavigateToSettings: () -> Unit,
 ) {
     val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
     val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor

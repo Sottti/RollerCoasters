@@ -18,6 +18,7 @@ internal fun StandardPreview(
             filters = state.filters,
             onAction = state.onAction,
             onListStateCreated = state.onListStateCreated,
+            onNavigateToRollerCoaster = {},
             onNavigateToSettings = {},
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
         )

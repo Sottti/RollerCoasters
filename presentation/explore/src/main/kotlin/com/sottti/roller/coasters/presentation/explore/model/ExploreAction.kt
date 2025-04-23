@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.model
 
 internal sealed class ExploreAction {
-    data class ShowRollerCoasterDetails(val rollerCoasterId: Int) : ExploreAction()
     sealed class PrimaryFilterAction : ExploreAction() {
         data object ShowSortFilters : PrimaryFilterAction()
         data object HideSortFilters : PrimaryFilterAction()

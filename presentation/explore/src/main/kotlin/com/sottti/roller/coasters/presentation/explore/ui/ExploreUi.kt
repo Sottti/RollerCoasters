@@ -27,10 +27,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 public fun ExploreUi(
+    onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
 ) {
     ExploreUi(
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
         viewModel = hiltViewModel(),
@@ -39,6 +41,7 @@ public fun ExploreUi(
 
 @Composable
 private fun ExploreUi(
+    onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     viewModel: ExploreViewModel,
@@ -49,6 +52,7 @@ private fun ExploreUi(
     ExploreUi(
         filters = state.filters,
         onAction = viewModel.onAction,
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onListStateCreated = { lazyListState ->
             ExploreUiEffects(viewModel.events, lazyListState, onScrollToTop)
         },
@@ -86,6 +90,7 @@ internal fun ExploreUi(
     filters: Filters,
     onAction: (ExploreAction) -> Unit,
     onListStateCreated: @Composable (LazyListState) -> Unit,
+    onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
@@ -106,6 +111,7 @@ internal fun ExploreUi(
         RollerCoastersList(
             listState = lazyListState,
             onAction = onAction,
+            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             paddingValues = paddingValues,
             rollerCoasters = rollerCoasters,
         )

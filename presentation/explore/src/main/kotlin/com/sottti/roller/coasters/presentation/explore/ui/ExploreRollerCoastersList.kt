@@ -21,13 +21,13 @@ import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.ShowRollerCoasterDetails
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 
 @Composable
 internal fun RollerCoastersList(
     listState: LazyListState,
     onAction: (ExploreAction) -> Unit,
+    onNavigateToRollerCoaster: (Int) -> Unit,
     paddingValues: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
@@ -45,6 +45,7 @@ internal fun RollerCoastersList(
                     else -> RollerCoasters(
                         listState = listState,
                         onAction = onAction,
+                        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                         rollerCoasters = rollerCoasters,
                     )
                 }
@@ -57,6 +58,7 @@ internal fun RollerCoastersList(
 private fun RollerCoasters(
     listState: LazyListState,
     onAction: (ExploreAction) -> Unit,
+    onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     LazyColumn(
@@ -69,7 +71,13 @@ private fun RollerCoasters(
         }
 
         items(rollerCoasters.itemCount) { index ->
-            rollerCoasters[index]?.let { rollerCoaster -> RollerCoaster(onAction, rollerCoaster) }
+            rollerCoasters[index]?.let { rollerCoaster ->
+                RollerCoaster(
+                    onAction = onAction,
+                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                    rollerCoaster = rollerCoaster
+                )
+            }
         }
 
         if (rollerCoasters.loadState.append is Loading) {
@@ -81,6 +89,7 @@ private fun RollerCoasters(
 @Composable
 private fun RollerCoaster(
     onAction: (ExploreAction) -> Unit,
+    onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoaster: ExploreRollerCoaster,
 ) {
     RollerCoasterCard(
@@ -90,7 +99,7 @@ private fun RollerCoaster(
         rollerCoasterName = rollerCoaster.rollerCoasterName,
         stat = rollerCoaster.stat,
         statDetail = rollerCoaster.statDetail,
-        onClick = { onAction(ShowRollerCoasterDetails(rollerCoaster.id)) },
+        onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
     )
 }
 

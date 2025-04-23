@@ -22,8 +22,8 @@ public fun SettingsUi(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun SettingsUi(
-    viewModel: SettingsViewModel,
     onBackNavigation: () -> Unit,
+    viewModel: SettingsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()

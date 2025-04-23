@@ -29,6 +29,7 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun NavigationBar(
+    onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -59,6 +60,7 @@ internal fun NavigationBar(
         ) {
             composable<Explore> {
                 ExploreUi(
+                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     onNavigateToSettings = onNavigateToSettings,
                     onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
                 )
