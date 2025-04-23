@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -22,7 +21,6 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
-import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Settings
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
