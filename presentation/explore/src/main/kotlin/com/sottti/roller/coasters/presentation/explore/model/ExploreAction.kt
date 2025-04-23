@@ -1,10 +1,7 @@
 package com.sottti.roller.coasters.presentation.explore.model
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
 internal sealed class ExploreAction {
-    @Immutable
+    data class ShowRollerCoasterDetails(val rollerCoasterId: String) : ExploreAction()
     sealed class PrimaryFilterAction : ExploreAction() {
         data object ShowSortFilters : PrimaryFilterAction()
         data object HideSortFilters : PrimaryFilterAction()
@@ -12,7 +9,6 @@ internal sealed class ExploreAction {
         data object HideTypeFilters : PrimaryFilterAction()
     }
 
-    @Immutable
     sealed class SecondaryFilterAction : ExploreAction() {
         data object SelectSortByAlphabetical : SecondaryFilterAction()
         data object SelectSortByDrop : SecondaryFilterAction()

@@ -10,12 +10,11 @@ import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCo
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
+import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.*
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideTypeFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowTypeFilters
-import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByAlphabetical
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByDrop
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByGForce
@@ -112,6 +111,7 @@ internal class ExploreViewModel @Inject constructor(
         when (action) {
             is PrimaryFilterAction -> processPrimaryFilterAction(action)
             is SecondaryFilterAction -> processSecondaryFilterAction(action)
+            is ShowRollerCoasterDetails -> TODO()
         }
     }
 

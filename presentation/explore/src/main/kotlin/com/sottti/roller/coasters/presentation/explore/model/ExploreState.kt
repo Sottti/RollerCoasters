@@ -17,6 +17,7 @@ internal data class ExploreState(
 
 @Immutable
 internal data class ExploreRollerCoaster(
+    val id : String,
     val imageUrl: ImageUrl?,
     val parkName: String,
     val rollerCoasterName: String,

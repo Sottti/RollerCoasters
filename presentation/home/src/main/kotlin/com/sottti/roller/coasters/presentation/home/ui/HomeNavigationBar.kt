@@ -57,27 +57,31 @@ internal fun NavigationBar(
             navController = navController,
             startDestination = startDestination,
         ) {
-            val exploreNavigator = object : ExploreNavigator {
-                override fun navigateBack() {
-                    navController.popBackStack()
-                }
-
-                override fun navigateToRollerCoasterDetails(rollerCoasterId: RollerCoasterId) {
-
-                }
-
-                override fun navigateToSettings() {
-                    rootNavController.navigate(Settings.route)
-                }
-            }
             composable(Explore.route) {
                 ExploreUi(
-                    navigator = exploreNavigator,
+                    navigator = navigator(navController, rootNavController),
                     onScrollToTop = { callback -> scrollToTopCallbacks[Explore.route] = callback },
                 )
             }
             composable(Favourites.route) { FavouritesUi() }
             composable(AboutMe.route) { AboutMeUi() }
         }
+    }
+}
+
+private fun navigator(
+    navController: NavHostController,
+    rootNavController: NavHostController,
+): ExploreNavigator = object : ExploreNavigator {
+    override fun navigateBack() {
+        navController.popBackStack()
+    }
+
+    override fun navigateToRollerCoasterDetails(rollerCoasterId: RollerCoasterId) {
+
+    }
+
+    override fun navigateToSettings() {
+        rootNavController.navigate(Settings.route)
     }
 }

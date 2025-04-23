@@ -106,6 +106,7 @@ internal fun ExploreUi(
     ) { paddingValues ->
         RollerCoastersList(
             listState = lazyListState,
+            onAction = onAction,
             paddingValues = paddingValues,
             rollerCoasters = rollerCoasters,
         )
