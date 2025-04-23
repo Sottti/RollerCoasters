@@ -7,16 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import com.sottti.roller.coasters.presentation.settings.data.SettingsViewModel
 
 @Composable
 public fun SettingsUi(
-    navController: NavHostController,
+    onBackNavigation: () -> Unit,
 ) {
     SettingsUi(
+        onBackNavigation = onBackNavigation,
         viewModel = hiltViewModel(),
-        navController = navController,
     )
 }
 
@@ -24,7 +23,7 @@ public fun SettingsUi(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun SettingsUi(
     viewModel: SettingsViewModel,
-    navController: NavHostController,
+    onBackNavigation: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -33,7 +32,7 @@ internal fun SettingsUi(
     Scaffold(
         topBar = {
             TopBar(
-                navController = navController,
+                onBackNavigation = onBackNavigation,
                 scrollBehavior = scrollBehavior,
                 state = state.topBar,
             )

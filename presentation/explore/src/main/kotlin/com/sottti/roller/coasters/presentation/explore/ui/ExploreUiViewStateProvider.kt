@@ -6,12 +6,10 @@ import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.LoadStates
 import androidx.paging.PagingData
-import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.presentation.explore.data.filtersInitialState
 import com.sottti.roller.coasters.presentation.explore.fixtures.exploreRollerCoasters
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -69,7 +67,6 @@ private fun explorePreviewState(
     data: List<ExploreRollerCoaster> = exploreRollerCoasters(),
 ) = ExplorePreviewState(
     filters = filtersInitialState(),
-    navigator = previewNavigator(),
     onAction = {},
     onListStateCreated = {},
     rollerCoasters = exploreRollerCoastersPagingDataFlow(
@@ -79,12 +76,6 @@ private fun explorePreviewState(
         refreshState = refreshState,
     ),
 )
-
-private fun previewNavigator(): ExploreNavigator = object : ExploreNavigator {
-    override fun navigateBack() {}
-    override fun navigateToRollerCoasterDetails(rollerCoasterId: RollerCoasterId) {}
-    override fun navigateToSettings() {}
-}
 
 private fun exploreRollerCoastersPagingDataFlow(
     refreshState: LoadState,

@@ -21,10 +21,15 @@ internal fun HomeUi(
         startDestination = Home,
     ) {
         composable<Home> {
-            NavigationBar(viewModel = viewModel, rootNavController = rootNavController)
+            NavigationBar(
+                viewModel = viewModel,
+                onNavigateToSettings = { rootNavController.navigate(Settings) },
+            )
         }
         composable<Settings> {
-            SettingsUi(navController = rootNavController)
+            SettingsUi(
+                onBackNavigation = { rootNavController.popBackStack() }
+            )
         }
     }
 }

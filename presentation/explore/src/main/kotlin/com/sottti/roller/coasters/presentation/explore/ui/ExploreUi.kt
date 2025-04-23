@@ -20,7 +20,6 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent
 import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent.ScrollToTop
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.Filters
-import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -28,11 +27,11 @@ import kotlinx.coroutines.launch
 
 @Composable
 public fun ExploreUi(
-    navigator: ExploreNavigator,
+    onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
 ) {
     ExploreUi(
-        navigator = navigator,
+        onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
         viewModel = hiltViewModel(),
     )
@@ -40,7 +39,7 @@ public fun ExploreUi(
 
 @Composable
 private fun ExploreUi(
-    navigator: ExploreNavigator,
+    onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     viewModel: ExploreViewModel,
 ) {
@@ -49,11 +48,11 @@ private fun ExploreUi(
 
     ExploreUi(
         filters = state.filters,
-        navigator = navigator,
         onAction = viewModel.onAction,
         onListStateCreated = { lazyListState ->
             ExploreUiEffects(viewModel.events, lazyListState, onScrollToTop)
         },
+        onNavigateToSettings = onNavigateToSettings,
         rollerCoasters = rollerCoasters,
     )
 }
@@ -85,9 +84,9 @@ private fun ExploreUiEffects(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ExploreUi(
     filters: Filters,
-    navigator: ExploreNavigator,
     onAction: (ExploreAction) -> Unit,
     onListStateCreated: @Composable (LazyListState) -> Unit,
+    onNavigateToSettings: () -> Unit,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
@@ -99,8 +98,8 @@ internal fun ExploreUi(
             ExploreTopBar(
                 filters = filters,
                 lazyListState = lazyListState,
-                navigator = navigator,
                 onAction = onAction,
+                onNavigateToSettings = onNavigateToSettings,
             )
         },
     ) { paddingValues ->

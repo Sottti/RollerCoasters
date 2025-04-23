@@ -16,9 +16,9 @@ internal fun StandardPreview(
     RollerCoastersPreviewTheme {
         ExploreUi(
             filters = state.filters,
-            navigator = state.navigator,
             onAction = state.onAction,
             onListStateCreated = state.onListStateCreated,
+            onNavigateToSettings = {},
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
         )
     }

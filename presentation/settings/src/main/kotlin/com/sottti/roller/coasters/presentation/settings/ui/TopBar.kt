@@ -12,7 +12,7 @@ import com.sottti.roller.coasters.presentation.settings.model.TopBarState
 @Composable
 @ExperimentalMaterial3Api
 internal fun TopBar(
-    navController: NavHostController,
+    onBackNavigation: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
     state: TopBarState,
 ) {
@@ -22,7 +22,7 @@ internal fun TopBar(
         navigationIcon = {
             Icon(
                 state = state.icon,
-                onClick = { navController.popBackStack() },
+                onClick = { onBackNavigation() },
             )
         }
     )

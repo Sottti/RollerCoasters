@@ -27,6 +27,4 @@ dependencies {
     implementation(project(module.presentation.designSystem.switch))
     implementation(project(module.presentation.designSystem.text))
     ksp(libs.hilt.compiler)
-    runtimeOnly(libs.lifecycle.process)
-
 }

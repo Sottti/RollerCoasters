@@ -2,7 +2,6 @@ package com.sottti.roller.coasters.presentation.explore.fixtures
 
 import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
-import com.sottti.roller.coasters.domain.fixtures.rollerCoasterId
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.fixtures.anotherStat
 import com.sottti.roller.coasters.presentation.fixtures.anotherStatDetail

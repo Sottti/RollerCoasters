@@ -14,9 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUi
-import com.sottti.roller.coasters.presentation.explore.navigation.ExploreNavigator
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUi
 import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesUi
 import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
@@ -29,8 +27,8 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun NavigationBar(
+    onNavigateToSettings: () -> Unit,
     viewModel: HomeViewModel,
-    rootNavController: NavHostController,
 ) {
     val navController = rememberNavController()
     val startDestination = Explore
@@ -60,29 +58,12 @@ internal fun NavigationBar(
         ) {
             composable<Explore> {
                 ExploreUi(
-                    navigator = navigator(navController, rootNavController),
                     onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
+                    onNavigateToSettings = onNavigateToSettings,
                 )
             }
             composable<Favourites> { FavouritesUi() }
             composable<AboutMe> { AboutMeUi() }
         }
-    }
-}
-
-private fun navigator(
-    navController: NavHostController,
-    rootNavController: NavHostController,
-): ExploreNavigator = object : ExploreNavigator {
-    override fun navigateBack() {
-        navController.popBackStack()
-    }
-
-    override fun navigateToRollerCoasterDetails(rollerCoasterId: RollerCoasterId) {
-
-    }
-
-    override fun navigateToSettings() {
-        rootNavController.navigate(Settings)
     }
 }
