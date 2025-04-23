@@ -15,12 +15,7 @@ internal class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
-        setContent {
-            RollerCoastersTheme {
-                HomeUi()
-            }
-        }
+        setContent { RollerCoastersTheme { HomeUi() } }
     }
 }
 

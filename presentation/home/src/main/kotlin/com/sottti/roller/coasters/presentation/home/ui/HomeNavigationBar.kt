@@ -9,7 +9,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,6 +20,7 @@ import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUi
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUi
 import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesUi
 import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
+import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
@@ -26,9 +30,9 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun NavigationBar(
     onNavigateToSettings: () -> Unit,
-    viewModel: HomeViewModel,
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val navController = rememberNavController()
+    val nestedNavController = rememberNavController()
     val startDestination = Explore
     val state by viewModel.state.collectAsStateWithLifecycle()
     val selectedTab by remember { mutableStateOf(startDestination) }
@@ -39,29 +43,38 @@ internal fun NavigationBar(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             BottomBar(
-                navController = navController,
                 navigationBarItems = state.items,
-                actions = viewModel.actions,
                 onNavigationBarItemClick = { homeNavigationBarItem ->
-                    if (selectedTab == homeNavigationBarItem.destination) {
-                        scrollToTopCallbacks[homeNavigationBarItem.destination]?.invoke()
-                    }
+                    val destination = homeNavigationBarItem.destination
+                    if (selectedTab == destination) scrollToTopCallbacks[destination]?.invoke()
+                    viewModel.actions.onDestinationSelected(homeNavigationBarItem.destination)
+                    nestedNavController.navigateTo(homeNavigationBarItem)
                 },
             )
         },
     ) { paddingValues ->
         NavHost(
-            navController = navController,
+            navController = nestedNavController,
             startDestination = startDestination,
         ) {
             composable<Explore> {
                 ExploreUi(
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
                     onNavigateToSettings = onNavigateToSettings,
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
                 )
             }
             composable<Favourites> { FavouritesUi() }
             composable<AboutMe> { AboutMeUi() }
         }
+    }
+}
+
+private fun NavHostController.navigateTo(
+    homeNavigationBarItem: HomeNavigationBarItem,
+) {
+    navigate(homeNavigationBarItem.destination) {
+        popUpTo(graph.findStartDestination().id) { saveState = true }
+        launchSingleTop = true
+        restoreState = true
     }
 }
