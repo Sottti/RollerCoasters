@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="identity_header">Identity</string>
+    <string name="identity_overline_former_names">Former names</string>
+    <string name="identity_overline_name">Name</string>
     <string name="status_header">Status</string>
+    <string name="status_overline_closed_date">Closed date</string>
+    <string name="status_overline_current">Current status</string>
+    <string name="status_overline_former">Former status</string>
+    <string name="status_overline_opened_date">Opened date</string>
 </resources>

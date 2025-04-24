@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="identity_header">Identidade</string>
+    <string name="identity_overline_former_names">Nomes anteriores</string>
+    <string name="identity_overline_name">Nome</string>
     <string name="status_header">Estado</string>
+    <string name="status_overline_closed_date">Data de peche</string>
+    <string name="status_overline_current">Estado actual</string>
+    <string name="status_overline_former">Estado anterior</string>
+    <string name="status_overline_opened_date">Data de apertura</string>
 </resources>

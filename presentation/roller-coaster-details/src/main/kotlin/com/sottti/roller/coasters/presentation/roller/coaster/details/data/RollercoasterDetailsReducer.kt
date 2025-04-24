@@ -5,6 +5,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterIdentityViewState
@@ -36,8 +37,18 @@ private fun RollerCoaster.toRollerCoasterDetails(
 private fun RollerCoaster.toIdentityViewState() =
     RollerCoasterIdentityViewState(
         header = R.string.identity_header,
-        name = name.current.value,
-        formerNames = name.former?.value
+        name = RollerCoasterDetailsRow(
+            headline = name.current.value,
+            overline = R.string.identity_overline_name,
+            trailing = null,
+        ),
+        formerNames = name.former?.value?.let { formerNames ->
+            RollerCoasterDetailsRow(
+                headline = formerNames,
+                overline = R.string.identity_overline_name,
+                trailing = null,
+            )
+        }
     )
 
 private fun Status.toStatusViewState(
@@ -45,8 +56,30 @@ private fun Status.toStatusViewState(
 ) =
     RollerCoasterStatusViewState(
         header = R.string.status_header,
-        closedDate = closedDate?.date?.let { dateFormatter.format(it) },
-        current = current.value,
-        former = former?.value,
-        openedDate = openedDate?.date?.let { dateFormatter.format(it) },
+        closedDate = closedDate?.date?.let {
+            RollerCoasterDetailsRow(
+                headline = dateFormatter.format(it),
+                overline = R.string.status_overline_closed_date,
+                trailing = null,
+            )
+        },
+        current = RollerCoasterDetailsRow(
+            headline = current.value,
+            overline = R.string.status_overline_current,
+            trailing = null,
+        ),
+        former = former?.value?.let { formerStatus ->
+            RollerCoasterDetailsRow(
+                headline = formerStatus,
+                overline = R.string.status_overline_former,
+                trailing = null,
+            )
+        },
+        openedDate = openedDate?.date?.let {
+            RollerCoasterDetailsRow(
+                headline = dateFormatter.format(it),
+                overline = R.string.status_overline_opened_date,
+                trailing = null,
+            )
+        },
     )

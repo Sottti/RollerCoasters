@@ -6,6 +6,6 @@ import androidx.compose.runtime.Immutable
 @Immutable
 internal data class RollerCoasterIdentityViewState(
     @StringRes val header : Int,
-    val formerNames: String?,
-    val name: String,
+    val formerNames: RollerCoasterDetailsRow?,
+    val name: RollerCoasterDetailsRow,
 )
