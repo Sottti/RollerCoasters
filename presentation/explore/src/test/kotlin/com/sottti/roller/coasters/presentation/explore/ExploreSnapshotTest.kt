@@ -4,8 +4,8 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
+import com.sottti.roller.coasters.presentation.explore.ui.ExploreUiPreview
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUiViewStateProvider
-import com.sottti.roller.coasters.presentation.explore.ui.StandardPreview
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,7 +27,7 @@ internal class ExploreSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            StandardPreview(state)
+            ExploreUiPreview(state)
         }
     }
 

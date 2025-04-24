@@ -11,7 +11,7 @@ internal fun initialState(): RollerCoasterDetailsState =
         topBar = topBarInitialState()
     )
 
-private fun topBarInitialState(): TopBarState = TopBarState(
+internal fun topBarInitialState(): TopBarState = TopBarState(
     title = null,
     icon = Icons.ArrowBack.Filled,
 )

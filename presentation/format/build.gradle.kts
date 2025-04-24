@@ -18,6 +18,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(project(module.domain.fixtures))
     implementation(project(module.domain.rollerCoasters))
+    implementation(project(module.presentation.fixtures))
     ksp(libs.hilt.compiler)
 
     androidTestImplementation(libs.junit.ext)

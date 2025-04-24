@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.di
 
 import androidx.lifecycle.SavedStateHandle
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.RollerCoasterDetails.Companion.KEY_ROLLER_COASTER_ID
 import dagger.Module
 import dagger.Provides
@@ -12,7 +13,9 @@ import dagger.hilt.android.components.ViewModelComponent
 internal object RollerCoasterDetailsModule {
 
     @Provides
-    fun provideRollerCoasterId(savedStateHandle: SavedStateHandle): Int =
-        savedStateHandle[KEY_ROLLER_COASTER_ID]
-            ?: throw IllegalArgumentException("rollerCoasterId is required")
+    fun provideRollerCoasterIdd(savedStateHandle: SavedStateHandle): RollerCoasterId {
+        val id: Int = savedStateHandle[KEY_ROLLER_COASTER_ID]
+            ?: throw IllegalArgumentException("A roller coaster id is required")
+        return RollerCoasterId(id)
+    }
 }

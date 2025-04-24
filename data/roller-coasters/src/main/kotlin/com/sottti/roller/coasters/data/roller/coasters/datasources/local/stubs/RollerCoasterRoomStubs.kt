@@ -47,7 +47,7 @@ import com.sottti.roller.coasters.domain.fixtures.RESTRAINTS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
 import com.sottti.roller.coasters.domain.fixtures.SPEED
 import com.sottti.roller.coasters.domain.fixtures.STATE
-import com.sottti.roller.coasters.domain.fixtures.STATUS
+import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
@@ -107,7 +107,7 @@ internal val anotherNotMainPictureRoomModel =
 
 @OptIn(InternalSerializationApi::class)
 private val statusRoomModel = StatusRoomModel(
-    current = STATUS,
+    current = OPERATIONAL_STATE,
     former = null,
     openedDate = OPENED_DATE,
     closedDate = null,

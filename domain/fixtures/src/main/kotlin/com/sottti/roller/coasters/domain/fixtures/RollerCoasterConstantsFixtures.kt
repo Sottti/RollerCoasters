@@ -40,4 +40,4 @@ public const val RESTRAINTS: String = "Over-the-shoulder restraints"
 public const val RIDERS_PER_HOUR: Int = 1300
 public const val SPEED: Double = 104.6
 public const val STATE: String = "Tarragona"
-public const val STATUS: String = "Operating"
+public const val OPERATIONAL_STATE: String = "Operating"

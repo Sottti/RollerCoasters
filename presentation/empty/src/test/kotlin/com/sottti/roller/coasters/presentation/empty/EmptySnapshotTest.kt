@@ -24,7 +24,7 @@ internal class EmptySnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            StandardPreview(state)
+            EmptyUiPreview(state)
         }
     }
 

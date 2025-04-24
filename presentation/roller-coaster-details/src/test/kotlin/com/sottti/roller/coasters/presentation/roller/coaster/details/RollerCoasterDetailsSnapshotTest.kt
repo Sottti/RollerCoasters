@@ -1,17 +1,20 @@
-package com.sottti.roller.coasters.presentation.informative
+package com.sottti.roller.coasters.presentation.roller.coaster.details
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerCoasterDetailsUiPreview
+import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerCoasterDetailsUiViewStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class InformativeSnapshotTest(
+internal class RollerCoasterDetailsSnapshotTest(
     nightMode: NightMode,
-    private val state: InformativeViewState,
+    private val state: RollerCoasterDetailsState,
 ) {
 
     @get:Rule
@@ -24,7 +27,7 @@ internal class InformativeSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            InformativeUiPreview(state)
+            RollerCoasterDetailsUiPreview(state)
         }
     }
 
@@ -32,7 +35,7 @@ internal class InformativeSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            InformativeUiViewStateProvider()
+            RollerCoasterDetailsUiViewStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

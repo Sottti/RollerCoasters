@@ -5,7 +5,9 @@ import androidx.compose.runtime.Immutable
 @Immutable
 internal sealed class RollerCoasterDetailsContentState {
     @Immutable
-    data class Loaded(val rollerCoaster: RollerCoasterDetails) : RollerCoasterDetailsContentState()
+    data class Loaded(
+        val rollerCoaster: RollerCoasterDetailsViewState,
+    ) : RollerCoasterDetailsContentState()
 
     @Immutable
     data object Error : RollerCoasterDetailsContentState()
