@@ -283,7 +283,7 @@ internal class SettingsLocalDataSourceTest {
             every { appLocale } returnsMany listOf(
                 Locale.UK,
                 Locale.UK,
-                localeEs,
+                Locale.forLanguageTag("es-ES"),
             )
         }
         val activityFlow = MutableSharedFlow<Unit>(replay = 0)
