@@ -5,11 +5,12 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
@@ -30,7 +31,8 @@ private fun RollerCoaster.toRollerCoasterDetails(
     dateFormatter: DateFormatter,
 ): RollerCoasterDetailsRollerCoasterViewState =
     RollerCoasterDetailsRollerCoasterViewState(
-        identity = this.toIdentityViewState(),
+        identity = toIdentityViewState(),
+        location = toLocationViewState(),
         status = status.toStatusViewState(dateFormatter),
     )
 
@@ -38,12 +40,12 @@ private fun RollerCoaster.toIdentityViewState() =
     RollerCoasterIdentityViewState(
         header = R.string.identity_header,
         name = RollerCoasterDetailsRow(
-            headline = R.string.identity_overline_name,
+            headline = R.string.identity_name,
             trailing = name.current.value,
         ),
         formerNames = name.former?.value?.let { formerNames ->
             RollerCoasterDetailsRow(
-                headline = R.string.identity_overline_former_names,
+                headline = R.string.identity_former_names,
                 trailing = formerNames,
             )
         }
@@ -57,23 +59,54 @@ private fun Status.toStatusViewState(
         closedDate = closedDate?.date?.let {
             RollerCoasterDetailsRow(
                 trailing = dateFormatter.format(it),
-                headline = R.string.status_overline_closed_date,
+                headline = R.string.status_closed_date,
             )
         },
         current = RollerCoasterDetailsRow(
             trailing = current.value,
-            headline = R.string.status_overline_current,
+            headline = R.string.status_current,
         ),
         former = former?.value?.let { formerStatus ->
             RollerCoasterDetailsRow(
                 trailing = formerStatus,
-                headline = R.string.status_overline_former,
+                headline = R.string.status_former,
             )
         },
         openedDate = openedDate?.date?.let {
             RollerCoasterDetailsRow(
                 trailing = dateFormatter.format(it),
-                headline = R.string.status_overline_opened_date,
+                headline = R.string.status_opened_date,
             )
         },
+    )
+
+private fun RollerCoaster.toLocationViewState() =
+    RollerCoasterLocationViewState(
+        city = RollerCoasterDetailsRow(
+            trailing = location.city.value,
+            headline = R.string.location_city,
+        ),
+        country = RollerCoasterDetailsRow(
+            trailing = location.country.value,
+            headline = R.string.location_country,
+        ),
+        header = R.string.location_header,
+        park = RollerCoasterDetailsRow(
+            trailing = park.name.value,
+            headline = R.string.location_park,
+        ),
+        region = RollerCoasterDetailsRow(
+            trailing = location.region.value,
+            headline = R.string.location_region,
+        ),
+        relocations = location.relocations?.value?.let { relocations ->
+            RollerCoasterDetailsRow(
+                trailing = relocations,
+                headline = R.string.location_relocations,
+            )
+        },
+        state = RollerCoasterDetailsRow(
+            trailing = location.state.value,
+            headline = R.string.location_state,
+        ),
     )

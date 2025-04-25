@@ -23,6 +23,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
 import androidx.compose.material3.ListItem as ListItemMaterial
 
@@ -40,6 +41,7 @@ internal fun RollerCoasterDetails(
     ) {
         item { RollerCoasterDetailsSection(rollerCoaster.identity) }
         item { RollerCoasterDetailsSection(rollerCoaster.status) }
+        item { RollerCoasterDetailsSection(rollerCoaster.location) }
     }
 }
 
@@ -66,6 +68,7 @@ internal fun Header(
 private fun Details(details: RollerCoasterDetailsSectionViewState) {
     when (details) {
         is RollerCoasterIdentityViewState -> IdentityDetails(details)
+        is RollerCoasterLocationViewState -> LocationDetails(details)
         is RollerCoasterStatusViewState -> StatusDetails(details)
     }
 }
@@ -84,7 +87,7 @@ internal fun IdentityDetails(
     state: RollerCoasterIdentityViewState,
 ) {
     DetailsCard {
-        ListItem(state.name)
+        ListItem(state = state.name, isFirstItem = true)
         ConditionalListItem(state.formerNames)
     }
 }
@@ -94,7 +97,7 @@ internal fun StatusDetails(
     state: RollerCoasterStatusViewState,
 ) {
     DetailsCard {
-        ListItem(state.current)
+        ListItem(state = state.current, isFirstItem = true)
         ConditionalListItem(state.former)
         ConditionalListItem(state.openedDate)
         ConditionalListItem(state.closedDate)
@@ -102,9 +105,25 @@ internal fun StatusDetails(
 }
 
 @Composable
+internal fun LocationDetails(
+    state: RollerCoasterLocationViewState,
+) {
+    DetailsCard {
+        ListItem(state = state.park, isFirstItem = true)
+        ConditionalListItem(state.relocations)
+        ListItem(state.city)
+        ListItem(state.region)
+        ListItem(state.state)
+        ListItem(state.country)
+    }
+}
+
+@Composable
 private fun ListItem(
     state: RollerCoasterDetailsRow,
+    isFirstItem: Boolean = false,
 ) {
+    if (!isFirstItem) HorizontalDivider()
     ListItemMaterial(
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         headlineContent = { Headline(state) },
@@ -115,11 +134,20 @@ private fun ListItem(
 @Composable
 private fun ConditionalListItem(
     state: RollerCoasterDetailsRow?,
+    isFirstItem: Boolean = false,
 ) {
     state?.let {
-        HorizontalDivider()
-        ListItem(it)
+        if (!isFirstItem) HorizontalDivider()
+        ListItem(state = state, isFirstItem = isFirstItem)
     }
+}
+
+@Composable
+private fun Headline(state: RollerCoasterDetailsRow) {
+    Text.Body.Medium(
+        text = stringResource(state.headline),
+        textColor = colors.onSurfaceVariant,
+    )
 }
 
 @Composable
@@ -130,12 +158,4 @@ private fun Trailing(state: RollerCoasterDetailsRow) {
             textColor = colors.onSurface,
         )
     }
-}
-
-@Composable
-private fun Headline(state: RollerCoasterDetailsRow) {
-    Text.Body.Small(
-        text = stringResource(state.headline),
-        textColor = colors.onSurfaceVariant,
-    )
 }

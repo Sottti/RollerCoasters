@@ -41,6 +41,7 @@ public const val PICTURE_ID_MAIN: Int = 1445
 public const val PICTURE_ID_NOT_MAIN: Int = 1447
 public const val PICTURE_URL: String = "https://rcdb.com/aaacdpa"
 public const val REGION: String = "Catalonia"
+public const val RELOCATIONS: String = "Another park"
 public const val RESTRAINTS: String = "Over-the-shoulder restraints"
 public const val RIDERS_PER_HOUR: Int = 1300
 public const val SPEED: Double = 104.6

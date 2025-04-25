@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="identity_header">Identidad</string>
-    <string name="identity_overline_former_names">Nombres anteriores</string>
-    <string name="identity_overline_name">Nombre</string>
+    <string name="identity_former_names">Nombres anteriores</string>
+    <string name="identity_name">Nombre</string>
+    <string name="location_city">Ciudad</string>
+    <string name="location_country">País</string>
+    <string name="location_header">Ubicación</string>
+    <string name="location_park">Parque</string>
+    <string name="location_region">Región</string>
+    <string name="location_relocations">Reubicaciones</string>
+    <string name="location_state">Estado</string>
     <string name="status_header">Estado</string>
-    <string name="status_overline_closed_date">Fecha de cierre</string>
-    <string name="status_overline_current">Estado actual</string>
-    <string name="status_overline_former">Estado anterior</string>
-    <string name="status_overline_opened_date">Fecha de apertura</string>
+    <string name="status_closed_date">Fecha de cierre</string>
+    <string name="status_current">Estado actual</string>
+    <string name="status_former">Estado anterior</string>
+    <string name="status_opened_date">Fecha de apertura</string>
 </resources>

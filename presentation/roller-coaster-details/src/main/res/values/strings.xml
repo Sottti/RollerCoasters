@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="identity_former_names">Former names</string>
     <string name="identity_header">Identity</string>
-    <string name="identity_overline_former_names">Former names</string>
-    <string name="identity_overline_name">Name</string>
+    <string name="identity_name">Name</string>
+    <string name="location_city">City</string>
+    <string name="location_country">Country</string>
+    <string name="location_header">Location</string>
+    <string name="location_park">Relocations</string>
+    <string name="location_region">Region</string>
+    <string name="location_relocations">Relocations</string>
+    <string name="location_state">State</string>
+    <string name="status_closed_date">Closed date</string>
+    <string name="status_current">Current status</string>
+    <string name="status_former">Former status</string>
     <string name="status_header">Status</string>
-    <string name="status_overline_closed_date">Closed date</string>
-    <string name="status_overline_current">Current status</string>
-    <string name="status_overline_former">Former status</string>
-    <string name="status_overline_opened_date">Opened date</string>
+    <string name="status_opened_date">Opened date</string>
 </resources>

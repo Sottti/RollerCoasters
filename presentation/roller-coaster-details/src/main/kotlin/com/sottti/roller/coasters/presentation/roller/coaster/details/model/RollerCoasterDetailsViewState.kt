@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
 
 @Immutable
@@ -35,6 +36,7 @@ internal sealed class RollerCoasterDetailsContentState {
 @Immutable
 internal data class RollerCoasterDetailsRollerCoasterViewState(
     val identity: RollerCoasterIdentityViewState,
+    val location: RollerCoasterLocationViewState,
     val status: RollerCoasterStatusViewState,
 )
 
@@ -56,6 +58,17 @@ internal sealed class RollerCoasterDetailsSectionViewState(
         val current: RollerCoasterDetailsRow,
         val former: RollerCoasterDetailsRow?,
         val openedDate: RollerCoasterDetailsRow?,
+    ) : RollerCoasterDetailsSectionViewState(header)
+
+    @Immutable
+    internal data class RollerCoasterLocationViewState(
+        override val header: Int,
+        val city: RollerCoasterDetailsRow,
+        val country: RollerCoasterDetailsRow,
+        val park: RollerCoasterDetailsRow,
+        val region: RollerCoasterDetailsRow,
+        val relocations: RollerCoasterDetailsRow?,
+        val state: RollerCoasterDetailsRow,
     ) : RollerCoasterDetailsSectionViewState(header)
 }
 

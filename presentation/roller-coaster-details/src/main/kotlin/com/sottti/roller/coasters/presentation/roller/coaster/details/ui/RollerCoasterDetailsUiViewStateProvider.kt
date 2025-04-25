@@ -20,11 +20,10 @@ internal class RollerCoasterDetailsUiViewStateProvider :
 
 private fun rollerCoasterDetailsState(
     content: RollerCoasterDetailsContentState,
-) =
-    RollerCoasterDetailsViewState(
-        content = content,
-        topBar = topBarInitialState(),
-    )
+) = RollerCoasterDetailsViewState(
+    content = content,
+    topBar = topBarInitialState(),
+)
 
 
 private val loadingState = rollerCoasterDetailsState(
