@@ -1,14 +1,16 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,48 +19,37 @@ import androidx.compose.ui.res.stringResource
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterIdentityViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterStatusViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
 import androidx.compose.material3.ListItem as ListItemMaterial
 
 @Composable
 internal fun RollerCoasterDetails(
-    rollerCoaster: RollerCoasterDetailsViewState,
+    rollerCoaster: RollerCoasterDetailsRollerCoasterViewState,
     paddingValues: PaddingValues,
 ) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-            .padding(horizontal = dimensions.padding.medium)
+            .padding(horizontal = dimensions.padding.medium),
+        verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium)
     ) {
-        item { RollerCoasterIdentity(rollerCoaster.identity) }
-        item { RollerCoasterStatus(rollerCoaster.status) }
+        item { RollerCoasterDetailsSection(rollerCoaster.identity) }
+        item { RollerCoasterDetailsSection(rollerCoaster.status) }
     }
 }
 
 @Composable
-internal fun RollerCoasterIdentity(
-    state: RollerCoasterIdentityViewState,
+internal fun RollerCoasterDetailsSection(
+    details: RollerCoasterDetailsSectionViewState,
 ) {
-    Column {
-        Header(state.header)
-        Spacer(modifier = Modifier.padding(dimensions.padding.small))
-        IdentityTable(state)
-    }
-}
-
-@Composable
-internal fun RollerCoasterStatus(
-    state: RollerCoasterStatusViewState,
-) {
-    Column {
-        Header(state.header)
-        Spacer(modifier = Modifier.padding(dimensions.padding.small))
-        StatusTable(state)
-    }
+    Header(details.header)
+    Spacer(modifier = Modifier.height(dimensions.padding.small))
+    Details(details)
 }
 
 @Composable
@@ -72,28 +63,41 @@ internal fun Header(
 }
 
 @Composable
-internal fun IdentityTable(
-    state: RollerCoasterIdentityViewState,
-) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column {
-            ListItem(state.name)
-            state.formerNames?.let { ListItem(state.formerNames) }
-        }
+private fun Details(details: RollerCoasterDetailsSectionViewState) {
+    when (details) {
+        is RollerCoasterIdentityViewState -> IdentityDetails(details)
+        is RollerCoasterStatusViewState -> StatusDetails(details)
     }
 }
 
 @Composable
-internal fun StatusTable(
-    state: RollerCoasterStatusViewState,
+internal fun DetailsCard(
+    content: @Composable () -> Unit,
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
-        Column {
-            ListItem(state.current)
-            state.former?.let { formerStatus -> ListItem(formerStatus) }
-            state.openedDate?.let { openedDate -> ListItem(openedDate) }
-            state.closedDate?.let { closedDate -> ListItem(closedDate) }
-        }
+        content()
+    }
+}
+
+@Composable
+internal fun IdentityDetails(
+    state: RollerCoasterIdentityViewState,
+) {
+    DetailsCard {
+        ListItem(state.name)
+        ConditionalListItem(state.formerNames)
+    }
+}
+
+@Composable
+internal fun StatusDetails(
+    state: RollerCoasterStatusViewState,
+) {
+    DetailsCard {
+        ListItem(state.current)
+        ConditionalListItem(state.former)
+        ConditionalListItem(state.openedDate)
+        ConditionalListItem(state.closedDate)
     }
 }
 
@@ -103,8 +107,35 @@ private fun ListItem(
 ) {
     ListItemMaterial(
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-        headlineContent = { Text.Vanilla(text = state.headline) },
-        overlineContent = { Text.Vanilla(text = stringResource(state.overline)) },
-        trailingContent = { state.trailing?.let { trailing -> Text.Vanilla(text = trailing) } },
+        headlineContent = { Headline(state) },
+        trailingContent = { Trailing(state) },
+    )
+}
+
+@Composable
+private fun ConditionalListItem(
+    state: RollerCoasterDetailsRow?,
+) {
+    state?.let {
+        HorizontalDivider()
+        ListItem(it)
+    }
+}
+
+@Composable
+private fun Trailing(state: RollerCoasterDetailsRow) {
+    state.trailing?.let { trailing ->
+        Text.Body.Large(
+            text = trailing,
+            textColor = colors.onSurface,
+        )
+    }
+}
+
+@Composable
+private fun Headline(state: RollerCoasterDetailsRow) {
+    Text.Body.Small(
+        text = stringResource(state.headline),
+        textColor = colors.onSurfaceVariant,
     )
 }

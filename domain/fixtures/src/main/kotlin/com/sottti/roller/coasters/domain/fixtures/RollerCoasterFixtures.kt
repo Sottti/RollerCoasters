@@ -180,7 +180,7 @@ public fun specs(
 
 public val status: Status =
     Status(
-        current = OperationalState(OPERATIONAL_STATE),
+        current = OperationalState(OPERATIONAL_STATE_CURRENT),
         former = null,
         openedDate = OpenedDate(Date.FullDate(LocalDate.parse(OPENED_DATE))),
         closedDate = null,

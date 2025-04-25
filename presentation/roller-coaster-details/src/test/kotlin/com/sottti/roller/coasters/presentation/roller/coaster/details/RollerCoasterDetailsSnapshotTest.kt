@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.roller.coaster.details
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerCoasterDetailsUiPreview
 import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerCoasterDetailsUiViewStateProvider
 import org.junit.Rule
@@ -14,7 +14,7 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class RollerCoasterDetailsSnapshotTest(
     nightMode: NightMode,
-    private val state: RollerCoasterDetailsState,
+    private val state: RollerCoasterDetailsViewState,
 ) {
 
     @get:Rule

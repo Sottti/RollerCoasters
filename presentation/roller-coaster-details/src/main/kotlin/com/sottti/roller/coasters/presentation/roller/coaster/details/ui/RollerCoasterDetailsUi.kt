@@ -17,7 +17,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.data.Rolle
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Error
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loaded
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loading
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 
 @Composable
 public fun RollerCoasterDetailsUi(
@@ -44,7 +44,7 @@ private fun RollerCoasterDetailsUi(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun RollerCoasterDetailsUi(
     onBackNavigation: () -> Unit,
-    state: RollerCoasterDetailsState,
+    state: RollerCoasterDetailsViewState,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 

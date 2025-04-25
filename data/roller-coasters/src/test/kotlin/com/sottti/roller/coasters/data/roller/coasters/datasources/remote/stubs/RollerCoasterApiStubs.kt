@@ -43,7 +43,7 @@ import com.sottti.roller.coasters.domain.fixtures.RESTRAINTS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
 import com.sottti.roller.coasters.domain.fixtures.SPEED
 import com.sottti.roller.coasters.domain.fixtures.STATE
-import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE
+import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_CURRENT
 
 internal val mainPictureApiModel: PictureApiModel =
     PictureApiModel(
@@ -102,7 +102,7 @@ private val parkApiModel: AmusementParkApiModel =
 private val statusApiModel: RollerCoasterStatusApiModel =
     RollerCoasterStatusApiModel(
         date = RollerCoasterStatusDateApiModel(closed = null, opened = OPENED_DATE),
-        state = OPERATIONAL_STATE,
+        state = OPERATIONAL_STATE_CURRENT,
     )
 
 internal val rollerCoasterApiModel = RollerCoasterApiModel(
