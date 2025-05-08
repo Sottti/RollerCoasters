@@ -47,16 +47,24 @@ internal fun RollerCoasterDetailsUi(
     state: RollerCoasterDetailsViewState,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val nestedScrollConnection = scrollBehavior.nestedScrollConnection
 
     Scaffold(
         topBar = { TopBar(onBackNavigation, scrollBehavior, state.topBar) }
     ) { paddingValues ->
         when (val content = state.content) {
             Error -> ErrorUi(modifier = Modifier.padding(paddingValues), button = ErrorButton {})
-            Loading -> ProgressIndicator(modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues))
-            is Loaded -> RollerCoasterDetails(content.rollerCoaster, paddingValues)
+            Loading -> ProgressIndicator(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            )
+
+            is Loaded -> RollerCoasterDetails(
+                nestedScrollConnection = nestedScrollConnection,
+                paddingValues = paddingValues,
+                rollerCoaster = content.rollerCoaster,
+            )
         }
     }
 }

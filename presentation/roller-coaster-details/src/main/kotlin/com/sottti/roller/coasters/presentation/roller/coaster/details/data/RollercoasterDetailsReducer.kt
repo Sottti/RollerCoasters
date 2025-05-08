@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.data
 
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.Specs
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
@@ -9,6 +10,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,6 +35,7 @@ private fun RollerCoaster.toRollerCoasterDetails(
     RollerCoasterDetailsRollerCoasterViewState(
         identity = toIdentityViewState(),
         location = toLocationViewState(),
+        specs = specs.toSpecsViewState(),
         status = status.toStatusViewState(dateFormatter),
     )
 
@@ -78,6 +81,31 @@ private fun Status.toStatusViewState(
                 headline = R.string.status_opened_date,
             )
         },
+    )
+
+private fun Specs.toSpecsViewState() =
+    RollerCoasterSpecsViewState(
+        header = R.string.specs_header,
+        capacity = capacity?.let { capacity ->
+            RollerCoasterDetailsRow(
+                trailing = capacity.ridersPerHour.value.toString(),
+                headline = R.string.specs_capacity,
+            )
+        },
+        cost = RollerCoasterDetailsRow(
+            trailing = cost.toString(),
+            headline = R.string.specs_cost,
+        ),
+        manufacturer = manufacturer?.let { manufacturer ->
+            RollerCoasterDetailsRow(
+                trailing = manufacturer.value,
+                headline = R.string.specs_manufacturer,
+            )
+        },
+        model = RollerCoasterDetailsRow(
+            trailing = model.value,
+            headline = R.string.specs_model,
+        ),
     )
 
 private fun RollerCoaster.toLocationViewState() =

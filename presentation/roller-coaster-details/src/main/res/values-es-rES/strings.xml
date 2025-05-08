@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="identity_header">Identidad</string>
     <string name="identity_former_names">Nombres anteriores</string>
+    <string name="identity_header">Identidad</string>
     <string name="identity_name">Nombre</string>
     <string name="location_city">Ciudad</string>
     <string name="location_country">País</string>
@@ -10,9 +10,14 @@
     <string name="location_region">Región</string>
     <string name="location_relocations">Reubicaciones</string>
     <string name="location_state">Estado</string>
-    <string name="status_header">Estado</string>
+    <string name="specs_capacity">Capacidad</string>
+    <string name="specs_cost">Coste</string>
+    <string name="specs_header">Especificaciones</string>
+    <string name="specs_manufacturer">Fabricante</string>
+    <string name="specs_model">Modelo</string>
     <string name="status_closed_date">Fecha de cierre</string>
     <string name="status_current">Estado actual</string>
     <string name="status_former">Estado anterior</string>
+    <string name="status_header">Estado</string>
     <string name="status_opened_date">Fecha de apertura</string>
 </resources>

@@ -17,6 +17,17 @@ internal fun TopBar(
     TopAppBar(
         title = {},
         scrollBehavior = scrollBehavior,
-        navigationIcon = { Icon(state = state.icon, onClick = { onBackNavigation() }) }
+        navigationIcon = { navigationIcon(state, onBackNavigation) }
+    )
+}
+
+@Composable
+private fun navigationIcon(
+    state: TopBarState,
+    onBackNavigation: () -> Unit,
+) {
+    Icon(
+        state = state.icon,
+        onClick = { onBackNavigation() },
     )
 }
