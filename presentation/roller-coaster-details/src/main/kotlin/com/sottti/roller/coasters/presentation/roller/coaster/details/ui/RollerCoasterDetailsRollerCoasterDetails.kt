@@ -78,7 +78,7 @@ internal fun SpecsDetails(
 ) {
     DetailsCard {
         ListItem(state = details.manufacturer, isFirstItem = true)
-        ListItem(state = details.model)
+        ListItem(state = details.model, isFirstItem = details.manufacturer == null)
         ListItem(state = details.capacity)
         ListItem(state = details.cost)
     }
@@ -114,8 +114,6 @@ internal fun LocationDetails(
     DetailsCard {
         ListItem(state = state.park, isFirstItem = true)
         ListItem(state.city)
-        ListItem(state.region)
-        ListItem(state.state)
         ListItem(state.country)
         ListItem(state.relocations)
     }

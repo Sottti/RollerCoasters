@@ -45,9 +45,7 @@ private fun Location.toRoom(): LocationRoomModel =
         city = city.value,
         coordinates = coordinates?.toRoom(),
         country = country.value,
-        region = region.value,
         relocations = relocations?.value,
-        state = state.value,
     )
 
 @OptIn(InternalSerializationApi::class)

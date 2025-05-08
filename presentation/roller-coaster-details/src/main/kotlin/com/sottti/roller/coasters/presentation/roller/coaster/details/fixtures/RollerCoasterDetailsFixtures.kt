@@ -13,10 +13,8 @@ import com.sottti.roller.coasters.domain.fixtures.OPENED_DATE
 import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_CURRENT
 import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_FORMER
 import com.sottti.roller.coasters.domain.fixtures.PARK_NAME
-import com.sottti.roller.coasters.domain.fixtures.REGION
 import com.sottti.roller.coasters.domain.fixtures.RELOCATIONS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
-import com.sottti.roller.coasters.domain.fixtures.STATE
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
@@ -66,9 +64,7 @@ private fun locationAverageViewState(): RollerCoasterLocationViewState =
         country = country(),
         header = R.string.location_header,
         park = park(),
-        region = region(),
         relocations = null,
-        state = state(),
     )
 
 private fun locationMaxedOutViewState(): RollerCoasterLocationViewState =
@@ -77,9 +73,7 @@ private fun locationMaxedOutViewState(): RollerCoasterLocationViewState =
         country = country(),
         header = R.string.location_header,
         park = park(),
-        region = region(),
         relocations = relocations(),
-        state = state(),
     )
 
 private fun identityMaxedOutViewState(): RollerCoasterIdentityViewState =
@@ -167,16 +161,6 @@ private fun currentStatus(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
 private fun openedDate(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
     trailing = OPENED_DATE,
     headline = R.string.status_opened_date,
-)
-
-private fun state(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
-    trailing = STATE,
-    headline = R.string.location_state,
-)
-
-private fun region(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
-    trailing = REGION,
-    headline = R.string.location_region,
 )
 
 private fun park(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(

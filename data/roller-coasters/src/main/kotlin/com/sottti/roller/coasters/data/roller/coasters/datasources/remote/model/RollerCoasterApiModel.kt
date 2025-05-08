@@ -20,7 +20,7 @@ internal data class RollerCoasterApiModel(
     @SerialName("coords")
     @Serializable(with = CoordinatesSerializer::class)
     val coords: CoordinatesApiModel?,
-    @SerialName("country")
+    @SerialName("region") // Is wrong on the API https://github.com/fabianrguez/rcdb-api/issues/11
     @Serializable(with = TrimmingStringSerializer::class)
     val country: String,
     @SerialName("design")
@@ -47,12 +47,6 @@ internal data class RollerCoasterApiModel(
     val park: AmusementParkApiModel,
     @SerialName("pictures")
     val pictures: List<PictureApiModel>,
-    @SerialName("region")
-    @Serializable(with = TrimmingStringSerializer::class)
-    val region: String,
-    @SerialName("state")
-    @Serializable(with = TrimmingStringSerializer::class)
-    val state: String,
     @SerialName("stats")
     val stats: RollerCoasterStatsApiModel?,
     @SerialName("status")

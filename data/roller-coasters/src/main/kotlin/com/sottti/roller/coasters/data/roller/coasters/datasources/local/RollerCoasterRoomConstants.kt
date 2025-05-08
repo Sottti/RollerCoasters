@@ -8,7 +8,6 @@ internal object RollerCoasterRoomConstants {
     const val COL_HEIGHT_MAX = "heightMax"
     const val COL_INVERSIONS_MAX = "inversionsMax"
     const val COL_LENGTH_MAX = "lengthMax"
-    const val COL_LOCATION_STATE = "location_state"
     const val COL_MAX_VERTICAL_MAX = "maxVerticalMax"
     const val COL_NAME_CURRENT = "name_current"
     const val COL_NAME_FORMER = "name_former"

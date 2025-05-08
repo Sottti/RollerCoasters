@@ -34,6 +34,7 @@ import com.sottti.roller.coasters.domain.fixtures.LONGITUDE
 import com.sottti.roller.coasters.domain.fixtures.MANUFACTURER
 import com.sottti.roller.coasters.domain.fixtures.MODEL
 import com.sottti.roller.coasters.domain.fixtures.OPENED_DATE
+import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_CURRENT
 import com.sottti.roller.coasters.domain.fixtures.PARK_ID
 import com.sottti.roller.coasters.domain.fixtures.PARK_NAME
 import com.sottti.roller.coasters.domain.fixtures.PICTURE_AUTHOR
@@ -42,12 +43,9 @@ import com.sottti.roller.coasters.domain.fixtures.PICTURE_ID_ANOTHER_NOT_MAIN
 import com.sottti.roller.coasters.domain.fixtures.PICTURE_ID_MAIN
 import com.sottti.roller.coasters.domain.fixtures.PICTURE_ID_NOT_MAIN
 import com.sottti.roller.coasters.domain.fixtures.PICTURE_URL
-import com.sottti.roller.coasters.domain.fixtures.REGION
 import com.sottti.roller.coasters.domain.fixtures.RESTRAINTS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
 import com.sottti.roller.coasters.domain.fixtures.SPEED
-import com.sottti.roller.coasters.domain.fixtures.STATE
-import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_CURRENT
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
@@ -162,8 +160,6 @@ private val coordinatesRoomModel: CoordinatesRoomModel =
 private val locationRoomModel = LocationRoomModel(
     city = CITY,
     country = COUNTRY,
-    region = REGION,
-    state = STATE,
     coordinates = coordinatesRoomModel,
     relocations = null,
 )

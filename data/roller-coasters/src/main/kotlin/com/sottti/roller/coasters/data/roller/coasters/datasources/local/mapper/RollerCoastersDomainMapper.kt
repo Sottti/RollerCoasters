@@ -27,7 +27,6 @@ import com.sottti.roller.coasters.domain.model.Picture
 import com.sottti.roller.coasters.domain.model.PictureCopyright
 import com.sottti.roller.coasters.domain.model.PictureId
 import com.sottti.roller.coasters.domain.model.PictureName
-import com.sottti.roller.coasters.domain.model.Region
 import com.sottti.roller.coasters.domain.model.Seconds
 import com.sottti.roller.coasters.domain.roller.coasters.model.AmusementPark
 import com.sottti.roller.coasters.domain.roller.coasters.model.Arrangement
@@ -62,7 +61,6 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterName
 import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Specs
-import com.sottti.roller.coasters.domain.roller.coasters.model.State
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.roller.coasters.model.Train
 import com.sottti.roller.coasters.domain.roller.coasters.model.Type
@@ -90,9 +88,7 @@ private fun LocationRoomModel.toDomain() =
         city = City(city),
         coordinates = coordinates?.toDomain(),
         country = Country(country),
-        region = Region(region),
         relocations = relocations?.let(::Relocations),
-        state = State(state),
     )
 
 @OptIn(InternalSerializationApi::class)

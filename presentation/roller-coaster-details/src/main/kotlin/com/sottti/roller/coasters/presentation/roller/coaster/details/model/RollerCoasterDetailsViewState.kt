@@ -69,9 +69,7 @@ internal sealed class RollerCoasterDetailsSectionViewState(
         val city: RollerCoasterDetailsRow,
         val country: RollerCoasterDetailsRow,
         val park: RollerCoasterDetailsRow,
-        val region: RollerCoasterDetailsRow,
         val relocations: RollerCoasterDetailsRow?,
-        val state: RollerCoasterDetailsRow,
     ) : RollerCoasterDetailsSectionViewState(header)
 
     @Immutable

@@ -123,18 +123,10 @@ private fun RollerCoaster.toLocationViewState() =
             trailing = park.name.value,
             headline = R.string.location_park,
         ),
-        region = RollerCoasterDetailsRow(
-            trailing = location.region.value,
-            headline = R.string.location_region,
-        ),
         relocations = location.relocations?.value?.let { relocations ->
             RollerCoasterDetailsRow(
                 trailing = relocations,
                 headline = R.string.location_relocations,
             )
         },
-        state = RollerCoasterDetailsRow(
-            trailing = location.state.value,
-            headline = R.string.location_state,
-        ),
     )
