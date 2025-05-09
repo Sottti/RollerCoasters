@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,14 +13,18 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sottti.roller.coasters.presentation.design.system.map.Map
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState
@@ -77,8 +82,8 @@ internal fun SpecsDetails(
     details: RollerCoasterSpecsViewState,
 ) {
     DetailsCard {
-        ListItem(state = details.manufacturer, isFirstItem = true)
-        ListItem(state = details.model, isFirstItem = details.manufacturer == null)
+        ListItem(state = details.manufacturer, showDivider = false)
+        ListItem(state = details.model, showDivider = details.manufacturer != null)
         ListItem(state = details.capacity)
         ListItem(state = details.cost)
     }
@@ -90,7 +95,7 @@ internal fun IdentityDetails(
     state: RollerCoasterIdentityViewState,
 ) {
     DetailsCard {
-        ListItem(state = state.name, isFirstItem = true)
+        ListItem(state = state.name, showDivider = false)
         ListItem(state.formerNames)
     }
 }
@@ -100,7 +105,7 @@ internal fun StatusDetails(
     state: RollerCoasterStatusViewState,
 ) {
     DetailsCard {
-        ListItem(state = state.current, isFirstItem = true)
+        ListItem(state = state.current, showDivider = false)
         ListItem(state.former)
         ListItem(state.openedDate)
         ListItem(state.closedDate)
@@ -112,7 +117,17 @@ internal fun LocationDetails(
     state: RollerCoasterLocationViewState,
 ) {
     DetailsCard {
-        ListItem(state = state.park, isFirstItem = true)
+        state.coordinates?.let {
+            Map(
+                latitude = state.coordinates.latitude,
+                longitude = state.coordinates.longitude,
+                markerTitle = state.mapMarkerTitle,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .aspectRatio(1.75f)
+            )
+        }
+        ListItem(state = state.park, showDivider = false)
         ListItem(state.city)
         ListItem(state.country)
         ListItem(state.relocations)
@@ -131,10 +146,10 @@ internal fun DetailsCard(
 @Composable
 private fun ListItem(
     state: RollerCoasterDetailsRow?,
-    isFirstItem: Boolean = false,
+    showDivider: Boolean = true,
 ) {
     state?.let {
-        if (!isFirstItem) HorizontalDivider()
+        if (showDivider) HorizontalDivider()
         ListItemMaterial(
             colors = ListItemDefaults.colors(containerColor = Color.Transparent),
             headlineContent = { Headline(state) },

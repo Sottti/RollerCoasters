@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationCoordinatesViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
@@ -110,6 +111,12 @@ private fun Specs.toSpecsViewState() =
 
 private fun RollerCoaster.toLocationViewState() =
     RollerCoasterLocationViewState(
+        coordinates = location.coordinates?.let { coordinates ->
+            RollerCoasterLocationCoordinatesViewState(
+                longitude = coordinates.longitude.value,
+                latitude = coordinates.latitude.value,
+            )
+        },
         city = RollerCoasterDetailsRow(
             trailing = location.city.value,
             headline = R.string.location_city,
@@ -123,6 +130,7 @@ private fun RollerCoaster.toLocationViewState() =
             trailing = park.name.value,
             headline = R.string.location_park,
         ),
+        mapMarkerTitle = name.current.value,
         relocations = location.relocations?.value?.let { relocations ->
             RollerCoasterDetailsRow(
                 trailing = relocations,

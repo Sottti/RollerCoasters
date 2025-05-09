@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "co.sottti.roller.coasters.presentation.design.system.icons"
+    namespace = "com.sottti.roller.coasters.presentation.design.system.icons"
     buildFeatures { compose = true }
     @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }

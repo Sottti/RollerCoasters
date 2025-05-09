@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.chip
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import co.cuvva.presentation.design.system.icons.data.Icons
-import co.sottti.roller.coasters.presentation.design.system.chip.R
+import com.sottti.roller.coasters.presentation.design.system.chip.R
 
 internal class ChipPreviewProvider : PreviewParameterProvider<ChipState> {
     override val values = buildList {

@@ -1,7 +1,7 @@
 package co.cuvva.presentation.design.system.icons.data
 
 import co.cuvva.presentation.design.system.icons.model.IconState
-import co.sottti.roller.coasters.presentation.design.system.icons.R
+import com.sottti.roller.coasters.presentation.design.system.icons.R
 
 public object Icons {
     public object AccountCircle {

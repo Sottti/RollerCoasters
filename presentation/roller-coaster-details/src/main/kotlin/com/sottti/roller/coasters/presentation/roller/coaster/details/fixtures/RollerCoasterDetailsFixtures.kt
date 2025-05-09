@@ -15,10 +15,12 @@ import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_FORMER
 import com.sottti.roller.coasters.domain.fixtures.PARK_NAME
 import com.sottti.roller.coasters.domain.fixtures.RELOCATIONS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
+import com.sottti.roller.coasters.domain.fixtures.coordinates
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationCoordinatesViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
@@ -61,17 +63,27 @@ private fun statusAverageViewState(): RollerCoasterStatusViewState =
 private fun locationAverageViewState(): RollerCoasterLocationViewState =
     RollerCoasterLocationViewState(
         city = city(),
+        coordinates = coordinates(),
         country = country(),
         header = R.string.location_header,
+        mapMarkerTitle = COASTER_NAME,
         park = park(),
         relocations = null,
+    )
+
+private fun coordinates(): RollerCoasterLocationCoordinatesViewState =
+    RollerCoasterLocationCoordinatesViewState(
+        latitude = coordinates.latitude.value,
+        longitude = coordinates.longitude.value,
     )
 
 private fun locationMaxedOutViewState(): RollerCoasterLocationViewState =
     RollerCoasterLocationViewState(
         city = city(),
+        coordinates = coordinates(),
         country = country(),
         header = R.string.location_header,
+        mapMarkerTitle = COASTER_NAME,
         park = park(),
         relocations = relocations(),
     )

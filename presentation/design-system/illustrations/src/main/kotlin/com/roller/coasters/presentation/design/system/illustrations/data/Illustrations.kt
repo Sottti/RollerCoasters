@@ -1,6 +1,6 @@
 package com.roller.coasters.presentation.design.system.illustrations.data
 
-import co.sottti.roller.coasters.presentation.design.system.illustrations.R
+import com.sottti.roller.coasters.presentation.design.system.illustrations.R
 import com.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
 
 public object Illustrations {

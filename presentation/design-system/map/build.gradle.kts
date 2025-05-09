@@ -7,20 +7,16 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.presentation.design.system.colors"
+    namespace = "com.sottti.roller.coasters.presentation.design.system.map"
     buildFeatures { compose = true }
     @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
 }
 
 dependencies {
-    api(project(module.domain.settings))
-    implementation(libs.compose.material)
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.maps)
     implementation(platform(libs.compose.bom))
-
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.truth)
+    implementation(project(module.presentation.designSystem.themes))
+    implementation(project(module.presentation.previews))
 }
