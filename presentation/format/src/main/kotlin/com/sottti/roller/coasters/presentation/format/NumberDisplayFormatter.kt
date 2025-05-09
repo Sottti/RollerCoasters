@@ -12,7 +12,7 @@ internal fun Double.toDisplayFormat(
 ): String {
     val locale = appLanguage.toLocale(defaultLocale)
     val symbols = DecimalFormatSymbols(locale)
-    val formatter = DecimalFormat("#,##0.###", symbols)
+    val formatter = DecimalFormat("#,##0.#", symbols)
     val decimalSeparator = Regex.escape(symbols.decimalSeparator.toString())
     return formatter
         .format(this)

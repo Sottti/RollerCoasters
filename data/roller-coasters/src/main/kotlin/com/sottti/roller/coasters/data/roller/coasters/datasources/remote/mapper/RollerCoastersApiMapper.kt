@@ -191,7 +191,7 @@ private fun RollerCoasterStatsApiModel.toDomainSingleTrack(
 private fun RollerCoasterApiModel.toDomainStatus(): Status =
     Status(
         closedDate = status.date.closed?.toDate()?.let { ClosedDate(it) },
-        current = OperationalState(status.state),
+        current = OperationalState(status.state).takeUnless { status.state.isBlank() },
         former = stats?.formerStatus?.let { FormerStatus(it) },
         openedDate = status.date.opened.toDate()?.let { OpenedDate(it) },
     )

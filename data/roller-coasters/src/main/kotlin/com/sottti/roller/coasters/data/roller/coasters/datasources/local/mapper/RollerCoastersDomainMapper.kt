@@ -198,7 +198,7 @@ private fun RideRoomModel.toMultiTrackRide(
 @OptIn(InternalSerializationApi::class)
 private fun StatusRoomModel.toDomain() = Status(
     closedDate = closedDate?.toDate()?.let(::ClosedDate),
-    current = OperationalState(current),
+    current = current?.let { OperationalState(current) },
     former = former?.let(::FormerStatus),
     openedDate = openedDate?.toDate()?.let(::OpenedDate),
 )

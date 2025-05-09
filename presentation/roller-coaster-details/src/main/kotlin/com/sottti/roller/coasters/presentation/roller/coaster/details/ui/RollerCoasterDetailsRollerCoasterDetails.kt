@@ -27,7 +27,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
 import androidx.compose.material3.ListItem as ListItemMaterial
 
@@ -54,9 +54,9 @@ internal fun RollerCoasterDetails(
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.mediumLarge),
     ) {
         item { RollerCoasterDetailsSection(rollerCoaster.identity) }
-        item { RollerCoasterDetailsSection(rollerCoaster.status) }
+        rollerCoaster.status?.let { item { RollerCoasterDetailsSection(rollerCoaster.status) } }
         item { RollerCoasterDetailsSection(rollerCoaster.location) }
-        item { RollerCoasterDetailsSection(rollerCoaster.specs) }
+        rollerCoaster.ride?.let { item { RollerCoasterDetailsSection(rollerCoaster.ride) } }
     }
 }
 
@@ -69,50 +69,55 @@ internal fun RollerCoasterDetailsSection(
     when (details) {
         is RollerCoasterIdentityViewState -> IdentityDetails(details)
         is RollerCoasterLocationViewState -> LocationDetails(details)
-        is RollerCoasterSpecsViewState -> SpecsDetails(details)
+        is RollerCoasterRideViewState -> RideDetails(details)
         is RollerCoasterStatusViewState -> StatusDetails(details)
     }
 }
 
 @Composable
-internal fun SpecsDetails(
-    details: RollerCoasterSpecsViewState,
-) {
-    DetailsCard {
-        ListItem(state = details.manufacturer, showDivider = false)
-        ListItem(state = details.model, showDivider = details.manufacturer != null)
-        ListItem(state = details.capacity)
-        ListItem(state = details.cost)
-    }
-}
+internal fun RideDetails(details: RollerCoasterRideViewState) {
+    val items = listOfNotNull(
+        details.height,
+        details.drop,
+        details.maxVertical,
+        details.speed,
+        details.inversions,
+        details.gForce,
+        details.length,
+        details.duration
+    )
 
-
-@Composable
-internal fun IdentityDetails(
-    state: RollerCoasterIdentityViewState,
-) {
     DetailsCard {
-        ListItem(state = state.name, showDivider = false)
-        ListItem(state.formerNames)
-    }
-}
-
-@Composable
-internal fun StatusDetails(
-    state: RollerCoasterStatusViewState,
-) {
-    DetailsCard {
-        ListItem(state = state.current, showDivider = false)
-        ListItem(state.former)
-        ListItem(state.openedDate)
-        ListItem(state.closedDate)
+        items.forEachIndexed { index, item ->
+            ListItem(state = item, showBottomDivider = index < items.lastIndex)
+        }
     }
 }
 
 @Composable
-internal fun LocationDetails(
-    state: RollerCoasterLocationViewState,
-) {
+internal fun IdentityDetails(state: RollerCoasterIdentityViewState) {
+    val items = listOfNotNull(state.name, state.formerNames)
+
+    DetailsCard {
+        items.forEachIndexed { index, item ->
+            ListItem(state = item, showBottomDivider = index < items.lastIndex)
+        }
+    }
+}
+
+@Composable
+internal fun StatusDetails(state: RollerCoasterStatusViewState) {
+    val items = listOfNotNull(state.current, state.former, state.openedDate, state.closedDate)
+
+    DetailsCard {
+        items.forEachIndexed { index, item ->
+            ListItem(state = item, showBottomDivider = index < items.lastIndex)
+        }
+    }
+}
+
+@Composable
+internal fun LocationDetails(state: RollerCoasterLocationViewState) {
     DetailsCard {
         state.coordinates?.let {
             Map(
@@ -124,17 +129,16 @@ internal fun LocationDetails(
                     .aspectRatio(1.75f)
             )
         }
-        ListItem(state = state.park, showDivider = false)
-        ListItem(state.city)
-        ListItem(state.country)
-        ListItem(state.relocations)
+
+        val items = listOfNotNull(state.park, state.city, state.country, state.relocations)
+        items.forEachIndexed { index, item ->
+            ListItem(state = item, showBottomDivider = index < items.lastIndex)
+        }
     }
 }
 
 @Composable
-internal fun DetailsCard(
-    content: @Composable () -> Unit,
-) {
+internal fun DetailsCard(content: @Composable () -> Unit) {
     Card(modifier = Modifier.fillMaxWidth()) {
         content()
     }
@@ -143,22 +147,20 @@ internal fun DetailsCard(
 @Composable
 private fun ListItem(
     state: RollerCoasterDetailsRow?,
-    showDivider: Boolean = true,
+    showBottomDivider: Boolean = true,
 ) {
     state?.let {
-        if (showDivider) HorizontalDivider()
         ListItemMaterial(
             colors = ListItemDefaults.colors(containerColor = Color.Transparent),
             headlineContent = { Headline(state) },
             trailingContent = { Trailing(state) },
         )
+        if (showBottomDivider) HorizontalDivider()
     }
 }
 
 @Composable
-internal fun Header(
-    @StringRes text: Int,
-) {
+internal fun Header(@StringRes text: Int) {
     Text.Label.Large(
         text = stringResource(text),
         textColor = colors.onBackground

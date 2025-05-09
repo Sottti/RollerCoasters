@@ -5,16 +5,20 @@ import com.sottti.roller.coasters.domain.fixtures.CLOSED_DATE
 import com.sottti.roller.coasters.domain.fixtures.COASTER_FORMER_NAMES
 import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
 import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME_THIRD
-import com.sottti.roller.coasters.domain.fixtures.COST
 import com.sottti.roller.coasters.domain.fixtures.COUNTRY
-import com.sottti.roller.coasters.domain.fixtures.MANUFACTURER
-import com.sottti.roller.coasters.domain.fixtures.MODEL
+import com.sottti.roller.coasters.domain.fixtures.DEGREES
+import com.sottti.roller.coasters.domain.fixtures.DROP
+import com.sottti.roller.coasters.domain.fixtures.DURATION_IN_MMSS
+import com.sottti.roller.coasters.domain.fixtures.GFORCE
+import com.sottti.roller.coasters.domain.fixtures.HEIGHT
+import com.sottti.roller.coasters.domain.fixtures.INVERSIONS
+import com.sottti.roller.coasters.domain.fixtures.LENGTH
 import com.sottti.roller.coasters.domain.fixtures.OPENED_DATE
 import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_CURRENT
 import com.sottti.roller.coasters.domain.fixtures.OPERATIONAL_STATE_FORMER
 import com.sottti.roller.coasters.domain.fixtures.PARK_NAME
 import com.sottti.roller.coasters.domain.fixtures.RELOCATIONS
-import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
+import com.sottti.roller.coasters.domain.fixtures.SPEED
 import com.sottti.roller.coasters.domain.fixtures.coordinates
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
@@ -22,59 +26,15 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationCoordinatesViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
-
-internal val rollerCoasterDetailsAverage =
-    RollerCoasterDetailsRollerCoasterViewState(
-        identity = identityAverageViewState(),
-        location = locationAverageViewState(),
-        specs = specsAverageViewState(),
-        status = statusAverageViewState(),
-    )
 
 internal val rollerCoasterDetailsMaxedOut =
     RollerCoasterDetailsRollerCoasterViewState(
         identity = identityMaxedOutViewState(),
         location = locationMaxedOutViewState(),
-        specs = specsMaxedOutViewState(),
+        ride = specsMaxedOutViewState(),
         status = statusMaxedOutViewState(),
-    )
-
-private fun identityAverageViewState(): RollerCoasterIdentityViewState =
-    RollerCoasterIdentityViewState(
-        header = R.string.identity_header,
-        name = RollerCoasterDetailsRow(
-            trailing = COASTER_NAME,
-            headline = R.string.identity_name,
-        ),
-        formerNames = null,
-    )
-
-private fun statusAverageViewState(): RollerCoasterStatusViewState =
-    RollerCoasterStatusViewState(
-        header = R.string.status_header,
-        closedDate = null,
-        current = currentStatus(),
-        former = null,
-        openedDate = openedDate(),
-    )
-
-private fun locationAverageViewState(): RollerCoasterLocationViewState =
-    RollerCoasterLocationViewState(
-        city = city(),
-        coordinates = coordinates(),
-        country = country(),
-        header = R.string.location_header,
-        mapMarkerTitle = COASTER_NAME,
-        park = park(),
-        relocations = null,
-    )
-
-private fun coordinates(): RollerCoasterLocationCoordinatesViewState =
-    RollerCoasterLocationCoordinatesViewState(
-        latitude = coordinates.latitude.value,
-        longitude = coordinates.longitude.value,
     )
 
 private fun locationMaxedOutViewState(): RollerCoasterLocationViewState =
@@ -107,42 +67,57 @@ private fun statusMaxedOutViewState(): RollerCoasterStatusViewState =
         openedDate = openedDate(),
     )
 
-private fun specsAverageViewState() =
-    RollerCoasterSpecsViewState(
-        capacity = capacity(),
-        cost = cost(),
-        header = R.string.specs_header,
-        manufacturer = manufacturer(),
-        model = model(),
-    )
-
 private fun specsMaxedOutViewState() =
-    RollerCoasterSpecsViewState(
-        capacity = capacity(),
-        cost = cost(),
-        header = R.string.specs_header,
-        manufacturer = manufacturer(),
-        model = model(),
+    RollerCoasterRideViewState(
+        drop = drop(),
+        duration = duration(),
+        gForce = gForce(),
+        header = R.string.ride_header,
+        height = height(),
+        inversions = inversions(),
+        length = length(),
+        maxVertical = maxVertical(),
+        speed = speed(),
     )
 
-private fun cost(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
-    trailing = "€$COST",
-    headline = R.string.specs_cost,
+private fun duration(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = DURATION_IN_MMSS,
+    headline = R.string.ride_duration,
 )
 
-private fun model(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
-    trailing = MODEL,
-    headline = R.string.specs_model,
+private fun gForce(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = GFORCE.toString(),
+    headline = R.string.ride_g_force,
 )
 
-private fun manufacturer(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
-    trailing = MANUFACTURER,
-    headline = R.string.specs_manufacturer,
+private fun height(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = "$HEIGHT meters",
+    headline = R.string.ride_height,
 )
 
-private fun capacity(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
-    trailing = "$RIDERS_PER_HOUR riders/hour",
-    headline = R.string.specs_capacity,
+private fun length(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = "$LENGTH meters",
+    headline = R.string.ride_length,
+)
+
+private fun inversions(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = INVERSIONS.toString(),
+    headline = R.string.ride_inversions,
+)
+
+private fun maxVertical(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = "$DEGREES°",
+    headline = R.string.ride_inversions,
+)
+
+private fun speed(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = "$SPEED km/h",
+    headline = R.string.ride_inversions,
+)
+
+private fun drop(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
+    trailing = "$DROP meters",
+    headline = R.string.ride_g_force,
 )
 
 private fun formerNames(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
@@ -189,3 +164,9 @@ private fun city(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
     trailing = CITY,
     headline = R.string.location_city,
 )
+
+private fun coordinates(): RollerCoasterLocationCoordinatesViewState =
+    RollerCoasterLocationCoordinatesViewState(
+        latitude = coordinates.latitude.value,
+        longitude = coordinates.longitude.value,
+    )

@@ -1,11 +1,15 @@
 package com.sottti.roller.coasters.presentation.format
 
 import android.content.Context
+import android.icu.text.MeasureFormat
+import android.icu.util.Measure
+import android.icu.util.MeasureUnit
 import com.sottti.roller.coasters.domain.model.Feet
 import com.sottti.roller.coasters.domain.model.Kmh
 import com.sottti.roller.coasters.domain.model.Meters
 import com.sottti.roller.coasters.domain.model.Mph
 import com.sottti.roller.coasters.domain.roller.coasters.model.Drop
+import com.sottti.roller.coasters.domain.roller.coasters.model.Duration
 import com.sottti.roller.coasters.domain.roller.coasters.model.GForce
 import com.sottti.roller.coasters.domain.roller.coasters.model.Height
 import com.sottti.roller.coasters.domain.roller.coasters.model.Height.ImperialHeight
@@ -22,6 +26,11 @@ import javax.inject.Inject
 public class UnitDisplayFormatter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
+    public fun toDisplayFormat(
+        defaultLocale: Locale,
+        duration: Duration,
+    ): String = duration.toDisplayFormatGForce(defaultLocale)
+
     public fun toDisplayFormat(
         appLanguage: AppLanguage,
         defaultLocale: Locale,
@@ -78,6 +87,32 @@ public class UnitDisplayFormatter @Inject constructor(
     ): String = context.getString(
         R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale)
     )
+
+    private fun Duration.toDisplayFormatGForce(
+        defaultLocale: Locale,
+    ): String {
+        val measures = mutableListOf<Measure>()
+
+        var remaining = seconds.value.toLong()
+        val hours = remaining / 3600
+        if (hours > 0) {
+            measures.add(Measure(hours, MeasureUnit.HOUR))
+            remaining %= 3600
+        }
+
+        val minutes = remaining / 60
+        if (minutes > 0) {
+            measures.add(Measure(minutes, MeasureUnit.MINUTE))
+            remaining %= 60
+        }
+
+        if (remaining > 0 || measures.isEmpty()) {
+            measures.add(Measure(remaining, MeasureUnit.SECOND))
+        }
+
+        val formatter = MeasureFormat.getInstance(defaultLocale, MeasureFormat.FormatWidth.SHORT)
+        return formatter.formatMeasures(*measures.toTypedArray())
+    }
 
     private fun Inversions.toDisplayFormatInversions(): String =
         context.getString(R.string.inversions, value)

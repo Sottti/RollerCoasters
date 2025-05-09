@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="distance_feet">%s pies</string>
-    <string name="distance_meters">%s m</string>
-    <string name="g_force">%s g</string>
+    <string name="distance_meters">%s metros</string>
+    <string name="g_force">%sg</string>
     <string name="inversions">%d inversiones</string>
     <string name="max_vertical">%d°</string>
     <string name="speed_kph">%s km/h</string>

@@ -88,7 +88,7 @@ internal fun RollerCoaster.toPicturesRoom(): List<PictureRoomModel> =
 private fun Status.toRoom(): StatusRoomModel =
     StatusRoomModel(
         closedDate = closedDate?.date?.toSortableString(),
-        current = current.value,
+        current = current?.value,
         former = former?.value,
         openedDate = openedDate?.date?.toSortableString(),
     )

@@ -22,7 +22,7 @@ import kotlinx.serialization.InternalSerializationApi
 @TypeConverters(ListConverters::class)
 internal abstract class RollerCoastersDatabase : RoomDatabase() {
     companion object {
-        const val ROLLER_COASTERS_DATABASE_NAME: String = "roller_coasters_db"
+        const val ROLLER_COASTERS_DATABASE_NAME: String = "roller_coasters.db"
         fun create(context: Context) =
             Room.databaseBuilder(
                 context = context,

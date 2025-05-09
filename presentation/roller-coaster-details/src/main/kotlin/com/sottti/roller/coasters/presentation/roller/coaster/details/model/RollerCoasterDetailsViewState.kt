@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
 
 @Immutable
@@ -38,8 +38,8 @@ internal sealed class RollerCoasterDetailsContentState {
 internal data class RollerCoasterDetailsRollerCoasterViewState(
     val identity: RollerCoasterIdentityViewState,
     val location: RollerCoasterLocationViewState,
-    val specs: RollerCoasterSpecsViewState,
-    val status: RollerCoasterStatusViewState,
+    val ride: RollerCoasterRideViewState?,
+    val status: RollerCoasterStatusViewState?,
 )
 
 @Immutable
@@ -57,7 +57,7 @@ internal sealed class RollerCoasterDetailsSectionViewState(
     internal data class RollerCoasterStatusViewState(
         override val header: Int,
         val closedDate: RollerCoasterDetailsRow?,
-        val current: RollerCoasterDetailsRow,
+        val current: RollerCoasterDetailsRow?,
         val former: RollerCoasterDetailsRow?,
         val openedDate: RollerCoasterDetailsRow?,
     ) : RollerCoasterDetailsSectionViewState(header)
@@ -80,12 +80,16 @@ internal sealed class RollerCoasterDetailsSectionViewState(
     )
 
     @Immutable
-    internal data class RollerCoasterSpecsViewState(
+    internal data class RollerCoasterRideViewState(
         override val header: Int,
-        val capacity: RollerCoasterDetailsRow?,
-        val cost: RollerCoasterDetailsRow?,
-        val manufacturer: RollerCoasterDetailsRow?,
-        val model: RollerCoasterDetailsRow,
+        val drop: RollerCoasterDetailsRow?,
+        val duration: RollerCoasterDetailsRow?,
+        val gForce: RollerCoasterDetailsRow?,
+        val height: RollerCoasterDetailsRow?,
+        val inversions: RollerCoasterDetailsRow?,
+        val length: RollerCoasterDetailsRow?,
+        val maxVertical: RollerCoasterDetailsRow?,
+        val speed: RollerCoasterDetailsRow?,
     ) : RollerCoasterDetailsSectionViewState(header)
 }
 
