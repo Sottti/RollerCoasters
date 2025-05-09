@@ -9,7 +9,7 @@
     <string name="location_park">Parque</string>
     <string name="location_relocations">Reubicacións</string>
     <string name="specs_capacity">Personas por hora</string>
-    <string name="specs_cost">Custo</string>
+    <string name="specs_cost">Custo (€)</string>
     <string name="specs_header">Especificacións</string>
     <string name="specs_manufacturer">Fabricante</string>
     <string name="specs_model">Modelo</string>

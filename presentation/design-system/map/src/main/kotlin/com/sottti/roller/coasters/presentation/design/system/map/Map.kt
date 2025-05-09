@@ -23,23 +23,26 @@ public fun Map(
     markerTitle: String,
     modifier: Modifier,
 ) {
-    val latLng = LatLng(latitude, longitude)
     val context = LocalContext.current
-    val markerState = rememberUpdatedMarkerState(position = latLng)
     val mapStyleOptions = remember { MapStyleOptions.loadRawResourceStyle(context, getMapStyle()) }
+    val latLng = LatLng(latitude, longitude)
+    val markerState = rememberUpdatedMarkerState(position = latLng)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(latLng, 17f)
     }
+    val mapUiSettings = MapUiSettings(scrollGesturesEnabled = false)
+    val mapProperties = MapProperties(
+        isBuildingEnabled = true,
+        isIndoorEnabled = true,
+        mapStyleOptions = mapStyleOptions,
+        mapType = MapType.NORMAL,
+    )
+
     GoogleMap(
-        modifier = modifier,
         cameraPositionState = cameraPositionState,
-        properties = MapProperties(
-            isBuildingEnabled = true,
-            isIndoorEnabled = true,
-            mapStyleOptions = mapStyleOptions,
-            mapType = MapType.NORMAL,
-        ),
-        uiSettings = MapUiSettings(scrollGesturesEnabled = false)
+        modifier = modifier,
+        properties = mapProperties,
+        uiSettings = mapUiSettings,
     ) {
         Marker(state = markerState, title = markerTitle)
     }

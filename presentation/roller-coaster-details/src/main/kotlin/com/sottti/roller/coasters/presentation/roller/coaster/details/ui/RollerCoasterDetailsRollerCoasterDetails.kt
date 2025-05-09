@@ -37,9 +37,9 @@ internal fun RollerCoasterDetails(
     paddingValues: PaddingValues,
     nestedScrollConnection: NestedScrollConnection,
 ) {
+    val topPadding = paddingValues.calculateTopPadding() + dimensions.padding.medium
     val bottomPadding = paddingValues.calculateBottomPadding() + dimensions.padding.medium
     val horizontalPadding = dimensions.padding.medium
-    val topPadding = paddingValues.calculateTopPadding() + dimensions.padding.medium
 
     LazyColumn(
         modifier = Modifier
