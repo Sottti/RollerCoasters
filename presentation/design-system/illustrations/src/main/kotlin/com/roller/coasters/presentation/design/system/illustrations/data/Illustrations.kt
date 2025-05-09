@@ -1,7 +1,7 @@
 package com.roller.coasters.presentation.design.system.illustrations.data
 
-import com.sottti.roller.coasters.presentation.design.system.illustrations.R
 import com.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
+import com.sottti.roller.coasters.presentation.design.system.illustrations.R
 
 public object Illustrations {
     public object BrokenTrack {

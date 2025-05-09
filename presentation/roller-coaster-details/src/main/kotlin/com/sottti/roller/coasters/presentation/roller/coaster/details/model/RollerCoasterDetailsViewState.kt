@@ -3,8 +3,6 @@ package com.sottti.roller.coasters.presentation.roller.coaster.details.model
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
-import com.sottti.roller.coasters.domain.model.Coordinates
-import com.sottti.roller.coasters.domain.roller.coasters.model.Capacity
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterSpecsViewState
@@ -40,7 +38,7 @@ internal sealed class RollerCoasterDetailsContentState {
 internal data class RollerCoasterDetailsRollerCoasterViewState(
     val identity: RollerCoasterIdentityViewState,
     val location: RollerCoasterLocationViewState,
-    val specs : RollerCoasterSpecsViewState,
+    val specs: RollerCoasterSpecsViewState,
     val status: RollerCoasterStatusViewState,
 )
 
@@ -70,7 +68,7 @@ internal sealed class RollerCoasterDetailsSectionViewState(
         val city: RollerCoasterDetailsRow,
         val coordinates: RollerCoasterLocationCoordinatesViewState?,
         val country: RollerCoasterDetailsRow,
-        val mapMarkerTitle : String,
+        val mapMarkerTitle: String,
         val park: RollerCoasterDetailsRow,
         val relocations: RollerCoasterDetailsRow?,
     ) : RollerCoasterDetailsSectionViewState(header)

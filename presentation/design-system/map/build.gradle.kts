@@ -14,9 +14,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.compose.foundation)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.ui.tooling)
     implementation(libs.compose.maps)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.previews))
 }
