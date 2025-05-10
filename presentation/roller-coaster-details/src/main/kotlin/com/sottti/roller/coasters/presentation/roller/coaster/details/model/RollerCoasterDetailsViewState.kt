@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.presentation.roller.coaster.details.model
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import co.cuvva.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
@@ -16,8 +17,8 @@ internal data class RollerCoasterDetailsViewState(
 
 @Immutable
 internal data class TopBarState(
-    @StringRes val title: Int?,
     val icon: IconState,
+    val title: String?,
 )
 
 @Immutable
@@ -36,10 +37,17 @@ internal sealed class RollerCoasterDetailsContentState {
 
 @Immutable
 internal data class RollerCoasterDetailsRollerCoasterViewState(
+    val images: List<RollerCoasterDetailsImageViewState>?,
     val identity: RollerCoasterIdentityViewState,
     val location: RollerCoasterLocationViewState,
     val ride: RollerCoasterRideViewState?,
     val status: RollerCoasterStatusViewState?,
+)
+
+@Immutable
+internal data class RollerCoasterDetailsImageViewState(
+    val contentDescription: String,
+    val imageUrl: ImageUrl,
 )
 
 @Immutable

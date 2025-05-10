@@ -7,6 +7,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Height
 import com.sottti.roller.coasters.domain.roller.coasters.model.Length
 import com.sottti.roller.coasters.domain.roller.coasters.model.MaxVertical
 import com.sottti.roller.coasters.domain.roller.coasters.model.MultiTrackRide
+import com.sottti.roller.coasters.domain.roller.coasters.model.Pictures
 import com.sottti.roller.coasters.domain.roller.coasters.model.Ride
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
@@ -17,6 +18,7 @@ import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
@@ -43,6 +45,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateRollerCoaster
     )
     update { currentState ->
         currentState.copy(
+            topBar = currentState.topBar.copy(title = rollerCoaster.name.current.value),
             content = RollerCoasterDetailsContentState.Loaded(
                 rollerCoaster = rollerCoaster.toRollerCoasterDetails(
                     dateFormatter = dateFormatter,
@@ -58,11 +61,19 @@ private fun RollerCoaster.toRollerCoasterDetails(
     formatContext: FormatContext,
 ): RollerCoasterDetailsRollerCoasterViewState =
     RollerCoasterDetailsRollerCoasterViewState(
+        images = pictures.toImagesViewState(),
         identity = toIdentityViewState(),
         location = toLocationViewState(),
         ride = specs.ride?.toRideViewState(formatContext),
         status = status.toStatusViewState(dateFormatter),
     )
+
+private fun Pictures.toImagesViewState() =
+    buildList {
+        add(main)
+        addAll(other)
+    }.filterNotNull()
+        .map { RollerCoasterDetailsImageViewState("", it.url) }
 
 private fun RollerCoaster.toIdentityViewState() =
     RollerCoasterIdentityViewState(

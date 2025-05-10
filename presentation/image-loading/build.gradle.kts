@@ -17,6 +17,7 @@ dependencies {
     api(project(module.domain.model))
     implementation(libs.coil.compose)
     implementation(libs.coil.network.ktor3)
+    implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling)
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.themes))

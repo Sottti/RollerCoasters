@@ -3,13 +3,18 @@ package com.sottti.roller.coasters.presentation.image.loading
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
@@ -17,8 +22,6 @@ import coil3.request.crossfade
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.fixtures.contentDescription
-import com.sottti.roller.coasters.presentation.fixtures.imageUrl
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
@@ -26,16 +29,18 @@ public fun Image(
     url: ImageUrl,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    roundedCorners: Boolean = false,
     foreverLoading: Boolean = false,
 ) {
     val isPreview = LocalInspectionMode.current
     val model = if (isPreview) previewImageModel() else imageRequest(url)
     val painter = rememberAsyncImagePainter(model)
     val painterState by painter.state.collectAsState()
+    val cornerRadius = if (roundedCorners) MaterialTheme.shapes.medium else RoundedCornerShape(0.dp)
 
-    Box(modifier = modifier) {
+    Box(modifier = modifier.clip(cornerRadius)) {
         val matchParentSizeModifier = Modifier.matchParentSize()
-        if (foreverLoading != true) Image(
+        if (!foreverLoading) Image(
             painter = painter,
             contentDescription = contentDescription,
             contentScale = ContentScale.Crop,
@@ -75,26 +80,17 @@ private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 
 @Composable
 @LightDarkThemePreview
-private fun ImageLoadedPreview() {
+private fun ImagePreview(
+    @PreviewParameter(ImageViewStateProvider::class)
+    viewState: ImageViewState,
+) {
     RollerCoastersPreviewTheme {
         Image(
-            url = imageUrl,
-            contentDescription = contentDescription,
+            contentDescription = viewState.contentDescription,
+            foreverLoading = viewState.foreverLoading,
             modifier = Modifier.aspectRatio(1.75f),
-            foreverLoading = false,
-        )
-    }
-}
-
-@Composable
-@LightDarkThemePreview
-private fun ImageLoadingPreview() {
-    RollerCoastersPreviewTheme {
-        Image(
-            url = imageUrl,
-            contentDescription = contentDescription,
-            modifier = Modifier.aspectRatio(1.75f),
-            foreverLoading = true,
+            roundedCorners = viewState.roundedCorners,
+            url = viewState.imageUrl,
         )
     }
 }

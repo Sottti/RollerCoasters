@@ -20,12 +20,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class RollerCoasterDetailsViewModel @Inject constructor(
+    observeAppLanguage: ObserveAppLanguage,
+    observeRollerCoaster: ObserveRollerCoaster,
+    observeSystemLocale: ObserveSystemLocale,
     private val dateFormatter: DateFormatter,
-    private val observeAppLanguage: ObserveAppLanguage,
-    private val observeRollerCoaster: ObserveRollerCoaster,
-    private val observeSystemLocale: ObserveSystemLocale,
-    private val rollerCoasterId: RollerCoasterId,
     private val unitDisplayFormatter: UnitDisplayFormatter,
+    rollerCoasterId: RollerCoasterId,
 
     ) : ViewModel() {
 

@@ -32,6 +32,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 internal val rollerCoasterDetailsMaxedOut =
     RollerCoasterDetailsRollerCoasterViewState(
         identity = identityMaxedOutViewState(),
+        images = emptyList(),
         location = locationMaxedOutViewState(),
         ride = specsMaxedOutViewState(),
         status = statusMaxedOutViewState(),
