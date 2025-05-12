@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.converters.ListConverters
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.FavouriteRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.serialization.InternalSerializationApi
@@ -13,10 +14,11 @@ import kotlinx.serialization.InternalSerializationApi
 @OptIn(InternalSerializationApi::class)
 @Database(
     entities = [
+        FavouriteRollerCoasterRoomModel::class,
         PictureRoomModel::class,
         RollerCoasterRoomModel::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 @TypeConverters(ListConverters::class)

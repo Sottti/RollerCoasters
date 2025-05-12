@@ -75,4 +75,18 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         remoteDataSource.syncRollerCoasters { rollerCoasters ->
             localDataSource.storeRollerCoasters(rollerCoasters)
         }
+
+    override suspend fun addFavouriteRollerCoaster(id: RollerCoasterId) {
+        localDataSource.addFavouriteRollerCoaster(id)
+    }
+
+    override suspend fun removeFavouriteRollerCoaster(id: RollerCoasterId) {
+        localDataSource.removeFavouriteRollerCoaster(id)
+    }
+
+    override fun observeIsFavouriteRollerCoaster(id: RollerCoasterId): Flow<Boolean> =
+        localDataSource.observeIsFavouriteRollerCoaster(id)
+
+    override suspend fun isFavouriteRollerCoaster(id: RollerCoasterId): Boolean =
+        localDataSource.isFavouriteRollerCoaster(id)
 }

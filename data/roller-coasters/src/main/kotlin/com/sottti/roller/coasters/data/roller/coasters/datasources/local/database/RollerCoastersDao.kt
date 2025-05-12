@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.RawQuery
 import androidx.room.Transaction
 import androidx.sqlite.db.SupportSQLiteQuery
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.FavouriteRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.coroutines.flow.Flow
@@ -60,4 +61,16 @@ internal interface RollerCoastersDao {
     @RawQuery
     @OptIn(InternalSerializationApi::class)
     suspend fun getPagedRollerCoasters(query: SupportSQLiteQuery): List<RollerCoasterRoomModel>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addFavouriteRollerCoaster(favouriteRollerCoaster: FavouriteRollerCoasterRoomModel)
+
+    @Query("DELETE FROM favourites WHERE rollerCoasterId = :rollerCoasterId")
+    suspend fun removeFavouriteRollerCoaster(rollerCoasterId: Int)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE rollerCoasterId = :rollerCoasterId)")
+    fun observeIsFavouriteRollerCoasterFlow(rollerCoasterId: Int): Flow<Boolean>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE rollerCoasterId = :rollerCoasterId)")
+    suspend fun isFavouriteRollerCoasterFlow(rollerCoasterId: Int): Boolean
 }

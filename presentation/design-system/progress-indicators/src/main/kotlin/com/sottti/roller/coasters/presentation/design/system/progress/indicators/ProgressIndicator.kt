@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.presentation.design.system.progress.indicator
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +21,21 @@ public fun ProgressIndicator(
 ) {
     Box(modifier = modifier) {
         CircularProgressIndicator(
+            strokeWidth = strokeWidth(size),
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(progressIndicatorSize(size))
         )
     }
+}
+
+@Composable
+private fun strokeWidth(
+    size: ProgressIndicatorSize,
+    ): Dp = when(size){
+    ProgressIndicatorSize.Small -> ProgressIndicatorDefaults.CircularStrokeWidth * 0.75f
+    ProgressIndicatorSize.Medium -> ProgressIndicatorDefaults.CircularStrokeWidth
+    ProgressIndicatorSize.Large -> ProgressIndicatorDefaults.CircularStrokeWidth
 }
 
 @Composable

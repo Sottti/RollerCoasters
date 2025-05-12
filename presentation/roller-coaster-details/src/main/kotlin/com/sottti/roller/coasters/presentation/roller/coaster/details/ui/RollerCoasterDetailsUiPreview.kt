@@ -14,6 +14,7 @@ internal fun RollerCoasterDetailsUiPreview(
 ) {
     RollerCoastersPreviewTheme {
         RollerCoasterDetailsUi(
+            onAction = {},
             onBackNavigation = {},
             state = state,
         )

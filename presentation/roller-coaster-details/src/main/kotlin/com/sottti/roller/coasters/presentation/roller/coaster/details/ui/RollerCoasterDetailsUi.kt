@@ -14,6 +14,8 @@ import com.sottti.roller.coasters.presentation.design.system.progress.indicators
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.roller.coaster.details.data.RollerCoasterDetailsViewModel
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.ToggleFavourite
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Error
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loaded
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loading
@@ -37,12 +39,17 @@ private fun RollerCoasterDetailsUi(
     viewModel: RollerCoasterDetailsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    RollerCoasterDetailsUi(onBackNavigation, state)
+    RollerCoasterDetailsUi(
+        onAction = viewModel.onAction,
+        onBackNavigation = onBackNavigation,
+        state = state,
+    )
 }
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun RollerCoasterDetailsUi(
+    onAction: (RollerCoasterDetailsAction) -> Unit,
     onBackNavigation: () -> Unit,
     state: RollerCoasterDetailsViewState,
 ) {
@@ -50,7 +57,14 @@ internal fun RollerCoasterDetailsUi(
     val nestedScrollConnection = scrollBehavior.nestedScrollConnection
 
     Scaffold(
-        topBar = { TopBar(onBackNavigation, scrollBehavior, state.topBar) }
+        topBar = {
+            TopBar(
+                onBackNavigation = onBackNavigation,
+                onToggleFavourite = { onAction(ToggleFavourite) },
+                scrollBehavior = scrollBehavior,
+                state = state.topBar,
+            )
+        }
     ) { paddingValues ->
         when (val content = state.content) {
             Error -> ErrorUi(modifier = Modifier.padding(paddingValues), button = ErrorButton {})

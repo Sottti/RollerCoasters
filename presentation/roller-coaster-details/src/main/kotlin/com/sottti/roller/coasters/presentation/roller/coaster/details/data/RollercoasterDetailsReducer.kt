@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.data
 
+import co.cuvva.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.domain.roller.coasters.model.Drop
 import com.sottti.roller.coasters.domain.roller.coasters.model.Duration
 import com.sottti.roller.coasters.domain.roller.coasters.model.GForce
@@ -17,6 +18,7 @@ import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.FavouriteIconState.Loaded
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageViewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
@@ -52,6 +54,21 @@ internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateRollerCoaster
                     formatContext = formatContext,
                 ),
             )
+        )
+    }
+}
+
+internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateIsFavouriteRollerCoaster(
+    favourite: Boolean,
+) {
+    update { currentState ->
+        currentState.copy(
+            topBar = currentState.topBar.copy(
+                favouriteIcon = when (favourite) {
+                    true -> Loaded(Icons.Star.Filled)
+                    false -> Loaded(Icons.Star.Outlined)
+                }
+            ),
         )
     }
 }

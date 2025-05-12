@@ -17,9 +17,16 @@ internal data class RollerCoasterDetailsViewState(
 
 @Immutable
 internal data class TopBarState(
-    val icon: IconState,
+    val favouriteIcon: FavouriteIconState,
+    val navigationIcon: IconState,
     val title: String?,
 )
+
+@Immutable
+internal sealed class FavouriteIconState{
+    data class Loaded(val iconState: IconState) : FavouriteIconState()
+    data object Loading : FavouriteIconState()
+}
 
 @Immutable
 internal sealed class RollerCoasterDetailsContentState {

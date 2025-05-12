@@ -24,4 +24,12 @@ public interface RollerCoastersRepository {
     public fun scheduleRollerCoastersSync()
 
     public suspend fun syncAllRollerCoasters(): Result<Unit>
+
+    public suspend fun addFavouriteRollerCoaster(id: RollerCoasterId)
+
+    public suspend fun removeFavouriteRollerCoaster(id: RollerCoasterId)
+
+    public suspend fun isFavouriteRollerCoaster(id: RollerCoasterId): Boolean
+
+    public fun observeIsFavouriteRollerCoaster(id: RollerCoasterId): Flow<Boolean>
 }

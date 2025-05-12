@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 import androidx.paging.PagingSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toFavouriteRollercoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
@@ -74,4 +75,20 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
             sortByFilter = sortByFilter,
             typeFilter = typeFilter,
         )
+
+    suspend fun addFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId) {
+        dao.addFavouriteRollerCoaster(
+            favouriteRollerCoaster = rollerCoasterId.toFavouriteRollercoasterRoomModel()
+        )
+    }
+
+    suspend fun removeFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId) {
+        dao.removeFavouriteRollerCoaster(rollerCoasterId.value)
+    }
+
+    fun observeIsFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Flow<Boolean> =
+        dao.observeIsFavouriteRollerCoasterFlow(rollerCoasterId.value)
+
+    suspend fun isFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Boolean =
+        dao.isFavouriteRollerCoasterFlow(rollerCoasterId.value)
 }
