@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.RollerCoastersPagingSource
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.FilteredRollerCoastersPagingSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherNotMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
@@ -95,12 +95,12 @@ internal class RollerCoastersLocalDataSourceTest {
 
     @Test
     fun `get paged roller coasters returns a paging source`() {
-        val result = localDataSource.observePagedRollerCoasters(
+        val result = localDataSource.observeFilteredRollerCoasters(
             measurementSystem = Metric,
             sortByFilter = Alphabetical,
             typeFilter = All,
         )
-        assertThat(result).isInstanceOf(RollerCoastersPagingSource::class.java)
+        assertThat(result).isInstanceOf(FilteredRollerCoastersPagingSource::class.java)
     }
 
     @Test

@@ -36,7 +36,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun observeRollerCoasters(
+    override fun observeFilteredRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
@@ -44,7 +44,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         Pager(
             config = pagerConfig,
             pagingSourceFactory = {
-                localDataSource.observePagedRollerCoasters(
+                localDataSource.observeFilteredRollerCoasters(
                     measurementSystem = measurementSystem,
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,
@@ -89,4 +89,14 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
 
     override suspend fun isFavouriteRollerCoaster(id: RollerCoasterId): Boolean =
         localDataSource.isFavouriteRollerCoaster(id)
+
+    override fun observeFavouriteRollerCoasters(
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Flow<PagingData<RollerCoaster>> =
+        Pager(
+            config = pagerConfig,
+            pagingSourceFactory = {
+                localDataSource.observeFavouriteRollerCoasters(measurementSystem)
+            }
+        ).flow
 }

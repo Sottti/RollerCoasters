@@ -1,25 +1,47 @@
 package com.sottti.roller.coasters.presentation.favourites.data
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
+import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFavouriteRollerCoasters
+import com.sottti.roller.coasters.presentation.favourites.model.FavouritesAction
+import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
+import com.sottti.roller.coasters.presentation.favourites.model.FavouritesState
+import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
-internal class FavouritesViewModel @Inject constructor() : ViewModel() {
-    private val _state =
-        MutableStateFlow(generateRandomColor())
-    val state: StateFlow<Color> = _state.asStateFlow()
-}
+internal class FavouritesViewModel @Inject constructor(
+    observeFavouriteRollerCoasters: ObserveFavouriteRollerCoasters,
+) : ViewModel() {
+    private val _rollerCoastersFlow: Flow<PagingData<FavouritesRollerCoaster>> =
+        observeFavouriteRollerCoasters()
+            .map { pagingData ->
+                pagingData.map { coaster ->
+                    FavouritesRollerCoaster(name = coaster.name.current.value)
+                }
+            }
+            .cachedIn(viewModelScope)
 
-private fun generateRandomColor(): Color {
-    val red = Random.nextInt(from = 0, until = 256)
-    val green = Random.nextInt(from = 0, until = 256)
-    val blue = Random.nextInt(from = 0, until = 256)
+    private val _state = MutableStateFlow(FavouritesState(_rollerCoastersFlow))
+    val state: StateFlow<FavouritesState> = _state.asStateFlow()
 
-    return Color(red, green, blue)
+    private val _events = MutableSharedFlow<FavouritesEvent>()
+    val events = _events.asSharedFlow()
+
+    internal val onAction: (FavouritesAction) -> Unit = { action -> processAction(action) }
+
+    private fun processAction(action: FavouritesAction) {
+
+    }
 }

@@ -16,9 +16,18 @@ android {
 
 dependencies {
     implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.presentation.designSystem.playground))
+    implementation(project(module.domain.rollerCoasters))
+    implementation(project(module.presentation.designSystem.dimensions))
+    implementation(project(module.presentation.designSystem.progressIndicators))
+    implementation(project(module.presentation.designSystem.text))
+    implementation(project(module.presentation.empty))
+    implementation(project(module.presentation.error))
+    implementation(project(module.presentation.topBars))
     ksp(libs.hilt.compiler)
 }

@@ -28,14 +28,14 @@ import org.junit.Test
 internal class RollerCoastersPagingSourceTest {
 
     private lateinit var dao: RollerCoastersDao
-    private lateinit var pagingSource: RollerCoastersPagingSource
+    private lateinit var pagingSource: FilteredRollerCoastersPagingSource
     private val sortByFilter = SortByFilter.Alphabetical
     private val typeFilter = TypeFilter.All
 
     @Before
     fun setup() {
         dao = mockk()
-        pagingSource = RollerCoastersPagingSource(
+        pagingSource = FilteredRollerCoastersPagingSource(
             dao = dao,
             measurementSystem = Metric,
             sortByFilter = sortByFilter,

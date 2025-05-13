@@ -62,29 +62,6 @@ private fun ExploreUi(
 }
 
 @Composable
-private fun ExploreUiEffects(
-    events: Flow<ExploreEvent>,
-    lazyListState: LazyListState,
-    onScrollToTop: (() -> Unit) -> Unit,
-) {
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-        onScrollToTop {
-            coroutineScope.launch { lazyListState.animateScrollToItem(0) }
-        }
-    }
-
-    LaunchedEffect(events) {
-        events.collect { event ->
-            when (event) {
-                ScrollToTop -> coroutineScope.launch { lazyListState.scrollToItem(0) }
-            }
-        }
-    }
-}
-
-@Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ExploreUi(
     filters: Filters,
@@ -115,5 +92,28 @@ internal fun ExploreUi(
             paddingValues = paddingValues,
             rollerCoasters = rollerCoasters,
         )
+    }
+}
+
+@Composable
+private fun ExploreUiEffects(
+    events: Flow<ExploreEvent>,
+    lazyListState: LazyListState,
+    onScrollToTop: (() -> Unit) -> Unit,
+) {
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        onScrollToTop {
+            coroutineScope.launch { lazyListState.animateScrollToItem(0) }
+        }
+    }
+
+    LaunchedEffect(events) {
+        events.collect { event ->
+            when (event) {
+                ScrollToTop -> coroutineScope.launch { lazyListState.scrollToItem(0) }
+            }
+        }
     }
 }

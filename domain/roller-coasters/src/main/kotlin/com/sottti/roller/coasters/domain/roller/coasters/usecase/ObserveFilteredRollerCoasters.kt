@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
-public class ObserveRollerCoasters @Inject constructor(
+public class ObserveFilteredRollerCoasters @Inject constructor(
     private val observeResolvedMeasurementSystem: ObserveResolvedMeasurementSystem,
     private val rollerCoastersRepository: RollerCoastersRepository,
 ) {
@@ -22,7 +22,7 @@ public class ObserveRollerCoasters @Inject constructor(
     ): Flow<PagingData<RollerCoaster>> =
         observeResolvedMeasurementSystem()
             .flatMapLatest { measurementSystem ->
-                rollerCoastersRepository.observeRollerCoasters(
+                rollerCoastersRepository.observeFilteredRollerCoasters(
                     measurementSystem = measurementSystem,
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,

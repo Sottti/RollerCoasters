@@ -14,4 +14,7 @@ internal object RollerCoastersSyncUniqueWork {
 }
 
 private fun onTimeWorkRequestConstraints(): Constraints =
-    Constraints.Builder().build()
+    Constraints
+        .Builder()
+        .setRequiresDeviceIdle(true)
+        .build()

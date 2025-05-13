@@ -69,8 +69,14 @@ internal interface RollerCoastersDao {
     suspend fun removeFavouriteRollerCoaster(rollerCoasterId: Int)
 
     @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE rollerCoasterId = :rollerCoasterId)")
-    fun observeIsFavouriteRollerCoasterFlow(rollerCoasterId: Int): Flow<Boolean>
+    suspend fun isFavouriteRollerCoasterFlow(rollerCoasterId: Int): Boolean
 
     @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE rollerCoasterId = :rollerCoasterId)")
-    suspend fun isFavouriteRollerCoasterFlow(rollerCoasterId: Int): Boolean
+    fun observeIsFavouriteRollerCoasterFlow(rollerCoasterId: Int): Flow<Boolean>
+
+    @RawQuery
+    @OptIn(InternalSerializationApi::class)
+    suspend fun getPagedFavouriteRollerCoasters(
+        query: SupportSQLiteQuery,
+    ): List<RollerCoasterRoomModel>
 }

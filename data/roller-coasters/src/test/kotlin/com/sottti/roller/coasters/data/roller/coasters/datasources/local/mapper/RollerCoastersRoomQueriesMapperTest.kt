@@ -9,7 +9,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with height sort by filter and all type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 10,
             offset = 0,
             sortByFilter = SortByFilter.Height,
@@ -24,7 +24,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with steel type filter and speed sort by filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 5,
             offset = 10,
             sortByFilter = SortByFilter.Speed,
@@ -40,7 +40,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with wood type filter and alphabetical sort by filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 20,
             offset = 40,
             sortByFilter = SortByFilter.Alphabetical,
@@ -56,7 +56,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with drop sort by filter and no type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 15,
             offset = 5,
             sortByFilter = SortByFilter.Drop,
@@ -72,7 +72,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with max vertical sort by filter and wood type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 8,
             offset = 2,
             sortByFilter = SortByFilter.MaxVertical,
@@ -88,7 +88,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with inversions sort by filter and steel type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 12,
             offset = 6,
             sortByFilter = SortByFilter.Inversions,
@@ -104,7 +104,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with length sort by filter and no type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 25,
             offset = 15,
             sortByFilter = SortByFilter.Length,
@@ -120,7 +120,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with g-force sort by filter and no type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 30,
             offset = 0,
             sortByFilter = SortByFilter.GForce,
@@ -136,7 +136,7 @@ class RollerCoastersRoomQueriesMapperTest {
 
     @Test
     fun `query with alphabetical sort by filter and all type filter`() {
-        val actual = createRollerCoastersQuery(
+        val actual = createFilteredRollerCoastersQuery(
             limit = 50,
             offset = 25,
             sortByFilter = SortByFilter.Alphabetical,

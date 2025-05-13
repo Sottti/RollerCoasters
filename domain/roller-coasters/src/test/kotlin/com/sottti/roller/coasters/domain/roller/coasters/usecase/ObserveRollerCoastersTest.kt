@@ -27,7 +27,7 @@ import org.junit.Test
 class ObserveRollerCoastersTest {
 
     private lateinit var observeResolvedMeasurementSystem: ObserveResolvedMeasurementSystem
-    private lateinit var observeRollerCoasters: ObserveRollerCoasters
+    private lateinit var observeFilteredRollerCoasters: ObserveFilteredRollerCoasters
     private lateinit var rollerCoastersRepository: RollerCoastersRepository
 
     private val sortByFilter = SortByFilter.Alphabetical
@@ -37,7 +37,7 @@ class ObserveRollerCoastersTest {
     fun setUp() {
         observeResolvedMeasurementSystem = mockk()
         rollerCoastersRepository = mockk()
-        observeRollerCoasters = ObserveRollerCoasters(
+        observeFilteredRollerCoasters = ObserveFilteredRollerCoasters(
             observeResolvedMeasurementSystem = observeResolvedMeasurementSystem,
             rollerCoastersRepository = rollerCoastersRepository
         )
@@ -50,14 +50,14 @@ class ObserveRollerCoastersTest {
 
         every { observeResolvedMeasurementSystem() } returns flowOf(Metric)
         every {
-            rollerCoastersRepository.observeRollerCoasters(
+            rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = Metric,
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter
             )
         } returns flowOf(pagingData)
 
-        val snapshot = observeRollerCoasters(sortByFilter, typeFilter).asSnapshot()
+        val snapshot = observeFilteredRollerCoasters(sortByFilter, typeFilter).asSnapshot()
 
         assertThat(snapshot).containsExactlyElementsIn(metricRollerCoasters)
     }
@@ -70,14 +70,14 @@ class ObserveRollerCoastersTest {
 
             every { observeResolvedMeasurementSystem() } returns flowOf(ImperialUk)
             every {
-                rollerCoastersRepository.observeRollerCoasters(
+                rollerCoastersRepository.observeFilteredRollerCoasters(
                     measurementSystem = ImperialUk,
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter
                 )
             } returns flowOf(pagingData)
 
-            val snapshot = observeRollerCoasters(sortByFilter, typeFilter).asSnapshot()
+            val snapshot = observeFilteredRollerCoasters(sortByFilter, typeFilter).asSnapshot()
 
             assertThat(snapshot).containsExactlyElementsIn(imperialUkRollerCoasters)
         }
@@ -90,14 +90,14 @@ class ObserveRollerCoastersTest {
 
             every { observeResolvedMeasurementSystem() } returns flowOf(ImperialUs)
             every {
-                rollerCoastersRepository.observeRollerCoasters(
+                rollerCoastersRepository.observeFilteredRollerCoasters(
                     measurementSystem = ImperialUs,
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter
                 )
             } returns flowOf(pagingData)
 
-            val snapshot = observeRollerCoasters(sortByFilter, typeFilter).asSnapshot()
+            val snapshot = observeFilteredRollerCoasters(sortByFilter, typeFilter).asSnapshot()
 
             assertThat(snapshot).containsExactlyElementsIn(imperialUsRollerCoasters)
         }
@@ -117,28 +117,28 @@ class ObserveRollerCoastersTest {
             emit(ImperialUs)
         }
         every {
-            rollerCoastersRepository.observeRollerCoasters(
+            rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = Metric,
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter
             )
         } returns flowOf(metricPagingData)
         every {
-            rollerCoastersRepository.observeRollerCoasters(
+            rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = ImperialUk,
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter
             )
         } returns flowOf(imperialUkPagingData)
         every {
-            rollerCoastersRepository.observeRollerCoasters(
+            rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = ImperialUs,
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter
             )
         } returns flowOf(imperialUsPagingData)
 
-        val emissions = observeRollerCoasters(sortByFilter, typeFilter).take(3).toList()
+        val emissions = observeFilteredRollerCoasters(sortByFilter, typeFilter).take(3).toList()
 
         assertThat(emissions.size).isEqualTo(3)
     }
@@ -149,14 +149,14 @@ class ObserveRollerCoastersTest {
 
         every { observeResolvedMeasurementSystem() } returns flowOf(Metric)
         every {
-            rollerCoastersRepository.observeRollerCoasters(
+            rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = Metric,
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter
             )
         } returns flowOf(emptyPagingData)
 
-        val snapshot = observeRollerCoasters(sortByFilter, typeFilter).asSnapshot()
+        val snapshot = observeFilteredRollerCoasters(sortByFilter, typeFilter).asSnapshot()
 
         assertThat(snapshot).isEmpty()
     }

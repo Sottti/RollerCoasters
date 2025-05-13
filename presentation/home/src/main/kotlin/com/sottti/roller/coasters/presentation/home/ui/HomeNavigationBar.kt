@@ -65,7 +65,13 @@ internal fun NavigationBar(
                     onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
                 )
             }
-            composable<Favourites> { FavouritesUi() }
+            composable<Favourites> {
+                FavouritesUi(
+                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                    onNavigateToSettings = onNavigateToSettings,
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
+                )
+            }
             composable<AboutMe> { AboutMeUi() }
         }
     }

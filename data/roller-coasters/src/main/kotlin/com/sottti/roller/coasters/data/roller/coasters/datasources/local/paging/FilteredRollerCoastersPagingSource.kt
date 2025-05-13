@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.createRollerCoastersQuery
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.createFilteredRollerCoastersQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
@@ -12,7 +12,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.Resolv
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
-internal class RollerCoastersPagingSource(
+internal class FilteredRollerCoastersPagingSource(
     private val dao: RollerCoastersDao,
     private val measurementSystem: ResolvedMeasurementSystem,
     private val sortByFilter: SortByFilter,
@@ -26,7 +26,7 @@ internal class RollerCoastersPagingSource(
             val page = params.key ?: 0
             val pageSize = params.loadSize
 
-            val query = createRollerCoastersQuery(
+            val query = createFilteredRollerCoastersQuery(
                 limit = pageSize,
                 offset = page * pageSize,
                 sortByFilter = sortByFilter,

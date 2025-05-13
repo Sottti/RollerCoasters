@@ -18,6 +18,7 @@ internal object RollerCoasterRoomConstants {
     const val COL_STATUS_CURRENT = "status_current"
     const val COL_STATUS_FORMER = "status_former"
     const val COL_TYPE = "type"
+    const val TABLE_FAVOURITE_ROLLER_COASTERS = "favourites"
     const val TABLE_PICTURES = "pictures"
     const val TABLE_ROLLER_COASTERS = "roller_coasters"
 }

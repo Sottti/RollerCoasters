@@ -11,12 +11,13 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerC
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_OPENED_DATE
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_SPEED_MAX
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.COL_TYPE
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.TABLE_FAVOURITE_ROLLER_COASTERS
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants.TABLE_ROLLER_COASTERS
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoasterApiConstants
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 
-internal fun createRollerCoastersQuery(
+internal fun createFilteredRollerCoastersQuery(
     limit: Int,
     offset: Int,
     sortByFilter: SortByFilter,
@@ -62,3 +63,17 @@ private fun TypeFilter.toSqlValue(): String =
         TypeFilter.Steel -> RollerCoasterApiConstants.VALUE_TYPE_STEEL
         TypeFilter.Wood -> RollerCoasterApiConstants.VALUE_TYPE_WOOD
     }
+
+internal fun createFavouriteRollerCoastersQuery(
+    limit: Int,
+    offset: Int,
+): SimpleSQLiteQuery {
+    val query = StringBuilder()
+        .append("SELECT * FROM $TABLE_ROLLER_COASTERS ")
+        .append("WHERE id IN (SELECT rollerCoasterId FROM $TABLE_FAVOURITE_ROLLER_COASTERS) ")
+        .append("ORDER BY $COL_NAME_CURRENT ASC ")
+        .append("LIMIT ? OFFSET ?")
+
+    val args = arrayOf(limit, offset)
+    return SimpleSQLiteQuery(query.toString(), args)
+}
