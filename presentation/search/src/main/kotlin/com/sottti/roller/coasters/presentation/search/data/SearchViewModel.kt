@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.presentation.search.data
 import androidx.lifecycle.ViewModel
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFavouriteRollerCoasters
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
+import com.sottti.roller.coasters.presentation.search.model.SearchBarState
 import com.sottti.roller.coasters.presentation.search.model.SearchState
-import com.sottti.roller.coasters.presentation.search.ui.SearchEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,15 +18,12 @@ internal class SearchViewModel @Inject constructor(
     observeFavouriteRollerCoasters: ObserveFavouriteRollerCoasters,
 ) : ViewModel() {
 
-//    private val _state = MutableStateFlow(SearchState(_rollerCoastersFlow))
-//    val state: StateFlow<SearchState> = _state.asStateFlow()
-//
-//    private val _events = MutableSharedFlow<SearchEvent>()
-//    val events = _events.asSharedFlow()
-//
-//    internal val onAction: (SearchAction) -> Unit = { action -> processAction(action) }
-//
-//    private fun processAction(action: SearchAction) {
-//
-//    }
+    private val _state = MutableStateFlow(SearchState(SearchBarState("Hint")))
+    val state: StateFlow<SearchState> = _state.asStateFlow()
+
+    internal val onAction: (SearchAction) -> Unit = { action -> processAction(action) }
+
+    private fun processAction(action: SearchAction) {
+
+    }
 }
