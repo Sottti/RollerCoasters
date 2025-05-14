@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,7 +37,7 @@ internal fun NavigationBar(
     val nestedNavController = rememberNavController()
     val startDestination = Explore
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val selectedTab by remember { mutableStateOf(startDestination) }
+    var selectedTab by remember { mutableStateOf<NavigationDestination>(startDestination) }
     val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -47,9 +48,14 @@ internal fun NavigationBar(
                 navigationBarItems = state.items,
                 onNavigationBarItemClick = { homeNavigationBarItem ->
                     val destination = homeNavigationBarItem.destination
-                    if (selectedTab == destination) scrollToTopCallbacks[destination]?.invoke()
-                    viewModel.actions.onDestinationSelected(homeNavigationBarItem.destination)
-                    nestedNavController.navigateTo(homeNavigationBarItem)
+                    when (selectedTab) {
+                        destination -> scrollToTopCallbacks[destination]?.invoke()
+                        else -> {
+                            selectedTab = destination
+                            viewModel.actions.onDestinationSelected(destination)
+                            nestedNavController.navigateTo(homeNavigationBarItem)
+                        }
+                    }
                 },
             )
         },
@@ -69,7 +75,7 @@ internal fun NavigationBar(
                 FavouritesUi(
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     onNavigateToSettings = onNavigateToSettings,
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
                 )
             }
             composable<AboutMe> { AboutMeUi() }

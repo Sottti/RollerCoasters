@@ -15,9 +15,9 @@ import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
-import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
+import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
@@ -80,7 +80,7 @@ private fun RollerCoasters(
                 RollerCoaster(
                     onAction = onAction,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                    rollerCoaster = rollerCoaster
+                    rollerCoaster = rollerCoaster,
                 )
             }
         }
@@ -97,7 +97,13 @@ private fun RollerCoaster(
     onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoaster: FavouritesRollerCoaster,
 ) {
-    Text.Vanilla(text = rollerCoaster.name)
+    RollerCoasterCard.Small(
+        modifier = Modifier.fillMaxSize(),
+        onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
+        imageUrl = rollerCoaster.imageUrl,
+        parkName = rollerCoaster.parkName,
+        rollerCoasterName = rollerCoaster.name,
+    )
 }
 
 @Composable

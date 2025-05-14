@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card
+package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.small
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
@@ -10,9 +10,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class RollerCoasterCardSnapshotTest(
+internal class RollerCoasterCardSmallSnapshotTest(
     nightMode: NightMode,
-    private val loading: Boolean,
+    private val state: RollerCoasterCardSmallState,
 ) {
 
     @get:Rule
@@ -26,7 +26,7 @@ internal class RollerCoasterCardSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            RollerCoasterCardPreview(loading)
+            RollerCoasterCardSmallPreview(state)
         }
     }
 
@@ -34,7 +34,7 @@ internal class RollerCoasterCardSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            RollerCoasterCardPreviewProvider()
+            RollerCoasterCardSmallPreviewProvider()
                 .values
                 .flatMap { state ->
                     listOf(

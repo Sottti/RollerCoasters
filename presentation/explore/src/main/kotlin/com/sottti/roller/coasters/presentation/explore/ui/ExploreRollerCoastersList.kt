@@ -92,7 +92,7 @@ private fun RollerCoaster(
     onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoaster: ExploreRollerCoaster,
 ) {
-    RollerCoasterCard(
+    RollerCoasterCard.Large(
         imageUrl = rollerCoaster.imageUrl,
         modifier = Modifier.fillMaxWidth(),
         parkName = rollerCoaster.parkName,

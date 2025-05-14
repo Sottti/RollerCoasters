@@ -25,6 +25,7 @@ dependencies {
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.progressIndicators))
+    implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.empty))
     implementation(project(module.presentation.error))

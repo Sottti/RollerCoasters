@@ -15,9 +15,14 @@ public fun MainTopBar(
     scrollBehavior: TopAppBarScrollBehavior? = null,
     onNavigateToSettings: () -> Unit,
 ) {
+    val colors = when (scrollBehavior) {
+        null -> TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+        else -> TopAppBarDefaults.topAppBarColors()
+    }
+
     TopAppBar(
         actions = { Icon(onNavigateToSettings) },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = colors,
         scrollBehavior = scrollBehavior,
         title = {},
     )

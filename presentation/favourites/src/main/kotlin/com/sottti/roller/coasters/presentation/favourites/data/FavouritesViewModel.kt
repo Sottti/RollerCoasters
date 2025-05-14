@@ -27,8 +27,13 @@ internal class FavouritesViewModel @Inject constructor(
     private val _rollerCoastersFlow: Flow<PagingData<FavouritesRollerCoaster>> =
         observeFavouriteRollerCoasters()
             .map { pagingData ->
-                pagingData.map { coaster ->
-                    FavouritesRollerCoaster(name = coaster.name.current.value)
+                pagingData.map { rollerCoaster ->
+                    FavouritesRollerCoaster(
+                        id = rollerCoaster.id.value,
+                        imageUrl = rollerCoaster.pictures.main?.url,
+                        name = rollerCoaster.name.current.value,
+                        parkName = rollerCoaster.park.name.value,
+                    )
                 }
             }
             .cachedIn(viewModelScope)

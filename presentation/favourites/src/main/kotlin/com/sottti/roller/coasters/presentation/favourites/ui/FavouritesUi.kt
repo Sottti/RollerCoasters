@@ -51,9 +51,9 @@ private fun FavouritesUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onListStateCreated = { lazyListState ->
             FavouritesUiEffects(
-                viewModel.events,
-                lazyListState,
-                onScrollToTop,
+                events = viewModel.events,
+                lazyListState = lazyListState,
+                onScrollToTop = onScrollToTop,
             )
         },
         onNavigateToSettings = onNavigateToSettings,

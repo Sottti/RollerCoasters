@@ -23,7 +23,7 @@ internal data class TopBarState(
 )
 
 @Immutable
-internal sealed class FavouriteIconState{
+internal sealed class FavouriteIconState {
     data class Loaded(val iconState: IconState) : FavouriteIconState()
     data object Loading : FavouriteIconState()
 }

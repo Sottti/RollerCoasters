@@ -32,7 +32,7 @@ public fun ProgressIndicator(
 @Composable
 private fun strokeWidth(
     size: ProgressIndicatorSize,
-    ): Dp = when(size){
+): Dp = when (size) {
     ProgressIndicatorSize.Small -> ProgressIndicatorDefaults.CircularStrokeWidth * 0.75f
     ProgressIndicatorSize.Medium -> ProgressIndicatorDefaults.CircularStrokeWidth
     ProgressIndicatorSize.Large -> ProgressIndicatorDefaults.CircularStrokeWidth

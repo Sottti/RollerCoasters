@@ -3,10 +3,10 @@ package com.sottti.roller.coasters.presentation.explore.fixtures
 import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import com.sottti.roller.coasters.presentation.fixtures.anotherStat
-import com.sottti.roller.coasters.presentation.fixtures.anotherStatDetail
-import com.sottti.roller.coasters.presentation.fixtures.stat
-import com.sottti.roller.coasters.presentation.fixtures.statDetail
+import com.sottti.roller.coasters.presentation.fixtures.fixtureAnotherStat
+import com.sottti.roller.coasters.presentation.fixtures.fixtureAnotherStatDetail
+import com.sottti.roller.coasters.presentation.fixtures.fixtureState
+import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
 
 internal fun exploreRollerCoasters() =
     listOf(
@@ -20,8 +20,8 @@ private fun exploreRollerCoaster(): ExploreRollerCoaster =
         imageUrl = rollerCoaster.pictures.main?.url,
         parkName = rollerCoaster.park.name.value,
         rollerCoasterName = rollerCoaster.name.current.value,
-        stat = stat,
-        statDetail = statDetail,
+        stat = fixtureState,
+        statDetail = fixtureStatDetail,
     )
 
 private fun anotherExploreRollerCoaster(): ExploreRollerCoaster =
@@ -30,6 +30,6 @@ private fun anotherExploreRollerCoaster(): ExploreRollerCoaster =
         imageUrl = anotherRollerCoaster.pictures.main?.url,
         parkName = anotherRollerCoaster.park.name.value,
         rollerCoasterName = anotherRollerCoaster.name.current.value,
-        stat = anotherStat,
-        statDetail = anotherStatDetail,
+        stat = fixtureAnotherStat,
+        statDetail = fixtureAnotherStatDetail,
     )
