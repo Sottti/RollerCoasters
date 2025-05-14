@@ -172,6 +172,14 @@ public object Icons {
         )
     }
 
+    public object Search {
+        public val Description: Int = R.string.description_icon_search
+        public val Outlined: IconState = IconState(
+            resId = R.drawable.ic_search_rounded_outline,
+            descriptionResId = Description,
+        )
+    }
+
     public object Settings {
         public val Description: Int = R.string.description_icon_settings
         public val Outlined: IconState = IconState(

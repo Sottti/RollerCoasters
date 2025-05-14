@@ -55,6 +55,7 @@ include(
     ":presentation:informative",
     ":presentation:navigation",
     ":presentation:previews",
+    ":presentation:search",
     ":presentation:roller-coaster-details",
     ":presentation:settings",
     ":presentation:string-provider",

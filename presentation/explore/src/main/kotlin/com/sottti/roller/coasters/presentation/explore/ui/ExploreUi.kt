@@ -40,6 +40,7 @@ public fun ExploreUi(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 private fun ExploreUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
@@ -54,7 +55,11 @@ private fun ExploreUi(
         onAction = viewModel.onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onListStateCreated = { lazyListState ->
-            ExploreUiEffects(viewModel.events, lazyListState, onScrollToTop)
+            ExploreUiEffects(
+                events = viewModel.events,
+                lazyListState = lazyListState,
+                onScrollToTop = onScrollToTop,
+            )
         },
         onNavigateToSettings = onNavigateToSettings,
         rollerCoasters = rollerCoasters,
@@ -96,6 +101,7 @@ internal fun ExploreUi(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 private fun ExploreUiEffects(
     events: Flow<ExploreEvent>,
     lazyListState: LazyListState,
@@ -104,9 +110,7 @@ private fun ExploreUiEffects(
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
-        onScrollToTop {
-            coroutineScope.launch { lazyListState.animateScrollToItem(0) }
-        }
+        onScrollToTop { coroutineScope.launch { lazyListState.animateScrollToItem(0) } }
     }
 
     LaunchedEffect(events) {

@@ -17,6 +17,7 @@ object module {
         const val navigation = ":presentation:navigation"
         const val previews = ":presentation:previews"
         const val rollerCoasterDetails = ":presentation:roller-coaster-details"
+        const val search = ":presentation:search"
         const val settings = ":presentation:settings"
         const val stringProvider = ":presentation:string-provider"
         const val topBars = ":presentation:top-bars"

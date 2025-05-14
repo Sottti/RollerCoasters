@@ -30,6 +30,7 @@ dependencies {
     implementation(project(module.presentation.favourites))
     implementation(project(module.presentation.navigation))
     implementation(project(module.presentation.rollerCoasterDetails))
+    implementation(project(module.presentation.search))
     implementation(project(module.presentation.settings))
     ksp(libs.hilt.compiler)
 }

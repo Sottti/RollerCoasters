@@ -26,6 +26,8 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Search
+import com.sottti.roller.coasters.presentation.search.ui.SearchUi
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,6 +80,14 @@ internal fun NavigationBar(
                     onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
                 )
             }
+            composable<Search> {
+                SearchUi(
+                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                    onNavigateToSettings = onNavigateToSettings,
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
+                )
+            }
+
             composable<AboutMe> { AboutMeUi() }
         }
     }

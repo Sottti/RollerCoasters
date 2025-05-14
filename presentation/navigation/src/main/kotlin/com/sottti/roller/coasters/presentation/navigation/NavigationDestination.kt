@@ -17,6 +17,9 @@ public sealed class NavigationDestination {
     public data object Home : NavigationDestination()
 
     @Serializable
+    public data object Search : NavigationDestination()
+
+    @Serializable
     public data object Settings : NavigationDestination()
 
     @Serializable

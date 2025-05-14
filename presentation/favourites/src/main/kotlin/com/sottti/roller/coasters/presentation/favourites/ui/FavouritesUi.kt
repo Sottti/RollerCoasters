@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +20,7 @@ import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewMod
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesAction
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesEvent.ScrollToTop
+import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -37,6 +39,7 @@ public fun FavouritesUi(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 private fun FavouritesUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
@@ -49,10 +52,11 @@ private fun FavouritesUi(
     FavouritesUi(
         onAction = viewModel.onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-        onListStateCreated = { lazyListState ->
+        onListStateCreated = { lazyListState, scrollBehavior ->
             FavouritesUiEffects(
                 events = viewModel.events,
                 lazyListState = lazyListState,
+                scrollBehavior = scrollBehavior,
                 onScrollToTop = onScrollToTop,
             )
         },
@@ -65,31 +69,27 @@ private fun FavouritesUi(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesUi(
     onAction: (FavouritesAction) -> Unit,
-    onListStateCreated: @Composable (LazyListState) -> Unit,
+    onListStateCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
-    onListStateCreated(lazyListState)
-
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val nestedScrollConnection = scrollBehavior.nestedScrollConnection
+    onListStateCreated(lazyListState, scrollBehavior)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            FavouritesTopBar(
-                lazyListState = lazyListState,
-                onAction = onAction,
-                onNavigateToSettings = onNavigateToSettings,
+            MainTopBar(
                 scrollBehavior = scrollBehavior,
+                onNavigateToSettings = onNavigateToSettings
             )
         },
     ) { paddingValues ->
         FavouritesRollerCoastersList(
             listState = lazyListState,
-            nestedScrollConnection = nestedScrollConnection,
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             paddingValues = paddingValues,
@@ -99,23 +99,31 @@ internal fun FavouritesUi(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 private fun FavouritesUiEffects(
     events: Flow<FavouritesEvent>,
     lazyListState: LazyListState,
     onScrollToTop: (() -> Unit) -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         onScrollToTop {
-            coroutineScope.launch { lazyListState.animateScrollToItem(0) }
+            coroutineScope.launch {
+                lazyListState.animateScrollToItem(0)
+                scrollBehavior.state.contentOffset = 0f
+            }
         }
     }
 
     LaunchedEffect(events) {
         events.collect { event ->
             when (event) {
-                ScrollToTop -> coroutineScope.launch { lazyListState.scrollToItem(0) }
+                ScrollToTop -> coroutineScope.launch {
+                    lazyListState.animateScrollToItem(0)
+                    scrollBehavior.state.contentOffset = 0f
+                }
             }
         }
     }

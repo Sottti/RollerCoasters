@@ -8,11 +8,15 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
 internal fun navigationBarItems(
     selectedItem: NavigationDestination = NavigationDestination.Explore,
-): HomeNavigationBarItems =
-    HomeNavigationBarItems(
-        items = listOf(explore(selectedItem), favourites(selectedItem), aboutMe(selectedItem)),
-        selectedItem = selectedItem,
-    )
+): HomeNavigationBarItems = HomeNavigationBarItems(
+    items = listOf(
+        explore(selectedItem),
+        favourites(selectedItem),
+        search(),
+        aboutMe(selectedItem),
+    ),
+    selectedItem = selectedItem,
+)
 
 
 private fun explore(
@@ -24,6 +28,12 @@ private fun explore(
         else -> Icons.Explore.Outlined
     },
     destination = NavigationDestination.Explore,
+)
+
+private fun search() = HomeNavigationBarItem(
+    labelResId = R.string.navigation_bar_item_label_search,
+    icon = Icons.Search.Outlined,
+    destination = NavigationDestination.Search,
 )
 
 private fun favourites(
