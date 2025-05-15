@@ -7,7 +7,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import co.cuvva.presentation.design.system.icons.model.IconState
-import co.cuvva.presentation.design.system.icons.ui.Icon
+import co.cuvva.presentation.design.system.icons.ui.icon.Icon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
@@ -44,7 +44,7 @@ private fun navigationIcon(
     onBackNavigation: () -> Unit,
 ) {
     Icon(
-        state = state,
+        iconState = state,
         onClick = { onBackNavigation() },
     )
 }
@@ -55,7 +55,7 @@ private fun favouriteIcon(
     onToggleFavourite: () -> Unit,
 ) {
     when (state) {
-        is Loaded -> Icon(state = state.iconState, onClick = onToggleFavourite)
+        is Loaded -> Icon(iconState = state.iconState, onClick = onToggleFavourite)
         Loading -> ProgressIndicator(
             modifier = Modifier.padding(end = dimensions.padding.medium),
             size = ProgressIndicatorSize.Small

@@ -4,7 +4,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import co.cuvva.presentation.design.system.icons.ui.Icon
+import co.cuvva.presentation.design.system.icons.ui.icon.Icon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.settings.model.SettingsTopBarState
 
@@ -28,7 +28,7 @@ private fun navigationIcon(
     onBackNavigation: () -> Unit,
 ) {
     Icon(
-        state = state.icon,
+        iconState = state.icon,
         onClick = { onBackNavigation() },
     )
 }

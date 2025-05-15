@@ -32,7 +32,7 @@ private fun systemLanguage(
 ): SystemLanguage =
     SystemLanguage(
         text = R.string.language_system,
-        icon = if (selected) Icons.Smartphone.Filled else Icons.Smartphone.Outlined,
+        icon = if (selected) Icons.Smartphone.filled else Icons.Smartphone.outlined,
         selected = selected,
     )
 
@@ -41,7 +41,7 @@ private fun galicianLanguage(
 ): GalicianLanguage =
     GalicianLanguage(
         text = R.string.language_galician,
-        icon = Icons.Language.Outlined,
+        icon = Icons.Language.outlined,
         selected = selected,
     )
 
@@ -50,7 +50,7 @@ private fun spanishSpainLanguage(
 ): SpanishSpainLanguage =
     SpanishSpainLanguage(
         text = R.string.language_spanish_spain,
-        icon = Icons.LanguageSpanish.Outlined,
+        icon = Icons.LanguageSpanish.outlined,
         selected = selected,
     )
 
@@ -58,7 +58,7 @@ private fun englishGbLanguage(
     selected: Boolean,
 ): EnglishGbLanguage = EnglishGbLanguage(
     text = R.string.language_english_gb,
-    icon = Icons.LanguageEnglishGb.Outlined,
+    icon = Icons.LanguageEnglishGb.outlined,
     selected = selected,
 )
 

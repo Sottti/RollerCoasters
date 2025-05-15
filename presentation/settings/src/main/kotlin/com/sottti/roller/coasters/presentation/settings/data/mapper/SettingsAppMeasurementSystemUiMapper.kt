@@ -35,7 +35,7 @@ private fun system(
 ): SystemApp =
     SystemApp(
         text = R.string.measurement_system_system,
-        icon = if (selected) Icons.Straighten.Filled else Icons.Straighten.Outlined,
+        icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
         selected = selected,
     )
 
@@ -43,7 +43,7 @@ private fun imperialUK(
     selected: Boolean,
 ): ImperialUK = ImperialUK(
     text = R.string.measurement_system_imperial_united_kingdom,
-    icon = if (selected) Icons.Straighten.Filled else Icons.Straighten.Outlined,
+    icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
     selected = selected,
 )
 
@@ -51,7 +51,7 @@ private fun imperialUS(
     selected: Boolean,
 ): ImperialUS = ImperialUS(
     text = R.string.measurement_system_imperial_united_states,
-    icon = if (selected) Icons.Straighten.Filled else Icons.Straighten.Outlined,
+    icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
     selected = selected,
 )
 
@@ -59,7 +59,7 @@ private fun metric(
     selected: Boolean,
 ): Metric = Metric(
     text = R.string.measurement_system_metric,
-    icon = if (selected) Icons.Straighten.Filled else Icons.Straighten.Outlined,
+    icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
     selected = selected,
 )
 

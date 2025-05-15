@@ -4,8 +4,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.fixtures.fixtureImageUrl
 import com.sottti.roller.coasters.presentation.fixtures.fixtureParkName
 import com.sottti.roller.coasters.presentation.fixtures.fixtureRollerCoasterName
-import com.sottti.roller.coasters.presentation.fixtures.fixtureState
 import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
+import com.sottti.roller.coasters.presentation.fixtures.fixtureState
 
 internal class RollerCoasterCardLargePreviewProvider :
     PreviewParameterProvider<RollerCoasterCardLargeState> {

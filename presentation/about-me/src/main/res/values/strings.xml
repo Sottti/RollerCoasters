@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="social_profiles_github_text" translatable="false">GitHub</string>
+    <string name="social_profiles_github_url" translatable="false">https://github.com/Sottti</string>
+    <string name="social_profiles_linked_in_text" translatable="false">LinkedIn</string>
+    <string name="social_profiles_linked_in_url" translatable="false">https://www.linkedin.com/in/sottti/</string>
+    <string name="social_profiles_stack_overflow_text" translatable="false">StackOverflow</string>
+    <string name="social_profiles_stack_overflow_url" translatable="false">https://stackoverflow.com/users/1177959/sotti</string>
+    <string name="social_profiles_title">Social profiles</string>
+    <string name="social_profiles_x_text" translatable="false">X</string>
+    <string name="social_profiles_x_url" translatable="false">https://x.com/Sotttti</string>
+</resources>

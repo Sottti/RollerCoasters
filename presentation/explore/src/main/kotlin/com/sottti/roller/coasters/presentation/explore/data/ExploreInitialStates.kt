@@ -56,7 +56,7 @@ internal fun sortByPrimaryFilterInitialState(): PrimaryFilter.SortByPrimaryFilte
         action = ShowSortFilters,
         expanded = false,
         labelResId = R.string.chip_label_sort_by_alphabetical,
-        leadingIcon = Icons.Sort.Filled,
+        leadingIcon = Icons.Sort.filled,
         selected = true,
     )
 
@@ -66,7 +66,7 @@ internal fun typePrimaryFilterInitialState(): PrimaryFilter.TypePrimaryFilter =
         expanded = false,
         labelResId = R.string.chip_label_type_all,
         selected = true,
-        leadingIcon = Icons.FilterList.Filled,
+        leadingIcon = Icons.FilterList.filled,
     )
 
 internal fun secondaryFiltersInitialState(): List<SecondaryFilter> =
@@ -98,7 +98,7 @@ private val alphabetical: AlphabeticalFilter =
         labelResId = R.string.chip_label_sort_by_alphabetical,
         selected = true,
         visible = false,
-        leadingIcon = Icons.CheckSmall.Filled,
+        leadingIcon = Icons.CheckSmall.filled,
     )
 
 private val heightFilter: HeightFilter =
@@ -170,7 +170,7 @@ private val allFilter: SecondaryFilter.TypeSecondaryFilter.AllFilter =
         labelResId = R.string.chip_label_type_all,
         selected = true,
         visible = false,
-        leadingIcon = Icons.CheckSmall.Filled,
+        leadingIcon = Icons.CheckSmall.filled,
     )
 
 private val steelFilter: SecondaryFilter.TypeSecondaryFilter.SteelFilter =

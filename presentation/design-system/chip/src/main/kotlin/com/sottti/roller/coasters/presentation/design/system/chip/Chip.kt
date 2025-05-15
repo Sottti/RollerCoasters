@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.model.IconState
-import co.cuvva.presentation.design.system.icons.ui.Icon
+import co.cuvva.presentation.design.system.icons.ui.icon.Icon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
@@ -38,7 +38,7 @@ public fun Chip(
 private fun LeadingIcon(
     state: IconState,
 ) = Icon(
-    state = state,
+    iconState = state,
     modifier = Modifier.size(FilterChipDefaults.IconSize),
 )
 
@@ -47,7 +47,7 @@ private fun TrailingIcon(expanded: Boolean) =
     Icon(
         crossfade = true,
         modifier = Modifier.size(FilterChipDefaults.IconSize),
-        state = if (expanded) Icons.ArrowDropUp.Filled else Icons.ArrowDropDown.Filled,
+        iconState = if (expanded) Icons.ArrowDropUp.filled else Icons.ArrowDropDown.filled,
     )
 
 

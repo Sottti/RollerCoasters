@@ -143,17 +143,17 @@ private inline fun <reified T : SecondaryFilter> MutableStateFlow<ExploreState>.
     }
 
 private fun SecondaryFilter.select(): SecondaryFilter = when (this) {
-    is AlphabeticalFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is DropFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is GForceFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is HeightFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is InversionsFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is LengthFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is MaxVerticalFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is SpeedFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is AllFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is SteelFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
-    is WoodFilter -> copy(leadingIcon = Icons.CheckSmall.Filled, selected = true)
+    is AlphabeticalFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is DropFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is GForceFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is HeightFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is InversionsFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is LengthFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is MaxVerticalFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is SpeedFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is AllFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is SteelFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
+    is WoodFilter -> copy(leadingIcon = Icons.CheckSmall.filled, selected = true)
 }
 
 private fun SecondaryFilter.unselect(): SecondaryFilter = when (this) {

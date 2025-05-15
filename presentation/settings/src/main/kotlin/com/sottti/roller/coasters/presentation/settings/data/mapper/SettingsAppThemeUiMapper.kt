@@ -29,7 +29,7 @@ private fun systemTheme(
 ): AppThemeUi.SystemTheme =
     AppThemeUi.SystemTheme(
         text = R.string.theme_system,
-        icon = if (selected) Icons.BrightnessAuto.Filled else Icons.BrightnessAuto.Outlined,
+        icon = if (selected) Icons.BrightnessAuto.filled else Icons.BrightnessAuto.outlined,
         selected = selected,
     )
 
@@ -38,7 +38,7 @@ private fun lightTheme(
 ): AppThemeUi.LightTheme =
     AppThemeUi.LightTheme(
         text = R.string.theme_light,
-        icon = if (selected) LightMode.Filled else LightMode.Outlined,
+        icon = if (selected) LightMode.filled else LightMode.outlined,
         selected = selected,
     )
 
@@ -47,7 +47,7 @@ private fun darkTheme(
 ): AppThemeUi.DarkTheme =
     AppThemeUi.DarkTheme(
         text = R.string.theme_dark,
-        icon = if (selected) DarkMode.Filled else DarkMode.Outlined,
+        icon = if (selected) DarkMode.filled else DarkMode.outlined,
         selected = selected,
     )
 

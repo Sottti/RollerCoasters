@@ -54,7 +54,7 @@ private fun ExploreUi(
         filters = state.filters,
         onAction = viewModel.onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-        onListStateCreated = { lazyListState ->
+        onListCreated = { lazyListState ->
             ExploreUiEffects(
                 events = viewModel.events,
                 lazyListState = lazyListState,
@@ -71,13 +71,13 @@ private fun ExploreUi(
 internal fun ExploreUi(
     filters: Filters,
     onAction: (ExploreAction) -> Unit,
-    onListStateCreated: @Composable (LazyListState) -> Unit,
+    onListCreated: @Composable (LazyListState) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
-    onListStateCreated(lazyListState)
+    onListCreated(lazyListState)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

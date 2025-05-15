@@ -33,7 +33,7 @@ internal fun initialState(
 private fun appColorContrastInitialState() = AppColorContrastState(
     listItem = AppColorContrastListItemState(
         headline = R.string.color_contrast_color_headline,
-        icon = Icons.Visibility.Outlined,
+        icon = Icons.Visibility.outlined,
         selectedAppColorContrast = SelectedAppColorContrastState.Loading,
         supporting = R.string.color_contrast_color_supporting,
     ),
@@ -45,13 +45,13 @@ private fun dynamicColorInitialState() = DynamicColorState(
     checkedState = DynamicColorCheckedState.Loading,
     headline = R.string.dynamic_color_headline,
     supporting = R.string.dynamic_color_supporting,
-    icon = Icons.Palette.Outlined,
+    icon = Icons.Palette.outlined,
 )
 
 private fun appLanguageInitialState() = AppLanguageState(
     listItem = AppLanguageListItemState(
         headline = R.string.language_headline,
-        icon = Icons.Language.Outlined,
+        icon = Icons.Language.outlined,
         supporting = R.string.language_supporting,
         selectedAppLanguage = AppSelectedLanguageState.Loading,
     ),
@@ -64,7 +64,7 @@ private fun appThemeInitialState() = AppThemeState(
         headline = R.string.theme_headline,
         supporting = R.string.theme_supporting,
         selectedAppTheme = SelectedAppThemeState.Loading,
-        icon = Icons.BrightnessMedium.Outlined
+        icon = Icons.BrightnessMedium.outlined
     ),
     picker = null,
 )
@@ -73,11 +73,11 @@ private fun appMeasurementSystemInitialState() = AppMeasurementSystemState(
     listItem = AppMeasurementSystemListItemState(
         headline = R.string.measurement_system_headline,
         supporting = R.string.measurement_system_supporting,
-        icon = Icons.Straighten.Outlined,
+        icon = Icons.Straighten.outlined,
         selectedAppMeasurementSystem = SelectedAppMeasurementSystemState.Loading,
     ),
     picker = null,
 )
 
 private fun topBarInitialState(): SettingsTopBarState =
-    SettingsTopBarState(title = R.string.title, icon = Icons.ArrowBack.Filled)
+    SettingsTopBarState(title = R.string.title, icon = Icons.ArrowBack.filled)

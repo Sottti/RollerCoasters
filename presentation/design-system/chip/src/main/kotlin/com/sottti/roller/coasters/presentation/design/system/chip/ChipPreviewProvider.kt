@@ -26,5 +26,5 @@ internal class ChipPreviewProvider : PreviewParameterProvider<ChipState> {
 
 private fun expandedValues() = sequenceOf(false, true, null)
 private fun labelResIdValues() = sequenceOf(R.string.chip_label, R.string.chip_label_long)
-private fun leadingIconValues() = sequenceOf(null, Icons.CheckSmall.Filled)
+private fun leadingIconValues() = sequenceOf(null, Icons.CheckSmall.filled)
 private fun selectedValues() = sequenceOf(false, true)

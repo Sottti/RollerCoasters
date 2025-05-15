@@ -17,7 +17,7 @@ internal fun ExploreUiPreview(
         ExploreUi(
             filters = state.filters,
             onAction = state.onAction,
-            onListStateCreated = state.onListStateCreated,
+            onListCreated = state.onListCreated,
             onNavigateToRollerCoaster = {},
             onNavigateToSettings = {},
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),

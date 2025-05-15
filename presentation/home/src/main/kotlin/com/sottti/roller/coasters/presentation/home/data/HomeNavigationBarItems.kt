@@ -24,15 +24,15 @@ private fun explore(
 ) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_explore,
     icon = when (selectedItem) {
-        NavigationDestination.Explore -> Icons.Explore.Filled
-        else -> Icons.Explore.Outlined
+        NavigationDestination.Explore -> Icons.Explore.filled
+        else -> Icons.Explore.outlined
     },
     destination = NavigationDestination.Explore,
 )
 
 private fun search() = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_search,
-    icon = Icons.Search.Outlined,
+    icon = Icons.Search.outlined,
     destination = NavigationDestination.Search,
 )
 
@@ -41,8 +41,8 @@ private fun favourites(
 ) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_favourites,
     icon = when (selectedItem) {
-        NavigationDestination.Favourites -> Icons.Star.Filled
-        else -> Icons.Star.Outlined
+        NavigationDestination.Favourites -> Icons.Star.filled
+        else -> Icons.Star.outlined
     },
     destination = NavigationDestination.Favourites,
 )
@@ -52,8 +52,8 @@ private fun aboutMe(
 ) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_about_me,
     icon = when (selectedItem) {
-        NavigationDestination.AboutMe -> Icons.AccountCircle.Filled
-        else -> Icons.AccountCircle.Outlined
+        NavigationDestination.AboutMe -> Icons.AccountCircle.filled
+        else -> Icons.AccountCircle.outlined
     },
     destination = NavigationDestination.AboutMe,
 )

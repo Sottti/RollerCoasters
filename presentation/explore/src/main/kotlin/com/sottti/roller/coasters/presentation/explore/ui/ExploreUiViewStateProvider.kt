@@ -68,7 +68,7 @@ private fun explorePreviewState(
 ) = ExplorePreviewState(
     filters = filtersInitialState(),
     onAction = {},
-    onListStateCreated = {},
+    onListCreated = {},
     rollerCoasters = exploreRollerCoastersPagingDataFlow(
         appendState = appendState,
         data = data,

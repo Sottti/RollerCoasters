@@ -14,6 +14,6 @@ internal fun initialState(): RollerCoasterDetailsViewState =
 
 internal fun topBarInitialState(): TopBarState = TopBarState(
     favouriteIcon = FavouriteIconState.Loading,
-    navigationIcon = Icons.ArrowBack.Filled,
+    navigationIcon = Icons.ArrowBack.filled,
     title = null,
 )

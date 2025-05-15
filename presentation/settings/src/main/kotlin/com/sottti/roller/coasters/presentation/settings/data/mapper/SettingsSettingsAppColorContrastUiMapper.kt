@@ -30,7 +30,7 @@ internal fun AppColorContrast.toPresentationModel(selected: Boolean): AppColorCo
 private fun systemContrast(
     selected: Boolean,
 ): SystemContrast = SystemContrast(
-    icon = if (selected) Icons.BrightnessAuto.Filled else Icons.BrightnessAuto.Outlined,
+    icon = if (selected) Icons.BrightnessAuto.filled else Icons.BrightnessAuto.outlined,
     selected = selected,
     text = R.string.color_contrast_system_contrast,
 )
@@ -38,7 +38,7 @@ private fun systemContrast(
 private fun standardContrast(
     selected: Boolean,
 ): StandardContrast = StandardContrast(
-    icon = if (selected) Icons.BrightnessStandard.Filled else Icons.BrightnessStandard.Outlined,
+    icon = if (selected) Icons.BrightnessStandard.filled else Icons.BrightnessStandard.outlined,
     selected = selected,
     text = R.string.color_contrast_standard_contrast,
 )
@@ -46,7 +46,7 @@ private fun standardContrast(
 private fun mediumContrast(
     selected: Boolean,
 ): MediumContrast = MediumContrast(
-    icon = if (selected) Icons.BrightnessMedium.Filled else Icons.BrightnessMedium.Outlined,
+    icon = if (selected) Icons.BrightnessMedium.filled else Icons.BrightnessMedium.outlined,
     selected = selected,
     text = R.string.color_contrast_medium_contrast,
 )
@@ -54,7 +54,7 @@ private fun mediumContrast(
 private fun highContrast(
     selected: Boolean,
 ): HighContrast = HighContrast(
-    icon = if (selected) Icons.BrightnessHigh.Filled else Icons.BrightnessHigh.Outlined,
+    icon = if (selected) Icons.BrightnessHigh.filled else Icons.BrightnessHigh.outlined,
     selected = selected,
     text = R.string.color_contrast_high_contrast,
 )

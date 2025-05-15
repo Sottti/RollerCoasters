@@ -52,7 +52,7 @@ private fun FavouritesUi(
     FavouritesUi(
         onAction = viewModel.onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-        onListStateCreated = { lazyListState, scrollBehavior ->
+        onListCreated = { lazyListState, scrollBehavior ->
             FavouritesUiEffects(
                 events = viewModel.events,
                 lazyListState = lazyListState,
@@ -69,14 +69,14 @@ private fun FavouritesUi(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesUi(
     onAction: (FavouritesAction) -> Unit,
-    onListStateCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
+    onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    onListStateCreated(lazyListState, scrollBehavior)
+    onListCreated(lazyListState, scrollBehavior)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

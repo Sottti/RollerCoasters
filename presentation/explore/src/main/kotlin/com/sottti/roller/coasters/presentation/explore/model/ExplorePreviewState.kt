@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 internal data class ExplorePreviewState(
     val filters: Filters,
     val onAction: (ExploreAction) -> Unit,
-    val onListStateCreated: @Composable (LazyListState) -> Unit,
+    val onListCreated: @Composable (LazyListState) -> Unit,
     val rollerCoasters: Flow<PagingData<ExploreRollerCoaster>>,
 )

@@ -84,11 +84,16 @@ internal fun NavigationBar(
                 SearchUi(
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     onNavigateToSettings = onNavigateToSettings,
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
+                    onScrollToTop = { callback -> scrollToTopCallbacks[Search] = callback },
                 )
             }
 
-            composable<AboutMe> { AboutMeUi() }
+            composable<AboutMe> {
+                AboutMeUi(
+                    onNavigateToSettings = onNavigateToSettings,
+                    onScrollToTop = { callback -> scrollToTopCallbacks[AboutMe] = callback },
+                )
+            }
         }
     }
 }

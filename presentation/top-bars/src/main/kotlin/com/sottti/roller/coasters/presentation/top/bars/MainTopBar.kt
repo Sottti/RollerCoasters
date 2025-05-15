@@ -7,7 +7,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import co.cuvva.presentation.design.system.icons.data.Icons.Settings
-import co.cuvva.presentation.design.system.icons.ui.Icon
+import co.cuvva.presentation.design.system.icons.ui.icon.Icon
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +31,7 @@ public fun MainTopBar(
 @Composable
 private fun Icon(onNavigateToSettings: () -> Unit) {
     Icon(
-        state = Settings.Outlined,
+        iconState = Settings.outlined,
         onClick = { onNavigateToSettings.invoke() },
     )
 }

@@ -36,6 +36,7 @@ include(
     ":presentation:design-system:dimensions",
     ":presentation:design-system:icons",
     ":presentation:design-system:illustrations",
+    ":presentation:design-system:images",
     ":presentation:design-system:map",
     ":presentation:design-system:playground",
     ":presentation:design-system:progress-indicators",
