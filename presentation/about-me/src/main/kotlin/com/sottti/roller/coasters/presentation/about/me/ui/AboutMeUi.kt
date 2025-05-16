@@ -88,6 +88,7 @@ internal fun AboutMeUi(
         topBar = { MainTopBar(scrollBehavior, onNavigateToSettings) },
     ) { paddingValues ->
         AboutMeUiContent(
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             paddingValues = paddingValues,
             state = state,

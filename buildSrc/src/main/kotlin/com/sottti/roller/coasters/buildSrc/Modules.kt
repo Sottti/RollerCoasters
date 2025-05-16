@@ -32,7 +32,6 @@ object module {
             const val illustrations = ":presentation:design-system:illustrations"
             const val images = ":presentation:design-system:images"
             const val map = ":presentation:design-system:map"
-            const val playground = ":presentation:design-system:playground"
             const val progressIndicators = ":presentation:design-system:progress-indicators"
             const val rollerCoasterCard = ":presentation:design-system:roller-coaster-card"
             const val switch = ":presentation:design-system:switch"

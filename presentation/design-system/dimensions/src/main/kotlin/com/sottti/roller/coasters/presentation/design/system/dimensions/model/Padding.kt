@@ -8,4 +8,5 @@ public data class Padding(
     val medium: Dp,
     val mediumLarge: Dp,
     val large: Dp,
+    val extraLarge: Dp,
 )

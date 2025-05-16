@@ -54,7 +54,6 @@ internal fun RollerCoasterDetailsUi(
     state: RollerCoasterDetailsViewState,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val nestedScrollConnection = scrollBehavior.nestedScrollConnection
 
     Scaffold(
         topBar = {
@@ -75,7 +74,7 @@ internal fun RollerCoasterDetailsUi(
             )
 
             is Loaded -> RollerCoasterDetails(
-                nestedScrollConnection = nestedScrollConnection,
+                nestedScrollConnection = scrollBehavior.nestedScrollConnection,
                 paddingValues = paddingValues,
                 rollerCoaster = content.rollerCoaster,
             )

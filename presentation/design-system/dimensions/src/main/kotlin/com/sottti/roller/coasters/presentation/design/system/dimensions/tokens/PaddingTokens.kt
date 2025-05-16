@@ -13,6 +13,7 @@ internal object PaddingTokens {
             medium = 16.dp,
             mediumLarge = 24.dp,
             large = 32.dp,
+            extraLarge = 64.dp,
         )
 
     @Composable
@@ -23,6 +24,7 @@ internal object PaddingTokens {
             medium = 16.dp,
             mediumLarge = 24.dp,
             large = 32.dp,
+            extraLarge = 64.dp,
         )
 
     @Composable
@@ -33,5 +35,6 @@ internal object PaddingTokens {
             medium = 16.dp,
             mediumLarge = 24.dp,
             large = 32.dp,
+            extraLarge = 64.dp,
         )
 }
