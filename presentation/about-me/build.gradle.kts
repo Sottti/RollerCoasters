@@ -26,6 +26,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.images))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
+    implementation(project(module.presentation.navigationExternal))
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))
     ksp(libs.hilt.compiler)

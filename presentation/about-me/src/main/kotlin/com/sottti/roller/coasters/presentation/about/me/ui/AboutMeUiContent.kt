@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import co.cuvva.presentation.design.system.icons.ui.wrappedIcon.WrappedIcon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
 import com.roller.coasters.presentation.design.system.images.ui.Image
+import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
+import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
 import com.sottti.roller.coasters.presentation.about.me.model.ProfileImageState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfilesState
@@ -24,6 +26,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 
 @Composable
 internal fun AboutMeUiContent(
+    onAction: (AboutMeAction) -> Unit,
     paddingValues: PaddingValues,
     state: AboutMeState,
 ) {
@@ -35,7 +38,7 @@ internal fun AboutMeUiContent(
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.large)
     ) {
         item { ProfileImage(state.profileImage) }
-        item { SocialProfiles(state.socialProfiles) }
+        item { SocialProfiles(onAction = onAction, state = state.socialProfiles) }
     }
 }
 
@@ -53,6 +56,7 @@ internal fun ProfileImage(state: ProfileImageState) {
 
 @Composable
 internal fun SocialProfiles(
+    onAction: (AboutMeAction) -> Unit,
     state: SocialProfilesState,
 ) {
     Column(
@@ -76,7 +80,7 @@ internal fun SocialProfiles(
                 WrappedIcon(
                     text = profile.text,
                     iconState = profile.icon,
-                    onClick = {},
+                    onClick = {onAction(OpenUrl(profile.url))},
                 )
             }
         }

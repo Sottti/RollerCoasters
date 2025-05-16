@@ -87,6 +87,10 @@ internal fun AboutMeUi(
         modifier = Modifier.fillMaxSize(),
         topBar = { MainTopBar(scrollBehavior, onNavigateToSettings) },
     ) { paddingValues ->
-        AboutMeUiContent(paddingValues = paddingValues, state = state)
+        AboutMeUiContent(
+            onAction = onAction,
+            paddingValues = paddingValues,
+            state = state,
+        )
     }
 }

@@ -5,7 +5,7 @@
     <string name="social_profiles_instagram_text" translatable="false">Instagram</string>
     <string name="social_profiles_instagram_url" translatable="false">https://www.instagram.com/sottti/</string>
     <string name="social_profiles_linked_in_text" translatable="false">LinkedIn</string>
-    <string name="social_profiles_linked_in_url" translatable="false">https://www.linkedin.com/in/sottti/</string>
+    <string name="social_profiles_linked_in_url" translatable="false">https://www.linkedin.com/in/sotti/</string>
     <string name="social_profiles_stack_overflow_text" translatable="false">SO</string>
     <string name="social_profiles_stack_overflow_url" translatable="false">https://stackoverflow.com/users/1177959/sotti</string>
     <string name="social_profiles_title">Social profiles</string>

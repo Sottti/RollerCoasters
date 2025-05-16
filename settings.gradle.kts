@@ -55,6 +55,7 @@ include(
     ":presentation:image-loading",
     ":presentation:informative",
     ":presentation:navigation",
+    ":presentation:navigation-external",
     ":presentation:previews",
     ":presentation:search",
     ":presentation:roller-coaster-details",
