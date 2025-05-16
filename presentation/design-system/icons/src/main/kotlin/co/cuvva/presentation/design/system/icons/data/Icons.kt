@@ -129,9 +129,17 @@ public object Icons {
     }
 
     public object GitHub {
-        private val description : Int = R.string.description_icon_github_logo
-        public val filled : IconState = IconState(
-            resId = R.drawable.ic_github_logo,
+        private val description: Int = R.string.description_icon_logo_github
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_logo_github,
+            descriptionResId = description,
+        )
+    }
+
+    public object Instagram {
+        private val description: Int = R.string.description_icon_logo_instagram
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_logo_instagram,
             descriptionResId = description,
         )
     }
@@ -173,9 +181,9 @@ public object Icons {
     }
 
     public object LinkedIn {
-        private val description : Int = R.string.description_icon_linked_in_logo
-        public val filled : IconState = IconState(
-            resId = R.drawable.ic_linked_in_logo,
+        private val description: Int = R.string.description_icon_logo_linked_in
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_logo_linked_in,
             descriptionResId = description,
         )
     }
@@ -225,9 +233,9 @@ public object Icons {
     }
 
     public object StackOverflow {
-        private val description : Int = R.string.description_icon_stack_overflow_logo
-        public val filled : IconState = IconState(
-            resId = R.drawable.ic_stack_overflow_logo,
+        private val description: Int = R.string.description_icon_logo_stack_overflow
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_logo_stack_overflow,
             descriptionResId = description,
         )
     }
@@ -269,9 +277,9 @@ public object Icons {
     }
 
     public object X {
-        private val description : Int = R.string.description_icon_linked_in_logo
-        public val filled : IconState = IconState(
-            resId = R.drawable.ic_x_logo,
+        private val description: Int = R.string.description_icon_logo_linked_in
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_logo_x,
             descriptionResId = description,
         )
     }

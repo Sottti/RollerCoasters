@@ -12,20 +12,21 @@
     <string name="description_icon_dark_mode">Modo escuro</string>
     <string name="description_icon_explore">Explorar</string>
     <string name="description_icon_filter_list">Filtro</string>
-    <string name="description_icon_github_logo">Logotipo de GitHub</string>
     <string name="description_icon_language">Lingua</string>
     <string name="description_icon_language_english_gb">Inglés británico</string>
     <string name="description_icon_language_spanish">Lingua española</string>
     <string name="description_icon_light_mode">Modo claro</string>
-    <string name="description_icon_linked_in_logo">Logotipo de LinkedIn</string>
+    <string name="description_icon_logo_github">Logotipo de GitHub</string>
+    <string name="description_icon_logo_instagram">Logotipo de Instagram</string>
+    <string name="description_icon_logo_linked_in">Logotipo de LinkedIn</string>
+    <string name="description_icon_logo_stack_overflow">Logotipo de StackOverflow</string>
+    <string name="description_icon_logo_x">Logotipo de X</string>
     <string name="description_icon_palette">Paleta de cores</string>
     <string name="description_icon_search">Buscar</string>
     <string name="description_icon_settings">Axustes</string>
     <string name="description_icon_smartphone">Teléfono</string>
     <string name="description_icon_sort">Ordear</string>
-    <string name="description_icon_stack_overflow_logo">Logotipo de StackOverflow</string>
     <string name="description_icon_star">Favoritos</string>
     <string name="description_icon_straighten">Regra</string>
     <string name="description_icon_visibility">Visibilidade</string>
-    <string name="description_icon_x_logo">Logotipo de X</string>
 </resources>

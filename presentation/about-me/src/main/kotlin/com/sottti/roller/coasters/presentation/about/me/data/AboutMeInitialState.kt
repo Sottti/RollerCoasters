@@ -16,6 +16,7 @@ internal val initialState = AboutMeState(
         title = R.string.social_profiles_title,
         profiles = listOf(
             gitHubProfile(),
+            instagramProfile(),
             linkedInProfile(),
             stackOverflowProfile(),
             xProfile(),
@@ -49,4 +50,11 @@ private fun stackOverflowProfile(): SocialProfileState =
         icon = Icons.StackOverflow.filled,
         text = R.string.social_profiles_stack_overflow_text,
         url = R.string.social_profiles_stack_overflow_url,
+    )
+
+private fun instagramProfile() : SocialProfileState =
+    SocialProfileState(
+        icon = Icons.Instagram.filled,
+        text = R.string.social_profiles_instagram_text,
+        url = R.string.social_profiles_instagram_url,
     )

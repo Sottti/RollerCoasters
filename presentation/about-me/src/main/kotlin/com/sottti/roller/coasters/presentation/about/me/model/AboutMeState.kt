@@ -18,7 +18,7 @@ internal data class ProfileImageState(
 
 @Immutable
 internal data class SocialProfilesState(
-    @StringRes val title : Int,
+    @StringRes val title: Int,
     val profiles: List<SocialProfileState>,
 )
 

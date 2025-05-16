@@ -12,21 +12,22 @@
     <string name="description_icon_dark_mode">Dark mode</string>
     <string name="description_icon_explore">Explore</string>
     <string name="description_icon_filter_list">Filter</string>
-    <string name="description_icon_github_logo">GitHub logo</string>
     <string name="description_icon_language">Language</string>
     <string name="description_icon_language_english_gb">British english</string>
     <string name="description_icon_language_spanish">Spanish language</string>
     <string name="description_icon_light_mode">Light mode</string>
-    <string name="description_icon_linked_in_logo">LinkedIn logo</string>
+    <string name="description_icon_logo_github">GitHub logo</string>
+    <string name="description_icon_logo_instagram">Instagram logo</string>
+    <string name="description_icon_logo_linked_in">LinkedIn logo</string>
+    <string name="description_icon_logo_stack_overflow">StackOverflow logo</string>
+    <string name="description_icon_logo_x">X logo</string>
     <string name="description_icon_palette">Color palette</string>
     <string name="description_icon_search">Search</string>
     <string name="description_icon_settings">Settings</string>
     <string name="description_icon_smartphone">Smartphone</string>
     <string name="description_icon_sort">Sort</string>
-    <string name="description_icon_stack_overflow_logo">StackOverflow logo</string>
     <string name="description_icon_star">Favourites</string>
     <string name="description_icon_straighten">Ruler</string>
     <string name="description_icon_visibility">Visibility</string>
-    <string name="description_icon_x_logo">X logo</string>
     <string name="wrapped_icon_preview_title" translatable="false">Wrapped Icon</string>
 </resources>

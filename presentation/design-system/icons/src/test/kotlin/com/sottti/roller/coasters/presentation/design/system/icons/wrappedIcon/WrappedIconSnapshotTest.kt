@@ -2,9 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.icons.wrappedIcon
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import co.cuvva.presentation.design.system.icons.ui.icon.IconPreview
 import co.cuvva.presentation.design.system.icons.ui.icon.IconPreviewProvider
-import co.cuvva.presentation.design.system.icons.ui.icon.IconPreviewState
 import co.cuvva.presentation.design.system.icons.ui.wrappedIcon.WrappedIconPreview
 import co.cuvva.presentation.design.system.icons.ui.wrappedIcon.WrappedIconPreviewState
 import com.android.ide.common.rendering.api.SessionParams
