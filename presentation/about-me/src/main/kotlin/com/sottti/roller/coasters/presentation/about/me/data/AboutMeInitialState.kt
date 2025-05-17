@@ -9,14 +9,14 @@ import com.sottti.roller.coasters.presentation.about.me.model.SocialProfileState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfilesState
 
 internal val initialState = AboutMeState(
-    profileImage = ProfileImageState(image = Images.ProfilePicture.state),
+    profileImage = ProfileImageState(image = Images.ProfilePicture2024.state),
     name = R.string.name,
     socialProfiles = SocialProfilesState(
-        title = R.string.social_profiles_title,
         profiles = listOf(
             gitHubProfile(),
             instagramProfile(),
             linkedInProfile(),
+            mediumProfile(),
             stackOverflowProfile(),
             xProfile(),
         )
@@ -56,4 +56,11 @@ private fun instagramProfile(): SocialProfileState =
         icon = Icons.Instagram.filled,
         text = R.string.social_profiles_instagram_text,
         url = R.string.social_profiles_instagram_url,
+    )
+
+private fun mediumProfile(): SocialProfileState =
+    SocialProfileState(
+        icon = Icons.Medium.filled,
+        text = R.string.social_profiles_medium_text,
+        url = R.string.social_profiles_medium_url,
     )

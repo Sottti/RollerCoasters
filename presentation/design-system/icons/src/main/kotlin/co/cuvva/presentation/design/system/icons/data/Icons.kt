@@ -144,6 +144,14 @@ public object Icons {
         )
     }
 
+    public object Medium {
+        private val description: Int = R.string.description_icon_logo_instagram
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_logo_medium,
+            descriptionResId = description,
+        )
+    }
+
     public object Language {
         private val description: Int = R.string.description_icon_language
         public val outlined: IconState = IconState(
