@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="topic_android_jetpack_compose">"Jetpack Compose"</string>
+    <string name="topic_android_material_design">"Material Design"</string>
+    <string name="topic_android_modular_architecture">"Arquitectura modular"</string>
+    <string name="topic_android_software_architecture">"Arquitectura de software"</string>
+    <string name="topic_hobbies_bodyboard">Bodyboard</string>
+    <string name="topic_hobbies_guitar">Guitarra</string>
+    <string name="topic_hobbies_rollerblading">Patinaxe en liña</string>
+    <string name="topic_hobbies_travel">Viaxar</string>
+    <string name="topic_languages_english">Inglés</string>
+    <string name="topic_languages_galician">Galego</string>
+    <string name="topic_languages_portuguese">Portugués</string>
+    <string name="topic_languages_spanish">Castelán</string>
 </resources>

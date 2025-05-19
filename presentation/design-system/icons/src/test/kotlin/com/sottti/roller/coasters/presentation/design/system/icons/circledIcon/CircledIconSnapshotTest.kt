@@ -1,10 +1,9 @@
-package com.sottti.roller.coasters.presentation.design.system.icons.wrappedIcon
+package com.sottti.roller.coasters.presentation.design.system.icons.circledIcon
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import co.cuvva.presentation.design.system.icons.ui.icon.IconPreviewProvider
-import co.cuvva.presentation.design.system.icons.ui.wrappedIcon.WrappedIconPreview
-import co.cuvva.presentation.design.system.icons.ui.wrappedIcon.WrappedIconPreviewState
+import co.cuvva.presentation.design.system.icons.ui.circledIcon.CircledIconOnBackgroundPreview
+import co.cuvva.presentation.design.system.icons.ui.circledIcon.CircledIconOnSurfacePreview
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import org.junit.Rule
@@ -13,9 +12,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class WrappedIconSnapshotTest(
+internal class CircledIconSnapshotTest(
     nightMode: NightMode,
-    private val state: WrappedIconPreviewState,
 ) {
 
     @get:Rule
@@ -27,9 +25,16 @@ internal class WrappedIconSnapshotTest(
     )
 
     @Test
-    fun snapshotTest() {
+    fun snapshotOnBackgroundTest() {
         paparazzi.snapshot {
-            WrappedIconPreview(state)
+            CircledIconOnBackgroundPreview()
+        }
+    }
+
+    @Test
+    fun snapshotOnSurfaceTest() {
+        paparazzi.snapshot {
+            CircledIconOnSurfacePreview()
         }
     }
 
@@ -37,14 +42,9 @@ internal class WrappedIconSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            IconPreviewProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+            listOf(
+                arrayOf(NightMode.NOTNIGHT),
+                arrayOf(NightMode.NIGHT),
+            )
     }
 }

@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.search.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -13,6 +14,7 @@ import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 
 @Composable
 public fun SearchUi(
+    paddingValues: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,

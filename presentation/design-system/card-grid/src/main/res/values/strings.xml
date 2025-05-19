@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_item" translatable="false">First item</string>
+    <string name="second_item" translatable="false">Second item</string>
+    <string name="third_item" translatable="false">Third item</string>
+    <string name="fourth_item" translatable="false">Fourth item</string>
+</resources>

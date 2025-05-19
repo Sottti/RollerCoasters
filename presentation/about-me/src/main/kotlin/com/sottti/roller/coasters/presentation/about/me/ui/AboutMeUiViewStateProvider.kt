@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.about.me.data.initialState
@@ -12,6 +13,7 @@ internal class AboutMeUiViewStateProvider : PreviewParameterProvider<AboutMePrev
             onAction = {},
             onListCreated = { listState, scrollBehavior -> },
             onNavigateToSettings = {},
+            paddingValues = PaddingValues(),
             state = initialState,
         )
     )

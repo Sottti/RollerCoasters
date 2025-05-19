@@ -4,9 +4,9 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.profile.picture.ProfilePicturePreviewState
 import com.sottti.roller.coasters.presentation.design.system.profile.picture.ProfilePicturePreview
 import com.sottti.roller.coasters.presentation.design.system.profile.picture.ProfilePicturePreviewProvider
+import com.sottti.roller.coasters.presentation.design.system.profile.picture.ProfilePicturePreviewState
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

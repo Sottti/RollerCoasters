@@ -30,6 +30,7 @@ include(
     ":domain:roller-coasters",
     ":domain:settings",
     ":presentation:about-me",
+    ":presentation:design-system:card-grid",
     ":presentation:design-system:chip",
     ":presentation:design-system:colors",
     ":presentation:design-system:dialogs",

@@ -38,6 +38,7 @@
             <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/presentation/about-me" />
             <option value="$PROJECT_DIR$/presentation/design-system" />
+            <option value="$PROJECT_DIR$/presentation/design-system/card-grid" />
             <option value="$PROJECT_DIR$/presentation/design-system/chip" />
             <option value="$PROJECT_DIR$/presentation/design-system/colors" />
             <option value="$PROJECT_DIR$/presentation/design-system/dialogs" />

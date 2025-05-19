@@ -24,6 +24,7 @@ object module {
         const val topBars = ":presentation:top-bars"
 
         object designSystem {
+            const val cardGrid = ":presentation:design-system:card-grid"
             const val chip = ":presentation:design-system:chip"
             const val colors = ":presentation:design-system:colors"
             const val dialogs = ":presentation:design-system:dialogs"

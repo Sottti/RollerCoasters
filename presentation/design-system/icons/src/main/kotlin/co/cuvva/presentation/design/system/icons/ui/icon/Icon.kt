@@ -1,12 +1,14 @@
 package co.cuvva.presentation.design.system.icons.ui.icon
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import co.cuvva.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
@@ -19,46 +21,31 @@ public fun Icon(
     crossfade: Boolean = false,
     onClick: (() -> Unit)? = null,
 ) {
-    when {
-        crossfade -> Crossfade(targetState = iconState) { targetState ->
-            Icon(modifier, targetState, onClick)
+    val iconModifier = modifier.size(24.dp)
+
+    @Composable
+    fun RenderIcon(state: IconState) {
+        when {
+            onClick != null -> IconButton(onClick = onClick) {
+                MaterialIcon(
+                    painter = painterResource(state.resId),
+                    contentDescription = stringResource(state.descriptionResId),
+                    modifier = iconModifier,
+                )
+            }
+
+            else -> MaterialIcon(
+                painter = painterResource(state.resId),
+                contentDescription = stringResource(state.descriptionResId),
+                modifier = iconModifier,
+            )
         }
-
-        else -> Icon(modifier, iconState, onClick)
     }
-}
 
-@Composable
-private fun Icon(
-    modifier: Modifier,
-    state: IconState,
-    onClick: (() -> Unit)? = null,
-) {
     when {
-        onClick != null -> IconWithClick(modifier, state, onClick = onClick)
-        else -> StaticIcon(modifier, state)
+        crossfade -> Crossfade(targetState = iconState) { targetState -> RenderIcon(targetState) }
+        else -> RenderIcon(iconState)
     }
-}
-
-@Composable
-private fun IconWithClick(
-    modifier: Modifier,
-    state: IconState,
-    onClick: (() -> Unit),
-) {
-    IconButton(onClick = onClick) { StaticIcon(modifier, state) }
-}
-
-@Composable
-private fun StaticIcon(
-    modifier: Modifier,
-    state: IconState,
-) {
-    MaterialIcon(
-        contentDescription = stringResource(state.descriptionResId),
-        modifier = modifier,
-        painter = painterResource(state.resId),
-    )
 }
 
 @Composable

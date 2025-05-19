@@ -1,4 +1,4 @@
-package co.cuvva.presentation.design.system.icons.ui.wrappedIcon
+package co.cuvva.presentation.design.system.icons.ui.pilledIcon
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
-public fun WrappedIcon(
+public fun PilledIcon(
     @StringRes text: Int,
     iconState: IconState,
     onClick: () -> Unit,
@@ -63,12 +63,12 @@ private fun Text(text: Int) {
 
 @Composable
 @LightDarkThemePreview
-internal fun WrappedIconPreview(
-    @PreviewParameter(WrappedIconPreviewProvider::class)
-    state: WrappedIconPreviewState,
+internal fun PilledIconPreview(
+    @PreviewParameter(PilledIconPreviewProvider::class)
+    state: PilledIconPreviewState,
 ) {
     RollerCoastersPreviewTheme {
-        WrappedIcon(
+        PilledIcon(
             text = state.text,
             iconState = state.iconState,
             onClick = state.onClick,

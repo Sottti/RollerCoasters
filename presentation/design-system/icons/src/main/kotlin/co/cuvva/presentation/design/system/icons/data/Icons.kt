@@ -16,6 +16,14 @@ public object Icons {
         )
     }
 
+    public object Android {
+        private val description: Int = R.string.description_icon_android
+        public val filled: IconState = IconState(
+            resId = R.drawable.ic_android_rounded_filled,
+            descriptionResId = description,
+        )
+    }
+
     public object ArrowBack {
         private val description: Int = R.string.description_icon_arrow_back
         public val filled: IconState = IconState(
@@ -132,6 +140,14 @@ public object Icons {
         private val description: Int = R.string.description_icon_logo_github
         public val filled: IconState = IconState(
             resId = R.drawable.ic_logo_github,
+            descriptionResId = description,
+        )
+    }
+
+    public object Hobbies {
+        private val description: Int = R.string.description_icon_logo_github
+        public val outlined: IconState = IconState(
+            resId = R.drawable.ic_hobbies_rounded_outlined,
             descriptionResId = description,
         )
     }
@@ -268,6 +284,14 @@ public object Icons {
         )
         public val outlined: IconState = IconState(
             resId = R.drawable.ic_straighten_rounded_outlined,
+            descriptionResId = description,
+        )
+    }
+
+    public object Translate {
+        private val description: Int = R.string.description_icon_visibility
+        public val outlined: IconState = IconState(
+            resId = R.drawable.ic_translate_rounded_outlined,
             descriptionResId = description,
         )
     }

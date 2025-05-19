@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="description_icon_account_circle">Sobre min</string>
+    <string name="description_icon_android">Logotipo de Android</string>
     <string name="description_icon_arrow_back">Frecha atrás</string>
     <string name="description_icon_arrow_drop_down">Frecha do despregable</string>
     <string name="description_icon_arrow_drop_up">Flecha de cerre do despregable</string>
@@ -12,6 +13,7 @@
     <string name="description_icon_dark_mode">Modo escuro</string>
     <string name="description_icon_explore">Explorar</string>
     <string name="description_icon_filter_list">Filtro</string>
+    <string name="description_icon_hobbies">"Afeccións"</string>
     <string name="description_icon_language">Lingua</string>
     <string name="description_icon_language_english_gb">Inglés británico</string>
     <string name="description_icon_language_spanish">Lingua española</string>
@@ -29,5 +31,6 @@
     <string name="description_icon_sort">Ordear</string>
     <string name="description_icon_star">Favoritos</string>
     <string name="description_icon_straighten">Regra</string>
+    <string name="description_icon_translate">Linguas</string>
     <string name="description_icon_visibility">Visibilidade</string>
 </resources>

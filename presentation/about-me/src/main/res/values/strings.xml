@@ -13,4 +13,17 @@
     <string name="social_profiles_stack_overflow_url" translatable="false">https://stackoverflow.com/users/1177959/sotti</string>
     <string name="social_profiles_x_text" translatable="false">X</string>
     <string name="social_profiles_x_url" translatable="false">https://x.com/Sotttti</string>
+    <string name="topic_android_jetpack_compose">Jetpack Compose</string>
+    <string name="topic_android_material_design">Material Design</string>
+    <string name="topic_android_modular_architecture">Modular Architecture</string>
+    <string name="topic_android_software_architecture">Software Architecture</string>
+    <string name="topic_hobbies_bodyboard">Bodyboard</string>
+    <string name="topic_hobbies_guitar">Guitar</string>
+    <string name="topic_hobbies_rollerblading">Rollerblading</string>
+    <string name="topic_hobbies_travel">Travel</string>
+    <string name="topic_languages_english">English</string>
+    <string name="topic_languages_galician">Galician</string>
+    <string name="topic_languages_portuguese">Portuguese</string>
+    <string name="topic_languages_spanish">Spanish</string>
+
 </resources>

@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
+    implementation(project(module.presentation.designSystem.cardGrid))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.images))

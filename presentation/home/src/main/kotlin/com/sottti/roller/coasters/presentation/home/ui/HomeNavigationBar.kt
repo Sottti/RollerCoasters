@@ -68,6 +68,7 @@ internal fun NavigationBar(
         ) {
             composable<Explore> {
                 ExploreUi(
+                    paddingValues = paddingValues,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     onNavigateToSettings = onNavigateToSettings,
                     onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
@@ -75,6 +76,7 @@ internal fun NavigationBar(
             }
             composable<Favourites> {
                 FavouritesUi(
+                    paddingValues= paddingValues,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     onNavigateToSettings = onNavigateToSettings,
                     onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
@@ -82,6 +84,7 @@ internal fun NavigationBar(
             }
             composable<Search> {
                 SearchUi(
+                    paddingValues = paddingValues,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     onNavigateToSettings = onNavigateToSettings,
                     onScrollToTop = { callback -> scrollToTopCallbacks[Search] = callback },
@@ -90,6 +93,7 @@ internal fun NavigationBar(
 
             composable<AboutMe> {
                 AboutMeUi(
+                    paddingValues = paddingValues,
                     onNavigateToSettings = onNavigateToSettings,
                     onScrollToTop = { callback -> scrollToTopCallbacks[AboutMe] = callback },
                 )

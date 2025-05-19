@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,6 +28,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 public fun ExploreUi(
+    paddingValues: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,

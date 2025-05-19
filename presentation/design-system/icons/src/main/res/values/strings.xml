@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="description_icon_account_circle">About me</string>
+    <string name="description_icon_android">Android logo</string>
     <string name="description_icon_arrow_back">Arrow back</string>
     <string name="description_icon_arrow_drop_down">Drop down arrow</string>
     <string name="description_icon_arrow_drop_up">Close drop down arrow</string>
@@ -12,6 +13,7 @@
     <string name="description_icon_dark_mode">Dark mode</string>
     <string name="description_icon_explore">Explore</string>
     <string name="description_icon_filter_list">Filter</string>
+    <string name="description_icon_hobbies">Hobbies</string>
     <string name="description_icon_language">Language</string>
     <string name="description_icon_language_english_gb">British english</string>
     <string name="description_icon_language_spanish">Spanish language</string>
@@ -29,6 +31,7 @@
     <string name="description_icon_sort">Sort</string>
     <string name="description_icon_star">Favourites</string>
     <string name="description_icon_straighten">Ruler</string>
+    <string name="description_icon_translate">Languages</string>
     <string name="description_icon_visibility">Visibility</string>
-    <string name="wrapped_icon_preview_title" translatable="false">Wrapped Icon</string>
+    <string name="pilled_icon_preview_title" translatable="false">Pilled Icon</string>
 </resources>
