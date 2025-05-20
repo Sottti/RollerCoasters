@@ -28,6 +28,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.ui.pilledIcon.PilledIcon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.about.me.data.socialNetworkPrimaryColor
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
@@ -106,10 +107,11 @@ internal fun SocialProfiles(
             horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
         ) {
             state.profiles.forEach { profile ->
+                val primaryColor = socialNetworkPrimaryColor(profile.url)
                 PilledIcon(
                     text = profile.text,
                     iconState = profile.icon,
-                    onClick = { onAction(OpenUrl(profile.url)) },
+                    onClick = { onAction(OpenUrl(url = profile.url, primaryColor = primaryColor)) },
                 )
             }
         }

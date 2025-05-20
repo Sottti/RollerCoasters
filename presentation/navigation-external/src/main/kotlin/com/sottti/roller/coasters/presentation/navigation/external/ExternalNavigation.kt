@@ -14,21 +14,21 @@ import javax.inject.Singleton
 public class ExternalNavigation @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    public fun openUrl(@StringRes urlResId: Int) {
-        val url = context.getString(urlResId)
+    public fun openUrl(
+        @StringRes urlResId: Int,
+        toolbarColor: Int,
+    ) {
         CustomTabsIntent.Builder().apply {
             setShowTitle(true)
             setShareState(CustomTabsIntent.SHARE_STATE_ON)
-            url.toolbarColor()?.let { toolbarColor ->
-                setDefaultColorSchemeParams(
-                    CustomTabColorSchemeParams.Builder()
-                        .setToolbarColor(toolbarColor)
-                        .build(),
-                )
-            }
+            setDefaultColorSchemeParams(
+                CustomTabColorSchemeParams.Builder()
+                    .setToolbarColor(toolbarColor)
+                    .build(),
+            )
         }
             .build()
             .apply { intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
-            .launchUrl(context, url.toUri())
+            .launchUrl(context, context.getString(urlResId).toUri())
     }
 }

@@ -1,7 +1,9 @@
 package com.sottti.roller.coasters.presentation.about.me.data
 
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
+import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
 import com.sottti.roller.coasters.presentation.navigation.external.ExternalNavigation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +23,10 @@ internal class AboutMeViewModel @Inject constructor(
 
     private fun processAction(action: AboutMeAction) {
         when (action) {
-            is AboutMeAction.OpenUrl -> externalNavigation.openUrl(action.url)
+            is OpenUrl -> externalNavigation.openUrl(
+                urlResId = action.url,
+                toolbarColor = action.primaryColor.toArgb(),
+            )
         }
     }
 }

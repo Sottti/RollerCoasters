@@ -29,11 +29,6 @@ internal data class GridTopics(
 )
 
 @Immutable
-internal data class TopicState(
-    @StringRes val textResId: Int,
-)
-
-@Immutable
 internal data class ProfileImageState(
     val image: ImageState,
 )
