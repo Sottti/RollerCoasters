@@ -8,6 +8,7 @@ import com.roller.coasters.presentation.design.system.images.model.ImageState
 @Immutable
 internal data class AboutMeState(
     @StringRes val name: Int,
+    @StringRes val title: Int,
     val profileImage: ProfileImageState,
     val socialProfiles: SocialProfilesState,
     val topics: TopicsState,

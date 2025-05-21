@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
@@ -16,7 +17,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
@@ -101,11 +104,18 @@ internal fun AboutMeUi(
     paddingValues: PaddingValues,
     state: AboutMeState,
 ) {
+    val lazyListState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    onListCreated(lazyListState, scrollBehavior)
+
     val contentWindowInsets =
         ScaffoldDefaults
             .contentWindowInsets
             .only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
+
+    val showTitle by remember(lazyListState) {
+        derivedStateOf { lazyListState.firstVisibleItemIndex > 2 }
+    }
 
     Scaffold(
         modifier = Modifier
@@ -116,11 +126,19 @@ internal fun AboutMeUi(
                 end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
                 bottom = paddingValues.calculateBottomPadding(),
             ),
-        topBar = { MainTopBar(scrollBehavior, onNavigateToSettings) },
+        topBar = {
+            MainTopBar(
+                onNavigateToSettings = onNavigateToSettings,
+                scrollBehavior = scrollBehavior,
+                showTitle = showTitle,
+                titleResId = state.title,
+            )
+        },
         contentWindowInsets = contentWindowInsets
 
     ) { innerPaddingValues ->
         AboutMeUiContent(
+            listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             onShowBottomSheet = onShowBottomSheet,

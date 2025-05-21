@@ -18,5 +18,6 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.icons))
+    implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.navigation))
 }

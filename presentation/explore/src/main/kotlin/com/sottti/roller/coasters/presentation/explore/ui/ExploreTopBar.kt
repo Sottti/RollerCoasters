@@ -31,7 +31,7 @@ internal fun ExploreTopBar(
         label = "expandable top bar background color animation",
     )
     Column(modifier = Modifier.background(backgroundColor)) {
-        MainTopBar { onNavigateToSettings() }
+        MainTopBar(onNavigateToSettings = { onNavigateToSettings() })
         FilterChips(filters = filters, onAction = onAction)
     }
 }

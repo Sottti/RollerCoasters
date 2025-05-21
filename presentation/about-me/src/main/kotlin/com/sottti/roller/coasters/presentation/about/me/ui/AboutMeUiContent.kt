@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.ZeroCornerSize
@@ -44,6 +44,7 @@ import com.sottti.roller.coasters.presentation.design.system.profile.picture.Pro
 
 @Composable
 internal fun AboutMeUiContent(
+    listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
     onAction: (AboutMeAction) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
@@ -60,7 +61,7 @@ internal fun AboutMeUiContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .nestedScroll(nestedScrollConnection),
-            state = rememberLazyListState(),
+            state = listState,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item { ProfileImage(state.profileImage) }
