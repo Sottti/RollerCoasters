@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="description_image_architecture">Diagram representing a canonical Android app architecture</string>
+    <string name="description_image_design_systems">Image showcasing tokens of a design system</string>
+    <string name="description_image_logo_jetpack_compose">Jetpack Compose logo</string>
+    <string name="description_image_material_design_3_expressive">Image showcasing Material Design 3 Expressive</string>
     <string name="description_image_profile_picture_2024">Profile picture image</string>
 </resources>

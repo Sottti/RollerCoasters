@@ -84,6 +84,7 @@ private fun androidTopics(): Topics = Topics(
     firstTopic = Topic(
         R.string.topic_android_jetpack_compose_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_android_jetpack_compose_title,
             bodyResId = R.string.topic_android_jetpack_compose_description,
             hyperlink = TopicHyperlink(
@@ -95,22 +96,25 @@ private fun androidTopics(): Topics = Topics(
     secondTopic = Topic(
         R.string.topic_android_material_design_title,
         TopicDescription(
+            image = Images.MaterialDesign3Expressive.state,
             titleResId = R.string.topic_android_material_design_title,
             bodyResId = R.string.topic_android_material_design_description,
         ),
     ),
     thirdTopic = Topic(
-        R.string.topic_android_modular_architecture_title,
+        R.string.topic_android_design_systems_title,
         TopicDescription(
-            titleResId = R.string.topic_android_modular_architecture_title,
-            bodyResId = R.string.topic_android_modular_architecture_description,
+            image = Images.DesignSystems.state,
+            titleResId = R.string.topic_android_design_systems_title,
+            bodyResId = R.string.topic_android_design_systems_description,
         ),
     ),
     fourthTopic = Topic(
-        R.string.topic_android_software_architecture_title,
+        R.string.topic_android_architecture_title,
         TopicDescription(
-            titleResId = R.string.topic_android_software_architecture_title,
-            bodyResId = R.string.topic_android_software_architecture_description,
+            image = Images.Architecture.state,
+            titleResId = R.string.topic_android_architecture_title,
+            bodyResId = R.string.topic_android_architecture_description,
         ),
     ),
 )
@@ -119,6 +123,7 @@ private fun hobbiesTopics(): Topics = Topics(
     firstTopic = Topic(
         R.string.topic_hobbies_aggressive_inline_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_hobbies_aggressive_inline_title,
             bodyResId = R.string.topic_hobbies_aggressive_inline_description,
         ),
@@ -126,6 +131,7 @@ private fun hobbiesTopics(): Topics = Topics(
     fourthTopic = Topic(
         R.string.topic_hobbies_bodyboard_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_hobbies_bodyboard_title,
             bodyResId = R.string.topic_hobbies_bodyboard_description,
         ),
@@ -133,6 +139,7 @@ private fun hobbiesTopics(): Topics = Topics(
     secondTopic = Topic(
         R.string.topic_hobbies_travel_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_hobbies_travel_title,
             bodyResId = R.string.topic_hobbies_travel_description,
         ),
@@ -140,6 +147,7 @@ private fun hobbiesTopics(): Topics = Topics(
     thirdTopic = Topic(
         R.string.topic_hobbies_guitar_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_hobbies_guitar_title,
             bodyResId = R.string.topic_hobbies_guitar_description,
         ),
@@ -150,6 +158,7 @@ private fun languagesTopics(): Topics = Topics(
     firstTopic = Topic(
         R.string.topic_languages_english_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_languages_english_title,
             bodyResId = R.string.topic_languages_english_description,
         ),
@@ -157,6 +166,7 @@ private fun languagesTopics(): Topics = Topics(
     fourthTopic = Topic(
         R.string.topic_languages_spanish_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_languages_spanish_title,
             bodyResId = R.string.topic_languages_spanish_description,
         ),
@@ -164,6 +174,7 @@ private fun languagesTopics(): Topics = Topics(
     secondTopic = Topic(
         R.string.topic_languages_galician_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_languages_galician_title,
             bodyResId = R.string.topic_languages_galician_description,
         ),
@@ -171,6 +182,7 @@ private fun languagesTopics(): Topics = Topics(
     thirdTopic = Topic(
         R.string.topic_languages_portuguese_title,
         TopicDescription(
+            image = Images.JetpackComposeLogo.state,
             titleResId = R.string.topic_languages_portuguese_title,
             bodyResId = R.string.topic_languages_portuguese_description,
         ),

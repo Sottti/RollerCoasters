@@ -40,6 +40,7 @@ internal data class TopicDescription(
     @StringRes val bodyResId: Int,
     @StringRes val titleResId: Int,
     val hyperlink: TopicHyperlink? = null,
+    val image: ImageState,
 )
 
 @Immutable

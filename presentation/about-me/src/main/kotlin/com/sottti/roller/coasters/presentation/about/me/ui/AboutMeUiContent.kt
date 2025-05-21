@@ -141,7 +141,7 @@ private fun Topics(
                     onShowBottomSheet {
                         BottomSheetContent(
                             onAction = onAction,
-                            topicDescription = topics.android.description(position),
+                            state = topics.android.description(position),
                         )
                     }
                 },
@@ -152,7 +152,7 @@ private fun Topics(
                     onShowBottomSheet {
                         BottomSheetContent(
                             onAction = onAction,
-                            topicDescription = topics.languages.description(position),
+                            state = topics.languages.description(position),
                         )
                     }
                 })
@@ -162,7 +162,7 @@ private fun Topics(
                     onShowBottomSheet {
                         BottomSheetContent(
                             onAction = onAction,
-                            topicDescription = topics.hobbies.description(position),
+                            state = topics.hobbies.description(position),
                         )
                     }
                 })

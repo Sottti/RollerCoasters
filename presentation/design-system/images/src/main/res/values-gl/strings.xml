@@ -1,3 +1,7 @@
 <resources>
+    <string name="description_image_architecture">Diagrama que representa unha arquitectura canónica de aplicación Android</string>
+    <string name="description_image_design_systems">Imaxe que amosa os tokens dun sistema de deseño</string>
+    <string name="description_image_logo_jetpack_compose">Logotipo de Jetpack Compose</string>
+    <string name="description_image_material_design_3_expressive">Imaxe demostrativa de Material Design 3 Expressive</string>
     <string name="description_image_profile_picture_2024">Imaxe de perfil</string>
 </resources>

@@ -13,10 +13,14 @@ import androidx.compose.foundation.Image as MaterialImage
 public fun Image(
     state: ImageState,
     modifier: Modifier = Modifier,
+    roundedCorners: Boolean = true,
 ) {
     MaterialImage(
         painter = painterResource(id = state.resId),
         contentDescription = stringResource(state.descriptionResId),
-        modifier = modifier.clip(MaterialTheme.shapes.medium),
+        modifier = when {
+            roundedCorners -> modifier.clip(MaterialTheme.shapes.medium)
+            else -> modifier
+        },
     )
 }

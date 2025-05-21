@@ -39,7 +39,7 @@ internal fun NavigationBar(
     onNavigateToSettings: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var bottomSheetContent by remember {
         mutableStateOf<(@Composable ColumnScope.() -> Unit)?>(null)
     }
