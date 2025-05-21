@@ -10,4 +10,5 @@ internal data class CardGridState(
     val thirdItem: Int,
     val modifier: Modifier,
     val iconState: IconState,
+    val onClick: (text: Int) -> Unit,
 )

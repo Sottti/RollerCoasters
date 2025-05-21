@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 
+private val ANDROID_DEVELOPERS_PRIMARY_COLOR_DARK: Color = Color(0xFF000000)
+private val ANDROID_DEVELOPERS_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)
 private val FALLBACK_COLOR_DARK: Color = Color(0xFF000000)
 private val FALLBACK_COLOR_LIGHT: Color = Color(0xFFFFFFFF)
 private val GITHUB_PRIMARY_COLOR_DARK: Color = Color(0xFF020409)
@@ -73,6 +75,15 @@ public fun mediumColor(): Color =
     when {
         isSystemInDarkTheme() -> MEDIUM_PRIMARY_COLOR_DARK
         else -> MEDIUM_PRIMARY_COLOR_LIGHT
+    }
+
+@ColorInt
+@Composable
+@ReadOnlyComposable
+public fun androidDevelopersColor(): Color =
+    when {
+        isSystemInDarkTheme() -> ANDROID_DEVELOPERS_PRIMARY_COLOR_DARK
+        else -> ANDROID_DEVELOPERS_PRIMARY_COLOR_LIGHT
     }
 
 @ColorInt

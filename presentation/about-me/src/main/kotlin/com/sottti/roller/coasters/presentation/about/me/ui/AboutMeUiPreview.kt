@@ -19,6 +19,7 @@ internal fun AboutMeUiPreview(
             onAction = state.onAction,
             onListCreated = state.onListCreated,
             onNavigateToSettings = state.onNavigateToSettings,
+            onShowBottomSheet = {},
             paddingValues = state.paddingValues,
             state = state.state,
         )

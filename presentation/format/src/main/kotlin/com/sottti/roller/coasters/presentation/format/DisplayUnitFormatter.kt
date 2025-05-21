@@ -23,7 +23,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Locale
 import javax.inject.Inject
 
-public class UnitDisplayFormatter @Inject constructor(
+public class DisplayUnitFormatter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
     public fun toDisplayFormat(

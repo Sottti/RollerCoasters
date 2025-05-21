@@ -16,7 +16,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.format.DateFormatter
-import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
+import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.FavouriteIconState.Loaded
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
@@ -38,12 +38,12 @@ internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateRollerCoaster
     dateFormatter: DateFormatter,
     rollerCoaster: RollerCoaster,
     systemLocale: Locale,
-    unitDisplayFormatter: UnitDisplayFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
 ) {
     val formatContext = FormatContext(
         appLanguage = appLanguage,
         systemLocale = systemLocale,
-        unitDisplayFormatter = unitDisplayFormatter,
+        displayUnitFormatter = displayUnitFormatter,
     )
     update { currentState ->
         currentState.copy(
@@ -232,26 +232,26 @@ private fun SingleTrackRide.toSingleTrackRideViewState(
 private data class FormatContext(
     val appLanguage: AppLanguage,
     val systemLocale: Locale,
-    val unitDisplayFormatter: UnitDisplayFormatter,
+    val displayUnitFormatter: DisplayUnitFormatter,
 )
 
 private fun FormatContext.formatDrop(drop: Drop) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, drop)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, drop)
 
 private fun FormatContext.formatGForce(gForce: GForce) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, gForce)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, gForce)
 
 private fun FormatContext.formatDuration(duration: Duration) =
-    unitDisplayFormatter.toDisplayFormat(systemLocale, duration)
+    displayUnitFormatter.toDisplayFormat(systemLocale, duration)
 
 private fun FormatContext.formatHeight(height: Height) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, height)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, height)
 
 private fun FormatContext.formatLength(length: Length) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, length)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, length)
 
 private fun FormatContext.formatSpeed(speed: Speed) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, speed)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, speed)
 
 private fun FormatContext.formatMaxVertical(maxVertical: MaxVertical) =
-    unitDisplayFormatter.toDisplayFormat(maxVertical)
+    displayUnitFormatter.toDisplayFormat(maxVertical)

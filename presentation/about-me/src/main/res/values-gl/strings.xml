@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topic_android_jetpack_compose">"Jetpack Compose"</string>
-    <string name="topic_android_material_design">"Material Design"</string>
-    <string name="topic_android_modular_architecture">"Arquitectura modular"</string>
-    <string name="topic_android_software_architecture">"Arquitectura de software"</string>
-    <string name="topic_hobbies_bodyboard">Bodyboard</string>
-    <string name="topic_hobbies_guitar">Guitarra</string>
-    <string name="topic_hobbies_rollerblading">Patinaxe en liña</string>
-    <string name="topic_hobbies_travel">Viaxar</string>
-    <string name="topic_languages_english">Inglés</string>
-    <string name="topic_languages_galician">Galego</string>
-    <string name="topic_languages_portuguese">Portugués</string>
-    <string name="topic_languages_spanish">Castelán</string>
+    <string name="topic_android_jetpack_compose_description">Levo usando Jetpack Compose dende as súas primeiras versións alfa en 2020 e teño desfrutado cada minuto. \n\nEn Cuvva, fixen un dos commits iniciais á produción incorporando Jetpack Compose a finais de 2020. O noso equipo participou posteriormente nun <a href="https://developer.android.com/stories/apps/cuvva-compose">programa de investigación</a> con Google¹ que foi presentado no <b>Google I/O 2021</b>. \n\nTiven o pracer de crear <b>Design Systems</b> para Android utilizando tanto o sistema de Vistas tradicional de Android como Jetpack Compose. Para min, Jetpack Compose representa un avance significativo para o toolkit de UI de Android.</string>
+    <string name="topic_android_jetpack_compose_hyperlink_text">¹Cuvva desenvolve máis rápido e con maior calidade con Compose</string>
+    <string name="topic_android_jetpack_compose_title">Jetpack Compose</string>
+
+    <string name="topic_android_material_design_description">Son fan de Material Design dende a súa introdución en 2014, xa que foi a miña porta de entrada para entender os Design Systems e os principios de deseño de UI.\n\nTraballei extensamente con Material Design 2 e Material Design 3 (que incorpora Material You). Actualmente, estou a explorar as capacidades expresivas de Material Design 3 e planeo migrar esta aplicación a estes avances canto antes.</string>
+    <string name="topic_android_material_design_title">Material Design</string>
+
+    <string name="topic_android_modular_architecture_description">Son fan da modularización de aplicacións. Cada proxecto e equipo require unha estratexia única, e sempre hai cesións que considerar.\n\nA miña experiencia abrangue dende aplicacións cun só módulo ata aquelas con máis de mil. Migrei aplicacións con deseños monolíticos a centos de módulos, e aínda me asombra de cantas maneiras se pode abordar a modularización.\n\nAínda que os beneficios son numerosos e non sempre evidentes de inmediato, aprecio especialmente as vantaxes que finalmente lle achega a un proxecto.</string>
+    <string name="topic_android_modular_architecture_title">Arquitectura Modular</string>
+
+    <string name="topic_android_software_architecture_description">Lembro cando medrou o consenso de que incluílo todo nunha única Activity non era un enfoque sostible. Hoxe en día, os debates adoitan destacar que unha sobreabundancia de capas e abstraccións tamén pode ser problemática. ¡A arquitectura de Android certamente avanzou moito!\n\nConsiderando a traxectoria a través de diversos patróns de deseño de software (como MVP, MVVM, MVC e MVI), solucións arquitectónicas como Clean Architecture e os principios SOLID, gústame explorar o que verdadeiramente segue sendo relevante e que novos paradigmas están a xurdir para a Enxeñaría de Android neste panorama en constante cambio.</string>
+    <string name="topic_android_software_architecture_title">Arquitectura de Software</string>
+
+    <string name="topic_hobbies_aggressive_inline_description">Comecei coa patinaxe agresiva en liña cando tiña 11 anos. Dende entón, volvín a practicala por períodos de anos durante tres épocas diferentes da miña vida. Encántame!</string>
+    <string name="topic_hobbies_aggressive_inline_title">Patinaxe Agresiva</string>
+
+    <string name="topic_hobbies_bodyboard_description">Namoreime do bodyboard cando tiña 7 anos e practiqueino moito durante a miña adolescencia. Aínda tento facer un poco de bodyboard cada verán, ¡e a sensación é xenial!</string>
+    <string name="topic_hobbies_bodyboard_title">Bodyboard</string>
+
+    <string name="topic_hobbies_guitar_description">Levo tocando a guitarra esporadicamente dende os 20 anos, cando merquei a primeira, que aínda conservo.</string>
+    <string name="topic_hobbies_guitar_title">Guitarra</string>
+
+    <string name="topic_hobbies_travel_description">Encántame viaxar coa miña familia, e especialmente facer viaxes por estrada. Gústame coñecer xente de culturas e procedencias diferentes, escoitar as súas historias, descubrir tradicións diversas e explorar a arquitectura urbana.</string>
+    <string name="topic_hobbies_travel_title">Viaxar</string>
+
+    <string name="topic_languages_english_description">Aprendín inglés por primeira vez na escola e levo 11 anos usándoo no meu traballo. Vivín en Londres durante 7 anos, onde mellorei significativamente o meu nivel de inglés.\n\nTamén continúei os meus estudos de inglés na escola e asistín a varios cursos intensivos en Nova York e Cataluña, de varias semanas de duración cada un.</string>
+    <string name="topic_languages_english_title">Inglés</string>
+
+    <string name="topic_languages_galician_description">A miña lingua nai. O español e o galego son as linguas oficiais en Galicia, onde nacín. Aprendinas dos meus pais e estudeinas na escola.</string>
+    <string name="topic_languages_galician_title">Galego</string>
+
+    <string name="topic_languages_portuguese_description">O galego e o portugués son linguas moi similares. Foron a mesma lingua hai séculos. Podo entender o portugués, pero non o falo con fluidez.</string>
+    <string name="topic_languages_portuguese_title">Portugués</string>
+
+    <string name="topic_languages_spanish_description">A miña lingua nai. O español e o galego son as linguas oficiais en Galicia, onde nacín. Aprendinas dos meus pais e estudeinas na escola.</string>
+    <string name="topic_languages_spanish_title">Español</string>
+
+    <string name="topic_not_found">Produciuse un erro. Solucionarémolo o antes posible.</string>
 </resources>

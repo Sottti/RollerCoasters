@@ -1,5 +1,6 @@
 package co.cuvva.roller.coasters.presentation.design.system.text
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +17,8 @@ internal fun TextPreviewContent() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(dimensions.spacing.large),
+                .padding(dimensions.spacing.large)
+                .background(colors.background),
             verticalArrangement = Arrangement.spacedBy(dimensions.spacing.small)
         ) {
             Text.Display.Large(text = "Display Large", textColor = colors.onSurface)

@@ -6,7 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
 @Composable
-internal fun topStartRoundedShape(): CornerBasedShape =
+internal fun topStartRounded(): CornerBasedShape =
     MaterialTheme.shapes.large.copy(
         bottomEnd = ZeroCornerSize,
         bottomStart = ZeroCornerSize,
@@ -14,7 +14,7 @@ internal fun topStartRoundedShape(): CornerBasedShape =
     )
 
 @Composable
-internal fun topEndRoundedShape(): CornerBasedShape =
+internal fun topEndRounded(): CornerBasedShape =
     MaterialTheme.shapes.large.copy(
         bottomEnd = ZeroCornerSize,
         bottomStart = ZeroCornerSize,
@@ -22,7 +22,7 @@ internal fun topEndRoundedShape(): CornerBasedShape =
     )
 
 @Composable
-internal fun bottomEndRoundedShape(): CornerBasedShape =
+internal fun bottomEndRounded(): CornerBasedShape =
     MaterialTheme.shapes.large.copy(
         bottomStart = ZeroCornerSize,
         topEnd = ZeroCornerSize,
@@ -30,7 +30,7 @@ internal fun bottomEndRoundedShape(): CornerBasedShape =
     )
 
 @Composable
-internal fun bottomStartRoundedShape(): CornerBasedShape =
+internal fun bottomStartRounded(): CornerBasedShape =
     MaterialTheme.shapes.large.copy(
         bottomEnd = ZeroCornerSize,
         topEnd = ZeroCornerSize,

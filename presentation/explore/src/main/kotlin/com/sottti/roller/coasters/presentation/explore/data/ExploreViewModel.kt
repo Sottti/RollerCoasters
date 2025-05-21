@@ -41,7 +41,7 @@ import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.Sor
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.AllFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.SteelFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.TypeSecondaryFilter.WoodFilter
-import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
+import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.string.provider.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -63,7 +63,7 @@ internal class ExploreViewModel @Inject constructor(
     observeSystemLocale: ObserveSystemLocale,
     observeFilteredRollerCoasters: ObserveFilteredRollerCoasters,
     stringProvider: StringProvider,
-    unitDisplayFormatter: UnitDisplayFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
 ) : ViewModel() {
 
     private val _sortByFilter = MutableStateFlow(SortByFilter.Alphabetical)
@@ -85,7 +85,7 @@ internal class ExploreViewModel @Inject constructor(
                 sortByFilter = sortByFilter,
                 stringProvider = stringProvider,
                 systemLocale = systemLocale,
-                unitDisplayFormatter = unitDisplayFormatter,
+                displayUnitFormatter = displayUnitFormatter,
             )
         }.flatMapLatest { it }
             .cachedIn(viewModelScope)

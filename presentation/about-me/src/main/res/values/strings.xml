@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="name" translatable="false">Pablo Costa</string>
+
     <string name="social_profiles_github_text" translatable="false">GitHub</string>
     <string name="social_profiles_github_url" translatable="false">https://github.com/Sottti</string>
+
     <string name="social_profiles_instagram_text" translatable="false">Instagram</string>
     <string name="social_profiles_instagram_url" translatable="false">https://www.instagram.com/sottti/</string>
+
     <string name="social_profiles_linked_in_text" translatable="false">LinkedIn</string>
     <string name="social_profiles_linked_in_url" translatable="false">https://www.linkedin.com/in/sotti/</string>
+
     <string name="social_profiles_medium_text" translatable="false">Medium</string>
     <string name="social_profiles_medium_url" translatable="false">https://medium.com/@sotti</string>
+
     <string name="social_profiles_stack_overflow_text" translatable="false">SO</string>
     <string name="social_profiles_stack_overflow_url" translatable="false">https://stackoverflow.com/users/1177959/sotti</string>
+
     <string name="social_profiles_x_text" translatable="false">X</string>
     <string name="social_profiles_x_url" translatable="false">https://x.com/Sotttti</string>
-    <string name="topic_android_jetpack_compose">Jetpack Compose</string>
-    <string name="topic_android_material_design">Material Design</string>
-    <string name="topic_android_modular_architecture">Modular Architecture</string>
-    <string name="topic_android_software_architecture">Software Architecture</string>
-    <string name="topic_hobbies_bodyboard">Bodyboard</string>
-    <string name="topic_hobbies_guitar">Guitar</string>
-    <string name="topic_hobbies_rollerblading">Rollerblading</string>
-    <string name="topic_hobbies_travel">Travel</string>
-    <string name="topic_languages_english">English</string>
-    <string name="topic_languages_galician">Galician</string>
-    <string name="topic_languages_portuguese">Portuguese</string>
-    <string name="topic_languages_spanish">Spanish</string>
 
+    <string name="topic_android_jetpack_compose_description">I\'ve been using Jetpack Compose since its very first alpha releases in 2020 and have enjoyed every minute. \n\nAt Cuvva, I made one of the initial production commits incorporating Jetpack Compose in late 2020. Our team subsequently participated in a <a href="https://developer.android.com/stories/apps/cuvva-compose">research program</a> with Google¹ that was showcased at <b>Google I/O 2021</b>. \n\nI\'ve had the pleasure of creating Android <b>Design Systems</b> using both the traditional Android View system and Jetpack Compose. For me, Jetpack Compose represents a significant step forward for the Android UI toolkit.</string>
+    <string name="topic_android_jetpack_compose_hyperlink_text">¹Cuvva builds faster and with higher quality with Compose</string>
+
+    <string name="topic_android_jetpack_compose_hyperlink_url" translatable="false">https://developer.android.com/stories/apps/cuvva-compose</string>
+    <string name="topic_android_jetpack_compose_title">Jetpack Compose</string>
+
+    <string name="topic_android_material_design_description">I\'ve been a fan of Material Design since its introduction in 2014, as it was my gateway to understanding Design Systems and UI design principles.\n\nI\'ve worked extensively with Material Design 2 and Material Design 3 (which incorporates Material You). Currently, I\'m diving into the expressive capabilities of Material Design 3, and I plan to migrate this app to these advancements as soon as possible.</string>
+    <string name="topic_android_material_design_title">Material Design</string>
+
+    <string name="topic_android_modular_architecture_description">I\'m a fan of app modularization. Every project and team requires a unique strategy, and there are always trade-offs to consider.\n\nMy experience ranges from applications with a single module to those with over a thousand. I\'ve migrated apps from monolithic designs to hundreds of modules, and it still amazes me how many ways modularization can be approached. \n\nWhile the benefits are numerous and not always immediately obvious, I\'m particularly fond of the advantages it ultimately brings to a project.</string>
+    <string name="topic_android_modular_architecture_title">Modular Architecture</string>
+
+    <string name="topic_android_software_architecture_description">I remember when the consensus grew that putting everything into a single Activity wasn\'t a sustainable approach. Nowadays, discussions often highlight that an overabundance of layers and abstractions can also be problematic. Android architecture has certainly come a long way!\n\nConsidering the journey through various software design patterns (like MVP, MVVM, MVC, and MVI), architectural solutions such as Clean Architecture, and the SOLID principles, I enjoy exploring what truly remains relevant and what new paradigms are emerging for Android Engineering in this ever-changing landscape.</string>
+    <string name="topic_android_software_architecture_title">Software Architecture</string>
+
+    <string name="topic_hobbies_aggressive_inline_description">I started aggressive inline skating when I was 11 years old. Since then, I have returned to it for years at a time during three different periods of my life. I absolutely love it.</string>
+    <string name="topic_hobbies_aggressive_inline_title">Aggressive Inline</string>
+
+    <string name="topic_hobbies_bodyboard_description">I fell in love with bodyboarding when I was 7 and practised it a lot during my teenage years. I still try to go bodyboarding a bit each summer, and it feels great.</string>
+    <string name="topic_hobbies_bodyboard_title">Bodyboard</string>
+
+    <string name="topic_hobbies_guitar_description">I\'ve been playing the guitar sporadically since I was 20, when I bought my first one, which is still with me.</string>
+    <string name="topic_hobbies_guitar_title">Guitar</string>
+
+    <string name="topic_hobbies_travel_description">I love travelling with my family, and especially road tripping. I enjoy meeting people from different cultures and backgrounds, hearing their stories, discovering diverse traditions, and exploring city architecture.</string>
+    <string name="topic_hobbies_travel_title">Travel</string>
+
+    <string name="topic_languages_english_description">I first learned English at school and have been using it in my work for 11 years. I lived in London for 7 years, where I significantly developed my English skills.\n\nI have also continued my English studies at school and attended several intensive courses in New York and Catalonia, each for several weeks.</string>
+    <string name="topic_languages_english_title">English</string>
+
+    <string name="topic_languages_galician_description">My mother tongue. Spanish and Galician are the official languages in Galicia, where I was born. I learned them from my parents and studied them at school.</string>
+    <string name="topic_languages_galician_title">Galician</string>
+
+    <string name="topic_languages_portuguese_description">Galician and Portuguese are very similar languages. They were the same language centuries ago. I can understand Portuguese, but I can\'t speak it fluently.</string>
+    <string name="topic_languages_portuguese_title">Portuguese</string>
+
+    <string name="topic_languages_spanish_description">My mother tongue. Spanish and Galician are the official languages in Galicia, where I was born. I learned them from my parents and studied them at school.</string>
+    <string name="topic_languages_spanish_title">Spanish</string>
+
+    <string name="topic_not_found">There was an error. We\'ll fix it as soon as possible.</string>
 </resources>

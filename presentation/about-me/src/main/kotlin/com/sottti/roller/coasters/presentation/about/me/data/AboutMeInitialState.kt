@@ -4,10 +4,13 @@ import co.cuvva.presentation.design.system.icons.data.Icons
 import com.roller.coasters.presentation.design.system.images.data.Images
 import com.sottti.roller.coasters.presentation.about.me.R
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
-import com.sottti.roller.coasters.presentation.about.me.model.GridTopics
 import com.sottti.roller.coasters.presentation.about.me.model.ProfileImageState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfileState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfilesState
+import com.sottti.roller.coasters.presentation.about.me.model.Topic
+import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
+import com.sottti.roller.coasters.presentation.about.me.model.TopicHyperlink
+import com.sottti.roller.coasters.presentation.about.me.model.Topics
 import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
 
 internal val initialState = AboutMeState(
@@ -15,27 +18,6 @@ internal val initialState = AboutMeState(
     profileImage = ProfileImageState(image = Images.ProfilePicture2024.state),
     socialProfiles = socialProfilesState(),
     topics = topicsState()
-)
-
-private fun topicsState(): TopicsState = TopicsState(
-    android = GridTopics(
-        firstTopic = R.string.topic_android_jetpack_compose,
-        secondTopic = R.string.topic_android_material_design,
-        thirdTopic = R.string.topic_android_modular_architecture,
-        fourthTopic = R.string.topic_android_software_architecture,
-    ),
-    hobbies = GridTopics(
-        firstTopic = R.string.topic_hobbies_rollerblading,
-        fourthTopic = R.string.topic_hobbies_bodyboard,
-        secondTopic = R.string.topic_hobbies_travel,
-        thirdTopic = R.string.topic_hobbies_guitar,
-    ),
-    languages = GridTopics(
-        firstTopic = R.string.topic_languages_english,
-        fourthTopic = R.string.topic_languages_spanish,
-        secondTopic = R.string.topic_languages_galician,
-        thirdTopic = R.string.topic_languages_portuguese,
-    ),
 )
 
 private fun socialProfilesState(): SocialProfilesState = SocialProfilesState(
@@ -90,3 +72,106 @@ private fun mediumProfile(): SocialProfileState =
         text = R.string.social_profiles_medium_text,
         url = R.string.social_profiles_medium_url,
     )
+
+private fun topicsState(): TopicsState = TopicsState(
+    android = androidTopics(),
+    hobbies = hobbiesTopics(),
+    languages = languagesTopics(),
+)
+
+private fun androidTopics(): Topics = Topics(
+    firstTopic = Topic(
+        R.string.topic_android_jetpack_compose_title,
+        TopicDescription(
+            titleResId = R.string.topic_android_jetpack_compose_title,
+            bodyResId = R.string.topic_android_jetpack_compose_description,
+            hyperlink = TopicHyperlink(
+                textResId = R.string.topic_android_jetpack_compose_hyperlink_text,
+                urlResId = R.string.topic_android_jetpack_compose_hyperlink_url,
+            ),
+        ),
+    ),
+    secondTopic = Topic(
+        R.string.topic_android_material_design_title,
+        TopicDescription(
+            titleResId = R.string.topic_android_material_design_title,
+            bodyResId = R.string.topic_android_material_design_description,
+        ),
+    ),
+    thirdTopic = Topic(
+        R.string.topic_android_modular_architecture_title,
+        TopicDescription(
+            titleResId = R.string.topic_android_modular_architecture_title,
+            bodyResId = R.string.topic_android_modular_architecture_description,
+        ),
+    ),
+    fourthTopic = Topic(
+        R.string.topic_android_software_architecture_title,
+        TopicDescription(
+            titleResId = R.string.topic_android_software_architecture_title,
+            bodyResId = R.string.topic_android_software_architecture_description,
+        ),
+    ),
+)
+
+private fun hobbiesTopics(): Topics = Topics(
+    firstTopic = Topic(
+        R.string.topic_hobbies_aggressive_inline_title,
+        TopicDescription(
+            titleResId = R.string.topic_hobbies_aggressive_inline_title,
+            bodyResId = R.string.topic_hobbies_aggressive_inline_description,
+        ),
+    ),
+    fourthTopic = Topic(
+        R.string.topic_hobbies_bodyboard_title,
+        TopicDescription(
+            titleResId = R.string.topic_hobbies_bodyboard_title,
+            bodyResId = R.string.topic_hobbies_bodyboard_description,
+        ),
+    ),
+    secondTopic = Topic(
+        R.string.topic_hobbies_travel_title,
+        TopicDescription(
+            titleResId = R.string.topic_hobbies_travel_title,
+            bodyResId = R.string.topic_hobbies_travel_description,
+        ),
+    ),
+    thirdTopic = Topic(
+        R.string.topic_hobbies_guitar_title,
+        TopicDescription(
+            titleResId = R.string.topic_hobbies_guitar_title,
+            bodyResId = R.string.topic_hobbies_guitar_description,
+        ),
+    ),
+)
+
+private fun languagesTopics(): Topics = Topics(
+    firstTopic = Topic(
+        R.string.topic_languages_english_title,
+        TopicDescription(
+            titleResId = R.string.topic_languages_english_title,
+            bodyResId = R.string.topic_languages_english_description,
+        ),
+    ),
+    fourthTopic = Topic(
+        R.string.topic_languages_spanish_title,
+        TopicDescription(
+            titleResId = R.string.topic_languages_spanish_title,
+            bodyResId = R.string.topic_languages_spanish_description,
+        ),
+    ),
+    secondTopic = Topic(
+        R.string.topic_languages_galician_title,
+        TopicDescription(
+            titleResId = R.string.topic_languages_galician_title,
+            bodyResId = R.string.topic_languages_galician_description,
+        ),
+    ),
+    thirdTopic = Topic(
+        R.string.topic_languages_portuguese_title,
+        TopicDescription(
+            titleResId = R.string.topic_languages_portuguese_title,
+            bodyResId = R.string.topic_languages_portuguese_description,
+        ),
+    ),
+)

@@ -29,6 +29,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.profilePicture))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
+    implementation(project(module.presentation.format))
     implementation(project(module.presentation.navigationExternal))
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))

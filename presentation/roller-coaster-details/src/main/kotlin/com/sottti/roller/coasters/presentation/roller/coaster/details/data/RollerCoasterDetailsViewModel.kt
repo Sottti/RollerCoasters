@@ -9,7 +9,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.usecase.ToggleFavourite
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
 import com.sottti.roller.coasters.presentation.format.DateFormatter
-import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
+import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +31,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
     private val dateFormatter: DateFormatter,
     private val rollerCoasterId: RollerCoasterId,
     private val toggleFavouriteRollerCoaster: ToggleFavouriteRollerCoaster,
-    private val unitDisplayFormatter: UnitDisplayFormatter,
+    private val displayUnitFormatter: DisplayUnitFormatter,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState())
@@ -49,7 +49,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
                 appLanguage = appLang,
                 rollerCoaster = coaster,
                 systemLocale = systemLocale,
-                unitDisplayFormatter = unitDisplayFormatter,
+                displayUnitFormatter = displayUnitFormatter,
                 dateFormatter = dateFormatter,
             )
         }.launchIn(viewModelScope)

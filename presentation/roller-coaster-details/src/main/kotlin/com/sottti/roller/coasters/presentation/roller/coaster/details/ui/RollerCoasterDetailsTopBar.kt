@@ -28,9 +28,9 @@ internal fun TopBar(
     TopAppBar(
         title = { state.title?.let { Text.Vanilla(state.title) } },
         scrollBehavior = scrollBehavior,
-        navigationIcon = { navigationIcon(state.navigationIcon, onBackNavigation) },
+        navigationIcon = { NavigationIcon(state.navigationIcon, onBackNavigation) },
         actions = {
-            favouriteIcon(
+            FavouriteIcon(
                 state = state.favouriteIcon,
                 onToggleFavourite = onToggleFavourite
             )
@@ -39,7 +39,7 @@ internal fun TopBar(
 }
 
 @Composable
-private fun navigationIcon(
+private fun NavigationIcon(
     state: IconState,
     onBackNavigation: () -> Unit,
 ) {
@@ -50,7 +50,7 @@ private fun navigationIcon(
 }
 
 @Composable
-private fun favouriteIcon(
+private fun FavouriteIcon(
     state: FavouriteIconState,
     onToggleFavourite: () -> Unit,
 ) {

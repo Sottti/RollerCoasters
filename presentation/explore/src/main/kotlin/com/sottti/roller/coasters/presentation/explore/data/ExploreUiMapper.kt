@@ -24,7 +24,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
-import com.sottti.roller.coasters.presentation.format.UnitDisplayFormatter
+import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.string.provider.StringProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -35,7 +35,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     sortByFilter: SortByFilter,
     stringProvider: StringProvider,
     systemLocale: Locale,
-    unitDisplayFormatter: UnitDisplayFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
 ): Flow<PagingData<ExploreRollerCoaster>> = map { pagingData ->
     var currentRank = 1
     var previousStat: String? = null
@@ -46,7 +46,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
             appLanguage = appLanguage,
             systemLocale = systemLocale,
             sortByFilter = sortByFilter,
-            unitDisplayFormatter = unitDisplayFormatter
+            displayUnitFormatter = displayUnitFormatter
         )
 
         when {
@@ -65,7 +65,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
             ranking = currentRank,
             sortByFilter = sortByFilter,
             stringProvider = stringProvider,
-            unitDisplayFormatter = unitDisplayFormatter,
+            displayUnitFormatter = displayUnitFormatter,
         )
     }
 }
@@ -76,13 +76,13 @@ private fun RollerCoaster.toUiModel(
     ranking: Int,
     sortByFilter: SortByFilter,
     stringProvider: StringProvider,
-    unitDisplayFormatter: UnitDisplayFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
 ) = ExploreRollerCoaster(
     id = id.value,
     imageUrl = pictures.main?.url,
     parkName = park.name.value,
     rollerCoasterName = name.current.value,
-    stat = contextualStat(appLanguage, systemLocale, sortByFilter, unitDisplayFormatter),
+    stat = contextualStat(appLanguage, systemLocale, sortByFilter, displayUnitFormatter),
     statDetail = stringProvider.getString(R.string.roller_coaster_ranking, ranking),
 )
 
@@ -90,12 +90,12 @@ private fun RollerCoaster.contextualStat(
     appLanguage: AppLanguage,
     systemLocale: Locale,
     sortByFilter: SortByFilter,
-    unitDisplayFormatter: UnitDisplayFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
 ): String? {
     val formatContext = FormatContext(
         appLanguage = appLanguage,
         systemLocale = systemLocale,
-        unitDisplayFormatter = unitDisplayFormatter,
+        displayUnitFormatter = displayUnitFormatter,
     )
     return when (val ride = specs.ride) {
         is MultiTrackRide -> when (sortByFilter) {
@@ -127,26 +127,26 @@ private fun RollerCoaster.contextualStat(
 private data class FormatContext(
     val appLanguage: AppLanguage,
     val systemLocale: Locale,
-    val unitDisplayFormatter: UnitDisplayFormatter,
+    val displayUnitFormatter: DisplayUnitFormatter,
 )
 
 private fun FormatContext.formatDrop(drop: Drop) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, drop)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, drop)
 
 private fun FormatContext.formatGForce(gForce: GForce) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, gForce)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, gForce)
 
 private fun FormatContext.formatHeight(height: Height) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, height)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, height)
 
 private fun FormatContext.formatLength(length: Length) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, length)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, length)
 
 private fun FormatContext.formatSpeed(speed: Speed) =
-    unitDisplayFormatter.toDisplayFormat(appLanguage, systemLocale, speed)
+    displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, speed)
 
 private fun FormatContext.formatInversions(inversions: Inversions) =
-    unitDisplayFormatter.toDisplayFormat(inversions)
+    displayUnitFormatter.toDisplayFormat(inversions)
 
 private fun FormatContext.formatMaxVertical(maxVertical: MaxVertical) =
-    unitDisplayFormatter.toDisplayFormat(maxVertical)
+    displayUnitFormatter.toDisplayFormat(maxVertical)

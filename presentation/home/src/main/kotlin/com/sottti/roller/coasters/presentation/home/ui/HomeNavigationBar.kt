@@ -1,9 +1,12 @@
 package com.sottti.roller.coasters.presentation.home.ui
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,13 +39,20 @@ internal fun NavigationBar(
     onNavigateToSettings: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val nestedNavController = rememberNavController()
+    val sheetState = rememberModalBottomSheetState()
+    var bottomSheetContent by remember {
+        mutableStateOf<(@Composable ColumnScope.() -> Unit)?>(null)
+    }
+    val showSheet: (@Composable ColumnScope.() -> Unit) -> Unit = { content ->
+        bottomSheetContent = content
+    }
+
+    val navController = rememberNavController()
     val startDestination = Explore
     val state by viewModel.state.collectAsStateWithLifecycle()
     var selectedTab by remember { mutableStateOf<NavigationDestination>(startDestination) }
     val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -55,7 +65,7 @@ internal fun NavigationBar(
                         else -> {
                             selectedTab = destination
                             viewModel.actions.onDestinationSelected(destination)
-                            nestedNavController.navigateTo(homeNavigationBarItem)
+                            navController.navigateTo(homeNavigationBarItem)
                         }
                     }
                 },
@@ -63,41 +73,70 @@ internal fun NavigationBar(
         },
     ) { paddingValues ->
         NavHost(
-            navController = nestedNavController,
+            navController = navController,
+            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+            onNavigateToSettings = onNavigateToSettings,
+            paddingValues = paddingValues,
+            scrollToTopCallbacks = scrollToTopCallbacks,
+            showSheet = showSheet,
             startDestination = startDestination,
-        ) {
-            composable<Explore> {
-                ExploreUi(
-                    paddingValues = paddingValues,
-                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                    onNavigateToSettings = onNavigateToSettings,
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
-                )
-            }
-            composable<Favourites> {
-                FavouritesUi(
-                    paddingValues= paddingValues,
-                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                    onNavigateToSettings = onNavigateToSettings,
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
-                )
-            }
-            composable<Search> {
-                SearchUi(
-                    paddingValues = paddingValues,
-                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                    onNavigateToSettings = onNavigateToSettings,
-                    onScrollToTop = { callback -> scrollToTopCallbacks[Search] = callback },
-                )
-            }
+        )
 
-            composable<AboutMe> {
-                AboutMeUi(
-                    paddingValues = paddingValues,
-                    onNavigateToSettings = onNavigateToSettings,
-                    onScrollToTop = { callback -> scrollToTopCallbacks[AboutMe] = callback },
-                )
-            }
+        if (bottomSheetContent != null) {
+            ModalBottomSheet(
+                onDismissRequest = { bottomSheetContent = null },
+                sheetState = sheetState,
+            ) { bottomSheetContent?.invoke(this) }
+        }
+    }
+}
+
+@Composable
+private fun NavHost(
+    navController: NavHostController,
+    startDestination: Explore,
+    paddingValues: PaddingValues,
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    scrollToTopCallbacks: MutableMap<NavigationDestination, () -> Unit>,
+    showSheet: (@Composable (ColumnScope.() -> Unit)) -> Unit,
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination,
+    ) {
+        composable<Explore> {
+            ExploreUi(
+                paddingValues = paddingValues,
+                onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                onNavigateToSettings = onNavigateToSettings,
+                onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
+            )
+        }
+        composable<Favourites> {
+            FavouritesUi(
+                paddingValues = paddingValues,
+                onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                onNavigateToSettings = onNavigateToSettings,
+                onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
+            )
+        }
+        composable<Search> {
+            SearchUi(
+                paddingValues = paddingValues,
+                onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                onNavigateToSettings = onNavigateToSettings,
+                onScrollToTop = { callback -> scrollToTopCallbacks[Search] = callback },
+            )
+        }
+
+        composable<AboutMe> {
+            AboutMeUi(
+                onNavigateToSettings = onNavigateToSettings,
+                onScrollToTop = { callback -> scrollToTopCallbacks[AboutMe] = callback },
+                onShowBottomSheet = showSheet,
+                paddingValues = paddingValues,
+            )
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -32,11 +33,13 @@ import kotlinx.coroutines.launch
 public fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
     paddingValues: PaddingValues,
 ) {
     AboutMeUi(
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
+        onShowBottomSheet = onShowBottomSheet,
         paddingValues = paddingValues,
         viewModel = hiltViewModel(),
     )
@@ -47,6 +50,7 @@ public fun AboutMeUi(
 private fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
     paddingValues: PaddingValues,
     viewModel: AboutMeViewModel,
 ) {
@@ -62,6 +66,7 @@ private fun AboutMeUi(
             )
         },
         onNavigateToSettings = onNavigateToSettings,
+        onShowBottomSheet = onShowBottomSheet,
         paddingValues = paddingValues,
         state = state,
     )
@@ -89,10 +94,11 @@ private fun AboutMeUiEffects(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun AboutMeUi(
-    paddingValues: PaddingValues,
     onAction: (AboutMeAction) -> Unit,
     onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToSettings: () -> Unit,
+    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
     state: AboutMeState,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -117,6 +123,7 @@ internal fun AboutMeUi(
         AboutMeUiContent(
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
+            onShowBottomSheet = onShowBottomSheet,
             paddingValues = innerPaddingValues,
             state = state,
         )

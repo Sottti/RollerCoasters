@@ -34,6 +34,7 @@ public fun CardGrid(
     @StringRes thirdItem: Int,
     iconState: IconState,
     modifier: Modifier,
+    onClick: ((Int) -> Unit),
 ) {
     Box {
         Column(
@@ -41,12 +42,28 @@ public fun CardGrid(
             verticalArrangement = Arrangement.spacedBy(dimensions.padding.small),
         ) {
             CardGridRow {
-                CardGridCard(shape = topStartRoundedShape(), textResId = firstItem)
-                CardGridCard(shape = topEndRoundedShape(), textResId = secondItem)
+                CardGridCard(
+                    onClick = { onClick(0) },
+                    shape = topStartRounded(),
+                    textResId = firstItem
+                )
+                CardGridCard(
+                    onClick = { onClick(1) },
+                    shape = topEndRounded(),
+                    textResId = secondItem
+                )
             }
             CardGridRow {
-                CardGridCard(shape = bottomStartRoundedShape(), textResId = thirdItem)
-                CardGridCard(shape = bottomEndRoundedShape(), textResId = forthItem)
+                CardGridCard(
+                    onClick = { onClick(2) },
+                    shape = bottomStartRounded(),
+                    textResId = thirdItem
+                )
+                CardGridCard(
+                    onClick = { onClick(3) },
+                    shape = bottomEndRounded(),
+                    textResId = forthItem
+                )
             }
         }
         CircledIcon(
@@ -72,10 +89,12 @@ private fun CardGridRow(
 
 @Composable
 private fun RowScope.CardGridCard(
+    onClick: (() -> Unit),
     shape: Shape,
     textResId: Int,
 ) {
     Card(
+        onClick = onClick,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.onSurface,
@@ -110,6 +129,7 @@ internal fun CardGridPreview(
                 thirdItem = state.thirdItem,
                 iconState = state.iconState,
                 modifier = state.modifier,
+                onClick = state.onClick,
             )
         }
     }

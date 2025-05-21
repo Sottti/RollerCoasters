@@ -15,17 +15,36 @@ internal data class AboutMeState(
 
 @Immutable
 internal data class TopicsState(
-    val android: GridTopics,
-    val hobbies: GridTopics,
-    val languages: GridTopics,
+    val android: Topics,
+    val hobbies: Topics,
+    val languages: Topics,
 )
 
 @Immutable
-internal data class GridTopics(
-    val firstTopic: Int,
-    val secondTopic: Int,
-    val thirdTopic: Int,
-    val fourthTopic: Int,
+internal data class Topics(
+    val firstTopic: Topic,
+    val secondTopic: Topic,
+    val thirdTopic: Topic,
+    val fourthTopic: Topic,
+)
+
+@Immutable
+internal data class Topic(
+    @StringRes val textResId: Int,
+    val description: TopicDescription,
+)
+
+@Immutable
+internal data class TopicDescription(
+    @StringRes val bodyResId: Int,
+    @StringRes val titleResId: Int,
+    val hyperlink: TopicHyperlink? = null,
+)
+
+@Immutable
+internal data class TopicHyperlink(
+    @StringRes val textResId: Int,
+    @StringRes val urlResId: Int,
 )
 
 @Immutable

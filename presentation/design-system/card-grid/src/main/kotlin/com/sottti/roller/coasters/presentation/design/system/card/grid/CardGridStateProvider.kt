@@ -15,6 +15,7 @@ internal class CardGridStateProvider : PreviewParameterProvider<CardGridState> {
                 forthItem = R.string.fourth_item,
                 modifier = Modifier.fillMaxWidth(),
                 iconState = Icons.Android.filled,
+                onClick = {},
             )
         )
     }.asSequence()
