@@ -40,7 +40,7 @@ include(
     ":presentation:design-system:images",
     ":presentation:design-system:map",
     ":presentation:design-system:playground",
-    ":presentation:design-system:profile-picture",
+    ":presentation:design-system:hero-image",
     ":presentation:design-system:progress-indicators",
     ":presentation:design-system:roller-coaster-card",
     ":presentation:design-system:switch",

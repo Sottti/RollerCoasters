@@ -28,7 +28,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import co.cuvva.presentation.design.system.icons.data.Icons
 import co.cuvva.presentation.design.system.icons.ui.pilledIcon.PilledIcon
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.about.me.data.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
@@ -39,8 +38,9 @@ import com.sottti.roller.coasters.presentation.about.me.model.Topics
 import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
 import com.sottti.roller.coasters.presentation.design.system.card.grid.CardGrid
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
+import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
-import com.sottti.roller.coasters.presentation.design.system.profile.picture.ProfilePicture
+import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImage
 
 @Composable
 internal fun AboutMeUiContent(
@@ -79,7 +79,7 @@ internal fun AboutMeUiContent(
 
 @Composable
 internal fun ProfileImage(state: ProfileImageState) {
-    ProfilePicture(
+    HeroImage(
         modifier = Modifier
             .padding(top = dimensions.padding.large)
             .fillMaxWidth(0.33f)
@@ -139,10 +139,9 @@ private fun Topics(
                 topics = topics.android,
                 onClick = { position ->
                     onShowBottomSheet {
-                        BottomSheetContent(
-                            onAction = onAction,
-                            state = topics.android.description(position),
-                        )
+                        topics.android.description(position)?.let { state ->
+                            BottomSheetContent(onAction = onAction, state = state)
+                        }
                     }
                 },
             )
@@ -150,20 +149,18 @@ private fun Topics(
                 topics = topics.languages,
                 onClick = { position ->
                     onShowBottomSheet {
-                        BottomSheetContent(
-                            onAction = onAction,
-                            state = topics.languages.description(position),
-                        )
+                        topics.languages.description(position)?.let { state ->
+                            BottomSheetContent(onAction = onAction, state = state)
+                        }
                     }
                 })
             HobbiesTopics(
                 topics = topics.hobbies,
                 onClick = { position ->
                     onShowBottomSheet {
-                        BottomSheetContent(
-                            onAction = onAction,
-                            state = topics.hobbies.description(position),
-                        )
+                        topics.hobbies.description(position)?.let { state ->
+                            BottomSheetContent(onAction = onAction, state = state)
+                        }
                     }
                 })
         }

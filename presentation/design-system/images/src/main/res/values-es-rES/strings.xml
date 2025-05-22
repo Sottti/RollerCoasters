@@ -1,8 +1,15 @@
 <resources>
+    <string name="description_image_aggressive_inline">Imagen de una persona haciendo patinaje en línea agresiveo</string>
     <string name="description_image_architecture">Diagrama que representa una arquitectura canónica de aplicación Android</string>
+    <string name="description_image_big_ben_clock_tower">Imagen de la torre del reloj del Big Ben</string>
+    <string name="description_image_bodyboard">Imagen de un padre con su hijo en una playa, entrando en el agua con una tabla de bodyboard.</string>
+    <string name="description_image_cies_islands">Imagen de las islas Cíes</string>
     <string name="description_image_design_systems">Imagen que muestra los tokens de un sistema de diseño</string>
+    <string name="description_image_guitar">Imagen de alguien tocando una guitarra</string>
     <string name="description_image_logo_jetpack_compose">Logo de Jetpack Compose</string>
-    <string name="description_image_material_design_3_expressive">Imagen demostrativa de Material Design 3 Expressive</string>
+    <string name="description_image_madrid">Imagen de Madrid</string>
+    <string name="description_image_material_design">Imagen demostrativa de Material Design</string>
     <string name="description_image_profile_picture_2024">Imagen de perfil</string>
-
+    <string name="description_image_taj_mahal">Imagen de alguien frente al Taj Mahal</string>
+    <string name="description_image_valença_do_minho">Imagen de Valença do Minho</string>
 </resources>

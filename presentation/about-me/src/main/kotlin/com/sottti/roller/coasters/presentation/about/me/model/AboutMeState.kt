@@ -40,8 +40,14 @@ internal data class TopicDescription(
     @StringRes val bodyResId: Int,
     @StringRes val titleResId: Int,
     val hyperlink: TopicHyperlink? = null,
-    val image: ImageState,
+    val image: TopicDescriptionImage,
 )
+
+@Immutable
+internal sealed class TopicDescriptionImage {
+    data class HeroImage(val state: ImageState) : TopicDescriptionImage()
+    data class Image(val state: ImageState) : TopicDescriptionImage()
+}
 
 @Immutable
 internal data class TopicHyperlink(
