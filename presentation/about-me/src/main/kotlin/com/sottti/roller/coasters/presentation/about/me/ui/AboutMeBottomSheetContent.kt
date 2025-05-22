@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,10 +31,10 @@ internal fun BottomSheetContent(
     state: TopicDescription,
 ) {
     Column(
-        modifier = Modifier.padding(
-            horizontal = dimensions.padding.medium,
-            vertical = dimensions.padding.large,
-        ),
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxWidth()
+            .padding(horizontal = dimensions.padding.medium, vertical = dimensions.padding.large),
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
     ) {
         HeaderImage(state.image)
