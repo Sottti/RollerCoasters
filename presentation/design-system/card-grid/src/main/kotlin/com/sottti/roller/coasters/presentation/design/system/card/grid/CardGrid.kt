@@ -16,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import co.cuvva.presentation.design.system.icons.model.IconState
-import co.cuvva.presentation.design.system.icons.ui.circledIcon.CircledIcon
-import co.cuvva.roller.coasters.presentation.design.system.text.Text
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
+import co.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme

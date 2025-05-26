@@ -1,7 +1,7 @@
-package co.cuvva.presentation.design.system.icons.ui.pilledIcon
+package co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon
 
 import androidx.annotation.StringRes
-import co.cuvva.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 
 internal data class PilledIconPreviewState(
     @StringRes val text: Int,

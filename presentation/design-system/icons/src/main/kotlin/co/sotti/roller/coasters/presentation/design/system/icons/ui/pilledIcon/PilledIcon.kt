@@ -1,4 +1,4 @@
-package co.cuvva.presentation.design.system.icons.ui.pilledIcon
+package co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import co.cuvva.presentation.design.system.icons.model.IconState
-import co.cuvva.presentation.design.system.icons.ui.icon.Icon
-import co.cuvva.roller.coasters.presentation.design.system.text.Text
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import co.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme

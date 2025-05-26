@@ -1,6 +1,6 @@
-package co.cuvva.presentation.design.system.icons.data
+package co.sotti.roller.coasters.presentation.design.system.icons.data
 
-import co.cuvva.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.R
 
 public object Icons {

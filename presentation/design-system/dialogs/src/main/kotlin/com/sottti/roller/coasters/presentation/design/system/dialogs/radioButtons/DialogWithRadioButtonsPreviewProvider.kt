@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import co.cuvva.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class DialogWithRadioButtonsPreviewProvider :

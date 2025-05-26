@@ -1,4 +1,4 @@
-package co.cuvva.roller.coasters.presentation.design.system.text
+package co.sotti.roller.coasters.presentation.design.system.text
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

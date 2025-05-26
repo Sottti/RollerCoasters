@@ -2,9 +2,9 @@ package com.sottti.roller.coasters.presentation.design.system.icons.icon
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import co.cuvva.presentation.design.system.icons.ui.icon.IconPreview
-import co.cuvva.presentation.design.system.icons.ui.icon.IconPreviewProvider
-import co.cuvva.presentation.design.system.icons.ui.icon.IconPreviewState
+import co.sotti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreview
+import co.sotti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreviewProvider
+import co.sotti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreviewState
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import org.junit.Rule

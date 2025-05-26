@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import co.cuvva.roller.coasters.presentation.design.system.text.Text
+import co.sotti.roller.coasters.presentation.design.system.text.Text
 import com.roller.coasters.presentation.design.system.images.ui.Image
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl

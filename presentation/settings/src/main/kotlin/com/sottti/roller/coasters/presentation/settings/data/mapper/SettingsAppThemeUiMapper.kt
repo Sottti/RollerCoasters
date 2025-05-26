@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.presentation.settings.data.mapper
 
 import androidx.compose.runtime.Composable
-import co.cuvva.presentation.design.system.icons.data.Icons
-import co.cuvva.presentation.design.system.icons.data.Icons.DarkMode
-import co.cuvva.presentation.design.system.icons.data.Icons.LightMode
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons.DarkMode
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons.LightMode
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R

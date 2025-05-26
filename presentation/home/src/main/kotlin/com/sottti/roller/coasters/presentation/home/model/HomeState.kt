@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.home.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import co.cuvva.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
 @Immutable

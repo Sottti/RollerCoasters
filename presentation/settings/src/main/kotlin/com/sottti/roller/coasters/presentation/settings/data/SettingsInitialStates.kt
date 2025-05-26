@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
-import co.cuvva.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastListItemState
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastState

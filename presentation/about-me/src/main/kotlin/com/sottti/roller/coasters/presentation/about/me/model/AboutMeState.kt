@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.about.me.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import co.cuvva.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.roller.coasters.presentation.design.system.images.model.ImageState
 
 @Immutable
@@ -11,7 +11,7 @@ internal data class AboutMeState(
     @StringRes val title: Int,
     val profileImage: ProfileImageState,
     val socialProfiles: SocialProfilesState,
-    val topics: TopicsState,
+    val getToKnowMe: TopicsState,
 )
 
 @Immutable

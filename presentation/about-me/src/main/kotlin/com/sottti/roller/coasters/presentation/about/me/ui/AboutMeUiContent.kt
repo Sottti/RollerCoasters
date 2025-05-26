@@ -25,9 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import co.cuvva.presentation.design.system.icons.data.Icons
-import co.cuvva.presentation.design.system.icons.ui.pilledIcon.PilledIcon
-import co.cuvva.roller.coasters.presentation.design.system.text.Text
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
+import co.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
@@ -75,7 +75,7 @@ internal fun AboutMeUiContent(
                 GetToKnowMe(
                     onAction = onAction,
                     onShowBottomSheet = onShowBottomSheet,
-                    topics = state.topics,
+                    topics = state.getToKnowMe,
                 )
             }
         }

@@ -1,4 +1,4 @@
-package co.cuvva.presentation.design.system.icons.ui.icon
+package co.sotti.roller.coasters.presentation.design.system.icons.ui.icon
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.size
@@ -9,7 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import co.cuvva.presentation.design.system.icons.model.IconState
+import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import androidx.compose.material3.Icon as MaterialIcon

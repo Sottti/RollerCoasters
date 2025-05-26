@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.data
 
-import co.cuvva.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideTypeFilters

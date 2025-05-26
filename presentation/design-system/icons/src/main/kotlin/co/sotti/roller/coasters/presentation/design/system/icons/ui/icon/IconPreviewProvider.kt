@@ -1,7 +1,7 @@
-package co.cuvva.presentation.design.system.icons.ui.icon
+package co.sotti.roller.coasters.presentation.design.system.icons.ui.icon
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import co.cuvva.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class IconPreviewProvider : PreviewParameterProvider<IconPreviewState> {
     override val values = buildList {

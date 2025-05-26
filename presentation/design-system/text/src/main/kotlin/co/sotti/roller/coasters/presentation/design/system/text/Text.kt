@@ -1,4 +1,4 @@
-package co.cuvva.roller.coasters.presentation.design.system.text
+package co.sotti.roller.coasters.presentation.design.system.text
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.MaterialTheme

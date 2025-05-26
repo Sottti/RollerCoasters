@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.about.me.data
 
-import co.cuvva.presentation.design.system.icons.data.Icons
+import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.roller.coasters.presentation.design.system.images.data.Images
 import com.sottti.roller.coasters.presentation.about.me.R
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
@@ -20,7 +20,7 @@ internal val initialState = AboutMeState(
     profileImage = ProfileImageState(image = Images.ProfilePicture2024.state),
     socialProfiles = socialProfilesState(),
     title = R.string.name,
-    topics = topicsState(),
+    getToKnowMe = getToKnowMeState(),
 )
 
 private fun socialProfilesState(): SocialProfilesState = SocialProfilesState(
@@ -76,7 +76,7 @@ private fun mediumProfile(): SocialProfileState =
         url = R.string.social_profiles_medium_url,
     )
 
-private fun topicsState(): TopicsState = TopicsState(
+private fun getToKnowMeState(): TopicsState = TopicsState(
     android = androidTopics(),
     hobbies = hobbiesTopics(),
     journey = journey(),
@@ -85,8 +85,8 @@ private fun topicsState(): TopicsState = TopicsState(
 
 private fun androidTopics(): Topics = Topics(
     firstTopic = Topic(
-        R.string.topic_android_jetpack_compose_title,
-        TopicDescription(
+        textResId = R.string.topic_android_jetpack_compose_title,
+        description = TopicDescription(
             image = Image(Images.JetpackComposeLogo.state),
             titleResId = R.string.topic_android_jetpack_compose_title,
             bodyResId = R.string.topic_android_jetpack_compose_description,
@@ -97,16 +97,16 @@ private fun androidTopics(): Topics = Topics(
         ),
     ),
     secondTopic = Topic(
-        R.string.topic_android_material_design_title,
-        TopicDescription(
+        textResId = R.string.topic_android_material_design_title,
+        description = TopicDescription(
             image = Image(Images.MaterialDesign3Expressive.state),
             titleResId = R.string.topic_android_material_design_title,
             bodyResId = R.string.topic_android_material_design_description,
         ),
     ),
     thirdTopic = Topic(
-        R.string.topic_android_design_systems_title,
-        TopicDescription(
+        textResId = R.string.topic_android_design_systems_title,
+        description = TopicDescription(
             image = Image(Images.DesignSystems.state),
             titleResId = R.string.topic_android_design_systems_title,
             bodyResId = R.string.topic_android_design_systems_description,
@@ -117,8 +117,8 @@ private fun androidTopics(): Topics = Topics(
         ),
     ),
     fourthTopic = Topic(
-        R.string.topic_android_architecture_title,
-        TopicDescription(
+        textResId = R.string.topic_android_architecture_title,
+        description = TopicDescription(
             image = Image(Images.AndroidArchitecture.state),
             titleResId = R.string.topic_android_architecture_title,
             bodyResId = R.string.topic_android_architecture_description,
@@ -128,32 +128,32 @@ private fun androidTopics(): Topics = Topics(
 
 private fun hobbiesTopics(): Topics = Topics(
     firstTopic = Topic(
-        R.string.topic_hobbies_aggressive_inline_title,
-        TopicDescription(
+        textResId = R.string.topic_hobbies_aggressive_inline_title,
+        description = TopicDescription(
             image = HeroImage(Images.AggressiveInline.state),
             titleResId = R.string.topic_hobbies_aggressive_inline_title,
             bodyResId = R.string.topic_hobbies_aggressive_inline_description,
         ),
     ),
     secondTopic = Topic(
-        R.string.topic_hobbies_travel_title,
-        TopicDescription(
+        textResId = R.string.topic_hobbies_travel_title,
+        description = TopicDescription(
             image = HeroImage(Images.TajMahal.state),
             titleResId = R.string.topic_hobbies_travel_title,
             bodyResId = R.string.topic_hobbies_travel_description,
         ),
     ),
     thirdTopic = Topic(
-        R.string.topic_hobbies_guitar_title,
-        TopicDescription(
+        textResId = R.string.topic_hobbies_guitar_title,
+        description = TopicDescription(
             image = HeroImage(Images.Guitar.state),
             titleResId = R.string.topic_hobbies_guitar_title,
             bodyResId = R.string.topic_hobbies_guitar_description,
         ),
     ),
     fourthTopic = Topic(
-        R.string.topic_hobbies_bodyboard_title,
-        TopicDescription(
+        textResId = R.string.topic_hobbies_bodyboard_title,
+        description = TopicDescription(
             image = HeroImage(Images.Bodyboard.state),
             titleResId = R.string.topic_hobbies_bodyboard_title,
             bodyResId = R.string.topic_hobbies_bodyboard_description,
@@ -163,32 +163,32 @@ private fun hobbiesTopics(): Topics = Topics(
 
 private fun languagesTopics(): Topics = Topics(
     firstTopic = Topic(
-        R.string.topic_languages_english_title,
-        TopicDescription(
+        textResId = R.string.topic_languages_english_title,
+        description = TopicDescription(
             image = HeroImage(Images.BigBen.state),
             titleResId = R.string.topic_languages_english_title,
             bodyResId = R.string.topic_languages_english_description,
         ),
     ),
     secondTopic = Topic(
-        R.string.topic_languages_galician_title,
-        TopicDescription(
+        textResId = R.string.topic_languages_galician_title,
+        description = TopicDescription(
             image = HeroImage(Images.CiesIslands.state),
             titleResId = R.string.topic_languages_galician_title,
             bodyResId = R.string.topic_languages_galician_description,
         ),
     ),
     thirdTopic = Topic(
-        R.string.topic_languages_portuguese_title,
-        TopicDescription(
+        textResId = R.string.topic_languages_portuguese_title,
+        description = TopicDescription(
             image = HeroImage(Images.ValencaDoMinho.state),
             titleResId = R.string.topic_languages_portuguese_title,
             bodyResId = R.string.topic_languages_portuguese_description,
         ),
     ),
     fourthTopic = Topic(
-        R.string.topic_languages_spanish_title,
-        TopicDescription(
+        textResId = R.string.topic_languages_spanish_title,
+        description = TopicDescription(
             image = HeroImage(Images.Madrid.state),
             titleResId = R.string.topic_languages_spanish_title,
             bodyResId = R.string.topic_languages_spanish_description,

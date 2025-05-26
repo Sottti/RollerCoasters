@@ -1,4 +1,4 @@
-package co.cuvva.presentation.design.system.icons.model
+package co.sotti.roller.coasters.presentation.design.system.icons.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
