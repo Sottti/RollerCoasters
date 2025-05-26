@@ -9,7 +9,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.net.toUri
 import java.util.Locale
 
-private const val ANDROID_DEVELOPERS: String = "developer.android.com"
+private const val HOST_ANDROID_DEVELOPERS: String = "developer.android.com"
+private const val HOST_DRIBBBLE: String = "dribbble.com"
 private const val HOST_GITHUB: String = "github.com"
 private const val HOST_INSTAGRAM: String = "instagram.com"
 private const val HOST_LINKEDIN: String = "linkedin.com"
@@ -28,7 +29,8 @@ public fun externalNavigationPrimaryColor(@StringRes url: Int): Color {
         .toUri().host?.lowercase(Locale.US) ?: return fallbackColor()
 
     return when {
-        host.endsWith(ANDROID_DEVELOPERS) -> androidDevelopersColor()
+        host.endsWith(HOST_ANDROID_DEVELOPERS) -> androidDevelopersColor()
+        host.endsWith(HOST_DRIBBBLE) -> androidDevelopersColor()
         host.endsWith(HOST_GITHUB) -> gitHubColor()
         host.endsWith(HOST_INSTAGRAM) -> instagramColor()
         host.endsWith(HOST_LINKEDIN) -> linkedInColor()

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="topic_android_jetpack_compose_description">Levo usando Jetpack Compose dende as súas primeiras versións alfa en 2020 e teño desfrutado cada minuto. \n\nEn Cuvva, fixen un dos commits iniciais á produción incorporando Jetpack Compose a finais de 2020. O noso equipo participou posteriormente nun <a href="https://developer.android.com/stories/apps/cuvva-compose">programa de investigación</a> con Google¹ que foi presentado no <b>Google I/O 2021</b>. \n\nTiven o pracer de crear <b>Design Systems</b> para Android utilizando tanto o sistema de Vistas tradicional de Android como Jetpack Compose. Para min, Jetpack Compose representa un avance significativo para o toolkit de UI de Android.</string>
-    <string name="topic_android_jetpack_compose_hyperlink_text">¹Cuvva desenvolve máis rápido e con maior calidade con Compose</string>
-    <string name="topic_android_jetpack_compose_hyperlink_url" translatable="false">https://developer.android.com/stories/apps/cuvva-compose</string>
     <string name="topic_android_jetpack_compose_title">Jetpack Compose</string>
 
     <string name="topic_android_material_design_description">Son fan de Material Design dende a súa introdución en 2014, xa que foi a miña porta de entrada para entender os Design Systems e os principios de deseño de UI.\n\nTraballei extensamente con Material Design 2 e Material Design 3 (que incorpora Material You). Actualmente, estou a explorar as capacidades expresivas de Material Design 3 e planeo migrar esta aplicación a estes avances canto antes.</string>

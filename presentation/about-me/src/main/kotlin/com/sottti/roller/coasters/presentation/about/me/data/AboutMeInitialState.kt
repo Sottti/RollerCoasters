@@ -109,6 +109,10 @@ private fun androidTopics(): Topics = Topics(
             image = Image(Images.DesignSystems.state),
             titleResId = R.string.topic_android_design_systems_title,
             bodyResId = R.string.topic_android_design_systems_description,
+            hyperlink = TopicHyperlink(
+                textResId = R.string.topic_android_design_systems_hyperlink_text,
+                urlResId = R.string.topic_android_design_systems_hyperlink_url,
+            )
         ),
     ),
     fourthTopic = Topic(
