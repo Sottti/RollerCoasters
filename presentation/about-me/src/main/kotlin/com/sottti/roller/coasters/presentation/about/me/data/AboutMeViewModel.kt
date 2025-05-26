@@ -24,7 +24,7 @@ internal class AboutMeViewModel @Inject constructor(
     private fun processAction(action: AboutMeAction) {
         when (action) {
             is OpenUrl -> externalNavigation.openUrl(
-                urlResId = action.url,
+                urlResId = action.urlResId,
                 toolbarColor = action.primaryColor.toArgb(),
             )
         }

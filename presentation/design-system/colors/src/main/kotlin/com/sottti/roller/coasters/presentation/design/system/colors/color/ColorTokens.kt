@@ -140,7 +140,7 @@ internal object ColorTokens {
             internal val background = Color(0xFF11140E)
             internal val onBackground = Color(0xFFE1E4D9)
             internal val surface = Color(0xFF11140E)
-            internal val onSurface = Color(0xFFFF00FF)
+            internal val onSurface = Color(0xFFE2E2E9)
             internal val surfaceVariant = Color(0xFF43483E)
             internal val onSurfaceVariant = Color(0xFFC4C8BB)
             internal val outline = Color(0xFF8E9286)

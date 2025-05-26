@@ -121,7 +121,7 @@ internal fun SocialProfiles(
                 PilledIcon(
                     text = profile.text,
                     iconState = profile.icon,
-                    onClick = { onAction(OpenUrl(url = profile.url, primaryColor = primaryColor)) },
+                    onClick = { onAction(OpenUrl(urlResId = profile.url, primaryColor = primaryColor)) },
                 )
             }
         }

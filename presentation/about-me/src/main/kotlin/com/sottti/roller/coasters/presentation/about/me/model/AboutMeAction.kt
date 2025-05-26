@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 internal sealed class AboutMeAction {
     data class OpenUrl(
-        @StringRes val url: Int,
+        @StringRes val urlResId: Int,
         val primaryColor: Color,
     ) : AboutMeAction()
 }
