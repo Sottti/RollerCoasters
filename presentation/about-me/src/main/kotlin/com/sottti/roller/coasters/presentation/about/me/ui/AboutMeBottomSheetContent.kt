@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import co.cuvva.roller.coasters.presentation.design.system.text.Text
@@ -32,10 +33,10 @@ internal fun BottomSheetContent(
 ) {
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = dimensions.padding.medium, vertical = dimensions.padding.large),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+        horizontalAlignment = CenterHorizontally,
     ) {
         HeaderImage(state.image)
         Spacer(modifier = Modifier.padding(dimensions.padding.large))
@@ -84,6 +85,5 @@ private fun Hyperlink(
         modifier = Modifier.fillMaxWidth(),
         text = annotatedLinkString,
         style = MaterialTheme.typography.bodyMedium,
-        onClick = { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) }
-    )
+        onClick = { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) })
 }
