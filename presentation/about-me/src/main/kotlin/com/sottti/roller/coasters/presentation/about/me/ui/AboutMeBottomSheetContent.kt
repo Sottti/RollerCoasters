@@ -40,7 +40,7 @@ internal fun BottomSheetContent(
         HeaderImage(state.image)
         Spacer(modifier = Modifier.padding(dimensions.padding.large))
         Text.Title.Large(textResId = state.titleResId)
-        Spacer(modifier = Modifier.padding(dimensions.padding.small))
+        Spacer(modifier = Modifier.padding(dimensions.padding.smallMedium))
         Text.Body.Medium(textResId = state.bodyResId, modifier = Modifier.fillMaxWidth())
         state.hyperlink?.let {
             Spacer(modifier = Modifier.padding(dimensions.padding.medium))
@@ -64,7 +64,6 @@ private fun HeaderImage(
         is TopicDescriptionImage.Image -> Image(
             state = state.state,
             modifier = Modifier.fillMaxWidth(0.66f),
-            roundedCorners = true,
         )
     }
 }
