@@ -8,13 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.sotti.roller.coasters.presentation.design.system.text.Text
 import com.roller.coasters.presentation.design.system.images.ui.Image
+import com.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
@@ -31,10 +30,11 @@ internal fun BottomSheetContent(
     onAction: (AboutMeAction) -> Unit,
     state: TopicDescription,
 ) {
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(horizontal = dimensions.padding.medium, vertical = dimensions.padding.large),
         horizontalAlignment = CenterHorizontally,
     ) {
@@ -54,17 +54,18 @@ internal fun BottomSheetContent(
 private fun HeaderImage(
     state: TopicDescriptionImage,
 ) {
+    val widthPercent = 0.66f
     when (state) {
         is TopicDescriptionImage.HeroImage -> HeroImage(
             image = state.state,
             modifier = Modifier
-                .fillMaxWidth(0.66f)
+                .fillMaxWidth(widthPercent)
                 .aspectRatio(1.0f),
         )
 
         is TopicDescriptionImage.Image -> Image(
             state = state.state,
-            modifier = Modifier.fillMaxWidth(0.66f),
+            modifier = Modifier.fillMaxWidth(widthPercent),
         )
     }
 }
@@ -84,6 +85,5 @@ private fun Hyperlink(
     ClickableText(
         modifier = Modifier.fillMaxWidth(),
         text = annotatedLinkString,
-        style = MaterialTheme.typography.bodyMedium,
         onClick = { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) })
 }

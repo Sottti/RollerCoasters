@@ -21,42 +21,31 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.presentation.about.me.data.AboutMeViewModel
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
+import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 import kotlinx.coroutines.launch
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 public fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
     paddingValues: PaddingValues,
 ) {
-    AboutMeUi(
-        onNavigateToSettings = onNavigateToSettings,
-        onScrollToTop = onScrollToTop,
-        onShowBottomSheet = onShowBottomSheet,
-        paddingValues = paddingValues,
-        viewModel = hiltViewModel(),
-    )
-}
-
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun AboutMeUi(
-    onNavigateToSettings: () -> Unit,
-    onScrollToTop: (() -> Unit) -> Unit,
-    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
-    viewModel: AboutMeViewModel,
-) {
+    val viewModel = hiltViewModel<AboutMeViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     AboutMeUi(
@@ -83,12 +72,13 @@ private fun AboutMeUiEffects(
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val currentScrollBehavior by rememberUpdatedState(scrollBehavior)
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(onScrollToTop) {
         onScrollToTop {
             coroutineScope.launch {
                 lazyListState.animateScrollToItem(0)
-                scrollBehavior.state.contentOffset = 0f
+                currentScrollBehavior.state.contentOffset = 0f
             }
         }
     }
@@ -107,6 +97,7 @@ internal fun AboutMeUi(
     val lazyListState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     onListCreated(lazyListState, scrollBehavior)
+    val showTitleAfterIndex = 2
 
     val contentWindowInsets =
         ScaffoldDefaults
@@ -114,7 +105,7 @@ internal fun AboutMeUi(
             .only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
 
     val showTitle by remember(lazyListState) {
-        derivedStateOf { lazyListState.firstVisibleItemIndex > 2 }
+        derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
     }
 
     Scaffold(
@@ -125,16 +116,14 @@ internal fun AboutMeUi(
                 start = paddingValues.calculateStartPadding(LayoutDirection.Ltr),
                 end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
                 bottom = paddingValues.calculateBottomPadding(),
-            ),
-        topBar = {
+            ), topBar = {
             MainTopBar(
                 onNavigateToSettings = onNavigateToSettings,
                 scrollBehavior = scrollBehavior,
                 showTitle = showTitle,
                 titleResId = state.title,
             )
-        },
-        contentWindowInsets = contentWindowInsets
+        }, contentWindowInsets = contentWindowInsets
 
     ) { innerPaddingValues ->
         AboutMeUiContent(
@@ -144,6 +133,25 @@ internal fun AboutMeUi(
             onShowBottomSheet = onShowBottomSheet,
             paddingValues = innerPaddingValues,
             state = state,
+        )
+    }
+}
+
+@Composable
+@LightDarkThemePreview
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun AboutMeUiPreview(
+    @PreviewParameter(AboutMeUiViewStateProvider::class)
+    state: AboutMePreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        AboutMeUi(
+            onAction = state.onAction,
+            onListCreated = state.onListCreated,
+            onNavigateToSettings = state.onNavigateToSettings,
+            onShowBottomSheet = {},
+            paddingValues = state.paddingValues,
+            state = state.state,
         )
     }
 }

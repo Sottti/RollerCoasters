@@ -4,9 +4,7 @@ import com.roller.coasters.presentation.design.system.images.data.Images
 import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.about.me.R
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
-import com.sottti.roller.coasters.presentation.about.me.model.ProfileImageState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfileState
-import com.sottti.roller.coasters.presentation.about.me.model.SocialProfilesState
 import com.sottti.roller.coasters.presentation.about.me.model.Topic
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescriptionImage.HeroImage
@@ -17,14 +15,14 @@ import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
 
 internal val initialState = AboutMeState(
     name = R.string.name,
-    profileImage = ProfileImageState(image = Images.ProfilePicture2024.state),
+    profileImage = Images.ProfilePicture2024.state,
     socialProfiles = socialProfilesState(),
     title = R.string.name,
     getToKnowMe = getToKnowMeState(),
 )
 
-private fun socialProfilesState(): SocialProfilesState = SocialProfilesState(
-    profiles = listOf(
+private fun socialProfilesState(): List<SocialProfileState> =
+    listOf(
         gitHubProfile(),
         instagramProfile(),
         linkedInProfile(),
@@ -32,7 +30,6 @@ private fun socialProfilesState(): SocialProfilesState = SocialProfilesState(
         stackOverflowProfile(),
         xProfile(),
     )
-)
 
 private fun linkedInProfile(): SocialProfileState =
     SocialProfileState(

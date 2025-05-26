@@ -25,14 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import com.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
 import com.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
-import com.sottti.roller.coasters.presentation.about.me.model.ProfileImageState
-import com.sottti.roller.coasters.presentation.about.me.model.SocialProfilesState
+import com.sottti.roller.coasters.presentation.about.me.model.SocialProfileState
 import com.sottti.roller.coasters.presentation.about.me.model.Topic
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
 import com.sottti.roller.coasters.presentation.about.me.model.Topics
@@ -85,13 +86,13 @@ internal fun AboutMeUiContent(
 
 
 @Composable
-internal fun ProfileImage(state: ProfileImageState) {
+internal fun ProfileImage(state: ImageState) {
     HeroImage(
         modifier = Modifier
             .padding(top = dimensions.padding.large)
             .fillMaxWidth(0.33f)
             .aspectRatio(1f),
-        image = state.image,
+        image = state,
     )
 }
 
@@ -106,31 +107,29 @@ private fun Name(state: Int) {
 @Composable
 internal fun SocialProfiles(
     onAction: (AboutMeAction) -> Unit,
-    state: SocialProfilesState,
+    state: List<SocialProfileState>,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium)) {
-        val scrollState = rememberScrollState()
-        Row(
-            modifier = Modifier
-                .horizontalScroll(scrollState)
-                .padding(horizontal = dimensions.padding.medium),
-            horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
-        ) {
-            state.profiles.forEach { profile ->
-                val primaryColor = externalNavigationPrimaryColor(profile.url)
-                PilledIcon(
-                    text = profile.text,
-                    iconState = profile.icon,
-                    onClick = {
-                        onAction(
-                            OpenUrl(
-                                urlResId = profile.url,
-                                primaryColor = primaryColor
-                            )
+    val scrollState = rememberScrollState()
+    Row(
+        modifier = Modifier
+            .horizontalScroll(scrollState)
+            .padding(horizontal = dimensions.padding.medium),
+        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
+    ) {
+        state.forEach { profile ->
+            val primaryColor = externalNavigationPrimaryColor(profile.url)
+            PilledIcon(
+                text = profile.text,
+                iconState = profile.icon,
+                onClick = {
+                    onAction(
+                        OpenUrl(
+                            urlResId = profile.url,
+                            primaryColor = primaryColor
                         )
-                    },
-                )
-            }
+                    )
+                },
+            )
         }
     }
 }
@@ -157,93 +156,64 @@ private fun GetToKnowMe(
                     }
                 }
             )
-            AndroidTopics(
+            TopicsGrid(
                 topics = topics.android,
+                iconState = Icons.Android.filled,
                 onClick = { position ->
-                    onShowBottomSheet {
-                        topics.android.description(position)?.let { state ->
-                            BottomSheetContent(onAction = onAction, state = state)
-                        }
-                    }
+                    showTopicBottomSheet(
+                        topics.android.description(position),
+                        onAction,
+                        onShowBottomSheet
+                    )
                 },
             )
-            LanguageTopics(
+            TopicsGrid(
                 topics = topics.languages,
+                iconState = Icons.Translate.outlined,
                 onClick = { position ->
-                    onShowBottomSheet {
-                        topics.languages.description(position)?.let { state ->
-                            BottomSheetContent(onAction = onAction, state = state)
-                        }
-                    }
+                    showTopicBottomSheet(
+                        topics.android.description(position),
+                        onAction,
+                        onShowBottomSheet
+                    )
                 })
-            HobbiesTopics(
+            TopicsGrid(
                 topics = topics.hobbies,
+                iconState = Icons.Hobbies.outlined,
                 onClick = { position ->
-                    onShowBottomSheet {
-                        topics.hobbies.description(position)?.let { state ->
-                            BottomSheetContent(onAction = onAction, state = state)
-                        }
-                    }
+                    showTopicBottomSheet(
+                        topics.android.description(position),
+                        onAction,
+                        onShowBottomSheet
+                    )
                 })
         }
     }
 }
 
-private fun Topics.description(position: Int): TopicDescription? =
-    when (position) {
-        0 -> firstTopic.description
-        1 -> secondTopic.description
-        2 -> thirdTopic.description
-        3 -> fourthTopic.description
-        else -> null
+@Composable
+private fun TopicsGrid(
+    topics: Topics,
+    iconState: IconState,
+    onClick: (Int) -> Unit,
+) = CardGrid(
+    firstItem = topics.firstTopic.textResId,
+    secondItem = topics.secondTopic.textResId,
+    thirdItem = topics.thirdTopic.textResId,
+    forthItem = topics.fourthTopic.textResId,
+    iconState = iconState,
+    modifier = Modifier.fillMaxWidth(),
+    onClick = onClick,
+)
+
+private inline fun showTopicBottomSheet(
+    topic: TopicDescription?,
+    noinline onAction: (AboutMeAction) -> Unit,
+    onShow: (@Composable ColumnScope.() -> Unit) -> Unit,
+) {
+    topic?.let { description ->
+        onShow { BottomSheetContent(onAction, description) }
     }
-
-@Composable
-private fun AndroidTopics(
-    onClick: (position: Int) -> Unit,
-    topics: Topics,
-) {
-    CardGrid(
-        firstItem = topics.firstTopic.textResId,
-        secondItem = topics.secondTopic.textResId,
-        thirdItem = topics.thirdTopic.textResId,
-        forthItem = topics.fourthTopic.textResId,
-        iconState = Icons.Android.filled,
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick,
-    )
-}
-
-@Composable
-private fun HobbiesTopics(
-    onClick: ((Int) -> Unit),
-    topics: Topics,
-) {
-    CardGrid(
-        firstItem = topics.firstTopic.textResId,
-        secondItem = topics.secondTopic.textResId,
-        thirdItem = topics.thirdTopic.textResId,
-        forthItem = topics.fourthTopic.textResId,
-        iconState = Icons.Hobbies.outlined,
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick,
-    )
-}
-
-@Composable
-private fun LanguageTopics(
-    topics: Topics,
-    onClick: ((Int) -> Unit),
-) {
-    CardGrid(
-        firstItem = topics.firstTopic.textResId,
-        secondItem = topics.secondTopic.textResId,
-        thirdItem = topics.thirdTopic.textResId,
-        forthItem = topics.fourthTopic.textResId,
-        iconState = Icons.Translate.outlined,
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick,
-    )
 }
 
 @Composable

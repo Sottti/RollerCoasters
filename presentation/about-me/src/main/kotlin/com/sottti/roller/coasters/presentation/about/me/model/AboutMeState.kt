@@ -28,7 +28,16 @@ internal data class Topics(
     val secondTopic: Topic,
     val thirdTopic: Topic,
     val fourthTopic: Topic,
-)
+) {
+    fun description(position: Int): TopicDescription? =
+        when (position) {
+            0 -> firstTopic.description
+            1 -> secondTopic.description
+            2 -> thirdTopic.description
+            3 -> fourthTopic.description
+            else -> null
+        }
+}
 
 @Immutable
 internal data class Topic(
