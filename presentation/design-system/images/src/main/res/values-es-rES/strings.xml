@@ -1,5 +1,6 @@
 <resources>
     <string name="description_image_aggressive_inline">Imagen de una persona haciendo patinaje en línea agresiveo</string>
+    <string name="description_image_android_dev_summit_credentials">Imagen de una tarjeta de acreditación del Android Dev Summit en la que figura Pablo Costa como nombre de asistente.</string>
     <string name="description_image_architecture">Diagrama que representa una arquitectura canónica de aplicación Android</string>
     <string name="description_image_big_ben_clock_tower">Imagen de la torre del reloj del Big Ben</string>
     <string name="description_image_bodyboard">Imagen de un padre con su hijo en una playa, entrando en el agua con una tabla de bodyboard.</string>

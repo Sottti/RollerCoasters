@@ -4,6 +4,15 @@ import com.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.images.R
 
 public object Images {
+    public object AndroidDevSummitCredentials {
+        private val description: Int = R.string.description_image_android_dev_summit_credentials
+        public val state: ImageState =
+            ImageState(
+                resId = R.drawable.img_android_dev_summir_credentials,
+                descriptionResId = description,
+            )
+    }
+
     public object AggressiveInline {
         private val description: Int = R.string.description_image_aggressive_inline
         public val state: ImageState =

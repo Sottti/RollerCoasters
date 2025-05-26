@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="description_image_aggressive_inline">Image of a person doing aggressive inline skating</string>
+    <string name="description_image_android_dev_summit_credentials">Image of an Android Dev Summit credentials card with Pablo Costa as an attendee name written on it</string>
     <string name="description_image_architecture">Diagram representing a canonical Android app architecture</string>
     <string name="description_image_big_ben_clock_tower">Image of the Big Ben Clock tower</string>
     <string name="description_image_bodyboard">Image of a father and his son on a beach, getting into the water with a bodyboard.</string>

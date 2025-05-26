@@ -6,6 +6,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
 @Composable
+internal fun allRounded(): CornerBasedShape =
+    MaterialTheme.shapes.large
+
+@Composable
 internal fun topStartRounded(): CornerBasedShape =
     MaterialTheme.shapes.large.copy(
         bottomEnd = ZeroCornerSize,

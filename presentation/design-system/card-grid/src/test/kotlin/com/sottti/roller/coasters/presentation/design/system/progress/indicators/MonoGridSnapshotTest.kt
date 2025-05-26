@@ -4,18 +4,18 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridPreview
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridState
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridStateProvider
+import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridPreview
+import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridState
+import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class CardGridSnapshotTest(
+internal class MonoGridSnapshotTest(
     nightMode: NightMode,
-    private val state: QuadCardGridState,
+    private val state: MonoCardGridState,
 ) {
 
     @get:Rule
@@ -29,7 +29,7 @@ internal class CardGridSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            QuadCardGridPreview(state)
+            MonoCardGridPreview(state)
         }
     }
 
@@ -37,7 +37,7 @@ internal class CardGridSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            QuadCardGridStateProvider()
+            MonoCardGridStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

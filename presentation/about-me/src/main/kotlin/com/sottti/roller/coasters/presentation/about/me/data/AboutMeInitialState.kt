@@ -16,11 +16,11 @@ import com.sottti.roller.coasters.presentation.about.me.model.Topics
 import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
 
 internal val initialState = AboutMeState(
-    title = R.string.name,
     name = R.string.name,
     profileImage = ProfileImageState(image = Images.ProfilePicture2024.state),
     socialProfiles = socialProfilesState(),
-    topics = topicsState()
+    title = R.string.name,
+    topics = topicsState(),
 )
 
 private fun socialProfilesState(): SocialProfilesState = SocialProfilesState(
@@ -79,6 +79,7 @@ private fun mediumProfile(): SocialProfileState =
 private fun topicsState(): TopicsState = TopicsState(
     android = androidTopics(),
     hobbies = hobbiesTopics(),
+    journey = journey(),
     languages = languagesTopics(),
 )
 
@@ -192,5 +193,14 @@ private fun languagesTopics(): Topics = Topics(
             titleResId = R.string.topic_languages_spanish_title,
             bodyResId = R.string.topic_languages_spanish_description,
         ),
+    ),
+)
+
+private fun journey() = Topic(
+    textResId = R.string.topic_journey_title,
+    description = TopicDescription(
+        image = HeroImage(Images.AndroidDevSummitCredentials.state),
+        titleResId = R.string.topic_journey_title,
+        bodyResId = R.string.topic_journey_description,
     ),
 )

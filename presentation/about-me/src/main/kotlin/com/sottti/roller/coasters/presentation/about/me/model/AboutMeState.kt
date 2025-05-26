@@ -18,6 +18,7 @@ internal data class AboutMeState(
 internal data class TopicsState(
     val android: Topics,
     val hobbies: Topics,
+    val journey: Topic,
     val languages: Topics,
 )
 

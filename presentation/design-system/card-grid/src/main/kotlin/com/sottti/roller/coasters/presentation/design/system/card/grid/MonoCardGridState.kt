@@ -1,0 +1,10 @@
+package com.sottti.roller.coasters.presentation.design.system.card.grid
+
+import androidx.compose.ui.Modifier
+import co.cuvva.presentation.design.system.icons.model.IconState
+
+internal data class MonoCardGridState(
+    val item: Int,
+    val modifier: Modifier,
+    val onClick: () -> Unit,
+)

@@ -33,6 +33,7 @@ import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.Open
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
 import com.sottti.roller.coasters.presentation.about.me.model.ProfileImageState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfilesState
+import com.sottti.roller.coasters.presentation.about.me.model.Topic
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
 import com.sottti.roller.coasters.presentation.about.me.model.Topics
 import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
@@ -67,10 +68,16 @@ internal fun AboutMeUiContent(
             item { ProfileImage(state.profileImage) }
             item { Spacer(modifier = Modifier.size(dimensions.padding.smallMedium)) }
             item { Name(state.name) }
-            item { Spacer(modifier = Modifier.size(dimensions.padding.medium)) }
+            item { Spacer(modifier = Modifier.size(dimensions.padding.large)) }
             item { SocialProfiles(onAction = onAction, state = state.socialProfiles) }
             item { Spacer(modifier = Modifier.size(dimensions.padding.large)) }
-            item { Topics(onAction, onShowBottomSheet = onShowBottomSheet, topics = state.topics) }
+            item {
+                GetToKnowMe(
+                    onAction = onAction,
+                    onShowBottomSheet = onShowBottomSheet,
+                    topics = state.topics,
+                )
+            }
         }
         FillerCard()
     }
@@ -122,7 +129,7 @@ internal fun SocialProfiles(
 }
 
 @Composable
-private fun Topics(
+private fun GetToKnowMe(
     onAction: (AboutMeAction) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
     topics: TopicsState,
@@ -135,6 +142,14 @@ private fun Topics(
             modifier = Modifier.padding(dimensions.padding.medium),
             verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
         ) {
+            AndroidJourney(
+                state = topics.journey,
+                onClick = {
+                    onShowBottomSheet {
+                        BottomSheetContent(onAction = onAction, state = topics.journey.description)
+                    }
+                }
+            )
             AndroidTopics(
                 topics = topics.android,
                 onClick = { position ->
@@ -219,6 +234,18 @@ private fun LanguageTopics(
         thirdItem = topics.thirdTopic.textResId,
         forthItem = topics.fourthTopic.textResId,
         iconState = Icons.Translate.outlined,
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick,
+    )
+}
+
+@Composable
+private fun AndroidJourney(
+    state: Topic,
+    onClick: (() -> Unit),
+) {
+    CardGrid(
+        item = state.textResId,
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick,
     )
