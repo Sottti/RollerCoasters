@@ -4,7 +4,6 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.presentation.about.me.data.AboutMeViewModel
 import com.sottti.roller.coasters.presentation.about.me.data.initialState
 import com.sottti.roller.coasters.presentation.navigation.external.ExternalNavigation
-import io.mockk.confirmVerified
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit4.MockKRule
 import io.mockk.justRun

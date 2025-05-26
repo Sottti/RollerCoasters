@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.home.data
 
-import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.home.R
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItems

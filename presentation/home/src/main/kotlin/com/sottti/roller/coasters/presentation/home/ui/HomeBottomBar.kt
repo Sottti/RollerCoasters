@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.presentation.home.ui
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
-import co.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import co.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItems
 

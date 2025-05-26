@@ -2,11 +2,11 @@ package com.sottti.roller.coasters.presentation.design.system.icons.pilledIcon
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
-import co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreview
-import co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreviewProvider
-import co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreviewState
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreview
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreviewProvider
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreviewState
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

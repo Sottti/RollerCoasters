@@ -25,9 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import co.sotti.roller.coasters.presentation.design.system.icons.data.Icons
-import co.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
-import co.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
+import com.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
@@ -121,7 +121,14 @@ internal fun SocialProfiles(
                 PilledIcon(
                     text = profile.text,
                     iconState = profile.icon,
-                    onClick = { onAction(OpenUrl(urlResId = profile.url, primaryColor = primaryColor)) },
+                    onClick = {
+                        onAction(
+                            OpenUrl(
+                                urlResId = profile.url,
+                                primaryColor = primaryColor
+                            )
+                        )
+                    },
                 )
             }
         }

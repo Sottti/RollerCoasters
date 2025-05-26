@@ -2,15 +2,15 @@ package com.sottti.roller.coasters.presentation.about.me.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import co.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class AboutMeState(
     @StringRes val name: Int,
     @StringRes val title: Int,
-    val profileImage: ProfileImageState,
-    val socialProfiles: SocialProfilesState,
+    val profileImage: ImageState,
+    val socialProfiles: List<SocialProfileState>,
     val getToKnowMe: TopicsState,
 )
 
@@ -40,8 +40,8 @@ internal data class Topic(
 internal data class TopicDescription(
     @StringRes val bodyResId: Int,
     @StringRes val titleResId: Int,
-    val hyperlink: TopicHyperlink? = null,
     val image: TopicDescriptionImage,
+    val hyperlink: TopicHyperlink? = null,
 )
 
 @Immutable
@@ -54,16 +54,6 @@ internal sealed class TopicDescriptionImage {
 internal data class TopicHyperlink(
     @StringRes val textResId: Int,
     @StringRes val urlResId: Int,
-)
-
-@Immutable
-internal data class ProfileImageState(
-    val image: ImageState,
-)
-
-@Immutable
-internal data class SocialProfilesState(
-    val profiles: List<SocialProfileState>,
 )
 
 @Immutable
