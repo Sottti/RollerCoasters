@@ -94,6 +94,15 @@ public object Images {
             )
     }
 
+    public object Map {
+        private val description: Int = R.string.description_image_map
+        public val state: ImageState =
+            ImageState(
+                resId = R.drawable.img_map,
+                descriptionResId = description,
+            )
+    }
+
     public object MaterialDesign3Expressive {
         private val description: Int = R.string.description_image_material_design
         public val state: ImageState =
