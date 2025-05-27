@@ -3,18 +3,18 @@ package com.sotti.roller.coasters.presentation.about.me.ui
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
-import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUiPreview
-import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUiStateProvider
+import com.sottti.roller.coasters.presentation.about.me.model.AboutMeBottomSheetPreviewState
+import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUiBottomSheetContentPreview
+import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUiBottomSheetContentStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class AboutMeSnapshotTest(
+internal class AboutMeUiBottomSheetContentSnapshotTest(
     nightMode: NightMode,
-    private val state: AboutMePreviewState,
+    private val state: AboutMeBottomSheetPreviewState,
 ) {
 
     @get:Rule
@@ -27,7 +27,7 @@ internal class AboutMeSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            AboutMeUiPreview(state)
+            AboutMeUiBottomSheetContentPreview(state)
         }
     }
 
@@ -35,7 +35,7 @@ internal class AboutMeSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            AboutMeUiStateProvider()
+            AboutMeUiBottomSheetContentStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

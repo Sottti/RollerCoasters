@@ -74,13 +74,13 @@ private fun mediumProfile(): SocialProfileState =
     )
 
 private fun getToKnowMeState(): TopicsState = TopicsState(
-    android = androidTopics(),
-    hobbies = hobbiesTopics(),
+    android = android(),
+    hobbies = hobbies(),
     journey = journey(),
-    languages = languagesTopics(),
+    languages = languages(),
 )
 
-private fun androidTopics(): Topics = Topics(
+private fun android(): Topics = Topics(
     firstTopic = Topic(
         textResId = R.string.topic_android_jetpack_compose_title,
         description = TopicDescription(
@@ -123,7 +123,7 @@ private fun androidTopics(): Topics = Topics(
     ),
 )
 
-private fun hobbiesTopics(): Topics = Topics(
+private fun hobbies(): Topics = Topics(
     firstTopic = Topic(
         textResId = R.string.topic_hobbies_aggressive_inline_title,
         description = TopicDescription(
@@ -133,11 +133,11 @@ private fun hobbiesTopics(): Topics = Topics(
         ),
     ),
     secondTopic = Topic(
-        textResId = R.string.topic_hobbies_travel_title,
+        textResId = R.string.topic_hobbies_bodyboard_title,
         description = TopicDescription(
-            image = HeroImage(Images.TajMahal.state),
-            titleResId = R.string.topic_hobbies_travel_title,
-            bodyResId = R.string.topic_hobbies_travel_description,
+            image = HeroImage(Images.Bodyboard.state),
+            titleResId = R.string.topic_hobbies_bodyboard_title,
+            bodyResId = R.string.topic_hobbies_bodyboard_description,
         ),
     ),
     thirdTopic = Topic(
@@ -149,16 +149,16 @@ private fun hobbiesTopics(): Topics = Topics(
         ),
     ),
     fourthTopic = Topic(
-        textResId = R.string.topic_hobbies_bodyboard_title,
+        textResId = R.string.topic_hobbies_travel_title,
         description = TopicDescription(
-            image = HeroImage(Images.Bodyboard.state),
-            titleResId = R.string.topic_hobbies_bodyboard_title,
-            bodyResId = R.string.topic_hobbies_bodyboard_description,
+            image = HeroImage(Images.TajMahal.state),
+            titleResId = R.string.topic_hobbies_travel_title,
+            bodyResId = R.string.topic_hobbies_travel_description,
         ),
     ),
 )
 
-private fun languagesTopics(): Topics = Topics(
+private fun languages(): Topics = Topics(
     firstTopic = Topic(
         textResId = R.string.topic_languages_english_title,
         description = TopicDescription(

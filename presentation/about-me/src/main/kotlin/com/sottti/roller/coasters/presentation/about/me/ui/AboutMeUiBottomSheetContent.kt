@@ -8,14 +8,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.roller.coasters.presentation.design.system.images.ui.Image
 import com.sotti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
+import com.sottti.roller.coasters.presentation.about.me.model.AboutMeBottomSheetPreviewState
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescriptionImage
 import com.sottti.roller.coasters.presentation.about.me.model.TopicHyperlink
@@ -23,7 +26,9 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImage
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.format.annotatedLinkString
+import com.sottti.roller.coasters.presentation.previews.LightDarkLongThemePreview
 
 @Composable
 internal fun BottomSheetContent(
@@ -86,4 +91,20 @@ private fun Hyperlink(
         modifier = Modifier.fillMaxWidth(),
         text = annotatedLinkString,
         onClick = { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) })
+}
+
+@Composable
+@LightDarkLongThemePreview
+internal fun AboutMeUiBottomSheetContentPreview(
+    @PreviewParameter(AboutMeUiBottomSheetContentStateProvider::class)
+    previewState: AboutMeBottomSheetPreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        Surface {
+            BottomSheetContent(
+                onAction = previewState.onAction,
+                state = previewState.state,
+            )
+        }
+    }
 }

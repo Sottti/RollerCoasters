@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.about.me.model
 
+import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import com.roller.coasters.presentation.design.system.images.model.ImageState
@@ -29,7 +30,7 @@ internal data class Topics(
     val thirdTopic: Topic,
     val fourthTopic: Topic,
 ) {
-    fun description(position: Int): TopicDescription? =
+    fun description(@IntRange(from = 0, to = 3) position: Int): TopicDescription? =
         when (position) {
             0 -> firstTopic.description
             1 -> secondTopic.description

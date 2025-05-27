@@ -10,13 +10,13 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(
     group = lightThemeGroup,
     device = device,
-    heightDp = 1200,
+    heightDp = 1400,
     uiMode = UI_MODE_NIGHT_NO or UI_MODE_TYPE_NORMAL,
 )
 @Preview(
     group = darkThemeGroup,
     device = device,
-    heightDp = 1200,
+    heightDp = 1400,
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 public annotation class LightDarkLongThemePreview

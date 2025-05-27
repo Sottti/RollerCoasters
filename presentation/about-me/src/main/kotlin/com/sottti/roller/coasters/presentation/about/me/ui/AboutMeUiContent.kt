@@ -161,9 +161,9 @@ private fun GetToKnowMe(
                 iconState = Icons.Android.filled,
                 onClick = { position ->
                     showTopicBottomSheet(
-                        topics.android.description(position),
-                        onAction,
-                        onShowBottomSheet
+                        topic = topics.android.description(position),
+                        onAction = onAction,
+                        onShow = onShowBottomSheet
                     )
                 },
             )
@@ -172,9 +172,9 @@ private fun GetToKnowMe(
                 iconState = Icons.Translate.outlined,
                 onClick = { position ->
                     showTopicBottomSheet(
-                        topics.android.description(position),
-                        onAction,
-                        onShowBottomSheet
+                        topic = topics.languages.description(position),
+                        onAction = onAction,
+                        onShow = onShowBottomSheet
                     )
                 })
             TopicsGrid(
@@ -182,9 +182,9 @@ private fun GetToKnowMe(
                 iconState = Icons.Hobbies.outlined,
                 onClick = { position ->
                     showTopicBottomSheet(
-                        topics.android.description(position),
-                        onAction,
-                        onShowBottomSheet
+                        topic = topics.hobbies.description(position),
+                        onAction = onAction,
+                        onShow = onShowBottomSheet
                     )
                 })
         }

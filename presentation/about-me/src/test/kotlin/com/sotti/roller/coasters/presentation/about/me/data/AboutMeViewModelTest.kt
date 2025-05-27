@@ -51,7 +51,6 @@ internal class AboutMeViewModelTest {
             )
         }
 
-
         viewModel.onAction(openUrlAction)
 
         verify(exactly = 1) {
