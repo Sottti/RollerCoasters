@@ -84,7 +84,7 @@ internal fun AboutMeUi(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     key(lazyListState, scrollBehavior) { onListCreated(lazyListState, scrollBehavior) }
     val showTitleAfterIndex = 2
-    val showTitle by remember(lazyListState) {
+    val showTitle by remember {
         derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
     }
 

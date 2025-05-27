@@ -87,6 +87,7 @@ private fun Hyperlink(
     )
 
     val primaryColor = externalNavigationPrimaryColor(hyperlink.urlResId)
+
     ClickableText(
         modifier = Modifier.fillMaxWidth(),
         text = annotatedLinkString,
