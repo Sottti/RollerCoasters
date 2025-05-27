@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -51,37 +52,22 @@ public fun AboutMeUi(
     AboutMeUi(
         onAction = viewModel.onAction,
         onListCreated = { lazyListState, scrollBehavior ->
-            AboutMeUiEffects(
-                lazyListState = lazyListState,
-                onScrollToTop = onScrollToTop,
-                scrollBehavior = scrollBehavior,
-            )
+            val coroutineScope = rememberCoroutineScope()
+            val currentScrollBehavior by rememberUpdatedState(newValue = scrollBehavior)
+            LaunchedEffect(key1 = onScrollToTop) {
+                onScrollToTop {
+                    coroutineScope.launch {
+                        lazyListState.animateScrollToItem(0)
+                        currentScrollBehavior.state.contentOffset = 0f
+                    }
+                }
+            }
         },
         onNavigateToSettings = onNavigateToSettings,
         onShowBottomSheet = onShowBottomSheet,
         paddingValues = paddingValues,
         state = state,
     )
-}
-
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun AboutMeUiEffects(
-    lazyListState: LazyListState,
-    onScrollToTop: (() -> Unit) -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
-) {
-    val coroutineScope = rememberCoroutineScope()
-    val currentScrollBehavior by rememberUpdatedState(scrollBehavior)
-
-    LaunchedEffect(onScrollToTop) {
-        onScrollToTop {
-            coroutineScope.launch {
-                lazyListState.animateScrollToItem(0)
-                currentScrollBehavior.state.contentOffset = 0f
-            }
-        }
-    }
 }
 
 @Composable
@@ -96,17 +82,17 @@ internal fun AboutMeUi(
 ) {
     val lazyListState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    onListCreated(lazyListState, scrollBehavior)
+    key(lazyListState, scrollBehavior) { onListCreated(lazyListState, scrollBehavior) }
     val showTitleAfterIndex = 2
+    val showTitle by remember(lazyListState) {
+        derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
+    }
 
     val contentWindowInsets =
         ScaffoldDefaults
             .contentWindowInsets
             .only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
 
-    val showTitle by remember(lazyListState) {
-        derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
-    }
 
     Scaffold(
         modifier = Modifier

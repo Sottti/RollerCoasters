@@ -95,7 +95,12 @@ internal class RollerCoastersRepositoryImplTest {
     @Test
     fun `observing roller coaster with no local data fetches from remote and emits roller coaster`() =
         runTest {
-            coEvery { localDataSource.observeRollerCoaster(rollerCoasterId(), Metric) } returns flow {
+            coEvery {
+                localDataSource.observeRollerCoaster(
+                    rollerCoasterId(),
+                    Metric
+                )
+            } returns flow {
                 emit(null)
                 emit(rollerCoaster())
             }

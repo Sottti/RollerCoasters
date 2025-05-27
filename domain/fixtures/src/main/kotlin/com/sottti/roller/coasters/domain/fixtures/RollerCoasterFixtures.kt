@@ -61,7 +61,6 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.Resolv
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import java.time.LocalDate
-import kotlin.collections.listOf
 
 public fun parkId(): ParkId = ParkId(PARK_ID)
 

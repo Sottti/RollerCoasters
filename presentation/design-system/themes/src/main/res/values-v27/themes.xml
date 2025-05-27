@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.RollerCoasters" parent="Theme.RollerCoasters.Base">
         <!-- Only API-27-specific flags here -->
         <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
