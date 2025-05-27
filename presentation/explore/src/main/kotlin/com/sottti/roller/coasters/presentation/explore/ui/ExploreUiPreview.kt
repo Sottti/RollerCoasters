@@ -10,7 +10,7 @@ import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 @Composable
 @LightDarkThemePreview
 internal fun ExploreUiPreview(
-    @PreviewParameter(ExploreUiViewStateProvider::class)
+    @PreviewParameter(ExploreUiStateProvider::class)
     state: ExplorePreviewState,
 ) {
     RollerCoastersPreviewTheme {

@@ -141,7 +141,7 @@ internal fun AboutMeUi(
 @LightDarkThemePreview
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun AboutMeUiPreview(
-    @PreviewParameter(AboutMeUiViewStateProvider::class)
+    @PreviewParameter(AboutMeUiStateProvider::class)
     state: AboutMePreviewState,
 ) {
     RollerCoastersPreviewTheme {

@@ -11,8 +11,8 @@ import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 @Composable
 @LightDarkThemePreview
 internal fun ErrorUiPreview(
-    @PreviewParameter(ErrorUiViewStateProvider::class)
-    viewState: ErrorViewState?,
+    @PreviewParameter(ErrorUiStateProvider::class)
+    viewState: ErrorState?,
 ) {
     RollerCoastersPreviewTheme {
         when (viewState) {

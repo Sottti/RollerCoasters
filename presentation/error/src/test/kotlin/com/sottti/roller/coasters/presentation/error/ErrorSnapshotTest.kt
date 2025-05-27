@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class ErrorSnapshotTest(
     nightMode: NightMode,
-    private val state: ErrorViewState?,
+    private val state: ErrorState?,
 ) {
 
     @get:Rule
@@ -32,7 +32,7 @@ internal class ErrorSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any?>> =
-            ErrorUiViewStateProvider()
+            ErrorUiStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

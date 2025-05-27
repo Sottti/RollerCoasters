@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class InformativeSnapshotTest(
     nightMode: NightMode,
-    private val state: InformativeViewState,
+    private val state: InformativeState,
 ) {
 
     @get:Rule
@@ -32,7 +32,7 @@ internal class InformativeSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            InformativeUiViewStateProvider()
+            InformativeUiStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

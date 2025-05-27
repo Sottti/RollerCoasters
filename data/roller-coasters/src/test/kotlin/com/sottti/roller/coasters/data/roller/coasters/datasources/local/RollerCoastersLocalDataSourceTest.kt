@@ -56,7 +56,7 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoaster(rollerCoaster)
+        localDataSource.storeRollerCoaster(rollerCoaster())
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
@@ -76,7 +76,7 @@ internal class RollerCoastersLocalDataSourceTest {
             )
         } just runs
 
-        localDataSource.storeRollerCoasters(listOf(rollerCoaster, anotherRollerCoaster))
+        localDataSource.storeRollerCoasters(listOf(rollerCoaster(), anotherRollerCoaster()))
 
         coVerify(exactly = 1) {
             dao.insertRollerCoasters(
@@ -110,11 +110,11 @@ internal class RollerCoastersLocalDataSourceTest {
         val pictures = listOf(notMainPictureRoomModel)
 
         coEvery {
-            dao.observeRollerCoaster(rollerCoasterId.value)
+            dao.observeRollerCoaster(rollerCoasterId().value)
         } returns flowOf(rollerCoasterEntity)
-        coEvery { dao.observePictures(rollerCoasterId.value) } returns flowOf(pictures)
+        coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(pictures)
 
-        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId, Metric).toList()
+        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
         assertThat(emissions).hasSize(1)
         assertThat(emissions.first()).isEqualTo(rollerCoaster(Metric))
@@ -127,11 +127,11 @@ internal class RollerCoastersLocalDataSourceTest {
         val pictures = listOf(notMainPictureRoomModel)
 
         coEvery {
-            dao.observeRollerCoaster(rollerCoasterId.value)
+            dao.observeRollerCoaster(rollerCoasterId().value)
         } returns flowOf(rollerCoasterEntity)
-        coEvery { dao.observePictures(rollerCoasterId.value) } returns flowOf(pictures)
+        coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(pictures)
 
-        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId, ImperialUs).toList()
+        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId(), ImperialUs).toList()
 
         assertThat(emissions).hasSize(1)
         assertThat(emissions.first()).isEqualTo(rollerCoaster(ImperialUs))
@@ -143,12 +143,12 @@ internal class RollerCoastersLocalDataSourceTest {
         val rollerCoasterEntity = rollerCoasterRoomModel
         val pictures = listOf(notMainPictureRoomModel)
 
-        coEvery { dao.observeRollerCoaster(rollerCoasterId.value) } returns flowOf(
+        coEvery { dao.observeRollerCoaster(rollerCoasterId().value) } returns flowOf(
             rollerCoasterEntity
         )
-        coEvery { dao.observePictures(rollerCoasterId.value) } returns flowOf(pictures)
+        coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(pictures)
 
-        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId, ImperialUk).toList()
+        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId(), ImperialUk).toList()
 
         assertThat(emissions).hasSize(1)
         assertThat(emissions.first()).isEqualTo(rollerCoaster(ImperialUk))
@@ -157,10 +157,10 @@ internal class RollerCoastersLocalDataSourceTest {
     @Test
     @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster with invalid id emits null`() = runTest {
-        coEvery { dao.observeRollerCoaster(rollerCoasterId.value) } returns flowOf(null)
-        coEvery { dao.observePictures(rollerCoasterId.value) } returns flowOf(emptyList())
+        coEvery { dao.observeRollerCoaster(rollerCoasterId().value) } returns flowOf(null)
+        coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(emptyList())
 
-        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId, Metric).toList()
+        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
         assertThat(emissions).hasSize(1)
         assertThat(emissions.first()).isNull()
@@ -170,17 +170,17 @@ internal class RollerCoastersLocalDataSourceTest {
     @OptIn(InternalSerializationApi::class)
     fun `observing coaster with no pictures emits roller coaster with empty pictures`() = runTest {
         coEvery {
-            dao.observeRollerCoaster(rollerCoasterId.value)
+            dao.observeRollerCoaster(rollerCoasterId().value)
         } returns flowOf(rollerCoasterRoomModel)
-        coEvery { dao.observePictures(rollerCoasterId.value) } returns flowOf(emptyList())
+        coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(emptyList())
 
-        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId, Metric).toList()
+        val emissions = localDataSource.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
         assertThat(emissions).hasSize(1)
         assertThat(emissions.first()).isEqualTo(
-            rollerCoaster.copy(
+            rollerCoaster().copy(
                 pictures = Pictures(
-                    main = mainPicture,
+                    main = mainPicture(),
                     other = emptyList()
                 )
             )
@@ -193,17 +193,17 @@ internal class RollerCoastersLocalDataSourceTest {
         val initialRollerCoasterEntity = rollerCoasterRoomModel
         val updatedRollerCoasterEntity = anotherRollerCoasterRoomModel
 
-        coEvery { dao.observeRollerCoaster(rollerCoasterId.value) } returns flow {
+        coEvery { dao.observeRollerCoaster(rollerCoasterId().value) } returns flow {
             emit(initialRollerCoasterEntity)
             emit(updatedRollerCoasterEntity)
         }
         coEvery {
-            dao.observePictures(rollerCoasterId.value)
+            dao.observePictures(rollerCoasterId().value)
         } returns flowOf(emptyList())
 
         val emissions =
             localDataSource
-                .observeRollerCoaster(rollerCoasterId, Metric).take(2)
+                .observeRollerCoaster(rollerCoasterId(), Metric).take(2)
                 .toList()
 
         assertThat(emissions).hasSize(2)
@@ -218,24 +218,24 @@ internal class RollerCoastersLocalDataSourceTest {
         val updatedPictures = listOf(notMainPictureRoomModel, anotherNotMainPictureRoomModel)
 
         coEvery {
-            dao.observeRollerCoaster(rollerCoasterId.value)
+            dao.observeRollerCoaster(rollerCoasterId().value)
         } returns flowOf(rollerCoasterRoomModel)
-        coEvery { dao.observePictures(rollerCoasterId.value) } returns flow {
+        coEvery { dao.observePictures(rollerCoasterId().value) } returns flow {
             emit(initialPictures)
             emit(updatedPictures)
         }
 
         val emissions =
             localDataSource
-                .observeRollerCoaster(rollerCoasterId, Metric).take(2)
+                .observeRollerCoaster(rollerCoasterId(), Metric).take(2)
                 .toList()
 
         assertThat(emissions).hasSize(2)
-        assertThat(emissions[0]).isEqualTo(rollerCoaster)
+        assertThat(emissions[0]).isEqualTo(rollerCoaster())
         assertThat(emissions[1]).isEqualTo(
-            rollerCoaster.copy(
-                pictures = rollerCoaster.pictures.copy(
-                    other = listOf(notMainPicture, anotherNotMainPicture)
+            rollerCoaster().copy(
+                pictures = rollerCoaster().pictures.copy(
+                    other = listOf(notMainPicture(), anotherNotMainPicture())
                 ),
             )
         )

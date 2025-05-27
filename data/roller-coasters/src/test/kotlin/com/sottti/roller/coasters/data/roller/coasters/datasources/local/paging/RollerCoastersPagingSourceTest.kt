@@ -137,7 +137,7 @@ internal class RollerCoastersPagingSourceTest {
         val state = PagingState(
             pages = listOf(
                 PagingSource.LoadResult.Page(
-                    data = listOf(rollerCoaster, anotherRollerCoaster),
+                    data = listOf(rollerCoaster(), anotherRollerCoaster()),
                     prevKey = 2,
                     nextKey = null,
                 )
@@ -157,7 +157,7 @@ internal class RollerCoastersPagingSourceTest {
         val state = PagingState(
             pages = listOf(
                 PagingSource.LoadResult.Page(
-                    data = listOf(rollerCoaster),
+                    data = listOf(rollerCoaster()),
                     prevKey = null,
                     nextKey = 2,
                 )

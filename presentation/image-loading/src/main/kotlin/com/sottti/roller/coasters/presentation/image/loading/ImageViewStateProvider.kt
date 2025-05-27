@@ -4,12 +4,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.fixtures.fixtureContentDescription
 import com.sottti.roller.coasters.presentation.fixtures.fixtureImageUrl
 
-internal class ImageViewStateProvider :
-    PreviewParameterProvider<ImageViewState> {
-    override val values: Sequence<ImageViewState> =
+internal class ImageStateProvider :
+    PreviewParameterProvider<ImageState> {
+    override val values: Sequence<ImageState> =
         buildList {
             add(
-                ImageViewState(
+                ImageState(
                     contentDescription = fixtureContentDescription,
                     foreverLoading = true,
                     imageUrl = fixtureImageUrl,
@@ -18,7 +18,7 @@ internal class ImageViewStateProvider :
             )
             roundedCornersValues.forEach { roundedCorners ->
                 add(
-                    ImageViewState(
+                    ImageState(
                         contentDescription = fixtureContentDescription,
                         foreverLoading = false,
                         imageUrl = fixtureImageUrl,

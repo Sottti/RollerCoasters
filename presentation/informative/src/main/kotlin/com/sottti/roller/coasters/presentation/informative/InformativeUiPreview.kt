@@ -12,8 +12,8 @@ import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 @Composable
 @LightDarkThemePreview
 internal fun InformativeUiPreview(
-    @PreviewParameter(InformativeUiViewStateProvider::class)
-    viewState: InformativeViewState,
+    @PreviewParameter(InformativeUiStateProvider::class)
+    viewState: InformativeState,
 ) {
     RollerCoastersPreviewTheme {
         InformativeUi(

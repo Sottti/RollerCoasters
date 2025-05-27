@@ -21,27 +21,27 @@ import com.sottti.roller.coasters.domain.fixtures.RELOCATIONS
 import com.sottti.roller.coasters.domain.fixtures.SPEED
 import com.sottti.roller.coasters.domain.fixtures.coordinates
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationCoordinatesViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterIdentityState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationCoordinatesState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterRideState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterStatusState
 
 internal val rollerCoasterDetailsMaxedOut =
-    RollerCoasterDetailsRollerCoasterViewState(
-        identity = identityMaxedOutViewState(),
+    RollerCoasterDetailsRollerCoasterState(
+        identity = identityMaxedOutState(),
         images = emptyList(),
-        location = locationMaxedOutViewState(),
-        ride = specsMaxedOutViewState(),
-        status = statusMaxedOutViewState(),
+        location = locationMaxedOutState(),
+        ride = specsMaxedOutState(),
+        status = statusMaxedOutState(),
     )
 
-private fun locationMaxedOutViewState(): RollerCoasterLocationViewState =
-    RollerCoasterLocationViewState(
+private fun locationMaxedOutState(): RollerCoasterLocationState =
+    RollerCoasterLocationState(
         city = city(),
-        coordinates = coordinates(),
+        coordinates = rollerCoasterLocationCoordinates(),
         country = country(),
         header = R.string.location_header,
         mapMarkerTitle = COASTER_NAME,
@@ -49,8 +49,8 @@ private fun locationMaxedOutViewState(): RollerCoasterLocationViewState =
         relocations = relocations(),
     )
 
-private fun identityMaxedOutViewState(): RollerCoasterIdentityViewState =
-    RollerCoasterIdentityViewState(
+private fun identityMaxedOutState(): RollerCoasterIdentityState =
+    RollerCoasterIdentityState(
         header = R.string.identity_header,
         name = RollerCoasterDetailsRow(
             trailing = COASTER_NAME_THIRD,
@@ -59,8 +59,8 @@ private fun identityMaxedOutViewState(): RollerCoasterIdentityViewState =
         formerNames = formerNames(),
     )
 
-private fun statusMaxedOutViewState(): RollerCoasterStatusViewState =
-    RollerCoasterStatusViewState(
+private fun statusMaxedOutState(): RollerCoasterStatusState =
+    RollerCoasterStatusState(
         header = R.string.status_header,
         closedDate = closedDate(),
         current = currentStatus(),
@@ -68,8 +68,8 @@ private fun statusMaxedOutViewState(): RollerCoasterStatusViewState =
         openedDate = openedDate(),
     )
 
-private fun specsMaxedOutViewState() =
-    RollerCoasterRideViewState(
+private fun specsMaxedOutState() =
+    RollerCoasterRideState(
         drop = drop(),
         duration = duration(),
         gForce = gForce(),
@@ -166,8 +166,8 @@ private fun city(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
     headline = R.string.location_city,
 )
 
-private fun coordinates(): RollerCoasterLocationCoordinatesViewState =
-    RollerCoasterLocationCoordinatesViewState(
-        latitude = coordinates.latitude.value,
-        longitude = coordinates.longitude.value,
+private fun rollerCoasterLocationCoordinates(): RollerCoasterLocationCoordinatesState =
+    RollerCoasterLocationCoordinatesState(
+        latitude = coordinates().latitude.value,
+        longitude = coordinates().longitude.value,
     )

@@ -4,13 +4,13 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.domain.model.ImageUrl
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterIdentityState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterRideState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterStatusState
 
 @Immutable
-internal data class RollerCoasterDetailsViewState(
+internal data class RollerCoasterDetailsState(
     val content: RollerCoasterDetailsContentState,
     val topBar: TopBarState,
 )
@@ -32,7 +32,7 @@ internal sealed class FavouriteIconState {
 internal sealed class RollerCoasterDetailsContentState {
     @Immutable
     data class Loaded(
-        val rollerCoaster: RollerCoasterDetailsRollerCoasterViewState,
+        val rollerCoaster: RollerCoasterDetailsRollerCoasterState,
     ) : RollerCoasterDetailsContentState()
 
     @Immutable
@@ -43,59 +43,59 @@ internal sealed class RollerCoasterDetailsContentState {
 }
 
 @Immutable
-internal data class RollerCoasterDetailsRollerCoasterViewState(
-    val images: List<RollerCoasterDetailsImageViewState>?,
-    val identity: RollerCoasterIdentityViewState,
-    val location: RollerCoasterLocationViewState,
-    val ride: RollerCoasterRideViewState?,
-    val status: RollerCoasterStatusViewState?,
+internal data class RollerCoasterDetailsRollerCoasterState(
+    val images: List<RollerCoasterDetailsImageState>?,
+    val identity: RollerCoasterIdentityState,
+    val location: RollerCoasterLocationState,
+    val ride: RollerCoasterRideState?,
+    val status: RollerCoasterStatusState?,
 )
 
 @Immutable
-internal data class RollerCoasterDetailsImageViewState(
+internal data class RollerCoasterDetailsImageState(
     val contentDescription: String,
     val imageUrl: ImageUrl,
 )
 
 @Immutable
-internal sealed class RollerCoasterDetailsSectionViewState(
+internal sealed class RollerCoasterDetailsSectionState(
     @StringRes open val header: Int,
 ) {
     @Immutable
-    internal data class RollerCoasterIdentityViewState(
+    internal data class RollerCoasterIdentityState(
         override val header: Int,
         val formerNames: RollerCoasterDetailsRow?,
         val name: RollerCoasterDetailsRow,
-    ) : RollerCoasterDetailsSectionViewState(header)
+    ) : RollerCoasterDetailsSectionState(header)
 
     @Immutable
-    internal data class RollerCoasterStatusViewState(
+    internal data class RollerCoasterStatusState(
         override val header: Int,
         val closedDate: RollerCoasterDetailsRow?,
         val current: RollerCoasterDetailsRow?,
         val former: RollerCoasterDetailsRow?,
         val openedDate: RollerCoasterDetailsRow?,
-    ) : RollerCoasterDetailsSectionViewState(header)
+    ) : RollerCoasterDetailsSectionState(header)
 
     @Immutable
-    internal data class RollerCoasterLocationViewState(
+    internal data class RollerCoasterLocationState(
         override val header: Int,
         val city: RollerCoasterDetailsRow,
-        val coordinates: RollerCoasterLocationCoordinatesViewState?,
+        val coordinates: RollerCoasterLocationCoordinatesState?,
         val country: RollerCoasterDetailsRow,
         val mapMarkerTitle: String,
         val park: RollerCoasterDetailsRow,
         val relocations: RollerCoasterDetailsRow?,
-    ) : RollerCoasterDetailsSectionViewState(header)
+    ) : RollerCoasterDetailsSectionState(header)
 
     @Immutable
-    internal data class RollerCoasterLocationCoordinatesViewState(
+    internal data class RollerCoasterLocationCoordinatesState(
         val latitude: Double,
         val longitude: Double,
     )
 
     @Immutable
-    internal data class RollerCoasterRideViewState(
+    internal data class RollerCoasterRideState(
         override val header: Int,
         val drop: RollerCoasterDetailsRow?,
         val duration: RollerCoasterDetailsRow?,
@@ -105,7 +105,7 @@ internal sealed class RollerCoasterDetailsSectionViewState(
         val length: RollerCoasterDetailsRow?,
         val maxVertical: RollerCoasterDetailsRow?,
         val speed: RollerCoasterDetailsRow?,
-    ) : RollerCoasterDetailsSectionViewState(header)
+    ) : RollerCoasterDetailsSectionState(header)
 }
 
 @Immutable

@@ -20,20 +20,20 @@ import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.FavouriteIconState.Loaded
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationCoordinatesViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterIdentityState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationCoordinatesState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterRideState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterStatusState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.Locale
 
-internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateRollerCoaster(
+internal fun MutableStateFlow<RollerCoasterDetailsState>.updateRollerCoaster(
     appLanguage: AppLanguage,
     dateFormatter: DateFormatter,
     rollerCoaster: RollerCoaster,
@@ -58,7 +58,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateRollerCoaster
     }
 }
 
-internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateIsFavouriteRollerCoaster(
+internal fun MutableStateFlow<RollerCoasterDetailsState>.updateIsFavouriteRollerCoaster(
     favourite: Boolean,
 ) {
     update { currentState ->
@@ -76,24 +76,24 @@ internal fun MutableStateFlow<RollerCoasterDetailsViewState>.updateIsFavouriteRo
 private fun RollerCoaster.toRollerCoasterDetails(
     dateFormatter: DateFormatter,
     formatContext: FormatContext,
-): RollerCoasterDetailsRollerCoasterViewState =
-    RollerCoasterDetailsRollerCoasterViewState(
-        images = pictures.toImagesViewState(),
-        identity = toIdentityViewState(),
-        location = toLocationViewState(),
-        ride = specs.ride?.toRideViewState(formatContext),
-        status = status.toStatusViewState(dateFormatter),
+): RollerCoasterDetailsRollerCoasterState =
+    RollerCoasterDetailsRollerCoasterState(
+        images = pictures.toImagesState(),
+        identity = toIdentityState(),
+        location = toLocationState(),
+        ride = specs.ride?.toRideState(formatContext),
+        status = status.toStatusState(dateFormatter),
     )
 
-private fun Pictures.toImagesViewState() =
+private fun Pictures.toImagesState() =
     buildList {
         add(main)
         addAll(other)
     }.filterNotNull()
-        .map { RollerCoasterDetailsImageViewState("", it.url) }
+        .map { RollerCoasterDetailsImageState("", it.url) }
 
-private fun RollerCoaster.toIdentityViewState() =
-    RollerCoasterIdentityViewState(
+private fun RollerCoaster.toIdentityState() =
+    RollerCoasterIdentityState(
         header = R.string.identity_header,
         name = RollerCoasterDetailsRow(
             headline = R.string.identity_name,
@@ -107,9 +107,9 @@ private fun RollerCoaster.toIdentityViewState() =
         }
     )
 
-private fun Status.toStatusViewState(
+private fun Status.toStatusState(
     dateFormatter: DateFormatter,
-) = RollerCoasterStatusViewState(
+) = RollerCoasterStatusState(
     header = R.string.status_header,
     closedDate = closedDate?.date?.let {
         RollerCoasterDetailsRow(
@@ -137,10 +137,10 @@ private fun Status.toStatusViewState(
     },
 ).takeIf { containsData() }
 
-private fun RollerCoaster.toLocationViewState() =
-    RollerCoasterLocationViewState(
+private fun RollerCoaster.toLocationState() =
+    RollerCoasterLocationState(
         coordinates = location.coordinates?.let { coordinates ->
-            RollerCoasterLocationCoordinatesViewState(
+            RollerCoasterLocationCoordinatesState(
                 longitude = coordinates.longitude.value,
                 latitude = coordinates.latitude.value,
             )
@@ -167,17 +167,17 @@ private fun RollerCoaster.toLocationViewState() =
         },
     )
 
-private fun Ride.toRideViewState(
+private fun Ride.toRideState(
     formatContext: FormatContext,
-): RollerCoasterRideViewState = when (this) {
-    is SingleTrackRide -> toSingleTrackRideViewState(formatContext)
+): RollerCoasterRideState = when (this) {
+    is SingleTrackRide -> toSingleTrackRideState(formatContext)
     is MultiTrackRide -> TODO()
 }
 
-private fun SingleTrackRide.toSingleTrackRideViewState(
+private fun SingleTrackRide.toSingleTrackRideState(
     formatContext: FormatContext,
 ) =
-    RollerCoasterRideViewState(
+    RollerCoasterRideState(
         header = R.string.ride_header,
         length = length?.let {
             RollerCoasterDetailsRow(

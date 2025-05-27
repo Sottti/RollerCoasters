@@ -13,7 +13,7 @@ internal class RollerCoastersApiMapperTest {
     @Test
     fun `map roller coaster api model to domain model when metric system`() {
         val result = rollerCoasterApiModel.toDomain(Metric)
-        assertThat(result).isEqualTo(rollerCoaster)
+        assertThat(result).isEqualTo(rollerCoaster())
     }
 
     @Test

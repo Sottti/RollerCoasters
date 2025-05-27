@@ -29,19 +29,19 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.map.Map
 import com.sottti.roller.coasters.presentation.image.loading.Image
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterIdentityViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterLocationViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterRideViewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionViewState.RollerCoasterStatusViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterIdentityState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterRideState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterStatusState
 import androidx.compose.material3.ListItem as ListItemMaterial
 
 @Composable
 internal fun RollerCoasterDetails(
-    rollerCoaster: RollerCoasterDetailsRollerCoasterViewState,
+    rollerCoaster: RollerCoasterDetailsRollerCoasterState,
     paddingValues: PaddingValues,
     nestedScrollConnection: NestedScrollConnection,
 ) {
@@ -65,7 +65,7 @@ internal fun RollerCoasterDetails(
 
 @Composable
 internal fun RollerCoasterImagesSection(
-    images: List<RollerCoasterDetailsImageViewState>,
+    images: List<RollerCoasterDetailsImageState>,
 ) {
     val pagerState = rememberPagerState { images.size }
     val carouselHeight = (LocalWindowInfo.current.containerSize.height * 0.25f).dp
@@ -92,22 +92,22 @@ internal fun RollerCoasterImagesSection(
 
 @Composable
 internal fun RollerCoasterDetailsSection(
-    details: RollerCoasterDetailsSectionViewState,
+    details: RollerCoasterDetailsSectionState,
 ) {
     Column(modifier = Modifier.padding(horizontal = dimensions.padding.medium)) {
         Header(details.header)
         Spacer(modifier = Modifier.height(dimensions.padding.smallMedium))
         when (details) {
-            is RollerCoasterIdentityViewState -> IdentityDetails(details)
-            is RollerCoasterLocationViewState -> LocationDetails(details)
-            is RollerCoasterRideViewState -> RideDetails(details)
-            is RollerCoasterStatusViewState -> StatusDetails(details)
+            is RollerCoasterIdentityState -> IdentityDetails(details)
+            is RollerCoasterLocationState -> LocationDetails(details)
+            is RollerCoasterRideState -> RideDetails(details)
+            is RollerCoasterStatusState -> StatusDetails(details)
         }
     }
 }
 
 @Composable
-internal fun RideDetails(details: RollerCoasterRideViewState) {
+internal fun RideDetails(details: RollerCoasterRideState) {
     val items = listOfNotNull(
         details.height,
         details.drop,
@@ -127,7 +127,7 @@ internal fun RideDetails(details: RollerCoasterRideViewState) {
 }
 
 @Composable
-internal fun IdentityDetails(state: RollerCoasterIdentityViewState) {
+internal fun IdentityDetails(state: RollerCoasterIdentityState) {
     val items = listOfNotNull(state.name, state.formerNames)
 
     DetailsCard {
@@ -138,7 +138,7 @@ internal fun IdentityDetails(state: RollerCoasterIdentityViewState) {
 }
 
 @Composable
-internal fun StatusDetails(state: RollerCoasterStatusViewState) {
+internal fun StatusDetails(state: RollerCoasterStatusState) {
     val items = listOfNotNull(state.current, state.former, state.openedDate, state.closedDate)
 
     DetailsCard {
@@ -149,7 +149,7 @@ internal fun StatusDetails(state: RollerCoasterStatusViewState) {
 }
 
 @Composable
-internal fun LocationDetails(state: RollerCoasterLocationViewState) {
+internal fun LocationDetails(state: RollerCoasterLocationState) {
     DetailsCard {
         state.coordinates?.let {
             Map(

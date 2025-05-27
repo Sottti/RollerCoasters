@@ -42,12 +42,12 @@ internal class ObserveRollerCoasterTest {
         every { observeResolvedMeasurementSystem() } returns flowOf(Metric)
         every {
             rollerCoastersRepository.observeRollerCoaster(
-                id = rollerCoasterId,
+                id = rollerCoasterId(),
                 measurementSystem = Metric,
             )
         } returns flowOf(metricRollerCoaster)
 
-        val result = observeRollerCoaster(rollerCoasterId).toList()
+        val result = observeRollerCoaster(rollerCoasterId()).toList()
 
         assertThat(result).containsExactly(metricRollerCoaster)
     }
@@ -58,12 +58,12 @@ internal class ObserveRollerCoasterTest {
         every { observeResolvedMeasurementSystem() } returns flowOf(ImperialUk)
         every {
             rollerCoastersRepository.observeRollerCoaster(
-                id = rollerCoasterId,
+                id = rollerCoasterId(),
                 measurementSystem = ImperialUk,
             )
         } returns flowOf(imperialUkRollerCoaster)
 
-        val result = observeRollerCoaster(rollerCoasterId).toList()
+        val result = observeRollerCoaster(rollerCoasterId()).toList()
 
         assertThat(result).containsExactly(imperialUkRollerCoaster)
     }
@@ -74,12 +74,12 @@ internal class ObserveRollerCoasterTest {
         every { observeResolvedMeasurementSystem() } returns flowOf(ImperialUs)
         every {
             rollerCoastersRepository.observeRollerCoaster(
-                id = rollerCoasterId,
+                id = rollerCoasterId(),
                 measurementSystem = ImperialUs,
             )
         } returns flowOf(imperialUsRollerCoaster)
 
-        val result = observeRollerCoaster(rollerCoasterId).toList()
+        val result = observeRollerCoaster(rollerCoasterId()).toList()
 
         assertThat(result).containsExactly(imperialUsRollerCoaster)
     }
@@ -96,24 +96,24 @@ internal class ObserveRollerCoasterTest {
         }
         every {
             rollerCoastersRepository.observeRollerCoaster(
-                id = rollerCoasterId,
+                id = rollerCoasterId(),
                 measurementSystem = Metric,
             )
         } returns flowOf(metricRollerCoaster)
         every {
             rollerCoastersRepository.observeRollerCoaster(
-                id = rollerCoasterId,
+                id = rollerCoasterId(),
                 measurementSystem = ImperialUk,
             )
         } returns flowOf(imperialUkRollerCoaster)
         every {
             rollerCoastersRepository.observeRollerCoaster(
-                id = rollerCoasterId,
+                id = rollerCoasterId(),
                 measurementSystem = ImperialUs,
             )
         } returns flowOf(imperialUsRollerCoaster)
 
-        val result = observeRollerCoaster(rollerCoasterId).take(2).toList()
+        val result = observeRollerCoaster(rollerCoasterId()).take(2).toList()
 
         assertThat(result)
             .containsExactly(metricRollerCoaster, imperialUkRollerCoaster, imperialUsRollerCoaster)

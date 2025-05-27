@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLo
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsViewState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,7 +35,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState())
-    internal val state: StateFlow<RollerCoasterDetailsViewState> = _state.asStateFlow()
+    internal val state: StateFlow<RollerCoasterDetailsState> = _state.asStateFlow()
 
     init {
         combine(

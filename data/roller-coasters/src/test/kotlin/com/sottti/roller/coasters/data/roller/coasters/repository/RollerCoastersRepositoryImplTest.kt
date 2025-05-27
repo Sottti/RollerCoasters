@@ -58,12 +58,12 @@ internal class RollerCoastersRepositoryImplTest {
     fun `observing roller coaster with local data emits roller coaster for metric system`() =
         runTest {
             coEvery {
-                localDataSource.observeRollerCoaster(rollerCoasterId, Metric)
-            } returns flowOf(rollerCoaster)
+                localDataSource.observeRollerCoaster(rollerCoasterId(), Metric)
+            } returns flowOf(rollerCoaster())
 
-            val emissions = repository.observeRollerCoaster(rollerCoasterId, Metric).toList()
+            val emissions = repository.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
-            assertThat(emissions).containsExactly(rollerCoaster)
+            assertThat(emissions).containsExactly(rollerCoaster())
         }
 
     @Test
@@ -71,10 +71,10 @@ internal class RollerCoastersRepositoryImplTest {
         runTest {
             val imperialRollerCoaster = rollerCoaster(ImperialUs)
             coEvery {
-                localDataSource.observeRollerCoaster(rollerCoasterId, ImperialUs)
+                localDataSource.observeRollerCoaster(rollerCoasterId(), ImperialUs)
             } returns flowOf(imperialRollerCoaster)
 
-            val emissions = repository.observeRollerCoaster(rollerCoasterId, ImperialUs).toList()
+            val emissions = repository.observeRollerCoaster(rollerCoasterId(), ImperialUs).toList()
 
             assertThat(emissions).containsExactly(imperialRollerCoaster)
         }
@@ -84,10 +84,10 @@ internal class RollerCoastersRepositoryImplTest {
         runTest {
             val imperialRollerCoaster = rollerCoaster(ImperialUk)
             coEvery {
-                localDataSource.observeRollerCoaster(rollerCoasterId, ImperialUk)
+                localDataSource.observeRollerCoaster(rollerCoasterId(), ImperialUk)
             } returns flowOf(imperialRollerCoaster)
 
-            val emissions = repository.observeRollerCoaster(rollerCoasterId, ImperialUk).toList()
+            val emissions = repository.observeRollerCoaster(rollerCoasterId(), ImperialUk).toList()
 
             assertThat(emissions).containsExactly(imperialRollerCoaster)
         }
@@ -95,54 +95,54 @@ internal class RollerCoastersRepositoryImplTest {
     @Test
     fun `observing roller coaster with no local data fetches from remote and emits roller coaster`() =
         runTest {
-            coEvery { localDataSource.observeRollerCoaster(rollerCoasterId, Metric) } returns flow {
+            coEvery { localDataSource.observeRollerCoaster(rollerCoasterId(), Metric) } returns flow {
                 emit(null)
-                emit(rollerCoaster)
+                emit(rollerCoaster())
             }
             coEvery {
-                remoteDataSource.getRollerCoaster(rollerCoasterId, Metric)
-            } returns Ok(rollerCoaster)
-            coEvery { localDataSource.storeRollerCoaster(rollerCoaster) } just runs
+                remoteDataSource.getRollerCoaster(rollerCoasterId(), Metric)
+            } returns Ok(rollerCoaster())
+            coEvery { localDataSource.storeRollerCoaster(rollerCoaster()) } just runs
 
-            val emissions = repository.observeRollerCoaster(rollerCoasterId, Metric).toList()
+            val emissions = repository.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
-            assertThat(emissions).containsExactly(rollerCoaster)
+            assertThat(emissions).containsExactly(rollerCoaster())
         }
 
     @Test
     fun `observing roller coaster with no local data and remote failure emits nothing`() = runTest {
         coEvery {
-            localDataSource.observeRollerCoaster(rollerCoasterId, Metric)
+            localDataSource.observeRollerCoaster(rollerCoasterId(), Metric)
         } returns flowOf(null)
         coEvery {
-            remoteDataSource.getRollerCoaster(rollerCoasterId, Metric)
+            remoteDataSource.getRollerCoaster(rollerCoasterId(), Metric)
         } returns Err(syncFailedException)
 
-        val emissions = repository.observeRollerCoaster(rollerCoasterId, Metric).toList()
+        val emissions = repository.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
         assertThat(emissions).isEmpty()
     }
 
     @Test
     fun `observing roller coaster reacts to local data update after remote fetch`() = runTest {
-        coEvery { localDataSource.observeRollerCoaster(rollerCoasterId, Metric) } returns flow {
+        coEvery { localDataSource.observeRollerCoaster(rollerCoasterId(), Metric) } returns flow {
             emit(null)
-            emit(rollerCoaster)
-            emit(anotherRollerCoaster)
+            emit(rollerCoaster())
+            emit(anotherRollerCoaster())
         }
-        coEvery { remoteDataSource.getRollerCoaster(rollerCoasterId, Metric) } returns Ok(
-            rollerCoaster
+        coEvery { remoteDataSource.getRollerCoaster(rollerCoasterId(), Metric) } returns Ok(
+            rollerCoaster()
         )
-        coEvery { localDataSource.storeRollerCoaster(rollerCoaster) } just runs
+        coEvery { localDataSource.storeRollerCoaster(rollerCoaster()) } just runs
 
-        val emissions = repository.observeRollerCoaster(rollerCoasterId, Metric).toList()
+        val emissions = repository.observeRollerCoaster(rollerCoasterId(), Metric).toList()
 
-        assertThat(emissions).containsExactly(rollerCoaster, anotherRollerCoaster)
+        assertThat(emissions).containsExactly(rollerCoaster(), anotherRollerCoaster())
     }
 
     @Test
     fun `sync roller coasters calls remote and stores data`() = runTest {
-        val rollerCoasters = listOf(rollerCoaster, anotherRollerCoaster)
+        val rollerCoasters = listOf(rollerCoaster(), anotherRollerCoaster())
 
         coEvery {
             remoteDataSource.syncRollerCoasters(onStoreRollerCoasters = any())

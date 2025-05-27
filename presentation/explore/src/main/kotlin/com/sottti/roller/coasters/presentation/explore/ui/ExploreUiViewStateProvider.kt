@@ -13,7 +13,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaste
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-internal class ExploreUiViewStateProvider : PreviewParameterProvider<ExplorePreviewState> {
+internal class ExploreUiStateProvider : PreviewParameterProvider<ExplorePreviewState> {
     override val values: Sequence<ExplorePreviewState> = sequenceOf(
         loadingState,
         loadedStateAppendLoading,

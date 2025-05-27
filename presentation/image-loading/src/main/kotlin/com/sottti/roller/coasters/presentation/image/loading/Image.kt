@@ -81,8 +81,8 @@ private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 @Composable
 @LightDarkThemePreview
 private fun ImagePreview(
-    @PreviewParameter(ImageViewStateProvider::class)
-    viewState: ImageViewState,
+    @PreviewParameter(ImageStateProvider::class)
+    viewState: ImageState,
 ) {
     RollerCoastersPreviewTheme {
         Image(

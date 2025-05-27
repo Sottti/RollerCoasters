@@ -33,26 +33,26 @@ internal class RollerCoastersRemoteDataSourceTest {
 
     @Test
     fun `Get roller coaster - API returns success`() = runTest {
-        coEvery { api.getRollerCoaster(rollerCoasterId) } returns Ok(rollerCoasterApiModel)
+        coEvery { api.getRollerCoaster(rollerCoasterId()) } returns Ok(rollerCoasterApiModel)
 
-        val result = dataSource.getRollerCoaster(id = rollerCoasterId, measurementSystem = Metric)
+        val result = dataSource.getRollerCoaster(id = rollerCoasterId(), measurementSystem = Metric)
 
         assertThat(result.isOk).isTrue()
-        assertThat(result.value).isEqualTo(rollerCoaster)
+        assertThat(result.value).isEqualTo(rollerCoaster())
 
-        coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId) }
+        coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId()) }
     }
 
     @Test
     fun `Get roller coaster - API returns error`() = runTest {
-        coEvery { api.getRollerCoaster(rollerCoasterId) } returns Err(noInterNetException)
+        coEvery { api.getRollerCoaster(rollerCoasterId()) } returns Err(noInterNetException)
 
-        val result = dataSource.getRollerCoaster(id = rollerCoasterId, measurementSystem = Metric)
+        val result = dataSource.getRollerCoaster(id = rollerCoasterId(), measurementSystem = Metric)
 
         assertThat(result.isErr).isTrue()
         assertThat(result.error.message).isEqualTo(noInterNetException.message)
 
-        coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId) }
+        coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId()) }
     }
 
     @Test
@@ -107,7 +107,7 @@ internal class RollerCoastersRemoteDataSourceTest {
         val result = dataSource.syncRollerCoasters(onStore)
 
         assertThat(result).isEqualTo(Ok(Unit))
-        assertThat(storedCoasters.flatten().first()).isEqualTo(rollerCoaster)
+        assertThat(storedCoasters.flatten().first()).isEqualTo(rollerCoaster())
 
         coVerify(exactly = 2) { api.getRollerCoasters(offset = any(), limit = any()) }
     }

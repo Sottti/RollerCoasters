@@ -11,8 +11,8 @@ import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 @Composable
 @LightDarkThemePreview
 internal fun EmptyUiPreview(
-    @PreviewParameter(EmptyUiViewStateProvider::class)
-    viewState: EmptyViewState?,
+    @PreviewParameter(EmptyUiStateProvider::class)
+    viewState: EmptyState?,
 ) {
     RollerCoastersPreviewTheme {
         when (viewState) {
