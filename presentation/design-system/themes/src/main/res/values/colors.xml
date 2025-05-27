@@ -4,25 +4,25 @@
     <color name="primary">#4C662B</color>
     <color name="onPrimary">#FFFFFF</color>
     <color name="primaryContainer">#CDEDA3</color>
-    <color name="onPrimaryContainer">#102000</color>
+    <color name="onPrimaryContainer">#354E16</color>
 
     <!-- Secondary Colors -->
     <color name="secondary">#586249</color>
     <color name="onSecondary">#FFFFFF</color>
     <color name="secondaryContainer">#DCE7C8</color>
-    <color name="onSecondaryContainer">#151E0B</color>
+    <color name="onSecondaryContainer">#404A33</color>
 
     <!-- Tertiary Colors -->
     <color name="tertiary">#386663</color>
     <color name="onTertiary">#FFFFFF</color>
     <color name="tertiaryContainer">#BCECE7</color>
-    <color name="onTertiaryContainer">#00201E</color>
+    <color name="onTertiaryContainer">#1F4E4B</color>
 
     <!-- Error Colors -->
     <color name="error">#BA1A1A</color>
     <color name="onError">#FFFFFF</color>
     <color name="errorContainer">#FFDAD6</color>
-    <color name="onErrorContainer">#410002</color>
+    <color name="onErrorContainer">#93000A</color>
 
     <!-- Background & Surface -->
     <color name="background">#F9FAEF</color>
