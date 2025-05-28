@@ -5,10 +5,10 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi
-import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi.ImperialUK
-import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi.ImperialUS
-import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi.Metric
-import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi.SystemApp
+import com.sottti.roller.coasters.presentation.settings.model.ImperialUk
+import com.sottti.roller.coasters.presentation.settings.model.ImperialUs
+import com.sottti.roller.coasters.presentation.settings.model.Metric
+import com.sottti.roller.coasters.presentation.settings.model.SystemApp
 
 internal fun AppMeasurementSystemUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)
@@ -30,8 +30,8 @@ internal fun AppMeasurementSystem.toPresentationModel(
 
 internal fun AppMeasurementSystemUi.toDomain(): AppMeasurementSystem =
     when (this) {
-        is ImperialUK -> AppMeasurementSystem.ImperialUk
-        is ImperialUS -> AppMeasurementSystem.ImperialUs
+        is ImperialUk -> AppMeasurementSystem.ImperialUk
+        is ImperialUs -> AppMeasurementSystem.ImperialUs
         is Metric -> AppMeasurementSystem.Metric
         is SystemApp -> AppMeasurementSystem.System
     }
@@ -47,7 +47,7 @@ private fun system(
 
 private fun imperialUK(
     selected: Boolean,
-): ImperialUK = ImperialUK(
+): ImperialUk = ImperialUk(
     text = R.string.measurement_system_imperial_united_kingdom,
     icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
     selected = selected,
@@ -55,7 +55,7 @@ private fun imperialUK(
 
 private fun imperialUS(
     selected: Boolean,
-): ImperialUS = ImperialUS(
+): ImperialUs = ImperialUs(
     text = R.string.measurement_system_imperial_united_states,
     icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
     selected = selected,

@@ -19,9 +19,9 @@ internal data class AppThemeListItemState(
 )
 
 @Immutable
-internal sealed class SelectedAppThemeState {
-    data object Loading : SelectedAppThemeState()
-    data class Loaded(val appTheme: AppThemeUi) : SelectedAppThemeState()
+internal sealed interface SelectedAppThemeState {
+    data object Loading : SelectedAppThemeState
+    data class Loaded(val appTheme: AppThemeUi) : SelectedAppThemeState
 }
 
 @Immutable
@@ -33,29 +33,30 @@ internal data class ThemePickerState(
 )
 
 @Immutable
-internal sealed class AppThemeUi(
-    @StringRes val text: Int,
-    val icon: IconState,
-    val selected: Boolean,
-) {
-    @Immutable
-    class DarkTheme(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppThemeUi(text, icon, selected)
-
-    @Immutable
-    class LightTheme(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppThemeUi(text, icon, selected)
-
-    @Immutable
-    class SystemTheme(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppThemeUi(text, icon, selected)
+internal sealed interface AppThemeUi {
+    @get:StringRes
+    val text: Int
+    val icon: IconState
+    val selected: Boolean
 }
+
+@Immutable
+internal data class DarkTheme(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppThemeUi
+
+@Immutable
+internal data class LightTheme(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppThemeUi
+
+@Immutable
+internal data class SystemTheme(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppThemeUi

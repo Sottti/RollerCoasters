@@ -5,10 +5,10 @@ import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.EnglishGbLanguage
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.GalicianLanguage
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.SpanishSpainLanguage
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.SystemLanguage
+import com.sottti.roller.coasters.presentation.settings.model.EnglishGbLanguage
+import com.sottti.roller.coasters.presentation.settings.model.GalicianLanguage
+import com.sottti.roller.coasters.presentation.settings.model.SpanishSpainLanguage
+import com.sottti.roller.coasters.presentation.settings.model.SystemLanguage
 
 internal fun AppLanguageUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)

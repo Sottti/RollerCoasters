@@ -19,9 +19,12 @@ internal data class AppLanguageListItemState(
 )
 
 @Immutable
-internal sealed class AppSelectedLanguageState {
-    data object Loading : AppSelectedLanguageState()
-    data class Loaded(val appLanguage: AppLanguageUi) : AppSelectedLanguageState()
+internal sealed interface AppSelectedLanguageState {
+    @Immutable
+    data object Loading : AppSelectedLanguageState
+
+    @Immutable
+    data class Loaded(val appLanguage: AppLanguageUi) : AppSelectedLanguageState
 }
 
 @Immutable
@@ -33,36 +36,37 @@ internal data class AppLanguagePickerState(
 )
 
 @Immutable
-internal sealed class AppLanguageUi(
-    @StringRes val text: Int,
-    val icon: IconState,
-    val selected: Boolean,
-) {
-    @Immutable
-    class SpanishSpainLanguage(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppLanguageUi(text, icon, selected)
-
-    @Immutable
-    class EnglishGbLanguage(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppLanguageUi(text, icon, selected)
-
-    @Immutable
-    class GalicianLanguage(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppLanguageUi(text, icon, selected)
-
-    @Immutable
-    class SystemLanguage(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppLanguageUi(text, icon, selected)
+internal sealed interface AppLanguageUi {
+    @get:StringRes
+    val text: Int
+    val icon: IconState
+    val selected: Boolean
 }
+
+@Immutable
+internal data class SpanishSpainLanguage(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppLanguageUi
+
+@Immutable
+internal data class EnglishGbLanguage(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppLanguageUi
+
+@Immutable
+internal data class GalicianLanguage(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppLanguageUi
+
+@Immutable
+internal data class SystemLanguage(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppLanguageUi

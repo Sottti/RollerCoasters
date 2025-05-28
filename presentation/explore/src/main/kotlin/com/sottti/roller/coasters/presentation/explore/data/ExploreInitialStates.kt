@@ -3,6 +3,9 @@ package com.sottti.roller.coasters.presentation.explore.data
 import androidx.paging.PagingData
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.explore.R
+import com.sottti.roller.coasters.presentation.explore.model.AllFilter
+import com.sottti.roller.coasters.presentation.explore.model.AlphabeticalFilter
+import com.sottti.roller.coasters.presentation.explore.model.DropFilter
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowTypeFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectSortByAlphabetical
@@ -19,17 +22,20 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Secon
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreState
 import com.sottti.roller.coasters.presentation.explore.model.Filters
+import com.sottti.roller.coasters.presentation.explore.model.GForceFilter
+import com.sottti.roller.coasters.presentation.explore.model.HeightFilter
+import com.sottti.roller.coasters.presentation.explore.model.InversionsFilter
+import com.sottti.roller.coasters.presentation.explore.model.LengthFilter
+import com.sottti.roller.coasters.presentation.explore.model.MaxVerticalFilter
 import com.sottti.roller.coasters.presentation.explore.model.PrimaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.AlphabeticalFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.DropFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.GForceFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.HeightFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.InversionsFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.LengthFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.MaxVerticalFilter
-import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter.SortBySecondaryFilter.SpeedFilter
+import com.sottti.roller.coasters.presentation.explore.model.SortByPrimaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.SortBySecondaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.SpeedFilter
+import com.sottti.roller.coasters.presentation.explore.model.SteelFilter
+import com.sottti.roller.coasters.presentation.explore.model.TypePrimaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.TypeSecondaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.WoodFilter
 import kotlinx.coroutines.flow.Flow
 
 internal fun initialState(
@@ -51,8 +57,8 @@ private fun primaryFiltersInitialState(): List<PrimaryFilter> =
         typePrimaryFilterInitialState(),
     )
 
-internal fun sortByPrimaryFilterInitialState(): PrimaryFilter.SortByPrimaryFilter =
-    PrimaryFilter.SortByPrimaryFilter(
+internal fun sortByPrimaryFilterInitialState(): SortByPrimaryFilter =
+    SortByPrimaryFilter(
         action = ShowSortFilters,
         expanded = false,
         labelResId = R.string.chip_label_sort_by_alphabetical,
@@ -60,8 +66,8 @@ internal fun sortByPrimaryFilterInitialState(): PrimaryFilter.SortByPrimaryFilte
         selected = true,
     )
 
-internal fun typePrimaryFilterInitialState(): PrimaryFilter.TypePrimaryFilter =
-    PrimaryFilter.TypePrimaryFilter(
+internal fun typePrimaryFilterInitialState(): TypePrimaryFilter =
+    TypePrimaryFilter(
         action = ShowTypeFilters,
         expanded = false,
         labelResId = R.string.chip_label_type_all,
@@ -84,7 +90,7 @@ private fun sortBySecondaryFiltersInitialState(): List<SortBySecondaryFilter> =
         gForceFilter,
     )
 
-private fun typeSecondaryFiltersInitialState(): List<SecondaryFilter.TypeSecondaryFilter> =
+private fun typeSecondaryFiltersInitialState(): List<TypeSecondaryFilter> =
     listOf(
         allFilter,
         steelFilter,
@@ -164,8 +170,8 @@ private val gForceFilter: GForceFilter =
         leadingIcon = null,
     )
 
-private val allFilter: SecondaryFilter.TypeSecondaryFilter.AllFilter =
-    SecondaryFilter.TypeSecondaryFilter.AllFilter(
+private val allFilter: AllFilter =
+    AllFilter(
         action = SelectTypeAll,
         labelResId = R.string.chip_label_type_all,
         selected = true,
@@ -173,8 +179,8 @@ private val allFilter: SecondaryFilter.TypeSecondaryFilter.AllFilter =
         leadingIcon = Icons.CheckSmall.filled,
     )
 
-private val steelFilter: SecondaryFilter.TypeSecondaryFilter.SteelFilter =
-    SecondaryFilter.TypeSecondaryFilter.SteelFilter(
+private val steelFilter: SteelFilter =
+    SteelFilter(
         action = SelectTypeSteel,
         labelResId = R.string.chip_label_type_steel,
         leadingIcon = null,
@@ -182,8 +188,8 @@ private val steelFilter: SecondaryFilter.TypeSecondaryFilter.SteelFilter =
         visible = false,
     )
 
-private val woodFilter: SecondaryFilter.TypeSecondaryFilter.WoodFilter =
-    SecondaryFilter.TypeSecondaryFilter.WoodFilter(
+private val woodFilter: WoodFilter =
+    WoodFilter(
         action = SelectTypeWood,
         labelResId = R.string.chip_label_type_wood,
         selected = false,

@@ -20,9 +20,12 @@ internal data class AppColorContrastListItemState(
 )
 
 @Immutable
-internal sealed class SelectedAppColorContrastState {
-    data object Loading : SelectedAppColorContrastState()
-    data class Loaded(val appColorContrast: AppColorContrastUi) : SelectedAppColorContrastState()
+internal sealed interface SelectedAppColorContrastState {
+    @Immutable
+    data object Loading : SelectedAppColorContrastState
+
+    @Immutable
+    data class Loaded(val appColorContrast: AppColorContrastUi) : SelectedAppColorContrastState
 }
 
 @Immutable
@@ -41,36 +44,36 @@ internal data class AppColorContrastPickerState(
 )
 
 @Immutable
-internal sealed class AppColorContrastUi(
-    @StringRes val text: Int,
-    val icon: IconState,
-    val selected: Boolean,
-) {
-    @Immutable
-    class StandardContrast(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppColorContrastUi(text, icon, selected)
-
-    @Immutable
-    class MediumContrast(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppColorContrastUi(text, icon, selected)
-
-    @Immutable
-    class HighContrast(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppColorContrastUi(text, icon, selected)
-
-    @Immutable
-    class SystemContrast(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppColorContrastUi(text, icon, selected)
+internal sealed interface AppColorContrastUi {
+    @get:StringRes val text: Int
+    val icon: IconState
+    val selected: Boolean
 }
+
+@Immutable
+internal data class StandardContrast(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppColorContrastUi
+
+@Immutable
+internal data class MediumContrast(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppColorContrastUi
+
+@Immutable
+internal data class HighContrast(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppColorContrastUi
+
+@Immutable
+internal data class SystemContrast(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppColorContrastUi

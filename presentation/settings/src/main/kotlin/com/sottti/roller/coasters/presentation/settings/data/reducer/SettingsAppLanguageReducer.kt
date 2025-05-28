@@ -9,12 +9,12 @@ import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguagePickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.EnglishGbLanguage
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.GalicianLanguage
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.SpanishSpainLanguage
-import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.SystemLanguage
 import com.sottti.roller.coasters.presentation.settings.model.AppSelectedLanguageState
+import com.sottti.roller.coasters.presentation.settings.model.EnglishGbLanguage
+import com.sottti.roller.coasters.presentation.settings.model.GalicianLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.settings.model.SpanishSpainLanguage
+import com.sottti.roller.coasters.presentation.settings.model.SystemLanguage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 

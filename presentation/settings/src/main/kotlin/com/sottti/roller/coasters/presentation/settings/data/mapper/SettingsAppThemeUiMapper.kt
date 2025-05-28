@@ -7,6 +7,9 @@ import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi
+import com.sottti.roller.coasters.presentation.settings.model.DarkTheme
+import com.sottti.roller.coasters.presentation.settings.model.LightTheme
+import com.sottti.roller.coasters.presentation.settings.model.SystemTheme
 
 internal fun AppThemeUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)
@@ -24,15 +27,15 @@ internal fun AppTheme.toPresentationModel(selected: Boolean): AppThemeUi =
 
 internal fun AppThemeUi.toDomain(): AppTheme =
     when (this) {
-        is AppThemeUi.DarkTheme -> AppTheme.DarkAppTheme
-        is AppThemeUi.LightTheme -> AppTheme.LightAppTheme
-        is AppThemeUi.SystemTheme -> AppTheme.SystemAppTheme
+        is DarkTheme -> AppTheme.DarkAppTheme
+        is LightTheme -> AppTheme.LightAppTheme
+        is SystemTheme -> AppTheme.SystemAppTheme
     }
 
 private fun systemTheme(
     selected: Boolean,
-): AppThemeUi.SystemTheme =
-    AppThemeUi.SystemTheme(
+): SystemTheme =
+    SystemTheme(
         text = R.string.theme_system,
         icon = if (selected) Icons.BrightnessAuto.filled else Icons.BrightnessAuto.outlined,
         selected = selected,
@@ -40,8 +43,8 @@ private fun systemTheme(
 
 private fun lightTheme(
     selected: Boolean,
-): AppThemeUi.LightTheme =
-    AppThemeUi.LightTheme(
+): LightTheme =
+    LightTheme(
         text = R.string.theme_light,
         icon = if (selected) LightMode.filled else LightMode.outlined,
         selected = selected,
@@ -49,8 +52,8 @@ private fun lightTheme(
 
 private fun darkTheme(
     selected: Boolean,
-): AppThemeUi.DarkTheme =
-    AppThemeUi.DarkTheme(
+): DarkTheme =
+    DarkTheme(
         text = R.string.theme_dark,
         icon = if (selected) DarkMode.filled else DarkMode.outlined,
         selected = selected,

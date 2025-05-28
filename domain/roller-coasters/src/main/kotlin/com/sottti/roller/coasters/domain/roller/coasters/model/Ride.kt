@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.domain.roller.coasters.model
 
 import com.sottti.roller.coasters.domain.model.Name
 
-public sealed class Ride
+public sealed interface Ride
 
 public data class SingleTrackRide(
     val drop: Drop?,
@@ -13,7 +13,7 @@ public data class SingleTrackRide(
     val length: Length?,
     val maxVertical: MaxVertical?,
     val speed: Speed?,
-) : Ride()
+) : Ride
 
 public data class MultiTrackRide(
     val drop: List<Drop>?,
@@ -25,4 +25,4 @@ public data class MultiTrackRide(
     val maxVertical: List<MaxVertical>?,
     val speed: List<Speed>?,
     val trackNames: List<Name>?,
-) : Ride()
+) : Ride

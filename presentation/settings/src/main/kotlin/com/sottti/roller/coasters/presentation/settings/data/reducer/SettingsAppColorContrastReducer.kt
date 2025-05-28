@@ -7,8 +7,12 @@ import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastNo
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
+import com.sottti.roller.coasters.presentation.settings.model.HighContrast
+import com.sottti.roller.coasters.presentation.settings.model.MediumContrast
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.settings.model.StandardContrast
+import com.sottti.roller.coasters.presentation.settings.model.SystemContrast
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
@@ -103,16 +107,16 @@ private fun colorContrastsList(
     selectedAppColorContrast: AppColorContrastUi,
 ) = listOfNotNull(
     AppColorContrast.SystemContrast.toPresentationModel(
-        selected = selectedAppColorContrast is AppColorContrastUi.SystemContrast
+        selected = selectedAppColorContrast is SystemContrast
     ).takeIf { appColorContrastAvailable },
     AppColorContrast.StandardContrast.toPresentationModel(
-        selected = selectedAppColorContrast is AppColorContrastUi.StandardContrast
+        selected = selectedAppColorContrast is StandardContrast
     ),
     AppColorContrast.MediumContrast.toPresentationModel(
-        selected = selectedAppColorContrast is AppColorContrastUi.MediumContrast
+        selected = selectedAppColorContrast is MediumContrast
     ),
     AppColorContrast.HighContrast.toPresentationModel(
-        selected = selectedAppColorContrast is AppColorContrastUi.HighContrast
+        selected = selectedAppColorContrast is HighContrast
     ),
 )
 

@@ -3,70 +3,82 @@ package com.sottti.roller.coasters.presentation.settings.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-internal sealed class SettingsAction {
+internal sealed interface SettingsAction {
     @Immutable
-    data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction()
+    data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction
 
     @Immutable
-    sealed class AppThemeActions : SettingsAction() {
-        data object LaunchAppThemePicker : AppThemeActions()
-        data class AppThemePickerSelectionChange(val appTheme: AppThemeUi) : AppThemeActions()
-        data class ConfirmAppThemePickerSelection(val appTheme: AppThemeUi) : AppThemeActions()
-        data object DismissAppThemePicker : AppThemeActions()
+    sealed interface AppThemeActions : SettingsAction {
+        @Immutable
+        data object LaunchAppThemePicker : AppThemeActions
+
+        @Immutable
+        data class AppThemePickerSelectionChange(val appTheme: AppThemeUi) : AppThemeActions
+
+        @Immutable
+        data class ConfirmAppThemePickerSelection(val appTheme: AppThemeUi) : AppThemeActions
+
+        @Immutable
+        data object DismissAppThemePicker : AppThemeActions
     }
 
     @Immutable
-    sealed class AppColorContrastActions : SettingsAction() {
+    sealed interface AppColorContrastActions : SettingsAction {
         @Immutable
-        data object LaunchAppColorContrastPicker : AppColorContrastActions()
+        data object LaunchAppColorContrastPicker : AppColorContrastActions
+
         @Immutable
         data class AppColorContrastPickerSelectionChange(
             val appColorContrast: AppColorContrastUi,
-        ) : AppColorContrastActions()
+        ) : AppColorContrastActions
 
         @Immutable
         data class ConfirmColorContrastPickerSelection(
             val appColorContrast: AppColorContrastUi,
-        ) : AppColorContrastActions()
+        ) : AppColorContrastActions
 
         @Immutable
-        data object DismissAppColorContrastPicker : AppColorContrastActions()
+        data object DismissAppColorContrastPicker : AppColorContrastActions
+
         @Immutable
-        data object DismissAppColorContrastNotAvailableMessage : AppColorContrastActions()
+        data object DismissAppColorContrastNotAvailableMessage : AppColorContrastActions
     }
 
-    sealed class AppLanguageActions : SettingsAction() {
+    @Immutable
+    sealed interface AppLanguageActions : SettingsAction {
         @Immutable
-        data object LaunchAppLanguagePicker : AppLanguageActions()
+        data object LaunchAppLanguagePicker : AppLanguageActions
+
         @Immutable
         data class AppLanguagePickerSelectionChange(
             val appLanguage: AppLanguageUi,
-        ) : AppLanguageActions()
+        ) : AppLanguageActions
 
         @Immutable
         data class ConfirmAppLanguagePickerSelection(
             val appLanguage: AppLanguageUi,
-        ) : AppLanguageActions()
+        ) : AppLanguageActions
 
         @Immutable
-        data object DismissAppLanguagePicker : AppLanguageActions()
+        data object DismissAppLanguagePicker : AppLanguageActions
     }
 
     @Immutable
-    sealed class AppMeasurementSystemActions : SettingsAction() {
+    sealed interface AppMeasurementSystemActions : SettingsAction {
         @Immutable
-        data object LaunchAppMeasurementSystemPicker : AppMeasurementSystemActions()
+        data object LaunchAppMeasurementSystemPicker : AppMeasurementSystemActions
+
         @Immutable
         data class AppMeasurementSystemPickerSelectionChange(
             val appMeasurementSystem: AppMeasurementSystemUi,
-        ) : AppMeasurementSystemActions()
+        ) : AppMeasurementSystemActions
 
         @Immutable
         data class ConfirmAppMeasurementSystemPickerSelection(
             val appMeasurementSystem: AppMeasurementSystemUi,
-        ) : AppMeasurementSystemActions()
+        ) : AppMeasurementSystemActions
 
         @Immutable
-        data object DismissAppMeasurementSystemPicker : AppMeasurementSystemActions()
+        data object DismissAppMeasurementSystemPicker : AppMeasurementSystemActions
     }
 }

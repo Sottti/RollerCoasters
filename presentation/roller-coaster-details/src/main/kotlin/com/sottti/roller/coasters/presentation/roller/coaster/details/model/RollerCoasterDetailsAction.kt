@@ -1,5 +1,5 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.model
 
-internal sealed class RollerCoasterDetailsAction {
-    data object ToggleFavourite : RollerCoasterDetailsAction()
+internal sealed interface RollerCoasterDetailsAction {
+    data object ToggleFavourite : RollerCoasterDetailsAction
 }

@@ -23,12 +23,12 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterIdentityState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationCoordinatesState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterLocationState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterRideState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsSectionState.RollerCoasterStatusState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterIdentityState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterLocationCoordinatesState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterLocationState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterRideState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterStatusState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.Locale

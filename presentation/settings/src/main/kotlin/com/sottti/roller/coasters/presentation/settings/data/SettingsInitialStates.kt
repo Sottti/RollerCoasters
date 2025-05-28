@@ -22,15 +22,15 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsTopBarStat
 internal fun initialState(
     dynamicColorAvailable: Boolean,
 ): SettingsState = SettingsState(
-    appColorContrast = appColorContrastInitialState(),
-    dynamicColor = dynamicColorInitialState().takeIf { dynamicColorAvailable },
-    appLanguage = appLanguageInitialState(),
-    appMeasurementSystem = appMeasurementSystemInitialState(),
-    appTheme = appThemeInitialState(),
-    topBar = topBarInitialState(),
+    appColorContrast = initialAppColorContrastState(),
+    dynamicColor = initialDynamicColorState().takeIf { dynamicColorAvailable },
+    appLanguage = initialAppLanguageState(),
+    appMeasurementSystem = initialAppMeasurementSystemState(),
+    appTheme = initialAppThemeState(),
+    topBar = initialTopBarState(),
 )
 
-private fun appColorContrastInitialState() = AppColorContrastState(
+private fun initialAppColorContrastState() = AppColorContrastState(
     listItem = AppColorContrastListItemState(
         headline = R.string.color_contrast_color_headline,
         icon = Icons.Visibility.outlined,
@@ -41,14 +41,14 @@ private fun appColorContrastInitialState() = AppColorContrastState(
     picker = null,
 )
 
-private fun dynamicColorInitialState() = DynamicColorState(
+private fun initialDynamicColorState() = DynamicColorState(
     checkedState = DynamicColorCheckedState.Loading,
     headline = R.string.dynamic_color_headline,
     supporting = R.string.dynamic_color_supporting,
     icon = Icons.Palette.outlined,
 )
 
-private fun appLanguageInitialState() = AppLanguageState(
+private fun initialAppLanguageState() = AppLanguageState(
     listItem = AppLanguageListItemState(
         headline = R.string.language_headline,
         icon = Icons.Language.outlined,
@@ -59,7 +59,7 @@ private fun appLanguageInitialState() = AppLanguageState(
 )
 
 
-private fun appThemeInitialState() = AppThemeState(
+private fun initialAppThemeState() = AppThemeState(
     listItem = AppThemeListItemState(
         headline = R.string.theme_headline,
         supporting = R.string.theme_supporting,
@@ -69,7 +69,7 @@ private fun appThemeInitialState() = AppThemeState(
     picker = null,
 )
 
-private fun appMeasurementSystemInitialState() = AppMeasurementSystemState(
+private fun initialAppMeasurementSystemState() = AppMeasurementSystemState(
     listItem = AppMeasurementSystemListItemState(
         headline = R.string.measurement_system_headline,
         supporting = R.string.measurement_system_supporting,
@@ -79,5 +79,5 @@ private fun appMeasurementSystemInitialState() = AppMeasurementSystemState(
     picker = null,
 )
 
-private fun topBarInitialState(): SettingsTopBarState =
+private fun initialTopBarState(): SettingsTopBarState =
     SettingsTopBarState(title = R.string.title, icon = Icons.ArrowBack.filled)

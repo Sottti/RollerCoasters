@@ -55,11 +55,11 @@ internal data class TopicDescription(
 )
 
 @Immutable
-internal sealed class TopicDescriptionImage {
+internal sealed interface TopicDescriptionImage {
     @Immutable
-    data class HeroImage(val state: ImageState) : TopicDescriptionImage()
+    data class HeroImage(val state: ImageState) : TopicDescriptionImage
     @Immutable
-    data class Image(val state: ImageState) : TopicDescriptionImage()
+    data class Image(val state: ImageState) : TopicDescriptionImage
 }
 
 @Immutable

@@ -5,10 +5,10 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorCo
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.HighContrast
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.MediumContrast
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.StandardContrast
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.SystemContrast
+import com.sottti.roller.coasters.presentation.settings.model.HighContrast
+import com.sottti.roller.coasters.presentation.settings.model.MediumContrast
+import com.sottti.roller.coasters.presentation.settings.model.StandardContrast
+import com.sottti.roller.coasters.presentation.settings.model.SystemContrast
 
 internal fun AppColorContrastUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)

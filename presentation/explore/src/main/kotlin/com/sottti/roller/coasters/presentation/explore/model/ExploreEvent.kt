@@ -1,5 +1,5 @@
 package com.sottti.roller.coasters.presentation.explore.model
 
-internal sealed class ExploreEvent {
-    object ScrollToTop : ExploreEvent()
+internal sealed interface ExploreEvent {
+    object ScrollToTop : ExploreEvent
 }

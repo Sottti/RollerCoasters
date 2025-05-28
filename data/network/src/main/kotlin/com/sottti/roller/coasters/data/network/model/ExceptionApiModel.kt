@@ -2,8 +2,7 @@ package com.sottti.roller.coasters.data.network.model
 
 public sealed class ExceptionApiModel(
     override val message: String,
-
-    ) : Exception(message) {
+) : Exception(message) {
 
     public data class NoInternet(
         override val message: String,

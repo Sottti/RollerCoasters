@@ -5,10 +5,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
 @Immutable
-internal sealed class AboutMeAction {
+internal sealed interface AboutMeAction {
     @Immutable
     data class OpenUrl(
         @StringRes val urlResId: Int,
         val primaryColor: Color,
-    ) : AboutMeAction()
+    ) : AboutMeAction
 }

@@ -7,11 +7,11 @@ import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemApp
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi
-import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi.DarkTheme
-import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi.LightTheme
-import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi.SystemTheme
+import com.sottti.roller.coasters.presentation.settings.model.DarkTheme
+import com.sottti.roller.coasters.presentation.settings.model.LightTheme
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.settings.model.SystemTheme
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

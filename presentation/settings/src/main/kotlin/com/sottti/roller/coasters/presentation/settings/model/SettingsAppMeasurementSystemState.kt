@@ -19,11 +19,14 @@ internal data class AppMeasurementSystemListItemState(
 )
 
 @Immutable
-internal sealed class SelectedAppMeasurementSystemState {
-    data object Loading : SelectedAppMeasurementSystemState()
+internal sealed interface SelectedAppMeasurementSystemState {
+    @Immutable
+    data object Loading : SelectedAppMeasurementSystemState
+
+    @Immutable
     data class Loaded(
         val appMeasurementSystem: AppMeasurementSystemUi,
-    ) : SelectedAppMeasurementSystemState()
+    ) : SelectedAppMeasurementSystemState
 }
 
 @Immutable
@@ -35,36 +38,37 @@ internal data class AppMeasurementSystemPickerState(
 )
 
 @Immutable
-internal sealed class AppMeasurementSystemUi(
-    @StringRes val text: Int,
-    val icon: IconState,
-    val selected: Boolean,
-) {
-    @Immutable
-    class Metric(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppMeasurementSystemUi(text, icon, selected)
-
-    @Immutable
-    class ImperialUS(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppMeasurementSystemUi(text, icon, selected)
-
-    @Immutable
-    class ImperialUK(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppMeasurementSystemUi(text, icon, selected)
-
-    @Immutable
-    class SystemApp(
-        @StringRes text: Int,
-        icon: IconState,
-        selected: Boolean,
-    ) : AppMeasurementSystemUi(text, icon, selected)
+internal sealed interface AppMeasurementSystemUi {
+    @get:StringRes
+    val text: Int
+    val icon: IconState
+    val selected: Boolean
 }
+
+@Immutable
+internal data class Metric(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppMeasurementSystemUi
+
+@Immutable
+internal data class ImperialUs(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppMeasurementSystemUi
+
+@Immutable
+internal data class ImperialUk(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppMeasurementSystemUi
+
+@Immutable
+internal data class SystemApp(
+    @StringRes override val text: Int,
+    override val icon: IconState,
+    override val selected: Boolean,
+) : AppMeasurementSystemUi
