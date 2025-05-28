@@ -30,7 +30,7 @@ internal fun SettingsUi(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        topBar = { TopBar(onBackNavigation, scrollBehavior, state.topBar) }
+        topBar = { TopBar(onBackNavigation, scrollBehavior, state.topBar) },
     ) { paddingValues ->
         SettingsList(
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
@@ -38,6 +38,9 @@ internal fun SettingsUi(
             paddingValues = paddingValues,
             state = state,
         )
-        Dialogs(state = state, onAction = viewModel.onAction)
+        Dialogs(
+            state = state,
+            onAction = viewModel.onAction,
+        )
     }
 }

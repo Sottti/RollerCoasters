@@ -58,7 +58,7 @@ private fun FavouriteIcon(
         is Loaded -> Icon(iconState = state.iconState, onClick = onToggleFavourite)
         Loading -> ProgressIndicator(
             modifier = Modifier.padding(end = dimensions.padding.medium),
-            size = ProgressIndicatorSize.Small
+            size = ProgressIndicatorSize.Small,
         )
     }
 }
