@@ -4,8 +4,6 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
-import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUiPreview
-import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUiStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

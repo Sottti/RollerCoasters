@@ -45,7 +45,8 @@ internal data class AppColorContrastPickerState(
 
 @Immutable
 internal sealed interface AppColorContrastUi {
-    @get:StringRes val text: Int
+    @get:StringRes
+    val text: Int
     val icon: IconState
     val selected: Boolean
 }

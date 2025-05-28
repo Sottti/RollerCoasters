@@ -26,10 +26,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.roller.coasters.presentation.design.system.images.model.ImageState
-import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
-import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
-import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
@@ -44,6 +40,10 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImage
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
+import com.sottti.roller.coasters.presentation.design.system.text.Text
 
 @Composable
 internal fun AboutMeUiContent(

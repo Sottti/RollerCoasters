@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.roller.coasters.presentation.design.system.images.ui.Image
-import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeBottomSheetPreviewState
@@ -26,6 +25,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImage
+import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.format.annotatedLinkString
 import com.sottti.roller.coasters.presentation.previews.LightDarkLongThemePreview

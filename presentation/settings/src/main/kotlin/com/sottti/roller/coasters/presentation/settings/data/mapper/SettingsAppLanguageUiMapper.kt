@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.presentation.settings.data.mapper
 
-import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi
 import com.sottti.roller.coasters.presentation.settings.model.EnglishGbLanguage

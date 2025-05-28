@@ -16,11 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
+import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
-import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import androidx.compose.material3.Card as MaterialCard

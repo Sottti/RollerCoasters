@@ -16,6 +16,7 @@ internal data class DynamicColorState(
 internal sealed interface DynamicColorCheckedState {
     @Immutable
     data object Loading : DynamicColorCheckedState
+
     @Immutable
     data class Loaded(val checked: Boolean) : DynamicColorCheckedState
 }

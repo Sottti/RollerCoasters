@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.data
 
-import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.domain.roller.coasters.model.Drop
 import com.sottti.roller.coasters.domain.roller.coasters.model.Duration
 import com.sottti.roller.coasters.domain.roller.coasters.model.GForce
@@ -15,6 +14,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.R

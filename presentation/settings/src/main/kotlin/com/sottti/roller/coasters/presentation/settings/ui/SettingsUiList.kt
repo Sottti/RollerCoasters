@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
+import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastListItemState
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguageListItemState
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemListItemState
