@@ -18,17 +18,19 @@ internal fun LanguagePickerDialog(
     state: AppLanguagePickerState,
     onAction: (SettingsAction) -> Unit,
 ) {
+    val selectedLanguage = remember(state.appLanguages) {
+        state.appLanguages.findSelectedLanguage()
+    }
     val options = remember(state.appLanguages) {
         state.appLanguages.map { language -> language.toRadioButtonOption() }
     }
     val onOptionSelected = remember(onAction, state.appLanguages) {
         { selectedOption: DialogRadioButtonOption ->
-            val selectedLanguage = selectedOption.toAppLanguageUi(state.appLanguages)
             onAction(AppLanguagePickerSelectionChange(selectedLanguage))
         }
     }
     val onConfirm = remember(onAction, state.appLanguages) {
-        { onAction(ConfirmAppLanguagePickerSelection(state.appLanguages.findSelectedLanguage())) }
+        { onAction(ConfirmAppLanguagePickerSelection(selectedLanguage)) }
     }
     val onDismiss = remember(onAction) { { onAction(DismissAppLanguagePicker) } }
     DialogWithRadioButtons(
