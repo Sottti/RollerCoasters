@@ -58,17 +58,17 @@ internal fun SettingsList(
             .padding(paddingValues)
             .nestedScroll(nestedScrollConnection),
     ) {
-        state.dynamicColor?.let {
-            item {
+        state.dynamicColor?.let { dynamicState ->
+            item(key = "dynamic_color") {
                 SettingItem(
-                    headline = state.dynamicColor.headline,
-                    supporting = state.dynamicColor.supporting,
-                    iconState = state.dynamicColor.icon,
+                    headline = dynamicState.headline,
+                    supporting = dynamicState.supporting,
+                    iconState = dynamicState.icon,
                     onClick = {},
                 ) {
-                    when (state.dynamicColor.checkedState) {
+                    when (dynamicState.checkedState) {
                         is DynamicColorCheckedState.Loaded -> Switch(
-                            checked = state.dynamicColor.checkedState.checked,
+                            checked = dynamicState.checkedState.checked,
                             onCheckedChange = onDynamicColorCheckedChange,
                         )
 

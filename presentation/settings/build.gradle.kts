@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -16,6 +17,7 @@ android {
 
 dependencies {
     implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
@@ -26,5 +28,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.switch))
     implementation(project(module.presentation.designSystem.text))
+    implementation(project(module.presentation.designSystem.themes))
+    implementation(project(module.presentation.previews))
     ksp(libs.hilt.compiler)
 }
