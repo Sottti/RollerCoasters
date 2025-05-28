@@ -23,36 +23,32 @@ internal fun AppMeasurementSystemPickerDialog(
             .appMeasurementSystems
             .map { appMeasurementSystem -> appMeasurementSystem.toRadioButtonOption() }
     }
+    val selectedSystem = remember(state.appMeasurementSystems) {
+        state.appMeasurementSystems.findSelectedMeasurementSystem()
+    }
     val onOptionSelected = remember(onAction, state.appMeasurementSystems) {
         { selectedOption: DialogRadioButtonOption ->
-            val selectedMeasurementSystem =
-                selectedOption.toAppMeasurementSystemUi(state.appMeasurementSystems)
-            onAction(AppMeasurementSystemPickerSelectionChange(selectedMeasurementSystem))
+            val newSelection = selectedOption.toAppMeasurementSystemUi(state.appMeasurementSystems)
+            onAction(AppMeasurementSystemPickerSelectionChange(newSelection))
         }
     }
-    val onConfirm = remember(onAction, state.appMeasurementSystems) {
-        {
-            onAction(
-                ConfirmAppMeasurementSystemPickerSelection(
-                    state.appMeasurementSystems.findSelectedMeasurementSystem()
-                )
-            )
-        }
+    val onConfirm = remember(onAction, selectedSystem) {
+        { onAction(ConfirmAppMeasurementSystemPickerSelection(selectedSystem)) }
     }
     val onDismiss = remember(onAction) { { onAction(DismissAppMeasurementSystemPicker) } }
 
     DialogWithRadioButtons(
-        title = state.title,
         confirm = state.confirm,
         dismiss = state.dismiss,
-        options = options,
-        onOptionSelected = onOptionSelected,
         onConfirm = onConfirm,
         onDismiss = onDismiss,
+        onOptionSelected = onOptionSelected,
+        options = options,
+        title = state.title,
     )
 }
 
 private fun List<AppMeasurementSystemUi>.findSelectedMeasurementSystem(): AppMeasurementSystemUi =
     find { it.selected }
         ?: firstOrNull()
-        ?: error("app measurement system list should not be empty")
+        ?: error("AppMeasurementSystem list must not be empty")

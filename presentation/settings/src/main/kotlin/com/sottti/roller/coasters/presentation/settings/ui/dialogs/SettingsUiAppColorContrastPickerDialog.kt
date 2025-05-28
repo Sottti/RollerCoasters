@@ -26,11 +26,8 @@ internal fun AppColorContrastPickerDialog(
     }
     val onOptionSelected = remember(onAction, state.appColorContrasts) {
         { selectedOption: DialogRadioButtonOption ->
-            onAction(
-                AppColorContrastPickerSelectionChange(
-                    selectedOption.toAppColorContrastUi(state.appColorContrasts),
-                ),
-            )
+            val newSelection = selectedOption.toAppColorContrastUi(state.appColorContrasts)
+            onAction(AppColorContrastPickerSelectionChange(newSelection))
         }
     }
     val onConfirm = remember(onAction, selectedContrast) {
@@ -39,13 +36,13 @@ internal fun AppColorContrastPickerDialog(
     val onDismiss = remember(onAction) { { onAction(DismissAppColorContrastPicker) } }
 
     DialogWithRadioButtons(
-        title = state.title,
         confirm = state.confirm,
         dismiss = state.dismiss,
-        options = options,
-        onOptionSelected = onOptionSelected,
         onConfirm = onConfirm,
         onDismiss = onDismiss,
+        onOptionSelected = onOptionSelected,
+        options = options,
+        title = state.title,
     )
 }
 

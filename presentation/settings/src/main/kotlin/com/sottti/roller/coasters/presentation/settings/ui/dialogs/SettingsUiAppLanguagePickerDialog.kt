@@ -18,21 +18,23 @@ internal fun LanguagePickerDialog(
     state: AppLanguagePickerState,
     onAction: (SettingsAction) -> Unit,
 ) {
-    val selectedLanguage = remember(state.appLanguages) {
-        state.appLanguages.findSelectedLanguage()
-    }
     val options = remember(state.appLanguages) {
         state.appLanguages.map { language -> language.toRadioButtonOption() }
     }
+    val selectedLanguage = remember(state.appLanguages) {
+        state.appLanguages.findSelectedLanguage()
+    }
     val onOptionSelected = remember(onAction, state.appLanguages) {
         { selectedOption: DialogRadioButtonOption ->
-            onAction(AppLanguagePickerSelectionChange(selectedLanguage))
+            val newSelection = selectedOption.toAppLanguageUi(state.appLanguages)
+            onAction(AppLanguagePickerSelectionChange(newSelection))
         }
     }
-    val onConfirm = remember(onAction, state.appLanguages) {
+    val onConfirm = remember(onAction, selectedLanguage) {
         { onAction(ConfirmAppLanguagePickerSelection(selectedLanguage)) }
     }
     val onDismiss = remember(onAction) { { onAction(DismissAppLanguagePicker) } }
+
     DialogWithRadioButtons(
         confirm = state.confirm,
         dismiss = state.dismiss,
@@ -47,4 +49,4 @@ internal fun LanguagePickerDialog(
 private fun List<AppLanguageUi>.findSelectedLanguage(): AppLanguageUi =
     find { it.selected }
         ?: firstOrNull()
-        ?: error("app languages list should not be empty")
+        ?: error("Language list must not be empty")

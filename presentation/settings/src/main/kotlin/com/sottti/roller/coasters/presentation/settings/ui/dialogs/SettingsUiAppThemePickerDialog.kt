@@ -21,28 +21,30 @@ internal fun AppThemePickerDialog(
     val options = remember(state.appThemes) {
         state.appThemes.map { appTheme -> appTheme.toRadioButtonOption() }
     }
+    val selectedTheme = remember(state.appThemes) { state.appThemes.findSelectedTheme() }
     val onOptionSelected = remember(onAction, state.appThemes) {
         { selectedOption: DialogRadioButtonOption ->
-            onAction(AppThemePickerSelectionChange(selectedOption.toAppThemeUi(state.appThemes)))
+            val newSelection = selectedOption.toAppThemeUi(state.appThemes)
+            onAction(AppThemePickerSelectionChange(newSelection))
         }
     }
-    val onConfirm = remember(onAction, state.appThemes) {
-        { onAction(ConfirmAppThemePickerSelection(state.appThemes.findSelectedTheme())) }
+    val onConfirm = remember(onAction, selectedTheme) {
+        { onAction(ConfirmAppThemePickerSelection(selectedTheme)) }
     }
     val onDismiss = remember(onAction) { { onAction(DismissAppThemePicker) } }
 
     DialogWithRadioButtons(
-        title = state.title,
         confirm = state.confirm,
         dismiss = state.dismiss,
-        options = options,
-        onOptionSelected = onOptionSelected,
         onConfirm = onConfirm,
         onDismiss = onDismiss,
+        onOptionSelected = onOptionSelected,
+        options = options,
+        title = state.title,
     )
 }
 
 private fun List<AppThemeUi>.findSelectedTheme(): AppThemeUi =
     find { it.selected }
         ?: firstOrNull()
-        ?: error("app measurement system list should not be empty")
+        ?: error("AppTheme list must not be empty")
