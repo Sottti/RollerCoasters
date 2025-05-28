@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -39,6 +40,21 @@ internal fun SettingsList(
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
 ) {
+    val onDynamicColorCheckedChange = remember(onAction) {
+        { checked: Boolean -> onAction(DynamicColorCheckedChange(checked)) }
+    }
+    val launchThemePicker = remember(onAction) {
+        { onAction(LaunchAppThemePicker) }
+    }
+    val launchColorContrastPicker = remember(onAction) {
+        { onAction(LaunchAppColorContrastPicker) }
+    }
+    val launchLanguagePicker = remember(onAction) {
+        { onAction(LaunchAppLanguagePicker) }
+    }
+    val launchMeasurementSystemPicker = remember(onAction) {
+        { onAction(LaunchAppMeasurementSystemPicker) }
+    }
     LazyColumn(
         modifier = Modifier
             .padding(paddingValues)
@@ -47,32 +63,33 @@ internal fun SettingsList(
         state.dynamicColor?.let {
             item {
                 DynamicColorSetting(
-                    onDynamicColorCheckedChange = { onAction(DynamicColorCheckedChange(it)) },
                     state = state.dynamicColor,
+                    onDynamicColorCheckedChange = onDynamicColorCheckedChange,
                 )
             }
         }
         item {
             ThemeSetting(
                 state = state.appTheme.listItem,
-                onLaunchThemePicker = { onAction(LaunchAppThemePicker) })
+                onLaunchThemePicker = launchThemePicker,
+            )
         }
         item {
             ColorContrastSetting(
                 state = state.appColorContrast.listItem,
-                onLaunchColorContrastPicker = { onAction(LaunchAppColorContrastPicker) },
+                onLaunchColorContrastPicker = launchColorContrastPicker,
             )
         }
         item {
             LanguageSetting(
                 state = state.appLanguage.listItem,
-                onLaunchLanguagePicker = { onAction(LaunchAppLanguagePicker) },
+                onLaunchLanguagePicker = launchLanguagePicker,
             )
         }
         item {
             MeasurementSystemSetting(
                 state = state.appMeasurementSystem.listItem,
-                onLaunchMeasurementSystemPicker = { onAction(LaunchAppMeasurementSystemPicker) },
+                onLaunchMeasurementSystemPicker = launchMeasurementSystemPicker,
             )
         }
     }
