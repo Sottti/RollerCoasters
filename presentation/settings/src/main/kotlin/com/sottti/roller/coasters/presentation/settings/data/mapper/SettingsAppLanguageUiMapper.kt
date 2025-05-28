@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data.mapper
 
-import androidx.compose.runtime.Composable
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
@@ -11,7 +10,6 @@ import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.Gali
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.SpanishSpainLanguage
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguageUi.SystemLanguage
 
-@Composable
 internal fun AppLanguageUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)
 
@@ -25,6 +23,14 @@ internal fun AppLanguage.toPresentationModel(selected: Boolean): AppLanguageUi =
         AppLanguage.SpanishSpain -> spanishSpainLanguage(selected)
         AppLanguage.Galician -> galicianLanguage(selected)
         AppLanguage.System -> systemLanguage(selected)
+    }
+
+internal fun AppLanguageUi.toDomain(): AppLanguage =
+    when (this) {
+        is EnglishGbLanguage -> AppLanguage.EnglishGb
+        is SpanishSpainLanguage -> AppLanguage.SpanishSpain
+        is GalicianLanguage -> AppLanguage.Galician
+        is SystemLanguage -> AppLanguage.System
     }
 
 private fun systemLanguage(
@@ -61,11 +67,3 @@ private fun englishGbLanguage(
     icon = Icons.LanguageEnglishGb.outlined,
     selected = selected,
 )
-
-internal fun AppLanguageUi.toDomain(): AppLanguage =
-    when (this) {
-        is EnglishGbLanguage -> AppLanguage.EnglishGb
-        is SpanishSpainLanguage -> AppLanguage.SpanishSpain
-        is GalicianLanguage -> AppLanguage.Galician
-        is SystemLanguage -> AppLanguage.System
-    }

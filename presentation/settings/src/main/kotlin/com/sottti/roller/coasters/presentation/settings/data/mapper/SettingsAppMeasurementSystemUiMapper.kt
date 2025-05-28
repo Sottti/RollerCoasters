@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data.mapper
 
-import androidx.compose.runtime.Composable
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
@@ -11,7 +10,6 @@ import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSyst
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi.Metric
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemUi.SystemApp
 
-@Composable
 internal fun AppMeasurementSystemUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)
 
@@ -28,6 +26,14 @@ internal fun AppMeasurementSystem.toPresentationModel(
         AppMeasurementSystem.ImperialUs -> imperialUS(selected)
         AppMeasurementSystem.ImperialUk -> imperialUK(selected)
         AppMeasurementSystem.System -> system(selected)
+    }
+
+internal fun AppMeasurementSystemUi.toDomain(): AppMeasurementSystem =
+    when (this) {
+        is ImperialUK -> AppMeasurementSystem.ImperialUk
+        is ImperialUS -> AppMeasurementSystem.ImperialUs
+        is Metric -> AppMeasurementSystem.Metric
+        is SystemApp -> AppMeasurementSystem.System
     }
 
 private fun system(
@@ -62,11 +68,3 @@ private fun metric(
     icon = if (selected) Icons.Straighten.filled else Icons.Straighten.outlined,
     selected = selected,
 )
-
-internal fun AppMeasurementSystemUi.toDomain(): AppMeasurementSystem =
-    when (this) {
-        is ImperialUK -> AppMeasurementSystem.ImperialUk
-        is ImperialUS -> AppMeasurementSystem.ImperialUs
-        is Metric -> AppMeasurementSystem.Metric
-        is SystemApp -> AppMeasurementSystem.System
-    }

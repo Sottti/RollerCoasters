@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 

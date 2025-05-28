@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.presentation.settings.data.SettingsViewModel
+import com.sottti.roller.coasters.presentation.settings.ui.dialogs.Dialogs
 
 @Composable
 public fun SettingsUi(

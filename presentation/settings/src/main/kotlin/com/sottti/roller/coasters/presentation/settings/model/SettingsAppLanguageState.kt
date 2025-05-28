@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.settings.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class AppLanguageState(
@@ -38,24 +38,28 @@ internal sealed class AppLanguageUi(
     val icon: IconState,
     val selected: Boolean,
 ) {
+    @Immutable
     class SpanishSpainLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppLanguageUi(text, icon, selected)
 
+    @Immutable
     class EnglishGbLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppLanguageUi(text, icon, selected)
 
+    @Immutable
     class GalicianLanguage(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppLanguageUi(text, icon, selected)
 
+    @Immutable
     class SystemLanguage(
         @StringRes text: Int,
         icon: IconState,

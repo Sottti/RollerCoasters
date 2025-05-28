@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.about.me.data
 
 import com.roller.coasters.presentation.design.system.images.data.Images
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.about.me.R
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
 import com.sottti.roller.coasters.presentation.about.me.model.SocialProfileState

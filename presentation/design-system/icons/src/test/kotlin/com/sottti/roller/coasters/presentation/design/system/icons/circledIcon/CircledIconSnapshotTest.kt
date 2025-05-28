@@ -4,8 +4,8 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sotti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIconOnBackgroundPreview
-import com.sotti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIconOnSurfacePreview
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIconOnBackgroundPreview
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIconOnSurfacePreview
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

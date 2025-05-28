@@ -1,15 +1,13 @@
 package com.sottti.roller.coasters.presentation.settings.data.mapper
 
-import androidx.compose.runtime.Composable
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons.DarkMode
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons.LightMode
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.DarkMode
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.LightMode
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi
 
-@Composable
 internal fun AppThemeUi.toRadioButtonOption(): DialogRadioButtonOption =
     DialogRadioButtonOption(text, icon, selected)
 
@@ -22,6 +20,13 @@ internal fun AppTheme.toPresentationModel(selected: Boolean): AppThemeUi =
         AppTheme.LightAppTheme -> lightTheme(selected)
         AppTheme.DarkAppTheme -> darkTheme(selected)
         AppTheme.SystemAppTheme -> systemTheme(selected)
+    }
+
+internal fun AppThemeUi.toDomain(): AppTheme =
+    when (this) {
+        is AppThemeUi.DarkTheme -> AppTheme.DarkAppTheme
+        is AppThemeUi.LightTheme -> AppTheme.LightAppTheme
+        is AppThemeUi.SystemTheme -> AppTheme.SystemAppTheme
     }
 
 private fun systemTheme(
@@ -50,10 +55,3 @@ private fun darkTheme(
         icon = if (selected) DarkMode.filled else DarkMode.outlined,
         selected = selected,
     )
-
-internal fun AppThemeUi.toDomain(): AppTheme =
-    when (this) {
-        is AppThemeUi.DarkTheme -> AppTheme.DarkAppTheme
-        is AppThemeUi.LightTheme -> AppTheme.LightAppTheme
-        is AppThemeUi.SystemTheme -> AppTheme.SystemAppTheme
-    }

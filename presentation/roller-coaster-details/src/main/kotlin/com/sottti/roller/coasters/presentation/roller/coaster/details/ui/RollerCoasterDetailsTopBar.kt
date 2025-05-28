@@ -6,9 +6,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
-import com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize

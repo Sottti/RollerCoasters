@@ -13,9 +13,9 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons.Settings
-import com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sottti.roller.coasters.presentation.design.system.text.Text
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,7 +57,7 @@ private fun Title(
 @Composable
 private fun Icon(onNavigateToSettings: () -> Unit) {
     Icon(
-        iconState = Settings.outlined,
+        iconState = Icons.Settings.outlined,
         onClick = { onNavigateToSettings.invoke() },
     )
 }

@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.settings.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class AppThemeState(
@@ -38,18 +38,21 @@ internal sealed class AppThemeUi(
     val icon: IconState,
     val selected: Boolean,
 ) {
+    @Immutable
     class DarkTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppThemeUi(text, icon, selected)
 
+    @Immutable
     class LightTheme(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppThemeUi(text, icon, selected)
 
+    @Immutable
     class SystemTheme(
         @StringRes text: Int,
         icon: IconState,

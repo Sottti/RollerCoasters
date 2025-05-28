@@ -4,7 +4,7 @@ import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import com.roller.coasters.presentation.design.system.images.model.ImageState
-import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class AboutMeState(
@@ -56,7 +56,9 @@ internal data class TopicDescription(
 
 @Immutable
 internal sealed class TopicDescriptionImage {
+    @Immutable
     data class HeroImage(val state: ImageState) : TopicDescriptionImage()
+    @Immutable
     data class Image(val state: ImageState) : TopicDescriptionImage()
 }
 

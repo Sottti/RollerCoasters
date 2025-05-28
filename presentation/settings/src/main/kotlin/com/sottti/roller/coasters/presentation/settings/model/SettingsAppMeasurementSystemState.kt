@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.settings.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class AppMeasurementSystemState(
@@ -40,24 +40,28 @@ internal sealed class AppMeasurementSystemUi(
     val icon: IconState,
     val selected: Boolean,
 ) {
+    @Immutable
     class Metric(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppMeasurementSystemUi(text, icon, selected)
 
+    @Immutable
     class ImperialUS(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppMeasurementSystemUi(text, icon, selected)
 
+    @Immutable
     class ImperialUK(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppMeasurementSystemUi(text, icon, selected)
 
+    @Immutable
     class SystemApp(
         @StringRes text: Int,
         icon: IconState,

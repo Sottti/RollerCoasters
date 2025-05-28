@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.settings.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 
 @Immutable
 internal data class AppColorContrastState(
@@ -46,24 +46,28 @@ internal sealed class AppColorContrastUi(
     val icon: IconState,
     val selected: Boolean,
 ) {
+    @Immutable
     class StandardContrast(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppColorContrastUi(text, icon, selected)
 
+    @Immutable
     class MediumContrast(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppColorContrastUi(text, icon, selected)
 
+    @Immutable
     class HighContrast(
         @StringRes text: Int,
         icon: IconState,
         selected: Boolean,
     ) : AppColorContrastUi(text, icon, selected)
 
+    @Immutable
     class SystemContrast(
         @StringRes text: Int,
         icon: IconState,

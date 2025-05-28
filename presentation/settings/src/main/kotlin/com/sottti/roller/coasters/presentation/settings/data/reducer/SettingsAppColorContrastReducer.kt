@@ -1,19 +1,11 @@
 package com.sottti.roller.coasters.presentation.settings.data.reducer
 
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastNotAvailableMessageState
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.HighContrast
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.MediumContrast
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.StandardContrast
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi.SystemContrast
 import com.sottti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorContrastState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
@@ -110,11 +102,18 @@ private fun colorContrastsList(
     appColorContrastAvailable: Boolean,
     selectedAppColorContrast: AppColorContrastUi,
 ) = listOfNotNull(
-    SystemContrast.toPresentationModel(selected = selectedAppColorContrast is SystemContrast)
-        .takeIf { appColorContrastAvailable },
-    StandardContrast.toPresentationModel(selected = selectedAppColorContrast is StandardContrast),
-    MediumContrast.toPresentationModel(selected = selectedAppColorContrast is MediumContrast),
-    HighContrast.toPresentationModel(selected = selectedAppColorContrast is HighContrast),
+    AppColorContrast.SystemContrast.toPresentationModel(
+        selected = selectedAppColorContrast is AppColorContrastUi.SystemContrast
+    ).takeIf { appColorContrastAvailable },
+    AppColorContrast.StandardContrast.toPresentationModel(
+        selected = selectedAppColorContrast is AppColorContrastUi.StandardContrast
+    ),
+    AppColorContrast.MediumContrast.toPresentationModel(
+        selected = selectedAppColorContrast is AppColorContrastUi.MediumContrast
+    ),
+    AppColorContrast.HighContrast.toPresentationModel(
+        selected = selectedAppColorContrast is AppColorContrastUi.HighContrast
+    ),
 )
 
 internal fun MutableStateFlow<SettingsState>.hideAppColorContrastNotAvailableMessage() {
