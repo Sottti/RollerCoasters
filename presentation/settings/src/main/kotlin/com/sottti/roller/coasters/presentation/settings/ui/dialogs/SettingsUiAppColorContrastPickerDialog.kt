@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.presentation.settings.ui.dialogs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogWithRadioButtons
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toAppColorContrastUi
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
@@ -16,28 +18,38 @@ internal fun AppColorContrastPickerDialog(
     state: AppColorContrastPickerState,
     onAction: (SettingsAction) -> Unit,
 ) {
+    val options = remember(state.appColorContrasts) {
+        state.appColorContrasts.map { it.toRadioButtonOption() }
+    }
+    val selectedContrast = remember(state.appColorContrasts) {
+        state.appColorContrasts.findSelectedAppColorContrast()
+    }
+    val onOptionSelected = remember(onAction, state.appColorContrasts) {
+        { selectedOption: DialogRadioButtonOption ->
+            onAction(
+                AppColorContrastPickerSelectionChange(
+                    selectedOption.toAppColorContrastUi(state.appColorContrasts),
+                ),
+            )
+        }
+    }
+    val onConfirm = remember(onAction, selectedContrast) {
+        { onAction(ConfirmColorContrastPickerSelection(selectedContrast)) }
+    }
+    val onDismiss = remember(onAction) { { onAction(DismissAppColorContrastPicker) } }
+
     DialogWithRadioButtons(
         title = state.title,
         confirm = state.confirm,
         dismiss = state.dismiss,
-        options = state.appColorContrasts.map { contrast -> contrast.toRadioButtonOption() },
-        onOptionSelected = { selectedOption ->
-            onAction(
-                AppColorContrastPickerSelectionChange(
-                    selectedOption.toAppColorContrastUi(state.appColorContrasts)
-                ),
-            )
-        },
-        onConfirm = {
-            onAction(
-                ConfirmColorContrastPickerSelection(
-                    state.appColorContrasts.findSelectedAppColorContrast(),
-                )
-            )
-        },
-        onDismiss = { onAction(DismissAppColorContrastPicker) },
+        options = options,
+        onOptionSelected = onOptionSelected,
+        onConfirm = onConfirm,
+        onDismiss = onDismiss,
     )
 }
 
 private fun List<AppColorContrastUi>.findSelectedAppColorContrast(): AppColorContrastUi =
-    find { it.selected } ?: first()
+    find { it.selected }
+        ?: firstOrNull()
+        ?: error("app color contrasts must not be empty")

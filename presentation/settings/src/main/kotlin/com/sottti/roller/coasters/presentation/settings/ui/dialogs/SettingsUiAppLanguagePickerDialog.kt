@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.presentation.settings.ui.dialogs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogWithRadioButtons
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toAppLanguageUi
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
@@ -16,21 +18,31 @@ internal fun LanguagePickerDialog(
     state: AppLanguagePickerState,
     onAction: (SettingsAction) -> Unit,
 ) {
-    DialogWithRadioButtons(
-        title = state.title,
-        confirm = state.confirm,
-        dismiss = state.dismiss,
-        options = state.appLanguages.map { language -> language.toRadioButtonOption() },
-        onOptionSelected = { selectedOption ->
+    val options = remember(state.appLanguages) {
+        state.appLanguages.map { language -> language.toRadioButtonOption() }
+    }
+    val onOptionSelected = remember(onAction, state.appLanguages) {
+        { selectedOption: DialogRadioButtonOption ->
             val selectedLanguage = selectedOption.toAppLanguageUi(state.appLanguages)
             onAction(AppLanguagePickerSelectionChange(selectedLanguage))
-        },
-        onConfirm = {
-            onAction(ConfirmAppLanguagePickerSelection(state.appLanguages.findSelectedLanguage()))
-        },
-        onDismiss = { onAction(DismissAppLanguagePicker) },
+        }
+    }
+    val onConfirm = remember(onAction, state.appLanguages) {
+        { onAction(ConfirmAppLanguagePickerSelection(state.appLanguages.findSelectedLanguage())) }
+    }
+    val onDismiss = remember(onAction) { { onAction(DismissAppLanguagePicker) } }
+    DialogWithRadioButtons(
+        confirm = state.confirm,
+        dismiss = state.dismiss,
+        onConfirm = onConfirm,
+        onDismiss = onDismiss,
+        onOptionSelected = onOptionSelected,
+        options = options,
+        title = state.title,
     )
 }
 
 private fun List<AppLanguageUi>.findSelectedLanguage(): AppLanguageUi =
-    find { it.selected } ?: first()
+    find { it.selected }
+        ?: firstOrNull()
+        ?: error("app languages list should not be empty")
