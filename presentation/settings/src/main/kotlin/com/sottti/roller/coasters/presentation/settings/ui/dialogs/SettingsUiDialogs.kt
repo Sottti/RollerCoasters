@@ -9,38 +9,40 @@ internal fun Dialogs(
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
 ) {
-    state.appTheme.picker?.let { themePickerState ->
-        AppThemePickerDialog(
-            state = themePickerState,
-            onAction = onAction,
-        )
-    }
+    with(state) {
+        appTheme.picker?.let { themePickerState ->
+            AppThemePickerDialog(
+                state = themePickerState,
+                onAction = onAction,
+            )
+        }
 
-    state.appColorContrast.picker?.let { colorContrastPickerState ->
-        AppColorContrastPickerDialog(
-            state = colorContrastPickerState,
-            onAction = onAction,
-        )
-    }
+        appColorContrast.picker?.let { colorContrastPickerState ->
+            AppColorContrastPickerDialog(
+                state = colorContrastPickerState,
+                onAction = onAction,
+            )
+        }
 
-    state.appColorContrast.notAvailableMessage?.let { colorContrastNotAvailableMessageState ->
-        AppColorContrastNotAvailableDialog(
-            state = colorContrastNotAvailableMessageState,
-            onAction = onAction,
-        )
-    }
+        appColorContrast.notAvailableMessage?.let { colorContrastNotAvailableMessageState ->
+            AppColorContrastNotAvailableDialog(
+                state = colorContrastNotAvailableMessageState,
+                onAction = onAction,
+            )
+        }
 
-    state.appLanguage.picker?.let { languagePickerState ->
-        LanguagePickerDialog(
-            state = languagePickerState,
-            onAction = onAction,
-        )
-    }
+        appLanguage.picker?.let { languagePickerState ->
+            AppLanguagePickerDialog(
+                state = languagePickerState,
+                onAction = onAction,
+            )
+        }
 
-    state.appMeasurementSystem.picker?.let { measurementSystemPickerState ->
-        AppMeasurementSystemPickerDialog(
-            state = measurementSystemPickerState,
-            onAction = onAction,
-        )
+        appMeasurementSystem.picker?.let { measurementSystemPickerState ->
+            AppMeasurementSystemPickerDialog(
+                state = measurementSystemPickerState,
+                onAction = onAction,
+            )
+        }
     }
 }
