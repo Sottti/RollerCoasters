@@ -12,6 +12,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import com.sottti.roller.coasters.presentation.settings.data.SettingsViewModel
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsPreviewState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.ui.dialogs.Dialogs
@@ -33,6 +34,7 @@ internal fun SettingsUi(
     viewModel: SettingsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    viewModel.onAction(LoadUi)
 
     SettingsUi(
         onAction = viewModel.onAction,
@@ -69,8 +71,7 @@ internal fun SettingsUi(
 @Composable
 @LightDarkThemePreview
 internal fun SettingsUiPreview(
-    @PreviewParameter(SettingsUiStateProvider::class)
-    state: SettingsPreviewState,
+    @PreviewParameter(SettingsUiStateProvider::class) state: SettingsPreviewState,
 ) {
     RollerCoastersPreviewTheme {
         SettingsUi(
@@ -84,8 +85,7 @@ internal fun SettingsUiPreview(
 @Composable
 @LightDarkThemePreview
 internal fun SettingsUiPickersPreview(
-    @PreviewParameter(SettingsUiPickersStateProvider::class)
-    state: SettingsPreviewState,
+    @PreviewParameter(SettingsUiPickersStateProvider::class) state: SettingsPreviewState,
 ) {
     RollerCoastersPreviewTheme {
         SettingsUi(

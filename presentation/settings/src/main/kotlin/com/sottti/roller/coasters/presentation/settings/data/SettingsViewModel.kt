@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sottti.roller.coasters.domain.features.Features
@@ -62,6 +63,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.App
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.DismissAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -88,85 +90,81 @@ internal class SettingsViewModel @Inject constructor(
     private val setAppLanguage: SetAppLanguage,
     private val setAppMeasurementSystem: SetAppMeasurementSystem,
     private val setAppTheme: SetAppTheme,
+    @get:VisibleForTesting private val initialState: SettingsState? = null,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(initialState(features.systemDynamicColorAvailable()))
+
+    private val _state = MutableStateFlow(
+        initialState ?: initialState(features.systemDynamicColorAvailable())
+    )
     internal val state: StateFlow<SettingsState> = _state.asStateFlow()
     internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
-
-    init {
-        if (features.systemDynamicColorAvailable()) {
-            collectAppDynamicColor()
-        }
-        collectTheme()
-        collectAppColorContrast()
-        collectAppLanguage()
-        collectMeasurementSystem()
-    }
-
-    private fun collectAppDynamicColor() {
-        viewModelScope.launch {
-            observeAppDynamicColor()
-                .collect { dynamicColorChecked ->
-                    _state.update { currentState ->
-                        currentState.updateDynamicColor(
-                            dynamicColorChecked
-                        )
-                    }
-                }
-        }
-    }
-
-    private fun collectTheme() {
-        viewModelScope.launch {
-            observeAppTheme()
-                .collect { theme ->
-                    _state.update { currentState -> currentState.updateAppTheme(theme) }
-                }
-        }
-    }
-
-    private fun collectAppColorContrast() {
-        viewModelScope.launch {
-            observeAppColorContrast()
-                .collect { appColorContrast ->
-                    _state.update { currentState ->
-                        currentState.updateAppColorContrast(
-                            appColorContrast
-                        )
-                    }
-                }
-        }
-    }
-
-    private fun collectAppLanguage() {
-        viewModelScope.launch {
-            observeAppLanguage()
-                .collect { appLanguage ->
-                    _state.update { currentState -> currentState.updateAppLanguage(appLanguage) }
-                }
-        }
-    }
-
-    private fun collectMeasurementSystem() {
-        viewModelScope.launch {
-            observeAppMeasurementSystem()
-                .collect { measurementSystem ->
-                    _state.update { currentState ->
-                        currentState.updateAppMeasurementSystem(measurementSystem)
-                    }
-                }
-        }
-    }
 
     private fun processAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
+                is LoadUi ->{
+                    if (features.systemDynamicColorAvailable()) collectAppDynamicColor()
+                    collectTheme()
+                    collectAppColorContrast()
+                    collectAppLanguage()
+                    collectMeasurementSystem()
+                }
                 is DynamicColorCheckedChange -> handleDynamicColorChange(action)
                 is AppThemeActions -> handleAppThemeAction(action)
                 is AppColorContrastActions -> handleAppColorContrastAction(action)
                 is AppLanguageActions -> handleAppLanguageAction(action)
                 is AppMeasurementSystemActions -> handleAppMeasurementSystemAction(action)
+            }
+        }
+    }
+
+    private fun collectAppDynamicColor() {
+        viewModelScope.launch {
+            observeAppDynamicColor().collect { dynamicColorChecked ->
+                _state.update { currentState ->
+                    currentState.updateDynamicColor(
+                        dynamicColorChecked
+                    )
+                }
+            }
+        }
+    }
+
+    private fun collectTheme() {
+        viewModelScope.launch {
+            observeAppTheme().collect { theme ->
+                _state.update { currentState -> currentState.updateAppTheme(theme) }
+            }
+        }
+    }
+
+    private fun collectAppColorContrast() {
+        viewModelScope.launch {
+            observeAppColorContrast().collect { appColorContrast ->
+                _state.update { currentState ->
+                    currentState.updateAppColorContrast(
+                        appColorContrast
+                    )
+                }
+            }
+        }
+    }
+
+    private fun collectAppLanguage() {
+        viewModelScope.launch {
+            observeAppLanguage().collect { appLanguage ->
+                _state.update { currentState -> currentState.updateAppLanguage(appLanguage) }
+            }
+        }
+    }
+
+    private fun collectMeasurementSystem() {
+        viewModelScope.launch {
+            observeAppMeasurementSystem().collect { measurementSystem ->
+                _state.update { currentState ->
+                    currentState.updateAppMeasurementSystem(measurementSystem)
+                }
             }
         }
     }
@@ -185,8 +183,7 @@ internal class SettingsViewModel @Inject constructor(
     private suspend fun handleAppThemeAction(action: AppThemeActions) {
         when (action) {
             is LaunchAppThemePicker -> {
-                val lightDarkSystemThemingAvailable =
-                    features.lightDarkSystemThemingAvailable()
+                val lightDarkSystemThemingAvailable = features.lightDarkSystemThemingAvailable()
                 val theme = getAppTheme().toPresentationModel(selected = true)
                 _state.update { currentState ->
                     currentState.showAppThemePicker(
@@ -252,9 +249,7 @@ internal class SettingsViewModel @Inject constructor(
     private suspend fun handleAppLanguageAction(action: AppLanguageActions) {
         when (action) {
             is LaunchAppLanguagePicker -> _state.update { currentState ->
-                currentState.showAppLanguagePicker(
-                    getAppLanguage()
-                )
+                currentState.showAppLanguagePicker(getAppLanguage())
             }
 
             is AppLanguagePickerSelectionChange -> _state.update { currentState ->

@@ -5,6 +5,9 @@ import androidx.compose.runtime.Immutable
 @Immutable
 internal sealed interface SettingsAction {
     @Immutable
+    data object LoadUi : SettingsAction
+
+    @Immutable
     data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction
 
     @Immutable
