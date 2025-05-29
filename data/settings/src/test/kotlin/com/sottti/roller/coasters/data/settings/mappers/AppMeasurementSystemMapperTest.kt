@@ -37,37 +37,31 @@ internal class AppMeasurementSystemMapperTest {
 
     @Test
     fun `imperial uk key maps to imperial uk`() {
-        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_UK.toAppMeasurementSystem())
-            .isEqualTo(ImperialUk)
+        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_UK.toAppMeasurementSystem()).isEqualTo(ImperialUk)
     }
 
     @Test
     fun `imperial us key maps to imperial us`() {
-        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_US.toAppMeasurementSystem())
-            .isEqualTo(ImperialUs)
+        assertThat(MEASUREMENT_SYSTEM_IMPERIAL_US.toAppMeasurementSystem()).isEqualTo(ImperialUs)
     }
 
     @Test
     fun `metric key maps to metric`() {
-        assertThat(MEASUREMENT_SYSTEM_METRIC.toAppMeasurementSystem())
-            .isEqualTo(Metric)
+        assertThat(MEASUREMENT_SYSTEM_METRIC.toAppMeasurementSystem()).isEqualTo(Metric)
     }
 
     @Test
     fun `system key maps to system`() {
-        assertThat(MEASUREMENT_SYSTEM_SYSTEM.toAppMeasurementSystem())
-            .isEqualTo(System)
+        assertThat(MEASUREMENT_SYSTEM_SYSTEM.toAppMeasurementSystem()).isEqualTo(System)
     }
 
     @Test
     fun `unknown key maps to system`() {
-        assertThat("unknown_measurement".toAppMeasurementSystem())
-            .isEqualTo(System)
+        assertThat("unknown_measurement".toAppMeasurementSystem()).isEqualTo(System)
     }
 
     @Test
     fun `empty key maps to system`() {
-        assertThat("".toAppMeasurementSystem())
-            .isEqualTo(System)
+        assertThat("".toAppMeasurementSystem()).isEqualTo(System)
     }
 }

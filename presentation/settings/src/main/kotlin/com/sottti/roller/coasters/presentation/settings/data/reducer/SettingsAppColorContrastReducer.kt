@@ -13,77 +13,60 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorCo
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.StandardContrast
 import com.sottti.roller.coasters.presentation.settings.model.SystemContrast
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
-internal fun MutableStateFlow<SettingsState>.updateAppColorContrast(
-    appColorContrast: AppColorContrast,
-) {
-    update { currentState ->
-        currentState.copy(
-            appColorContrast = currentState.appColorContrast.copy(
-                listItem = currentState.appColorContrast.listItem.copy(
-                    selectedAppColorContrast = SelectedAppColorContrastState.Loaded(
-                        appColorContrast.toPresentationModel(selected = true),
-                    )
-                ),
+internal fun SettingsState.updateAppColorContrast(
+    newAppColorContrast: AppColorContrast,
+) = copy(
+    appColorContrast = this.appColorContrast.copy(
+        listItem = this.appColorContrast.listItem.copy(
+            selectedAppColorContrast = SelectedAppColorContrastState.Loaded(
+                newAppColorContrast.toPresentationModel(selected = true),
+            )
+        ),
+    )
+)
+
+internal fun SettingsState.showAppColorContrastPicker(
+    newAppColorContrast: AppColorContrast,
+    appColorContrastAvailable: Boolean,
+): SettingsState = when {
+    isDynamicColorChecked() -> copy(
+        appColorContrast.copy(
+            picker = null,
+            notAvailableMessage = appColorContrastNotAvailableMessageState(),
+        )
+    )
+
+    else -> copy(
+        appColorContrast = appColorContrast.copy(
+            notAvailableMessage = null,
+            picker = appColorContrastPickerState(
+                appColorContrastAvailable = appColorContrastAvailable,
+                selectedAppColorContrast =
+                    newAppColorContrast.toPresentationModel(selected = true)
             )
         )
-    }
-}
-
-internal fun MutableStateFlow<SettingsState>.showAppColorContrastPicker(
-    appColorContrast: AppColorContrast,
-    appColorContrastAvailable: Boolean,
-) {
-    update { currentState ->
-        when {
-            currentState.isDynamicColorChecked() -> currentState.copy(
-                currentState.appColorContrast.copy(
-                    picker = null,
-                    notAvailableMessage = appColorContrastNotAvailableMessageState(),
-                )
-            )
-
-            else -> currentState.copy(
-                appColorContrast = currentState.appColorContrast.copy(
-                    notAvailableMessage = null,
-                    picker = appColorContrastPickerState(
-                        appColorContrastAvailable = appColorContrastAvailable,
-                        selectedAppColorContrast =
-                            appColorContrast.toPresentationModel(selected = true)
-                    )
-                )
-            )
-        }
-    }
+    )
 }
 
 private fun SettingsState.isDynamicColorChecked() =
     dynamicColor?.checkedState is DynamicColorCheckedState.Loaded
             && dynamicColor.checkedState.checked
 
-internal fun MutableStateFlow<SettingsState>.updateAppColorContrastPicker(
+internal fun SettingsState.updateAppColorContrastPicker(
     appColorContrastAvailable: Boolean,
     selectedAppColorContrast: AppColorContrastUi,
-) {
-    update { currentState ->
-        currentState.copy(
-            appColorContrast = currentState.appColorContrast.copy(
-                picker = appColorContrastPickerState(
-                    appColorContrastAvailable = appColorContrastAvailable,
-                    selectedAppColorContrast = selectedAppColorContrast,
-                )
-            )
+) = copy(
+    appColorContrast = appColorContrast.copy(
+        picker = appColorContrastPickerState(
+            appColorContrastAvailable = appColorContrastAvailable,
+            selectedAppColorContrast = selectedAppColorContrast,
         )
-    }
-}
+    )
+)
 
-internal fun MutableStateFlow<SettingsState>.hideAppColorContrastPicker() {
-    update { currentState ->
-        currentState.copy(appColorContrast = currentState.appColorContrast.copy(picker = null))
-    }
-}
+internal fun SettingsState.hideAppColorContrastPicker() =
+    copy(appColorContrast = appColorContrast.copy(picker = null))
 
 private fun appColorContrastNotAvailableMessageState(): AppColorContrastNotAvailableMessageState =
     AppColorContrastNotAvailableMessageState(
@@ -106,7 +89,7 @@ private fun colorContrastsList(
     appColorContrastAvailable: Boolean,
     selectedAppColorContrast: AppColorContrastUi,
 ) = listOfNotNull(
-    AppColorContrast.SystemContrast.toPresentationModel(
+    AppColorContrast.System.toPresentationModel(
         selected = selectedAppColorContrast is SystemContrast
     ).takeIf { appColorContrastAvailable },
     AppColorContrast.StandardContrast.toPresentationModel(
@@ -120,10 +103,5 @@ private fun colorContrastsList(
     ),
 )
 
-internal fun MutableStateFlow<SettingsState>.hideAppColorContrastNotAvailableMessage() {
-    update { currentState ->
-        currentState.copy(
-            appColorContrast = currentState.appColorContrast.copy(notAvailableMessage = null)
-        )
-    }
-}
+internal fun SettingsState.hideAppColorContrastNotAvailableMessage() =
+    copy(appColorContrast = appColorContrast.copy(notAvailableMessage = null))

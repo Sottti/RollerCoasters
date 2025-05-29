@@ -32,7 +32,7 @@ internal class AppColorContrastMapperTest {
 
     @Test
     fun `system contrast maps to its key`() {
-        assertThat(AppColorContrast.SystemContrast.key)
+        assertThat(AppColorContrast.System.key)
             .isEqualTo(COLOR_CONTRAST_KEY_SYSTEM)
     }
 
@@ -57,18 +57,18 @@ internal class AppColorContrastMapperTest {
     @Test
     fun `system contrast key maps to system contrast`() {
         assertThat(COLOR_CONTRAST_KEY_SYSTEM.toAppColorContrast())
-            .isEqualTo(AppColorContrast.SystemContrast)
+            .isEqualTo(AppColorContrast.System)
     }
 
     @Test
     fun `unknown key maps to system contrast`() {
         assertThat("unknown_contrast".toAppColorContrast())
-            .isEqualTo(AppColorContrast.SystemContrast)
+            .isEqualTo(AppColorContrast.System)
     }
 
     @Test
     fun `empty key maps to system contrast`() {
         assertThat("".toAppColorContrast())
-            .isEqualTo(AppColorContrast.SystemContrast)
+            .isEqualTo(AppColorContrast.System)
     }
 }

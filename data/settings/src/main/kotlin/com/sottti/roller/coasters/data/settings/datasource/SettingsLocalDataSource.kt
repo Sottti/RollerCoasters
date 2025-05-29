@@ -21,7 +21,7 @@ import com.sottti.roller.coasters.data.settings.mapper.toTheme
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
@@ -164,14 +164,14 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     private val appThemeDefaultValue by lazy {
         when {
-            features.lightDarkSystemThemingAvailable() -> AppTheme.SystemAppTheme.key
+            features.lightDarkSystemThemingAvailable() -> AppTheme.System.key
             else -> AppTheme.LightAppTheme.key
         }
     }
 
     private val appColorContrastDefaultValue by lazy {
         when {
-            features.systemColorContrastAvailable() -> SystemContrast.key
+            features.systemColorContrastAvailable() -> System.key
             else -> StandardContrast.key
         }
     }

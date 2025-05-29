@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.settings.data
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sottti.roller.coasters.domain.features.Features
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.GetAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveAppColorContrast
@@ -67,6 +67,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -106,28 +107,44 @@ internal class SettingsViewModel @Inject constructor(
     private fun collectAppDynamicColor() {
         viewModelScope.launch {
             observeAppDynamicColor()
-                .collect { dynamicColorChecked -> _state.updateDynamicColor(dynamicColorChecked) }
+                .collect { dynamicColorChecked ->
+                    _state.update { currentState ->
+                        currentState.updateDynamicColor(
+                            dynamicColorChecked
+                        )
+                    }
+                }
         }
     }
 
     private fun collectTheme() {
         viewModelScope.launch {
             observeAppTheme()
-                .collect { theme -> _state.updateAppTheme(theme) }
+                .collect { theme ->
+                    _state.update { currentState -> currentState.updateAppTheme(theme) }
+                }
         }
     }
 
     private fun collectAppColorContrast() {
         viewModelScope.launch {
             observeAppColorContrast()
-                .collect { appColorContrast -> _state.updateAppColorContrast(appColorContrast) }
+                .collect { appColorContrast ->
+                    _state.update { currentState ->
+                        currentState.updateAppColorContrast(
+                            appColorContrast
+                        )
+                    }
+                }
         }
     }
 
     private fun collectAppLanguage() {
         viewModelScope.launch {
             observeAppLanguage()
-                .collect { appLanguage -> _state.updateAppLanguage(appLanguage) }
+                .collect { appLanguage ->
+                    _state.update { currentState -> currentState.updateAppLanguage(appLanguage) }
+                }
         }
     }
 
@@ -135,7 +152,9 @@ internal class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             observeAppMeasurementSystem()
                 .collect { measurementSystem ->
-                    _state.updateAppMeasurementSystem(measurementSystem)
+                    _state.update { currentState ->
+                        currentState.updateAppMeasurementSystem(measurementSystem)
+                    }
                 }
         }
     }
@@ -159,91 +178,124 @@ internal class SettingsViewModel @Inject constructor(
         }
         setAppDynamicColor(appDynamicColor)
         if (action.checked) {
-            setAppColorContrast(SystemContrast)
+            setAppColorContrast(System)
         }
     }
 
     private suspend fun handleAppThemeAction(action: AppThemeActions) {
         when (action) {
             is LaunchAppThemePicker -> {
-                val lightDarkSystemThemingAvailable = features.lightDarkSystemThemingAvailable()
+                val lightDarkSystemThemingAvailable =
+                    features.lightDarkSystemThemingAvailable()
                 val theme = getAppTheme().toPresentationModel(selected = true)
-                _state.showAppThemePicker(
-                    lightDarkAppThemingAvailable = lightDarkSystemThemingAvailable,
-                    theme = theme,
+                _state.update { currentState ->
+                    currentState.showAppThemePicker(
+                        lightDarkAppThemingAvailable = lightDarkSystemThemingAvailable,
+                        selectedAppTheme = theme,
+                    )
+                }
+            }
+
+            is AppThemePickerSelectionChange -> _state.update { currentState ->
+                currentState.updateAppThemePicker(
+                    lightDarkAppThemingAvailable = features.lightDarkSystemThemingAvailable(),
+                    selectedAppTheme = action.appTheme,
                 )
             }
 
-            is AppThemePickerSelectionChange -> _state.updateAppThemePicker(
-                lightDarkAppThemingAvailable = features.lightDarkSystemThemingAvailable(),
-                theme = action.appTheme,
-            )
-
             is ConfirmAppThemePickerSelection -> {
-                _state.hideAppThemePicker()
+                _state.update { currentState -> currentState.hideAppThemePicker() }
                 setAppTheme(action.appTheme.toDomain())
             }
 
-            is DismissAppThemePicker -> _state.hideAppThemePicker()
+            is DismissAppThemePicker -> _state.update { currentState ->
+                currentState.hideAppThemePicker()
+            }
         }
     }
 
     private suspend fun handleAppColorContrastAction(action: AppColorContrastActions) {
         when (action) {
             is LaunchAppColorContrastPicker -> {
-                _state.showAppColorContrastPicker(
-                    appColorContrast = getAppColorContrast(),
-                    appColorContrastAvailable = features.systemColorContrastAvailable(),
-                )
+                _state.update { currentState ->
+                    currentState.showAppColorContrastPicker(
+                        newAppColorContrast = getAppColorContrast(),
+                        appColorContrastAvailable = features.systemColorContrastAvailable(),
+                    )
+                }
             }
 
             is AppColorContrastPickerSelectionChange -> {
-                _state.updateAppColorContrastPicker(
-                    appColorContrastAvailable = features.systemColorContrastAvailable(),
-                    selectedAppColorContrast = action.appColorContrast,
-                )
+                _state.update { currentState ->
+                    currentState.updateAppColorContrastPicker(
+                        appColorContrastAvailable = features.systemColorContrastAvailable(),
+                        selectedAppColorContrast = action.appColorContrast,
+                    )
+                }
             }
 
             is ConfirmColorContrastPickerSelection -> {
-                _state.hideAppColorContrastPicker()
+                _state.update { currentState -> currentState.hideAppColorContrastPicker() }
                 setAppColorContrast(action.appColorContrast.toDomain())
             }
 
-            is DismissAppColorContrastPicker -> _state.hideAppColorContrastPicker()
-            is DismissAppColorContrastNotAvailableMessage -> _state.hideAppColorContrastNotAvailableMessage()
+            is DismissAppColorContrastPicker -> _state.update { currentState ->
+                currentState.hideAppColorContrastPicker()
+            }
+
+            is DismissAppColorContrastNotAvailableMessage -> _state.update { currentState ->
+                currentState.hideAppColorContrastNotAvailableMessage()
+            }
         }
     }
 
     private suspend fun handleAppLanguageAction(action: AppLanguageActions) {
         when (action) {
-            is LaunchAppLanguagePicker -> _state.showAppLanguagePicker(getAppLanguage())
-            is AppLanguagePickerSelectionChange ->
-                _state.updateAppLanguagePicker(action.appLanguage)
+            is LaunchAppLanguagePicker -> _state.update { currentState ->
+                currentState.showAppLanguagePicker(
+                    getAppLanguage()
+                )
+            }
+
+            is AppLanguagePickerSelectionChange -> _state.update { currentState ->
+                currentState.updateAppLanguagePicker(
+                    action.appLanguage
+                )
+            }
 
             is ConfirmAppLanguagePickerSelection -> {
-                _state.hideAppLanguagePicker()
+                _state.update { currentState -> currentState.hideAppLanguagePicker() }
                 setAppLanguage(action.appLanguage.toDomain())
             }
 
-            is DismissAppLanguagePicker -> _state.hideAppLanguagePicker()
+            is DismissAppLanguagePicker -> _state.update { currentState ->
+                currentState.hideAppLanguagePicker()
+            }
         }
     }
 
     private suspend fun handleAppMeasurementSystemAction(action: AppMeasurementSystemActions) {
         when (action) {
-            is LaunchAppMeasurementSystemPicker ->
-                _state.showAppMeasurementSystemPicker(getAppMeasurementSystem())
+            is LaunchAppMeasurementSystemPicker -> _state.update { currentState ->
+                currentState.showAppMeasurementSystemPicker(
+                    getAppMeasurementSystem()
+                )
+            }
 
-            is AppMeasurementSystemPickerSelectionChange -> {
-                _state.updateAppMeasurementSystemPicker(action.appMeasurementSystem)
+            is AppMeasurementSystemPickerSelectionChange -> _state.update { currentState ->
+                currentState.updateAppMeasurementSystemPicker(
+                    action.appMeasurementSystem
+                )
             }
 
             is ConfirmAppMeasurementSystemPickerSelection -> {
-                _state.hideAppMeasurementSystemPicker()
+                _state.update { currentState -> currentState.hideAppMeasurementSystemPicker() }
                 setAppMeasurementSystem(action.appMeasurementSystem.toDomain())
             }
 
-            is DismissAppMeasurementSystemPicker -> _state.hideAppMeasurementSystemPicker()
+            is DismissAppMeasurementSystemPicker -> _state.update { currentState ->
+                currentState.hideAppMeasurementSystemPicker()
+            }
         }
     }
 }

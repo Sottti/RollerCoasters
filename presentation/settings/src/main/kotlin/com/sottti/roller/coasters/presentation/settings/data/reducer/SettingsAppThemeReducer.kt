@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.settings.data.reducer
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.DarkAppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.LightAppTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.System
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi
@@ -13,78 +13,61 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeSt
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SystemTheme
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
-internal fun MutableStateFlow<SettingsState>.updateAppTheme(
-    appTheme: AppTheme,
-) {
-    update { currentState ->
-        currentState.copy(
-            appTheme = currentState.appTheme.copy(
-                currentState.appTheme.listItem.copy(
-                    selectedAppTheme = SelectedAppThemeState.Loaded(
-                        appTheme.toPresentationModel(selected = true),
-                    )
-                ),
+internal fun SettingsState.updateAppTheme(
+    newAppTheme: AppTheme,
+): SettingsState = copy(
+    appTheme = appTheme.copy(
+        appTheme.listItem.copy(
+            selectedAppTheme = SelectedAppThemeState.Loaded(
+                newAppTheme.toPresentationModel(selected = true),
             )
-        )
-    }
-}
+        ),
+    )
+)
 
-internal fun MutableStateFlow<SettingsState>.showAppThemePicker(
+internal fun SettingsState.showAppThemePicker(
     lightDarkAppThemingAvailable: Boolean,
-    theme: AppThemeUi,
-) {
-    update { currentState ->
-        currentState.copy(
-            appTheme = currentState.appTheme.copy(
-                picker = appThemePickerState(
-                    lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
-                    theme = theme,
-                )
-            )
+    selectedAppTheme: AppThemeUi,
+): SettingsState = copy(
+    appTheme = appTheme.copy(
+        picker = appThemePickerState(
+            lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
+            selectedAppTheme = selectedAppTheme,
         )
-    }
-}
+    )
+)
 
-internal fun MutableStateFlow<SettingsState>.updateAppThemePicker(
+internal fun SettingsState.updateAppThemePicker(
     lightDarkAppThemingAvailable: Boolean,
-    theme: AppThemeUi,
-) {
-    update { currentState ->
-        currentState.copy(
-            appTheme = currentState.appTheme.copy(
-                picker = appThemePickerState(
-                    lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
-                    theme = theme,
-                )
-            ),
+    selectedAppTheme: AppThemeUi,
+): SettingsState = copy(
+    appTheme = appTheme.copy(
+        picker = appThemePickerState(
+            lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
+            selectedAppTheme = selectedAppTheme,
         )
-    }
-}
+    ),
+)
 
-internal fun MutableStateFlow<SettingsState>.hideAppThemePicker() {
-    update { currentState ->
-        currentState.copy(appTheme = currentState.appTheme.copy(picker = null))
-    }
-}
+internal fun SettingsState.hideAppThemePicker(): SettingsState =
+    copy(appTheme = appTheme.copy(picker = null))
 
 private fun appThemePickerState(
     lightDarkAppThemingAvailable: Boolean,
-    theme: AppThemeUi,
+    selectedAppTheme: AppThemeUi,
 ) = ThemePickerState(
     title = R.string.theme_picker_title,
     confirm = R.string.picker_confirm,
     dismiss = R.string.picker_dismiss,
-    appThemes = appThemesList(lightDarkAppThemingAvailable, theme),
+    appThemes = appThemesList(lightDarkAppThemingAvailable, selectedAppTheme),
 )
 
 private fun appThemesList(
     lightDarkAppThemingAvailable: Boolean,
     selectedAppTheme: AppThemeUi,
 ) = listOfNotNull(
-    SystemAppTheme.toPresentationModel(selected = selectedAppTheme is SystemTheme)
+    System.toPresentationModel(selected = selectedAppTheme is SystemTheme)
         .takeIf { lightDarkAppThemingAvailable },
     LightAppTheme.toPresentationModel(selected = selectedAppTheme is LightTheme),
     DarkAppTheme.toPresentationModel(selected = selectedAppTheme is DarkTheme),

@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
@@ -51,7 +51,7 @@ internal class ObserveResolvedColorContrastTest {
 
     @Test
     fun `emits resolved high contrast when system high contrast is observed`() = runTest {
-        every { settingsRepository.observeAppColorContrast() } returns flowOf(SystemContrast)
+        every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
             settingsRepository.getAppSystemColorContrast()
         } returns SystemColorContrast.HighContrast
@@ -61,7 +61,7 @@ internal class ObserveResolvedColorContrastTest {
 
     @Test
     fun `emits resolved low contrast when system low contrast is observed`() = runTest {
-        every { settingsRepository.observeAppColorContrast() } returns flowOf(SystemContrast)
+        every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
             settingsRepository.getAppSystemColorContrast()
         } returns SystemColorContrast.LowContrast
@@ -71,7 +71,7 @@ internal class ObserveResolvedColorContrastTest {
 
     @Test
     fun `emits resolved medium contrast when system medium contrast is observed`() = runTest {
-        every { settingsRepository.observeAppColorContrast() } returns flowOf(SystemContrast)
+        every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
             settingsRepository.getAppSystemColorContrast()
         } returns SystemColorContrast.MediumContrast
@@ -81,7 +81,7 @@ internal class ObserveResolvedColorContrastTest {
 
     @Test
     fun `emits resolved standard contrast when system standard contrast is observed`() = runTest {
-        every { settingsRepository.observeAppColorContrast() } returns flowOf(SystemContrast)
+        every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
             settingsRepository.getAppSystemColorContrast()
         } returns SystemColorContrast.StandardContrast
@@ -93,7 +93,7 @@ internal class ObserveResolvedColorContrastTest {
     fun `emits multiple resolved contrasts when observed`() = runTest {
         every {
             settingsRepository.observeAppColorContrast()
-        } returns flowOf(HighContrast, SystemContrast)
+        } returns flowOf(HighContrast, System)
         coEvery {
             settingsRepository.getAppSystemColorContrast()
         } returns SystemColorContrast.MediumContrast

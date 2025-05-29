@@ -23,7 +23,7 @@ public class ObserveResolvedColorContrast @Inject constructor(
             AppColorContrast.StandardContrast,
                 -> toResolvedColorContrast()
 
-            AppColorContrast.SystemContrast ->
+            AppColorContrast.System ->
                 settingsRepository.getAppSystemColorContrast().toResolvedColorContrast()
         }
 }

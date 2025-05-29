@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.domain.settings.usecase.theme
 
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.DarkAppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.LightAppTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.System
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -38,8 +38,8 @@ internal class GetAppThemeTest {
 
     @Test
     fun `returns system app theme when repository provides system app theme`() = runTest {
-        coEvery { settingsRepository.getAppTheme() } returns SystemAppTheme
+        coEvery { settingsRepository.getAppTheme() } returns System
         val result = getAppTheme()
-        assertEquals(SystemAppTheme, result)
+        assertEquals(System, result)
     }
 }

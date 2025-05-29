@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.domain.settings.usecase.colorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -48,9 +48,9 @@ internal class ObserveAppColorContrastTest {
 
     @Test
     fun `emits system contrast when repository flow emits system contrast`() = runTest {
-        every { settingsRepository.observeAppColorContrast() } returns flowOf(SystemContrast)
+        every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         val result = observeAppColorContrast().toList()
-        assertEquals(listOf(SystemContrast), result)
+        assertEquals(listOf(System), result)
     }
 
     @Test

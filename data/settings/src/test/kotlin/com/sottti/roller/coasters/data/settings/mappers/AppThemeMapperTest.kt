@@ -30,7 +30,7 @@ internal class AppThemeMapperTest {
 
     @Test
     fun `system theme maps to its key`() {
-        assertThat(AppTheme.SystemAppTheme.key).isEqualTo(THEME_KEY_SYSTEM)
+        assertThat(AppTheme.System.key).isEqualTo(THEME_KEY_SYSTEM)
     }
 
     @Test
@@ -48,13 +48,13 @@ internal class AppThemeMapperTest {
     @Test
     fun `unknown key maps to system theme`() {
         val result = "unknown_theme".toTheme()
-        assertThat(result).isEqualTo(AppTheme.SystemAppTheme)
+        assertThat(result).isEqualTo(AppTheme.System)
     }
 
     @Test
     fun `empty key maps to system theme`() {
         val result = "".toTheme()
-        assertThat(result).isEqualTo(AppTheme.SystemAppTheme)
+        assertThat(result).isEqualTo(AppTheme.System)
     }
 
     @Test
@@ -71,7 +71,7 @@ internal class AppThemeMapperTest {
 
     @Test
     fun `system theme maps to night custom`() {
-        val result = AppTheme.SystemAppTheme.toUiModeManagerNightMode()
+        val result = AppTheme.System.toUiModeManagerNightMode()
         assertThat(result).isEqualTo(MODE_NIGHT_CUSTOM)
     }
 
@@ -89,7 +89,7 @@ internal class AppThemeMapperTest {
 
     @Test
     fun `system theme maps to app compat follow system`() {
-        val result = AppTheme.SystemAppTheme.toAppCompatDelegateNightMode()
+        val result = AppTheme.System.toAppCompatDelegateNightMode()
         assertThat(result).isEqualTo(MODE_NIGHT_FOLLOW_SYSTEM)
     }
 }

@@ -22,14 +22,14 @@ internal fun AppTheme.toPresentationModel(selected: Boolean): AppThemeUi =
     when (this) {
         AppTheme.LightAppTheme -> lightTheme(selected)
         AppTheme.DarkAppTheme -> darkTheme(selected)
-        AppTheme.SystemAppTheme -> systemTheme(selected)
+        AppTheme.System -> systemTheme(selected)
     }
 
 internal fun AppThemeUi.toDomain(): AppTheme =
     when (this) {
         is DarkTheme -> AppTheme.DarkAppTheme
         is LightTheme -> AppTheme.LightAppTheme
-        is SystemTheme -> AppTheme.SystemAppTheme
+        is SystemTheme -> AppTheme.System
     }
 
 private fun systemTheme(

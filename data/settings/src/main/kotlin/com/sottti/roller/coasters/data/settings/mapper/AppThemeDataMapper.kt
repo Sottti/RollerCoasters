@@ -20,25 +20,25 @@ internal val AppTheme.key: String
     get() = when (this) {
         AppTheme.DarkAppTheme -> THEME_KEY_DARK
         AppTheme.LightAppTheme -> THEME_KEY_LIGHT
-        AppTheme.SystemAppTheme -> THEME_KEY_SYSTEM
+        AppTheme.System -> THEME_KEY_SYSTEM
     }
 
 internal fun String.toTheme(): AppTheme =
     when (this) {
         THEME_KEY_DARK -> AppTheme.DarkAppTheme
         THEME_KEY_LIGHT -> AppTheme.LightAppTheme
-        else -> AppTheme.SystemAppTheme
+        else -> AppTheme.System
     }
 
 @RequiresApi(Build.VERSION_CODES.R)
 internal fun AppTheme.toUiModeManagerNightMode() = when (this) {
     AppTheme.DarkAppTheme -> UiModeManager.MODE_NIGHT_YES
     AppTheme.LightAppTheme -> UiModeManager.MODE_NIGHT_NO
-    AppTheme.SystemAppTheme -> UiModeManager.MODE_NIGHT_CUSTOM
+    AppTheme.System -> UiModeManager.MODE_NIGHT_CUSTOM
 }
 
 internal fun AppTheme.toAppCompatDelegateNightMode() = when (this) {
     AppTheme.DarkAppTheme -> AppCompatDelegate.MODE_NIGHT_YES
     AppTheme.LightAppTheme -> AppCompatDelegate.MODE_NIGHT_NO
-    AppTheme.SystemAppTheme -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+    AppTheme.System -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 }

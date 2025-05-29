@@ -19,7 +19,7 @@ internal fun DialogRadioButtonOption.toAppColorContrastUi(
 
 internal fun AppColorContrast.toPresentationModel(selected: Boolean): AppColorContrastUi =
     when (this) {
-        AppColorContrast.SystemContrast -> systemContrast(selected)
+        AppColorContrast.System -> systemContrast(selected)
         AppColorContrast.StandardContrast -> standardContrast(selected)
         AppColorContrast.MediumContrast -> mediumContrast(selected)
         AppColorContrast.HighContrast -> highContrast(selected)
@@ -30,7 +30,7 @@ internal fun AppColorContrastUi.toDomain(): AppColorContrast =
         is HighContrast -> AppColorContrast.HighContrast
         is MediumContrast -> AppColorContrast.MediumContrast
         is StandardContrast -> AppColorContrast.StandardContrast
-        is SystemContrast -> AppColorContrast.SystemContrast
+        is SystemContrast -> AppColorContrast.System
     }
 
 private fun systemContrast(

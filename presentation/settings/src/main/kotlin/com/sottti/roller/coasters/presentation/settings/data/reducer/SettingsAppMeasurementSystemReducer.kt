@@ -15,57 +15,41 @@ import com.sottti.roller.coasters.presentation.settings.model.Metric
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SystemApp
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
-internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystem(
-    appMeasurementSystem: AppMeasurementSystem,
-) {
-    update { currentState ->
-        currentState.copy(
-            appMeasurementSystem = currentState.appMeasurementSystem.copy(
-                listItem = currentState.appMeasurementSystem.listItem.copy(
-                    selectedAppMeasurementSystem = SelectedAppMeasurementSystemState.Loaded(
-                        appMeasurementSystem.toPresentationModel(selected = true),
-                    )
-                ),
+internal fun SettingsState.updateAppMeasurementSystem(
+    newAppMeasurementSystem: AppMeasurementSystem,
+): SettingsState = copy(
+    appMeasurementSystem = this.appMeasurementSystem.copy(
+        listItem = this.appMeasurementSystem.listItem.copy(
+            selectedAppMeasurementSystem = SelectedAppMeasurementSystemState.Loaded(
+                newAppMeasurementSystem.toPresentationModel(selected = true),
             )
-        )
-    }
-}
+        ),
+    ),
+)
 
-internal fun MutableStateFlow<SettingsState>.showAppMeasurementSystemPicker(
-    appMeasurementSystem: AppMeasurementSystem,
-) {
-    update { currentState ->
-        currentState.copy(
-            appMeasurementSystem = currentState.appMeasurementSystem.copy(
-                picker = appMeasurementSystemPickerState(
-                    appMeasurementSystem.toPresentationModel(selected = true),
-                ),
-            )
-        )
-    }
-}
+internal fun SettingsState.showAppMeasurementSystemPicker(
+    selectedAppMeasurementSystem: AppMeasurementSystem,
+): SettingsState = copy(
+    appMeasurementSystem = this.appMeasurementSystem.copy(
+        picker = appMeasurementSystemPickerState(
+            selectedAppMeasurementSystem.toPresentationModel(selected = true),
+        ),
+    ),
+)
 
-internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystemPicker(
+internal fun SettingsState.updateAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystemUi,
-) {
-    update { currentState ->
-        currentState.copy(
-            appMeasurementSystem = currentState.appMeasurementSystem.copy(
-                picker = appMeasurementSystemPickerState(selectedAppMeasurementSystem)
-            ),
-        )
-    }
-}
+): SettingsState = copy(
+    appMeasurementSystem = this.appMeasurementSystem.copy(
+        picker = appMeasurementSystemPickerState(selectedAppMeasurementSystem)
+    ),
+)
 
-internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker() {
-    update { currentState ->
-        currentState.copy(
-            appMeasurementSystem = currentState.appMeasurementSystem.copy(picker = null)
-        )
-    }
+internal fun SettingsState.hideAppMeasurementSystemPicker(): SettingsState {
+    return this.copy(
+        appMeasurementSystem = this.appMeasurementSystem.copy(picker = null)
+    )
 }
 
 private fun appMeasurementSystemPickerState(

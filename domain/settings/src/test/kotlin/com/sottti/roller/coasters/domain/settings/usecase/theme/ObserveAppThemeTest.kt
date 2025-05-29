@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.domain.settings.usecase.theme
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.DarkAppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.LightAppTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.SystemAppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.System
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -40,9 +40,9 @@ internal class ObserveAppThemeTest {
 
     @Test
     fun `emits system app theme when repository observes system app theme`() = runTest {
-        every { settingsRepository.observeAppTheme() } returns flowOf(SystemAppTheme)
+        every { settingsRepository.observeAppTheme() } returns flowOf(System)
         val emissions = observeAppTheme().toList()
-        assertThat(emissions).containsExactly(SystemAppTheme)
+        assertThat(emissions).containsExactly(System)
     }
 
     @Test

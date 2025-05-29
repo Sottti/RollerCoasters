@@ -29,13 +29,13 @@ internal class ResolvedColorContrastMappersTest {
 
     @Test
     fun `app system contrast throws exception for unresolved state`() {
-        assertFailsWith<IllegalStateException> { AppColorContrast.SystemContrast.toResolvedColorContrast() }
+        assertFailsWith<IllegalStateException> { AppColorContrast.System.toResolvedColorContrast() }
     }
 
     @Test
     fun `app system contrast throws exception with specific message`() {
         val exception = assertFailsWith<IllegalStateException> {
-            AppColorContrast.SystemContrast.toResolvedColorContrast()
+            AppColorContrast.System.toResolvedColorContrast()
         }
         Assert.assertEquals(SYSTEM_CONTRAST_UNRESOLVED_MESSAGE, exception.message)
     }

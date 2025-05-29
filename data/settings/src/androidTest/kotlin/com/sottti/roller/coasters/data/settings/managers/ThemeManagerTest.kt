@@ -62,7 +62,7 @@ internal class ThemeManagerTest {
         every { features.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) } just runs
 
-        manager.setTheme(AppTheme.SystemAppTheme)
+        manager.setTheme(AppTheme.System)
 
         verify { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) }
     }
@@ -104,7 +104,7 @@ internal class ThemeManagerTest {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         } just runs
 
-        manager.setTheme(AppTheme.SystemAppTheme)
+        manager.setTheme(AppTheme.System)
 
         verify {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)

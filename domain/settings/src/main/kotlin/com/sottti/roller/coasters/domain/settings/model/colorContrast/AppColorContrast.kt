@@ -4,5 +4,5 @@ public enum class AppColorContrast {
     HighContrast,
     MediumContrast,
     StandardContrast,
-    SystemContrast,
+    System,
 }

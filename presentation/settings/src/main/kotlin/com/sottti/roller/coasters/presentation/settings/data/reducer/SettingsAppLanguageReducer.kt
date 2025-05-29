@@ -15,55 +15,41 @@ import com.sottti.roller.coasters.presentation.settings.model.GalicianLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SpanishSpainLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SystemLanguage
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
-internal fun MutableStateFlow<SettingsState>.updateAppLanguage(
-    appLanguage: AppLanguage,
-) {
-    update { currentState ->
-        currentState.copy(
-            appLanguage = currentState.appLanguage.copy(
-                listItem = currentState.appLanguage.listItem.copy(
-                    selectedAppLanguage = AppSelectedLanguageState.Loaded(
-                        appLanguage.toPresentationModel(selected = true),
-                    )
-                ),
-            )
+internal fun SettingsState.updateAppLanguage(
+    newAppLanguage: AppLanguage,
+): SettingsState {
+    return copy(
+        appLanguage = appLanguage.copy(
+            listItem = appLanguage.listItem.copy(
+                selectedAppLanguage = AppSelectedLanguageState.Loaded(
+                    newAppLanguage.toPresentationModel(selected = true),
+                )
+            ),
         )
-    }
+    )
 }
 
-internal fun MutableStateFlow<SettingsState>.showAppLanguagePicker(
-    appLanguage: AppLanguage,
-) {
-    update { currentState ->
-        currentState.copy(
-            appLanguage = currentState.appLanguage.copy(
-                picker = appLanguagePickerState(appLanguage.toPresentationModel(selected = true)),
-            )
-        )
-    }
-}
+internal fun SettingsState.showAppLanguagePicker(
+    selectedAppLanguage: AppLanguage,
+): SettingsState = copy(
+    appLanguage = appLanguage.copy(
+        picker = appLanguagePickerState(selectedAppLanguage.toPresentationModel(selected = true)),
+    )
+)
 
-internal fun MutableStateFlow<SettingsState>.updateAppLanguagePicker(
+internal fun SettingsState.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
-) {
-    update { currentState ->
-        currentState.copy(
-            appLanguage = currentState
-                .appLanguage
-                .copy(picker = appLanguagePickerState(selectedAppLanguage)),
-        )
-    }
+): SettingsState {
+    return copy(
+        appLanguage = appLanguage.copy(picker = appLanguagePickerState(selectedAppLanguage)),
+    )
 }
 
-internal fun MutableStateFlow<SettingsState>.hideAppLanguagePicker() {
-    update { currentState ->
-        currentState.copy(
-            appLanguage = currentState.appLanguage.copy(picker = null)
-        )
-    }
+internal fun SettingsState.hideAppLanguagePicker(): SettingsState {
+    return copy(
+        appLanguage = appLanguage.copy(picker = null)
+    )
 }
 
 private fun appLanguagePickerState(

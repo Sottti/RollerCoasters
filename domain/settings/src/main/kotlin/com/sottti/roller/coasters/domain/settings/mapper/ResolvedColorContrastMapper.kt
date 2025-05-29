@@ -5,7 +5,7 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorCo
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.SystemContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast.LowContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
@@ -18,7 +18,7 @@ internal fun AppColorContrast.toResolvedColorContrast(): ResolvedColorContrast =
         HighContrast -> ResolvedColorContrast.HighContrast
         MediumContrast -> ResolvedColorContrast.MediumContrast
         StandardContrast -> ResolvedColorContrast.StandardContrast
-        SystemContrast -> throw IllegalStateException(SYSTEM_CONTRAST_UNRESOLVED_MESSAGE)
+        System -> throw IllegalStateException(SYSTEM_CONTRAST_UNRESOLVED_MESSAGE)
     }
 
 internal fun SystemColorContrast.toResolvedColorContrast() =
