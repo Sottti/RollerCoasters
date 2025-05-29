@@ -113,7 +113,7 @@ internal class ObserveRollerCoasterTest {
             )
         } returns flowOf(imperialUsRollerCoaster)
 
-        val result = observeRollerCoaster(rollerCoasterId()).take(2).toList()
+        val result = observeRollerCoaster(rollerCoasterId()).toList()
 
         assertThat(result)
             .containsExactly(metricRollerCoaster, imperialUkRollerCoaster, imperialUsRollerCoaster)

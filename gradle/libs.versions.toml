@@ -39,6 +39,7 @@ startup = "1.2.0"
 targetSdk = "36"
 test-runner = "1.6.2"
 truth = "1.4.4"
+turbine = "1.2.0"
 work = "2.10.1"
 
 [libraries]
@@ -92,6 +93,7 @@ splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "spla
 startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
 test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 
 [plugins]

@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
+import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
@@ -26,20 +27,17 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppLa
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMeasurementSystem
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppTheme
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynamicColor
-import io.mockk.coEvery
+import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class SettingsViewModelTest {
-    private lateinit var viewModel: SettingsViewModel
-
+internal class SettingsViewModelTest {
     private val features = mockk<Features>()
     private val getAppColorContrast = mockk<GetAppColorContrast>()
     private val getAppLanguage = mockk<GetAppLanguage>()
@@ -56,58 +54,111 @@ class SettingsViewModelTest {
     private val setAppMeasurementSystem = mockk<SetAppMeasurementSystem>()
     private val setAppTheme = mockk<SetAppTheme>()
 
-    @Before
-    fun setup() {
-        coEvery { getAppColorContrast() } returns AppColorContrast.StandardContrast
-        coEvery { getAppLanguage() } returns AppLanguage.System
-        coEvery { getAppMeasurementSystem() } returns AppMeasurementSystem.Metric
-        coEvery { getAppTheme() } returns AppTheme.System
-
-        every { features.lightDarkSystemThemingAvailable() } returns true
-        every { features.systemColorContrastAvailable() } returns true
+    @Test
+    fun `initial loading state with dynamic color available`() = runTest {
         every { features.systemDynamicColorAvailable() } returns true
+        every { observeAppTheme() } returns emptyFlow()
+        every { observeAppColorContrast() } returns emptyFlow()
+        every { observeAppLanguage() } returns emptyFlow()
+        every { observeAppMeasurementSystem() } returns emptyFlow()
+        every { observeAppDynamicColor() } returns emptyFlow()
 
-        every { observeAppColorContrast() } returns MutableStateFlow(AppColorContrast.StandardContrast)
-        every { observeAppLanguage() } returns MutableStateFlow(AppLanguage.System)
-        every { observeAppMeasurementSystem() } returns MutableStateFlow(AppMeasurementSystem.Metric)
-        every { observeAppTheme() } returns MutableStateFlow(AppTheme.System)
-        every { observeAppDynamicColor() } returns MutableStateFlow(AppDynamicColor.Disabled)
-
-        viewModel = SettingsViewModel(
+        val viewModel = SettingsViewModel(
             features = features,
-            getAppColorContrast = getAppColorContrast,
-            getAppLanguage = getAppLanguage,
-            getAppMeasurementSystem = getAppMeasurementSystem,
-            getAppTheme = getAppTheme,
+            getAppColorContrast = mockk(),
+            getAppLanguage = mockk(),
+            getAppMeasurementSystem = mockk(),
+            getAppTheme = mockk(),
             observeAppColorContrast = observeAppColorContrast,
             observeAppDynamicColor = observeAppDynamicColor,
             observeAppLanguage = observeAppLanguage,
             observeAppMeasurementSystem = observeAppMeasurementSystem,
             observeAppTheme = observeAppTheme,
-            setAppColorContrast = setAppColorContrast,
-            setAppDynamicColor = setAppDynamicColor,
-            setAppLanguage = setAppLanguage,
-            setAppMeasurementSystem = setAppMeasurementSystem,
-            setAppTheme = setAppTheme,
+            setAppColorContrast = mockk(),
+            setAppDynamicColor = mockk(),
+            setAppLanguage = mockk(),
+            setAppMeasurementSystem = mockk(),
+            setAppTheme = mockk(),
         )
+
+        viewModel.state.test {
+            assertThat(awaitItem()).isEqualTo(initialState(dynamicColorAvailable = true))
+            cancelAndIgnoreRemainingEvents()
+        }
     }
 
     @Test
-    fun `initial state reflects default settings for all options`() {
-        assertThat(viewModel.state.value).isEqualTo(initialState(true))
+    fun `initial loading state with dynamic color unavailable`() = runTest {
+        every { features.systemDynamicColorAvailable() } returns false
+        every { observeAppTheme() } returns emptyFlow()
+        every { observeAppColorContrast() } returns emptyFlow()
+        every { observeAppLanguage() } returns emptyFlow()
+        every { observeAppMeasurementSystem() } returns emptyFlow()
+        every { observeAppDynamicColor() } returns emptyFlow()
+
+        val viewModel = SettingsViewModel(
+            features = features,
+            getAppColorContrast = mockk(),
+            getAppLanguage = mockk(),
+            getAppMeasurementSystem = mockk(),
+            getAppTheme = mockk(),
+            observeAppColorContrast = observeAppColorContrast,
+            observeAppDynamicColor = observeAppDynamicColor,
+            observeAppLanguage = observeAppLanguage,
+            observeAppMeasurementSystem = observeAppMeasurementSystem,
+            observeAppTheme = observeAppTheme,
+            setAppColorContrast = mockk(),
+            setAppDynamicColor = mockk(),
+            setAppLanguage = mockk(),
+            setAppMeasurementSystem = mockk(),
+            setAppTheme = mockk(),
+        )
+
+        viewModel.state.test {
+            assertThat(awaitItem()).isEqualTo(initialState(dynamicColorAvailable = false))
+            cancelAndIgnoreRemainingEvents()
+        }
     }
+
 
     @Test
-    fun `state transitions from loading to loaded after initialization`() = runTest {
-        assertThat(viewModel.state.value).isEqualTo(
-            initialState(true)
-                .updateAppColorContrast(AppColorContrast.StandardContrast)
-                .updateAppLanguage(AppLanguage.System)
-                .updateAppMeasurementSystem(AppMeasurementSystem.Metric)
-                .updateAppTheme(AppTheme.System)
-                .updateDynamicColor(AppDynamicColor.Disabled)
+    fun `initial loaded state with dynamic color available`() = runTest {
+        every { features.systemDynamicColorAvailable() } returns true
+        every { observeAppColorContrast() } returns flowOf(AppColorContrast.System)
+        every { observeAppDynamicColor() } returns flowOf(AppDynamicColor.Enabled)
+        every { observeAppLanguage() } returns flowOf(AppLanguage.System)
+        every { observeAppMeasurementSystem() } returns flowOf(AppMeasurementSystem.System)
+        every { observeAppTheme() } returns flowOf(AppTheme.System)
+
+        val viewModel = SettingsViewModel(
+            features = features,
+            getAppColorContrast = mockk(),
+            getAppLanguage = mockk(),
+            getAppMeasurementSystem = mockk(),
+            getAppTheme = mockk(),
+            observeAppColorContrast = observeAppColorContrast,
+            observeAppDynamicColor = observeAppDynamicColor,
+            observeAppLanguage = observeAppLanguage,
+            observeAppMeasurementSystem = observeAppMeasurementSystem,
+            observeAppTheme = observeAppTheme,
+            setAppColorContrast = mockk(),
+            setAppDynamicColor = mockk(),
+            setAppLanguage = mockk(),
+            setAppMeasurementSystem = mockk(),
+            setAppTheme = mockk(),
         )
+
+        val expectedState = initialState(dynamicColorAvailable = true)
+            .updateAppColorContrast(AppColorContrast.System)
+            .updateAppLanguage(AppLanguage.System)
+            .updateAppMeasurementSystem(AppMeasurementSystem.System)
+            .updateAppTheme(AppTheme.System)
+            .updateDynamicColor(AppDynamicColor.Enabled)
+
+        viewModel.state.test {
+            var state: SettingsState
+            do state = awaitItem() while (state != expectedState)
+            assertThat(state).isEqualTo(expectedState)
+        }
     }
-
-
 }
