@@ -219,7 +219,7 @@ internal class SettingsViewModel @Inject constructor(
             is LaunchAppColorContrastPicker -> {
                 _state.update { currentState ->
                     currentState.showAppColorContrastPicker(
-                        newAppColorContrast = getAppColorContrast(),
+                        selectedAppColorContrast = getAppColorContrast(),
                         appColorContrastAvailable = features.systemColorContrastAvailable(),
                     )
                 }

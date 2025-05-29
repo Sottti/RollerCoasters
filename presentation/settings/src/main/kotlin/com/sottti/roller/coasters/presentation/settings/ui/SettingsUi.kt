@@ -80,3 +80,18 @@ internal fun SettingsUiPreview(
         )
     }
 }
+
+@Composable
+@LightDarkThemePreview
+internal fun SettingsUiPickersPreview(
+    @PreviewParameter(SettingsUiPickersStateProvider::class)
+    state: SettingsPreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        SettingsUi(
+            onAction = state.onAction,
+            onBackNavigation = state.onBackNavigation,
+            state = state.state,
+        )
+    }
+}

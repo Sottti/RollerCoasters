@@ -18,38 +18,24 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 
 @OptIn(ExperimentalMaterial3Api::class)
 internal class SettingsUiStateProvider : PreviewParameterProvider<SettingsPreviewState> {
-    override val values: Sequence<SettingsPreviewState> = sequenceOf(
-        loadingStateWithDynamicColorAvailable,
-        loadingStateWithDynamicColorNotAvailable,
-        loadedStateWithDynamicColorAvailableAndDisabled,
-        loadedStateWithDynamicColorAvailableAndEnabled,
-    )
+    override val values: Sequence<SettingsPreviewState> = sequence {
+        val dynamicColors = AppDynamicColor.entries.toList()
+        val themes = AppTheme.entries.toList()
+        val contrasts = AppColorContrast.entries.toList()
+        val languages = AppLanguage.entries.toList()
+        val measurements = AppMeasurementSystem.entries.toList()
+
+        for (i in 0..3) {
+            yield(
+                previewState(
+                    state = initialState(true)
+                        .updateDynamicColor(dynamicColors.atLeast(i))
+                        .updateAppTheme(themes.atLeast(i))
+                        .updateAppColorContrast(contrasts.atLeast(i))
+                        .updateAppLanguage(languages.atLeast(i))
+                        .updateAppMeasurementSystem(measurements.atLeast(i)),
+                )
+            )
+        }
+    }
 }
-
-private fun previewState(
-    state: SettingsState,
-): SettingsPreviewState =
-    SettingsPreviewState(
-        onAction = {},
-        onBackNavigation = {},
-        state = state,
-    )
-
-private val loadingStateWithDynamicColorAvailable = previewState(state = initialState(true))
-private val loadingStateWithDynamicColorNotAvailable = previewState(state = initialState(false))
-private val loadedStateWithDynamicColorAvailableAndDisabled = previewState(
-    state = initialState(true)
-        .updateDynamicColor(AppDynamicColor.Disabled)
-        .updateAppTheme(AppTheme.System)
-        .updateAppColorContrast(AppColorContrast.System)
-        .updateAppLanguage(AppLanguage.System)
-        .updateAppMeasurementSystem(AppMeasurementSystem.System)
-)
-private val loadedStateWithDynamicColorAvailableAndEnabled = previewState(
-    state = initialState(true)
-        .updateDynamicColor(AppDynamicColor.Enabled)
-        .updateAppTheme(AppTheme.System)
-        .updateAppColorContrast(AppColorContrast.System)
-        .updateAppLanguage(AppLanguage.System)
-        .updateAppMeasurementSystem(AppMeasurementSystem.System)
-)

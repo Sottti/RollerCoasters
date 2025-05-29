@@ -17,7 +17,9 @@ internal fun DialogRadioButtonOption.toAppColorContrastUi(
     contrasts: List<AppColorContrastUi>,
 ): AppColorContrastUi = contrasts.find { it.text == text } ?: contrasts.first()
 
-internal fun AppColorContrast.toPresentationModel(selected: Boolean): AppColorContrastUi =
+internal fun AppColorContrast.toPresentationModel(
+    selected: Boolean,
+): AppColorContrastUi =
     when (this) {
         AppColorContrast.System -> systemContrast(selected)
         AppColorContrast.StandardContrast -> standardContrast(selected)

@@ -27,7 +27,7 @@ internal fun SettingsState.updateAppColorContrast(
 )
 
 internal fun SettingsState.showAppColorContrastPicker(
-    newAppColorContrast: AppColorContrast,
+    selectedAppColorContrast: AppColorContrast,
     appColorContrastAvailable: Boolean,
 ): SettingsState = when {
     isDynamicColorChecked() -> copy(
@@ -43,7 +43,7 @@ internal fun SettingsState.showAppColorContrastPicker(
             picker = appColorContrastPickerState(
                 appColorContrastAvailable = appColorContrastAvailable,
                 selectedAppColorContrast =
-                    newAppColorContrast.toPresentationModel(selected = true)
+                    selectedAppColorContrast.toPresentationModel(selected = true)
             )
         )
     )
