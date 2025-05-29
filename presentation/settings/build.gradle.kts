@@ -31,4 +31,9 @@ dependencies {
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
     ksp(libs.hilt.compiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.truth)
 }
