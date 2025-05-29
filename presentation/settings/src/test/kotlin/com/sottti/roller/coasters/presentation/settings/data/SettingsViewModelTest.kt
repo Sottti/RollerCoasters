@@ -23,22 +23,36 @@ import com.sottti.roller.coasters.domain.settings.usecase.theme.GetAppTheme
 import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveAppTheme
 import com.sottti.roller.coasters.domain.settings.usecase.theme.SetAppTheme
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppColorContrastNotAvailableMessage
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.showAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastNotAvailableMessage
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.LaunchAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.DismissAppLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.LaunchAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.DismissAppMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.DismissAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -58,6 +72,11 @@ internal class SettingsViewModelTest {
     private val setAppLanguage = mockk<SetAppLanguage>()
     private val setAppMeasurementSystem = mockk<SetAppMeasurementSystem>()
     private val setAppTheme = mockk<SetAppTheme>()
+
+    @Before
+    fun setup() {
+        clearAllMocks()
+    }
 
     @Test
     fun `initial loading state with dynamic color available`() = runTest {
@@ -215,7 +234,6 @@ internal class SettingsViewModelTest {
         }
     }
 
-
     @Test
     fun `shows app language picker`() = runTest {
         val appLanguage = AppLanguage.System
@@ -286,6 +304,119 @@ internal class SettingsViewModelTest {
 
         viewModel.state.test {
             assertThat(awaitItem()).isEqualTo(expectedState)
+        }
+    }
+
+    @Test
+    fun `hides app color contrast picker`() = runTest {
+        val colorContrastAvailable = true
+        val appColorContrast = AppColorContrast.System
+
+        val initialState = loadedState(
+            dynamicColorState = AppDynamicColor.Disabled,
+        )
+            .showAppColorContrastPicker(
+                selectedAppColorContrast = appColorContrast,
+                appColorContrastAvailable = colorContrastAvailable,
+            )
+
+        val viewModel = createViewModel(
+            initialState = initialState,
+        )
+
+        viewModel.onAction(DismissAppColorContrastPicker)
+
+        val expectedState = initialState.hideAppColorContrastPicker()
+
+        viewModel.state.test {
+            val state = awaitItem()
+            assertThat(state).isEqualTo(expectedState)
+        }
+    }
+
+    @Test
+    fun `hides app color contrast not available dialog`() = runTest {
+        val colorContrastAvailable = true
+        val appColorContrast = AppColorContrast.System
+
+        val initialState = loadedState(
+            dynamicColorState = AppDynamicColor.Enabled,
+        )
+            .showAppColorContrastPicker(
+                selectedAppColorContrast = appColorContrast,
+                appColorContrastAvailable = colorContrastAvailable,
+            )
+
+        val viewModel = createViewModel(
+            initialState = initialState,
+        )
+
+        viewModel.onAction(DismissAppColorContrastNotAvailableMessage)
+
+        val expectedState = initialState.hideAppColorContrastNotAvailableMessage()
+
+        viewModel.state.test {
+            val state = awaitItem()
+            assertThat(state).isEqualTo(expectedState)
+        }
+    }
+
+    @Test
+    fun `hides app theme picker`() = runTest {
+        val initialState = loadedState().showAppThemePicker(
+            lightDarkAppThemingAvailable = true,
+            selectedAppTheme = AppTheme.System.toPresentationModel(selected = true),
+        )
+
+        val viewModel = createViewModel(
+            initialState = initialState,
+        )
+
+        viewModel.onAction(DismissAppThemePicker)
+
+        val expectedState = initialState.hideAppThemePicker()
+
+        viewModel.state.test {
+            val state = awaitItem()
+            assertThat(state).isEqualTo(expectedState)
+        }
+    }
+
+    @Test
+    fun `hides app language picker`() = runTest {
+        val initialState = loadedState().showAppLanguagePicker(
+            selectedAppLanguage = AppLanguage.System,
+        )
+
+        val viewModel = createViewModel(
+            initialState = initialState,
+        )
+
+        viewModel.onAction(DismissAppLanguagePicker)
+
+        val expectedState = initialState.hideAppLanguagePicker()
+
+        viewModel.state.test {
+            val state = awaitItem()
+            assertThat(state).isEqualTo(expectedState)
+        }
+    }
+
+    @Test
+    fun `hides app measurement system picker`() = runTest {
+        val initialState = loadedState().showAppMeasurementSystemPicker(
+            selectedAppMeasurementSystem = AppMeasurementSystem.System,
+        )
+
+        val viewModel = createViewModel(initialState = initialState)
+
+        viewModel.onAction(DismissAppMeasurementSystemPicker)
+
+        val expectedState = initialState.hideAppMeasurementSystemPicker()
+
+        viewModel.state.test {
+            val state = awaitItem()
+            assertThat(state).isEqualTo(expectedState)
         }
     }
 }
