@@ -11,9 +11,13 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMe
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppTheme
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynamicColor
 
+internal fun loadingState(
+    dynamicColorAvailable: Boolean,
+) = initialState(dynamicColorAvailable = dynamicColorAvailable)
+
 internal fun loadedState(
     dynamicColorAvailable: Boolean = true,
-    dynamicColorState : AppDynamicColor = AppDynamicColor.Enabled,
+    dynamicColorState: AppDynamicColor = AppDynamicColor.Enabled,
 ) =
     initialState(dynamicColorAvailable)
         .updateAppColorContrast(AppColorContrast.System)

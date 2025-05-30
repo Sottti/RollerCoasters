@@ -103,13 +103,14 @@ internal class SettingsViewModel @Inject constructor(
     private fun processAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
-                is LoadUi ->{
+                is LoadUi -> {
                     if (features.systemDynamicColorAvailable()) collectAppDynamicColor()
                     collectTheme()
                     collectAppColorContrast()
                     collectAppLanguage()
                     collectMeasurementSystem()
                 }
+
                 is DynamicColorCheckedChange -> handleDynamicColorChange(action)
                 is AppThemeActions -> handleAppThemeAction(action)
                 is AppColorContrastActions -> handleAppColorContrastAction(action)

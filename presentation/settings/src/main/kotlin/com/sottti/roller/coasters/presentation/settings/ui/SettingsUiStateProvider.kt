@@ -14,7 +14,6 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMe
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppTheme
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynamicColor
 import com.sottti.roller.coasters.presentation.settings.model.SettingsPreviewState
-import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 
 @OptIn(ExperimentalMaterial3Api::class)
 internal class SettingsUiStateProvider : PreviewParameterProvider<SettingsPreviewState> {

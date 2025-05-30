@@ -3,7 +3,6 @@ package com.sottti.roller.coasters.presentation.settings.data.mapper
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
-import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastUi
 import org.junit.Test
 
 internal class SettingsAppColorContrastUiMapperTest {
@@ -64,7 +63,11 @@ internal class SettingsAppColorContrastUiMapperTest {
 
     @Test(expected = NoSuchElementException::class)
     fun `radio button option fallback fails with empty UI model list`() {
-        val option = DialogRadioButtonOption(text = -1, icon = com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.BrightnessAuto.outlined, selected = false)
+        val option = DialogRadioButtonOption(
+            text = -1,
+            icon = com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.BrightnessAuto.outlined,
+            selected = false
+        )
         option.toAppColorContrastUi(emptyList())
     }
 
