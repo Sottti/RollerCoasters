@@ -11,6 +11,7 @@ import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.GetAppCo
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveAppDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.SetAppDynamicColor
 import com.sottti.roller.coasters.domain.settings.usecase.language.GetAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.SetAppLanguage
@@ -35,7 +36,6 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppCo
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppThemePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.AppColorContrastPickerSelectionChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.ConfirmColorContrastPickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastNotAvailableMessage
@@ -53,8 +53,10 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.App
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.ConfirmAppThemePickerSelection
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.DismissAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -474,5 +476,43 @@ internal class SettingsViewModelTest {
         )
         viewModel.onAction(ConfirmColorContrastPickerSelection(selectedAppColorContrast))
         viewModel.assertHasState(expectedState)
+    }
+
+    @Test
+    fun `dynamic color gets enabled from disabled`() = runTest {
+        val setAppDynamicColor = mockk<SetAppDynamicColor>()
+        val setAppColorContrast = mockk<SetAppColorContrast>()
+        val initialDynamicColorState = AppDynamicColor.Disabled
+        val newDynamicColorState = AppDynamicColor.Enabled
+        val initialState = loadedState(dynamicColorState = initialDynamicColorState)
+        coEvery { setAppDynamicColor(newDynamicColorState) } returns Unit
+        coEvery { setAppColorContrast(AppColorContrast.System) } returns Unit
+        val viewModel = createViewModel(
+            initialState = initialState,
+            setAppColorContrast = setAppColorContrast,
+            setAppDynamicColor = setAppDynamicColor,
+        )
+
+        viewModel.onAction(DynamicColorCheckedChange(true))
+
+        coVerify(exactly = 1) { setAppDynamicColor(newDynamicColorState) }
+        coVerify(exactly = 1) { setAppColorContrast(AppColorContrast.System) }
+    }
+
+    @Test
+    fun `dynamic color gets disabled from enabled`() = runTest {
+        val setAppDynamicColor = mockk<SetAppDynamicColor>()
+        val initialDynamicColorState = AppDynamicColor.Enabled
+        val newDynamicColorState = AppDynamicColor.Disabled
+        val initialState = loadedState(dynamicColorState = initialDynamicColorState)
+        coEvery { setAppDynamicColor(newDynamicColorState) } returns Unit
+        val viewModel = createViewModel(
+            initialState = initialState,
+            setAppDynamicColor = setAppDynamicColor,
+        )
+
+        viewModel.onAction(DynamicColorCheckedChange(false))
+
+        coVerify(exactly = 1) { setAppDynamicColor(newDynamicColorState) }
     }
 }
