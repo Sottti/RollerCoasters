@@ -32,7 +32,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Dyn
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 
 @Composable
-internal fun SettingsList(
+internal fun SettingsContent(
     nestedScrollConnection: NestedScrollConnection,
     paddingValues: PaddingValues,
     state: SettingsState,
@@ -64,7 +64,7 @@ internal fun SettingsList(
                     headline = dynamicState.headline,
                     supporting = dynamicState.supporting,
                     iconState = dynamicState.icon,
-                    onClick = {},
+                    onClick = null,
                 ) {
                     when (dynamicState.checkedState) {
                         is DynamicColorCheckedState.Loaded -> Switch(
@@ -138,11 +138,11 @@ private fun SettingItem(
     @StringRes headline: Int,
     @StringRes supporting: Int,
     iconState: IconState,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
     trailingContent: @Composable () -> Unit,
 ) {
     ListItem(
-        modifier = Modifier.clickable(onClick = onClick),
+        modifier = onClick?.let { Modifier.clickable(onClick = onClick) } ?: Modifier,
         headlineContent = { Text.Vanilla(headline) },
         leadingContent = { Icon(iconState) },
         supportingContent = { Text.Vanilla(supporting) },
