@@ -55,7 +55,7 @@ internal fun SettingsUi(
     Scaffold(
         topBar = { TopBar(onBackNavigation, scrollBehavior, state.topBar) },
     ) { paddingValues ->
-        SettingsList(
+        SettingsContent(
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             paddingValues = paddingValues,

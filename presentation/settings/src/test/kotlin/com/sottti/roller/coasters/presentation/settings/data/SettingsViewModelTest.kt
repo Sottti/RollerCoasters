@@ -200,7 +200,6 @@ internal class SettingsViewModelTest {
             selectedAppTheme = initialSelectedAppTheme,
         )
         val expectedState = initialState.updateAppThemePicker(
-            lightDarkAppThemingAvailable = lightDarkSystemThemingAvailable,
             selectedAppTheme = newSelectedTheme,
         )
         coEvery { features.lightDarkSystemThemingAvailable() } returns lightDarkSystemThemingAvailable

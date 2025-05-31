@@ -41,7 +41,6 @@ internal class SettingsAppThemeReducerTest {
         val initialState = loadedState()
         val selected = AppTheme.LightAppTheme.toPresentationModel(selected = true)
         val result = initialState.updateAppThemePicker(
-            lightDarkAppThemingAvailable = true,
             selectedAppTheme = selected,
         )
         val picker = result.appTheme.picker

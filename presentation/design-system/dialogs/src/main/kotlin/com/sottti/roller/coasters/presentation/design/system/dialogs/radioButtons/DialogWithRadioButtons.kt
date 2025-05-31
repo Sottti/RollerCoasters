@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -49,13 +50,11 @@ private fun OptionsList(
     onOptionSelected: (DialogRadioButtonOption) -> Unit,
 ) {
     LazyColumn {
-        options.forEach { option ->
-            item {
-                RadioButtonRow(
-                    option = option,
-                    onOptionSelected = onOptionSelected,
-                )
-            }
+        items(options, key = { it.text }) { option ->
+            RadioButtonRow(
+                option = option,
+                onOptionSelected = onOptionSelected,
+            )
         }
     }
 }

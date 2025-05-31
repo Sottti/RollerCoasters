@@ -196,7 +196,6 @@ internal class SettingsViewModel @Inject constructor(
 
             is AppThemePickerSelectionChange -> _state.update { currentState ->
                 currentState.updateAppThemePicker(
-                    lightDarkAppThemingAvailable = features.lightDarkSystemThemingAvailable(),
                     selectedAppTheme = action.appTheme,
                 )
             }
