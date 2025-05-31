@@ -11,7 +11,7 @@ internal class RollerCoasterSyncScheduler @Inject constructor(
 ) {
     fun schedule() {
         with(receiver = WorkManager.getInstance(context)) {
-            //scheduleUniqueWork()
+            scheduleUniqueWork()
             schedulePeriodicWork()
         }
     }
