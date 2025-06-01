@@ -14,9 +14,9 @@ internal class SettingsAppThemeReducerTest {
     fun `updates app theme`() {
         val initialState = loadedState()
         val result = initialState.updateAppTheme(AppTheme.DarkAppTheme)
-        val selected = result.appTheme.listItem.selectedAppTheme
-        val isSelected = (selected as? Loaded)?.appTheme?.selected
-        val isCorrect = (selected as? Loaded)?.appTheme?.toDomain() == AppTheme.DarkAppTheme
+        val selectedAppTheme = result.appTheme.listItem.selectedAppTheme
+        val isSelected = (selectedAppTheme as? Loaded)?.appTheme?.selected
+        val isCorrect = (selectedAppTheme as? Loaded)?.appTheme?.toDomain() == AppTheme.DarkAppTheme
         assertThat(isSelected).isTrue()
         assertThat(isCorrect).isTrue()
     }
@@ -24,10 +24,10 @@ internal class SettingsAppThemeReducerTest {
     @Test
     fun `shows app theme picker`() {
         val initialState = loadedState()
-        val selected = AppTheme.System.toPresentationModel(selected = true)
+        val selectedAppTheme = AppTheme.System.toPresentationModel(selected = true)
         val result = initialState.showAppThemePicker(
             lightDarkAppThemingAvailable = true,
-            selectedAppTheme = selected,
+            selectedAppTheme = selectedAppTheme,
         )
         val picker = result.appTheme.picker
         assertThat(picker).isNotNull()
@@ -38,11 +38,12 @@ internal class SettingsAppThemeReducerTest {
 
     @Test
     fun `updates app theme picker`() {
-        val initialState = loadedState()
-        val selected = AppTheme.LightAppTheme.toPresentationModel(selected = true)
-        val result = initialState.updateAppThemePicker(
-            selectedAppTheme = selected,
+        val selectedAppTheme = AppTheme.LightAppTheme.toPresentationModel(selected = true)
+        val initialState = loadedState().showAppThemePicker(
+            lightDarkAppThemingAvailable = true,
+            selectedAppTheme = selectedAppTheme,
         )
+        val result = initialState.updateAppThemePicker(selectedAppTheme = selectedAppTheme)
         val picker = result.appTheme.picker
         assertThat(picker).isNotNull()
         assertThat(picker?.appThemes?.any {
@@ -52,10 +53,10 @@ internal class SettingsAppThemeReducerTest {
 
     @Test
     fun `hides app theme picker`() {
-        val selected = AppTheme.System.toPresentationModel(selected = true)
+        val selectedAppTheme = AppTheme.System.toPresentationModel(selected = true)
         val state = loadedState().showAppThemePicker(
             lightDarkAppThemingAvailable = true,
-            selectedAppTheme = selected,
+            selectedAppTheme = selectedAppTheme,
         )
         val result = state.hideAppThemePicker()
         assertThat(result.appTheme.picker).isNull()

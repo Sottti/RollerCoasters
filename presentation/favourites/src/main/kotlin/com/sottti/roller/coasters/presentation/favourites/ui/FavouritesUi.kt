@@ -13,24 +13,25 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewModel
-import com.sottti.roller.coasters.presentation.favourites.model.FavouritesAction
+import com.sottti.roller.coasters.presentation.favourites.model.FavouritesPreviewState
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
-import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesEvent.ScrollToTop
+import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 @Composable
 public fun FavouritesUi(
-    paddingValues: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
 ) {
     FavouritesUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
@@ -52,11 +53,9 @@ private fun FavouritesUi(
     val rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems()
 
     FavouritesUi(
-        onAction = viewModel.onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onListCreated = { lazyListState, scrollBehavior ->
             FavouritesUiEffects(
-                events = viewModel.events,
                 lazyListState = lazyListState,
                 scrollBehavior = scrollBehavior,
                 onScrollToTop = onScrollToTop,
@@ -70,7 +69,6 @@ private fun FavouritesUi(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesUi(
-    onAction: (FavouritesAction) -> Unit,
     onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
@@ -84,15 +82,13 @@ internal fun FavouritesUi(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             MainTopBar(
-                scrollBehavior = scrollBehavior,
-                onNavigateToSettings = onNavigateToSettings
+                scrollBehavior = scrollBehavior, onNavigateToSettings = onNavigateToSettings
             )
         },
     ) { paddingValues ->
-        FavouritesRollerCoastersList(
+        FavouritesRollerCoastersContent(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
-            onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             paddingValues = paddingValues,
             rollerCoasters = rollerCoasters,
@@ -103,7 +99,6 @@ internal fun FavouritesUi(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun FavouritesUiEffects(
-    events: Flow<FavouritesEvent>,
     lazyListState: LazyListState,
     onScrollToTop: (() -> Unit) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
@@ -118,15 +113,20 @@ private fun FavouritesUiEffects(
             }
         }
     }
+}
 
-    LaunchedEffect(events) {
-        events.collect { event ->
-            when (event) {
-                ScrollToTop -> coroutineScope.launch {
-                    lazyListState.animateScrollToItem(0)
-                    scrollBehavior.state.contentOffset = 0f
-                }
-            }
-        }
+@Composable
+@LightDarkThemePreview
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun FavouritesUiPreview(
+    @PreviewParameter(FavouritesUiStateProvider::class) state: FavouritesPreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        FavouritesUi(
+            onListCreated = state.onListCreated,
+            onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
+            onNavigateToSettings = state.onNavigateToSettings,
+            rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
+        )
     }
 }

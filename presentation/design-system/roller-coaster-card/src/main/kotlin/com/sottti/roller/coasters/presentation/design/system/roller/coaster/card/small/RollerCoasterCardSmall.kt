@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.domain.model.ImageUrl
-import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.R
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard.Small
@@ -24,20 +24,21 @@ import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
 
 @Composable
 internal fun SmallImpl(
+    foreverLoading: Boolean,
+    imageUrl: ImageUrl?,
     modifier: Modifier,
     onClick: () -> Unit,
-    imageUrl: ImageUrl?,
-    foreverLoading: Boolean,
     parkName: String,
     rollerCoasterName: String,
 ) {
     Card(
         modifier = modifier,
         onClick = onClick,
+        shape = MaterialTheme.shapes.large,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Details(rollerCoasterName, parkName)
             imageUrl?.let { Image(imageUrl = imageUrl, foreverLoading = foreverLoading) }
+            Details(rollerCoasterName, parkName)
         }
     }
 }
@@ -50,16 +51,11 @@ private fun RowScope.Details(
     Column(
         modifier = Modifier
             .weight(1.0f)
-            .padding(dimensions.padding.medium)
+            .padding(dimensions.padding.medium),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text.Title.Large(
-            text = rollerCoasterName,
-            textColor = colors.onSurface,
-        )
-        Text.Label.Medium(
-            text = parkName,
-            textColor = colors.onSurfaceVariant,
-        )
+        Text.Title.Large(text = rollerCoasterName)
+        Text.Body.Small(text = parkName)
     }
 }
 
@@ -72,9 +68,11 @@ private fun Image(
         url = imageUrl,
         contentDescription = stringResource(R.string.image_content_description),
         modifier = Modifier
-            .fillMaxWidth(0.4f)
-            .aspectRatio(1.5f),
+            .fillMaxWidth(0.33f)
+            .aspectRatio(1.5f)
+            .padding(dimensions.padding.small),
         foreverLoading = foreverLoading,
+        roundedCorners = true,
     )
 }
 

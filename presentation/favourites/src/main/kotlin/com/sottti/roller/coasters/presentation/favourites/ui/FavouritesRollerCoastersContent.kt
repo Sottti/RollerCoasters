@@ -21,14 +21,12 @@ import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
-import com.sottti.roller.coasters.presentation.favourites.model.FavouritesAction
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 
 @Composable
-internal fun FavouritesRollerCoastersList(
+internal fun FavouritesRollerCoastersContent(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
-    onAction: (FavouritesAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     paddingValues: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
@@ -47,7 +45,6 @@ internal fun FavouritesRollerCoastersList(
                     else -> RollerCoasters(
                         listState = listState,
                         nestedScrollConnection = nestedScrollConnection,
-                        onAction = onAction,
                         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                         rollerCoasters = rollerCoasters,
                     )
@@ -61,7 +58,6 @@ internal fun FavouritesRollerCoastersList(
 private fun RollerCoasters(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
-    onAction: (FavouritesAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
@@ -78,7 +74,6 @@ private fun RollerCoasters(
         items(rollerCoasters.itemCount) { index ->
             rollerCoasters[index]?.let { rollerCoaster ->
                 RollerCoaster(
-                    onAction = onAction,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     rollerCoaster = rollerCoaster,
                 )
@@ -93,7 +88,6 @@ private fun RollerCoasters(
 
 @Composable
 private fun RollerCoaster(
-    onAction: (FavouritesAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoaster: FavouritesRollerCoaster,
 ) {

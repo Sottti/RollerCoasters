@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -17,18 +18,22 @@ android {
 dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
+    implementation(project(module.domain.fixtures))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
+    implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.empty))
     implementation(project(module.presentation.error))
+    implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))
     ksp(libs.hilt.compiler)
 }

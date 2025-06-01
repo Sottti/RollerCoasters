@@ -6,16 +6,12 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFavouriteRollerCoasters
-import com.sottti.roller.coasters.presentation.favourites.model.FavouritesAction
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesState
-import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -26,27 +22,9 @@ internal class FavouritesViewModel @Inject constructor(
 ) : ViewModel() {
     private val _rollerCoastersFlow: Flow<PagingData<FavouritesRollerCoaster>> =
         observeFavouriteRollerCoasters()
-            .map { pagingData ->
-                pagingData.map { rollerCoaster ->
-                    FavouritesRollerCoaster(
-                        id = rollerCoaster.id.value,
-                        imageUrl = rollerCoaster.pictures.main?.url,
-                        name = rollerCoaster.name.current.value,
-                        parkName = rollerCoaster.park.name.value,
-                    )
-                }
-            }
+            .map { pagingData -> pagingData.map { rollerCoaster -> rollerCoaster.toUiModel() } }
             .cachedIn(viewModelScope)
 
     private val _state = MutableStateFlow(FavouritesState(_rollerCoastersFlow))
     val state: StateFlow<FavouritesState> = _state.asStateFlow()
-
-    private val _events = MutableSharedFlow<FavouritesEvent>()
-    val events = _events.asSharedFlow()
-
-    internal val onAction: (FavouritesAction) -> Unit = { action -> processAction(action) }
-
-    private fun processAction(action: FavouritesAction) {
-
-    }
 }
