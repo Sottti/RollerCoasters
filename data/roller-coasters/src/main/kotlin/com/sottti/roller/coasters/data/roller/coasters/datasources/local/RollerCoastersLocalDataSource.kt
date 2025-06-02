@@ -2,11 +2,12 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import androidx.paging.PagingSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.createFavouriteRollerCoastersQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toFavouriteRollercoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.FavouriteRollerCoastersPagingSource
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.FilteredRollerCoastersPagingSource
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
@@ -93,11 +94,9 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     suspend fun isFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Boolean =
         dao.isFavouriteRollerCoasterFlow(rollerCoasterId.value)
 
+    @OptIn(InternalSerializationApi::class)
     fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
-    ): PagingSource<Int, RollerCoaster> =
-        FavouriteRollerCoastersPagingSource(
-            dao = dao,
-            measurementSystem = measurementSystem,
-        )
+    ): PagingSource<Int, RollerCoasterRoomModel> =
+        dao.observePagedFavouriteRollerCoasters()
 }

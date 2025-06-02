@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local.database
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,8 +13,6 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.P
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.InternalSerializationApi
-
-// TODO: Create a test class
 
 @Dao
 internal interface RollerCoastersDao {
@@ -74,9 +73,13 @@ internal interface RollerCoastersDao {
     @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE rollerCoasterId = :rollerCoasterId)")
     fun observeIsFavouriteRollerCoasterFlow(rollerCoasterId: Int): Flow<Boolean>
 
-    @RawQuery
     @OptIn(InternalSerializationApi::class)
-    suspend fun getPagedFavouriteRollerCoasters(
-        query: SupportSQLiteQuery,
-    ): List<RollerCoasterRoomModel>
+    @Query(
+        """
+        SELECT * FROM roller_coasters
+        WHERE id IN (SELECT rollerCoasterId FROM favourites)
+        ORDER BY name_current ASC
+    """
+    )
+    fun observePagedFavouriteRollerCoasters(): PagingSource<Int, RollerCoasterRoomModel>
 }
