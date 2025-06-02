@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.chip.Chip
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
@@ -24,10 +26,11 @@ internal fun FilterChips(
     filters: Filters,
     onAction: (ExploreAction) -> Unit,
 ) {
+    val rememberedOnAction = rememberUpdatedState(onAction)
     Column(modifier = Modifier.padding(vertical = dimensions.padding.small)) {
-        PrimaryFilters(filters.primary, onAction)
+        PrimaryFilters(filters.primary, rememberedOnAction.value)
         Spacer(modifier = Modifier.size(dimensions.padding.small))
-        SecondaryFilters(filters.secondary, onAction)
+        SecondaryFilters(filters.secondary, rememberedOnAction.value)
     }
 }
 
@@ -40,9 +43,11 @@ private fun PrimaryFilters(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = dimensions.padding.medium),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
+        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
     ) {
-        filters.forEach { filter -> PrimaryFilterChip(filter = filter, onAction = onAction) }
+        filters.forEach { filter ->
+            key(filter.labelResId) { PrimaryFilterChip(filter = filter, onAction = onAction) }
+        }
     }
 }
 
@@ -58,7 +63,9 @@ private fun SecondaryFilters(
             .padding(horizontal = dimensions.padding.medium),
         horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
     ) {
-        filters.forEach { filter -> SecondaryFilterChip(onAction, filter) }
+        filters
+            .filter { it.visible }
+            .forEach { filter -> key(filter.labelResId) { SecondaryFilterChip(onAction, filter) } }
     }
 }
 
@@ -81,12 +88,10 @@ private fun SecondaryFilterChip(
     onAction: (ExploreAction) -> Unit,
     filter: SecondaryFilter,
 ) {
-    if (filter.visible) {
-        Chip(
-            labelResId = filter.labelResId,
-            leadingIcon = filter.leadingIcon,
-            onClick = { onAction(filter.action) },
-            selected = filter.selected,
-        )
-    }
+    Chip(
+        labelResId = filter.labelResId,
+        leadingIcon = filter.leadingIcon,
+        onClick = { onAction(filter.action) },
+        selected = filter.selected,
+    )
 }

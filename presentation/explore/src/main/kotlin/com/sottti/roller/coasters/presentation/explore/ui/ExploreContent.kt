@@ -64,7 +64,7 @@ private fun RollerCoasters(
     LazyColumn(
         state = listState,
         contentPadding = PaddingValues(dimensions.padding.medium),
-        verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium)
+        verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
             item { FillMaxWidthProgressIndicator() }
@@ -75,7 +75,7 @@ private fun RollerCoasters(
                 RollerCoaster(
                     onAction = onAction,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                    rollerCoaster = rollerCoaster
+                    rollerCoaster = rollerCoaster,
                 )
             }
         }

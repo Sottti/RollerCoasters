@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -20,6 +21,7 @@ internal fun ExploreUiPreview(
             onListCreated = state.onListCreated,
             onNavigateToRollerCoaster = {},
             onNavigateToSettings = {},
+            paddingValues = PaddingValues(),
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
         )
     }

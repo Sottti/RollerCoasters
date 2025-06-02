@@ -1,11 +1,9 @@
-package com.sottti.roller.coasters.presentation.explore
+package com.sottti.roller.coasters.presentation.explore.ui
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
-import com.sottti.roller.coasters.presentation.explore.ui.ExploreUiPreview
-import com.sottti.roller.coasters.presentation.explore.ui.ExploreUiStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

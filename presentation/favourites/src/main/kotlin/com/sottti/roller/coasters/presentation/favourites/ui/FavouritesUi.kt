@@ -96,7 +96,7 @@ internal fun FavouritesUi(
             )
         },
     ) { innerPaddingValues ->
-        val rememberedContentPadding = remember(innerPaddingValues, paddingValues) {
+        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
             PaddingValues(
                 start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
                 end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
@@ -108,7 +108,7 @@ internal fun FavouritesUi(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = rememberedContentPadding,
+            paddingValues = rememberedPaddingValues,
             rollerCoasters = rollerCoasters,
         )
     }
@@ -137,7 +137,8 @@ private fun FavouritesUiEffects(
 @LightDarkThemePreview
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesUiPreview(
-    @PreviewParameter(FavouritesUiStateProvider::class) state: FavouritesPreviewState,
+    @PreviewParameter(FavouritesUiStateProvider::class)
+    state: FavouritesPreviewState,
 ) {
     RollerCoastersPreviewTheme {
         FavouritesUi(

@@ -30,6 +30,8 @@ internal class FavouritesUiStateProvider : PreviewParameterProvider<FavouritesPr
         )
 }
 
+private val favouritesRollerCoasters = favouritesRollerCoasters()
+
 private val loadingState = favouritesPreviewState(
     refreshState = Loading,
     data = emptyList(),
@@ -97,5 +99,3 @@ private fun favouritesRollerCoastersPagingDataFlow(
             )
         )
     )
-
-private val favouritesRollerCoasters = favouritesRollerCoasters()

@@ -58,8 +58,10 @@ private fun Image(
         contentDescription = stringResource(R.string.image_content_description),
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1.75f),
+            .aspectRatio(1.75f)
+            .padding(dimensions.padding.small),
         foreverLoading = foreverLoading,
+        roundedCorners = true,
     )
 }
 
@@ -81,7 +83,7 @@ private fun Footer(
                 text = rollerCoasterName,
                 textColor = colors.onSurface,
             )
-            Text.Label.Medium(
+            Text.Body.Small(
                 text = parkName,
                 textColor = colors.onSurfaceVariant,
             )

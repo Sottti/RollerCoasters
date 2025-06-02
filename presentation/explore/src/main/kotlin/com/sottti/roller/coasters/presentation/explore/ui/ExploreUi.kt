@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -9,8 +11,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
@@ -24,8 +28,6 @@ import com.sottti.roller.coasters.presentation.explore.model.Filters
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-// TODO() Remove filters when state is loading/empty/error
-
 @Composable
 public fun ExploreUi(
     paddingValues: PaddingValues,
@@ -37,6 +39,7 @@ public fun ExploreUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
+        paddingValues = paddingValues,
         viewModel = hiltViewModel(),
     )
 }
@@ -47,6 +50,7 @@ private fun ExploreUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
     viewModel: ExploreViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -64,6 +68,7 @@ private fun ExploreUi(
             )
         },
         onNavigateToSettings = onNavigateToSettings,
+        paddingValues = paddingValues,
         rollerCoasters = rollerCoasters,
     )
 }
@@ -76,6 +81,7 @@ internal fun ExploreUi(
     onListCreated: @Composable (LazyListState) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
+    paddingValues: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
@@ -91,12 +97,20 @@ internal fun ExploreUi(
                 onNavigateToSettings = onNavigateToSettings,
             )
         },
-    ) { paddingValues ->
+    ) { innerPaddingValues ->
+        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
+            PaddingValues(
+                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
+                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
+                top = innerPaddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding(),
+            )
+        }
         RollerCoastersList(
             listState = lazyListState,
             onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = paddingValues,
+            paddingValues = rememberedPaddingValues,
             rollerCoasters = rollerCoasters,
         )
     }
