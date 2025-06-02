@@ -67,7 +67,7 @@ private fun favouritesPreviewState(
     refreshState: LoadState = NotLoading(endOfPaginationReached = false),
     appendState: LoadState = NotLoading(endOfPaginationReached = false),
     prependState: LoadState = NotLoading(endOfPaginationReached = false),
-    data: List<FavouritesRollerCoaster> = favouritesRollerCoasters(),
+    data: List<FavouritesRollerCoaster> = favouritesRollerCoaster,
 ) = FavouritesPreviewState(
     onNavigateToSettings = {},
     onNavigateToRollerCoaster = {},
@@ -97,3 +97,5 @@ private fun favouritesRollerCoastersPagingDataFlow(
             )
         )
     )
+
+private val favouritesRollerCoaster = favouritesRollerCoasters()

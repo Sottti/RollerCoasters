@@ -13,7 +13,9 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.LayoutDirection
@@ -94,16 +96,19 @@ internal fun FavouritesUi(
             )
         },
     ) { innerPaddingValues ->
-        FavouritesRollerCoastersContent(
-            listState = lazyListState,
-            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
-            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = PaddingValues(
+        val rememberedContentPadding = remember(innerPaddingValues, paddingValues) {
+            PaddingValues(
                 start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
                 end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
                 top = innerPaddingValues.calculateTopPadding(),
                 bottom = paddingValues.calculateBottomPadding(),
-            ),
+            )
+        }
+        FavouritesRollerCoastersContent(
+            listState = lazyListState,
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
+            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+            paddingValues = rememberedContentPadding,
             rollerCoasters = rollerCoasters,
         )
     }
@@ -117,9 +122,9 @@ private fun FavouritesUiEffects(
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val coroutineScope = rememberCoroutineScope()
-
+    val rememberedOnScrollToTop = rememberUpdatedState(onScrollToTop)
     LaunchedEffect(Unit) {
-        onScrollToTop {
+        rememberedOnScrollToTop.value {
             coroutineScope.launch {
                 lazyListState.animateScrollToItem(0)
                 scrollBehavior.state.contentOffset = 0f
