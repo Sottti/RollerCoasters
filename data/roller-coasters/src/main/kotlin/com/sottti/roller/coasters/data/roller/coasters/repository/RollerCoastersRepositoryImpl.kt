@@ -3,10 +3,8 @@ package com.sottti.roller.coasters.data.roller.coasters.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.sync.RollerCoasterSyncScheduler
 import com.sottti.roller.coasters.domain.model.Result
@@ -18,7 +16,6 @@ import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoaste
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.InternalSerializationApi
 import javax.inject.Inject
@@ -98,17 +95,8 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     override fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
     ): Flow<PagingData<RollerCoaster>> =
-        Pager(
-            config = pagerConfig,
-            pagingSourceFactory = {
-                localDataSource.observeFavouriteRollerCoasters(measurementSystem)
-            }
-        ).flow.map { pagingData ->
-            pagingData.map { roomModel ->
-                roomModel.toDomain(
-                    measurementSystem,
-                    emptyList(),
-                )
-            }
-        }
+        localDataSource.observeFavouriteRollerCoasters(
+            measurementSystem = measurementSystem,
+            pagerConfig = pagerConfig,
+        )
 }

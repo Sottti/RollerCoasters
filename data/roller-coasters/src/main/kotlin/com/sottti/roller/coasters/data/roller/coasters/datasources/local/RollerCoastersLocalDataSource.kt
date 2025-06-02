@@ -1,8 +1,11 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.PagingSource
+import androidx.paging.map
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.createFavouriteRollerCoastersQuery
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toFavouriteRollercoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
@@ -17,6 +20,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.Resolv
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
 import javax.inject.Inject
@@ -99,4 +103,21 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         measurementSystem: ResolvedMeasurementSystem,
     ): PagingSource<Int, RollerCoasterRoomModel> =
         dao.observePagedFavouriteRollerCoasters()
+
+    @OptIn(InternalSerializationApi::class)
+    fun observeFavouriteRollerCoasters(
+        measurementSystem: ResolvedMeasurementSystem,
+        pagerConfig: PagingConfig,
+    ): Flow<PagingData<RollerCoaster>> =
+        Pager(
+            config = pagerConfig,
+            pagingSourceFactory = { dao.observePagedFavouriteRollerCoasters() }
+        ).flow.map { pagingData ->
+            pagingData.map { roomModel ->
+                roomModel.toDomain(
+                    measurementSystem = measurementSystem,
+                    pictures = dao.getPictures(roomModel.id),
+                )
+            }
+        }
 }
