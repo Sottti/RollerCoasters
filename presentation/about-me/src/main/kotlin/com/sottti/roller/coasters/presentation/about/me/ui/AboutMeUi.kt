@@ -2,17 +2,13 @@ package com.sottti.roller.coasters.presentation.about.me.ui
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -26,7 +22,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.presentation.about.me.data.AboutMeViewModel
@@ -88,36 +83,28 @@ internal fun AboutMeUi(
         derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
     }
 
-    val contentWindowInsets =
-        ScaffoldDefaults
-            .contentWindowInsets
-            .only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
-
-
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                top = 0.dp,
-                start = paddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                bottom = paddingValues.calculateBottomPadding(),
-            ), topBar = {
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
             MainTopBar(
                 onNavigateToSettings = onNavigateToSettings,
                 scrollBehavior = scrollBehavior,
                 showTitle = showTitle,
                 titleResId = state.title,
             )
-        }, contentWindowInsets = contentWindowInsets
-
+        }
     ) { innerPaddingValues ->
         AboutMeUiContent(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             onShowBottomSheet = onShowBottomSheet,
-            paddingValues = innerPaddingValues,
+            paddingValues = PaddingValues(
+                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
+                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
+                top = innerPaddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding(),
+            ),
             state = state,
         )
     }

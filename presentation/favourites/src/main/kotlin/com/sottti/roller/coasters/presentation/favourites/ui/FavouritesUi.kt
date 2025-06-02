@@ -1,6 +1,8 @@
 package com.sottti.roller.coasters.presentation.favourites.ui
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -14,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
@@ -37,6 +40,7 @@ public fun FavouritesUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
+        paddingValues = paddingValues,
         viewModel = hiltViewModel(),
     )
 }
@@ -47,6 +51,7 @@ private fun FavouritesUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
     viewModel: FavouritesViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -62,6 +67,7 @@ private fun FavouritesUi(
             )
         },
         onNavigateToSettings = onNavigateToSettings,
+        paddingValues = paddingValues,
         rollerCoasters = rollerCoasters,
     )
 }
@@ -72,6 +78,7 @@ internal fun FavouritesUi(
     onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
+    paddingValues: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
@@ -82,15 +89,21 @@ internal fun FavouritesUi(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             MainTopBar(
-                scrollBehavior = scrollBehavior, onNavigateToSettings = onNavigateToSettings
+                onNavigateToSettings = onNavigateToSettings,
+                scrollBehavior = scrollBehavior,
             )
         },
-    ) { paddingValues ->
+    ) { innerPaddingValues ->
         FavouritesRollerCoastersContent(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = paddingValues,
+            paddingValues = PaddingValues(
+                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
+                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
+                top = innerPaddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding(),
+            ),
             rollerCoasters = rollerCoasters,
         )
     }
@@ -126,6 +139,7 @@ internal fun FavouritesUiPreview(
             onListCreated = state.onListCreated,
             onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
             onNavigateToSettings = state.onNavigateToSettings,
+            paddingValues = state.paddingValues,
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
         )
     }

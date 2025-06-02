@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.favourites.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.paging.LoadState
@@ -71,6 +72,7 @@ private fun favouritesPreviewState(
     onNavigateToSettings = {},
     onNavigateToRollerCoaster = {},
     onListCreated = { a, b -> },
+    paddingValues = PaddingValues(),
     rollerCoasters = favouritesRollerCoastersPagingDataFlow(
         appendState = appendState,
         data = data,

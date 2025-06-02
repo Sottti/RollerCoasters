@@ -36,4 +36,11 @@ dependencies {
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))
     ksp(libs.hilt.compiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.paging.testing)
+    testImplementation(libs.truth)
+    testImplementation(libs.turbine)
 }
