@@ -9,9 +9,20 @@ import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFiltered
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage.EnglishGb
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
+import com.sottti.roller.coasters.presentation.explore.model.AllFilter
+import com.sottti.roller.coasters.presentation.explore.model.AlphabeticalFilter
+import com.sottti.roller.coasters.presentation.explore.model.DropFilter
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent
+import com.sottti.roller.coasters.presentation.explore.model.GForceFilter
+import com.sottti.roller.coasters.presentation.explore.model.HeightFilter
+import com.sottti.roller.coasters.presentation.explore.model.InversionsFilter
+import com.sottti.roller.coasters.presentation.explore.model.LengthFilter
+import com.sottti.roller.coasters.presentation.explore.model.MaxVerticalFilter
+import com.sottti.roller.coasters.presentation.explore.model.SpeedFilter
+import com.sottti.roller.coasters.presentation.explore.model.SteelFilter
+import com.sottti.roller.coasters.presentation.explore.model.WoodFilter
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -218,7 +229,8 @@ internal class ExploreViewModelTest {
 
         viewModel.onAction(PrimaryFilterAction.HideSortFilters)
 
-        val expected = MutableStateFlow(viewModel.state.value).apply { collapseSortByPrimaryFilter() }.value.filters
+        val expected =
+            MutableStateFlow(viewModel.state.value).apply { collapseSortByPrimaryFilter() }.value.filters
 
         assertThat(viewModel.state.value.filters).isEqualTo(expected)
     }
@@ -275,5 +287,302 @@ internal class ExploreViewModelTest {
         val expected = MutableStateFlow(viewModel.state.value)
             .apply { collapseTypePrimaryFilter() }.value.filters
         assertThat(viewModel.state.value.filters).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select alphabetical sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByAlphabetical)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<AlphabeticalFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select drop sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Drop,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByDrop)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<DropFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select steel type filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.Steel,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectTypeSteel)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<SteelFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select all type filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectTypeAll)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<AllFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select gforce sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.GForce,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByGForce)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<GForceFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select height sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Height,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByHeight)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<HeightFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select inversions sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Inversions,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByInversions)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<InversionsFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select length sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Length,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByLength)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<LengthFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select max vertical sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.MaxVertical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortByMaxVertical)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<MaxVerticalFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select speed sort filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Speed,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectSortBySpeed)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<SpeedFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `process select wood type filter action updates state correctly`() = runTest {
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.Wood,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
+        viewModel.onAction(SecondaryFilterAction.SelectTypeWood)
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { select<WoodFilter>() }.value
+        assertThat(viewModel.state.value).isEqualTo(expected)
     }
 }
