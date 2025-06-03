@@ -48,7 +48,7 @@ public fun AboutMeUi(
         onAction = viewModel.onAction,
         onListCreated = { lazyListState, scrollBehavior ->
             val coroutineScope = rememberCoroutineScope()
-            val currentScrollBehavior by rememberUpdatedState(newValue = scrollBehavior)
+            val currentScrollBehavior by rememberUpdatedState(scrollBehavior)
             LaunchedEffect(key1 = onScrollToTop) {
                 onScrollToTop {
                     coroutineScope.launch {

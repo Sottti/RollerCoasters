@@ -30,7 +30,7 @@ internal class FavouritesViewModelTest {
 
         try {
             val observeFavouriteRollerCoasters = mockk<ObserveFavouriteRollerCoasters>()
-            coEvery { observeFavouriteRollerCoasters.invoke() } returns pagingFlow
+            coEvery { observeFavouriteRollerCoasters() } returns pagingFlow
 
             val viewModel = FavouritesViewModel(
                 observeFavouriteRollerCoasters = observeFavouriteRollerCoasters,

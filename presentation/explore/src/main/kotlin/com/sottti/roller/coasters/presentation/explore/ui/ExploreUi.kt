@@ -54,7 +54,7 @@ private fun ExploreUi(
     viewModel: ExploreViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems()
+    val rollerCoasters = viewModel.rollerCoasters.collectAsLazyPagingItems()
 
     ExploreUi(
         filters = state.filters,

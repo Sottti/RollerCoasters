@@ -58,6 +58,6 @@ private fun Title(
 private fun Icon(onNavigateToSettings: () -> Unit) {
     Icon(
         iconState = Icons.Settings.outlined,
-        onClick = { onNavigateToSettings.invoke() },
+        onClick = { onNavigateToSettings() },
     )
 }

@@ -70,7 +70,7 @@ internal class ExploreViewModel @Inject constructor(
     private val _typeFilter = MutableStateFlow(TypeFilter.All)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val _rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>> =
+    val rollerCoasters: Flow<PagingData<ExploreRollerCoaster>> =
         combine(
             flow = _typeFilter,
             flow2 = _sortByFilter,
@@ -90,7 +90,7 @@ internal class ExploreViewModel @Inject constructor(
         }.flatMapLatest { it }
             .cachedIn(viewModelScope)
 
-    private val _state = MutableStateFlow(initialState(_rollerCoastersFlow))
+    private val _state = MutableStateFlow(initialState())
     val state: StateFlow<ExploreState> = _state.asStateFlow()
 
     private val _events = MutableSharedFlow<ExploreEvent>()

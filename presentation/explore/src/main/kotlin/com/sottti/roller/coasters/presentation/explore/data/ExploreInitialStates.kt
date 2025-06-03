@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.explore.data
 
-import androidx.paging.PagingData
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.AllFilter
@@ -19,7 +18,6 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Secon
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeAll
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeSteel
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction.SelectTypeWood
-import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreState
 import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.explore.model.GForceFilter
@@ -36,12 +34,9 @@ import com.sottti.roller.coasters.presentation.explore.model.SteelFilter
 import com.sottti.roller.coasters.presentation.explore.model.TypePrimaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.TypeSecondaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.WoodFilter
-import kotlinx.coroutines.flow.Flow
 
 internal fun initialState(
-    rollerCoastersFlow: Flow<PagingData<ExploreRollerCoaster>>,
 ): ExploreState = ExploreState(
-    rollerCoasters = rollerCoastersFlow,
     filters = filtersInitialState(),
 )
 

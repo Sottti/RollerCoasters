@@ -27,21 +27,21 @@ internal class ObserveSystemLocaleTest {
     @Test
     fun `invoking use case delegates to repository`() = runTest {
         every { repository.observeSystemLocale() } returns flowOf(Locale.UK)
-        useCase.invoke()
+        useCase()
         verify { repository.observeSystemLocale() }
     }
 
     @Test
     fun `invoking use case emits locale uk from repository`() = runTest {
         every { repository.observeSystemLocale() } returns flowOf(Locale.UK)
-        val result = useCase.invoke().toList()
+        val result = useCase().toList()
         assertThat(result).containsExactly(Locale.UK)
     }
 
     @Test
     fun `invoking use case emits multiple locales from repository`() = runTest {
         every { repository.observeSystemLocale() } returns flowOf(Locale.UK, Locale("es", "ES"))
-        val result = useCase.invoke().toList()
+        val result = useCase().toList()
         assertThat(result).containsExactly(Locale.UK, Locale("es", "ES")).inOrder()
     }
 }

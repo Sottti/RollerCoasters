@@ -1,7 +1,5 @@
 package com.sottti.roller.coasters.presentation.explore.data
 
-import allFilter
-import alphaFilter
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.presentation.explore.model.AllFilter
 import com.sottti.roller.coasters.presentation.explore.model.DropFilter
@@ -12,15 +10,9 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Prima
 import com.sottti.roller.coasters.presentation.explore.model.ExploreState
 import com.sottti.roller.coasters.presentation.explore.model.SortBySecondaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.TypeSecondaryFilter
-import dropFilter
-import filtersWithExpansion
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import org.junit.Before
 import org.junit.Test
-import sortByPrimary
-import steelFilter
-import typePrimary
 
 internal class ExploreReducersTest {
 
@@ -28,7 +20,7 @@ internal class ExploreReducersTest {
 
     @Before
     fun setUp() {
-        stateFlow = MutableStateFlow(initialState(emptyFlow()))
+        stateFlow = MutableStateFlow(initialState())
     }
 
     @Test
@@ -62,7 +54,7 @@ internal class ExploreReducersTest {
     @Test
     fun `test collapsing sort by primary filter hides all secondary filters`() {
         stateFlow = MutableStateFlow(
-            initialState(emptyFlow()).copy(
+            initialState().copy(
                 filters = filtersWithExpansion(
                     sortByExpanded = true,
                     sortBySecondaryVisible = true
@@ -79,9 +71,8 @@ internal class ExploreReducersTest {
 
     @Test
     fun `test collapsing type primary filter hides all secondary filters`() {
-
         stateFlow = MutableStateFlow(
-            initialState(emptyFlow()).copy(
+            initialState().copy(
                 filters = filtersWithExpansion(
                     typeExpanded = true,
                     typeSecondaryVisible = true
@@ -97,10 +88,9 @@ internal class ExploreReducersTest {
     }
 
     @Test
-    fun `test selecting sort by secondary filter selects and collapses primary and hides secondary`() {
-
+    fun `test selecting sort by secondary filter selects and collapses primary, hides secondary`() {
         stateFlow = MutableStateFlow(
-            initialState(emptyFlow()).copy(
+            initialState().copy(
                 filters = filtersWithExpansion(
                     sortByExpanded = true,
                     sortBySecondaryVisible = true
@@ -111,7 +101,7 @@ internal class ExploreReducersTest {
         assertThat(stateFlow.value.dropFilter.selected).isTrue()
         assertThat(stateFlow.value.dropFilter.leadingIcon).isNotNull()
         assertThat(stateFlow.value.dropFilter.visible).isFalse()
-        assertThat(stateFlow.value.alphaFilter.selected).isFalse()
+        assertThat(stateFlow.value.alphabeticalFilter.selected).isFalse()
         assertThat(stateFlow.value.sortByPrimary.expanded).isFalse()
         assertThat(stateFlow.value.sortByPrimary.action).isEqualTo(ShowSortFilters)
         stateFlow.value.filters.secondary.forEach { filter ->
@@ -121,9 +111,8 @@ internal class ExploreReducersTest {
 
     @Test
     fun `test selecting type secondary filter selects and collapses primary and hides secondary`() {
-
         stateFlow = MutableStateFlow(
-            initialState(emptyFlow()).copy(
+            initialState().copy(
                 filters = filtersWithExpansion(
                     typeExpanded = true,
                     typeSecondaryVisible = true

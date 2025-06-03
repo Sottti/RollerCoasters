@@ -26,8 +26,7 @@ public fun RollerCoastersTheme(
             .value
 
     val resolvedColorContrast =
-        observeResolvedColorContrast
-            .invoke()
+        observeResolvedColorContrast()
             .collectAsState(initial = ResolvedColorContrast.StandardContrast).value
 
     val colors = colors(
