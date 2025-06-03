@@ -171,7 +171,7 @@ private fun Ride.toRideState(
     formatContext: FormatContext,
 ): RollerCoasterRideState = when (this) {
     is SingleTrackRide -> toSingleTrackRideState(formatContext)
-    is MultiTrackRide -> TODO()
+    is MultiTrackRide -> toMultiTrackRideState(formatContext)
 }
 
 private fun SingleTrackRide.toSingleTrackRideState(
@@ -227,6 +227,46 @@ private fun SingleTrackRide.toSingleTrackRideState(
                 headline = R.string.ride_speed,
             )
         },
+    )
+
+private fun MultiTrackRide.toMultiTrackRideState(
+    formatContext: FormatContext,
+) =
+    RollerCoasterRideState(
+        header = R.string.ride_header,
+        length = length?.toRow(R.string.ride_length) { length ->
+            formatContext.formatLength(length)
+        },
+        height = height?.toRow(R.string.ride_height) { height ->
+            formatContext.formatHeight(height)
+        },
+        drop = drop?.toRow(R.string.ride_drop) { drop ->
+            formatContext.formatDrop(drop)
+        },
+        inversions = inversions?.toRow(R.string.ride_inversions) { inversions ->
+            inversions.value.toString()
+        },
+        maxVertical = maxVertical?.toRow(R.string.ride_max_vertical) { maxVertical ->
+            formatContext.formatMaxVertical(maxVertical)
+        },
+        duration = duration?.toRow(R.string.ride_duration) { duration ->
+            formatContext.formatDuration(duration)
+        },
+        gForce = gForce?.toRow(R.string.ride_g_force) { gForce ->
+            formatContext.formatGForce(gForce)
+        },
+        speed = speed?.toRow(R.string.ride_speed) { speed ->
+            formatContext.formatSpeed(speed)
+        },
+    )
+
+private inline fun <T> List<T>.toRow(
+    @androidx.annotation.StringRes headline: Int,
+    mapper: (T) -> String,
+): RollerCoasterDetailsRow =
+    RollerCoasterDetailsRow(
+        headline = headline,
+        trailing = joinToString(", ") { mapper(it) },
     )
 
 private data class FormatContext(
