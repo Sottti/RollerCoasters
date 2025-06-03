@@ -16,6 +16,7 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -168,39 +169,111 @@ internal class ExploreViewModelTest {
 
     @Test
     fun `show sort filters expands sort and collapses type`() = runTest {
-        val viewModel = viewModel()
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
         assertThat(viewModel.state.value.filters).isEqualTo(filtersInitialState())
         viewModel.onAction(PrimaryFilterAction.ShowSortFilters)
-        assertThat(viewModel.state.value.filters)
-            .isEqualTo(filtersWithExpansion(sortByExpanded = true))
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { expandSortByPrimaryFilter() }.value.filters
+        assertThat(viewModel.state.value.filters).isEqualTo(expected)
     }
 
     @Test
     fun `hide sort filters collapses sort and does not expand type`() = runTest {
-        val viewModel = viewModel()
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
         viewModel.onAction(PrimaryFilterAction.ShowSortFilters)
-        assertThat(viewModel.state.value.filters)
-            .isEqualTo(filtersWithExpansion(sortByExpanded = true))
+
         viewModel.onAction(PrimaryFilterAction.HideSortFilters)
-        assertThat(viewModel.state.value.filters).isEqualTo(filtersInitialState())
+
+        val expected = MutableStateFlow(viewModel.state.value).apply { collapseSortByPrimaryFilter() }.value.filters
+
+        assertThat(viewModel.state.value.filters).isEqualTo(expected)
     }
 
     @Test
     fun `show type filters expands type and collapses sort`() = runTest {
-        val viewModel = viewModel()
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
+
         viewModel.onAction(PrimaryFilterAction.ShowTypeFilters)
-        assertThat(viewModel.state.value.filters)
-            .isEqualTo(filtersWithExpansion(typeExpanded = true))
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { expandTypePrimaryFilter() }.value.filters
+        assertThat(viewModel.state.value.filters).isEqualTo(expected)
     }
 
     @Test
     fun `hide type filters collapses type and does not expand sort`() = runTest {
-        val viewModel = viewModel()
+        val observeAppLanguage = mockk<ObserveAppLanguage>()
+        val observeSystemLocale = mockk<ObserveSystemLocale>()
+        val observeFilteredRollerCoasters = mockk<ObserveFilteredRollerCoasters>()
+
+        every { observeAppLanguage() } returns flowOf(EnglishGb)
+        every { observeSystemLocale() } returns flowOf(Locale.US)
+        coEvery {
+            observeFilteredRollerCoasters.invoke(
+                sortByFilter = SortByFilter.Alphabetical,
+                typeFilter = TypeFilter.All,
+            )
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = viewModel(
+            observeAppLanguage = observeAppLanguage,
+            observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+            observeSystemLocale = observeSystemLocale,
+        )
         viewModel.onAction(PrimaryFilterAction.ShowTypeFilters)
-        assertThat(viewModel.state.value.filters)
-            .isEqualTo(filtersWithExpansion(typeExpanded = true))
         viewModel.onAction(PrimaryFilterAction.HideTypeFilters)
-        assertThat(viewModel.state.value.filters)
-            .isEqualTo(filtersInitialState())
+        val expected = MutableStateFlow(viewModel.state.value)
+            .apply { collapseTypePrimaryFilter() }.value.filters
+        assertThat(viewModel.state.value.filters).isEqualTo(expected)
     }
 }

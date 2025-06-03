@@ -10,9 +10,16 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.Prima
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.HideTypeFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowSortFilters
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction.ShowTypeFilters
+import com.sottti.roller.coasters.presentation.explore.model.GForceFilter
+import com.sottti.roller.coasters.presentation.explore.model.HeightFilter
+import com.sottti.roller.coasters.presentation.explore.model.InversionsFilter
+import com.sottti.roller.coasters.presentation.explore.model.LengthFilter
+import com.sottti.roller.coasters.presentation.explore.model.MaxVerticalFilter
 import com.sottti.roller.coasters.presentation.explore.model.SortByPrimaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.SpeedFilter
 import com.sottti.roller.coasters.presentation.explore.model.SteelFilter
 import com.sottti.roller.coasters.presentation.explore.model.TypePrimaryFilter
+import com.sottti.roller.coasters.presentation.explore.model.WoodFilter
 import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.string.provider.StringProvider
 import io.mockk.mockk
@@ -29,7 +36,6 @@ internal fun filtersWithExpansion(
                 expanded = sortByExpanded,
                 action = if (sortByExpanded) HideSortFilters else ShowSortFilters,
             )
-
             is TypePrimaryFilter -> it.copy(
                 expanded = typeExpanded,
                 action = if (typeExpanded) HideTypeFilters else ShowTypeFilters,
@@ -40,9 +46,15 @@ internal fun filtersWithExpansion(
         when (it) {
             is AlphabeticalFilter -> it.copy(visible = sortBySecondaryVisible)
             is DropFilter -> it.copy(visible = sortBySecondaryVisible)
+            is GForceFilter -> it.copy(visible = sortBySecondaryVisible)
+            is HeightFilter -> it.copy(visible = sortBySecondaryVisible)
+            is InversionsFilter -> it.copy(visible = sortBySecondaryVisible)
+            is LengthFilter -> it.copy(visible = sortBySecondaryVisible)
+            is MaxVerticalFilter -> it.copy(visible = sortBySecondaryVisible)
+            is SpeedFilter -> it.copy(visible = sortBySecondaryVisible)
             is AllFilter -> it.copy(visible = typeSecondaryVisible)
             is SteelFilter -> it.copy(visible = typeSecondaryVisible)
-            else -> it
+            is WoodFilter -> it.copy(visible = typeSecondaryVisible)
         }
     }
 )
