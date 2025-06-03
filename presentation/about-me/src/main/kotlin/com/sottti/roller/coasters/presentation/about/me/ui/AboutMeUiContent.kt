@@ -126,8 +126,8 @@ internal fun SocialProfiles(
                     onAction(
                         OpenUrl(
                             urlResId = profile.url,
-                            primaryColor = primaryColor
-                        )
+                            primaryColor = primaryColor,
+                        ),
                     )
                 },
             )
@@ -155,7 +155,7 @@ private fun GetToKnowMe(
                     onShowBottomSheet {
                         BottomSheetContent(onAction = onAction, state = topics.journey.description)
                     }
-                }
+                },
             )
             TopicsGrid(
                 topics = topics.android,
@@ -164,7 +164,7 @@ private fun GetToKnowMe(
                     showTopicBottomSheet(
                         topic = topics.android.description(position),
                         onAction = onAction,
-                        onShow = onShowBottomSheet
+                        onShow = onShowBottomSheet,
                     )
                 },
             )
@@ -175,9 +175,10 @@ private fun GetToKnowMe(
                     showTopicBottomSheet(
                         topic = topics.languages.description(position),
                         onAction = onAction,
-                        onShow = onShowBottomSheet
+                        onShow = onShowBottomSheet,
                     )
-                })
+                },
+            )
             TopicsGrid(
                 topics = topics.hobbies,
                 iconState = Icons.Hobbies.outlined,
@@ -185,9 +186,10 @@ private fun GetToKnowMe(
                     showTopicBottomSheet(
                         topic = topics.hobbies.description(position),
                         onAction = onAction,
-                        onShow = onShowBottomSheet
+                        onShow = onShowBottomSheet,
                     )
-                })
+                },
+            )
         }
     }
 }
@@ -242,6 +244,6 @@ private fun ColumnScope.FillerCard() {
         shape = RectangleShape,
         modifier = Modifier
             .weight(1f)
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {}
 }

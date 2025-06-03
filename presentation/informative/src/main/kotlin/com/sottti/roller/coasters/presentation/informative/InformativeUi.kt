@@ -33,13 +33,13 @@ public fun InformativeUi(
             .fillMaxSize()
             .padding(dimensions.padding.medium),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Illustration(
             state = illustration,
             modifier = Modifier
                 .weight(0.5f)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
 
         Text.Headline.Medium(
@@ -57,7 +57,7 @@ public fun InformativeUi(
         button?.let {
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = button.onClick
+                onClick = button.onClick,
             ) {
                 Text.Vanilla(button.text)
             }

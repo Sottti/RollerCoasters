@@ -36,7 +36,7 @@ internal fun FavouritesRollerCoastersList(
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         when (rollerCoasters.loadState.refresh) {
             is Loading -> FillMaxWidthProgressIndicator()
@@ -121,6 +121,6 @@ private fun FillMaxWidthProgressIndicator() {
     ProgressIndicator(
         modifier = Modifier
             .padding(vertical = dimensions.padding.medium)
-            .fillMaxSize()
+            .fillMaxSize(),
     )
 }

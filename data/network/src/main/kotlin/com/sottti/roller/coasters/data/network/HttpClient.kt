@@ -13,13 +13,15 @@ import kotlinx.serialization.json.Json
 internal fun createHttpClient() =
     HttpClient(CIO) {
         install(ContentNegotiation) {
-            json(Json {
+            json(
+                Json {
                 coerceInputValues = true
                 explicitNulls = false
                 ignoreUnknownKeys = true
                 isLenient = true
                 prettyPrint = true
-            })
+            },
+            )
         }
 
         install(Logging) {

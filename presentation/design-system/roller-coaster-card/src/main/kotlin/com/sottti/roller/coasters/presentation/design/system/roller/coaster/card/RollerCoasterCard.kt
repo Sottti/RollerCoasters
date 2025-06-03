@@ -46,7 +46,7 @@ public object RollerCoasterCard {
             parkName = parkName,
             rollerCoasterName = rollerCoasterName,
             stat = stat,
-            statDetail = statDetail
+            statDetail = statDetail,
         )
     }
 }

@@ -39,19 +39,30 @@ internal fun SettingsList(
     onAction: (SettingsAction) -> Unit,
 ) {
     val onDynamicColorCheckedChange = remember(onAction) {
-        { checked: Boolean -> onAction(DynamicColorCheckedChange(checked)) }
+        {
+            checked: Boolean ->
+                onAction(DynamicColorCheckedChange(checked))
+            }
     }
     val launchThemePicker = remember(onAction) {
-        { onAction(LaunchAppThemePicker) }
+        {
+            onAction(LaunchAppThemePicker)
+        }
     }
     val launchColorContrastPicker = remember(onAction) {
-        { onAction(LaunchAppColorContrastPicker) }
+        {
+            onAction(LaunchAppColorContrastPicker)
+        }
     }
     val launchLanguagePicker = remember(onAction) {
-        { onAction(LaunchAppLanguagePicker) }
+        {
+            onAction(LaunchAppLanguagePicker)
+        }
     }
     val launchMeasurementSystemPicker = remember(onAction) {
-        { onAction(LaunchAppMeasurementSystemPicker) }
+        {
+            onAction(LaunchAppMeasurementSystemPicker)
+        }
     }
     LazyColumn(
         modifier = Modifier
@@ -123,8 +134,10 @@ internal fun SettingsList(
                 iconState = state.appMeasurementSystem.listItem.icon,
                 onClick = launchMeasurementSystemPicker,
             ) {
-                when (val selection =
-                    state.appMeasurementSystem.listItem.selectedAppMeasurementSystem) {
+                when (
+                    val selection =
+                    state.appMeasurementSystem.listItem.selectedAppMeasurementSystem
+                ) {
                     is Loaded -> Text.Vanilla(selection.appMeasurementSystem.text)
                     Loading -> SmallProgressIndicator()
                 }

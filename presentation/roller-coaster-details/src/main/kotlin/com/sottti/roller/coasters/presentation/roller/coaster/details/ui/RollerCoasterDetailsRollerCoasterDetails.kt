@@ -116,7 +116,7 @@ internal fun RideDetails(details: RollerCoasterRideState) {
         details.inversions,
         details.gForce,
         details.length,
-        details.duration
+        details.duration,
     )
 
     DetailsCard {
@@ -158,7 +158,7 @@ internal fun LocationDetails(state: RollerCoasterLocationState) {
                 markerTitle = state.mapMarkerTitle,
                 modifier = Modifier
                     .fillMaxSize()
-                    .aspectRatio(1.75f)
+                    .aspectRatio(1.75f),
             )
         }
 
@@ -195,7 +195,7 @@ private fun ListItem(
 internal fun Header(@StringRes text: Int) {
     Text.Label.Large(
         text = stringResource(text),
-        textColor = colors.onBackground
+        textColor = colors.onBackground,
     )
 }
 

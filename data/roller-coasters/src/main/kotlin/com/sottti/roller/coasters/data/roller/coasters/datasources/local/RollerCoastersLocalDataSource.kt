@@ -79,7 +79,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
 
     suspend fun addFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId) {
         dao.addFavouriteRollerCoaster(
-            favouriteRollerCoaster = rollerCoasterId.toFavouriteRollercoasterRoomModel()
+            favouriteRollerCoaster = rollerCoasterId.toFavouriteRollercoasterRoomModel(),
         )
     }
 

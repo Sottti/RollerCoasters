@@ -144,7 +144,7 @@ internal class RollerCoastersLocalDataSourceTest {
         val pictures = listOf(notMainPictureRoomModel)
 
         coEvery { dao.observeRollerCoaster(rollerCoasterId().value) } returns flowOf(
-            rollerCoasterEntity
+            rollerCoasterEntity,
         )
         coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(pictures)
 
@@ -181,9 +181,9 @@ internal class RollerCoastersLocalDataSourceTest {
             rollerCoaster().copy(
                 pictures = Pictures(
                     main = mainPicture(),
-                    other = emptyList()
-                )
-            )
+                    other = emptyList(),
+                ),
+            ),
         )
     }
 
@@ -235,9 +235,9 @@ internal class RollerCoastersLocalDataSourceTest {
         assertThat(emissions[1]).isEqualTo(
             rollerCoaster().copy(
                 pictures = rollerCoaster().pictures.copy(
-                    other = listOf(notMainPicture(), anotherNotMainPicture())
+                    other = listOf(notMainPicture(), anotherNotMainPicture()),
                 ),
-            )
+            ),
         )
     }
 }

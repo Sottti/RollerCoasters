@@ -102,14 +102,15 @@ internal fun AboutMeUi(
                 start = paddingValues.calculateStartPadding(LayoutDirection.Ltr),
                 end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
                 bottom = paddingValues.calculateBottomPadding(),
-            ), topBar = {
+            ),
+                topBar = {
             MainTopBar(
                 onNavigateToSettings = onNavigateToSettings,
                 scrollBehavior = scrollBehavior,
                 showTitle = showTitle,
                 titleResId = state.title,
             )
-        }, contentWindowInsets = contentWindowInsets
+        }, contentWindowInsets = contentWindowInsets,
 
     ) { innerPaddingValues ->
         AboutMeUiContent(

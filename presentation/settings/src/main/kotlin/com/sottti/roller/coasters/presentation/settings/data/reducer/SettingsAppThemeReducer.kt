@@ -25,9 +25,9 @@ internal fun MutableStateFlow<SettingsState>.updateAppTheme(
                 currentState.appTheme.listItem.copy(
                     selectedAppTheme = SelectedAppThemeState.Loaded(
                         appTheme.toPresentationModel(selected = true),
-                    )
+                    ),
                 ),
-            )
+            ),
         )
     }
 }
@@ -42,8 +42,8 @@ internal fun MutableStateFlow<SettingsState>.showAppThemePicker(
                 picker = appThemePickerState(
                     lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
                     theme = theme,
-                )
-            )
+                ),
+            ),
         )
     }
 }
@@ -58,7 +58,7 @@ internal fun MutableStateFlow<SettingsState>.updateAppThemePicker(
                 picker = appThemePickerState(
                     lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
                     theme = theme,
-                )
+                ),
             ),
         )
     }

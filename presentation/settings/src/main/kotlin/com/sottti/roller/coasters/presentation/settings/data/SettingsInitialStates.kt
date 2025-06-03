@@ -64,7 +64,7 @@ private fun initialAppThemeState() = AppThemeState(
         headline = R.string.theme_headline,
         supporting = R.string.theme_supporting,
         selectedAppTheme = SelectedAppThemeState.Loading,
-        icon = Icons.BrightnessMedium.outlined
+        icon = Icons.BrightnessMedium.outlined,
     ),
     picker = null,
 )

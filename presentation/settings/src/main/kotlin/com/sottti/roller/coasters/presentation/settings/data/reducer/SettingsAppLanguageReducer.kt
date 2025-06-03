@@ -27,9 +27,9 @@ internal fun MutableStateFlow<SettingsState>.updateAppLanguage(
                 listItem = currentState.appLanguage.listItem.copy(
                     selectedAppLanguage = AppSelectedLanguageState.Loaded(
                         appLanguage.toPresentationModel(selected = true),
-                    )
+                    ),
                 ),
-            )
+            ),
         )
     }
 }
@@ -41,7 +41,7 @@ internal fun MutableStateFlow<SettingsState>.showAppLanguagePicker(
         currentState.copy(
             appLanguage = currentState.appLanguage.copy(
                 picker = appLanguagePickerState(appLanguage.toPresentationModel(selected = true)),
-            )
+            ),
         )
     }
 }
@@ -61,7 +61,7 @@ internal fun MutableStateFlow<SettingsState>.updateAppLanguagePicker(
 internal fun MutableStateFlow<SettingsState>.hideAppLanguagePicker() {
     update { currentState ->
         currentState.copy(
-            appLanguage = currentState.appLanguage.copy(picker = null)
+            appLanguage = currentState.appLanguage.copy(picker = null),
         )
     }
 }

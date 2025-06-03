@@ -14,7 +14,7 @@ internal class ImageStateProvider :
                     foreverLoading = true,
                     imageUrl = fixtureImageUrl,
                     roundedCorners = false,
-                )
+                ),
             )
             roundedCornersValues.forEach { roundedCorners ->
                 add(
@@ -23,7 +23,7 @@ internal class ImageStateProvider :
                         foreverLoading = false,
                         imageUrl = fixtureImageUrl,
                         roundedCorners = roundedCorners,
-                    )
+                    ),
                 )
             }
         }.asSequence()

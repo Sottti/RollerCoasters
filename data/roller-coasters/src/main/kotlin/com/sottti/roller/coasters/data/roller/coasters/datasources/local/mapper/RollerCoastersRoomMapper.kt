@@ -70,7 +70,7 @@ private fun Picture.toRoom(rollerCoasterId: RollerCoasterId) =
 private fun AmusementPark.toRoom(): ParkRoomModel =
     ParkRoomModel(
         id = id.value,
-        name = name.value
+        name = name.value,
     )
 
 @OptIn(InternalSerializationApi::class)

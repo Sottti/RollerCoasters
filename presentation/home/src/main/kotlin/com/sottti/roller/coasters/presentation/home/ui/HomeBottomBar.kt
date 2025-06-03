@@ -19,7 +19,7 @@ internal fun BottomBar(
                 icon = { Icon(item.icon) },
                 label = { Text.Vanilla(item.labelResId) },
                 selected = navigationBarItems.selectedItem == item.destination,
-                onClick = { onNavigationBarItemClick(item) }
+                onClick = { onNavigationBarItemClick(item) },
             )
         }
     }

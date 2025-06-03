@@ -49,7 +49,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,
                 )
-            }
+            },
         ).flow
 
 
@@ -97,6 +97,6 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             config = pagerConfig,
             pagingSourceFactory = {
                 localDataSource.observeFavouriteRollerCoasters(measurementSystem)
-            }
+            },
         ).flow
 }

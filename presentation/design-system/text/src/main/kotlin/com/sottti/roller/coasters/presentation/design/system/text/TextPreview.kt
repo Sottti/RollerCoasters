@@ -19,7 +19,7 @@ internal fun TextPreviewContent() {
                 .fillMaxSize()
                 .padding(dimensions.spacing.large)
                 .background(colors.background),
-            verticalArrangement = Arrangement.spacedBy(dimensions.spacing.small)
+            verticalArrangement = Arrangement.spacedBy(dimensions.spacing.small),
         ) {
             Text.Display.Large(text = "Display Large", textColor = colors.onSurface)
             Text.Display.Medium(text = "Display Medium", textColor = colors.onSurface)

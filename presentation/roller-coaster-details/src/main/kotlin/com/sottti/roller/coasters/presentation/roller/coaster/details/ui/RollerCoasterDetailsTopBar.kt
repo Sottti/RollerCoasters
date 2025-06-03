@@ -32,9 +32,9 @@ internal fun TopBar(
         actions = {
             FavouriteIcon(
                 state = state.favouriteIcon,
-                onToggleFavourite = onToggleFavourite
+                onToggleFavourite = onToggleFavourite,
             )
-        }
+        },
     )
 }
 

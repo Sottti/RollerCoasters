@@ -44,7 +44,7 @@ internal fun MutableStateFlow<ExploreState>.expandSortByPrimaryFilter() {
                             )
                         }
                     },
-                )
+                ),
             )
         }
 }
@@ -65,7 +65,7 @@ internal fun MutableStateFlow<ExploreState>.expandTypePrimaryFilter() {
                             )
                         }
                     },
-                )
+                ),
             )
         }
 }
@@ -114,7 +114,8 @@ private fun <T : PrimaryFilter> MutableStateFlow<ExploreState>.collapsePrimaryFi
                         primaryFilterClass.isInstance(filter) -> (filter as T).updateFilter(state)
                         else -> filter
                     }
-                })
+                },
+            ),
         )
     }
 }
@@ -136,8 +137,8 @@ private inline fun <reified T : SecondaryFilter> MutableStateFlow<ExploreState>.
 
                             else -> filter
                         }
-                    }
-                )
+                    },
+                ),
             )
         }
     }
@@ -188,7 +189,8 @@ private inline fun <reified T : SecondaryFilter> MutableStateFlow<ExploreState>.
                         is SteelFilter -> filter.copy(visible = filter is T)
                         is WoodFilter -> filter.copy(visible = filter is T)
                     }
-                })
+                },
+            ),
         )
     }
 }
@@ -212,7 +214,7 @@ private fun MutableStateFlow<ExploreState>.hideSecondaryFilters() = apply {
                         is WoodFilter -> filter.copy(visible = false)
                     }
                 },
-            )
+            ),
         )
     }
 }

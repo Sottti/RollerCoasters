@@ -27,9 +27,9 @@ internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystem(
                 listItem = currentState.appMeasurementSystem.listItem.copy(
                     selectedAppMeasurementSystem = SelectedAppMeasurementSystemState.Loaded(
                         appMeasurementSystem.toPresentationModel(selected = true),
-                    )
+                    ),
                 ),
-            )
+            ),
         )
     }
 }
@@ -43,7 +43,7 @@ internal fun MutableStateFlow<SettingsState>.showAppMeasurementSystemPicker(
                 picker = appMeasurementSystemPickerState(
                     appMeasurementSystem.toPresentationModel(selected = true),
                 ),
-            )
+            ),
         )
     }
 }
@@ -54,7 +54,7 @@ internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystemPicker(
     update { currentState ->
         currentState.copy(
             appMeasurementSystem = currentState.appMeasurementSystem.copy(
-                picker = appMeasurementSystemPickerState(selectedAppMeasurementSystem)
+                picker = appMeasurementSystemPickerState(selectedAppMeasurementSystem),
             ),
         )
     }
@@ -63,7 +63,7 @@ internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystemPicker(
 internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker() {
     update { currentState ->
         currentState.copy(
-            appMeasurementSystem = currentState.appMeasurementSystem.copy(picker = null)
+            appMeasurementSystem = currentState.appMeasurementSystem.copy(picker = null),
         )
     }
 }

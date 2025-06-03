@@ -30,7 +30,7 @@ public fun Chip(
         trailingIcon = { expanded?.let { TrailingIcon(expanded) } },
         onClick = onClick,
         selected = selected || expanded == true,
-        modifier = Modifier.animateContentSize()
+        modifier = Modifier.animateContentSize(),
     )
 }
 

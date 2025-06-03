@@ -140,7 +140,7 @@ internal class RollerCoastersPagingSourceTest {
                     data = listOf(rollerCoaster(), anotherRollerCoaster()),
                     prevKey = 2,
                     nextKey = null,
-                )
+                ),
             ),
             anchorPosition = 1,
             config = PagingConfig(pageSize = 2),
@@ -160,7 +160,7 @@ internal class RollerCoastersPagingSourceTest {
                     data = listOf(rollerCoaster()),
                     prevKey = null,
                     nextKey = 2,
-                )
+                ),
             ),
             anchorPosition = 1,
             config = PagingConfig(pageSize = 2),
@@ -180,7 +180,7 @@ internal class RollerCoastersPagingSourceTest {
                     data = emptyList(),
                     prevKey = null,
                     nextKey = null,
-                )
+                ),
             ),
             anchorPosition = 0,
             config = PagingConfig(pageSize = 2),

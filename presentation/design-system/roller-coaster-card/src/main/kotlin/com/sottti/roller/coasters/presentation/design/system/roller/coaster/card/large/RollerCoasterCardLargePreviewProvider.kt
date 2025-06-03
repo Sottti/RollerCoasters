@@ -21,7 +21,7 @@ internal class RollerCoasterCardLargePreviewProvider :
                         rollerCoasterName = fixtureRollerCoasterName,
                         stat = fixtureState,
                         statDetail = fixtureStatDetail,
-                    )
+                    ),
                 )
             }
 

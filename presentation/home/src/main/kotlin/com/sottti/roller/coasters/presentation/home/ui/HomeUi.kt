@@ -24,7 +24,7 @@ internal fun HomeUi() {
                 onNavigateToSettings = { rootNavController.navigate(Settings) },
                 onNavigateToRollerCoaster = { rollerCoasterId ->
                     rootNavController.navigate(RollerCoasterDetails(rollerCoasterId))
-                }
+                },
             )
         }
         composable<Settings> {
@@ -35,7 +35,7 @@ internal fun HomeUi() {
             val rollerCoasterDetails: RollerCoasterDetails = backStackEntry.toRoute()
             RollerCoasterDetailsUi(
                 rollerCoasterId = rollerCoasterDetails.rollerCoasterId,
-                onBackNavigation = { rootNavController.popBackStack() }
+                onBackNavigation = { rootNavController.popBackStack() },
             )
         }
     }

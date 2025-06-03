@@ -50,7 +50,7 @@ private fun RowScope.Details(
     Column(
         modifier = Modifier
             .weight(1.0f)
-            .padding(dimensions.padding.medium)
+            .padding(dimensions.padding.medium),
     ) {
         Text.Title.Large(
             text = rollerCoasterName,

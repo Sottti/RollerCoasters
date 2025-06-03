@@ -40,7 +40,7 @@ private fun Graphic(
 ) {
     Card(
         onClick = onClick,
-        shape = MaterialTheme.shapes.extraLarge
+        shape = MaterialTheme.shapes.extraLarge,
     ) {
         Icon(
             modifier = Modifier

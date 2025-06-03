@@ -20,14 +20,14 @@ public fun RainbowLazyColumn(
 ) {
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         items(rainbowColors(seedColor)) { color: Color ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .background(color = color)
+                    .background(color = color),
 
             )
         }
@@ -48,7 +48,7 @@ private fun rainbowColors(
         Color.hsv(
             hue = (seedHue + index * 360f / 38) % 360,
             saturation = seedSaturation,
-            value = seedValue
+            value = seedValue,
         )
     }
 }

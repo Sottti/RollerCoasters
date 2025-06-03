@@ -28,13 +28,16 @@ internal fun <T> GenericPickerDialog(
     }
     val currentOnSelect by rememberUpdatedState(onSelect)
     val onOptionSelected = remember(currentOnSelect, items) {
-        { opt: DialogRadioButtonOption ->
+        {
+            opt: DialogRadioButtonOption ->
             val itm = fromOption(opt, items)
             currentOnSelect(itm)
         }
     }
     val onConfirmAction = remember(onConfirm, selectedItem) {
-        { onConfirm(selectedItem) }
+        {
+            onConfirm(selectedItem)
+        }
     }
     val currentOnDismiss by rememberUpdatedState(onDismiss)
     val onDismissAction = remember { { currentOnDismiss() } }

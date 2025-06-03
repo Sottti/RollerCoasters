@@ -56,7 +56,7 @@ internal fun SearchUi(
         topBar = {
             MainTopBar(
                 scrollBehavior = scrollBehavior,
-                onNavigateToSettings = onNavigateToSettings
+                onNavigateToSettings = onNavigateToSettings,
             )
         },
     ) { paddingValues ->

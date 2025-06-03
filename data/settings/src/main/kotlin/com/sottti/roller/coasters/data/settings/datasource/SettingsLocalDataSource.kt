@@ -105,11 +105,11 @@ internal class SettingsLocalDataSource @Inject constructor(
         localeManager.appLocale.toLanguage()
 
     fun observeAppLanguage(): Flow<AppLanguage> = observeLifecycle(
-        transform = { localeManager.appLocale.toLanguage() }
+        transform = { localeManager.appLocale.toLanguage() },
     )
 
     fun observeSystemLocale(): Flow<Locale> = observeLifecycle(
-        transform = { Locale.getDefault() }
+        transform = { Locale.getDefault() },
     )
 
     suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {

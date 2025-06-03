@@ -58,8 +58,8 @@ internal class IntOrListSerializerTest {
             listOf(
                 JsonPrimitive("12"),
                 JsonPrimitive("invalid"),
-                JsonPrimitive("45")
-            )
+                JsonPrimitive("45"),
+            ),
         )
         val result = decode(jsonElement)
 
@@ -96,9 +96,9 @@ internal class IntOrListSerializerTest {
                 listOf(
                     JsonPrimitive(1),
                     JsonPrimitive(2),
-                    JsonPrimitive(3)
-                )
-            )
+                    JsonPrimitive(3),
+                ),
+            ),
         )
     }
 

@@ -13,7 +13,9 @@ internal fun AppColorContrastNotAvailableDialog(
     onAction: (SettingsAction) -> Unit,
 ) {
     val onDismiss = remember(onAction) {
-        { onAction(DismissAppColorContrastNotAvailableMessage) }
+        {
+            onAction(DismissAppColorContrastNotAvailableMessage)
+        }
     }
     DialogInformative(
         title = state.title,

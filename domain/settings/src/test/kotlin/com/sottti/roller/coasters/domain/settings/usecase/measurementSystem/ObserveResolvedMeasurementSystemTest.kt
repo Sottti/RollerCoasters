@@ -94,12 +94,12 @@ internal class ObserveResolvedMeasurementSystemTest {
             listOf(AppMeasurementSystem.Metric, AppMeasurementSystem.ImperialUs)
         coEvery { observeAppMeasurementSystem() } returns flowOf(
             appMeasurementSystems[0],
-            appMeasurementSystems[1]
+            appMeasurementSystems[1],
         )
         val result = observeResolvedMeasurementSystem().toList()
         assertThat(result).containsExactly(
             Metric,
-            ImperialUs
+            ImperialUs,
         ).inOrder()
         coVerify(exactly = 0) { getSystemMeasurementSystem() }
     }

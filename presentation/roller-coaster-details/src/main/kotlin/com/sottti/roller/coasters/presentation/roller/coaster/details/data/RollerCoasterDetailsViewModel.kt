@@ -41,7 +41,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
         combine(
             observeAppLanguage(),
             observeSystemLocale(),
-            observeRollerCoaster(rollerCoasterId)
+            observeRollerCoaster(rollerCoasterId),
         ) { appLang, systemLocale, coaster ->
             Triple(appLang, systemLocale, coaster)
         }.onEach { (appLang, systemLocale, coaster) ->

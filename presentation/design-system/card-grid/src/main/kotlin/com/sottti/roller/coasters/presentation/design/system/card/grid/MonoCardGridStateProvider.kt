@@ -11,7 +11,7 @@ internal class MonoCardGridStateProvider : PreviewParameterProvider<MonoCardGrid
                 item = R.string.first_item,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {},
-            )
+            ),
         )
     }.asSequence()
 }

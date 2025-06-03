@@ -87,7 +87,7 @@ public fun mainPicture(): Picture =
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
             date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
-        )
+        ),
     )
 
 public fun anotherMainPicture(): Picture =
@@ -98,7 +98,7 @@ public fun anotherMainPicture(): Picture =
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
             date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
-        )
+        ),
     )
 
 public fun notMainPicture(): Picture =
@@ -109,7 +109,7 @@ public fun notMainPicture(): Picture =
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
             date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
-        )
+        ),
     )
 
 public fun anotherNotMainPicture(): Picture =
@@ -120,7 +120,7 @@ public fun anotherNotMainPicture(): Picture =
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
             date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
-        )
+        ),
     )
 
 public fun design(): Design =
@@ -225,7 +225,7 @@ public fun anotherRollerCoaster(
     pictures = Pictures(
         main = anotherMainPicture(),
         other = listOf(anotherNotMainPicture()),
-    )
+    ),
 )
 
 public fun gForce(): GForce = GForce(GFORCE)

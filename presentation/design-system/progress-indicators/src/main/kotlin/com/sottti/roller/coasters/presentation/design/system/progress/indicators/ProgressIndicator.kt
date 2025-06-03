@@ -24,7 +24,7 @@ public fun ProgressIndicator(
             strokeWidth = strokeWidth(size),
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(progressIndicatorSize(size))
+                .size(progressIndicatorSize(size)),
         )
     }
 }

@@ -30,7 +30,7 @@ public suspend fun <T> safeApiCall(
                 message = exception.message,
                 code = exception.response.status.value,
                 errorBody = exception.response.bodyAsText(),
-            )
+            ),
         )
     } catch (exception: ServerResponseException) { // 5xx errors
         Err(ServerError(message = exception.message, code = exception.response.status.value))

@@ -85,7 +85,7 @@ internal fun FavouritesUi(
         topBar = {
             MainTopBar(
                 scrollBehavior = scrollBehavior,
-                onNavigateToSettings = onNavigateToSettings
+                onNavigateToSettings = onNavigateToSettings,
             )
         },
     ) { paddingValues ->

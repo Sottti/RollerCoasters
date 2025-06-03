@@ -12,6 +12,6 @@ internal class SettingsUiStateProvider : PreviewParameterProvider<SettingsPrevie
             onAction = {},
             onBackNavigation = {},
             state = initialState(true),
-        )
+        ),
     )
 }

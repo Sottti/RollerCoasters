@@ -28,7 +28,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.displayLarge,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -43,7 +43,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -59,7 +59,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.displayMedium,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -74,7 +74,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -90,7 +90,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.displaySmall,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -105,7 +105,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
     }
@@ -123,7 +123,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.headlineLarge,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -138,7 +138,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -154,7 +154,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.headlineMedium,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -169,7 +169,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -185,7 +185,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.headlineSmall,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -200,7 +200,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
     }
@@ -218,7 +218,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.titleLarge,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -233,7 +233,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -249,7 +249,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.titleMedium,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -264,7 +264,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -280,7 +280,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.titleSmall,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -295,7 +295,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
     }
@@ -313,7 +313,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.bodyLarge,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -328,7 +328,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -344,7 +344,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.bodyMedium,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -359,7 +359,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -375,7 +375,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.bodySmall,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -390,7 +390,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
     }
@@ -408,7 +408,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.labelLarge,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -423,7 +423,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -439,7 +439,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.labelMedium,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -454,7 +454,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
 
@@ -470,7 +470,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.labelSmall,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 
@@ -485,7 +485,7 @@ public object Text {
                 text = stringResource(textResId),
                 modifier = modifier,
                 textAlign = textAlign,
-                textColor = textColor
+                textColor = textColor,
             )
         }
     }
@@ -499,7 +499,7 @@ public object Text {
         MaterialText(
             text = text,
             modifier = modifier,
-            textAlign = textAlign
+            textAlign = textAlign,
         )
     }
 
@@ -512,7 +512,7 @@ public object Text {
         Vanilla(
             text = stringResource(textResId),
             modifier = modifier,
-            textAlign = textAlign
+            textAlign = textAlign,
         )
     }
 
@@ -529,7 +529,7 @@ public object Text {
             style = textStyle,
             color = textColor,
             modifier = modifier,
-            textAlign = textAlign
+            textAlign = textAlign,
         )
     }
 }

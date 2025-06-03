@@ -75,7 +75,7 @@ internal class ExploreViewModel @Inject constructor(
             flow = _typeFilter,
             flow2 = _sortByFilter,
             flow3 = observeAppLanguage(),
-            flow4 = observeSystemLocale()
+            flow4 = observeSystemLocale(),
         ) { typeFilter, sortByFilter, appLanguage, systemLocale ->
             observeFilteredRollerCoasters(
                 sortByFilter = sortByFilter,

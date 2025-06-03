@@ -40,7 +40,7 @@ private fun PrimaryFilters(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = dimensions.padding.medium),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
+        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
     ) {
         filters.forEach { filter -> PrimaryFilterChip(filter = filter, onAction = onAction) }
     }
@@ -56,7 +56,7 @@ private fun SecondaryFilters(
             .fillMaxWidth()
             .animateContentSize()
             .padding(horizontal = dimensions.padding.medium),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
+        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
     ) {
         filters.forEach { filter -> SecondaryFilterChip(onAction, filter) }
     }

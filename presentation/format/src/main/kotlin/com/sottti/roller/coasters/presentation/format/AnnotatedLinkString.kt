@@ -18,7 +18,7 @@ public fun annotatedLinkString(
         style = SpanStyle(
             color = color,
             textDecoration = TextDecoration.Underline,
-        )
+        ),
     ) {
         append(text)
     }

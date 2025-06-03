@@ -48,7 +48,7 @@ private fun Title(
     AnimatedVisibility(
         visible = title.isNotEmpty() && showTitle,
         enter = fadeIn() + slideInVertically(initialOffsetY = { it / 2 }),
-        exit = fadeOut() + slideOutVertically(targetOffsetY = { it / 2 })
+        exit = fadeOut() + slideOutVertically(targetOffsetY = { it / 2 }),
     ) {
         Text.Vanilla(text = title)
     }

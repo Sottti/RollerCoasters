@@ -110,7 +110,7 @@ private fun android(): Topics = Topics(
             hyperlink = TopicHyperlink(
                 textResId = R.string.topic_android_design_systems_hyperlink_text,
                 urlResId = R.string.topic_android_design_systems_hyperlink_url,
-            )
+            ),
         ),
     ),
     fourthTopic = Topic(

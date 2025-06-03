@@ -95,7 +95,7 @@ private fun LocationRoomModel.toDomain() =
 private fun CoordinatesRoomModel.toDomain() =
     Coordinates(
         latitude = Latitude(latitude),
-        longitude = Longitude(longitude)
+        longitude = Longitude(longitude),
     )
 
 @OptIn(InternalSerializationApi::class)
@@ -117,7 +117,7 @@ private fun List<PictureRoomModel>.toDomain(
     mainPicture: PictureRoomModel?,
 ): Pictures = Pictures(
     main = mainPicture?.toDomain(),
-    other = map(PictureRoomModel::toDomain)
+    other = map(PictureRoomModel::toDomain),
 )
 
 @OptIn(InternalSerializationApi::class)
@@ -128,7 +128,7 @@ private fun PictureRoomModel.toDomain() =
         url = ImageUrl(url),
         copyright = PictureCopyright(
             author = Author(copyrightName),
-            date = copyrightDate?.toDate()
+            date = copyrightDate?.toDate(),
         ),
     )
 

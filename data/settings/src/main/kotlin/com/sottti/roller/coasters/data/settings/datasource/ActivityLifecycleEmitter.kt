@@ -31,7 +31,7 @@ internal class ActivityLifecycleEmitter @Inject constructor(
                 override fun onActivityStopped(activity: Activity) {}
                 override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
                 override fun onActivityDestroyed(activity: Activity) {}
-            }
+            },
         )
 
         _activityCreatedFlow.tryEmit(Unit)

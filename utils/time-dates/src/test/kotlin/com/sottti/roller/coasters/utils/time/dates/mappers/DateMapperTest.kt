@@ -146,7 +146,7 @@ internal class DateMapperTest {
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(extremePositiveYearSortableString)
+                INVALID_DATE_FORMAT_MESSAGE.format(extremePositiveYearSortableString),
             )
     }
 
@@ -165,7 +165,7 @@ internal class DateMapperTest {
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixFullDateString)
+                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixFullDateString),
             )
     }
 
@@ -176,7 +176,7 @@ internal class DateMapperTest {
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(internalWhitespaceDate)
+                INVALID_DATE_FORMAT_MESSAGE.format(internalWhitespaceDate),
             )
     }
 
@@ -210,7 +210,7 @@ internal class DateMapperTest {
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixYearMonth)
+                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixYearMonth),
             )
     }
 

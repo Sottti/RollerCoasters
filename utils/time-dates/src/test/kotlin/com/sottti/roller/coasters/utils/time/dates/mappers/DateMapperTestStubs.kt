@@ -24,7 +24,7 @@ internal val sortedMixedDates = arrayOf(
     "2005-02-01", // 2005 February 1st
     "2011-08-00", // 2011 August
     "2018-06-06", // 2018 June 6th
-    "2023-10-00"  // 2023 October
+    "2023-10-00",  // 2023 October
 )
 internal val unsortedMixedDates = listOf(
     fullDate, // 2018-06-06
@@ -32,7 +32,7 @@ internal val unsortedMixedDates = listOf(
     yearOnly, // 1984-00-00
     FullDate(LocalDate.of(2005, 2, 1)), // 2005-02-01
     YearAndMonth(YearMonth.of(2011, 8)), // 2011-08-00
-    YearOnly(Year.of(1999)) // 1999-00-00
+    YearOnly(Year.of(1999)), // 1999-00-00
 )
 
 internal val sortedMixedSuffixDates = arrayOf(
@@ -41,7 +41,7 @@ internal val sortedMixedSuffixDates = arrayOf(
     "2005-02-01", // 2005 February 1st
     "2011-08-00", // 2011 August
     "2018-06-06", // 2018 June 6th
-    "2023-10-00"  // 2023 October
+    "2023-10-00",  // 2023 October
 )
 internal val unsortedMixedSuffixDates = listOf(
     FullDate(LocalDate.of(2018, 6, 6)), // 2018-06-06
@@ -49,7 +49,7 @@ internal val unsortedMixedSuffixDates = listOf(
     YearOnly(Year.of(1984)), // 1984-00-00
     YearAndMonth(YearMonth.of(2011, 8)), // 2011-08-00 (with suffix)
     YearOnly(Year.of(1999)), // 1999-00-00 (with suffix)
-    FullDate(LocalDate.of(2005, 2, 1)) // 2005-02-01
+    FullDate(LocalDate.of(2005, 2, 1)), // 2005-02-01
 )
 
 internal const val emptyString = ""

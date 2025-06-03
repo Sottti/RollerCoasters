@@ -91,7 +91,8 @@ private fun Hyperlink(
     ClickableText(
         modifier = Modifier.fillMaxWidth(),
         text = annotatedLinkString,
-        onClick = { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) })
+        onClick = { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) },
+    )
 }
 
 @Composable

@@ -58,8 +58,8 @@ internal class StringOrListSerializerTest {
             listOf(
                 JsonPrimitive("Hello"),
                 JsonPrimitive(""),
-                JsonPrimitive("World")
-            )
+                JsonPrimitive("World"),
+            ),
         )
         val result = decode(jsonElement)
 
@@ -96,9 +96,9 @@ internal class StringOrListSerializerTest {
                 listOf(
                     JsonPrimitive("One"),
                     JsonPrimitive("Two"),
-                    JsonPrimitive("Three")
-                )
-            )
+                    JsonPrimitive("Three"),
+                ),
+            ),
         )
     }
 

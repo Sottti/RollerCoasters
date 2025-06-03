@@ -8,7 +8,7 @@ public fun OpacityLocalProvider(
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalOpacities provides opacities()
+        LocalOpacities provides opacities(),
     ) {
         content()
     }

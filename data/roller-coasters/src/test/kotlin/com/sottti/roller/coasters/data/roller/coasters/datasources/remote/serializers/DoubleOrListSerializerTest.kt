@@ -58,8 +58,8 @@ internal class DoubleOrListSerializerTest {
             listOf(
                 JsonPrimitive("12.3"),
                 JsonPrimitive("invalid"),
-                JsonPrimitive("45.6")
-            )
+                JsonPrimitive("45.6"),
+            ),
         )
         val result = decode(jsonElement)
 
@@ -96,9 +96,9 @@ internal class DoubleOrListSerializerTest {
                 listOf(
                     JsonPrimitive(1.2),
                     JsonPrimitive(3.4),
-                    JsonPrimitive(5.6)
-                )
-            )
+                    JsonPrimitive(5.6),
+                ),
+            ),
         )
     }
 

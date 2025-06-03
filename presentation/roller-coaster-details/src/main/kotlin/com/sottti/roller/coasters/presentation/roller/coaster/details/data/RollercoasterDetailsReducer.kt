@@ -53,7 +53,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsState>.updateRollerCoaster(
                     dateFormatter = dateFormatter,
                     formatContext = formatContext,
                 ),
-            )
+            ),
         )
     }
 }
@@ -67,7 +67,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsState>.updateIsFavouriteRoller
                 favouriteIcon = when (favourite) {
                     true -> Loaded(Icons.Star.filled)
                     false -> Loaded(Icons.Star.outlined)
-                }
+                },
             ),
         )
     }
@@ -104,7 +104,7 @@ private fun RollerCoaster.toIdentityState() =
                 headline = R.string.identity_former_names,
                 trailing = formerNames,
             )
-        }
+        },
     )
 
 private fun Status.toStatusState(

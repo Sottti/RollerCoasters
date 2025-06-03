@@ -98,7 +98,7 @@ internal class RollerCoastersRepositoryImplTest {
             coEvery {
                 localDataSource.observeRollerCoaster(
                     rollerCoasterId(),
-                    Metric
+                    Metric,
                 )
             } returns flow {
                 emit(null)
@@ -136,7 +136,7 @@ internal class RollerCoastersRepositoryImplTest {
             emit(anotherRollerCoaster())
         }
         coEvery { remoteDataSource.getRollerCoaster(rollerCoasterId(), Metric) } returns Ok(
-            rollerCoaster()
+            rollerCoaster(),
         )
         coEvery { localDataSource.storeRollerCoaster(rollerCoaster()) } just runs
 

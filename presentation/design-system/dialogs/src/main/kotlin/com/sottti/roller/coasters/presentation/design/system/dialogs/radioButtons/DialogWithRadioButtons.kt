@@ -35,7 +35,7 @@ public fun DialogWithRadioButtons(
         text = {
             OptionsList(
                 options = options,
-                onOptionSelected = onOptionSelected
+                onOptionSelected = onOptionSelected,
             )
         },
         confirmButton = { ConfirmButton(text = confirm, onConfirm = { onConfirm() }) },
@@ -71,7 +71,8 @@ private fun RadioButtonRow(
         trailingContent = {
             RadioButton(
                 selected = option.selected,
-                onClick = { onOptionSelected(option) })
+                onClick = { onOptionSelected(option) },
+            )
         },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         modifier = Modifier

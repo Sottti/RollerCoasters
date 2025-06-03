@@ -4,5 +4,5 @@ public enum class AppMeasurementSystem {
     ImperialUk,
     ImperialUs,
     Metric,
-    System
+    System,
 }

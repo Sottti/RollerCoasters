@@ -39,7 +39,7 @@ class ObserveRollerCoastersTest {
         rollerCoastersRepository = mockk()
         observeFilteredRollerCoasters = ObserveFilteredRollerCoasters(
             observeResolvedMeasurementSystem = observeResolvedMeasurementSystem,
-            rollerCoastersRepository = rollerCoastersRepository
+            rollerCoastersRepository = rollerCoastersRepository,
         )
     }
 
@@ -53,7 +53,7 @@ class ObserveRollerCoastersTest {
             rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = Metric,
                 sortByFilter = sortByFilter,
-                typeFilter = typeFilter
+                typeFilter = typeFilter,
             )
         } returns flowOf(pagingData)
 
@@ -73,7 +73,7 @@ class ObserveRollerCoastersTest {
                 rollerCoastersRepository.observeFilteredRollerCoasters(
                     measurementSystem = ImperialUk,
                     sortByFilter = sortByFilter,
-                    typeFilter = typeFilter
+                    typeFilter = typeFilter,
                 )
             } returns flowOf(pagingData)
 
@@ -93,7 +93,7 @@ class ObserveRollerCoastersTest {
                 rollerCoastersRepository.observeFilteredRollerCoasters(
                     measurementSystem = ImperialUs,
                     sortByFilter = sortByFilter,
-                    typeFilter = typeFilter
+                    typeFilter = typeFilter,
                 )
             } returns flowOf(pagingData)
 
@@ -120,21 +120,21 @@ class ObserveRollerCoastersTest {
             rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = Metric,
                 sortByFilter = sortByFilter,
-                typeFilter = typeFilter
+                typeFilter = typeFilter,
             )
         } returns flowOf(metricPagingData)
         every {
             rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = ImperialUk,
                 sortByFilter = sortByFilter,
-                typeFilter = typeFilter
+                typeFilter = typeFilter,
             )
         } returns flowOf(imperialUkPagingData)
         every {
             rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = ImperialUs,
                 sortByFilter = sortByFilter,
-                typeFilter = typeFilter
+                typeFilter = typeFilter,
             )
         } returns flowOf(imperialUsPagingData)
 
@@ -152,7 +152,7 @@ class ObserveRollerCoastersTest {
             rollerCoastersRepository.observeFilteredRollerCoasters(
                 measurementSystem = Metric,
                 sortByFilter = sortByFilter,
-                typeFilter = typeFilter
+                typeFilter = typeFilter,
             )
         } returns flowOf(emptyPagingData)
 

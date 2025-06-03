@@ -25,9 +25,9 @@ internal fun MutableStateFlow<SettingsState>.updateAppColorContrast(
                 listItem = currentState.appColorContrast.listItem.copy(
                     selectedAppColorContrast = SelectedAppColorContrastState.Loaded(
                         appColorContrast.toPresentationModel(selected = true),
-                    )
+                    ),
                 ),
-            )
+            ),
         )
     }
 }
@@ -42,7 +42,7 @@ internal fun MutableStateFlow<SettingsState>.showAppColorContrastPicker(
                 currentState.appColorContrast.copy(
                     picker = null,
                     notAvailableMessage = appColorContrastNotAvailableMessageState(),
-                )
+                ),
             )
 
             else -> currentState.copy(
@@ -51,9 +51,9 @@ internal fun MutableStateFlow<SettingsState>.showAppColorContrastPicker(
                     picker = appColorContrastPickerState(
                         appColorContrastAvailable = appColorContrastAvailable,
                         selectedAppColorContrast =
-                            appColorContrast.toPresentationModel(selected = true)
-                    )
-                )
+                            appColorContrast.toPresentationModel(selected = true),
+                    ),
+                ),
             )
         }
     }
@@ -73,8 +73,8 @@ internal fun MutableStateFlow<SettingsState>.updateAppColorContrastPicker(
                 picker = appColorContrastPickerState(
                     appColorContrastAvailable = appColorContrastAvailable,
                     selectedAppColorContrast = selectedAppColorContrast,
-                )
-            )
+                ),
+            ),
         )
     }
 }
@@ -107,23 +107,23 @@ private fun colorContrastsList(
     selectedAppColorContrast: AppColorContrastUi,
 ) = listOfNotNull(
     AppColorContrast.SystemContrast.toPresentationModel(
-        selected = selectedAppColorContrast is SystemContrast
+        selected = selectedAppColorContrast is SystemContrast,
     ).takeIf { appColorContrastAvailable },
     AppColorContrast.StandardContrast.toPresentationModel(
-        selected = selectedAppColorContrast is StandardContrast
+        selected = selectedAppColorContrast is StandardContrast,
     ),
     AppColorContrast.MediumContrast.toPresentationModel(
-        selected = selectedAppColorContrast is MediumContrast
+        selected = selectedAppColorContrast is MediumContrast,
     ),
     AppColorContrast.HighContrast.toPresentationModel(
-        selected = selectedAppColorContrast is HighContrast
+        selected = selectedAppColorContrast is HighContrast,
     ),
 )
 
 internal fun MutableStateFlow<SettingsState>.hideAppColorContrastNotAvailableMessage() {
     update { currentState ->
         currentState.copy(
-            appColorContrast = currentState.appColorContrast.copy(notAvailableMessage = null)
+            appColorContrast = currentState.appColorContrast.copy(notAvailableMessage = null),
         )
     }
 }

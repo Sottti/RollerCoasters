@@ -85,7 +85,7 @@ public class DisplayUnitFormatter @Inject constructor(
         appLanguage: AppLanguage,
         defaultLocale: Locale,
     ): String = context.getString(
-        R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale)
+        R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale),
     )
 
     private fun Duration.toDisplayFormatGForce(
@@ -125,7 +125,7 @@ public class DisplayUnitFormatter @Inject constructor(
         defaultLocale: Locale,
     ): String = context.getString(
         R.string.distance_feet,
-        value.toDisplayFormat(appLanguage, defaultLocale)
+        value.toDisplayFormat(appLanguage, defaultLocale),
     )
 
     private fun Meters.toDisplayFormatMeters(
@@ -133,7 +133,7 @@ public class DisplayUnitFormatter @Inject constructor(
         defaultLocale: Locale,
     ): String = context.getString(
         R.string.distance_meters,
-        value.toDisplayFormat(appLanguage, defaultLocale)
+        value.toDisplayFormat(appLanguage, defaultLocale),
     )
 
     private fun Mph.toDisplayFormatMph(
@@ -141,7 +141,7 @@ public class DisplayUnitFormatter @Inject constructor(
         defaultLocale: Locale,
     ): String = context.getString(
         R.string.speed_mph,
-        value.toDisplayFormat(appLanguage, defaultLocale)
+        value.toDisplayFormat(appLanguage, defaultLocale),
     )
 
     private fun Kmh.toDisplayFormatKmh(
@@ -149,6 +149,6 @@ public class DisplayUnitFormatter @Inject constructor(
         defaultLocale: Locale,
     ): String = context.getString(
         R.string.speed_kph,
-        value.toDisplayFormat(appLanguage, defaultLocale)
+        value.toDisplayFormat(appLanguage, defaultLocale),
     )
 }

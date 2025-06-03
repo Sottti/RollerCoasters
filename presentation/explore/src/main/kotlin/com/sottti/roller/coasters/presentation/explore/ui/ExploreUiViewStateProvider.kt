@@ -38,14 +38,14 @@ private val loadedStateAppendPrependBothLoading =
     explorePreviewState(appendState = Loading, prependState = Loading)
 private val loadedStateNoPagination = explorePreviewState()
 private val loadedStateAppendEndReached = explorePreviewState(
-    appendState = NotLoading(endOfPaginationReached = true)
+    appendState = NotLoading(endOfPaginationReached = true),
 )
 private val loadedStatePrependEndReached = explorePreviewState(
-    prependState = NotLoading(endOfPaginationReached = true)
+    prependState = NotLoading(endOfPaginationReached = true),
 )
 private val loadedStateAppendPrependBothEndsReached = explorePreviewState(
     appendState = NotLoading(endOfPaginationReached = true),
-    prependState = NotLoading(endOfPaginationReached = true)
+    prependState = NotLoading(endOfPaginationReached = true),
 )
 
 private val emptyState = explorePreviewState(
@@ -90,6 +90,6 @@ private fun exploreRollerCoastersPagingDataFlow(
                 refresh = refreshState,
                 prepend = prependState,
                 append = appendState,
-            )
-        )
+            ),
+        ),
     )

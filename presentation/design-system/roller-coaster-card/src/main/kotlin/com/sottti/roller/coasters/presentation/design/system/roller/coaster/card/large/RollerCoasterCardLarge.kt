@@ -74,7 +74,7 @@ private fun Footer(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(horizontal = dimensions.padding.medium)
-            .padding(vertical = dimensions.padding.medium)
+            .padding(vertical = dimensions.padding.medium),
     ) {
         Column(modifier = Modifier.weight(1.0f)) {
             Text.Title.Large(

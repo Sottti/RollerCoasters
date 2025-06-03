@@ -67,13 +67,14 @@ internal fun RollerCoasterDetailsUi(
                 scrollBehavior = scrollBehavior,
                 state = state.topBar,
             )
-        }) { paddingValues ->
+        },
+    ) { paddingValues ->
         when (val content = state.content) {
             Error -> ErrorUi(modifier = Modifier.padding(paddingValues), button = ErrorButton {})
             Loading -> ProgressIndicator(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
+                    .padding(paddingValues),
             )
 
             is Loaded -> RollerCoasterDetails(
