@@ -29,7 +29,7 @@ import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 import kotlinx.coroutines.launch
 
@@ -111,7 +111,7 @@ internal fun AboutMeUi(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun AboutMeUiPreview(
     @PreviewParameter(AboutMeUiStateProvider::class)

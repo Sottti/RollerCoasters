@@ -20,7 +20,7 @@ import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.image.loading.Image
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 internal fun SmallImpl(
@@ -77,7 +77,7 @@ private fun Image(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun RollerCoasterCardSmallPreview(
     @PreviewParameter(RollerCoasterCardSmallPreviewProvider::class)
     state: RollerCoasterCardSmallState,

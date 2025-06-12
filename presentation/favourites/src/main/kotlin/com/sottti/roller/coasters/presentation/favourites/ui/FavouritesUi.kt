@@ -27,7 +27,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewModel
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesPreviewState
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 import kotlinx.coroutines.launch
 
@@ -134,7 +134,7 @@ private fun FavouritesUiEffects(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesUiPreview(
     @PreviewParameter(FavouritesUiStateProvider::class)

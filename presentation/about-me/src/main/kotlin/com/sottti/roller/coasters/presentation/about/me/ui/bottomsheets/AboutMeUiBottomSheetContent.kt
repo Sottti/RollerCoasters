@@ -28,7 +28,7 @@ import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImag
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.format.annotatedLinkString
-import com.sottti.roller.coasters.presentation.previews.LightDarkLongThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersTallPreview
 
 @Composable
 internal fun BottomSheetContent(
@@ -95,7 +95,7 @@ private fun Hyperlink(
 }
 
 @Composable
-@LightDarkLongThemePreview
+@RollerCoastersTallPreview
 internal fun AboutMeUiBottomSheetContentPreview(
     @PreviewParameter(AboutMeUiBottomSheetContentStateProvider::class)
     previewState: AboutMeBottomSheetPreviewState,

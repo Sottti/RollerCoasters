@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 
 @Composable
@@ -47,7 +47,7 @@ private fun progressIndicatorSize(size: ProgressIndicatorSize): Dp =
     }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun ProgressIndicatorPreview(
     @PreviewParameter(ProgressIndicatorPreviewProvider::class)
     modifier: Modifier,

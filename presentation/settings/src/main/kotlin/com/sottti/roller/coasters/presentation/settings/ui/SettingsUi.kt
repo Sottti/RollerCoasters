@@ -4,12 +4,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.settings.data.SettingsViewModel
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
@@ -34,7 +35,10 @@ internal fun SettingsUi(
     viewModel: SettingsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    viewModel.onAction(LoadUi)
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(LoadUi)
+    }
 
     SettingsUi(
         onAction = viewModel.onAction,
@@ -69,7 +73,7 @@ internal fun SettingsUi(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun SettingsUiPreview(
     @PreviewParameter(SettingsUiStateProvider::class) state: SettingsPreviewState,
 ) {
@@ -83,7 +87,7 @@ internal fun SettingsUiPreview(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun SettingsUiPickersPreview(
     @PreviewParameter(SettingsUiPickersStateProvider::class) state: SettingsPreviewState,
 ) {

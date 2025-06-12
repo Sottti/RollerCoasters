@@ -11,7 +11,7 @@ import com.roller.coasters.presentation.design.system.images.model.ImageState
 import com.roller.coasters.presentation.design.system.images.ui.Image
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 
 @Composable
@@ -33,7 +33,7 @@ public fun HeroImage(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun HeroImagePreview(
     @PreviewParameter(ProfilePicturePreviewProvider::class)
     state: HeroImageState,

@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun DialogWithRadioButtons(
@@ -81,7 +81,7 @@ private fun RadioButtonRow(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun DialogWithRadioButtonsPreview(
     @PreviewParameter(DialogWithRadioButtonsPreviewProvider::class)
     state: DialogWithRadioButtonsState,

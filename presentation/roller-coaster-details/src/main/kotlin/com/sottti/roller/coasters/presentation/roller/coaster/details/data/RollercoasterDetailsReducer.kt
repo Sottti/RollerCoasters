@@ -171,7 +171,7 @@ private fun Ride.toRideState(
     formatContext: FormatContext,
 ): RollerCoasterRideState = when (this) {
     is SingleTrackRide -> toSingleTrackRideState(formatContext)
-    is MultiTrackRide -> TODO()
+    is MultiTrackRide -> toMultiTrackRideState(formatContext)
 }
 
 private fun SingleTrackRide.toSingleTrackRideState(
@@ -228,6 +228,62 @@ private fun SingleTrackRide.toSingleTrackRideState(
             )
         },
     )
+
+private fun MultiTrackRide.toMultiTrackRideState(
+    formatContext: FormatContext,
+): RollerCoasterRideState =
+    RollerCoasterRideState(
+        header = R.string.ride_header,
+        length = length?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatLength(it),
+                headline = R.string.ride_length,
+            )
+        },
+        height = height?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatHeight(it),
+                headline = R.string.ride_height,
+            )
+        },
+        drop = drop?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatDrop(it),
+                headline = R.string.ride_drop,
+            )
+        },
+        inversions = inversions?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = it.value.toString(),
+                headline = R.string.ride_inversions,
+            )
+        },
+        maxVertical = maxVertical?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatMaxVertical(it),
+                headline = R.string.ride_max_vertical,
+            )
+        },
+        duration = duration?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatDuration(it),
+                headline = R.string.ride_duration,
+            )
+        },
+        gForce = gForce?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatGForce(it),
+                headline = R.string.ride_g_force,
+            )
+        },
+        speed = speed?.firstOrNull()?.let {
+            RollerCoasterDetailsRow(
+                trailing = formatContext.formatSpeed(it),
+                headline = R.string.ride_speed,
+            )
+        },
+    )
+
 
 private data class FormatContext(
     val appLanguage: AppLanguage,

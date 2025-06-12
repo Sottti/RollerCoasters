@@ -40,7 +40,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import androidx.compose.material3.ListItem as ListItemMaterial
 
 @Composable
-internal fun RollerCoasterDetails(
+internal fun RollerCoasterDetailsContent(
     rollerCoaster: RollerCoasterDetailsRollerCoasterState,
     paddingValues: PaddingValues,
     nestedScrollConnection: NestedScrollConnection,

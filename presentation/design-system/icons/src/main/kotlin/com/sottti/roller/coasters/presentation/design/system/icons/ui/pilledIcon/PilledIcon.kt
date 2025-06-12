@@ -17,7 +17,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.model.IconSta
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun PilledIcon(
@@ -62,7 +62,7 @@ private fun Text(text: Int) {
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun PilledIconPreview(
     @PreviewParameter(PilledIconPreviewProvider::class)
     state: PilledIconPreviewState,

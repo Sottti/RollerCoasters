@@ -13,7 +13,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun CircledIcon(
@@ -38,7 +38,7 @@ public fun CircledIcon(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun CircledIconOnBackgroundPreview() {
     RollerCoastersPreviewTheme {
         CircledIcon(
@@ -50,7 +50,7 @@ internal fun CircledIconOnBackgroundPreview() {
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun CircledIconOnSurfacePreview() {
     RollerCoastersPreviewTheme {
         CircledIcon(

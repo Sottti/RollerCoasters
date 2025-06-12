@@ -2,12 +2,10 @@ package com.sottti.roller.coasters.presentation.explore.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import androidx.paging.PagingData
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.PrimaryFilterAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction.SecondaryFilterAction
-import kotlinx.coroutines.flow.Flow
 
 @Immutable
 internal data class ExploreState(

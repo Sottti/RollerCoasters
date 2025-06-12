@@ -6,10 +6,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun ExploreUiPreview(
     @PreviewParameter(ExploreUiStateProvider::class)
     state: ExplorePreviewState,

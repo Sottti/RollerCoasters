@@ -20,7 +20,10 @@ internal data class TopBarState(
 
 @Immutable
 internal sealed interface FavouriteIconState {
+    @Immutable
     data class Loaded(val iconState: IconState) : FavouriteIconState
+
+    @Immutable
     data object Loading : FavouriteIconState
 }
 
@@ -35,7 +38,7 @@ internal sealed interface RollerCoasterDetailsContentState {
     data object Error : RollerCoasterDetailsContentState
 
     @Immutable
-    object Loading : RollerCoasterDetailsContentState
+    data object Loading : RollerCoasterDetailsContentState
 }
 
 @Immutable

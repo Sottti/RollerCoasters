@@ -22,7 +22,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.model.IconSta
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import androidx.compose.material3.Card as MaterialCard
 
 @Composable
@@ -134,7 +134,7 @@ private fun Card(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun QuadCardGridPreview(
     @PreviewParameter(QuadCardGridStateProvider::class)
     state: QuadCardGridState,
@@ -155,7 +155,7 @@ internal fun QuadCardGridPreview(
 }
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun MonoCardGridPreview(
     @PreviewParameter(MonoCardGridStateProvider::class)
     state: MonoCardGridState,

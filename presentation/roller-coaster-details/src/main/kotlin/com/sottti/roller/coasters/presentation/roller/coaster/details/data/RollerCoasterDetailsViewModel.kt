@@ -11,6 +11,8 @@ import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLo
 import com.sottti.roller.coasters.presentation.format.DateFormatter
 import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.LoadUi
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.ToggleFavourite
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,24 +26,40 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class RollerCoasterDetailsViewModel @Inject constructor(
-    observeAppLanguage: ObserveAppLanguage,
-    observeIsFavouriteRollerCoaster: ObserveIsFavouriteRollerCoaster,
-    observeRollerCoaster: ObserveRollerCoaster,
-    observeSystemLocale: ObserveSystemLocale,
     private val dateFormatter: DateFormatter,
+    private val displayUnitFormatter: DisplayUnitFormatter,
+    private val observeAppLanguage: ObserveAppLanguage,
+    private val observeIsFavouriteRollerCoaster: ObserveIsFavouriteRollerCoaster,
+    private val observeRollerCoaster: ObserveRollerCoaster,
+    private val observeSystemLocale: ObserveSystemLocale,
     private val rollerCoasterId: RollerCoasterId,
     private val toggleFavouriteRollerCoaster: ToggleFavouriteRollerCoaster,
-    private val displayUnitFormatter: DisplayUnitFormatter,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState())
     internal val state: StateFlow<RollerCoasterDetailsState> = _state.asStateFlow()
 
-    init {
+    internal val onAction: (RollerCoasterDetailsAction) -> Unit =
+        { action -> processAction(action) }
+
+    private fun processAction(action: RollerCoasterDetailsAction) {
+        when (action) {
+            LoadUi -> {
+                observeState()
+                observeIsFavourite()
+            }
+
+            ToggleFavourite -> viewModelScope.launch {
+                toggleFavouriteRollerCoaster(rollerCoasterId = rollerCoasterId)
+            }
+        }
+    }
+
+    private fun observeState() {
         combine(
-            observeAppLanguage(),
-            observeSystemLocale(),
-            observeRollerCoaster(rollerCoasterId)
+            flow = observeAppLanguage(),
+            flow2 = observeSystemLocale(),
+            flow3 = observeRollerCoaster(rollerCoasterId),
         ) { appLang, systemLocale, coaster ->
             Triple(appLang, systemLocale, coaster)
         }.onEach { (appLang, systemLocale, coaster) ->
@@ -53,24 +71,11 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
                 dateFormatter = dateFormatter,
             )
         }.launchIn(viewModelScope)
+    }
 
+    private fun observeIsFavourite() {
         observeIsFavouriteRollerCoaster(rollerCoasterId)
             .onEach { _state.updateIsFavouriteRollerCoaster(it) }
             .launchIn(viewModelScope)
-    }
-
-    internal val onAction: (RollerCoasterDetailsAction) -> Unit =
-        { action -> processAction(action) }
-
-    private fun processAction(action: RollerCoasterDetailsAction) {
-        when (action) {
-            RollerCoasterDetailsAction.ToggleFavourite -> {
-                viewModelScope.launch {
-                    toggleFavouriteRollerCoaster(
-                        rollerCoasterId = rollerCoasterId,
-                    )
-                }
-            }
-        }
     }
 }

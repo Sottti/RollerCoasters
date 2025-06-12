@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME_THIRD
 import com.sottti.roller.coasters.presentation.roller.coaster.details.data.topBarInitialState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.fixtures.rollerCoasterDetailsMaxedOut
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
@@ -14,8 +15,18 @@ internal class RollerCoasterDetailsUiPreviewProvider :
     PreviewParameterProvider<RollerCoasterDetailsPreviewState> {
     override val values: Sequence<RollerCoasterDetailsPreviewState> = sequenceOf(
         previewState(Loading),
-        previewState(Loaded(rollerCoasterDetailsMaxedOut)),
+        previewState(Loaded(rollerCoasterDetailsMaxedOut)).addTopBarTitle(),
         previewState(Error),
+    )
+}
+
+private fun RollerCoasterDetailsPreviewState.addTopBarTitle(): RollerCoasterDetailsPreviewState {
+    return copy(
+        state = state.copy(
+            topBar = state.topBar.copy(
+                title = COASTER_NAME_THIRD,
+            ),
+        ),
     )
 }
 

@@ -36,6 +36,7 @@ internal fun filtersWithExpansion(
                 expanded = sortByExpanded,
                 action = if (sortByExpanded) HideSortFilters else ShowSortFilters,
             )
+
             is TypePrimaryFilter -> it.copy(
                 expanded = typeExpanded,
                 action = if (typeExpanded) HideTypeFilters else ShowTypeFilters,

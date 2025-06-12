@@ -22,7 +22,7 @@ import coil3.request.crossfade
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun Image(
@@ -79,7 +79,7 @@ private fun imageRequest(
 private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 private fun ImagePreview(
     @PreviewParameter(ImageStateProvider::class)
     viewState: ImageState,

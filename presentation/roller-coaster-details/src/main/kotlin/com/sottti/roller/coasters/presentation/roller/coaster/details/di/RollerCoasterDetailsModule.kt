@@ -13,7 +13,9 @@ import dagger.hilt.android.components.ViewModelComponent
 internal object RollerCoasterDetailsModule {
 
     @Provides
-    fun provideRollerCoasterIdd(savedStateHandle: SavedStateHandle): RollerCoasterId {
+    fun provideRollerCoasterId(
+        savedStateHandle: SavedStateHandle,
+    ): RollerCoasterId {
         val id: Int = savedStateHandle[KEY_ROLLER_COASTER_ID]
             ?: throw IllegalArgumentException("A roller coaster id is required")
         return RollerCoasterId(id)

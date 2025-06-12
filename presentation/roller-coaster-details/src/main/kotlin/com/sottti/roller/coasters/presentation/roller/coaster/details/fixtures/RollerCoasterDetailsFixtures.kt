@@ -108,12 +108,12 @@ private fun inversions(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
 
 private fun maxVertical(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
     trailing = "$DEGREES°",
-    headline = R.string.ride_inversions,
+    headline = R.string.ride_max_vertical,
 )
 
 private fun speed(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
     trailing = "$SPEED km/h",
-    headline = R.string.ride_inversions,
+    headline = R.string.ride_speed,
 )
 
 private fun drop(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(

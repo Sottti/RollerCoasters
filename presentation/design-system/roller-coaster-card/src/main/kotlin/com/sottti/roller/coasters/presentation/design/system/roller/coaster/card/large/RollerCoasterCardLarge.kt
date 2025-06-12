@@ -21,7 +21,7 @@ import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.image.loading.Image
-import com.sottti.roller.coasters.presentation.previews.LightDarkThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 internal fun LargeImpl(
@@ -106,7 +106,7 @@ private fun Footer(
 
 
 @Composable
-@LightDarkThemePreview
+@RollerCoastersPreview
 internal fun RollerCoasterCardLargePreview(
     @PreviewParameter(RollerCoasterCardLargePreviewProvider::class)
     state: RollerCoasterCardLargeState,

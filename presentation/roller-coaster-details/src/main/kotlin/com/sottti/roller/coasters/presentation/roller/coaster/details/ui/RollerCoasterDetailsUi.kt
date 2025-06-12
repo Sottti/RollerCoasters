@@ -6,6 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -15,9 +16,10 @@ import com.sottti.roller.coasters.presentation.design.system.progress.indicators
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
-import com.sottti.roller.coasters.presentation.previews.LightDarkLongThemePreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersTallPreview
 import com.sottti.roller.coasters.presentation.roller.coaster.details.data.RollerCoasterDetailsViewModel
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.LoadUi
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.ToggleFavourite
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Error
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loaded
@@ -43,6 +45,9 @@ private fun RollerCoasterDetailsUi(
     viewModel: RollerCoasterDetailsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.onAction(LoadUi)
+    }
     RollerCoasterDetailsUi(
         onAction = viewModel.onAction,
         onBackNavigation = onBackNavigation,
@@ -76,7 +81,7 @@ internal fun RollerCoasterDetailsUi(
                     .padding(paddingValues)
             )
 
-            is Loaded -> RollerCoasterDetails(
+            is Loaded -> RollerCoasterDetailsContent(
                 nestedScrollConnection = scrollBehavior.nestedScrollConnection,
                 paddingValues = paddingValues,
                 rollerCoaster = content.rollerCoaster,
@@ -86,7 +91,7 @@ internal fun RollerCoasterDetailsUi(
 }
 
 @Composable
-@LightDarkLongThemePreview
+@RollerCoastersTallPreview
 internal fun RollerCoasterDetailsUiPreview(
     @PreviewParameter(RollerCoasterDetailsUiPreviewProvider::class)
     previewState: RollerCoasterDetailsPreviewState,
