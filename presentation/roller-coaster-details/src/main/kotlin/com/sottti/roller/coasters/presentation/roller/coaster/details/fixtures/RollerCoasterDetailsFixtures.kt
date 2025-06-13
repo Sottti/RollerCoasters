@@ -118,7 +118,7 @@ private fun speed(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
 
 private fun drop(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(
     trailing = "$DROP meters",
-    headline = R.string.ride_g_force,
+    headline = R.string.ride_drop,
 )
 
 private fun formerNames(): RollerCoasterDetailsRow = RollerCoasterDetailsRow(

@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
 import app.cash.paparazzi.DeviceConfig
+import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_6_PRO
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
@@ -17,7 +18,7 @@ internal class AboutMeUiSnapshotTest(
 
     @get:Rule
     val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
+        deviceConfig = PIXEL_6_PRO.copy(nightMode = nightMode),
         showSystemUi = false,
         theme = "Theme.RollerCoasters",
     )

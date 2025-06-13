@@ -181,19 +181,19 @@ private fun SingleTrackRide.toSingleTrackRideState(
         header = R.string.ride_header,
         length = length?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { length -> formatContext.formatLength(length) },
+                trailing = formatContext.formatLength(it),
                 headline = R.string.ride_length,
             )
         },
         height = height?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { height -> formatContext.formatHeight(height) },
+                trailing = formatContext.formatHeight(it),
                 headline = R.string.ride_height,
             )
         },
         drop = drop?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { drop -> formatContext.formatDrop(drop) },
+                trailing = formatContext.formatDrop(it),
                 headline = R.string.ride_drop,
             )
         },
@@ -205,25 +205,25 @@ private fun SingleTrackRide.toSingleTrackRideState(
         },
         maxVertical = maxVertical?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { maxVertical -> formatContext.formatMaxVertical(maxVertical) },
+                trailing = formatContext.formatMaxVertical(it),
                 headline = R.string.ride_max_vertical,
             )
         },
         duration = duration?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { duration -> formatContext.formatDuration(duration) },
+                trailing = formatContext.formatDuration(it),
                 headline = R.string.ride_duration,
             )
         },
         gForce = gForce?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { gForce -> formatContext.formatGForce(gForce) },
+                trailing = formatContext.formatGForce(it),
                 headline = R.string.ride_g_force,
             )
         },
         speed = speed?.let {
             RollerCoasterDetailsRow(
-                trailing = it.let { speed -> formatContext.formatSpeed(speed) },
+                trailing = formatContext.formatSpeed(it),
                 headline = R.string.ride_speed,
             )
         },

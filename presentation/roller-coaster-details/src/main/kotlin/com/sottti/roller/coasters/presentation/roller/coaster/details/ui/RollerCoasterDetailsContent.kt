@@ -14,9 +14,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -27,8 +30,14 @@ import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.map.Map
+import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.error.ErrorButton
+import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.image.loading.Image
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loaded
+import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loading
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsImageState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRollerCoasterState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsRow
@@ -40,10 +49,35 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import androidx.compose.material3.ListItem as ListItemMaterial
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun RollerCoasterDetailsContent(
-    rollerCoaster: RollerCoasterDetailsRollerCoasterState,
+    state: RollerCoasterDetailsContentState,
     paddingValues: PaddingValues,
+    scrollBehavior: TopAppBarScrollBehavior,
+) {
+    when (state) {
+        RollerCoasterDetailsContentState.Error ->
+            ErrorUi(modifier = Modifier.padding(paddingValues), button = ErrorButton {})
+
+        Loading -> ProgressIndicator(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        )
+
+        is Loaded -> LoadedContent(
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
+            paddingValues = paddingValues,
+            state = state.rollerCoaster,
+        )
+    }
+}
+
+@Composable
+private fun LoadedContent(
     nestedScrollConnection: NestedScrollConnection,
+    paddingValues: PaddingValues,
+    state: RollerCoasterDetailsRollerCoasterState,
 ) {
     val topPadding = paddingValues.calculateTopPadding() + dimensions.padding.medium
     val bottomPadding = paddingValues.calculateBottomPadding() + dimensions.padding.medium
@@ -55,20 +89,21 @@ internal fun RollerCoasterDetailsContent(
         contentPadding = PaddingValues(bottom = bottomPadding, top = topPadding),
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.mediumLarge),
     ) {
-        rollerCoaster.images?.let { item { RollerCoasterImagesSection(rollerCoaster.images) } }
-        item { RollerCoasterDetailsSection(rollerCoaster.identity) }
-        rollerCoaster.status?.let { item { RollerCoasterDetailsSection(rollerCoaster.status) } }
-        item { RollerCoasterDetailsSection(rollerCoaster.location) }
-        rollerCoaster.ride?.let { item { RollerCoasterDetailsSection(rollerCoaster.ride) } }
+        state.images?.let { item { ImagesSection(state.images) } }
+        item { DetailsSection(state.identity) }
+        state.status?.let { item { DetailsSection(state.status) } }
+        item { DetailsSection(state.location) }
+        state.ride?.let { item { DetailsSection(state.ride) } }
     }
 }
 
 @Composable
-internal fun RollerCoasterImagesSection(
+internal fun ImagesSection(
     images: List<RollerCoasterDetailsImageState>,
 ) {
     val pagerState = rememberPagerState { images.size }
-    val carouselHeight = (LocalWindowInfo.current.containerSize.height * 0.25f).dp
+    val windowHeight = LocalWindowInfo.current.containerSize.height
+    val carouselHeight = remember(windowHeight) { (windowHeight * 0.25f).dp }
 
 
     Column(Modifier.fillMaxWidth()) {
@@ -91,7 +126,7 @@ internal fun RollerCoasterImagesSection(
 }
 
 @Composable
-internal fun RollerCoasterDetailsSection(
+internal fun DetailsSection(
     details: RollerCoasterDetailsSectionState,
 ) {
     Column(modifier = Modifier.padding(horizontal = dimensions.padding.medium)) {
@@ -108,16 +143,27 @@ internal fun RollerCoasterDetailsSection(
 
 @Composable
 internal fun RideDetails(details: RollerCoasterRideState) {
-    val items = listOfNotNull(
+    val items = remember(
+        details.speed,
         details.height,
         details.drop,
         details.maxVertical,
-        details.speed,
         details.inversions,
-        details.gForce,
         details.length,
-        details.duration
-    )
+        details.duration,
+        details.gForce,
+    ) {
+        listOfNotNull(
+            details.speed,
+            details.height,
+            details.drop,
+            details.maxVertical,
+            details.inversions,
+            details.length,
+            details.duration,
+            details.gForce,
+        )
+    }
 
     DetailsCard {
         items.forEachIndexed { index, item ->
@@ -128,7 +174,9 @@ internal fun RideDetails(details: RollerCoasterRideState) {
 
 @Composable
 internal fun IdentityDetails(state: RollerCoasterIdentityState) {
-    val items = listOfNotNull(state.name, state.formerNames)
+    val items = remember(state.name, state.formerNames) {
+        listOfNotNull(state.name, state.formerNames)
+    }
 
     DetailsCard {
         items.forEachIndexed { index, item ->
@@ -139,7 +187,14 @@ internal fun IdentityDetails(state: RollerCoasterIdentityState) {
 
 @Composable
 internal fun StatusDetails(state: RollerCoasterStatusState) {
-    val items = listOfNotNull(state.current, state.former, state.openedDate, state.closedDate)
+    val items = remember(
+        state.current,
+        state.former,
+        state.openedDate,
+        state.closedDate,
+    ) {
+        listOfNotNull(state.current, state.former, state.openedDate, state.closedDate)
+    }
 
     DetailsCard {
         items.forEachIndexed { index, item ->
@@ -151,10 +206,11 @@ internal fun StatusDetails(state: RollerCoasterStatusState) {
 @Composable
 internal fun LocationDetails(state: RollerCoasterLocationState) {
     DetailsCard {
-        state.coordinates?.let {
+        val coordinates = state.coordinates
+        coordinates?.let {
             Map(
-                latitude = state.coordinates.latitude,
-                longitude = state.coordinates.longitude,
+                latitude = it.latitude,
+                longitude = it.longitude,
                 markerTitle = state.mapMarkerTitle,
                 modifier = Modifier
                     .fillMaxSize()
@@ -162,7 +218,9 @@ internal fun LocationDetails(state: RollerCoasterLocationState) {
             )
         }
 
-        val items = listOfNotNull(state.park, state.city, state.country, state.relocations)
+        val items = remember(state.park, state.city, state.country, state.relocations) {
+            listOfNotNull(state.park, state.city, state.country, state.relocations)
+        }
         items.forEachIndexed { index, item ->
             ListItem(state = item, showBottomDivider = index < items.lastIndex)
         }
@@ -178,17 +236,15 @@ internal fun DetailsCard(content: @Composable () -> Unit) {
 
 @Composable
 private fun ListItem(
-    state: RollerCoasterDetailsRow?,
+    state: RollerCoasterDetailsRow,
     showBottomDivider: Boolean = true,
 ) {
-    state?.let {
-        ListItemMaterial(
-            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-            headlineContent = { Headline(state) },
-            trailingContent = { Trailing(state) },
-        )
-        if (showBottomDivider) HorizontalDivider()
-    }
+    ListItemMaterial(
+        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+        headlineContent = { Headline(state) },
+        trailingContent = { Trailing(state) },
+    )
+    if (showBottomDivider) HorizontalDivider()
 }
 
 @Composable

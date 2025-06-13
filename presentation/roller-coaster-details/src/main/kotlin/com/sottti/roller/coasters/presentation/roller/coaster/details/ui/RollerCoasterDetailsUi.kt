@@ -1,29 +1,21 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.error.ErrorButton
-import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersTallPreview
 import com.sottti.roller.coasters.presentation.roller.coaster.details.data.RollerCoasterDetailsViewModel
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.LoadUi
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.ToggleFavourite
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Error
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loaded
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsContentState.Loading
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsPreviewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 
@@ -62,31 +54,26 @@ internal fun RollerCoasterDetailsUi(
     onBackNavigation: () -> Unit,
     state: RollerCoasterDetailsState,
 ) {
+    val content = remember(state.content) { state.content }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val topBarState = remember(state.topBar) { state.topBar }
+    val onToggleFavourite = remember(onAction) { { onAction(ToggleFavourite) } }
+
 
     Scaffold(
         topBar = {
             TopBar(
                 onBackNavigation = onBackNavigation,
-                onToggleFavourite = { onAction(ToggleFavourite) },
+                onToggleFavourite = onToggleFavourite,
                 scrollBehavior = scrollBehavior,
-                state = state.topBar,
+                state = topBarState,
             )
         }) { paddingValues ->
-        when (val content = state.content) {
-            Error -> ErrorUi(modifier = Modifier.padding(paddingValues), button = ErrorButton {})
-            Loading -> ProgressIndicator(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            )
-
-            is Loaded -> RollerCoasterDetailsContent(
-                nestedScrollConnection = scrollBehavior.nestedScrollConnection,
-                paddingValues = paddingValues,
-                rollerCoaster = content.rollerCoaster,
-            )
-        }
+        RollerCoasterDetailsContent(
+            paddingValues = paddingValues,
+            scrollBehavior = scrollBehavior,
+            state = content,
+        )
     }
 }
 

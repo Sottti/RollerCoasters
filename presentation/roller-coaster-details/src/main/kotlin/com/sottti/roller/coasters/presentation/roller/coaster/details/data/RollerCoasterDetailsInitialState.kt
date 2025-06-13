@@ -9,11 +9,9 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.TopB
 internal fun initialState(): RollerCoasterDetailsState =
     RollerCoasterDetailsState(
         content = RollerCoasterDetailsContentState.Loading,
-        topBar = topBarInitialState(),
+        topBar = TopBarState(
+            favouriteIcon = FavouriteIconState.Loading,
+            navigationIcon = Icons.ArrowBack.filled,
+            title = null,
+        ),
     )
-
-internal fun topBarInitialState(): TopBarState = TopBarState(
-    favouriteIcon = FavouriteIconState.Loading,
-    navigationIcon = Icons.ArrowBack.filled,
-    title = null,
-)

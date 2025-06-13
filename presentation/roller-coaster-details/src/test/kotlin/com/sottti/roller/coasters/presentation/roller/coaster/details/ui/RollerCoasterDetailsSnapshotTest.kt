@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.roller.coaster.details
+package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -6,8 +6,6 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsPreviewState
-import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerCoasterDetailsUiPreview
-import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerCoasterDetailsUiPreviewProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
