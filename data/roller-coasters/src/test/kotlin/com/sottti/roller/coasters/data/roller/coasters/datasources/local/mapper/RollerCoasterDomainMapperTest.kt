@@ -10,10 +10,8 @@ import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
-import kotlinx.serialization.InternalSerializationApi
 import org.junit.Test
 
-@OptIn(InternalSerializationApi::class)
 internal class RollerCoasterDomainMapperTest {
 
     @Test

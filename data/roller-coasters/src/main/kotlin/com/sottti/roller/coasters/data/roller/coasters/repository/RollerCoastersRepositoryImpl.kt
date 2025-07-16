@@ -17,7 +17,6 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.Resolv
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
-import kotlinx.serialization.InternalSerializationApi
 import javax.inject.Inject
 
 internal class RollerCoastersRepositoryImpl @Inject constructor(
@@ -91,7 +90,6 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     override suspend fun isFavouriteRollerCoaster(id: RollerCoasterId): Boolean =
         localDataSource.isFavouriteRollerCoaster(id)
 
-    @OptIn(InternalSerializationApi::class)
     override fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
     ): Flow<PagingData<RollerCoaster>> =

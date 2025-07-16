@@ -1,8 +1,5 @@
-@file:OptIn(InternalSerializationApi::class)
-
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model
 
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

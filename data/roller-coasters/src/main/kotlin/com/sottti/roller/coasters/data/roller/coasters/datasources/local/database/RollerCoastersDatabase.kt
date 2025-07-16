@@ -9,9 +9,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.convert
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.FavouriteRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.PictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
-import kotlinx.serialization.InternalSerializationApi
 
-@OptIn(InternalSerializationApi::class)
 @Database(
     entities = [
         FavouriteRollerCoasterRoomModel::class,

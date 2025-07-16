@@ -1,5 +1,3 @@
-@file:OptIn(InternalSerializationApi::class)
-
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model
 
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.CoordinatesSerializer
@@ -8,7 +6,6 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serial
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.PictureSerializer
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.StringOrListSerializer
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.serializers.TrimmingStringSerializer
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
