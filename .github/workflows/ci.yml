@@ -23,8 +23,11 @@ jobs:
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
 
+      - name: Validate Gradle Wrapper
+        run: ./gradlew --version
+
       - name: Assemble Debug
         run: ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest --stacktrace --no-daemon --continue
+        run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
