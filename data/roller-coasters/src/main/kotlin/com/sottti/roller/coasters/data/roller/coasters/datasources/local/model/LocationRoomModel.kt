@@ -5,7 +5,7 @@ import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@InternalSerializationApi
+@OptIn(InternalSerializationApi::class)
 internal data class LocationRoomModel(
     @Embedded val coordinates: CoordinatesRoomModel?,
     val city: String,

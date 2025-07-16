@@ -6,7 +6,7 @@ import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@InternalSerializationApi
+@OptIn(InternalSerializationApi::class)
 internal data class ParkRoomModel(
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_AMUSEMENT_PARK_ID) val id: Int,
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_AMUSEMENT_PARK_NAME) val name: String,

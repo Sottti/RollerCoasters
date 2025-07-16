@@ -5,7 +5,7 @@ import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@InternalSerializationApi
+@OptIn(InternalSerializationApi::class)
 internal data class SpecsRoomModel(
     @Embedded val design: DesignRoomModel,
     @Embedded val ride: RideRoomModel?,

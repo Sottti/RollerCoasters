@@ -6,7 +6,7 @@ import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@InternalSerializationApi
+@OptIn(InternalSerializationApi::class)
 internal data class DesignRoomModel(
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_TYPE) val type: String,
     val arrangement: String?,

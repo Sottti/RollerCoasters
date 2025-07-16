@@ -6,7 +6,7 @@ import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@InternalSerializationApi
+@OptIn(InternalSerializationApi::class)
 internal data class NameRoomModel(
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_NAME_CURRENT) val current: String,
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_NAME_FORMER) val former: String?,
