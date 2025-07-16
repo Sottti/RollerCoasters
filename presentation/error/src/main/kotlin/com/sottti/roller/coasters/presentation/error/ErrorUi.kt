@@ -24,6 +24,6 @@ public fun ErrorUi(
         button = InformativeButton(
             text = button.text,
             onClick = button.onClick,
-        )
+        ),
     )
 }

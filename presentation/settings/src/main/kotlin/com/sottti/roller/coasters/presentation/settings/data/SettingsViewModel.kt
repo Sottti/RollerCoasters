@@ -95,7 +95,7 @@ internal class SettingsViewModel @Inject constructor(
 
 
     private val _state = MutableStateFlow(
-        initialState ?: initialState(features.systemDynamicColorAvailable())
+        initialState ?: initialState(features.systemDynamicColorAvailable()),
     )
     internal val state: StateFlow<SettingsState> = _state.asStateFlow()
     internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }

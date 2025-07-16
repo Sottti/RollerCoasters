@@ -42,7 +42,7 @@ private val loadedStateAppendPrependBothLoading =
     favouritesPreviewState(appendState = Loading, prependState = Loading)
 private val loadedStateNoPagination = favouritesPreviewState()
 private val loadedStateAppendEndReached = favouritesPreviewState(
-    appendState = NotLoading(endOfPaginationReached = true)
+    appendState = NotLoading(endOfPaginationReached = true),
 )
 private val loadedStatePrependEndReached = favouritesPreviewState(
     prependState = NotLoading(endOfPaginationReached = true)

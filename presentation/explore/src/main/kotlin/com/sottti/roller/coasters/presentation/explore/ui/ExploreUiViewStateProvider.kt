@@ -38,7 +38,7 @@ private val loadedStateAppendPrependBothLoading =
     explorePreviewState(appendState = Loading, prependState = Loading)
 private val loadedStateNoPagination = explorePreviewState()
 private val loadedStateAppendEndReached = explorePreviewState(
-    appendState = NotLoading(endOfPaginationReached = true)
+    appendState = NotLoading(endOfPaginationReached = true),
 )
 private val loadedStatePrependEndReached = explorePreviewState(
     prependState = NotLoading(endOfPaginationReached = true)

@@ -26,7 +26,7 @@ internal fun AppThemePickerDialog(
         findSelected = { appThemes ->
             appThemes.firstSelectedOrFirst(
                 isSelected = { appTheme -> appTheme.selected },
-                errorMessage = THEME_EMPTY_ERROR
+                errorMessage = THEME_EMPTY_ERROR,
             )
         },
         onSelect = { onAction(AppThemePickerSelectionChange(it)) },

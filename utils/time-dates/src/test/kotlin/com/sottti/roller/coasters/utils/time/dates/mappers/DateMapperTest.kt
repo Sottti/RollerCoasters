@@ -146,7 +146,7 @@ internal class DateMapperTest {
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(extremePositiveYearSortableString)
+                INVALID_DATE_FORMAT_MESSAGE.format(extremePositiveYearSortableString),
             )
     }
 

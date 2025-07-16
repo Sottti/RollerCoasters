@@ -98,7 +98,7 @@ internal class RollerCoastersRepositoryImplTest {
             coEvery {
                 localDataSource.observeRollerCoaster(
                     rollerCoasterId(),
-                    Metric
+                    Metric,
                 )
             } returns flow {
                 emit(null)

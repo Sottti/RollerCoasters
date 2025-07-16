@@ -58,7 +58,7 @@ internal class StringOrListSerializerTest {
             listOf(
                 JsonPrimitive("Hello"),
                 JsonPrimitive(""),
-                JsonPrimitive("World")
+                JsonPrimitive("World"),
             )
         )
         val result = decode(jsonElement)

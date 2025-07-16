@@ -24,7 +24,7 @@ internal val sortedMixedDates = arrayOf(
     "2005-02-01", // 2005 February 1st
     "2011-08-00", // 2011 August
     "2018-06-06", // 2018 June 6th
-    "2023-10-00"  // 2023 October
+    "2023-10-00"  // 2023 October,
 )
 internal val unsortedMixedDates = listOf(
     fullDate, // 2018-06-06

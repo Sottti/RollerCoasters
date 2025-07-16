@@ -44,7 +44,7 @@ internal fun MutableStateFlow<ExploreState>.expandSortByPrimaryFilter() {
                             )
                         }
                     },
-                )
+                ),
             )
         }
 }

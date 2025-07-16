@@ -12,7 +12,7 @@ internal fun SettingsState.updateDynamicColor(
             when (dynamicColorChecked) {
                 AppDynamicColor.Disabled -> false
                 AppDynamicColor.Enabled -> true
-            }
+            },
         )
     )
 )

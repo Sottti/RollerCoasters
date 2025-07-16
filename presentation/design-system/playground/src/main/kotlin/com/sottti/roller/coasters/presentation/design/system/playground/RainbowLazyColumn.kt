@@ -48,7 +48,7 @@ private fun rainbowColors(
         Color.hsv(
             hue = (seedHue + index * 360f / 38) % 360,
             saturation = seedSaturation,
-            value = seedValue
+            value = seedValue,
         )
     }
 }

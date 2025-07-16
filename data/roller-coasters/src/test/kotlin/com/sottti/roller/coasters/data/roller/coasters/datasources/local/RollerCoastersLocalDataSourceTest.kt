@@ -144,7 +144,7 @@ internal class RollerCoastersLocalDataSourceTest {
         val pictures = listOf(notMainPictureRoomModel)
 
         coEvery { dao.observeRollerCoaster(rollerCoasterId().value) } returns flowOf(
-            rollerCoasterEntity
+            rollerCoasterEntity,
         )
         coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(pictures)
 

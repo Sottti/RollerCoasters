@@ -16,7 +16,7 @@ internal class DialogWithRadioButtonsPreviewProvider :
                             dismiss = dismiss,
                             title = title,
                             options = optionsValues(),
-                        )
+                        ),
                     )
                 }
             }

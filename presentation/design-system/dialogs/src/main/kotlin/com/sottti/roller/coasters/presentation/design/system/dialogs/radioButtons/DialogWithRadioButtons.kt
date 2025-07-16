@@ -36,7 +36,7 @@ public fun DialogWithRadioButtons(
         text = {
             OptionsList(
                 options = options,
-                onOptionSelected = onOptionSelected
+                onOptionSelected = onOptionSelected,
             )
         },
         confirmButton = { ConfirmButton(text = confirm, onConfirm = { onConfirm() }) },

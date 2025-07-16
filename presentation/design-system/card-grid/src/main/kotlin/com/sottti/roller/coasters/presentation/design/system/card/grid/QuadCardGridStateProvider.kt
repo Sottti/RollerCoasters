@@ -16,7 +16,7 @@ internal class QuadCardGridStateProvider : PreviewParameterProvider<QuadCardGrid
                 modifier = Modifier.fillMaxWidth(),
                 iconState = Icons.Android.filled,
                 onClick = {},
-            )
+            ),
         )
     }.asSequence()
 }

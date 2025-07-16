@@ -95,7 +95,7 @@ private fun LocationRoomModel.toDomain() =
 private fun CoordinatesRoomModel.toDomain() =
     Coordinates(
         latitude = Latitude(latitude),
-        longitude = Longitude(longitude)
+        longitude = Longitude(longitude),
     )
 
 @OptIn(InternalSerializationApi::class)

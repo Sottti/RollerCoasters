@@ -79,7 +79,7 @@ internal interface RollerCoastersDao {
         SELECT * FROM roller_coasters
         WHERE id IN (SELECT rollerCoasterId FROM favourites)
         ORDER BY name_current ASC
-    """
+    """,
     )
     fun observePagedFavouriteRollerCoasters(): PagingSource<Int, RollerCoasterRoomModel>
 }

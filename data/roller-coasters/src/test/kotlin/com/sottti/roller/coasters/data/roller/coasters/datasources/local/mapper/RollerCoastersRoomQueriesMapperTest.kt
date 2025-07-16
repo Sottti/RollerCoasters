@@ -124,7 +124,7 @@ class RollerCoastersRoomQueriesMapperTest {
             limit = 30,
             offset = 0,
             sortByFilter = SortByFilter.GForce,
-            typeFilter = TypeFilter.All
+            typeFilter = TypeFilter.All,
         )
 
         val expectedSql =

@@ -13,7 +13,7 @@ internal class DialogInformativePreviewProvider : PreviewParameterProvider<Dialo
                             dismiss = dismiss,
                             text = text,
                             title = title,
-                        )
+                        ),
                     )
                 }
             }

@@ -10,7 +10,7 @@ import com.roller.coasters.presentation.design.system.images.data.Images
 internal class ProfilePicturePreviewProvider :
     PreviewParameterProvider<HeroImageState> {
     override val values = sequenceOf(
-        profilePicture2024()
+        profilePicture2024(),
     )
 }
 

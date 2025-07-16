@@ -87,7 +87,7 @@ public fun mainPicture(): Picture =
         copyright = PictureCopyright(
             author = Author(PICTURE_AUTHOR),
             date = Date.FullDate(LocalDate.parse(COPYRIGHT_DATE)),
-        )
+        ),
     )
 
 public fun anotherMainPicture(): Picture =

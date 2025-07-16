@@ -53,7 +53,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsState>.updateRollerCoaster(
                     dateFormatter = dateFormatter,
                     formatContext = formatContext,
                 ),
-            )
+            ),
         )
     }
 }

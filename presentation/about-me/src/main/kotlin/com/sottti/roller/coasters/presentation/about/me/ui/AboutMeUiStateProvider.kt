@@ -15,6 +15,6 @@ internal class AboutMeUiStateProvider : PreviewParameterProvider<AboutMePreviewS
             onNavigateToSettings = {},
             paddingValues = PaddingValues(),
             state = initialState,
-        )
+        ),
     )
 }

@@ -30,7 +30,7 @@ internal class SettingsUiPickersStateProvider : PreviewParameterProvider<Setting
             yield(
                 previewState(
                     state = baseState.showAppLanguagePicker(
-                        selectedAppLanguage = language
+                        selectedAppLanguage = language,
                     )
                 )
             )

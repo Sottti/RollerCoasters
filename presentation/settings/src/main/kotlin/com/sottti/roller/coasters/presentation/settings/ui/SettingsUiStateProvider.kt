@@ -33,7 +33,7 @@ internal class SettingsUiStateProvider : PreviewParameterProvider<SettingsPrevie
                         .updateAppColorContrast(contrasts.atLeast(i))
                         .updateAppLanguage(languages.atLeast(i))
                         .updateAppMeasurementSystem(measurements.atLeast(i)),
-                )
+                ),
             )
         }
     }
