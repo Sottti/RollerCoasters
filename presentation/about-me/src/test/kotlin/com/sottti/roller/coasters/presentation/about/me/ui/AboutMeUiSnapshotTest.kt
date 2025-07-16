@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
-import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_6_PRO
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
