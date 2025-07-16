@@ -7,10 +7,8 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.n
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.rollerCoasterRoomModel
 import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
-import kotlinx.serialization.InternalSerializationApi
 import org.junit.Test
 
-@OptIn(InternalSerializationApi::class)
 internal class RollerCoasterRoomMapperTest {
 
     @Test

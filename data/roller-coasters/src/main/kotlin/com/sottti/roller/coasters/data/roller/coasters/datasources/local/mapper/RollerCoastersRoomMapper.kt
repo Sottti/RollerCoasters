@@ -25,9 +25,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Specs
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSortableString
-import kotlinx.serialization.InternalSerializationApi
 
-@OptIn(InternalSerializationApi::class)
 internal fun RollerCoaster.toRoom() =
     RollerCoasterRoomModel(
         id = id.value,
@@ -39,7 +37,6 @@ internal fun RollerCoaster.toRoom() =
         specs = specs.toRoom(),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun Location.toRoom(): LocationRoomModel =
     LocationRoomModel(
         city = city.value,
@@ -48,14 +45,12 @@ private fun Location.toRoom(): LocationRoomModel =
         relocations = relocations?.value,
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun Coordinates.toRoom(): CoordinatesRoomModel =
     CoordinatesRoomModel(
         latitude = latitude.value,
         longitude = longitude.value,
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun Picture.toRoom(rollerCoasterId: RollerCoasterId) =
     PictureRoomModel(
         copyrightDate = copyright.date?.toSortableString(),
@@ -66,25 +61,21 @@ private fun Picture.toRoom(rollerCoasterId: RollerCoasterId) =
         url = url.value,
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun AmusementPark.toRoom(): ParkRoomModel =
     ParkRoomModel(
         id = id.value,
         name = name.value,
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun RollerCoasterName.toRoom(): NameRoomModel =
     NameRoomModel(
         current = current.value,
         former = former?.value,
     )
 
-@OptIn(InternalSerializationApi::class)
 internal fun RollerCoaster.toPicturesRoom(): List<PictureRoomModel> =
     pictures.other.map { picture -> picture.toRoom(rollerCoasterId = id) }
 
-@OptIn(InternalSerializationApi::class)
 private fun Status.toRoom(): StatusRoomModel =
     StatusRoomModel(
         closedDate = closedDate?.date?.toSortableString(),
@@ -93,7 +84,6 @@ private fun Status.toRoom(): StatusRoomModel =
         openedDate = openedDate?.date?.toSortableString(),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun Specs.toRoom(): SpecsRoomModel =
     SpecsRoomModel(
         capacity = capacity?.ridersPerHour?.value,
@@ -105,7 +95,6 @@ private fun Specs.toRoom(): SpecsRoomModel =
         ride = ride?.toRoom(),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun Design.toRoom(): DesignRoomModel =
     DesignRoomModel(
         arrangement = arrangement?.value,
@@ -116,7 +105,6 @@ private fun Design.toRoom(): DesignRoomModel =
         type = type.value,
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun Ride.toRoom(): RideRoomModel =
     RideRoomModel(
         drop = toRoomDrop(),

@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.InternalSerializationApi
 import org.junit.Before
 import org.junit.Test
 
@@ -47,7 +46,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `store roller coaster with single item`() = runTest {
         coEvery {
             dao.insertRollerCoasters(
@@ -67,7 +65,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `store roller coasters with multiple items`() = runTest {
         coEvery {
             dao.insertRollerCoasters(
@@ -87,7 +84,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `store roller coasters when list is empty`() = runTest {
         localDataSource.storeRollerCoasters(emptyList())
         coVerify(exactly = 0) { dao.insertRollerCoasters(any(), any()) }
@@ -104,7 +100,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster with valid id and metric system emits coaster`() = runTest {
         val rollerCoasterEntity = rollerCoasterRoomModel
         val pictures = listOf(notMainPictureRoomModel)
@@ -121,7 +116,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster with valid id and imperial us system emits coaster`() = runTest {
         val rollerCoasterEntity = rollerCoasterRoomModel
         val pictures = listOf(notMainPictureRoomModel)
@@ -138,7 +132,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster with valid id and imperial uk system emits coaster`() = runTest {
         val rollerCoasterEntity = rollerCoasterRoomModel
         val pictures = listOf(notMainPictureRoomModel)
@@ -155,7 +148,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster with invalid id emits null`() = runTest {
         coEvery { dao.observeRollerCoaster(rollerCoasterId().value) } returns flowOf(null)
         coEvery { dao.observePictures(rollerCoasterId().value) } returns flowOf(emptyList())
@@ -167,7 +159,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing coaster with no pictures emits roller coaster with empty pictures`() = runTest {
         coEvery {
             dao.observeRollerCoaster(rollerCoasterId().value)
@@ -188,7 +179,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster reacts to updated roller coaster data`() = runTest {
         val initialRollerCoasterEntity = rollerCoasterRoomModel
         val updatedRollerCoasterEntity = anotherRollerCoasterRoomModel
@@ -212,7 +202,6 @@ internal class RollerCoastersLocalDataSourceTest {
     }
 
     @Test
-    @OptIn(InternalSerializationApi::class)
     fun `observing roller coaster reacts to updated pictures`() = runTest {
         val initialPictures = listOf(notMainPictureRoomModel)
         val updatedPictures = listOf(notMainPictureRoomModel, anotherNotMainPictureRoomModel)

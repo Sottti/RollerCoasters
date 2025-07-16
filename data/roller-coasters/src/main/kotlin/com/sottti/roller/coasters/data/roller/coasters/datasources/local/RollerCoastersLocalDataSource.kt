@@ -22,21 +22,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.InternalSerializationApi
 import javax.inject.Inject
 
 internal class RollerCoastersLocalDataSource @Inject constructor(
     private val dao: RollerCoastersDao,
 ) {
 
-    @OptIn(InternalSerializationApi::class)
     suspend fun storeRollerCoaster(
         rollerCoaster: RollerCoaster,
     ) {
         storeRollerCoasters(listOf(rollerCoaster))
     }
 
-    @OptIn(InternalSerializationApi::class)
     suspend fun storeRollerCoasters(
         rollerCoasters: List<RollerCoaster>,
     ) {
@@ -56,7 +53,6 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         }
     }
 
-    @OptIn(InternalSerializationApi::class)
     fun observeRollerCoaster(
         id: RollerCoasterId,
         measurementSystem: ResolvedMeasurementSystem,
@@ -98,13 +94,11 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     suspend fun isFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Boolean =
         dao.isFavouriteRollerCoasterFlow(rollerCoasterId.value)
 
-    @OptIn(InternalSerializationApi::class)
     fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
     ): PagingSource<Int, RollerCoasterRoomModel> =
         dao.observePagedFavouriteRollerCoasters()
 
-    @OptIn(InternalSerializationApi::class)
     fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
         pagerConfig: PagingConfig,

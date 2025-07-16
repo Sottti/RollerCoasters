@@ -46,21 +46,17 @@ import com.sottti.roller.coasters.domain.fixtures.PICTURE_URL
 import com.sottti.roller.coasters.domain.fixtures.RESTRAINTS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
 import com.sottti.roller.coasters.domain.fixtures.SPEED
-import kotlinx.serialization.InternalSerializationApi
 
-@OptIn(InternalSerializationApi::class)
 private val parkRoomModel = ParkRoomModel(
     id = PARK_ID,
     name = PARK_NAME,
 )
 
-@OptIn(InternalSerializationApi::class)
 private val nameRoomModel = NameRoomModel(
     current = COASTER_NAME,
     former = null,
 )
 
-@OptIn(InternalSerializationApi::class)
 internal val mainPictureRoomModel = PictureRoomModel(
     id = PICTURE_ID_MAIN,
     name = COASTER_NAME,
@@ -70,7 +66,6 @@ internal val mainPictureRoomModel = PictureRoomModel(
     copyrightDate = COPYRIGHT_DATE,
 )
 
-@OptIn(InternalSerializationApi::class)
 internal val anotherMainPictureRoomModel =
     PictureRoomModel(
         id = PICTURE_ID_ANOTHER_MAIN,
@@ -81,7 +76,6 @@ internal val anotherMainPictureRoomModel =
         copyrightDate = COPYRIGHT_DATE,
     )
 
-@OptIn(InternalSerializationApi::class)
 internal val notMainPictureRoomModel =
     PictureRoomModel(
         id = PICTURE_ID_NOT_MAIN,
@@ -92,7 +86,6 @@ internal val notMainPictureRoomModel =
         copyrightDate = COPYRIGHT_DATE,
     )
 
-@OptIn(InternalSerializationApi::class)
 internal val anotherNotMainPictureRoomModel =
     PictureRoomModel(
         id = PICTURE_ID_ANOTHER_NOT_MAIN,
@@ -103,7 +96,6 @@ internal val anotherNotMainPictureRoomModel =
         copyrightDate = COPYRIGHT_DATE,
     )
 
-@OptIn(InternalSerializationApi::class)
 private val statusRoomModel = StatusRoomModel(
     current = OPERATIONAL_STATE_CURRENT,
     former = null,
@@ -111,7 +103,6 @@ private val statusRoomModel = StatusRoomModel(
     closedDate = null,
 )
 
-@OptIn(InternalSerializationApi::class)
 private val designRoomModel = DesignRoomModel(
     type = COASTER_TYPE,
     train = COASTER_TRAIN,
@@ -121,7 +112,6 @@ private val designRoomModel = DesignRoomModel(
     designer = COASTER_DESIGNER,
 )
 
-@OptIn(InternalSerializationApi::class)
 private val rideRoomModel = RideRoomModel(
     drop = listOf(DROP),
     dropMax = DROP,
@@ -141,7 +131,6 @@ private val rideRoomModel = RideRoomModel(
     trackNames = null,
 )
 
-@OptIn(InternalSerializationApi::class)
 private val specsRoomModel = SpecsRoomModel(
     model = MODEL,
     manufacturer = MANUFACTURER,
@@ -152,11 +141,9 @@ private val specsRoomModel = SpecsRoomModel(
     ride = rideRoomModel,
 )
 
-@OptIn(InternalSerializationApi::class)
 private val coordinatesRoomModel: CoordinatesRoomModel =
     CoordinatesRoomModel(latitude = LATITUDE, longitude = LONGITUDE)
 
-@OptIn(InternalSerializationApi::class)
 private val locationRoomModel = LocationRoomModel(
     city = CITY,
     country = COUNTRY,
@@ -164,7 +151,6 @@ private val locationRoomModel = LocationRoomModel(
     relocations = null,
 )
 
-@OptIn(InternalSerializationApi::class)
 internal val rollerCoasterRoomModel =
     RollerCoasterRoomModel(
         id = COASTER_ID,
@@ -176,7 +162,6 @@ internal val rollerCoasterRoomModel =
         mainPicture = mainPictureRoomModel,
     )
 
-@OptIn(InternalSerializationApi::class)
 internal val anotherRollerCoasterRoomModel =
     rollerCoasterRoomModel.copy(
         id = COASTER_ID_ANOTHER,
