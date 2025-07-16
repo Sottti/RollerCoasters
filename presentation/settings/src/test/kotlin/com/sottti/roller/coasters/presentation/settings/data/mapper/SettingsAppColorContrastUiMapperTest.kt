@@ -66,7 +66,7 @@ internal class SettingsAppColorContrastUiMapperTest {
         val option = DialogRadioButtonOption(
             text = -1,
             icon = com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.BrightnessAuto.outlined,
-            selected = false
+            selected = false,
         )
         option.toAppColorContrastUi(emptyList())
     }

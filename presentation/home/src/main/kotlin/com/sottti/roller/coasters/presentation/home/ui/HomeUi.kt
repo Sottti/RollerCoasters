@@ -24,7 +24,7 @@ internal fun HomeUi() {
                 onNavigateToSettings = { rootNavController.navigate(Settings) },
                 onNavigateToRollerCoaster = { rollerCoasterId ->
                     rootNavController.navigate(RollerCoasterDetails(rollerCoasterId))
-                }
+                },
             )
         }
         composable<Settings> {

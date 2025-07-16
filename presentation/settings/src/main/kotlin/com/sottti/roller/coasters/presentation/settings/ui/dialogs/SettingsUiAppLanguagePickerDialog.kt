@@ -26,7 +26,7 @@ internal fun AppLanguagePickerDialog(
         findSelected = { appLanguages ->
             appLanguages.firstSelectedOrFirst(
                 isSelected = { appLanguage -> appLanguage.selected },
-                errorMessage = LANGUAGE_EMPTY_ERROR
+                errorMessage = LANGUAGE_EMPTY_ERROR,
             )
         },
         onSelect = { onAction(AppLanguagePickerSelectionChange(it)) },

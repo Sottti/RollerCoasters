@@ -126,7 +126,7 @@ internal fun SocialProfiles(
                     onAction(
                         OpenUrl(
                             urlResId = profile.url,
-                            primaryColor = primaryColor
+                            primaryColor = primaryColor,
                         )
                     )
                 },

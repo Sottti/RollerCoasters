@@ -62,7 +62,7 @@ internal fun RollerCoasterDetailsContent(
         Loading -> ProgressIndicator(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(paddingValues),
         )
 
         is Loaded -> LoadedContent(

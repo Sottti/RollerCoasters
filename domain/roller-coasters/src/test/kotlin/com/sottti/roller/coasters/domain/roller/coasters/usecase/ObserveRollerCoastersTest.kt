@@ -39,7 +39,7 @@ class ObserveRollerCoastersTest {
         rollerCoastersRepository = mockk()
         observeFilteredRollerCoasters = ObserveFilteredRollerCoasters(
             observeResolvedMeasurementSystem = observeResolvedMeasurementSystem,
-            rollerCoastersRepository = rollerCoastersRepository
+            rollerCoastersRepository = rollerCoastersRepository,
         )
     }
 

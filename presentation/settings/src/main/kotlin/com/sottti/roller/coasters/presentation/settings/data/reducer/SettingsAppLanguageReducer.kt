@@ -26,7 +26,7 @@ internal fun SettingsState.updateAppLanguage(
                     newAppLanguage.toPresentationModel(selected = true),
                 )
             ),
-        )
+        ),
     )
 }
 

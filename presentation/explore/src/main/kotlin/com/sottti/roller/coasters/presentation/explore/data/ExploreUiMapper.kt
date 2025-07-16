@@ -46,7 +46,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
             appLanguage = appLanguage,
             systemLocale = systemLocale,
             sortByFilter = sortByFilter,
-            displayUnitFormatter = displayUnitFormatter
+            displayUnitFormatter = displayUnitFormatter,
         )
 
         when {

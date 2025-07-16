@@ -76,7 +76,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                             onStoreRollerCoasters(mappedCoasters)
                             Ok(Unit)
                         },
-                        failure = { exception -> Err(exception) }
+                        failure = { exception -> Err(exception) },
                     )
                 }
             }

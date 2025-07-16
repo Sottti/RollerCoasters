@@ -11,7 +11,7 @@ internal object RollerCoastersSyncPeriodicWork {
     val request =
         PeriodicWorkRequestBuilder<RollerCoastersSyncWorker>(
             repeatInterval = 72,
-            repeatIntervalTimeUnit = TimeUnit.HOURS
+            repeatIntervalTimeUnit = TimeUnit.HOURS,
         )
             .setConstraints(periodicWorkRequestConstraints())
             .build()

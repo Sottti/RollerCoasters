@@ -85,7 +85,7 @@ public class DisplayUnitFormatter @Inject constructor(
         appLanguage: AppLanguage,
         defaultLocale: Locale,
     ): String = context.getString(
-        R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale)
+        R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale),
     )
 
     private fun Duration.toDisplayFormatGForce(

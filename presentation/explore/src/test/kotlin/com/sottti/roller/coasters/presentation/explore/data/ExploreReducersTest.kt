@@ -57,7 +57,7 @@ internal class ExploreReducersTest {
             initialState().copy(
                 filters = filtersWithExpansion(
                     sortByExpanded = true,
-                    sortBySecondaryVisible = true
+                    sortBySecondaryVisible = true,
                 )
             )
         )

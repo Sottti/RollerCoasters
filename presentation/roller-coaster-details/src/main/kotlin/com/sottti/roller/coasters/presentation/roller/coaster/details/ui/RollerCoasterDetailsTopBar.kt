@@ -34,7 +34,7 @@ internal fun TopBar(
                 state = state.favouriteIcon,
                 onToggleFavourite = onToggleFavourite,
             )
-        }
+        },
     )
 }
 

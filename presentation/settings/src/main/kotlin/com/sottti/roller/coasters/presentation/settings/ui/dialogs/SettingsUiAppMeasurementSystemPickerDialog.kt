@@ -26,7 +26,7 @@ internal fun AppMeasurementSystemPickerDialog(
         findSelected = { appMeasurementSystems ->
             appMeasurementSystems.firstSelectedOrFirst(
                 isSelected = { appMeasurementSystem -> appMeasurementSystem.selected },
-                errorMessage = MEASUREMENT_SYSTEM_EMPTY_ERROR
+                errorMessage = MEASUREMENT_SYSTEM_EMPTY_ERROR,
             )
         },
         onSelect = { onAction(AppMeasurementSystemPickerSelectionChange(it)) },

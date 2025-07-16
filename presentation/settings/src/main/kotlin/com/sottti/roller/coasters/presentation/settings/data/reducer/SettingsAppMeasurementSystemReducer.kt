@@ -48,7 +48,7 @@ internal fun SettingsState.updateAppMeasurementSystemPicker(
 
 internal fun SettingsState.hideAppMeasurementSystemPicker(): SettingsState {
     return this.copy(
-        appMeasurementSystem = this.appMeasurementSystem.copy(picker = null)
+        appMeasurementSystem = this.appMeasurementSystem.copy(picker = null),
     )
 }
 

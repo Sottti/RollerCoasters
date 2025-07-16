@@ -57,7 +57,7 @@ internal fun filtersWithExpansion(
             is SteelFilter -> it.copy(visible = typeSecondaryVisible)
             is WoodFilter -> it.copy(visible = typeSecondaryVisible)
         }
-    }
+    },
 )
 
 

@@ -23,7 +23,7 @@ internal fun SettingsState.updateAppTheme(
                 newAppTheme.toPresentationModel(selected = true),
             )
         ),
-    )
+    ),
 )
 
 internal fun SettingsState.showAppThemePicker(

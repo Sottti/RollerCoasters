@@ -12,7 +12,7 @@ internal class PilledIconPreviewProvider : PreviewParameterProvider<PilledIconPr
                 onClick = { },
                 text = R.string.pilled_icon_preview_title,
 
-                )
+                ),
         )
     }.asSequence()
 }

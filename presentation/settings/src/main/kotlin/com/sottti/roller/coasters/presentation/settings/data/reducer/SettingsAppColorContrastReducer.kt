@@ -23,7 +23,7 @@ internal fun SettingsState.updateAppColorContrast(
                 newAppColorContrast.toPresentationModel(selected = true),
             )
         ),
-    )
+    ),
 )
 
 internal fun SettingsState.showAppColorContrastPicker(

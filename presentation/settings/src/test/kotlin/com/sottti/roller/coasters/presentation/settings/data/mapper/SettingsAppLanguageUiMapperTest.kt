@@ -45,7 +45,7 @@ internal class SettingsAppLanguageUiMapperTest {
         val option = DialogRadioButtonOption(
             text = -1,
             icon = com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.Language.outlined,
-            selected = false
+            selected = false,
         )
         option.toAppLanguageUi(emptyList())
     }

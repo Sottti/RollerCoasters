@@ -18,7 +18,7 @@ internal class RollerCoasterCardSmallPreviewProvider :
                             onClick = {},
                             parkName = fixtureParkName,
                             rollerCoasterName = fixtureRollerCoasterName,
-                        )
+                        ),
                     )
                 }
             }

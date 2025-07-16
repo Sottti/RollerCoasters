@@ -26,7 +26,7 @@ internal fun AppColorContrastPickerDialog(
         findSelected = { appColorContrasts ->
             appColorContrasts.firstSelectedOrFirst(
                 isSelected = { appColorContrast -> appColorContrast.selected },
-                errorMessage = COLOR_CONTRAST_EMPTY_ERROR
+                errorMessage = COLOR_CONTRAST_EMPTY_ERROR,
             )
         },
         onSelect = { onAction(AppColorContrastPickerSelectionChange(it)) },

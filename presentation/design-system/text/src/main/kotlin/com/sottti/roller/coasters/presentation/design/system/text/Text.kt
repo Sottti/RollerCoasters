@@ -28,7 +28,7 @@ public object Text {
                 textStyle = MaterialTheme.typography.displayLarge,
                 textColor = textColor,
                 modifier = modifier,
-                textAlign = textAlign
+                textAlign = textAlign,
             )
         }
 

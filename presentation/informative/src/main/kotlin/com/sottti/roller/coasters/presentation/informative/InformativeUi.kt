@@ -39,7 +39,7 @@ public fun InformativeUi(
             state = illustration,
             modifier = Modifier
                 .weight(0.5f)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
 
         Text.Headline.Medium(
