@@ -19,12 +19,15 @@ jobs:
       - uses: gradle/actions/setup-gradle@v3
 
       - name: Setup local.properties with Maps API Key
+        working-directory: RollerCoasters
         run: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
 
       - name: Assemble Debug
+        working-directory: RollerCoasters
         run: ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Run Unit Tests
+        working-directory: RollerCoasters
         run: ./gradlew testDebugUnitTest --stacktrace --no-daemon --continue
