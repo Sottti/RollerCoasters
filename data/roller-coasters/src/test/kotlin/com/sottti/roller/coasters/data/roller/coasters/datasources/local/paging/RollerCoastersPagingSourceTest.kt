@@ -20,11 +20,10 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.InternalSerializationApi
 import org.junit.Before
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class, InternalSerializationApi::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 internal class RollerCoastersPagingSourceTest {
 
     private lateinit var dao: RollerCoastersDao

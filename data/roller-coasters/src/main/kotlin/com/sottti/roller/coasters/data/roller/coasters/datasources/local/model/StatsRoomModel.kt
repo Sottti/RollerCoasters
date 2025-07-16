@@ -2,11 +2,9 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local.model
 
 import androidx.room.ColumnInfo
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@OptIn(InternalSerializationApi::class)
 internal data class RideRoomModel(
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_DROP_MAX) val dropMax: Double?,
     @ColumnInfo(name = RollerCoasterRoomConstants.COL_G_FORCE_MAX) val gForceMax: Double?,
