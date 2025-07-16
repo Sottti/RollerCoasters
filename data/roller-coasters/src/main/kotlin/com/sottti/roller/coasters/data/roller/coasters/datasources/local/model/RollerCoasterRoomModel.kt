@@ -4,11 +4,9 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoasterRoomConstants
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
 @Serializable
-@OptIn(InternalSerializationApi::class)
 @Entity(tableName = RollerCoasterRoomConstants.TABLE_ROLLER_COASTERS)
 internal data class RollerCoasterRoomModel(
     @Embedded val location: LocationRoomModel,

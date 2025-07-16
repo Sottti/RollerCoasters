@@ -66,9 +66,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Train
 import com.sottti.roller.coasters.domain.roller.coasters.model.Type
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
-import kotlinx.serialization.InternalSerializationApi
 
-@OptIn(InternalSerializationApi::class)
 internal fun RollerCoasterRoomModel.toDomain(
     measurementSystem: ResolvedMeasurementSystem,
     pictures: List<PictureRoomModel>,
@@ -82,7 +80,6 @@ internal fun RollerCoasterRoomModel.toDomain(
     status = status.toDomain(),
 )
 
-@OptIn(InternalSerializationApi::class)
 private fun LocationRoomModel.toDomain() =
     Location(
         city = City(city),
@@ -91,28 +88,24 @@ private fun LocationRoomModel.toDomain() =
         relocations = relocations?.let(::Relocations),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun CoordinatesRoomModel.toDomain() =
     Coordinates(
         latitude = Latitude(latitude),
         longitude = Longitude(longitude)
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun NameRoomModel.toDomain() =
     RollerCoasterName(
         current = Name(current),
         former = former?.let(::Name),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun ParkRoomModel.toDomain() =
     AmusementPark(
         id = ParkId(id),
         name = Name(name),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun List<PictureRoomModel>.toDomain(
     mainPicture: PictureRoomModel?,
 ): Pictures = Pictures(
@@ -120,7 +113,6 @@ private fun List<PictureRoomModel>.toDomain(
     other = map(PictureRoomModel::toDomain)
 )
 
-@OptIn(InternalSerializationApi::class)
 private fun PictureRoomModel.toDomain() =
     Picture(
         id = PictureId(id),
@@ -132,7 +124,6 @@ private fun PictureRoomModel.toDomain() =
         ),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun SpecsRoomModel.toDomain(
     measurementSystem: ResolvedMeasurementSystem,
 ) = Specs(
@@ -145,7 +136,6 @@ private fun SpecsRoomModel.toDomain(
     ride = ride?.toDomain(measurementSystem = measurementSystem),
 )
 
-@OptIn(InternalSerializationApi::class)
 private fun DesignRoomModel.toDomain() =
     Design(
         arrangement = arrangement?.let(::Arrangement),
@@ -156,7 +146,6 @@ private fun DesignRoomModel.toDomain() =
         type = Type(type),
     )
 
-@OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toDomain(
     measurementSystem: ResolvedMeasurementSystem,
 ): Ride =
@@ -165,7 +154,6 @@ private fun RideRoomModel.toDomain(
         else -> toMultiTrackRide(measurementSystem, trackNames)
     }
 
-@OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toSingleTrackRide(
     measurementSystem: ResolvedMeasurementSystem,
 ) = SingleTrackRide(
@@ -179,7 +167,6 @@ private fun RideRoomModel.toSingleTrackRide(
     speed = speed?.firstOrNull()?.toSpeed(measurementSystem),
 )
 
-@OptIn(InternalSerializationApi::class)
 private fun RideRoomModel.toMultiTrackRide(
     measurementSystem: ResolvedMeasurementSystem,
     trackNames: List<String>,
@@ -195,7 +182,6 @@ private fun RideRoomModel.toMultiTrackRide(
     trackNames = trackNames.map(::Name),
 )
 
-@OptIn(InternalSerializationApi::class)
 private fun StatusRoomModel.toDomain() = Status(
     closedDate = closedDate?.toDate()?.let(::ClosedDate),
     current = current?.let { OperationalState(current) },
