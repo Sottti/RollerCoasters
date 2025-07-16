@@ -45,6 +45,7 @@ public fun InformativeUi(
         Text.Headline.Medium(
             text = stringResource(primaryText),
             textColor = colors.onBackground,
+            textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(dimensions.padding.medium))
         Text.Body.Medium(
