@@ -24,9 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.map.Map
@@ -102,9 +102,11 @@ internal fun ImagesSection(
     images: List<RollerCoasterDetailsImageState>,
 ) {
     val pagerState = rememberPagerState { images.size }
-    val windowHeight = LocalWindowInfo.current.containerSize.height
-    val carouselHeight = remember(windowHeight) { (windowHeight * 0.25f).dp }
 
+    val density = LocalDensity.current
+    val windowHeightPx = LocalWindowInfo.current.containerSize.height
+    val windowHeightDp = with(density) { windowHeightPx.toDp() }
+    val carouselHeight = remember(windowHeightDp) { (windowHeightDp * 0.25f) }
 
     Column(Modifier.fillMaxWidth()) {
         HorizontalPager(
