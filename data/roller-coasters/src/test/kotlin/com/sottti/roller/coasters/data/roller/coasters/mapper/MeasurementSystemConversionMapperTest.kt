@@ -13,6 +13,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Length.ImperialLe
 import com.sottti.roller.coasters.domain.roller.coasters.model.Length.MetricLength
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed.ImperialSpeed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed.MetricSpeed
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.toMetric
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric

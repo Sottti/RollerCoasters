@@ -6,13 +6,19 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.GForce
 import com.sottti.roller.coasters.domain.roller.coasters.model.Height
 import com.sottti.roller.coasters.domain.roller.coasters.model.Length
 import com.sottti.roller.coasters.domain.roller.coasters.model.MaxVertical
-import com.sottti.roller.coasters.domain.roller.coasters.model.MultiTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Pictures
 import com.sottti.roller.coasters.domain.roller.coasters.model.Ride
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
-import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxDrop
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxDuration
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxGForce
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxHeight
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxInversions
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxLength
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxMaxVertical
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxSpeed
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.format.DateFormatter
@@ -81,7 +87,7 @@ private fun RollerCoaster.toRollerCoasterDetails(
         images = pictures.toImagesState(),
         identity = toIdentityState(),
         location = toLocationState(),
-        ride = specs.ride?.toRideState(formatContext),
+        ride = specs.ride?.toTrackRideState(formatContext),
         status = status.toStatusState(dateFormatter),
     )
 
@@ -167,123 +173,58 @@ private fun RollerCoaster.toLocationState() =
         },
     )
 
-private fun Ride.toRideState(
-    formatContext: FormatContext,
-): RollerCoasterRideState = when (this) {
-    is SingleTrackRide -> toSingleTrackRideState(formatContext)
-    is MultiTrackRide -> toMultiTrackRideState(formatContext)
-}
-
-private fun SingleTrackRide.toSingleTrackRideState(
-    formatContext: FormatContext,
-) =
+private fun Ride.toTrackRideState(formatContext: FormatContext) =
     RollerCoasterRideState(
         header = R.string.ride_header,
-        length = length?.let {
+        length = maxLength()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatLength(it),
                 headline = R.string.ride_length,
             )
         },
-        height = height?.let {
+        height = maxHeight()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatHeight(it),
                 headline = R.string.ride_height,
             )
         },
-        drop = drop?.let {
+        drop = maxDrop()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatDrop(it),
                 headline = R.string.ride_drop,
             )
         },
-        inversions = inversions?.let {
+        inversions = maxInversions()?.let {
             RollerCoasterDetailsRow(
                 trailing = it.value.toString(),
                 headline = R.string.ride_inversions,
             )
         },
-        maxVertical = maxVertical?.let {
+        maxVertical = maxMaxVertical()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatMaxVertical(it),
                 headline = R.string.ride_max_vertical,
             )
         },
-        duration = duration?.let {
+        duration = maxDuration()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatDuration(it),
                 headline = R.string.ride_duration,
             )
         },
-        gForce = gForce?.let {
+        gForce = maxGForce()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatGForce(it),
                 headline = R.string.ride_g_force,
             )
         },
-        speed = speed?.let {
+        speed = maxSpeed()?.let {
             RollerCoasterDetailsRow(
                 trailing = formatContext.formatSpeed(it),
                 headline = R.string.ride_speed,
             )
         },
     )
-
-private fun MultiTrackRide.toMultiTrackRideState(
-    formatContext: FormatContext,
-): RollerCoasterRideState =
-    RollerCoasterRideState(
-        header = R.string.ride_header,
-        length = length?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatLength(it),
-                headline = R.string.ride_length,
-            )
-        },
-        height = height?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatHeight(it),
-                headline = R.string.ride_height,
-            )
-        },
-        drop = drop?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatDrop(it),
-                headline = R.string.ride_drop,
-            )
-        },
-        inversions = inversions?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = it.value.toString(),
-                headline = R.string.ride_inversions,
-            )
-        },
-        maxVertical = maxVertical?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatMaxVertical(it),
-                headline = R.string.ride_max_vertical,
-            )
-        },
-        duration = duration?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatDuration(it),
-                headline = R.string.ride_duration,
-            )
-        },
-        gForce = gForce?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatGForce(it),
-                headline = R.string.ride_g_force,
-            )
-        },
-        speed = speed?.firstOrNull()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatSpeed(it),
-                headline = R.string.ride_speed,
-            )
-        },
-    )
-
 
 private data class FormatContext(
     val appLanguage: AppLanguage,

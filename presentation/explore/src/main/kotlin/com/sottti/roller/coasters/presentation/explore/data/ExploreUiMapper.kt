@@ -8,9 +8,8 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Height
 import com.sottti.roller.coasters.domain.roller.coasters.model.Inversions
 import com.sottti.roller.coasters.domain.roller.coasters.model.Length
 import com.sottti.roller.coasters.domain.roller.coasters.model.MaxVertical
-import com.sottti.roller.coasters.domain.roller.coasters.model.MultiTrackRide
+import com.sottti.roller.coasters.domain.roller.coasters.model.Ride
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
-import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.Alphabetical
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.Drop
@@ -21,6 +20,13 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.Leng
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.MaxVertical
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.Speed
 import com.sottti.roller.coasters.domain.roller.coasters.model.Speed
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxDrop
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxGForce
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxHeight
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxInversions
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxLength
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxMaxVertical
+import com.sottti.roller.coasters.domain.roller.coasters.model.helpers.maxSpeed
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
@@ -42,7 +48,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     var itemsWithSameStat = 0
 
     pagingData.map { rollerCoaster ->
-        val currentStat = rollerCoaster.contextualStat(
+        val currentStat = rollerCoaster.specs.ride?.contextualStat(
             appLanguage = appLanguage,
             systemLocale = systemLocale,
             sortByFilter = sortByFilter,
@@ -59,34 +65,19 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
 
         previousStat = currentStat
 
-        rollerCoaster.toUiModel(
-            appLanguage = appLanguage,
-            systemLocale = systemLocale,
-            ranking = currentRank,
-            sortByFilter = sortByFilter,
-            stringProvider = stringProvider,
-            displayUnitFormatter = displayUnitFormatter,
+        ExploreRollerCoaster(
+            id = rollerCoaster.id.value,
+            imageUrl = rollerCoaster.pictures.main?.url,
+            parkName = rollerCoaster.park.name.value,
+            rollerCoasterName = rollerCoaster.name.current.value,
+            stat = currentStat,
+            statDetail = stringProvider.getString(R.string.roller_coaster_ranking, currentRank),
         )
+
     }
 }
 
-private fun RollerCoaster.toUiModel(
-    appLanguage: AppLanguage,
-    systemLocale: Locale,
-    ranking: Int,
-    sortByFilter: SortByFilter,
-    stringProvider: StringProvider,
-    displayUnitFormatter: DisplayUnitFormatter,
-) = ExploreRollerCoaster(
-    id = id.value,
-    imageUrl = pictures.main?.url,
-    parkName = park.name.value,
-    rollerCoasterName = name.current.value,
-    stat = contextualStat(appLanguage, systemLocale, sortByFilter, displayUnitFormatter),
-    statDetail = stringProvider.getString(R.string.roller_coaster_ranking, ranking),
-)
-
-private fun RollerCoaster.contextualStat(
+private fun Ride.contextualStat(
     appLanguage: AppLanguage,
     systemLocale: Locale,
     sortByFilter: SortByFilter,
@@ -97,30 +88,15 @@ private fun RollerCoaster.contextualStat(
         systemLocale = systemLocale,
         displayUnitFormatter = displayUnitFormatter,
     )
-    return when (val ride = specs.ride) {
-        is MultiTrackRide -> when (sortByFilter) {
-            Alphabetical -> null
-            Drop -> ride.drop?.maxOfOrNull { formatContext.formatDrop(it) }
-            GForce -> ride.gForce?.maxOfOrNull { formatContext.formatGForce(it) }
-            Height -> ride.height?.maxOfOrNull { formatContext.formatHeight(it) }
-            Inversions -> ride.inversions?.maxOfOrNull { formatContext.formatInversions(it) }
-            Length -> ride.length?.maxOfOrNull { formatContext.formatLength(it) }
-            MaxVertical -> ride.maxVertical?.maxOfOrNull { formatContext.formatMaxVertical(it) }
-            Speed -> ride.speed?.maxOfOrNull { formatContext.formatSpeed(it) }
-        }
-
-        is SingleTrackRide -> when (sortByFilter) {
-            Alphabetical -> null
-            Drop -> ride.drop?.let { formatContext.formatDrop(it) }
-            GForce -> ride.gForce?.let { formatContext.formatGForce(it) }
-            Height -> ride.height?.let { formatContext.formatHeight(it) }
-            Inversions -> ride.inversions?.let { formatContext.formatInversions(it) }
-            Length -> ride.length?.let { formatContext.formatLength(it) }
-            MaxVertical -> ride.maxVertical?.let { formatContext.formatMaxVertical(it) }
-            Speed -> ride.speed?.let { formatContext.formatSpeed(it) }
-        }
-
-        null -> null
+    return when (sortByFilter) {
+        Alphabetical -> null
+        Drop -> maxDrop()?.let { formatContext.formatDrop(it) }
+        GForce -> maxGForce()?.let { formatContext.formatGForce(it) }
+        Height -> maxHeight()?.let { formatContext.formatHeight(it) }
+        Inversions -> maxInversions()?.let { formatContext.formatInversions(it) }
+        Length -> maxLength()?.let { formatContext.formatLength(it) }
+        MaxVertical -> maxMaxVertical()?.let { formatContext.formatMaxVertical(it) }
+        Speed -> maxSpeed()?.let { formatContext.formatSpeed(it) }
     }
 }
 

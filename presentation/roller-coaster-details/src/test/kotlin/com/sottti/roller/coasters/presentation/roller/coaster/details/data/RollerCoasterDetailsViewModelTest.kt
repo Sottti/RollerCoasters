@@ -60,15 +60,15 @@ internal class RollerCoasterDetailsViewModelTest {
         every { observeRollerCoaster(rollerCoasterId) } returns flowOf(rollerCoaster)
         every { observeIsFavourite(rollerCoasterId) } returns flowOf(true)
 
-        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.height!!) } returns "$HEIGHT meters"
-        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.length!!) } returns "$LENGTH meters"
-        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.drop!!) } returns "$DROP meters"
-        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.speed!!) } returns "$SPEED km/h"
-        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.gForce!!) } returns "$GFORCE"
-        every { displayUnitFormatter.toDisplayFormat(systemLocale, rollerCoaster.specs.ride!!.duration!!) } returns DURATION_IN_MMSS
-        every { displayUnitFormatter.toDisplayFormat(rollerCoaster.specs.ride!!.maxVertical!!) } returns "${rollerCoaster.specs.ride!!.maxVertical!!.degrees.value}°"
-        every { dateFormatter.format(rollerCoaster.status.openedDate!!.date) } returns OPENED_DATE
-        every { dateFormatter.format(rollerCoaster.status.closedDate?.date ?: error("")) } returns CLOSED_DATE
+//        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.height!!) } returns "$HEIGHT meters"
+//        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.length!!) } returns "$LENGTH meters"
+//        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.drop!!) } returns "$DROP meters"
+//        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.speed!!) } returns "$SPEED km/h"
+//        every { displayUnitFormatter.toDisplayFormat(appLanguage, systemLocale, rollerCoaster.specs.ride!!.gForce!!) } returns "$GFORCE"
+//        every { displayUnitFormatter.toDisplayFormat(systemLocale, rollerCoaster.specs.ride!!.duration!!) } returns DURATION_IN_MMSS
+//        every { displayUnitFormatter.toDisplayFormat(rollerCoaster.specs.ride!!.maxVertical!!) } returns "${rollerCoaster.specs.ride!!.maxVertical!!.degrees.value}°"
+//        every { dateFormatter.format(rollerCoaster.status.openedDate!!.date) } returns OPENED_DATE
+//        every { dateFormatter.format(rollerCoaster.status.closedDate?.date ?: error("")) } returns CLOSED_DATE
 
         val viewModel = viewModel(
             dateFormatter = dateFormatter,

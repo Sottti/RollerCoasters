@@ -48,27 +48,3 @@ internal fun Double.toLength(
     ImperialUk, ImperialUs -> ImperialLength(Feet.fromMeters(Meters(this)))
     Metric -> MetricLength(Meters(this))
 }
-
-internal fun Drop.toMetric(): MetricDrop =
-    when (this) {
-        is ImperialDrop -> MetricDrop(Meters.fromFeet(feet))
-        is MetricDrop -> this
-    }
-
-internal fun Length.toMetric(): MetricLength =
-    when (this) {
-        is ImperialLength -> MetricLength(Meters.fromFeet(feet))
-        is MetricLength -> this
-    }
-
-internal fun Height.toMetric(): MetricHeight =
-    when (this) {
-        is ImperialHeight -> MetricHeight(Meters.fromFeet(feet))
-        is MetricHeight -> this
-    }
-
-internal fun Speed.toMetric(): MetricSpeed =
-    when (this) {
-        is ImperialSpeed -> MetricSpeed(Kmh.fromMph(mph))
-        is MetricSpeed -> this
-    }
