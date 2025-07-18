@@ -4,8 +4,14 @@ Roller Coasters is a personal project where I experiment with modern Android dev
 
 Is currently under active development, and the codebase is not yet stable.
 
-## Features
+## Current Features
 
+
+## Planned Features
+- **Search** roller coasters directly by name
+- **Parks** as first class entities
+
+## Current Tech
 - **Jetpack Compose** for all UI components and previews
 - **Paging** for efficient data loading
 - **Hilt** for dependency injection
@@ -16,7 +22,7 @@ Is currently under active development, and the codebase is not yet stable.
 - **Paparazzi** screenshot tests
 - Support for multiple languages and measurement systems
 
-## Planned Features
+## Planned Tech Updates
 - **Navigation** using Jetpack Compose Navigation 3
 - **Animations** for enhanced user experience
 - **Large screens support** with multi-window and foldable devices
