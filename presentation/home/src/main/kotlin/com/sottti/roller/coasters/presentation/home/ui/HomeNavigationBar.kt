@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -51,7 +52,10 @@ internal fun NavigationBar(
     val navController = rememberNavController()
     val startDestination = Explore
     val state by viewModel.state.collectAsStateWithLifecycle()
-    var selectedTab by remember { mutableStateOf<NavigationDestination>(startDestination) }
+    var selectedTab by rememberSaveable(stateSaver = NavigationDestination.saver) {
+        mutableStateOf(startDestination)
+    }
+
     val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
 
     Scaffold(
