@@ -1,13 +1,13 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.data
 
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
-import com.sottti.roller.coasters.presentation.format.DateFormatter
-import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveIsFavouriteRollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ToggleFavouriteRollerCoaster
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
+import com.sottti.roller.coasters.presentation.format.DateFormatter
+import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import io.mockk.mockk
 
 internal fun viewModel(
@@ -30,4 +30,3 @@ internal fun viewModel(
         rollerCoasterId = rollerCoasterId,
         toggleFavouriteRollerCoaster = toggleFavouriteRollerCoaster,
     )
-
