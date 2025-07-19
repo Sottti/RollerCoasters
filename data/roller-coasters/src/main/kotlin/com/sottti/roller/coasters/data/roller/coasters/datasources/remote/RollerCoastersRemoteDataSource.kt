@@ -35,6 +35,19 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                 failure = { exception -> Err(exception) },
             )
 
+    suspend fun searchRollerCoasters(
+        query: String,
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Result<List<RollerCoaster>> =
+        api
+            .searchRollerCoasters(query)
+            .mapBoth(
+                success = { search ->
+                    Ok(search.coasters.map { it.toDomain(measurementSystem) })
+                },
+                failure = { exception -> Err(exception) },
+            )
+
     suspend fun syncRollerCoasters(
         onStoreRollerCoasters: suspend (List<RollerCoaster>) -> Unit,
     ): Result<Unit> {

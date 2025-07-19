@@ -36,4 +36,9 @@ public interface RollerCoastersRepository {
     public fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
     ): Flow<PagingData<RollerCoaster>>
+
+    public suspend fun searchRollerCoasters(
+        query: String,
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Result<List<RollerCoaster>>
 }

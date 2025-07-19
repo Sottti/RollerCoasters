@@ -97,4 +97,11 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             measurementSystem = measurementSystem,
             pagerConfig = pagerConfig,
         )
+
+    override suspend fun searchRollerCoasters(
+        query: String,
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Result<List<RollerCoaster>> =
+        remoteDataSource.searchRollerCoasters(query, measurementSystem)
+            .onSuccess { localDataSource.storeRollerCoasters(it) }
 }
