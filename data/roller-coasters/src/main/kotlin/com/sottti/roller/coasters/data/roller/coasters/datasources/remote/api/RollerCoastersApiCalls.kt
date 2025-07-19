@@ -5,7 +5,9 @@ import com.sottti.roller.coasters.data.network.model.ResultApiModel
 import com.sottti.roller.coasters.data.network.safeApiCall
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoastersApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.SearchCoastersApiModel
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import io.ktor.client.HttpClient
 import javax.inject.Inject
 
@@ -22,4 +24,9 @@ internal class RollerCoastersApiCalls @Inject constructor(
         id: RollerCoasterId,
     ): ResultApiModel<RollerCoasterApiModel> =
         safeApiCall { httpClient.fetch("$API_BASE_URL/${id.value}") }
+
+    suspend fun searchRollerCoasters(
+        query: SearchQuery,
+    ): ResultApiModel<SearchCoastersApiModel> =
+        safeApiCall { httpClient.fetch("$API_BASE_URL/search?q=${query.value}") }
 }
