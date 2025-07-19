@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -6,8 +6,8 @@ plugins {
 
 dependencies {
     api(libs.result)
-    api(project(module.domain.model))
-    api(project(module.domain.settings))
+    api(project(Modules.domain.model))
+    api(project(Modules.domain.settings))
     implementation(libs.javax.inject)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.paging.common)
@@ -19,5 +19,5 @@ dependencies {
     testImplementation(libs.paging.common)
     testImplementation(libs.paging.testing)
     testImplementation(libs.truth)
-    testImplementation(project(module.domain.fixtures))
+    testImplementation(project(Modules.domain.fixtures))
 }

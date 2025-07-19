@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.android.library)
@@ -16,5 +16,5 @@ android {
 dependencies {
     implementation(libs.compose.foundation)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.model))
+    implementation(project(Modules.domain.model))
 }

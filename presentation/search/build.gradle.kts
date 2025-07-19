@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.android.library)
@@ -20,13 +20,13 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.progressIndicators))
-    implementation(project(module.presentation.designSystem.rollerCoasterCard))
-    implementation(project(module.presentation.designSystem.text))
-    implementation(project(module.presentation.empty))
-    implementation(project(module.presentation.error))
-    implementation(project(module.presentation.topBars))
+    implementation(project(Modules.domain.rollerCoasters))
+    implementation(project(Modules.presentation.designSystem.dimensions))
+    implementation(project(Modules.presentation.designSystem.progressIndicators))
+    implementation(project(Modules.presentation.designSystem.rollerCoasterCard))
+    implementation(project(Modules.presentation.designSystem.text))
+    implementation(project(Modules.presentation.empty))
+    implementation(project(Modules.presentation.error))
+    implementation(project(Modules.presentation.topBars))
     ksp(libs.hilt.compiler)
 }

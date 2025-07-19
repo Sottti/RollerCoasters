@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.android.library)
@@ -21,19 +21,19 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.fixtures))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.icons))
-    implementation(project(module.presentation.designSystem.map))
-    implementation(project(module.presentation.designSystem.progressIndicators))
-    implementation(project(module.presentation.designSystem.text))
-    implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.error))
-    implementation(project(module.presentation.format))
-    implementation(project(module.presentation.imageLoading))
-    implementation(project(module.presentation.navigation))
-    implementation(project(module.presentation.previews))
+    implementation(project(Modules.domain.fixtures))
+    implementation(project(Modules.domain.rollerCoasters))
+    implementation(project(Modules.presentation.designSystem.dimensions))
+    implementation(project(Modules.presentation.designSystem.icons))
+    implementation(project(Modules.presentation.designSystem.map))
+    implementation(project(Modules.presentation.designSystem.progressIndicators))
+    implementation(project(Modules.presentation.designSystem.text))
+    implementation(project(Modules.presentation.designSystem.themes))
+    implementation(project(Modules.presentation.error))
+    implementation(project(Modules.presentation.format))
+    implementation(project(Modules.presentation.imageLoading))
+    implementation(project(Modules.presentation.navigation))
+    implementation(project(Modules.presentation.previews))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)

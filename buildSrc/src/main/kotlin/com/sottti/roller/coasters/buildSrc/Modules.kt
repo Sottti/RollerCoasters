@@ -2,8 +2,8 @@
 
 package com.sottti.roller.coasters.buildSrc
 
-object module {
-    object presentation {
+object Modules {
+    object Presentation {
         const val aboutMe = ":presentation:about-me"
         const val empty = ":presentation:empty"
         const val error = ":presentation:error"
@@ -23,7 +23,7 @@ object module {
         const val stringProvider = ":presentation:string-provider"
         const val topBars = ":presentation:top-bars"
 
-        object designSystem {
+        object DesignSystem {
             const val cardGrid = ":presentation:design-system:card-grid"
             const val chip = ":presentation:design-system:chip"
             const val colors = ":presentation:design-system:colors"
@@ -43,7 +43,7 @@ object module {
         }
     }
 
-    object domain {
+    object Domain {
         const val features = ":domain:features"
         const val fixtures = ":domain:fixtures"
         const val model = ":domain:model"
@@ -51,14 +51,14 @@ object module {
         const val settings = ":domain:settings"
     }
 
-    object data {
+    object Data {
         const val features = ":data:features"
         const val network = ":data:network"
         const val rollerCoasters = ":data:roller-coasters"
         const val settings = ":data:settings"
     }
 
-    object utils {
+    object Utils {
         const val timeDates = ":utils:time-dates"
     }
 
