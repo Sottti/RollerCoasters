@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
@@ -36,4 +37,9 @@ public interface RollerCoastersRepository {
     public fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
     ): Flow<PagingData<RollerCoaster>>
+
+    public suspend fun searchRollerCoasters(
+        query: SearchQuery,
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Result<List<RollerCoaster>>
 }

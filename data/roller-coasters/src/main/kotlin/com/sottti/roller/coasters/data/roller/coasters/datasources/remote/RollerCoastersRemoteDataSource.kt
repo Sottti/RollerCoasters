@@ -10,6 +10,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,19 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
             .getRollerCoaster(id)
             .mapBoth(
                 success = { rollerCoaster -> Ok(rollerCoaster.toDomain(measurementSystem)) },
+                failure = { exception -> Err(exception) },
+            )
+
+    suspend fun searchRollerCoasters(
+        query: SearchQuery,
+        measurementSystem: ResolvedMeasurementSystem,
+    ): Result<List<RollerCoaster>> =
+        api
+            .searchRollerCoasters(query)
+            .mapBoth(
+                success = { search ->
+                    Ok(search.coasters.map { it.toDomain(measurementSystem) })
+                },
                 failure = { exception -> Err(exception) },
             )
 
