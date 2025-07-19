@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.android.library)
@@ -18,10 +18,10 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
-    implementation(project(module.data.network))
-    implementation(project(module.domain.fixtures))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.utils.timeDates))
+    implementation(project(Modules.data.network))
+    implementation(project(Modules.domain.fixtures))
+    implementation(project(Modules.domain.rollerCoasters))
+    implementation(project(Modules.utils.timeDates))
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)
 

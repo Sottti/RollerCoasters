@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.android.library)
@@ -22,10 +22,10 @@ dependencies {
     implementation(libs.compose.runtime)
     implementation(libs.hilt)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.fixtures))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.presentation.designSystem.colors))
-    implementation(project(module.presentation.fixtures))
+    implementation(project(Modules.domain.fixtures))
+    implementation(project(Modules.domain.rollerCoasters))
+    implementation(project(Modules.presentation.designSystem.colors))
+    implementation(project(Modules.presentation.fixtures))
     ksp(libs.hilt.compiler)
 
     androidTestImplementation(libs.junit.ext)

@@ -1,11 +1,11 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
-    api(project(module.domain.model))
+    api(project(Modules.domain.model))
     implementation(libs.annotations)
 
     testImplementation(libs.junit)

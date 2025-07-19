@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildSrc.Modules
 
 plugins {
     alias(libs.plugins.android.library)
@@ -13,6 +13,6 @@ android {
 
 dependencies {
     implementation(libs.hilt)
-    implementation(project(module.domain.features))
+    implementation(project(Modules.domain.features))
     ksp(libs.hilt.compiler)
 }
