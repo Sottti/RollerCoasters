@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: gradle/actions/wrapper-validation@v3
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -32,9 +34,6 @@ jobs:
         run: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
-
-      - name: Verify Gradle Wrapper Checksum
-        run: ./gradlew wrapper --validate
 
       - name: Assemble Debug & Run JVM Tests
         run: ./gradlew assembleDebug testDebugUnitTest --stacktrace --no-daemon
