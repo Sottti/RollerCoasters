@@ -1,3 +1,4 @@
 <resources>
-    <string name="top_bar_title">Favoritos</string>>
+    <string name="top_bar_title">Buscar</string>
+    <string name="search_hint">Buscar…</string>
 </resources>
