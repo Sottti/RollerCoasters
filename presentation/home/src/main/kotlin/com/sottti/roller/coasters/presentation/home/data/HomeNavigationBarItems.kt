@@ -12,7 +12,7 @@ internal fun navigationBarItems(
     items = listOf(
         explore(selectedItem),
         favourites(selectedItem),
-        // search(),  Disabled for now, as it is not ready
+        search(),
         aboutMe(selectedItem),
     ),
     selectedItem = selectedItem,
