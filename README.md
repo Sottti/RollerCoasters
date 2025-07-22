@@ -18,7 +18,7 @@ The project is under active development and the codebase is not yet stable or ne
 
 ## Planned Features
 
-- **Search** roller coasters directly by name
+- **Search** roller coasters directly by name (under development)
 - **Parks** as first class entities
 - **Better discovery** including filtering by manufacturer, park...
 
