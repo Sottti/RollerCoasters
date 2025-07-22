@@ -9,6 +9,7 @@
     <string name="description_icon_brightness_high">Brillo alto</string>
     <string name="description_icon_brightness_medium">Brillo medio</string>
     <string name="description_icon_brightness_standard">Brillo normal</string>
+    <string name="description_icon_cancel">Cancelar</string>
     <string name="description_icon_check">Marcado</string>
     <string name="description_icon_dark_mode">Modo escuro</string>
     <string name="description_icon_explore">Explorar</string>

@@ -18,17 +18,15 @@ import com.sottti.roller.coasters.presentation.settings.model.SystemLanguage
 
 internal fun SettingsState.updateAppLanguage(
     newAppLanguage: AppLanguage,
-): SettingsState {
-    return copy(
-        appLanguage = appLanguage.copy(
-            listItem = appLanguage.listItem.copy(
-                selectedAppLanguage = AppSelectedLanguageState.Loaded(
-                    newAppLanguage.toPresentationModel(selected = true),
-                )
-            ),
+): SettingsState = copy(
+    appLanguage = appLanguage.copy(
+        listItem = appLanguage.listItem.copy(
+            selectedAppLanguage = AppSelectedLanguageState.Loaded(
+                newAppLanguage.toPresentationModel(selected = true),
+            )
         ),
-    )
-}
+    ),
+)
 
 internal fun SettingsState.showAppLanguagePicker(
     selectedAppLanguage: AppLanguage,
@@ -40,17 +38,13 @@ internal fun SettingsState.showAppLanguagePicker(
 
 internal fun SettingsState.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
-): SettingsState {
-    return copy(
-        appLanguage = appLanguage.copy(picker = appLanguagePickerState(selectedAppLanguage)),
-    )
-}
+): SettingsState = copy(
+    appLanguage = appLanguage.copy(picker = appLanguagePickerState(selectedAppLanguage)),
+)
 
-internal fun SettingsState.hideAppLanguagePicker(): SettingsState {
-    return copy(
-        appLanguage = appLanguage.copy(picker = null)
-    )
-}
+internal fun SettingsState.hideAppLanguagePicker(): SettingsState = copy(
+    appLanguage = appLanguage.copy(picker = null)
+)
 
 private fun appLanguagePickerState(
     selectedAppLanguage: AppLanguageUi,
