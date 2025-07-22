@@ -15,6 +15,8 @@ import com.sottti.roller.coasters.presentation.settings.model.GalicianLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SpanishSpainLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SystemLanguage
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppLanguage(
     newAppLanguage: AppLanguage,
@@ -30,6 +32,12 @@ internal fun SettingsState.updateAppLanguage(
     )
 }
 
+internal fun MutableStateFlow<SettingsState>.updateAppLanguage(
+    newAppLanguage: AppLanguage,
+) {
+    update { currentState -> currentState.updateAppLanguage(newAppLanguage) }
+}
+
 internal fun SettingsState.showAppLanguagePicker(
     selectedAppLanguage: AppLanguage,
 ): SettingsState = copy(
@@ -37,6 +45,14 @@ internal fun SettingsState.showAppLanguagePicker(
         picker = appLanguagePickerState(selectedAppLanguage.toPresentationModel(selected = true)),
     )
 )
+
+internal fun MutableStateFlow<SettingsState>.showAppLanguagePicker(
+    selectedAppLanguage: AppLanguage,
+) {
+    update { currentState ->
+        currentState.showAppLanguagePicker(selectedAppLanguage)
+    }
+}
 
 internal fun SettingsState.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
@@ -46,10 +62,24 @@ internal fun SettingsState.updateAppLanguagePicker(
     )
 }
 
+internal fun MutableStateFlow<SettingsState>.updateAppLanguagePicker(
+    selectedAppLanguage: AppLanguageUi,
+) {
+    update { currentState ->
+        currentState.updateAppLanguagePicker(
+            selectedAppLanguage = selectedAppLanguage,
+        )
+    }
+}
+
 internal fun SettingsState.hideAppLanguagePicker(): SettingsState {
     return copy(
         appLanguage = appLanguage.copy(picker = null)
     )
+}
+
+internal fun MutableStateFlow<SettingsState>.hideAppLanguagePicker() {
+    update { currentState -> currentState.hideAppLanguagePicker() }
 }
 
 private fun appLanguagePickerState(
