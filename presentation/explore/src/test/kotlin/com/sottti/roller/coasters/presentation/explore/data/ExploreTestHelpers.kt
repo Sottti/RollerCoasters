@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.data
 
-import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFilteredRollerCoasters
+import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
 import com.sottti.roller.coasters.presentation.explore.model.AllFilter
@@ -64,13 +64,13 @@ internal fun filtersWithExpansion(
 internal fun viewModel(
     displayUnitFormatter: DisplayUnitFormatter = mockk(),
     observeAppLanguage: ObserveAppLanguage = mockk(),
-    observeFilteredRollerCoasters: ObserveFilteredRollerCoasters = mockk(),
+    observeRollerCoasters: ObserveRollerCoasters = mockk(),
     observeSystemLocale: ObserveSystemLocale = mockk(),
     stringProvider: StringProvider = mockk(),
 ): ExploreViewModel = ExploreViewModel(
     displayUnitFormatter = displayUnitFormatter,
     observeAppLanguage = observeAppLanguage,
-    observeFilteredRollerCoasters = observeFilteredRollerCoasters,
+    observeRollerCoasters = observeRollerCoasters,
     observeSystemLocale = observeSystemLocale,
     stringProvider = stringProvider,
 )

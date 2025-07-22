@@ -7,10 +7,12 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.Ro
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.noInterNetException
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoastersApiModelPage1
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.searchRollercoastersResponseApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.serverErrorException
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -110,5 +112,32 @@ internal class RollerCoastersRemoteDataSourceTest {
         assertThat(storedCoasters.flatten().first()).isEqualTo(rollerCoaster())
 
         coVerify(exactly = 2) { api.getRollerCoasters(offset = any(), limit = any()) }
+    }
+
+    @Test
+    fun `search roller coasters - API returns success`() = runTest {
+        val query = SearchQuery(searchRollercoastersResponseApiModel.rollerCoasters.first().name)
+        coEvery { api.searchRollerCoasters(query) } returns Ok(searchRollercoastersResponseApiModel)
+
+        val result = dataSource.searchRollerCoasters(query, Metric)
+
+        assertThat(result.isOk).isTrue()
+        assertThat(result.value).hasSize(searchRollercoastersResponseApiModel.rollerCoasters.size)
+        assertThat(result.value.first()).isEqualTo(rollerCoaster())
+
+        coVerify(exactly = 1) { api.searchRollerCoasters(query) }
+    }
+
+    @Test
+    fun `search roller coasters - API returns error`() = runTest {
+        val query = SearchQuery(searchRollercoastersResponseApiModel.rollerCoasters.first().name)
+        coEvery { api.searchRollerCoasters(query) } returns Err(noInterNetException)
+
+        val result = dataSource.searchRollerCoasters(query, Metric)
+
+        assertThat(result.isErr).isTrue()
+        assertThat(result.error.message).isEqualTo(noInterNetException.message)
+
+        coVerify(exactly = 1) { api.searchRollerCoasters(query) }
     }
 }

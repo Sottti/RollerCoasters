@@ -43,8 +43,10 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         api
             .searchRollerCoasters(query)
             .mapBoth(
-                success = { search ->
-                    Ok(search.coasters.map { it.toDomain(measurementSystem) })
+                success = { result ->
+                    Ok(result.rollerCoasters.map { rollerCoasterApiModel ->
+                        rollerCoasterApiModel.toDomain(measurementSystem)
+                    })
                 },
                 failure = { exception -> Err(exception) },
             )

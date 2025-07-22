@@ -37,7 +37,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun observeFilteredRollerCoasters(
+    override fun observeRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
@@ -45,7 +45,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         Pager(
             config = pagerConfig,
             pagingSourceFactory = {
-                localDataSource.observeFilteredRollerCoasters(
+                localDataSource.observeRollerCoasters(
                     measurementSystem = measurementSystem,
                     sortByFilter = sortByFilter,
                     typeFilter = typeFilter,
@@ -100,9 +100,10 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
         )
 
     override suspend fun searchRollerCoasters(
-        query: SearchQuery,
         measurementSystem: ResolvedMeasurementSystem,
+        query: SearchQuery,
     ): Result<List<RollerCoaster>> =
-        remoteDataSource.searchRollerCoasters(query, measurementSystem)
-            .onSuccess { localDataSource.storeRollerCoasters(it) }
+        remoteDataSource
+            .searchRollerCoasters(query = query, measurementSystem = measurementSystem)
+            .onSuccess { rollerCoasters -> localDataSource.storeRollerCoasters(rollerCoasters) }
 }

@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
-import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFilteredRollerCoasters
+import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
 import com.sottti.roller.coasters.presentation.explore.model.AllFilter
@@ -61,7 +61,7 @@ import javax.inject.Inject
 internal class ExploreViewModel @Inject constructor(
     observeAppLanguage: ObserveAppLanguage,
     observeSystemLocale: ObserveSystemLocale,
-    observeFilteredRollerCoasters: ObserveFilteredRollerCoasters,
+    observeRollerCoasters: ObserveRollerCoasters,
     stringProvider: StringProvider,
     displayUnitFormatter: DisplayUnitFormatter,
 ) : ViewModel() {
@@ -77,7 +77,7 @@ internal class ExploreViewModel @Inject constructor(
             flow3 = observeAppLanguage(),
             flow4 = observeSystemLocale()
         ) { typeFilter, sortByFilter, appLanguage, systemLocale ->
-            observeFilteredRollerCoasters(
+            observeRollerCoasters(
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter,
             ).toUiModel(

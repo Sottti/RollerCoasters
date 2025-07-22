@@ -11,6 +11,7 @@ import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
@@ -176,5 +177,39 @@ internal class RollerCoastersRepositoryImplTest {
         assertThat(result).isEqualTo(Err(syncFailedException))
         coVerify(exactly = 1) { remoteDataSource.syncRollerCoasters(onStoreRollerCoasters = any()) }
         coVerify(exactly = 0) { localDataSource.storeRollerCoasters(rollerCoasters = any()) }
+    }
+
+    @Test
+    fun `search roller coasters returns expected result and stores them`() = runTest {
+        val query = SearchQuery(rollerCoaster().name.current.value)
+        val measurementSystem = Metric
+        val rollerCoasters = listOf(rollerCoaster(), anotherRollerCoaster())
+
+        coEvery {
+            remoteDataSource.searchRollerCoasters(query, measurementSystem)
+        } returns Ok(rollerCoasters)
+        coEvery { localDataSource.storeRollerCoasters(rollerCoasters) } just runs
+
+        val result = repository.searchRollerCoasters(measurementSystem, query)
+
+        assertThat(result).isEqualTo(Ok(rollerCoasters))
+        coVerify(exactly = 1) { remoteDataSource.searchRollerCoasters(query, measurementSystem) }
+        coVerify(exactly = 1) { localDataSource.storeRollerCoasters(rollerCoasters) }
+    }
+
+    @Test
+    fun `search roller coasters returns error when remote fails`() = runTest {
+        val query = SearchQuery(rollerCoaster(Metric).name.current.value)
+        val measurementSystem = Metric
+
+        coEvery {
+            remoteDataSource.searchRollerCoasters(query, measurementSystem)
+        } returns Err(syncFailedException)
+
+        val result = repository.searchRollerCoasters(measurementSystem, query)
+
+        assertThat(result).isEqualTo(Err(syncFailedException))
+        coVerify(exactly = 1) { remoteDataSource.searchRollerCoasters(query, measurementSystem) }
+        coVerify(exactly = 0) { localDataSource.storeRollerCoasters(any()) }
     }
 }

@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.Resolv
 import kotlinx.coroutines.flow.Flow
 
 public interface RollerCoastersRepository {
-    public fun observeFilteredRollerCoasters(
+    public fun observeRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
@@ -39,7 +39,7 @@ public interface RollerCoastersRepository {
     ): Flow<PagingData<RollerCoaster>>
 
     public suspend fun searchRollerCoasters(
-        query: SearchQuery,
         measurementSystem: ResolvedMeasurementSystem,
+        query: SearchQuery,
     ): Result<List<RollerCoaster>>
 }

@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatusApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatusDateApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoastersApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.SearchCoastersApiModel
 import com.sottti.roller.coasters.domain.fixtures.CITY
 import com.sottti.roller.coasters.domain.fixtures.COASTER_ARRANGEMENT
 import com.sottti.roller.coasters.domain.fixtures.COASTER_DESIGNER
@@ -133,4 +134,10 @@ internal val rollerCoastersApiModelPage1 =
     RollerCoastersApiModel(
         rollerCoasters = listOf(rollerCoasterApiModel),
         pagination = paginationApiModelPage1,
+    )
+
+internal val searchRollercoastersResponseApiModel =
+    SearchCoastersApiModel(
+        rollerCoasters = listOf(rollerCoasterApiModel),
+        totalMatch = 1,
     )

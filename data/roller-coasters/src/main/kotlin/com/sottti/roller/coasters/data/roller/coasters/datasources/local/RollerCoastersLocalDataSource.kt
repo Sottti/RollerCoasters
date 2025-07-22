@@ -7,10 +7,9 @@ import androidx.paging.PagingSource
 import androidx.paging.map
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toDomain
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toFavouriteRollercoasterRoomModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toFavouriteRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toPicturesRoom
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.mapper.toRoom
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.RollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.FilteredRollerCoastersPagingSource
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
@@ -66,7 +65,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
                 )
             }
 
-    fun observeFilteredRollerCoasters(
+    fun observeRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
@@ -80,7 +79,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
 
     suspend fun addFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId) {
         dao.addFavouriteRollerCoaster(
-            favouriteRollerCoaster = rollerCoasterId.toFavouriteRollercoasterRoomModel(),
+            favouriteRollerCoaster = rollerCoasterId.toFavouriteRollerCoasterRoomModel(),
         )
     }
 
@@ -93,11 +92,6 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
 
     suspend fun isFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Boolean =
         dao.isFavouriteRollerCoasterFlow(rollerCoasterId.value)
-
-    fun observeFavouriteRollerCoasters(
-        measurementSystem: ResolvedMeasurementSystem,
-    ): PagingSource<Int, RollerCoasterRoomModel> =
-        dao.observePagedFavouriteRollerCoasters()
 
     fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,

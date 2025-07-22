@@ -91,7 +91,7 @@ internal class RollerCoastersLocalDataSourceTest {
 
     @Test
     fun `get paged roller coasters returns a paging source`() {
-        val result = localDataSource.observeFilteredRollerCoasters(
+        val result = localDataSource.observeRollerCoasters(
             measurementSystem = Metric,
             sortByFilter = Alphabetical,
             typeFilter = All,

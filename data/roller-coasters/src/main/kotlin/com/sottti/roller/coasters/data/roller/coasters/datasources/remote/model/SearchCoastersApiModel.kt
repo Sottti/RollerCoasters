@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class SearchCoastersApiModel(
-    @SerialName("coasters") val coasters: List<RollerCoasterApiModel>,
+    @SerialName("coasters") val rollerCoasters: List<RollerCoasterApiModel>,
     @SerialName("totalMatch") val totalMatch: Int,
 )
