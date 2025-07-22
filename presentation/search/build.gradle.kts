@@ -22,6 +22,7 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.dimensions))
+    implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))

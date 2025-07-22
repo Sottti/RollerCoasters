@@ -96,6 +96,14 @@ public object Icons {
         )
     }
 
+    public object Cancel {
+        private val description: Int = R.string.description_icon_check
+        public val outlined: IconState = IconState(
+            resId = R.drawable.ic_cancel_rounded_outlined,
+            descriptionResId = description,
+        )
+    }
+
     public object CheckSmall {
         private val description: Int = R.string.description_icon_check
         public val filled: IconState = IconState(

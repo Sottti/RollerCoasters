@@ -20,17 +20,15 @@ import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppLanguage(
     newAppLanguage: AppLanguage,
-): SettingsState {
-    return copy(
-        appLanguage = appLanguage.copy(
-            listItem = appLanguage.listItem.copy(
-                selectedAppLanguage = AppSelectedLanguageState.Loaded(
-                    newAppLanguage.toPresentationModel(selected = true),
-                )
-            ),
+): SettingsState = copy(
+    appLanguage = appLanguage.copy(
+        listItem = appLanguage.listItem.copy(
+            selectedAppLanguage = AppSelectedLanguageState.Loaded(
+                newAppLanguage.toPresentationModel(selected = true),
+            )
         ),
-    )
-}
+    ),
+)
 
 internal fun MutableStateFlow<SettingsState>.updateAppLanguage(
     newAppLanguage: AppLanguage,
@@ -56,11 +54,9 @@ internal fun MutableStateFlow<SettingsState>.showAppLanguagePicker(
 
 internal fun SettingsState.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
-): SettingsState {
-    return copy(
-        appLanguage = appLanguage.copy(picker = appLanguagePickerState(selectedAppLanguage)),
-    )
-}
+): SettingsState = copy(
+    appLanguage = appLanguage.copy(picker = appLanguagePickerState(selectedAppLanguage)),
+)
 
 internal fun MutableStateFlow<SettingsState>.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
