@@ -33,28 +33,35 @@ import javax.inject.Inject
 internal class SearchViewModel @Inject constructor(
     private val searchRollerCoasters: SearchRollerCoasters,
 ) : ViewModel() {
-    private val initialViewState: SearchViewState = SearchViewState(
+
+    private val initialViewState = SearchViewState(
         SearchBarViewState(
             hint = R.string.search_hint,
             query = null,
             showClearIcon = false,
         )
     )
+
     private val _state = MutableStateFlow(initialViewState)
     val state: StateFlow<SearchViewState> = _state.asStateFlow()
 
-    internal val onAction: (SearchAction) -> Unit = { action -> processAction(action) }
+    internal val onAction: (SearchAction) -> Unit = ::processAction
 
     private fun processAction(action: SearchAction) {
         when (action) {
-            is QueryChanged -> _state.updateQuery(action.query).updateClearIcon(action.query)
+            is QueryChanged -> {
+                _state.updateQuery(action.query)
+                    .updateClearIcon(action.query)
+            }
+
             ClearQuery -> _state.clearQuery()
         }
     }
 
     init {
         viewModelScope.launch {
-            state.map { viewState -> viewState.searchBar.query.orEmpty().trim() }
+            state
+                .map { it.searchBar.query.orEmpty().trim() }
                 .distinctUntilChanged()
                 .debounce(300)
                 .flatMapLatest { query ->
@@ -69,7 +76,8 @@ internal class SearchViewModel @Inject constructor(
                             }
                         }
                     }
-                }.collect { searchResults ->
+                }
+                .collect { searchResults ->
                     _state
                         .notLoading()
                         .updateResults(searchResults.map(RollerCoaster::toViewState))
