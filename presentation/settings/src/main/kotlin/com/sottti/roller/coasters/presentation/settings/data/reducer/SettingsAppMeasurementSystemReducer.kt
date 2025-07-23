@@ -15,6 +15,8 @@ import com.sottti.roller.coasters.presentation.settings.model.Metric
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasurementSystemState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SystemApp
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppMeasurementSystem(
     newAppMeasurementSystem: AppMeasurementSystem,
@@ -28,6 +30,14 @@ internal fun SettingsState.updateAppMeasurementSystem(
     ),
 )
 
+internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystem(
+    newAppMeasurementSystem: AppMeasurementSystem,
+) {
+    update { currentState ->
+        currentState.updateAppMeasurementSystem(newAppMeasurementSystem)
+    }
+}
+
 internal fun SettingsState.showAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystem,
 ): SettingsState = copy(
@@ -38,6 +48,14 @@ internal fun SettingsState.showAppMeasurementSystemPicker(
     ),
 )
 
+internal fun MutableStateFlow<SettingsState>.showAppMeasurementSystemPicker(
+    selectedAppMeasurementSystem: AppMeasurementSystem,
+) {
+    update { currentState ->
+        currentState.showAppMeasurementSystemPicker(selectedAppMeasurementSystem)
+    }
+}
+
 internal fun SettingsState.updateAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystemUi,
 ): SettingsState = copy(
@@ -46,10 +64,22 @@ internal fun SettingsState.updateAppMeasurementSystemPicker(
     ),
 )
 
+internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystemPicker(
+    selectedAppMeasurementSystem: AppMeasurementSystemUi,
+) {
+    update { currentState ->
+        currentState.updateAppMeasurementSystemPicker(selectedAppMeasurementSystem)
+    }
+}
+
 internal fun SettingsState.hideAppMeasurementSystemPicker(): SettingsState {
     return this.copy(
         appMeasurementSystem = this.appMeasurementSystem.copy(picker = null),
     )
+}
+
+internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker() {
+    update { currentState -> currentState.hideAppMeasurementSystemPicker() }
 }
 
 private fun appMeasurementSystemPickerState(

@@ -13,6 +13,8 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeSt
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SystemTheme
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppTheme(
     newAppTheme: AppTheme,
@@ -26,6 +28,12 @@ internal fun SettingsState.updateAppTheme(
     ),
 )
 
+internal fun MutableStateFlow<SettingsState>.updateAppTheme(
+    newAppTheme: AppTheme,
+) {
+    update { currentState -> currentState.updateAppTheme(newAppTheme) }
+}
+
 internal fun SettingsState.showAppThemePicker(
     lightDarkAppThemingAvailable: Boolean,
     selectedAppTheme: AppThemeUi,
@@ -37,6 +45,18 @@ internal fun SettingsState.showAppThemePicker(
         )
     )
 )
+
+internal fun MutableStateFlow<SettingsState>.showAppThemePicker(
+    lightDarkAppThemingAvailable: Boolean,
+    selectedAppTheme: AppThemeUi,
+) {
+    update { currentState ->
+        currentState.showAppThemePicker(
+            lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
+            selectedAppTheme = selectedAppTheme,
+        )
+    }
+}
 
 internal fun SettingsState.updateAppThemePicker(
     selectedAppTheme: AppThemeUi,
@@ -61,8 +81,22 @@ internal fun SettingsState.updateAppThemePicker(
     )
 }
 
+internal fun MutableStateFlow<SettingsState>.updateAppThemePicker(
+    selectedAppTheme: AppThemeUi,
+) {
+    update { currentState ->
+        currentState.updateAppThemePicker(
+            selectedAppTheme = selectedAppTheme,
+        )
+    }
+}
+
 internal fun SettingsState.hideAppThemePicker(): SettingsState =
     copy(appTheme = appTheme.copy(picker = null))
+
+internal fun MutableStateFlow<SettingsState>.hideAppThemePicker() {
+    update { currentState -> currentState.hideAppThemePicker() }
+}
 
 private fun appThemePickerState(
     lightDarkAppThemingAvailable: Boolean,

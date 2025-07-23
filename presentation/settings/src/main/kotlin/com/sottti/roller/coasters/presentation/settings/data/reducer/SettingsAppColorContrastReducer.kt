@@ -13,6 +13,8 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppColorCo
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.StandardContrast
 import com.sottti.roller.coasters.presentation.settings.model.SystemContrast
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppColorContrast(
     newAppColorContrast: AppColorContrast,
@@ -25,6 +27,14 @@ internal fun SettingsState.updateAppColorContrast(
         ),
     ),
 )
+
+internal fun MutableStateFlow<SettingsState>.updateAppColorContrast(
+    newAppColorContrast: AppColorContrast,
+) {
+    update { currentState ->
+        currentState.updateAppColorContrast(newAppColorContrast)
+    }
+}
 
 internal fun SettingsState.showAppColorContrastPicker(
     selectedAppColorContrast: AppColorContrast,
@@ -49,6 +59,18 @@ internal fun SettingsState.showAppColorContrastPicker(
     )
 }
 
+internal fun MutableStateFlow<SettingsState>.showAppColorContrastPicker(
+    selectedAppColorContrast: AppColorContrast,
+    appColorContrastAvailable: Boolean,
+) {
+    update { currentState ->
+        currentState.showAppColorContrastPicker(
+            selectedAppColorContrast = selectedAppColorContrast,
+            appColorContrastAvailable = appColorContrastAvailable,
+        )
+    }
+}
+
 private fun SettingsState.isDynamicColorChecked() =
     dynamicColor?.checkedState is DynamicColorCheckedState.Loaded
             && dynamicColor.checkedState.checked
@@ -65,8 +87,24 @@ internal fun SettingsState.updateAppColorContrastPicker(
     )
 )
 
+internal fun MutableStateFlow<SettingsState>.updateAppColorContrastPicker(
+    appColorContrastAvailable: Boolean,
+    selectedAppColorContrast: AppColorContrastUi,
+) {
+    update { currentState ->
+        currentState.updateAppColorContrastPicker(
+            appColorContrastAvailable = appColorContrastAvailable,
+            selectedAppColorContrast = selectedAppColorContrast,
+        )
+    }
+}
+
 internal fun SettingsState.hideAppColorContrastPicker() =
     copy(appColorContrast = appColorContrast.copy(picker = null))
+
+internal fun MutableStateFlow<SettingsState>.hideAppColorContrastPicker() {
+    update { currentState -> currentState.hideAppColorContrastPicker() }
+}
 
 private fun appColorContrastNotAvailableMessageState(): AppColorContrastNotAvailableMessageState =
     AppColorContrastNotAvailableMessageState(
@@ -105,3 +143,7 @@ private fun colorContrastsList(
 
 internal fun SettingsState.hideAppColorContrastNotAvailableMessage() =
     copy(appColorContrast = appColorContrast.copy(notAvailableMessage = null))
+
+internal fun MutableStateFlow<SettingsState>.hideAppColorContrastNotAvailableMessage() {
+    update { currentState -> currentState.hideAppColorContrastNotAvailableMessage() }
+}
