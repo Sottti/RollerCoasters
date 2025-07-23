@@ -91,7 +91,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         dao.observeIsFavouriteRollerCoasterFlow(rollerCoasterId.value)
 
     suspend fun isFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Boolean =
-        dao.isFavouriteRollerCoasterFlow(rollerCoasterId.value)
+        dao.isFavouriteRollerCoaster(rollerCoasterId.value)
 
     fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
