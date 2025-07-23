@@ -21,8 +21,8 @@ import kotlinx.coroutines.flow.update
 internal fun SettingsState.updateAppMeasurementSystem(
     newAppMeasurementSystem: AppMeasurementSystem,
 ): SettingsState = copy(
-    appMeasurementSystem = this.appMeasurementSystem.copy(
-        listItem = this.appMeasurementSystem.listItem.copy(
+    appMeasurementSystem = appMeasurementSystem.copy(
+        listItem = appMeasurementSystem.listItem.copy(
             selectedAppMeasurementSystem = SelectedAppMeasurementSystemState.Loaded(
                 newAppMeasurementSystem.toPresentationModel(selected = true),
             )
@@ -41,7 +41,7 @@ internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystem(
 internal fun SettingsState.showAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystem,
 ): SettingsState = copy(
-    appMeasurementSystem = this.appMeasurementSystem.copy(
+    appMeasurementSystem = appMeasurementSystem.copy(
         picker = appMeasurementSystemPickerState(
             selectedAppMeasurementSystem.toPresentationModel(selected = true),
         ),
@@ -59,7 +59,7 @@ internal fun MutableStateFlow<SettingsState>.showAppMeasurementSystemPicker(
 internal fun SettingsState.updateAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystemUi,
 ): SettingsState = copy(
-    appMeasurementSystem = this.appMeasurementSystem.copy(
+    appMeasurementSystem = appMeasurementSystem.copy(
         picker = appMeasurementSystemPickerState(selectedAppMeasurementSystem)
     ),
 )
@@ -73,8 +73,8 @@ internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystemPicker(
 }
 
 internal fun SettingsState.hideAppMeasurementSystemPicker(): SettingsState {
-    return this.copy(
-        appMeasurementSystem = this.appMeasurementSystem.copy(picker = null),
+    return copy(
+        appMeasurementSystem = appMeasurementSystem.copy(picker = null),
     )
 }
 
