@@ -1,10 +1,7 @@
 package com.sottti.roller.coasters.presentation.navigation
 
 import androidx.compose.runtime.saveable.Saver
-import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
-import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
-import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
-import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Search
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.*
 import kotlinx.serialization.Serializable
 
 
@@ -49,8 +46,8 @@ public fun String?.toNavigationDestination(): NavigationDestination =
         AboutMe::class.qualifiedName -> AboutMe
         Explore::class.qualifiedName -> Explore
         Favourites::class.qualifiedName -> Favourites
-        NavigationDestination.Home::class.qualifiedName -> NavigationDestination.Home
+        Home::class.qualifiedName -> Home
         Search::class.qualifiedName -> Search
-        NavigationDestination.Settings::class.qualifiedName -> NavigationDestination.Settings
+        Settings::class.qualifiedName -> Settings
         else -> Explore
     }
