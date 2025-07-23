@@ -16,11 +16,13 @@ The project is under active development and the codebase is not yet stable or ne
 - **Dynamic theming** (Material 3, dynamic colors and color contrast)
 - Support for multiple languages and measurement systems
 
-## Planned Features
+## Planned Features or improvements
 
 - **Search** roller coasters directly by name (work in progress...)
 - **Parks** as first class entities
 - **Better discovery** including filtering by manufacturer, park...
+- **Error handling**
+- **Empty states**
 
 ## Current Tech
 
