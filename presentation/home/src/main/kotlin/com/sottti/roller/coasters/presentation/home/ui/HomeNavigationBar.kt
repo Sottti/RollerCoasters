@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -151,7 +150,7 @@ private fun NavHostController.navigateTo(
     homeNavigationBarItem: HomeNavigationBarItem,
 ) {
     navigate(homeNavigationBarItem.destination) {
-        popUpTo(graph.findStartDestination().id) { saveState = true }
+        popUpTo(graph.startDestinationId) { saveState = true }
         launchSingleTop = true
         restoreState = true
     }

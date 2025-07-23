@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
+    implementation(project(module.domain.fixtures))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.icons))
@@ -29,9 +30,9 @@ dependencies {
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.previews))
     implementation(project(module.presentation.empty))
     implementation(project(module.presentation.error))
+    implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))
     ksp(libs.hilt.compiler)
 }

@@ -12,11 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.search.data.SearchViewModel
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
+import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
 import com.sottti.roller.coasters.presentation.search.model.SearchViewState
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 
@@ -68,13 +72,30 @@ internal fun SearchUi(
             )
         }
         SearchUiContent(
-            state,
-            onAction,
-            rememberedPaddingValues,
-            listState,
-            scrollBehavior,
-            onNavigateToRollerCoaster,
-            paddingValues
+            listState = listState,
+            onAction = onAction,
+            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+            paddingValues = paddingValues,
+            rememberedPaddingValues = rememberedPaddingValues,
+            scrollBehavior = scrollBehavior,
+            state = state,
+        )
+    }
+}
+
+@Composable
+@RollerCoastersPreview
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun SearchUiPreview(
+    @PreviewParameter(SearchUiStateProvider::class) state: SearchPreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        SearchUi(
+            onAction = state.onAction,
+            onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
+            onNavigateToSettings = state.onNavigateToSettings,
+            paddingValues = state.paddingValues,
+            state = state.state,
         )
     }
 }

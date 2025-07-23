@@ -2,12 +2,12 @@ package com.sottti.roller.coasters.presentation.search.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
+import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
 import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
-import com.sottti.roller.coasters.presentation.search.model.SearchAction
+import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
+import com.sottti.roller.coasters.presentation.search.R
 import com.sottti.roller.coasters.presentation.search.model.SearchBarViewState
 import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
-import com.sottti.roller.coasters.presentation.search.model.SearchResultViewState
 import com.sottti.roller.coasters.presentation.search.model.SearchViewState
 import com.sottti.roller.coasters.presentation.search.model.toViewState
 
@@ -26,7 +26,7 @@ private val idleState = SearchPreviewState(
     paddingValues = PaddingValues(),
     state = SearchViewState(
         searchBar = SearchBarViewState(
-            hint = com.sottti.roller.coasters.presentation.search.R.string.search_hint,
+            hint = R.string.search_hint,
             query = null,
             showClearIcon = false,
         ),
@@ -42,8 +42,8 @@ private val resultsState = SearchPreviewState(
     paddingValues = PaddingValues(),
     state = SearchViewState(
         searchBar = SearchBarViewState(
-            hint = com.sottti.roller.coasters.presentation.search.R.string.search_hint,
-            query = "Dragon",
+            hint = R.string.search_hint,
+            query = COASTER_NAME,
             showClearIcon = true,
         ),
         loading = false,
@@ -61,7 +61,7 @@ private val loadingState = SearchPreviewState(
     paddingValues = PaddingValues(),
     state = SearchViewState(
         searchBar = SearchBarViewState(
-            hint = com.sottti.roller.coasters.presentation.search.R.string.search_hint,
+            hint = R.string.search_hint,
             query = "Dr",
             showClearIcon = true,
         ),
