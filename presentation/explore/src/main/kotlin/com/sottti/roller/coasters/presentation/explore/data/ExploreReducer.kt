@@ -28,47 +28,49 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.reflect.KClass
 
-internal fun MutableStateFlow<ExploreState>.expandSortByPrimaryFilter() {
+internal fun MutableStateFlow<ExploreState>.expandSortByPrimaryFilter(): MutableStateFlow<ExploreState> =
     collapseTypePrimaryFilter()
         .show<SortBySecondaryFilter>()
-        .update { state ->
-            state.copy(
-                filters = state.filters.copy(
-                    primary = state.filters.primary.map { filter ->
-                        when (filter) {
-                            is TypePrimaryFilter -> filter
-                            is SortByPrimaryFilter -> filter.copy(
-                                labelResId = R.string.chip_label_sort_by,
-                                action = HideSortFilters,
-                                expanded = true,
-                            )
-                        }
-                    },
-                ),
-            )
+        .apply {
+            update { state ->
+                state.copy(
+                    filters = state.filters.copy(
+                        primary = state.filters.primary.map { filter ->
+                            when (filter) {
+                                is TypePrimaryFilter -> filter
+                                is SortByPrimaryFilter -> filter.copy(
+                                    labelResId = R.string.chip_label_sort_by,
+                                    action = HideSortFilters,
+                                    expanded = true,
+                                )
+                            }
+                        },
+                    ),
+                )
+            }
         }
-}
 
-internal fun MutableStateFlow<ExploreState>.expandTypePrimaryFilter() {
+internal fun MutableStateFlow<ExploreState>.expandTypePrimaryFilter(): MutableStateFlow<ExploreState> =
     collapseSortByPrimaryFilter()
         .show<TypeSecondaryFilter>()
-        .update { state ->
-            state.copy(
-                filters = state.filters.copy(
-                    primary = state.filters.primary.map { filter ->
-                        when (filter) {
-                            is SortByPrimaryFilter -> filter
-                            is TypePrimaryFilter -> filter.copy(
-                                labelResId = R.string.chip_label_type,
-                                action = HideTypeFilters,
-                                expanded = true,
-                            )
-                        }
-                    },
+        .apply {
+            update { state ->
+                state.copy(
+                    filters = state.filters.copy(
+                        primary = state.filters.primary.map { filter ->
+                            when (filter) {
+                                is SortByPrimaryFilter -> filter
+                                is TypePrimaryFilter -> filter.copy(
+                                    labelResId = R.string.chip_label_type,
+                                    action = HideTypeFilters,
+                                    expanded = true,
+                                )
+                            }
+                        },
+                    )
                 )
-            )
+            }
         }
-}
 
 private inline fun <reified T : SecondaryFilter> MutableStateFlow<ExploreState>.collapsePrimaryFilter() =
     apply {
@@ -252,3 +254,4 @@ private val SecondaryFilter.secondaryFilterClass: KClass<out SecondaryFilter>
         is WoodFilter,
             -> TypeSecondaryFilter::class
     }
+

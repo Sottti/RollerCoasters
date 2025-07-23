@@ -32,7 +32,7 @@ internal fun SettingsState.updateAppMeasurementSystem(
 
 internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystem(
     newAppMeasurementSystem: AppMeasurementSystem,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState ->
         currentState.updateAppMeasurementSystem(newAppMeasurementSystem)
     }
@@ -50,7 +50,7 @@ internal fun SettingsState.showAppMeasurementSystemPicker(
 
 internal fun MutableStateFlow<SettingsState>.showAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystem,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState ->
         currentState.showAppMeasurementSystemPicker(selectedAppMeasurementSystem)
     }
@@ -66,7 +66,7 @@ internal fun SettingsState.updateAppMeasurementSystemPicker(
 
 internal fun MutableStateFlow<SettingsState>.updateAppMeasurementSystemPicker(
     selectedAppMeasurementSystem: AppMeasurementSystemUi,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState ->
         currentState.updateAppMeasurementSystemPicker(selectedAppMeasurementSystem)
     }
@@ -78,7 +78,7 @@ internal fun SettingsState.hideAppMeasurementSystemPicker(): SettingsState {
     )
 }
 
-internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker() {
+internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker(): MutableStateFlow<SettingsState> = apply {
     update { currentState -> currentState.hideAppMeasurementSystemPicker() }
 }
 
