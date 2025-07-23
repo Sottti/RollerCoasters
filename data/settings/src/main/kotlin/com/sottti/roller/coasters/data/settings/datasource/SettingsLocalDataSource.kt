@@ -90,9 +90,9 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
-    suspend fun getAppColorContrast(): AppColorContrast = appAppColorContrastFlow.first()
+    suspend fun getAppColorContrast(): AppColorContrast = appColorContrastFlow.first()
 
-    fun observeAppColorContrast(): Flow<AppColorContrast> = appAppColorContrastFlow
+    fun observeAppColorContrast(): Flow<AppColorContrast> = appColorContrastFlow
 
     fun getSystemColorContrast(): SystemColorContrast =
         systemColorContrastManager.systemColorContrast
@@ -148,7 +148,7 @@ internal class SettingsLocalDataSource @Inject constructor(
             key.toTheme()
         }
 
-    private val appAppColorContrastFlow: Flow<AppColorContrast> =
+    private val appColorContrastFlow: Flow<AppColorContrast> =
         dataStore.data.map { preferences ->
             val key = preferences[appColorContrastKey] ?: appColorContrastDefaultValue
             key.toAppColorContrast()
