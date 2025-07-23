@@ -45,7 +45,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsState>.updateRollerCoaster(
     rollerCoaster: RollerCoaster,
     systemLocale: Locale,
     displayUnitFormatter: DisplayUnitFormatter,
-) {
+): MutableStateFlow<RollerCoasterDetailsState> = apply {
     val formatContext = FormatContext(
         appLanguage = appLanguage,
         systemLocale = systemLocale,
@@ -66,7 +66,7 @@ internal fun MutableStateFlow<RollerCoasterDetailsState>.updateRollerCoaster(
 
 internal fun MutableStateFlow<RollerCoasterDetailsState>.updateIsFavouriteRollerCoaster(
     favourite: Boolean,
-) {
+): MutableStateFlow<RollerCoasterDetailsState> = apply {
     update { currentState ->
         currentState.copy(
             topBar = currentState.topBar.copy(
@@ -252,3 +252,4 @@ private fun FormatContext.formatSpeed(speed: Speed) =
 
 private fun FormatContext.formatMaxVertical(maxVertical: MaxVertical) =
     displayUnitFormatter.toDisplayFormat(maxVertical)
+

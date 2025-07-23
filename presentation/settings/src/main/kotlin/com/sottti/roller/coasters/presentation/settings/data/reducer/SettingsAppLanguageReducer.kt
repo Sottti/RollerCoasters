@@ -32,7 +32,7 @@ internal fun SettingsState.updateAppLanguage(
 
 internal fun MutableStateFlow<SettingsState>.updateAppLanguage(
     newAppLanguage: AppLanguage,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState -> currentState.updateAppLanguage(newAppLanguage) }
 }
 
@@ -46,7 +46,7 @@ internal fun SettingsState.showAppLanguagePicker(
 
 internal fun MutableStateFlow<SettingsState>.showAppLanguagePicker(
     selectedAppLanguage: AppLanguage,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState ->
         currentState.showAppLanguagePicker(selectedAppLanguage)
     }
@@ -60,7 +60,7 @@ internal fun SettingsState.updateAppLanguagePicker(
 
 internal fun MutableStateFlow<SettingsState>.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState ->
         currentState.updateAppLanguagePicker(
             selectedAppLanguage = selectedAppLanguage,
@@ -74,7 +74,7 @@ internal fun SettingsState.hideAppLanguagePicker(): SettingsState {
     )
 }
 
-internal fun MutableStateFlow<SettingsState>.hideAppLanguagePicker() {
+internal fun MutableStateFlow<SettingsState>.hideAppLanguagePicker(): MutableStateFlow<SettingsState> = apply {
     update { currentState -> currentState.hideAppLanguagePicker() }
 }
 
@@ -95,3 +95,4 @@ private fun appLanguagesList(
     SpanishSpain.toPresentationModel(selected = selectedLanguage is SpanishSpainLanguage),
     Galician.toPresentationModel(selected = selectedLanguage is GalicianLanguage),
 )
+

@@ -21,8 +21,9 @@ internal fun SettingsState.updateDynamicColor(
 
 internal fun MutableStateFlow<SettingsState>.updateDynamicColor(
     dynamicColorChecked: AppDynamicColor,
-) {
+): MutableStateFlow<SettingsState> = apply {
     update { currentState ->
         currentState.updateDynamicColor(dynamicColorChecked)
     }
 }
+
