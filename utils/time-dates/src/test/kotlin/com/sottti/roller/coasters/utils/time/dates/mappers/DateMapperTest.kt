@@ -14,203 +14,203 @@ internal class DateMapperTest {
     @Test
     fun `full date to sortable string returns correct format`() {
         val result = fullDate.toSortableString()
-        assertThat(result).isEqualTo(fullDateSortableString)
+        assertThat(result).isEqualTo(FULL_DATE_SORTABLE_STRING)
     }
 
     @Test
     fun `year and month to sortable string returns correct format`() {
         val result = yearAndMonth.toSortableString()
-        assertThat(result).isEqualTo(yearAndMonthSortableString)
+        assertThat(result).isEqualTo(YEAR_AND_MONTH_SORTABLE_STRING)
     }
 
     @Test
     fun `year only to sortable string returns correct format`() {
         val result = yearOnly.toSortableString()
-        assertThat(result).isEqualTo(yearOnlySortableString)
+        assertThat(result).isEqualTo(YEAR_ONLY_SORTABLE_STRING)
     }
 
     @Test
     fun `map to date correctly parses full date`() {
-        val result = fullDateSortableString.toDate()
+        val result = FULL_DATE_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(fullDate)
     }
 
     @Test
     fun `map to date correctly parses year and month`() {
-        val result = yearAndMonthSortableString.toDate()
+        val result = YEAR_AND_MONTH_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(yearAndMonth)
     }
 
     @Test
     fun `map to date correctly parses year only`() {
-        val result = yearOnlySortableString.toDate()
+        val result = YEAR_ONLY_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(yearOnly)
     }
 
     @Test
     fun `map to date full date with leading whitespace parses correctly`() {
-        val result = whitespaceFullDateString.toDate()
+        val result = WHITESPACE_FULL_DATE_STRING.toDate()
         assertThat(result).isEqualTo(fullDate)
     }
 
     @Test
     fun `map to date leap year full date parses correctly`() {
-        val result = leapYearFullDateString.toDate()
+        val result = LEAP_YEAR_FULL_DATE_STRING.toDate()
         assertThat(result).isEqualTo(leapYearFullDate)
     }
 
     @Test
     fun `map to date max valid year only parses correctly`() {
-        val result = maxYearOnlyString.toDate()
+        val result = MAX_YEAR_ONLY_STRING.toDate()
         assertThat(result).isEqualTo(maxYearOnly)
     }
 
     @Test
     fun `map to date maximum full date parses correctly`() {
-        val result = maxFullDateSortableString.toDate()
+        val result = MAX_FULL_DATE_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(maxFullDate)
     }
 
     @Test
     fun `map to date min valid year only parses correctly`() {
-        val result = minYearOnlyString.toDate()
+        val result = MIN_YEAR_ONLY_STRING.toDate()
         assertThat(result).isEqualTo(minYearOnly)
     }
 
     @Test
     fun `map to date minimum full date parses correctly`() {
-        val result = minFullDateSortableString.toDate()
+        val result = MIN_FULL_DATE_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(minFullDate)
     }
 
     @Test
     fun `map to date negative year parses correctly`() {
-        val result = negativeYearSortableString.toDate()
+        val result = NEGATIVE_YEAR_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(negativeYearOnly)
     }
 
     @Test
     fun `map to date year and month with single digit month parses correctly`() {
-        val result = singleDigitMonthString.toDate()
+        val result = SINGLE_DIGIT_MONTH_STRING.toDate()
         assertThat(result).isEqualTo(singleDigitMonth)
     }
 
     @Test
     fun `map to date year and month with trailing whitespace parses correctly`() {
-        val result = whitespaceYearMonthString.toDate()
+        val result = WHITESPACE_YEAR_MONTH_STRING.toDate()
         assertThat(result).isEqualTo(yearAndMonth)
     }
 
     @Test
     fun `map to date year and month without suffix parses correctly`() {
-        val result = noSuffixYearMonthString.toDate()
+        val result = NO_SUFFIX_YEAR_MONTH_STRING.toDate()
         assertThat(result).isEqualTo(yearAndMonth)
     }
 
     @Test
     fun `map to date year only with surrounding whitespace parses correctly`() {
-        val result = whitespaceYearString.toDate()
+        val result = WHITESPACE_YEAR_STRING.toDate()
         assertThat(result).isEqualTo(yearOnly)
     }
 
     @Test
     fun `map to date year only without suffix parses correctly`() {
-        val result = noSuffixYearString.toDate()
+        val result = NO_SUFFIX_YEAR_STRING.toDate()
         assertThat(result).isEqualTo(yearOnly)
     }
 
     @Test
     fun `map to date zero year parses correctly`() {
-        val result = zeroYearSortableString.toDate()
+        val result = ZERO_YEAR_SORTABLE_STRING.toDate()
         assertThat(result).isEqualTo(zeroYearOnly)
     }
 
     @Test
     fun `map to date empty string throws illegal argument exception`() {
-        assertThat(emptyString.toDate()).isNull()
+        assertThat(EMPTY_STRING.toDate()).isNull()
     }
 
     @Test
     fun `map to date extreme negative year throws illegal argument exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            extremeNegativeYearSortableString.toDate()
+            EXTREME_NEGATIVE_YEAR_SORTABLE_STRING.toDate()
         }
         assertThat(exception.message)
-            .isEqualTo(INVALID_DATE_FORMAT_MESSAGE.format(extremeNegativeYearSortableString))
+            .isEqualTo(INVALID_DATE_FORMAT_MESSAGE.format(EXTREME_NEGATIVE_YEAR_SORTABLE_STRING))
     }
 
     @Test
     fun `map to date extreme positive year throws illegal argument exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            extremePositiveYearSortableString.toDate()
+            EXTREME_POSITIVE_YEAR_SORTABLE_STRING.toDate()
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(extremePositiveYearSortableString),
+                INVALID_DATE_FORMAT_MESSAGE.format(EXTREME_POSITIVE_YEAR_SORTABLE_STRING),
             )
     }
 
     @Test
     fun `map to date full date with invalid day throws exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            invalidDayFullDateString.toDate()
+            INVALID_DAY_FULL_DATE_STRING.toDate()
         }
-        assertThat(exception.message).isEqualTo(invalidFullDateMessage(invalidDayFullDateString))
+        assertThat(exception.message).isEqualTo(invalidFullDateMessage(INVALID_DAY_FULL_DATE_STRING))
     }
 
     @Test
     fun `map to date full date with partial suffix throws exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            partialSuffixFullDateString.toDate()
+            PARTIAL_SUFFIX_FULL_DATE_STRING.toDate()
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixFullDateString)
+                INVALID_DATE_FORMAT_MESSAGE.format(PARTIAL_SUFFIX_FULL_DATE_STRING)
             )
     }
 
     @Test
     fun `map to date internal whitespace throws exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            internalWhitespaceDate.toDate()
+            INTERNAL_WHITESPACE_DATE.toDate()
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(internalWhitespaceDate)
+                INVALID_DATE_FORMAT_MESSAGE.format(INTERNAL_WHITESPACE_DATE)
             )
     }
 
     @Test
     fun `map to date invalid month in year-month throws illegal argument exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            invalidYearMonthInvalidMonth.toDate()
+            INVALID_YEAR_MONTH_INVALID_MONTH.toDate()
         }
         assertThat(exception.message)
-            .isEqualTo(invalidYearMonthMessage(invalidYearMonthInvalidMonth))
+            .isEqualTo(invalidYearMonthMessage(INVALID_YEAR_MONTH_INVALID_MONTH))
     }
 
     @Test
     fun `map to date random text throws exception with correct message`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            randomText.toDate()
+            RANDOM_TEXT.toDate()
         }
-        assertThat(exception.message).isEqualTo(INVALID_DATE_FORMAT_MESSAGE.format(randomText))
+        assertThat(exception.message).isEqualTo(INVALID_DATE_FORMAT_MESSAGE.format(RANDOM_TEXT))
     }
 
     @Test
     fun `map to date year and month with invalid month parses as year only`() {
-        val result = invalidMonthYearMonth.toDate()
+        val result = INVALID_MONTH_YEAR_MONTH.toDate()
         assertThat(result).isEqualTo(yearOnly)
     }
 
     @Test
     fun `map to date year and month with partial suffix throws exception`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            partialSuffixYearMonth.toDate()
+            PARTIAL_SUFFIX_YEAR_MONTH.toDate()
         }
         assertThat(exception.message)
             .isEqualTo(
-                INVALID_DATE_FORMAT_MESSAGE.format(partialSuffixYearMonth)
+                INVALID_DATE_FORMAT_MESSAGE.format(PARTIAL_SUFFIX_YEAR_MONTH)
             )
     }
 
