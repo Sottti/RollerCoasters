@@ -33,6 +33,7 @@ subprojects {
     }
     plugins.withId("org.jetbrains.kotlin.android") {
         extensions.configure<KotlinAndroidProjectExtension> {
+            jvmToolchain(17)
             compilerOptions {
                 jvmTarget.set(JvmTarget.JVM_17)
                 freeCompilerArgs.add("-Xwhen-guards")
@@ -42,6 +43,7 @@ subprojects {
     plugins.withId("org.jetbrains.kotlin.jvm") {
         extensions.configure<KotlinProjectExtension> {
             explicitApi()
+            jvmToolchain(17)
         }
     }
     plugins.withId("org.jetbrains.kotlin.android") {
