@@ -22,26 +22,28 @@ internal fun createFilteredRollerCoastersQuery(
     sortByFilter: SortByFilter,
     typeFilter: TypeFilter,
 ): SimpleSQLiteQuery {
-    val args = mutableListOf<Any>()
-    val query = StringBuilder("SELECT * FROM $TABLE_ROLLER_COASTERS")
-
-    if (typeFilter != TypeFilter.All) {
-        query.append(" WHERE LOWER($COL_TYPE) = ?")
-        args += typeFilter.toSqlValue()
+    val args = buildList {
+        if (typeFilter != TypeFilter.All) add(typeFilter.toSqlValue())
+        add(limit)
+        add(offset)
     }
 
-    val direction = if (sortByFilter == SortByFilter.Alphabetical) "ASC" else "DESC"
+    val query = buildString {
+        append("SELECT * FROM $TABLE_ROLLER_COASTERS")
+        if (typeFilter != TypeFilter.All) {
+            append(" WHERE LOWER($COL_TYPE) = ?")
+        }
 
-    query.append(" ORDER BY ")
-        .append(sortByFilter.toSqlValue())
-        .append(" $direction, ")
-        .append("$COL_OPENED_DATE ASC, $COL_NAME_CURRENT ASC ")
-        .append("LIMIT ? OFFSET ?")
+        val direction = if (sortByFilter == SortByFilter.Alphabetical) "ASC" else "DESC"
 
-    args += limit
-    args += offset
+        append(" ORDER BY ")
+        append(sortByFilter.toSqlValue())
+        append(" $direction, ")
+        append("$COL_OPENED_DATE ASC, $COL_NAME_CURRENT ASC ")
+        append("LIMIT ? OFFSET ?")
+    }
 
-    return SimpleSQLiteQuery(query.toString(), args.toTypedArray())
+    return SimpleSQLiteQuery(query, args.toTypedArray())
 }
 
 private fun SortByFilter.toSqlValue(): String =

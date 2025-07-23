@@ -91,23 +91,24 @@ public class DisplayUnitFormatter @Inject constructor(
     private fun Duration.toDisplayFormatGForce(
         defaultLocale: Locale,
     ): String {
-        val measures = mutableListOf<Measure>()
+        val measures = buildList {
+            var remaining = seconds.value.toLong()
 
-        var remaining = seconds.value.toLong()
-        val hours = remaining / 3600
-        if (hours > 0) {
-            measures.add(Measure(hours, MeasureUnit.HOUR))
-            remaining %= 3600
-        }
+            val hours = remaining / 3600
+            if (hours > 0) {
+                add(Measure(hours, MeasureUnit.HOUR))
+                remaining %= 3600
+            }
 
-        val minutes = remaining / 60
-        if (minutes > 0) {
-            measures.add(Measure(minutes, MeasureUnit.MINUTE))
-            remaining %= 60
-        }
+            val minutes = remaining / 60
+            if (minutes > 0) {
+                add(Measure(minutes, MeasureUnit.MINUTE))
+                remaining %= 60
+            }
 
-        if (remaining > 0 || measures.isEmpty()) {
-            measures.add(Measure(remaining, MeasureUnit.SECOND))
+            if (remaining > 0 || isEmpty()) {
+                add(Measure(remaining, MeasureUnit.SECOND))
+            }
         }
 
         val formatter = MeasureFormat.getInstance(defaultLocale, MeasureFormat.FormatWidth.SHORT)
