@@ -9,6 +9,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUi
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUi
@@ -53,6 +55,15 @@ internal fun NavigationBar(
     val state by viewModel.state.collectAsStateWithLifecycle()
     var selectedTab by rememberSaveable(stateSaver = NavigationDestination.saver) {
         mutableStateOf(startDestination)
+    }
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    LaunchedEffect(navBackStackEntry?.destination?.route) {
+        val destination = navBackStackEntry?.destination?.route?.toNavigationDestination()
+        if (destination != null && destination != selectedTab) {
+            selectedTab = destination
+            viewModel.actions.onDestinationSelected(destination)
+        }
     }
 
     val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
@@ -154,4 +165,12 @@ private fun NavHostController.navigateTo(
         launchSingleTop = true
         restoreState = true
     }
+}
+
+private fun String.toNavigationDestination(): NavigationDestination? = when (this) {
+    AboutMe::class.simpleName -> AboutMe
+    Explore::class.simpleName -> Explore
+    Favourites::class.simpleName -> Favourites
+    Search::class.simpleName -> Search
+    else -> null
 }
