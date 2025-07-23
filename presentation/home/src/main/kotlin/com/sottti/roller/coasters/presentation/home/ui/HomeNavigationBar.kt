@@ -33,6 +33,7 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Search
+import com.sottti.roller.coasters.presentation.navigation.toNavigationDestination
 import com.sottti.roller.coasters.presentation.search.ui.SearchUi
 
 @Composable
@@ -57,16 +58,16 @@ internal fun NavigationBar(
         mutableStateOf(startDestination)
     }
 
+    val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
+
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     LaunchedEffect(navBackStackEntry?.destination?.route) {
-        val destination = navBackStackEntry?.destination?.route?.toNavigationDestination()
-        if (destination != null && destination != selectedTab) {
-            selectedTab = destination
-            viewModel.actions.onDestinationSelected(destination)
+        val currentDestination = navBackStackEntry?.destination?.route.toNavigationDestination()
+        if (currentDestination != selectedTab) {
+            selectedTab = currentDestination
+            viewModel.actions.onDestinationSelected(currentDestination)
         }
     }
-
-    val scrollToTopCallbacks = remember { mutableMapOf<NavigationDestination, () -> Unit>() }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -165,12 +166,4 @@ private fun NavHostController.navigateTo(
         launchSingleTop = true
         restoreState = true
     }
-}
-
-private fun String.toNavigationDestination(): NavigationDestination? = when (this) {
-    AboutMe::class.simpleName -> AboutMe
-    Explore::class.simpleName -> Explore
-    Favourites::class.simpleName -> Favourites
-    Search::class.simpleName -> Search
-    else -> null
 }

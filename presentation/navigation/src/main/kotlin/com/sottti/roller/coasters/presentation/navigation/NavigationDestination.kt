@@ -1,6 +1,10 @@
 package com.sottti.roller.coasters.presentation.navigation
 
 import androidx.compose.runtime.saveable.Saver
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Favourites
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Search
 import kotlinx.serialization.Serializable
 
 
@@ -31,20 +35,22 @@ public sealed interface NavigationDestination {
     }
 
     public companion object {
-        public val saver: Saver<NavigationDestination, String> =
-            Saver(
-                save = { it::class.simpleName ?: AboutMe::class.simpleName },
-                restore = { name ->
-                    when (name) {
-                        AboutMe::class.simpleName -> AboutMe
-                        Explore::class.simpleName -> Explore
-                        Favourites::class.simpleName -> Favourites
-                        Home::class.simpleName -> Home
-                        Search::class.simpleName -> Search
-                        Settings::class.simpleName -> Settings
-                        else -> Explore
-                    }
-                }
-            )
+        public val saver: Saver<NavigationDestination, String> = Saver(
+            save = { navigationDestination ->
+                navigationDestination::class.qualifiedName ?: Explore::class.qualifiedName
+            },
+            restore = { name -> name.toNavigationDestination() }
+        )
     }
 }
+
+public fun String?.toNavigationDestination(): NavigationDestination =
+    when (this) {
+        AboutMe::class.qualifiedName -> AboutMe
+        Explore::class.qualifiedName -> Explore
+        Favourites::class.qualifiedName -> Favourites
+        NavigationDestination.Home::class.qualifiedName -> NavigationDestination.Home
+        Search::class.qualifiedName -> Search
+        NavigationDestination.Settings::class.qualifiedName -> NavigationDestination.Settings
+        else -> Explore
+    }
