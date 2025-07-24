@@ -4,22 +4,18 @@ on:
   pull_request:
 
 jobs:
-  build-and-test:
-    name: Build & JVM Tests
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: gradle/actions/wrapper-validation@v3
-
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
-
       - uses: gradle/actions/setup-gradle@v3
-
       - name: Cache Gradle
         uses: actions/cache@v4
         with:
@@ -29,11 +25,38 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             gradle-${{ runner.os }}-
-
       - name: Setup local.properties with Maps API Key
         run: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
+      - name: Assemble Debug
+        run: ./gradlew assembleDebug --stacktrace --no-daemon
 
-      - name: Assemble Debug & Run JVM Tests
-        run: ./gradlew assembleDebug testDebugUnitTest --stacktrace --no-daemon
+  jvm-tests:
+    name: JVM Tests
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gradle/actions/wrapper-validation@v3
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v3
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+      - name: Setup local.properties with Maps API Key
+        run: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+          echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
+      - name: Run JVM Tests
+        run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
