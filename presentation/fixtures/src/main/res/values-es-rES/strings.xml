@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fixture_button_text">Texto del botón</string>
+    <string name="fixture_primary_text">Texto principal</string>
+    <string name="fixture_secondary_text">Texto secundario</string>
+    <string name="fixture_title">Título</string>
+</resources>

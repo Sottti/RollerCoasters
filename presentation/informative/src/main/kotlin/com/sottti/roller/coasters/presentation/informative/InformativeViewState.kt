@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.informative
 
-import com.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
+import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
 
 internal data class InformativeState(
     val illustration: IllustrationState,

@@ -28,6 +28,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.progressIndicators))
     implementation(project(module.presentation.designSystem.rollerCoasterCard))
+    implementation(project(module.presentation.designSystem.searchBox))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.empty))

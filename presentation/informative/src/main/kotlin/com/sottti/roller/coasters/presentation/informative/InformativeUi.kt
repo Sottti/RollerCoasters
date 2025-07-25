@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
-import com.roller.coasters.presentation.design.system.illustrations.ui.Illustration
+import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
+import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.Illustration
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.text.Text

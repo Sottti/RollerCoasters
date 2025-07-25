@@ -94,9 +94,10 @@ internal fun MutableStateFlow<SettingsState>.updateAppThemePicker(
 internal fun SettingsState.hideAppThemePicker(): SettingsState =
     copy(appTheme = appTheme.copy(picker = null))
 
-internal fun MutableStateFlow<SettingsState>.hideAppThemePicker(): MutableStateFlow<SettingsState> = apply {
-    update { currentState -> currentState.hideAppThemePicker() }
-}
+internal fun MutableStateFlow<SettingsState>.hideAppThemePicker(): MutableStateFlow<SettingsState> =
+    apply {
+        update { currentState -> currentState.hideAppThemePicker() }
+    }
 
 private fun appThemePickerState(
     lightDarkAppThemingAvailable: Boolean,
@@ -123,4 +124,3 @@ private fun AppThemeUi.withSelected(selected: Boolean): AppThemeUi = when (this)
     is LightTheme -> copy(selected = selected)
     is SystemTheme -> copy(selected = selected)
 }
-
