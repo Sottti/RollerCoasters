@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint">Hint</string>
+    <string name="query" translatable="false">Dragon Khan</string>
+</resources>

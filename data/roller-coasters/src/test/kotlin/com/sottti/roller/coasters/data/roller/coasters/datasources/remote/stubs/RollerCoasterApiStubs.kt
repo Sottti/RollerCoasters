@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs
 
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.AmusementParkApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.CoordinatesApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PaginationApiModel
@@ -43,6 +44,7 @@ import com.sottti.roller.coasters.domain.fixtures.PICTURE_URL
 import com.sottti.roller.coasters.domain.fixtures.RESTRAINTS
 import com.sottti.roller.coasters.domain.fixtures.RIDERS_PER_HOUR
 import com.sottti.roller.coasters.domain.fixtures.SPEED
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 
 internal val mainPictureApiModel: PictureApiModel =
     PictureApiModel(
@@ -141,3 +143,8 @@ internal val searchRollercoastersResponseApiModel =
         rollerCoasters = listOf(rollerCoasterApiModel),
         totalMatch = 1,
     )
+
+internal val searchQuery =
+    SearchQuery(searchRollercoastersResponseApiModel.rollerCoasters.first().name)
+
+internal val searchQueryApiModel = searchQuery.toApiModel()

@@ -36,6 +36,7 @@ object module {
             const val map = ":presentation:design-system:map"
             const val progressIndicators = ":presentation:design-system:progress-indicators"
             const val rollerCoasterCard = ":presentation:design-system:roller-coaster-card"
+            const val searchBox = ":presentation:design-system:search-box"
             const val switch = ":presentation:design-system:switch"
             const val text = ":presentation:design-system:text"
             const val themes = ":presentation:design-system:themes"
