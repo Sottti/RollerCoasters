@@ -1,10 +1,10 @@
-package com.roller.coasters.presentation.design.system.illustrations.ui
+package com.sottti.roller.coasters.presentation.design.system.illustrations.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
+import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
 import androidx.compose.foundation.Image as MaterialImage
 
 @Composable
