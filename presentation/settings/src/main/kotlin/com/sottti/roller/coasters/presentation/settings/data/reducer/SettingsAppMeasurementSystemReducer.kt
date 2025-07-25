@@ -78,9 +78,10 @@ internal fun SettingsState.hideAppMeasurementSystemPicker(): SettingsState {
     )
 }
 
-internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker(): MutableStateFlow<SettingsState> = apply {
-    update { currentState -> currentState.hideAppMeasurementSystemPicker() }
-}
+internal fun MutableStateFlow<SettingsState>.hideAppMeasurementSystemPicker(): MutableStateFlow<SettingsState> =
+    apply {
+        update { currentState -> currentState.hideAppMeasurementSystemPicker() }
+    }
 
 private fun appMeasurementSystemPickerState(
     selectedAppMeasurementSystem: AppMeasurementSystemUi,

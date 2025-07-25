@@ -5,14 +5,12 @@ import com.sottti.roller.coasters.presentation.design.system.icons.R
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class PilledIconPreviewProvider : PreviewParameterProvider<PilledIconPreviewState> {
-    override val values = buildList {
-        add(
-            PilledIconPreviewState(
-                iconState = Icons.Explore.filled,
-                onClick = { },
-                text = R.string.pilled_icon_preview_title,
-
-                ),
-        )
-    }.asSequence()
+    override val values = sequenceOf(pilledIconPreviewState)
 }
+
+private val pilledIconPreviewState: PilledIconPreviewState =
+    PilledIconPreviewState(
+        iconState = Icons.Explore.filled,
+        onClick = { },
+        text = R.string.pilled_icon_preview_title,
+    )
