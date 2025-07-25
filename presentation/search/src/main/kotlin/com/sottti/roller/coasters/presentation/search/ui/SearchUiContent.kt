@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -56,7 +57,7 @@ internal fun SearchUiContent(
                 start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
                 end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
                 top = innerPaddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
+                bottom = innerPaddingValues.calculateBottomPadding(),
             )
         }
         SearchResults(
@@ -87,15 +88,22 @@ private fun SearchResults(
         when {
             isEmpty -> EmptyUi(modifier = Modifier
                 .padding(paddingValues)
+                .imePadding()
                 .fillMaxSize())
             else -> LazyColumn(
                 state = listState,
-                contentPadding = PaddingValues(dimensions.padding.medium),
+                contentPadding = PaddingValues(
+                    top = paddingValues.calculateTopPadding() + dimensions.padding.medium,
+                    bottom = paddingValues.calculateBottomPadding() + dimensions.padding.medium,
+                    start = dimensions.padding.medium,
+                    end = dimensions.padding.medium,
+                ),
                 verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
                 modifier = Modifier
-                    .padding(paddingValues)
                     .fillMaxSize()
+                    .imePadding()
                     .nestedScroll(connection = scrollBehavior.nestedScrollConnection)
+
             ) {
                 items(items = state) { result ->
                     RollerCoasterCard.Small(
