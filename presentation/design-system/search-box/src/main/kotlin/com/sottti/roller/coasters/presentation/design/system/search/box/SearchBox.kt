@@ -27,7 +27,7 @@ public fun SearchBox(
     modifier: Modifier = Modifier,
     onQueryChange: (String?) -> Unit,
 ) {
-    val shape = MaterialTheme.shapes.extraLarge
+    val shape = MaterialTheme.shapes.large
     val queryString = query.orEmpty()
     TextField(
         value = queryString,
@@ -36,6 +36,7 @@ public fun SearchBox(
         placeholder = { Text.Vanilla(stringResource(hint)) },
         singleLine = true,
         shape = shape,
+        leadingIcon = { Icon(iconState = Icons.Search.outlined) },
         trailingIcon = { SearchBoxTrailingIcon(loading, onQueryChange, queryString) },
         colors = searchBoxColors()
     )
