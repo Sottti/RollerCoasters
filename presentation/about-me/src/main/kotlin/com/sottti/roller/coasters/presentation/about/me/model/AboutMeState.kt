@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.presentation.about.me.model
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 
 @Immutable
 internal data class AboutMeState(
