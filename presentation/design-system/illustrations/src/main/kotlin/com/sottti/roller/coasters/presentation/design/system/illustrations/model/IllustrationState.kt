@@ -1,4 +1,4 @@
-package com.roller.coasters.presentation.design.system.illustrations.model
+package com.sottti.roller.coasters.presentation.design.system.illustrations.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
