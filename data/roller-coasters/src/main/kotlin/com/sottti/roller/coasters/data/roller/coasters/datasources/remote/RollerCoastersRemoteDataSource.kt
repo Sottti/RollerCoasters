@@ -6,6 +6,7 @@ import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
 import com.sottti.roller.coasters.domain.model.Result
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
@@ -41,7 +42,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         measurementSystem: ResolvedMeasurementSystem,
     ): Result<List<RollerCoaster>> =
         api
-            .searchRollerCoasters(query)
+            .searchRollerCoasters(query.toApiModel())
             .mapBoth(
                 success = { result ->
                     Ok(result.rollerCoasters.map { rollerCoasterApiModel ->

@@ -5,13 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 
 internal class MonoCardGridStateProvider : PreviewParameterProvider<MonoCardGridState> {
-    override val values = buildList {
-        add(
-            MonoCardGridState(
-                item = R.string.first_item,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {},
-            ),
-        )
-    }.asSequence()
+    override val values = sequenceOf(monoCardGridState)
 }
+
+private val monoCardGridState = MonoCardGridState(
+    item = R.string.first_item,
+    modifier = Modifier.fillMaxWidth(),
+    onClick = {},
+)

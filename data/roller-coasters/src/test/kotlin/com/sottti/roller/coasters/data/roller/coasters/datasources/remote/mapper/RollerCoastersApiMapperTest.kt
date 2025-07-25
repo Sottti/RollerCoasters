@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mappe
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.rollerCoasterApiModel
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
@@ -26,5 +27,19 @@ internal class RollerCoastersApiMapperTest {
     fun `map roller coaster api model to domain model when imperial Uk system`() {
         val result = rollerCoasterApiModel.toDomain(ImperialUk)
         assertThat(result).isEqualTo(rollerCoaster(ImperialUk))
+    }
+
+    @Test
+    fun `encode empty search query`() {
+        val searchQuery = SearchQuery("")
+        val result = searchQuery.toApiModel()
+        assertThat(result.value).isEqualTo("")
+    }
+
+    @Test
+    fun `encode search query with plus and slash`() {
+        val searchQuery = SearchQuery("A+B/C")
+        val result = searchQuery.toApiModel()
+        assertThat(result.value).isEqualTo("A%2BB%2FC")
     }
 }
