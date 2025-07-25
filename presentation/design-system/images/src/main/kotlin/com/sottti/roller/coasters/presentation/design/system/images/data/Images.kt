@@ -1,6 +1,6 @@
-package com.roller.coasters.presentation.design.system.images.data
+package com.sottti.roller.coasters.presentation.design.system.images.data
 
-import com.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.images.R
 
 public object Images {
