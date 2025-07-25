@@ -22,7 +22,6 @@ import com.sottti.roller.coasters.presentation.search.data.SearchViewModel
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
 import com.sottti.roller.coasters.presentation.search.model.SearchViewState
-import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 
 @Composable
 public fun SearchUi(
@@ -57,9 +56,11 @@ internal fun SearchUi(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            MainTopBar(
-                scrollBehavior = scrollBehavior,
+            SearchTopBar(
+                lazyListState = listState,
+                onAction = onAction,
                 onNavigateToSettings = onNavigateToSettings,
+                state = state,
             )
         },
     ) { innerPaddingValues ->
@@ -71,14 +72,14 @@ internal fun SearchUi(
                 bottom = paddingValues.calculateBottomPadding(),
             )
         }
-        SearchUiContent(
+        SearchResultsUi(
             listState = listState,
             onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             paddingValues = paddingValues,
             rememberedPaddingValues = rememberedPaddingValues,
             scrollBehavior = scrollBehavior,
-            state = state,
+            state = state.results,
         )
     }
 }

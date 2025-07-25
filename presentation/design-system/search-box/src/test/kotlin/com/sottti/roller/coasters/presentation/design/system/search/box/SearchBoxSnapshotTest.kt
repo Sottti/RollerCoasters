@@ -1,21 +1,18 @@
-package com.sottti.roller.coasters.presentation.design.system.progress.indicators
+package com.sottti.roller.coasters.presentation.design.system.search.box
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridPreview
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridState
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class CardGridSnapshotTest(
+internal class SearchBoxSnapshotTest(
     nightMode: NightMode,
-    private val state: QuadCardGridState,
+    private val state: SearchBoxViewState,
 ) {
 
     @get:Rule
@@ -29,15 +26,15 @@ internal class CardGridSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            QuadCardGridPreview(state)
+            SearchBoxPreview(state)
         }
     }
 
-    companion object {
+    companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            QuadCardGridStateProvider()
+            SearchBoxViewStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(
