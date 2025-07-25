@@ -1,12 +1,9 @@
-package com.sottti.roller.coasters.presentation.design.system.progress.indicators
+package com.sottti.roller.coasters.presentation.design.system.card.grid
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridPreview
-import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridState
-import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

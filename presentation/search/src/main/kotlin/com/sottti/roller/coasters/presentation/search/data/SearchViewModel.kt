@@ -8,7 +8,6 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.SearchRollerCoasters
 import com.sottti.roller.coasters.presentation.search.R
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
-import com.sottti.roller.coasters.presentation.search.model.SearchAction.ClearQuery
 import com.sottti.roller.coasters.presentation.search.model.SearchAction.QueryChanged
 import com.sottti.roller.coasters.presentation.search.model.SearchBarViewState
 import com.sottti.roller.coasters.presentation.search.model.SearchViewState
@@ -53,8 +52,6 @@ internal class SearchViewModel @Inject constructor(
                 _state.updateQuery(action.query)
                     .updateClearIcon(action.query)
             }
-
-            ClearQuery -> _state.clearQuery()
         }
     }
 

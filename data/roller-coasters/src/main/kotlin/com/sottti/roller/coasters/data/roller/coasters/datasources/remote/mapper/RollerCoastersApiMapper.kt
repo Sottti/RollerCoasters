@@ -5,6 +5,7 @@ import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.PictureApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.RollerCoasterStatsApiModel
+import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.model.SearchQueryApiModel
 import com.sottti.roller.coasters.data.roller.coasters.mapper.toDrop
 import com.sottti.roller.coasters.data.roller.coasters.mapper.toHeight
 import com.sottti.roller.coasters.data.roller.coasters.mapper.toLength
@@ -54,6 +55,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RidersPerHour
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterName
+import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.roller.coasters.model.SingleTrackRide
 import com.sottti.roller.coasters.domain.roller.coasters.model.Specs
 import com.sottti.roller.coasters.domain.roller.coasters.model.Status
@@ -62,6 +64,8 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.Type
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.utils.time.dates.mapper.toDate
 import com.sottti.roller.coasters.utils.time.dates.mapper.toSeconds
+import java.net.URLEncoder.encode
+import java.nio.charset.StandardCharsets.UTF_8
 
 internal fun RollerCoasterApiModel.toDomain(
     measurementSystem: ResolvedMeasurementSystem,
@@ -75,6 +79,9 @@ internal fun RollerCoasterApiModel.toDomain(
         specs = toDomainSpecs(measurementSystem),
         status = toDomainStatus(),
     )
+
+internal fun SearchQuery.toApiModel(): SearchQueryApiModel =
+    SearchQueryApiModel(encode(value, UTF_8.name()))
 
 private fun RollerCoasterApiModel.toDomainLocation(): Location =
     Location(

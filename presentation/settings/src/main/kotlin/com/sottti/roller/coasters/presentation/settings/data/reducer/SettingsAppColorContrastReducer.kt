@@ -102,9 +102,10 @@ internal fun MutableStateFlow<SettingsState>.updateAppColorContrastPicker(
 internal fun SettingsState.hideAppColorContrastPicker() =
     copy(appColorContrast = appColorContrast.copy(picker = null))
 
-internal fun MutableStateFlow<SettingsState>.hideAppColorContrastPicker(): MutableStateFlow<SettingsState> = apply {
-    update { currentState -> currentState.hideAppColorContrastPicker() }
-}
+internal fun MutableStateFlow<SettingsState>.hideAppColorContrastPicker(): MutableStateFlow<SettingsState> =
+    apply {
+        update { currentState -> currentState.hideAppColorContrastPicker() }
+    }
 
 private fun appColorContrastNotAvailableMessageState(): AppColorContrastNotAvailableMessageState =
     AppColorContrastNotAvailableMessageState(
@@ -144,7 +145,7 @@ private fun colorContrastsList(
 internal fun SettingsState.hideAppColorContrastNotAvailableMessage() =
     copy(appColorContrast = appColorContrast.copy(notAvailableMessage = null))
 
-internal fun MutableStateFlow<SettingsState>.hideAppColorContrastNotAvailableMessage(): MutableStateFlow<SettingsState> = apply {
-    update { currentState -> currentState.hideAppColorContrastNotAvailableMessage() }
-}
-
+internal fun MutableStateFlow<SettingsState>.hideAppColorContrastNotAvailableMessage(): MutableStateFlow<SettingsState> =
+    apply {
+        update { currentState -> currentState.hideAppColorContrastNotAvailableMessage() }
+    }
