@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.informative
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,11 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
-import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.Illustration
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
+import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.CircledIllustration
 import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun InformativeUi(
@@ -35,26 +39,25 @@ public fun InformativeUi(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Illustration(
+        Spacer(modifier = Modifier.weight(1f))
+        CircledIllustration(
             state = illustration,
-            modifier = Modifier
-                .weight(0.5f)
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(0.8f),
         )
-
+        Spacer(modifier = Modifier.weight(1f))
         Text.Headline.Medium(
             text = stringResource(primaryText),
             textColor = colors.onBackground,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(dimensions.padding.medium))
+        Spacer(modifier = Modifier.height(dimensions.padding.small))
         Text.Body.Medium(
             text = stringResource(secondaryText),
             textColor = colors.onBackground,
             textAlign = TextAlign.Center,
         )
 
-        Spacer(modifier = Modifier.weight(0.25f))
+        Spacer(modifier = Modifier.weight(1f))
         button?.let {
             Button(
                 modifier = Modifier.fillMaxWidth(),
@@ -65,3 +68,29 @@ public fun InformativeUi(
         }
     }
 }
+
+@Composable
+@RollerCoastersPreview
+internal fun InformativeUiPreview(
+    @PreviewParameter(InformativeUiStateProvider::class)
+    viewState: InformativeState,
+) {
+    RollerCoastersPreviewTheme {
+        InformativeUi(
+            modifier = Modifier.background(colors.background),
+            illustration = viewState.illustration,
+            primaryText = viewState.primaryText,
+            secondaryText = viewState.secondaryText,
+            button = toButton(viewState.buttonText),
+        )
+    }
+}
+
+@Composable
+private fun toButton(@StringRes text: Int?): InformativeButton? =
+    text?.let {
+        InformativeButton(
+            text = text,
+            onClick = {},
+        )
+    }

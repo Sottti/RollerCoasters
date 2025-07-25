@@ -8,6 +8,7 @@ internal object PaddingTokens {
     @Composable
     internal fun compact(): Padding =
         Padding(
+            extraSmall = 2.dp,
             small = 4.dp,
             smallMedium = 8.dp,
             medium = 16.dp,
@@ -19,6 +20,7 @@ internal object PaddingTokens {
     @Composable
     internal fun medium(): Padding =
         Padding(
+            extraSmall = 2.dp,
             small = 4.dp,
             smallMedium = 8.dp,
             medium = 16.dp,
@@ -30,6 +32,7 @@ internal object PaddingTokens {
     @Composable
     internal fun expanded(): Padding =
         Padding(
+            extraSmall = 2.dp,
             small = 4.dp,
             smallMedium = 8.dp,
             medium = 16.dp,

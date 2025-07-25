@@ -14,7 +14,7 @@ internal class EmptyUiStateProvider : PreviewParameterProvider<EmptyState?> {
 
 private val emptyDefault = null
 private val emptyAlternative = EmptyState(
-    illustration = Illustrations.EmptyTrack.state,
+    illustration = Illustrations.DragonKhanAndShambhala.state,
     primaryText = FixturesR.fixture_primary_text,
     secondaryText = FixturesR.fixture_secondary_text,
 )

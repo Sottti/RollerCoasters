@@ -9,38 +9,38 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(
     device = device,
     group = lightThemeGroup,
-    name = "Light English",
+    name = "1.Light English",
 )
 @Preview(
     device = device,
     group = lightThemeGroup,
     locale = "es",
-    name = "Light Spanish",
+    name = "2. Light Spanish",
 )
 @Preview(
     device = device,
     group = lightThemeGroup,
     locale = "gl",
-    name = "Light Galician",
+    name = "3. Light Galician",
 )
 @Preview(
     device = device,
     group = darkThemeGroup,
-    name = "Dark English",
+    name = "4. Dark English",
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 @Preview(
     device = device,
     group = darkThemeGroup,
     locale = "es",
-    name = "Dark Spanish",
+    name = "5. Dark Spanish",
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 @Preview(
     device = device,
     group = darkThemeGroup,
     locale = "gl",
-    name = "Dark Galician",
+    name = "6. Dark Galician",
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 public annotation class RollerCoastersPreview

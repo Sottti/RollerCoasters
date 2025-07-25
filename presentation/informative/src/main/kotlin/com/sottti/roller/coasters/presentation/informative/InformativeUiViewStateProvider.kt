@@ -13,14 +13,14 @@ internal class InformativeUiStateProvider : PreviewParameterProvider<Informative
 }
 
 private val informativeWithButton = InformativeState(
-    illustration = Illustrations.BrokenTrack.state,
+    illustration = Illustrations.DragonKhanAndShambhala.state,
     primaryText = FixturesR.fixture_primary_text,
     secondaryText = FixturesR.fixture_secondary_text,
     buttonText = FixturesR.fixture_button_text,
 )
 
 private val informativeWithoutButton = InformativeState(
-    illustration = Illustrations.BrokenTrack.state,
+    illustration = Illustrations.DragonKhanAndShambhala.state,
     primaryText = FixturesR.fixture_primary_text,
     secondaryText = FixturesR.fixture_secondary_text,
     buttonText = null,

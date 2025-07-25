@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
@@ -54,8 +55,8 @@ private fun RowScope.Details(
             .padding(dimensions.padding.medium),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text.Title.Large(text = rollerCoasterName)
-        Text.Body.Small(text = parkName)
+        Text.Title.Large(text = rollerCoasterName, textAlign = TextAlign.Center)
+        Text.Body.Small(text = parkName, textAlign = TextAlign.Center)
     }
 }
 
