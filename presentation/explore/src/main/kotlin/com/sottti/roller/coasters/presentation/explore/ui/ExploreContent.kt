@@ -70,7 +70,10 @@ private fun RollerCoasters(
             item { FillMaxWidthProgressIndicator() }
         }
 
-        items(rollerCoasters.itemCount) { index ->
+        items(
+            rollerCoasters.itemCount,
+            key = { index -> rollerCoasters[index]?.id ?: index }
+        ) { index ->
             rollerCoasters[index]?.let { rollerCoaster ->
                 RollerCoaster(
                     onAction = onAction,

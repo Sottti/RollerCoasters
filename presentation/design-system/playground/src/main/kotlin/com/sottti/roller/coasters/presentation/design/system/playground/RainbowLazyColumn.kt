@@ -22,7 +22,10 @@ public fun RainbowLazyColumn(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        items(rainbowColors(seedColor)) { color: Color ->
+        items(
+            rainbowColors(seedColor),
+            key = { color: Color -> color.hashCode() }
+        ) { color: Color ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
