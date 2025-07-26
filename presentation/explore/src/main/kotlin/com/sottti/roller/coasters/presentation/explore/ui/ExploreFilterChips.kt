@@ -4,7 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Spacer
+import com.sottti.roller.coasters.presentation.utils.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,7 +29,7 @@ internal fun FilterChips(
     val rememberedOnAction = rememberUpdatedState(onAction)
     Column(modifier = Modifier.padding(vertical = dimensions.padding.small)) {
         PrimaryFilters(filters.primary, rememberedOnAction.value)
-        Spacer(modifier = Modifier.size(dimensions.padding.small))
+        Spacer(dimensions.padding.small)
         SecondaryFilters(filters.secondary, rememberedOnAction.value)
     }
 }

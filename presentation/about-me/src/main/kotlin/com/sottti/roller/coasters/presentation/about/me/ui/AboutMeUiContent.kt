@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import com.sottti.roller.coasters.presentation.utils.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -68,11 +68,11 @@ internal fun AboutMeUiContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item { ProfileImage(state.profileImage) }
-            item { Spacer(modifier = Modifier.size(dimensions.padding.smallMedium)) }
+            item { Spacer(dimensions.padding.smallMedium) }
             item { Name(state.name) }
-            item { Spacer(modifier = Modifier.size(dimensions.padding.large)) }
+            item { Spacer(dimensions.padding.large) }
             item { SocialProfiles(onAction = onAction, state = state.socialProfiles) }
-            item { Spacer(modifier = Modifier.size(dimensions.padding.large)) }
+            item { Spacer(dimensions.padding.large) }
             item {
                 GetToKnowMe(
                     onAction = onAction,

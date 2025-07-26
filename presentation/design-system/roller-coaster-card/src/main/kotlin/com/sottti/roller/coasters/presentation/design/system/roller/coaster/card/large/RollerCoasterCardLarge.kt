@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.roller.coaster.car
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import com.sottti.roller.coasters.presentation.utils.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -88,7 +88,7 @@ private fun Footer(
                 textColor = colors.onSurfaceVariant,
             )
         }
-        Spacer(modifier = Modifier.size(dimensions.padding.smallMedium))
+        Spacer(dimensions.padding.smallMedium)
         stat?.let {
             Column(horizontalAlignment = Alignment.End) {
                 Text.Label.Small(
