@@ -105,7 +105,10 @@ private fun SearchResults(
                     .nestedScroll(connection = scrollBehavior.nestedScrollConnection)
 
             ) {
-                items(items = state) { result ->
+                items(
+                    items = state,
+                    key = { result -> result.id }
+                ) { result ->
                     RollerCoasterCard.Small(
                         imageUrl = result.imageUrl,
                         parkName = result.parkName,
