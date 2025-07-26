@@ -2,8 +2,6 @@ package com.sottti.roller.coasters.presentation.about.me.ui
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,27 +19,45 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.presentation.about.me.data.AboutMeViewModel
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
+import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
+import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 import kotlinx.coroutines.launch
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 public fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
     paddingValues: PaddingValues,
 ) {
-    val viewModel = hiltViewModel<AboutMeViewModel>()
+    AboutMeUi(
+        onNavigateToSettings = onNavigateToSettings,
+        onScrollToTop = onScrollToTop,
+        onShowBottomSheet = onShowBottomSheet,
+        paddingValues = paddingValues,
+        viewModel = hiltViewModel(),
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun AboutMeUi(
+    onNavigateToSettings: () -> Unit,
+    onScrollToTop: (() -> Unit) -> Unit,
+    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
+    viewModel: AboutMeViewModel,
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     AboutMeUi(
@@ -94,17 +110,17 @@ internal fun AboutMeUi(
             )
         }
     ) { innerPaddingValues ->
+        val mergedPaddingValues =
+            paddingValues
+                .override(top = dimensions.padding.zero) +
+                    innerPaddingValues
+                        .override(bottom = dimensions.padding.zero)
         AboutMeUiContent(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             onShowBottomSheet = onShowBottomSheet,
-            paddingValues = PaddingValues(
-                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                top = innerPaddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
-            ),
+            paddingValues = mergedPaddingValues,
             state = state,
         )
     }

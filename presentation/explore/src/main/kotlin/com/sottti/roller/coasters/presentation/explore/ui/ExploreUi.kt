@@ -30,10 +30,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 public fun ExploreUi(
-    paddingValues: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
 ) {
     ExploreUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,

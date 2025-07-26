@@ -18,10 +18,10 @@ import com.sottti.roller.coasters.presentation.search.model.SearchViewState
 
 @Composable
 public fun SearchUi(
-    paddingValues: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
 ) {
     val viewModel = hiltViewModel<SearchViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
