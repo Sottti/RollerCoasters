@@ -86,10 +86,13 @@ private fun SearchResults(
         transitionSpec = { fadeIn() togetherWith fadeOut() }
     ) { isEmpty ->
         when {
-            isEmpty -> EmptyUi(modifier = Modifier
-                .padding(paddingValues)
-                .imePadding()
-                .fillMaxSize())
+            isEmpty -> EmptyUi(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .imePadding()
+                    .fillMaxSize()
+            )
+
             else -> LazyColumn(
                 state = listState,
                 contentPadding = PaddingValues(
@@ -105,7 +108,10 @@ private fun SearchResults(
                     .nestedScroll(connection = scrollBehavior.nestedScrollConnection)
 
             ) {
-                items(items = state) { result ->
+                items(
+                    items = state,
+                    key = { result -> result.id }
+                ) { result ->
                     RollerCoasterCard.Small(
                         imageUrl = result.imageUrl,
                         parkName = result.parkName,

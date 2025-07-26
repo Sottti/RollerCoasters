@@ -2,9 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIco
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,6 +16,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
+import com.sottti.roller.coasters.presentation.utils.Spacer
 
 @Composable
 public fun PilledIcon(
@@ -27,7 +26,7 @@ public fun PilledIcon(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Graphic(iconState = iconState, onClick = onClick)
-        Spacer(modifier = Modifier.size(dimensions.padding.smallMedium))
+        Spacer(dimensions.padding.smallMedium)
         Text(text)
 
     }

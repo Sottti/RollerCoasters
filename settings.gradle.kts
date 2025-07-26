@@ -60,10 +60,11 @@ include(
     ":presentation:navigation",
     ":presentation:navigation-external",
     ":presentation:previews",
-    ":presentation:search",
     ":presentation:roller-coaster-details",
+    ":presentation:search",
     ":presentation:settings",
     ":presentation:string-provider",
     ":presentation:top-bars",
+    ":presentation:utils",
     ":utils:time-dates",
 )

@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,6 +28,7 @@ import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.format.annotatedLinkString
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersTallPreview
+import com.sottti.roller.coasters.presentation.utils.Spacer
 
 @Composable
 internal fun BottomSheetContent(
@@ -44,12 +44,12 @@ internal fun BottomSheetContent(
         horizontalAlignment = CenterHorizontally,
     ) {
         HeaderImage(state.image)
-        Spacer(modifier = Modifier.padding(dimensions.padding.large))
+        Spacer(dimensions.padding.large)
         Text.Title.Large(textResId = state.titleResId)
-        Spacer(modifier = Modifier.padding(dimensions.padding.smallMedium))
+        Spacer(dimensions.padding.smallMedium)
         Text.Body.Medium(textResId = state.bodyResId, modifier = Modifier.fillMaxWidth())
         state.hyperlink?.let {
-            Spacer(modifier = Modifier.padding(dimensions.padding.medium))
+            Spacer(dimensions.padding.medium)
             Hyperlink(state.hyperlink, onAction)
         }
     }
