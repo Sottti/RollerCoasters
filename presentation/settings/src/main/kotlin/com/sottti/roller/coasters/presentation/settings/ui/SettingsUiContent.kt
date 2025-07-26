@@ -3,14 +3,15 @@ package com.sottti.roller.coasters.presentation.settings.ui
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.ListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
@@ -30,6 +31,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.App
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 internal fun SettingsContent(
@@ -54,100 +56,134 @@ internal fun SettingsContent(
         { onAction(LaunchAppMeasurementSystemPicker) }
     }
     LazyColumn(
-        modifier = Modifier
-            .padding(paddingValues)
-            .nestedScroll(nestedScrollConnection),
+        contentPadding = paddingValues + PaddingValues(vertical = dimensions.padding.medium),
+        modifier = Modifier.nestedScroll(nestedScrollConnection),
     ) {
-        state.dynamicColor?.let { dynamicState ->
-            item(key = "dynamic_color") {
-                SettingItem(
-                    headline = dynamicState.headline,
-                    supporting = dynamicState.supporting,
-                    iconState = dynamicState.icon,
-                    onClick = null,
-                ) {
-                    when (dynamicState.checkedState) {
-                        is DynamicColorCheckedState.Loaded -> Switch(
-                            checked = dynamicState.checkedState.checked,
-                            onCheckedChange = onDynamicColorCheckedChange,
-                        )
+        dynamicColor(state = state, onDynamicColorCheckedChange = onDynamicColorCheckedChange)
+        theme(state = state, launchThemePicker = launchThemePicker)
+        colorContrast(state = state, launchColorContrastPicker = launchColorContrastPicker)
+        language(state = state, launchLanguagePicker = launchLanguagePicker)
+        measurementSystem(
+            launchMeasurementSystemPicker = launchMeasurementSystemPicker,
+            state = state,
+        )
+    }
+}
 
-                        DynamicColorCheckedState.Loading -> SmallProgressIndicator()
-                    }
-                }
-            }
-        }
-        item {
-            SettingItem(
-                headline = state.appTheme.listItem.headline,
-                supporting = state.appTheme.listItem.supporting,
-                iconState = state.appTheme.listItem.icon,
-                onClick = launchThemePicker,
-            ) {
-                when (val selection = state.appTheme.listItem.selectedAppTheme) {
-                    is SelectedAppThemeState.Loaded -> Text.Vanilla(selection.appTheme.text)
-                    SelectedAppThemeState.Loading -> SmallProgressIndicator()
-                }
-            }
-        }
-        item {
-            SettingItem(
-                headline = state.appColorContrast.listItem.headline,
-                supporting = state.appColorContrast.listItem.supporting,
-                iconState = state.appColorContrast.listItem.icon,
-                onClick = launchColorContrastPicker,
-            ) {
-                when (val selection = state.appColorContrast.listItem.selectedAppColorContrast) {
-                    is SelectedAppColorContrastState.Loaded -> Text.Vanilla(selection.appColorContrast.text)
-                    SelectedAppColorContrastState.Loading -> SmallProgressIndicator()
-                }
-            }
-        }
-        item {
-            SettingItem(
-                headline = state.appLanguage.listItem.headline,
-                supporting = state.appLanguage.listItem.supporting,
-                iconState = state.appLanguage.listItem.icon,
-                onClick = launchLanguagePicker,
-            ) {
-                when (val selection = state.appLanguage.listItem.selectedAppLanguage) {
-                    is AppSelectedLanguageState.Loaded -> Text.Vanilla(selection.appLanguage.text)
-                    AppSelectedLanguageState.Loading -> SmallProgressIndicator()
-                }
-            }
-        }
-        item {
-            SettingItem(
-                headline = state.appMeasurementSystem.listItem.headline,
-                supporting = state.appMeasurementSystem.listItem.supporting,
-                iconState = state.appMeasurementSystem.listItem.icon,
-                onClick = launchMeasurementSystemPicker,
-            ) {
-                when (val selection =
-                    state.appMeasurementSystem.listItem.selectedAppMeasurementSystem) {
-                    is Loaded -> Text.Vanilla(selection.appMeasurementSystem.text)
-                    Loading -> SmallProgressIndicator()
-                }
+private fun LazyListScope.dynamicColor(
+    state: SettingsState,
+    onDynamicColorCheckedChange: (Boolean) -> Unit,
+) {
+    state.dynamicColor?.let { dynamicState ->
+        settingItem(
+            headline = dynamicState.headline,
+            supporting = dynamicState.supporting,
+            iconState = dynamicState.icon,
+            onClick = null,
+            key = "dynamic_color"
+        ) {
+            when (dynamicState.checkedState) {
+                is DynamicColorCheckedState.Loaded -> Switch(
+                    checked = dynamicState.checkedState.checked,
+                    onCheckedChange = onDynamicColorCheckedChange,
+                )
+
+                DynamicColorCheckedState.Loading -> SmallProgressIndicator()
             }
         }
     }
 }
 
-@Composable
-private fun SettingItem(
+private fun LazyListScope.theme(
+    state: SettingsState,
+    launchThemePicker: () -> Unit,
+) {
+    settingItem(
+        headline = state.appTheme.listItem.headline,
+        supporting = state.appTheme.listItem.supporting,
+        iconState = state.appTheme.listItem.icon,
+        onClick = launchThemePicker,
+        key = "theme",
+    ) {
+        when (val selection = state.appTheme.listItem.selectedAppTheme) {
+            is SelectedAppThemeState.Loaded -> Text.Vanilla(selection.appTheme.text)
+            SelectedAppThemeState.Loading -> SmallProgressIndicator()
+        }
+    }
+}
+
+private fun LazyListScope.colorContrast(
+    state: SettingsState,
+    launchColorContrastPicker: () -> Unit,
+) {
+    settingItem(
+        headline = state.appColorContrast.listItem.headline,
+        supporting = state.appColorContrast.listItem.supporting,
+        iconState = state.appColorContrast.listItem.icon,
+        onClick = launchColorContrastPicker,
+        key = "color_contrast",
+    ) {
+        when (val selection = state.appColorContrast.listItem.selectedAppColorContrast) {
+            is SelectedAppColorContrastState.Loaded -> Text.Vanilla(selection.appColorContrast.text)
+            SelectedAppColorContrastState.Loading -> SmallProgressIndicator()
+        }
+    }
+}
+
+private fun LazyListScope.language(
+    state: SettingsState,
+    launchLanguagePicker: () -> Unit,
+) {
+    settingItem(
+        headline = state.appLanguage.listItem.headline,
+        supporting = state.appLanguage.listItem.supporting,
+        iconState = state.appLanguage.listItem.icon,
+        onClick = launchLanguagePicker,
+        key = "language",
+    ) {
+        when (val selection = state.appLanguage.listItem.selectedAppLanguage) {
+            is AppSelectedLanguageState.Loaded -> Text.Vanilla(selection.appLanguage.text)
+            AppSelectedLanguageState.Loading -> SmallProgressIndicator()
+        }
+    }
+}
+
+private fun LazyListScope.measurementSystem(
+    launchMeasurementSystemPicker: () -> Unit,
+    state: SettingsState,
+) {
+    settingItem(
+        headline = state.appMeasurementSystem.listItem.headline,
+        supporting = state.appMeasurementSystem.listItem.supporting,
+        iconState = state.appMeasurementSystem.listItem.icon,
+        onClick = launchMeasurementSystemPicker,
+        key = "measurement_system",
+    ) {
+        when (val selection =
+            state.appMeasurementSystem.listItem.selectedAppMeasurementSystem) {
+            is Loaded -> Text.Vanilla(selection.appMeasurementSystem.text)
+            Loading -> SmallProgressIndicator()
+        }
+    }
+}
+
+private fun LazyListScope.settingItem(
     @StringRes headline: Int,
     @StringRes supporting: Int,
     iconState: IconState,
     onClick: (() -> Unit)?,
+    key: String,
     trailingContent: @Composable () -> Unit,
 ) {
-    ListItem(
-        modifier = onClick?.let { Modifier.clickable(onClick = onClick) } ?: Modifier,
-        headlineContent = { Text.Vanilla(headline) },
-        leadingContent = { Icon(iconState) },
-        supportingContent = { Text.Vanilla(supporting) },
-        trailingContent = trailingContent,
-    )
+    item(key = key) {
+        ListItem(
+            modifier = onClick?.let { Modifier.clickable(onClick = onClick) } ?: Modifier,
+            headlineContent = { Text.Vanilla(headline) },
+            leadingContent = { Icon(iconState) },
+            supportingContent = { Text.Vanilla(supporting) },
+            trailingContent = trailingContent,
+        )
+    }
 }
 
 

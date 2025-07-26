@@ -44,7 +44,7 @@ public fun InformativeUi(
             state = illustration,
             modifier = Modifier.fillMaxWidth(0.8f),
         )
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(0.5f))
         Text.Headline.Medium(
             text = stringResource(primaryText),
             textColor = colors.onBackground,
