@@ -80,7 +80,7 @@ private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 
 @Composable
 @RollerCoastersPreview
-private fun ImagePreview(
+internal fun ImagePreview(
     @PreviewParameter(ImageStateProvider::class)
     viewState: ImageState,
 ) {
