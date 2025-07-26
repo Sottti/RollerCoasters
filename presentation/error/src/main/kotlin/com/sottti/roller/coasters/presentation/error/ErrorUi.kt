@@ -12,7 +12,7 @@ import com.sottti.roller.coasters.presentation.informative.InformativeUi
 public fun ErrorUi(
     button: ErrorButton,
     modifier: Modifier = Modifier,
-    illustration: IllustrationState = Illustrations.BrokenTrack.state,
+    illustration: IllustrationState = Illustrations.DragonKhanAndShambhala.state,
     @StringRes primaryText: Int = R.string.error_primary_text_default,
     @StringRes secondaryText: Int = R.string.error_secondary_text_default,
 ) {

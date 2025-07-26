@@ -14,7 +14,7 @@ internal class ErrorUiStateProvider : PreviewParameterProvider<ErrorState?> {
 
 private val defaultError = null
 private val alternativeError = ErrorState(
-    illustration = Illustrations.BrokenTrack.state,
+    illustration = Illustrations.DragonKhanAndShambhala.state,
     primaryText = FixturesR.fixture_primary_text,
     secondaryText = FixturesR.fixture_secondary_text,
     buttonText = FixturesR.fixture_button_text,
