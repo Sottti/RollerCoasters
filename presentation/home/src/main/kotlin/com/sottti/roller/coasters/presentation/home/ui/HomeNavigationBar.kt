@@ -124,26 +124,26 @@ private fun NavHost(
     ) {
         composable<Explore> {
             ExploreUi(
-                paddingValues = paddingValues,
                 onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
+                paddingValues = paddingValues,
             )
         }
         composable<Favourites> {
             FavouritesUi(
-                paddingValues = paddingValues,
                 onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
+                paddingValues = paddingValues,
             )
         }
         composable<Search> {
             SearchUi(
-                paddingValues = paddingValues,
                 onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[Search] = callback },
+                paddingValues = paddingValues,
             )
         }
 
