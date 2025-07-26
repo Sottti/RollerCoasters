@@ -86,10 +86,13 @@ private fun SearchResults(
         transitionSpec = { fadeIn() togetherWith fadeOut() }
     ) { isEmpty ->
         when {
-            isEmpty -> EmptyUi(modifier = Modifier
-                .padding(paddingValues)
-                .imePadding()
-                .fillMaxSize())
+            isEmpty -> EmptyUi(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .imePadding()
+                    .fillMaxSize()
+            )
+
             else -> LazyColumn(
                 state = listState,
                 contentPadding = PaddingValues(

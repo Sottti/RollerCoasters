@@ -4,10 +4,8 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import com.sottti.roller.coasters.presentation.utils.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
@@ -19,6 +17,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.explore.model.PrimaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.SecondaryFilter
+import com.sottti.roller.coasters.presentation.utils.Spacer
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,6 +45,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterLocationState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterRideState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterStatusState
+import com.sottti.roller.coasters.presentation.utils.Spacer
 import androidx.compose.material3.ListItem as ListItemMaterial
 
 @Composable
@@ -133,7 +133,7 @@ internal fun DetailsSection(
 ) {
     Column(modifier = Modifier.padding(horizontal = dimensions.padding.medium)) {
         Header(details.header)
-        Spacer(modifier = Modifier.height(dimensions.padding.smallMedium))
+        Spacer(size = dimensions.padding.smallMedium)
         when (details) {
             is RollerCoasterIdentityState -> IdentityDetails(details)
             is RollerCoasterLocationState -> LocationDetails(details)

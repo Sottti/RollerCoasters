@@ -4,10 +4,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
@@ -23,6 +21,7 @@ import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.Ci
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
+import com.sottti.roller.coasters.presentation.utils.Spacer
 
 @Composable
 public fun InformativeUi(
@@ -39,25 +38,25 @@ public fun InformativeUi(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(weight = 1f)
         CircledIllustration(
             state = illustration,
             modifier = Modifier.fillMaxWidth(0.8f),
         )
-        Spacer(modifier = Modifier.weight(0.5f))
+        Spacer(weight = 0.5f)
         Text.Headline.Medium(
             text = stringResource(primaryText),
             textColor = colors.onBackground,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(dimensions.padding.small))
+        Spacer(size = dimensions.padding.small)
         Text.Body.Medium(
             text = stringResource(secondaryText),
             textColor = colors.onBackground,
             textAlign = TextAlign.Center,
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(weight = 1f)
         button?.let {
             Button(
                 modifier = Modifier.fillMaxWidth(),
