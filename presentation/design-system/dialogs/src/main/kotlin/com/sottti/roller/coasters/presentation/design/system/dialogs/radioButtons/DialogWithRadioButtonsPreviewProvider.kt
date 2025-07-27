@@ -6,11 +6,11 @@ import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class DialogWithRadioButtonsPreviewProvider :
     PreviewParameterProvider<DialogWithRadioButtonsState> {
-    override val values = buildList {
+    override val values: Sequence<DialogWithRadioButtonsState> = sequence {
         titleValues().forEach { title ->
             confirmValues().forEach { confirm ->
                 dismissValues().forEach { dismiss ->
-                    add(
+                    yield(
                         DialogWithRadioButtonsState(
                             confirm = confirm,
                             dismiss = dismiss,
@@ -21,7 +21,7 @@ internal class DialogWithRadioButtonsPreviewProvider :
                 }
             }
         }
-    }.asSequence()
+    }
 }
 
 private fun confirmValues() = listOf(

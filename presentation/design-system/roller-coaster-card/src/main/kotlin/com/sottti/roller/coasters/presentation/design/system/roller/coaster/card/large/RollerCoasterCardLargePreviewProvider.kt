@@ -10,9 +10,9 @@ import com.sottti.roller.coasters.presentation.fixtures.fixtureState
 internal class RollerCoasterCardLargePreviewProvider :
     PreviewParameterProvider<RollerCoasterCardLargeState> {
     override val values: Sequence<RollerCoasterCardLargeState> =
-        buildList {
+        sequence {
             foreverLoadingValues.forEach { foreverLoading ->
-                add(
+                yield(
                     RollerCoasterCardLargeState(
                         foreverLoading = foreverLoading,
                         imageUrl = fixtureImageUrl,
@@ -25,7 +25,7 @@ internal class RollerCoasterCardLargePreviewProvider :
                 )
             }
 
-        }.asSequence()
+        }
 }
 
 private val foreverLoadingValues = listOf(true, false)

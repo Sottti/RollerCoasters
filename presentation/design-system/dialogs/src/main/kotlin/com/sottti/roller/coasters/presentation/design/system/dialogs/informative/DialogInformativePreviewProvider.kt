@@ -4,11 +4,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class DialogInformativePreviewProvider : PreviewParameterProvider<DialogInformativeState> {
-    override val values = buildList {
+    override val values: Sequence<DialogInformativeState> = sequence {
         titleValues().forEach { title ->
             textValues().forEach { text ->
                 dismissValues().forEach { dismiss ->
-                    add(
+                    yield(
                         DialogInformativeState(
                             dismiss = dismiss,
                             text = text,
@@ -18,7 +18,7 @@ internal class DialogInformativePreviewProvider : PreviewParameterProvider<Dialo
                 }
             }
         }
-    }.asSequence()
+    }
 }
 
 private fun dismissValues() = listOf(
