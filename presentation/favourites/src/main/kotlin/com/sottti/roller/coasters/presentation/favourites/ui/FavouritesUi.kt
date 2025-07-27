@@ -76,7 +76,7 @@ internal fun FavouritesUi(
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
-    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     onListCreated(lazyListState, scrollBehavior)
 
     FavouritesContent(

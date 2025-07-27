@@ -36,7 +36,7 @@ internal fun invalidYearMonthMessage(input: String) = "Invalid year-month value:
 @VisibleForTesting
 internal fun invalidYearOnlyMessage(input: String) = "Invalid year value: $input"
 
-internal fun String.toDate(): Date? {
+public fun String.toDate(): Date? {
     if (this.isBlank()) return null
     val cleanedDate = cleanDate()
     return when {
@@ -47,7 +47,7 @@ internal fun String.toDate(): Date? {
     }
 }
 
-internal fun Date.toSortableString(): String =
+public fun Date.toSortableString(): String =
     when (this) {
         is FullDate -> localDate.format(fullDateFormatter)
         is YearAndMonth -> "${yearMonth.format(yearMonthSortableFormatter)}$YEAR_AND_MONTH_SORTABLE_SUFFIX"

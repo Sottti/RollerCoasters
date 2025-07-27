@@ -54,7 +54,7 @@ internal fun RollerCoasterDetailsUi(
     state: RollerCoasterDetailsState,
 ) {
     val content = remember(state.content) { state.content }
-    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val topBarState = remember(state.topBar) { state.topBar }
     val onToggleFavourite = remember(onAction) { { onAction(ToggleFavourite) } }
 
