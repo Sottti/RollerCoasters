@@ -7,10 +7,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -19,16 +16,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.LayoutDirection
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchResultViewState
 import com.sottti.roller.coasters.presentation.search.model.SearchViewState
+import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,19 +49,11 @@ internal fun SearchUiContent(
             )
         },
     ) { innerPaddingValues ->
-        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
-            PaddingValues(
-                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                top = innerPaddingValues.calculateTopPadding(),
-                bottom = innerPaddingValues.calculateBottomPadding(),
-            )
-        }
         SearchResults(
             listState = listState,
             onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = rememberedPaddingValues,
+            paddingValues = innerPaddingValues.override(bottom = paddingValues.calculateBottomPadding()),
             scrollBehavior = scrollBehavior,
             state = state.results,
         )
@@ -89,22 +78,15 @@ private fun SearchResults(
             isEmpty -> EmptyUi(
                 modifier = Modifier
                     .padding(paddingValues)
-                    .imePadding()
                     .fillMaxSize()
             )
 
             else -> LazyColumn(
                 state = listState,
-                contentPadding = PaddingValues(
-                    top = paddingValues.calculateTopPadding() + dimensions.padding.medium,
-                    bottom = paddingValues.calculateBottomPadding() + dimensions.padding.medium,
-                    start = dimensions.padding.medium,
-                    end = dimensions.padding.medium,
-                ),
+                contentPadding = paddingValues + PaddingValues(dimensions.padding.medium),
                 verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
                 modifier = Modifier
                     .fillMaxSize()
-                    .imePadding()
                     .nestedScroll(connection = scrollBehavior.nestedScrollConnection)
 
             ) {
