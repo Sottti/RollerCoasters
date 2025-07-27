@@ -51,7 +51,7 @@ public fun AboutMeUi(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun AboutMeUi(
+private fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,

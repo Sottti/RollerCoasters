@@ -30,7 +30,7 @@ public fun SettingsUi(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun SettingsUi(
+private fun SettingsUi(
     onBackNavigation: () -> Unit,
     viewModel: SettingsViewModel,
 ) {
@@ -76,20 +76,6 @@ internal fun SettingsUi(
 @RollerCoastersPreview
 internal fun SettingsUiPreview(
     @PreviewParameter(SettingsUiStateProvider::class) state: SettingsPreviewState,
-) {
-    RollerCoastersPreviewTheme {
-        SettingsUi(
-            onAction = state.onAction,
-            onBackNavigation = state.onBackNavigation,
-            state = state.state,
-        )
-    }
-}
-
-@Composable
-@RollerCoastersPreview
-internal fun SettingsUiPickersPreview(
-    @PreviewParameter(SettingsUiPickersStateProvider::class) state: SettingsPreviewState,
 ) {
     RollerCoastersPreviewTheme {
         SettingsUi(

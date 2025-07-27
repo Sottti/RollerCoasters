@@ -23,7 +23,23 @@ public fun SearchUi(
     onScrollToTop: (() -> Unit) -> Unit,
     paddingValues: PaddingValues,
 ) {
-    val viewModel = hiltViewModel<SearchViewModel>()
+    SearchUi(
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onNavigateToSettings = onNavigateToSettings,
+        onScrollToTop = onScrollToTop,
+        paddingValues = paddingValues,
+        viewModel = hiltViewModel()
+    )
+}
+
+@Composable
+private fun SearchUi(
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onScrollToTop: (() -> Unit) -> Unit,
+    paddingValues: PaddingValues,
+    viewModel: SearchViewModel,
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     SearchUi(
         onAction = viewModel.onAction,
