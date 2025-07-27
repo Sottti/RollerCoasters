@@ -7,8 +7,8 @@ import com.sottti.roller.coasters.presentation.fixtures.fixtureImageUrl
 internal class ImageStateProvider :
     PreviewParameterProvider<ImageState> {
     override val values: Sequence<ImageState> =
-        buildList {
-            add(
+        sequence {
+            yield(
                 ImageState(
                     contentDescription = fixtureContentDescription,
                     foreverLoading = true,
@@ -17,7 +17,7 @@ internal class ImageStateProvider :
                 ),
             )
             roundedCornersValues.forEach { roundedCorners ->
-                add(
+                yield(
                     ImageState(
                         contentDescription = fixtureContentDescription,
                         foreverLoading = false,
@@ -26,7 +26,7 @@ internal class ImageStateProvider :
                     )
                 )
             }
-        }.asSequence()
+        }
 }
 
 private val roundedCornersValues = listOf(false, true)

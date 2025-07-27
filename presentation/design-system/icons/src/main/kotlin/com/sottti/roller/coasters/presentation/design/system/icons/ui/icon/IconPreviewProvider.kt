@@ -4,11 +4,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class IconPreviewProvider : PreviewParameterProvider<IconPreviewState> {
-    override val values = buildList {
+    override val values: Sequence<IconPreviewState> = sequence {
         stateValues().forEach { state ->
             crossfadeValues().forEach { crossfade ->
                 onClickValues().forEach { onClick ->
-                    add(
+                    yield(
                         IconPreviewState(
                             crossfade = crossfade,
                             onClick = onClick,
@@ -18,7 +18,7 @@ internal class IconPreviewProvider : PreviewParameterProvider<IconPreviewState> 
                 }
             }
         }
-    }.asSequence()
+    }
 }
 
 private fun crossfadeValues() = sequenceOf(false, true)
