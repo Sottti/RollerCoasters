@@ -53,13 +53,13 @@ import com.sottti.roller.coasters.presentation.utils.plus
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun AboutMeContent(
+    lazyListState: LazyListState,
+    onAction: (AboutMeAction) -> Unit,
     onNavigateToSettings: () -> Unit,
+    outerPadding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
     showTitle: Boolean,
     state: AboutMeState,
-    paddingValues: PaddingValues,
-    lazyListState: LazyListState,
-    onAction: (AboutMeAction) -> Unit,
     onShowBottomSheet: (@Composable (ColumnScope.() -> Unit)) -> Unit,
 ) {
     Scaffold(
@@ -72,18 +72,18 @@ internal fun AboutMeContent(
                 titleResId = state.title,
             )
         }
-    ) { innerPaddingValues ->
+    ) { innerPadding ->
         val mergedPaddingValues =
-            paddingValues
+            outerPadding
                 .override(top = dimensions.padding.zero) +
-                    innerPaddingValues
+                    innerPadding
                         .override(bottom = dimensions.padding.zero)
         AboutMeItems(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onAction = onAction,
             onShowBottomSheet = onShowBottomSheet,
-            paddingValues = mergedPaddingValues,
+            padding = mergedPaddingValues,
             state = state,
         )
     }
@@ -95,13 +95,13 @@ private fun AboutMeItems(
     nestedScrollConnection: NestedScrollConnection,
     onAction: (AboutMeAction) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     state: AboutMeState,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues),
+            .padding(padding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         LazyColumn(

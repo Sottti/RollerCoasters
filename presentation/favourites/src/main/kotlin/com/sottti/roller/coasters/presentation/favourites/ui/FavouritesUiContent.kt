@@ -3,8 +3,6 @@ package com.sottti.roller.coasters.presentation.favourites.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,11 +11,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
@@ -30,17 +26,19 @@ import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
+import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesContent(
-    onNavigateToSettings: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
-    paddingValues: PaddingValues,
     lazyListState: LazyListState,
     onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    outerPadding: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
+    scrollBehavior: TopAppBarScrollBehavior,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -50,20 +48,12 @@ internal fun FavouritesContent(
                 scrollBehavior = scrollBehavior,
             )
         },
-    ) { innerPaddingValues ->
-        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
-            PaddingValues(
-                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                top = innerPaddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
-            )
-        }
+    ) { innerPadding ->
         RollerCoasters(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = rememberedPaddingValues,
+            padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
             rollerCoasters = rollerCoasters,
         )
     }
@@ -75,47 +65,47 @@ private fun RollerCoasters(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
     onNavigateToRollerCoaster: (Int) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
-    Column(
-        modifier = Modifier
-            .padding(paddingValues)
-            .fillMaxSize()
-    ) {
+    Column(modifier = Modifier.fillMaxSize()) {
         when (rollerCoasters.loadState.refresh) {
-            is Loading -> FillMaxWidthProgressIndicator()
-            is LoadState.Error -> Error()
-            is NotLoading -> {
-                when (rollerCoasters.itemCount) {
-                    0 -> Empty()
-                    else -> RollerCoasters(
-                        listState = listState,
-                        nestedScrollConnection = nestedScrollConnection,
-                        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                        rollerCoasters = rollerCoasters,
-                    )
-                }
+            is Loading -> FillMaxWidthProgressIndicator(padding)
+            is LoadState.Error -> ErrorUi(
+                modifier = Modifier.padding(padding),
+                button = ErrorButton(onClick = {})
+            )
+
+            is NotLoading -> when (rollerCoasters.itemCount) {
+                0 -> EmptyUi(modifier = Modifier.padding(padding))
+                else -> RollerCoastersLoaded(
+                    listState = listState,
+                    nestedScrollConnection = nestedScrollConnection,
+                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                    padding = padding,
+                    rollerCoasters = rollerCoasters,
+                )
             }
         }
     }
 }
 
 @Composable
-private fun RollerCoasters(
+private fun RollerCoastersLoaded(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
     onNavigateToRollerCoaster: (Int) -> Unit,
+    padding: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(dimensions.padding.medium),
+        contentPadding = padding + PaddingValues(dimensions.padding.medium),
         modifier = Modifier.nestedScroll(nestedScrollConnection),
         state = listState,
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
-            item { FillMaxWidthProgressIndicator() }
+            item { FillMaxWidthProgressIndicator(padding) }
         }
 
         items(
@@ -131,7 +121,7 @@ private fun RollerCoasters(
         }
 
         if (rollerCoasters.loadState.append is Loading) {
-            item { FillMaxWidthProgressIndicator() }
+            item { FillMaxWidthProgressIndicator(padding) }
         }
     }
 }
@@ -151,17 +141,7 @@ private fun RollerCoaster(
 }
 
 @Composable
-private fun Empty() {
-    EmptyUi()
-}
-
-@Composable
-private fun Error() {
-    ErrorUi(button = ErrorButton(onClick = {}))
-}
-
-@Composable
-private fun FillMaxWidthProgressIndicator() {
+private fun FillMaxWidthProgressIndicator(padding: PaddingValues) {
     ProgressIndicator(
         modifier = Modifier
             .padding(vertical = dimensions.padding.medium)

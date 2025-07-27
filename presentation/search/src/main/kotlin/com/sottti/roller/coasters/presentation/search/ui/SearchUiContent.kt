@@ -34,7 +34,7 @@ internal fun SearchUiContent(
     onAction: (SearchAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
-    paddingValues: PaddingValues,
+    outerPadding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
     state: SearchViewState,
 ) {
@@ -48,12 +48,12 @@ internal fun SearchUiContent(
                 state = state,
             )
         },
-    ) { innerPaddingValues ->
+    ) { innerPadding ->
         SearchResults(
             listState = listState,
             onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = innerPaddingValues.override(bottom = paddingValues.calculateBottomPadding()),
+            padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
             scrollBehavior = scrollBehavior,
             state = state.results,
         )
@@ -66,7 +66,7 @@ private fun SearchResults(
     listState: LazyListState,
     onAction: (SearchAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
     state: List<SearchResultViewState>,
 ) {
@@ -77,13 +77,13 @@ private fun SearchResults(
         when {
             isEmpty -> EmptyUi(
                 modifier = Modifier
-                    .padding(paddingValues)
+                    .padding(padding)
                     .fillMaxSize()
             )
 
             else -> LazyColumn(
                 state = listState,
-                contentPadding = paddingValues + PaddingValues(dimensions.padding.medium),
+                contentPadding = padding + PaddingValues(dimensions.padding.medium),
                 verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
                 modifier = Modifier
                     .fillMaxSize()

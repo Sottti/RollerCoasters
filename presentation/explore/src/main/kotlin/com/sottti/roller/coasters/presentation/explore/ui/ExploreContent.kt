@@ -34,9 +34,9 @@ internal fun ExploreContent(
     filters: Filters,
     lazyListState: LazyListState,
     onAction: (ExploreAction) -> Unit,
-    onNavigateToSettings: () -> Unit,
-    paddingValues: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    outerPadding: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     Scaffold(
@@ -49,20 +49,20 @@ internal fun ExploreContent(
                 onNavigateToSettings = onNavigateToSettings,
             )
         },
-    ) { innerPaddingValues ->
-        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
+    ) { innerPadding ->
+        val rememberedPaddingValues = remember(innerPadding, outerPadding) {
             PaddingValues(
-                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                top = innerPaddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
+                start = innerPadding.calculateStartPadding(LayoutDirection.Ltr),
+                end = innerPadding.calculateEndPadding(LayoutDirection.Ltr),
+                top = innerPadding.calculateTopPadding(),
+                bottom = outerPadding.calculateBottomPadding(),
             )
         }
         RollerCoastersList(
             listState = lazyListState,
             onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = rememberedPaddingValues,
+            padding = rememberedPaddingValues,
             rollerCoasters = rollerCoasters,
         )
     }
@@ -73,12 +73,12 @@ private fun RollerCoastersList(
     listState: LazyListState,
     onAction: (ExploreAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     Column(
         modifier = Modifier
-            .padding(paddingValues)
+            .padding(padding)
             .fillMaxSize()
     ) {
         when (rollerCoasters.loadState.refresh) {

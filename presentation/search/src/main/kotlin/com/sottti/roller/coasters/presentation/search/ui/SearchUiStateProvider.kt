@@ -45,7 +45,7 @@ private fun searchPreviewState(
     onAction = {},
     onNavigateToRollerCoaster = {},
     onNavigateToSettings = {},
-    paddingValues = PaddingValues(),
+    padding = PaddingValues(),
     state = SearchViewState(
         searchBar = searchBar,
         loading = loading,

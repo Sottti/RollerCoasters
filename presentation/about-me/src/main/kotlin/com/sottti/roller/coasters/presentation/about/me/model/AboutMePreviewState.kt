@@ -13,6 +13,6 @@ internal data class AboutMePreviewState(
     val onAction: (AboutMeAction) -> Unit,
     val onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     val onNavigateToSettings: () -> Unit,
-    val paddingValues: PaddingValues,
+    val padding: PaddingValues,
     val state: AboutMeState,
 )

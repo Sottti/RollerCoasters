@@ -21,7 +21,7 @@ internal fun ExploreUiPreview(
             onListCreated = state.onListCreated,
             onNavigateToRollerCoaster = {},
             onNavigateToSettings = {},
-            paddingValues = PaddingValues(),
+            padding = PaddingValues(),
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
         )
     }

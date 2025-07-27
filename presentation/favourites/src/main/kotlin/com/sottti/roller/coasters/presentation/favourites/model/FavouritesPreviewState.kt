@@ -15,6 +15,6 @@ internal data class FavouritesPreviewState(
     val onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     val onNavigateToRollerCoaster: (Int) -> Unit,
     val onNavigateToSettings: () -> Unit,
-    val paddingValues: PaddingValues,
+    val padding: PaddingValues,
     val rollerCoasters: Flow<PagingData<FavouritesRollerCoaster>>,
 )

@@ -87,12 +87,12 @@ internal fun NavigationBar(
                 },
             )
         },
-    ) { paddingValues ->
+    ) { padding ->
         NavHost(
             navController = navController,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             onNavigateToSettings = onNavigateToSettings,
-            paddingValues = paddingValues,
+            padding = padding,
             scrollToTopCallbacks = scrollToTopCallbacks,
             showSheet = showSheet,
             startDestination = startDestination,
@@ -100,7 +100,7 @@ internal fun NavigationBar(
 
         if (bottomSheetContent != null) {
             ModalBottomSheet(
-                modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
+                modifier = Modifier.padding(top = padding.calculateTopPadding()),
                 onDismissRequest = { bottomSheetContent = null },
                 sheetState = sheetState,
             ) { bottomSheetContent?.invoke(this) }
@@ -112,7 +112,7 @@ internal fun NavigationBar(
 private fun NavHost(
     navController: NavHostController,
     startDestination: Explore,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     scrollToTopCallbacks: MutableMap<NavigationDestination, () -> Unit>,
@@ -127,7 +127,7 @@ private fun NavHost(
                 onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[Explore] = callback },
-                paddingValues = paddingValues,
+                padding = padding,
             )
         }
         composable<Favourites> {
@@ -135,7 +135,7 @@ private fun NavHost(
                 onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[Favourites] = callback },
-                paddingValues = paddingValues,
+                padding = padding,
             )
         }
         composable<Search> {
@@ -143,7 +143,7 @@ private fun NavHost(
                 onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[Search] = callback },
-                paddingValues = paddingValues,
+                padding = padding,
             )
         }
 
@@ -152,7 +152,7 @@ private fun NavHost(
                 onNavigateToSettings = onNavigateToSettings,
                 onScrollToTop = { callback -> scrollToTopCallbacks[AboutMe] = callback },
                 onShowBottomSheet = showSheet,
-                paddingValues = paddingValues,
+                padding = padding,
             )
         }
     }
