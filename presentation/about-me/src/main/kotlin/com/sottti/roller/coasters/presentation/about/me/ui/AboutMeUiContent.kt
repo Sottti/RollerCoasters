@@ -16,7 +16,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,10 +45,52 @@ import com.sottti.roller.coasters.presentation.design.system.icons.model.IconSta
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.Spacer
+import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
-internal fun AboutMeUiContent(
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun AboutMeContent(
+    onNavigateToSettings: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior,
+    showTitle: Boolean,
+    state: AboutMeState,
+    paddingValues: PaddingValues,
+    lazyListState: LazyListState,
+    onAction: (AboutMeAction) -> Unit,
+    onShowBottomSheet: (@Composable (ColumnScope.() -> Unit)) -> Unit,
+) {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            MainTopBar(
+                onNavigateToSettings = onNavigateToSettings,
+                scrollBehavior = scrollBehavior,
+                showTitle = showTitle,
+                titleResId = state.title,
+            )
+        }
+    ) { innerPaddingValues ->
+        val mergedPaddingValues =
+            paddingValues
+                .override(top = dimensions.padding.zero) +
+                    innerPaddingValues
+                        .override(bottom = dimensions.padding.zero)
+        AboutMeItems(
+            listState = lazyListState,
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
+            onAction = onAction,
+            onShowBottomSheet = onShowBottomSheet,
+            paddingValues = mergedPaddingValues,
+            state = state,
+        )
+    }
+}
+
+@Composable
+private fun AboutMeItems(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
     onAction: (AboutMeAction) -> Unit,
@@ -86,7 +131,7 @@ internal fun AboutMeUiContent(
 
 
 @Composable
-internal fun ProfileImage(state: ImageState) {
+private fun ProfileImage(state: ImageState) {
     HeroImage(
         modifier = Modifier
             .padding(top = dimensions.padding.large)
@@ -105,7 +150,7 @@ private fun Name(state: Int) {
 }
 
 @Composable
-internal fun SocialProfiles(
+private fun SocialProfiles(
     onAction: (AboutMeAction) -> Unit,
     state: List<SocialProfileState>,
 ) {

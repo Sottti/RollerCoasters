@@ -1,24 +1,17 @@
 package com.sottti.roller.coasters.presentation.favourites.ui
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
@@ -28,7 +21,6 @@ import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewMod
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesPreviewState
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
-import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -87,31 +79,14 @@ internal fun FavouritesUi(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     onListCreated(lazyListState, scrollBehavior)
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            MainTopBar(
-                onNavigateToSettings = onNavigateToSettings,
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { innerPaddingValues ->
-        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
-            PaddingValues(
-                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                top = innerPaddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
-            )
-        }
-        FavouritesRollerCoastersContent(
-            listState = lazyListState,
-            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
-            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = rememberedPaddingValues,
-            rollerCoasters = rollerCoasters,
-        )
-    }
+    FavouritesContent(
+        lazyListState = lazyListState,
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onNavigateToSettings = onNavigateToSettings,
+        paddingValues = paddingValues,
+        rollerCoasters = rollerCoasters,
+        scrollBehavior = scrollBehavior,
+    )
 }
 
 @Composable

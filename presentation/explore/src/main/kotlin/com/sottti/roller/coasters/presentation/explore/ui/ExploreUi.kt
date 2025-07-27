@@ -1,20 +1,13 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
@@ -87,33 +80,15 @@ internal fun ExploreUi(
     val lazyListState = rememberLazyListState()
     onListCreated(lazyListState)
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            ExploreTopBar(
-                filters = filters,
-                lazyListState = lazyListState,
-                onAction = onAction,
-                onNavigateToSettings = onNavigateToSettings,
-            )
-        },
-    ) { innerPaddingValues ->
-        val rememberedPaddingValues = remember(innerPaddingValues, paddingValues) {
-            PaddingValues(
-                start = innerPaddingValues.calculateStartPadding(LayoutDirection.Ltr),
-                end = innerPaddingValues.calculateEndPadding(LayoutDirection.Ltr),
-                top = innerPaddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding(),
-            )
-        }
-        RollerCoastersList(
-            listState = lazyListState,
-            onAction = onAction,
-            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-            paddingValues = rememberedPaddingValues,
-            rollerCoasters = rollerCoasters,
-        )
-    }
+    ExploreContent(
+        filters = filters,
+        lazyListState = lazyListState,
+        onAction = onAction,
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onNavigateToSettings = onNavigateToSettings,
+        paddingValues = paddingValues,
+        rollerCoasters = rollerCoasters,
+    )
 }
 
 @Composable

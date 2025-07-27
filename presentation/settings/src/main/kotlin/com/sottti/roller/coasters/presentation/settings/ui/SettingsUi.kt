@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.ui
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,7 +15,6 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsPreviewState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
-import com.sottti.roller.coasters.presentation.settings.ui.dialogs.Dialogs
 
 @Composable
 public fun SettingsUi(
@@ -56,20 +54,12 @@ internal fun SettingsUi(
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-    Scaffold(
-        topBar = { TopBar(onBackNavigation, scrollBehavior, state.topBar) },
-    ) { paddingValues ->
-        SettingsContent(
-            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
-            onAction = onAction,
-            paddingValues = paddingValues,
-            state = state,
-        )
-        Dialogs(
-            state = state,
-            onAction = onAction,
-        )
-    }
+    SettingsUiContent(
+        onAction = onAction,
+        onBackNavigation = onBackNavigation,
+        scrollBehavior = scrollBehavior,
+        state = state,
+    )
 }
 
 @Composable
