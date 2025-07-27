@@ -1,46 +1,26 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.utils.BasePaparazziSnapshotTest
+import com.sottti.roller.coasters.presentation.utils.paparazziParameters
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class ExploreSnapshotTest(
     nightMode: NightMode,
-    private val state: ExplorePreviewState,
-) {
+    state: ExplorePreviewState,
+) : BasePaparazziSnapshotTest<ExplorePreviewState>(nightMode, state) {
 
-    @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
-
-    @Test
-    fun snapshotTest() {
-        paparazzi.snapshot {
-            ExploreUiPreview(state)
-        }
+    override fun snapshotContent(state: ExplorePreviewState) {
+        ExploreUiPreview(state)
     }
 
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> =
-            ExploreUiStateProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+        fun data(): Collection<Array<Any?>> =
+            ExploreUiStateProvider().paparazziParameters()
     }
 }

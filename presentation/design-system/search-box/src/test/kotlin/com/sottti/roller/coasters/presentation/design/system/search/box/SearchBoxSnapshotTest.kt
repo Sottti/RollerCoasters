@@ -1,47 +1,30 @@
 package com.sottti.roller.coasters.presentation.design.system.search.box
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.utils.BasePaparazziSnapshotTest
+import com.sottti.roller.coasters.presentation.utils.paparazziParameters
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class SearchBoxSnapshotTest(
     nightMode: NightMode,
-    private val state: SearchBoxViewState,
+    state: SearchBoxViewState,
+) : BasePaparazziSnapshotTest<SearchBoxViewState>(
+    nightMode,
+    state,
+    renderingMode = SessionParams.RenderingMode.SHRINK,
 ) {
 
-    @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
-
-    @Test
-    fun snapshotTest() {
-        paparazzi.snapshot {
-            SearchBoxPreview(state)
-        }
+    override fun snapshotContent(state: SearchBoxViewState) {
+        SearchBoxPreview(state)
     }
 
     companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> =
-            SearchBoxViewStateProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+        fun data(): Collection<Array<Any?>> =
+            SearchBoxViewStateProvider().paparazziParameters()
     }
 }
