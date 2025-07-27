@@ -144,7 +144,7 @@ private fun RollerCoaster(
 private fun FillMaxWidthProgressIndicator(padding: PaddingValues) {
     ProgressIndicator(
         modifier = Modifier
-            .padding(vertical = dimensions.padding.medium)
+            .padding(padding)
             .fillMaxSize(),
     )
 }
