@@ -4,12 +4,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class ChipPreviewProvider : PreviewParameterProvider<ChipState> {
-    override val values = buildList {
+    override val values: Sequence<ChipState> = sequence {
         leadingIconValues().forEach { leadingIcon ->
             selectedValues().forEach { enabled ->
                 expandedValues().forEach { expanded ->
                     labelResIdValues().forEach { checked ->
-                        add(
+                        yield(
                             ChipState(
                                 expanded = expanded,
                                 labelResId = checked,
@@ -21,7 +21,7 @@ internal class ChipPreviewProvider : PreviewParameterProvider<ChipState> {
                 }
             }
         }
-    }.asSequence()
+    }
 }
 
 private fun expandedValues() = sequenceOf(false, true, null)

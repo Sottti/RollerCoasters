@@ -8,10 +8,10 @@ import com.sottti.roller.coasters.presentation.fixtures.fixtureRollerCoasterName
 internal class RollerCoasterCardSmallPreviewProvider :
     PreviewParameterProvider<RollerCoasterCardSmallState> {
     override val values: Sequence<RollerCoasterCardSmallState> =
-        buildList {
+        sequence {
             foreverLoadingValues.forEach { foreverLoading ->
                 imageUrlValues.forEach { imageUrl ->
-                    add(
+                    yield(
                         RollerCoasterCardSmallState(
                             foreverLoading = foreverLoading,
                             imageUrl = imageUrl,
@@ -22,7 +22,7 @@ internal class RollerCoasterCardSmallPreviewProvider :
                     )
                 }
             }
-        }.asSequence()
+        }
 }
 
 private val foreverLoadingValues = listOf(true, false)

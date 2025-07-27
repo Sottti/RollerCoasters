@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -27,6 +28,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.map.Map
@@ -48,7 +50,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterStatusState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.TopBarState
 import com.sottti.roller.coasters.presentation.utils.Spacer
-import androidx.compose.material3.ListItem as ListItemMaterial
+import androidx.compose.material3.ListItem as MaterialListItem
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -257,10 +259,13 @@ private fun ListItem(
     state: RollerCoasterDetailsRow,
     showBottomDivider: Boolean = true,
 ) {
-    ListItemMaterial(
+    val windowWidthPx = LocalWindowInfo.current.containerSize.width
+    val density = LocalDensity.current
+    val screenWidth = with(density) { windowWidthPx.toDp() }
+    MaterialListItem(
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-        headlineContent = { Headline(state) },
-        trailingContent = { Trailing(state) },
+        headlineContent = { Headline(screenWidth = screenWidth, state = state) },
+        trailingContent = { Trailing(screenWidth = screenWidth, state = state) },
     )
     if (showBottomDivider) HorizontalDivider()
 }
@@ -274,19 +279,27 @@ private fun Header(@StringRes text: Int) {
 }
 
 @Composable
-private fun Headline(state: RollerCoasterDetailsRow) {
+private fun Headline(
+    screenWidth: Dp,
+    state: RollerCoasterDetailsRow,
+) {
     Text.Body.Large(
         text = stringResource(state.headline),
         textColor = colors.onSurfaceVariant,
+        modifier = Modifier.widthIn(max = screenWidth * 0.4f)
     )
 }
 
 @Composable
-private fun Trailing(state: RollerCoasterDetailsRow) {
+private fun Trailing(
+    screenWidth: Dp,
+    state: RollerCoasterDetailsRow,
+) {
     state.trailing?.let { trailing ->
         Text.Body.Large(
             text = trailing,
             textColor = colors.onSurface,
+            modifier = Modifier.widthIn(max = screenWidth * 0.5f)
         )
     }
 }

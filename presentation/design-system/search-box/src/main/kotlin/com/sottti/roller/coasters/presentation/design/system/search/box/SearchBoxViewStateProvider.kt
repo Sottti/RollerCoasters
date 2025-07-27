@@ -4,10 +4,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
 
 internal class SearchBoxViewStateProvider : PreviewParameterProvider<SearchBoxViewState> {
-    override val values = buildList {
+    override val values: Sequence<SearchBoxViewState> = sequence {
         queryValues().forEach { query ->
             loadingValues().forEach { loading ->
-                add(
+                yield(
                     SearchBoxViewState(
                         hint = R.string.hint,
                         query = query,
@@ -17,7 +17,7 @@ internal class SearchBoxViewStateProvider : PreviewParameterProvider<SearchBoxVi
                 )
             }
         }
-    }.asSequence()
+    }
 }
 
 private fun loadingValues() = listOf(false, true)
