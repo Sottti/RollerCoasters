@@ -105,7 +105,7 @@ private fun RollerCoastersLoaded(
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
-            item { FillMaxWidthProgressIndicator(padding) }
+            item { FillMaxWidthProgressIndicator() }
         }
 
         items(
@@ -121,7 +121,7 @@ private fun RollerCoastersLoaded(
         }
 
         if (rollerCoasters.loadState.append is Loading) {
-            item { FillMaxWidthProgressIndicator(padding) }
+            item { FillMaxWidthProgressIndicator() }
         }
     }
 }
@@ -141,7 +141,9 @@ private fun RollerCoaster(
 }
 
 @Composable
-private fun FillMaxWidthProgressIndicator(padding: PaddingValues) {
+private fun FillMaxWidthProgressIndicator(
+    padding: PaddingValues = PaddingValues(vertical = dimensions.padding.medium),
+) {
     ProgressIndicator(
         modifier = Modifier
             .padding(padding)
