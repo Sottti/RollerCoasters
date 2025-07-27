@@ -13,7 +13,7 @@ internal class AboutMeUiStateProvider : PreviewParameterProvider<AboutMePreviewS
             onAction = {},
             onListCreated = { listState, scrollBehavior -> },
             onNavigateToSettings = {},
-            paddingValues = PaddingValues(),
+            padding = PaddingValues(),
             state = initialState,
         ),
     )

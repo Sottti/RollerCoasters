@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -22,47 +25,81 @@ import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
+import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
+import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
+
 
 @Composable
-internal fun FavouritesRollerCoastersContent(
-    listState: LazyListState,
-    nestedScrollConnection: NestedScrollConnection,
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun FavouritesContent(
+    lazyListState: LazyListState,
     onNavigateToRollerCoaster: (Int) -> Unit,
-    paddingValues: PaddingValues,
+    onNavigateToSettings: () -> Unit,
+    outerPadding: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
+    scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    Column(
-        modifier = Modifier
-            .padding(paddingValues)
-            .fillMaxSize()
-    ) {
-        when (rollerCoasters.loadState.refresh) {
-            is Loading -> FillMaxWidthProgressIndicator()
-            is LoadState.Error -> Error()
-            is NotLoading -> {
-                when (rollerCoasters.itemCount) {
-                    0 -> Empty()
-                    else -> RollerCoasters(
-                        listState = listState,
-                        nestedScrollConnection = nestedScrollConnection,
-                        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
-                        rollerCoasters = rollerCoasters,
-                    )
-                }
-            }
-        }
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            MainTopBar(
+                onNavigateToSettings = onNavigateToSettings,
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    ) { innerPadding ->
+        RollerCoasters(
+            listState = lazyListState,
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
+            onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+            padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
+            rollerCoasters = rollerCoasters,
+        )
     }
 }
+
 
 @Composable
 private fun RollerCoasters(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
     onNavigateToRollerCoaster: (Int) -> Unit,
+    padding: PaddingValues,
+    rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        when (rollerCoasters.loadState.refresh) {
+            is Loading -> FillMaxWidthProgressIndicator(padding)
+            is LoadState.Error -> ErrorUi(
+                modifier = Modifier.padding(padding),
+                button = ErrorButton(onClick = {})
+            )
+
+            is NotLoading -> when (rollerCoasters.itemCount) {
+                0 -> EmptyUi(modifier = Modifier.padding(padding))
+                else -> LoadedRollerCoasters(
+                    listState = listState,
+                    nestedScrollConnection = nestedScrollConnection,
+                    onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+                    padding = padding,
+                    rollerCoasters = rollerCoasters,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun LoadedRollerCoasters(
+    listState: LazyListState,
+    nestedScrollConnection: NestedScrollConnection,
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    padding: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(dimensions.padding.medium),
+        contentPadding = padding + PaddingValues(dimensions.padding.medium),
         modifier = Modifier.nestedScroll(nestedScrollConnection),
         state = listState,
         verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
@@ -104,20 +141,12 @@ private fun RollerCoaster(
 }
 
 @Composable
-private fun Empty() {
-    EmptyUi()
-}
-
-@Composable
-private fun Error() {
-    ErrorUi(button = ErrorButton(onClick = {}))
-}
-
-@Composable
-private fun FillMaxWidthProgressIndicator() {
+private fun FillMaxWidthProgressIndicator(
+    padding: PaddingValues = PaddingValues(vertical = dimensions.padding.medium),
+) {
     ProgressIndicator(
         modifier = Modifier
-            .padding(vertical = dimensions.padding.medium)
+            .padding(padding)
             .fillMaxSize(),
     )
 }

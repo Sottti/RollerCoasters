@@ -8,6 +8,6 @@ internal data class SearchPreviewState(
     val onAction: (SearchAction) -> Unit,
     val onNavigateToRollerCoaster: (Int) -> Unit,
     val onNavigateToSettings: () -> Unit,
-    val paddingValues: PaddingValues,
+    val padding: PaddingValues,
     val state: SearchViewState,
 )

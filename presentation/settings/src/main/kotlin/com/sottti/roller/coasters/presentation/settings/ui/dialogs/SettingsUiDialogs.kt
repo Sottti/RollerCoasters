@@ -5,7 +5,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 
 @Composable
-internal fun Dialogs(
+internal fun SettingsDialogs(
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
 ) {

@@ -21,15 +21,31 @@ public fun SearchUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
 ) {
-    val viewModel = hiltViewModel<SearchViewModel>()
+    SearchUi(
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onNavigateToSettings = onNavigateToSettings,
+        onScrollToTop = onScrollToTop,
+        padding = padding,
+        viewModel = hiltViewModel()
+    )
+}
+
+@Composable
+private fun SearchUi(
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onScrollToTop: (() -> Unit) -> Unit,
+    padding: PaddingValues,
+    viewModel: SearchViewModel,
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     SearchUi(
         onAction = viewModel.onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
-        paddingValues = paddingValues,
+        padding = padding,
         state = state,
     )
 }
@@ -40,7 +56,7 @@ internal fun SearchUi(
     onAction: (SearchAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     state: SearchViewState,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -51,7 +67,7 @@ internal fun SearchUi(
         onAction = onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
-        paddingValues = paddingValues,
+        outerPadding = padding,
         scrollBehavior = scrollBehavior,
         state = state,
     )
@@ -68,7 +84,7 @@ internal fun SearchUiPreview(
             onAction = state.onAction,
             onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
             onNavigateToSettings = state.onNavigateToSettings,
-            paddingValues = state.paddingValues,
+            padding = state.padding,
             state = state.state,
         )
     }

@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -59,22 +58,13 @@ internal fun RollerCoasterDetailsUi(
     val topBarState = remember(state.topBar) { state.topBar }
     val onToggleFavourite = remember(onAction) { { onAction(ToggleFavourite) } }
 
-
-    Scaffold(
-        topBar = {
-            TopBar(
-                onBackNavigation = onBackNavigation,
-                onToggleFavourite = onToggleFavourite,
-                scrollBehavior = scrollBehavior,
-                state = topBarState,
-            )
-        }) { paddingValues ->
-        RollerCoasterDetailsContent(
-            paddingValues = paddingValues,
-            scrollBehavior = scrollBehavior,
-            state = content,
-        )
-    }
+    RollerCoasterDetailsContent(
+        content = content,
+        onBackNavigation = onBackNavigation,
+        onToggleFavourite = onToggleFavourite,
+        scrollBehavior = scrollBehavior,
+        topBarState = topBarState,
+    )
 }
 
 @Composable
