@@ -52,7 +52,7 @@ internal fun SettingsUi(
     onBackNavigation: () -> Unit,
     state: SettingsState,
 ) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
 
     SettingsUiContent(
         onAction = onAction,

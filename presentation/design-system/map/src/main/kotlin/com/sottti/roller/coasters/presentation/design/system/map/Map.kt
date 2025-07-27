@@ -57,18 +57,20 @@ private fun RealMap(
 ) {
     val context = LocalContext.current
     val mapStyleOptions = remember { MapStyleOptions.loadRawResourceStyle(context, getMapStyle()) }
-    val latLng = LatLng(latitude, longitude)
+    val latLng = remember(latitude, longitude) { LatLng(latitude, longitude) }
     val markerState = rememberUpdatedMarkerState(position = latLng)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(latLng, 17f)
     }
-    val mapUiSettings = MapUiSettings(scrollGesturesEnabled = false)
-    val mapProperties = MapProperties(
-        isBuildingEnabled = true,
-        isIndoorEnabled = true,
-        mapStyleOptions = mapStyleOptions,
-        mapType = MapType.NORMAL,
-    )
+    val mapUiSettings = remember { MapUiSettings(scrollGesturesEnabled = false) }
+    val mapProperties = remember(mapStyleOptions) {
+        MapProperties(
+            isBuildingEnabled = true,
+            isIndoorEnabled = true,
+            mapStyleOptions = mapStyleOptions,
+            mapType = MapType.NORMAL,
+        )
+    }
 
     GoogleMap(
         cameraPositionState = cameraPositionState,

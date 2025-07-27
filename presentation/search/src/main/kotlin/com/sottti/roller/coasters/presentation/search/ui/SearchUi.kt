@@ -59,7 +59,7 @@ internal fun SearchUi(
     padding: PaddingValues,
     state: SearchViewState,
 ) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
     val listState = rememberLazyListState()
 
     SearchUiContent(

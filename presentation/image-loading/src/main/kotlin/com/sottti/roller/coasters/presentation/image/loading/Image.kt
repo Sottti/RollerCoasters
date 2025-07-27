@@ -67,13 +67,15 @@ private fun PlaceHolder(
 }
 
 @Composable
-private fun imageRequest(
-    url: ImageUrl,
-): ImageRequest = ImageRequest
-    .Builder(LocalContext.current)
-    .data(url.value)
-    .crossfade(true)
-    .build()
+private fun imageRequest(url: ImageUrl): ImageRequest {
+    val context = LocalContext.current
+    return remember(url, context) {
+        ImageRequest.Builder(context)
+            .data(url.value)
+            .crossfade(true)
+            .build()
+    }
+}
 
 @Composable
 private fun previewImageModel() = R.drawable.dragon_khan_hero_image
