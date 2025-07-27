@@ -4,7 +4,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 
-public fun AppMeasurementSystem.toResolvedMeasurementSystem(
+internal fun AppMeasurementSystem.toResolvedMeasurementSystem(
     getSystemMeasurementSystem: () -> SystemMeasurementSystem,
 ): ResolvedMeasurementSystem = when (this) {
     AppMeasurementSystem.ImperialUk -> ResolvedMeasurementSystem.ImperialUk
