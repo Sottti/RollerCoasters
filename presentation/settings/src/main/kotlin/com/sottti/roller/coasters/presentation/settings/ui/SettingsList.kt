@@ -36,7 +36,7 @@ import com.sottti.roller.coasters.presentation.utils.plus
 @Composable
 internal fun SettingsList(
     nestedScrollConnection: NestedScrollConnection,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
 ) {
@@ -56,7 +56,7 @@ internal fun SettingsList(
         { onAction(AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker) }
     }
     LazyColumn(
-        contentPadding = paddingValues + PaddingValues(vertical = dimensions.padding.medium),
+        contentPadding = padding + PaddingValues(vertical = dimensions.padding.medium),
         modifier = Modifier.nestedScroll(nestedScrollConnection),
     ) {
         dynamicColor(state = state, onDynamicColorCheckedChange = onDynamicColorCheckedChange)

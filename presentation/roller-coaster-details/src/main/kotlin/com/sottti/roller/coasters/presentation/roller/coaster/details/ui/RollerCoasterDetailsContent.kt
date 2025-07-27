@@ -67,22 +67,22 @@ internal fun RollerCoasterDetailsContent(
                 scrollBehavior = scrollBehavior,
                 state = topBarState,
             )
-        }) { paddingValues ->
+        }) { padding: PaddingValues ->
         when (content) {
             RollerCoasterDetailsContentState.Error ->
                 ErrorUi(
-                    modifier = Modifier.padding(paddingValues = paddingValues),
+                    modifier = Modifier.padding(padding),
                     button = ErrorButton {})
 
             Loading -> ProgressIndicator(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues = paddingValues),
+                    .padding(padding),
             )
 
             is Loaded -> LoadedContent(
                 nestedScrollConnection = scrollBehavior.nestedScrollConnection,
-                paddingValues = paddingValues,
+                padding = padding,
                 state = content.rollerCoaster,
             )
         }
@@ -92,11 +92,11 @@ internal fun RollerCoasterDetailsContent(
 @Composable
 private fun LoadedContent(
     nestedScrollConnection: NestedScrollConnection,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     state: RollerCoasterDetailsRollerCoasterState,
 ) {
-    val topPadding = paddingValues.calculateTopPadding() + dimensions.padding.medium
-    val bottomPadding = paddingValues.calculateBottomPadding() + dimensions.padding.medium
+    val topPadding = padding.calculateTopPadding() + dimensions.padding.medium
+    val bottomPadding = padding.calculateBottomPadding() + dimensions.padding.medium
 
     LazyColumn(
         modifier = Modifier

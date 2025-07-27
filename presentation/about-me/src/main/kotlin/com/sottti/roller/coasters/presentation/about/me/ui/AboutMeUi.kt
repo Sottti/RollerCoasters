@@ -31,13 +31,13 @@ public fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
 ) {
     AboutMeUi(
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
         onShowBottomSheet = onShowBottomSheet,
-        paddingValues = paddingValues,
+        padding = padding,
         viewModel = hiltViewModel(),
     )
 }
@@ -48,7 +48,7 @@ private fun AboutMeUi(
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     viewModel: AboutMeViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -69,7 +69,7 @@ private fun AboutMeUi(
         },
         onNavigateToSettings = onNavigateToSettings,
         onShowBottomSheet = onShowBottomSheet,
-        paddingValues = paddingValues,
+        padding = padding,
         state = state,
     )
 }
@@ -81,7 +81,7 @@ internal fun AboutMeUi(
     onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToSettings: () -> Unit,
     onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     state: AboutMeState,
 ) {
     val lazyListState = rememberLazyListState()
@@ -97,7 +97,7 @@ internal fun AboutMeUi(
         onAction = onAction,
         onNavigateToSettings = onNavigateToSettings,
         onShowBottomSheet = onShowBottomSheet,
-        paddingValues = paddingValues,
+        outerPadding = padding,
         scrollBehavior = scrollBehavior,
         showTitle = showTitle,
         state = state,
@@ -117,7 +117,7 @@ internal fun AboutMeUiPreview(
             onListCreated = state.onListCreated,
             onNavigateToSettings = state.onNavigateToSettings,
             onShowBottomSheet = {},
-            paddingValues = state.paddingValues,
+            padding = state.padding,
             state = state.state,
         )
     }

@@ -35,6 +35,7 @@ dependencies {
     implementation(project(module.presentation.error))
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))
+    implementation(project(module.presentation.utils))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)

@@ -26,13 +26,13 @@ public fun ExploreUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
 ) {
     ExploreUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
-        paddingValues = paddingValues,
+        padding = padding,
         viewModel = hiltViewModel(),
     )
 }
@@ -43,7 +43,7 @@ private fun ExploreUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     viewModel: ExploreViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -61,7 +61,7 @@ private fun ExploreUi(
             )
         },
         onNavigateToSettings = onNavigateToSettings,
-        paddingValues = paddingValues,
+        padding = padding,
         rollerCoasters = rollerCoasters,
     )
 }
@@ -74,7 +74,7 @@ internal fun ExploreUi(
     onListCreated: @Composable (LazyListState) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
@@ -86,7 +86,7 @@ internal fun ExploreUi(
         onAction = onAction,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
-        paddingValues = paddingValues,
+        outerPadding = padding,
         rollerCoasters = rollerCoasters,
     )
 }

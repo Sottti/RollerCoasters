@@ -28,13 +28,13 @@ public fun FavouritesUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
 ) {
     FavouritesUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
         onScrollToTop = onScrollToTop,
-        paddingValues = paddingValues,
+        padding = padding,
         viewModel = hiltViewModel(),
     )
 }
@@ -45,7 +45,7 @@ private fun FavouritesUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     onScrollToTop: (() -> Unit) -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     viewModel: FavouritesViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -61,7 +61,7 @@ private fun FavouritesUi(
             )
         },
         onNavigateToSettings = onNavigateToSettings,
-        paddingValues = paddingValues,
+        padding = padding,
         rollerCoasters = rollerCoasters,
     )
 }
@@ -72,7 +72,7 @@ internal fun FavouritesUi(
     onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
-    paddingValues: PaddingValues,
+    padding: PaddingValues,
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     val lazyListState = rememberLazyListState()
@@ -83,7 +83,7 @@ internal fun FavouritesUi(
         lazyListState = lazyListState,
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onNavigateToSettings = onNavigateToSettings,
-        paddingValues = paddingValues,
+        outerPadding = padding,
         rollerCoasters = rollerCoasters,
         scrollBehavior = scrollBehavior,
     )
@@ -120,7 +120,7 @@ internal fun FavouritesUiPreview(
             onListCreated = state.onListCreated,
             onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
             onNavigateToSettings = state.onNavigateToSettings,
-            paddingValues = state.paddingValues,
+            padding = state.padding,
             rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
         )
     }
