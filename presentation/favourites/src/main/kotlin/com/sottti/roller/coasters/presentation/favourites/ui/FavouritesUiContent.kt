@@ -78,7 +78,7 @@ private fun RollerCoasters(
 
             is NotLoading -> when (rollerCoasters.itemCount) {
                 0 -> EmptyUi(modifier = Modifier.padding(padding))
-                else -> RollerCoastersLoaded(
+                else -> LoadedRollerCoasters(
                     listState = listState,
                     nestedScrollConnection = nestedScrollConnection,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
@@ -91,7 +91,7 @@ private fun RollerCoasters(
 }
 
 @Composable
-private fun RollerCoastersLoaded(
+private fun LoadedRollerCoasters(
     listState: LazyListState,
     nestedScrollConnection: NestedScrollConnection,
     onNavigateToRollerCoaster: (Int) -> Unit,
