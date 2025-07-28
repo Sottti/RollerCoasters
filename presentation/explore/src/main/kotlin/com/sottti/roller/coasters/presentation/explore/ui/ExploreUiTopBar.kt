@@ -18,7 +18,7 @@ import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ExploreTopBar(
-    filters: Filters,
+    filters: Filters?,
     lazyListState: LazyListState,
     onAction: (ExploreAction) -> Unit,
     onNavigateToSettings: () -> Unit,
@@ -32,6 +32,6 @@ internal fun ExploreTopBar(
     )
     Column(modifier = Modifier.background(backgroundColor)) {
         MainTopBar(onNavigateToSettings = onNavigateToSettings)
-        FilterChips(filters = filters, onAction = onAction)
+        filters?.let { FilterChips(filters = filters, onAction = onAction) }
     }
 }

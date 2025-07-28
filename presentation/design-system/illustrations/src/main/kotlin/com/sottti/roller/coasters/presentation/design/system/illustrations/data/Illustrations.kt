@@ -12,4 +12,13 @@ public object Illustrations {
                 descriptionResId = description,
             )
     }
+
+    public object ExpeditionToEverest {
+        private val description: Int = R.string.description_illustration_expedition_to_everest
+        public val state: IllustrationState =
+            IllustrationState(
+                resId = R.drawable.il_expedition_to_everest,
+                descriptionResId = description,
+            )
+    }
 }

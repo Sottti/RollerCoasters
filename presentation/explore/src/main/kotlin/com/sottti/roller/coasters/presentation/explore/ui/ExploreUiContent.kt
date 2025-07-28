@@ -40,8 +40,9 @@ internal fun ExploreContent(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
+            val showFilters = rollerCoasters.itemCount > 0
             ExploreTopBar(
-                filters = filters,
+                filters = filters.takeIf { showFilters },
                 lazyListState = lazyListState,
                 onAction = onAction,
                 onNavigateToSettings = onNavigateToSettings,
