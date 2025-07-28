@@ -1,12 +1,17 @@
 package com.sottti.roller.coasters.presentation.error
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.illustrations.data.Illustrations
 import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.informative.InformativeButton
 import com.sottti.roller.coasters.presentation.informative.InformativeUi
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun ErrorUi(
@@ -26,4 +31,34 @@ public fun ErrorUi(
             onClick = button.onClick,
         ),
     )
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun ErrorUiPreview(
+    @PreviewParameter(ErrorUiStateProvider::class)
+    viewState: ErrorState?,
+) {
+    RollerCoastersPreviewTheme {
+        when (viewState) {
+            null -> ErrorUi(
+                ErrorButton(
+                    text = R.string.error_button_text_default,
+                    onClick = {},
+                ),
+                modifier = Modifier.background(colors.background),
+            )
+
+            else -> ErrorUi(
+                modifier = Modifier.background(colors.background),
+                illustration = viewState.illustration,
+                primaryText = viewState.primaryText,
+                secondaryText = viewState.secondaryText,
+                button = ErrorButton(
+                    text = viewState.buttonText,
+                    onClick = {},
+                ),
+            )
+        }
+    }
 }

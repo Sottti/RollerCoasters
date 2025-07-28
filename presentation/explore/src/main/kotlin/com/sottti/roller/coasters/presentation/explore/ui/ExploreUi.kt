@@ -8,16 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.explore.data.ExploreViewModel
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent
 import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent.ScrollToTop
+import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.Filters
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -110,5 +114,24 @@ private fun ExploreUiEffects(
                 ScrollToTop -> coroutineScope.launch { lazyListState.scrollToItem(0) }
             }
         }
+    }
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun ExploreUiPreview(
+    @PreviewParameter(ExploreUiStateProvider::class)
+    state: ExplorePreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        ExploreUi(
+            filters = state.filters,
+            onAction = state.onAction,
+            onListCreated = state.onListCreated,
+            onNavigateToRollerCoaster = {},
+            onNavigateToSettings = {},
+            padding = PaddingValues(),
+            rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems(),
+        )
     }
 }
