@@ -55,7 +55,12 @@ private fun FavouriteIcon(
     onToggleFavourite: () -> Unit,
 ) {
     when (state) {
-        is Loaded -> Icon(iconState = state.iconState, onClick = onToggleFavourite)
+        is Loaded -> Icon(
+            crossfade = true,
+            iconState = state.iconState,
+            onClick = onToggleFavourite,
+        )
+
         Loading -> ProgressIndicator(
             modifier = Modifier.padding(end = dimensions.padding.medium),
             size = ProgressIndicatorSize.Small,

@@ -252,4 +252,3 @@ private fun FormatContext.formatSpeed(speed: Speed) =
 
 private fun FormatContext.formatMaxVertical(maxVertical: MaxVertical) =
     displayUnitFormatter.toDisplayFormat(maxVertical)
-
