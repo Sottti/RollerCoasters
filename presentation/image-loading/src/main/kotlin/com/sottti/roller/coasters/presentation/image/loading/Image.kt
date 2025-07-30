@@ -85,15 +85,15 @@ private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 @RollerCoastersPreview
 internal fun ImagePreview(
     @PreviewParameter(ImageStateProvider::class)
-    viewState: ImageState,
+    state: ImageState,
 ) {
     RollerCoastersPreviewTheme {
         Image(
-            contentDescription = viewState.contentDescription,
-            foreverLoading = viewState.foreverLoading,
+            contentDescription = state.contentDescription,
+            foreverLoading = state.foreverLoading,
             modifier = Modifier.aspectRatio(1.75f),
-            roundedCorners = viewState.roundedCorners,
-            url = viewState.imageUrl,
+            roundedCorners = state.roundedCorners,
+            url = state.imageUrl,
         )
     }
 }

@@ -9,9 +9,9 @@ import com.sottti.roller.coasters.domain.roller.coasters.usecase.SearchRollerCoa
 import com.sottti.roller.coasters.presentation.search.R
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchAction.QueryChanged
-import com.sottti.roller.coasters.presentation.search.model.SearchBarViewState
-import com.sottti.roller.coasters.presentation.search.model.SearchViewState
-import com.sottti.roller.coasters.presentation.search.model.toViewState
+import com.sottti.roller.coasters.presentation.search.model.SearchBarState
+import com.sottti.roller.coasters.presentation.search.model.SearchState
+import com.sottti.roller.coasters.presentation.search.model.toState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -33,16 +33,16 @@ internal class SearchViewModel @Inject constructor(
     private val searchRollerCoasters: SearchRollerCoasters,
 ) : ViewModel() {
 
-    private val initialViewState = SearchViewState(
-        SearchBarViewState(
+    private val initialState = SearchState(
+        SearchBarState(
             hint = R.string.search_hint,
             query = null,
             showClearIcon = false,
         )
     )
 
-    private val _state = MutableStateFlow(initialViewState)
-    val state: StateFlow<SearchViewState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(initialState)
+    val state: StateFlow<SearchState> = _state.asStateFlow()
 
     internal val onAction: (SearchAction) -> Unit = ::processAction
 
@@ -77,7 +77,7 @@ internal class SearchViewModel @Inject constructor(
                 .collect { searchResults ->
                     _state
                         .notLoading()
-                        .updateResults(searchResults.map(RollerCoaster::toViewState))
+                        .updateResults(searchResults.map(RollerCoaster::toState))
                 }
         }
     }

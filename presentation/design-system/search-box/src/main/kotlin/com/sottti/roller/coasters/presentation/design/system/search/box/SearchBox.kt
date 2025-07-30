@@ -67,8 +67,8 @@ private fun SearchBoxTrailingIcon(
 @Composable
 @RollerCoastersPreview
 internal fun SearchBoxPreview(
-    @PreviewParameter(SearchBoxViewStateProvider::class)
-    state: SearchBoxViewState,
+    @PreviewParameter(SearchBoxStateProvider::class)
+    state: SearchBoxState,
 ) {
     RollerCoastersPreviewTheme {
         SearchBox(

@@ -3,12 +3,12 @@ package com.sottti.roller.coasters.presentation.design.system.search.box
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
 
-internal class SearchBoxViewStateProvider : PreviewParameterProvider<SearchBoxViewState> {
-    override val values: Sequence<SearchBoxViewState> = sequence {
+internal class SearchBoxStateProvider : PreviewParameterProvider<SearchBoxState> {
+    override val values: Sequence<SearchBoxState> = sequence {
         queryValues().forEach { query ->
             loadingValues().forEach { loading ->
                 yield(
-                    SearchBoxViewState(
+                    SearchBoxState(
                         hint = R.string.hint,
                         query = query,
                         loading = loading,

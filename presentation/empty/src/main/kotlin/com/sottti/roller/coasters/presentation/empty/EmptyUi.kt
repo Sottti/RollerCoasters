@@ -31,17 +31,17 @@ public fun EmptyUi(
 @RollerCoastersPreview
 internal fun EmptyUiPreview(
     @PreviewParameter(EmptyUiStateProvider::class)
-    viewState: EmptyState?,
+    state: EmptyState?,
 ) {
     RollerCoastersPreviewTheme {
-        when (viewState) {
+        when (state) {
             null -> EmptyUi(modifier = Modifier.background(colors.background))
 
             else -> EmptyUi(
                 modifier = Modifier.background(colors.background),
-                illustration = viewState.illustration,
-                primaryText = viewState.primaryText,
-                secondaryText = viewState.secondaryText,
+                illustration = state.illustration,
+                primaryText = state.primaryText,
+                secondaryText = state.secondaryText,
             )
         }
     }

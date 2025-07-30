@@ -37,10 +37,10 @@ public fun ErrorUi(
 @RollerCoastersPreview
 internal fun ErrorUiPreview(
     @PreviewParameter(ErrorUiStateProvider::class)
-    viewState: ErrorState?,
+    state: ErrorState?,
 ) {
     RollerCoastersPreviewTheme {
-        when (viewState) {
+        when (state) {
             null -> ErrorUi(
                 ErrorButton(
                     text = R.string.error_button_text_default,
@@ -51,11 +51,11 @@ internal fun ErrorUiPreview(
 
             else -> ErrorUi(
                 modifier = Modifier.background(colors.background),
-                illustration = viewState.illustration,
-                primaryText = viewState.primaryText,
-                secondaryText = viewState.secondaryText,
+                illustration = state.illustration,
+                primaryText = state.primaryText,
+                secondaryText = state.secondaryText,
                 button = ErrorButton(
-                    text = viewState.buttonText,
+                    text = state.buttonText,
                     onClick = {},
                 ),
             )

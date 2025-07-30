@@ -1,23 +1,23 @@
 package com.sottti.roller.coasters.presentation.search.data
 
-import com.sottti.roller.coasters.presentation.search.model.SearchResultViewState
-import com.sottti.roller.coasters.presentation.search.model.SearchViewState
+import com.sottti.roller.coasters.presentation.search.model.SearchResultState
+import com.sottti.roller.coasters.presentation.search.model.SearchState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-internal fun MutableStateFlow<SearchViewState>.updateQuery(query: String?): MutableStateFlow<SearchViewState> =
+internal fun MutableStateFlow<SearchState>.updateQuery(query: String?): MutableStateFlow<SearchState> =
     apply { update { it.copy(searchBar = it.searchBar.copy(query = query)) } }
 
-internal fun MutableStateFlow<SearchViewState>.updateClearIcon(query: String?): MutableStateFlow<SearchViewState> =
+internal fun MutableStateFlow<SearchState>.updateClearIcon(query: String?): MutableStateFlow<SearchState> =
     apply { update { it.copy(searchBar = it.searchBar.copy(showClearIcon = !query.isNullOrBlank())) } }
 
-internal fun MutableStateFlow<SearchViewState>.loading(): MutableStateFlow<SearchViewState> =
+internal fun MutableStateFlow<SearchState>.loading(): MutableStateFlow<SearchState> =
     apply { update { it.copy(loading = true) } }
 
-internal fun MutableStateFlow<SearchViewState>.notLoading(): MutableStateFlow<SearchViewState> =
+internal fun MutableStateFlow<SearchState>.notLoading(): MutableStateFlow<SearchState> =
     apply { update { it.copy(loading = false) } }
 
-internal fun MutableStateFlow<SearchViewState>.updateResults(
-    results: List<SearchResultViewState>,
-): MutableStateFlow<SearchViewState> =
+internal fun MutableStateFlow<SearchState>.updateResults(
+    results: List<SearchResultState>,
+): MutableStateFlow<SearchState> =
     apply { update { it.copy(results = results) } }

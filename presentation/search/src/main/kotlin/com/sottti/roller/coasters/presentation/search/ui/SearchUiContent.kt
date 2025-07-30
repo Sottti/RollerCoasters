@@ -22,8 +22,8 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
-import com.sottti.roller.coasters.presentation.search.model.SearchResultViewState
-import com.sottti.roller.coasters.presentation.search.model.SearchViewState
+import com.sottti.roller.coasters.presentation.search.model.SearchResultState
+import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.utils.override
 import com.sottti.roller.coasters.presentation.utils.plus
 
@@ -36,7 +36,7 @@ internal fun SearchUiContent(
     onNavigateToSettings: () -> Unit,
     outerPadding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
-    state: SearchViewState,
+    state: SearchState,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -68,7 +68,7 @@ private fun SearchResults(
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
-    state: List<SearchResultViewState>,
+    state: List<SearchResultState>,
 ) {
     AnimatedContent(
         targetState = state.isEmpty(),
