@@ -1,25 +1,27 @@
-package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
+package com.sottti.roller.coasters.presentation.topBars.ui
 
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsPreviewState
+import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBarPreview
+import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBarState
+import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBarUiStateProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class RollerCoasterDetailsSnapshotTest(
+internal class TopBarsUiSnapshotTest(
     nightMode: NightMode,
-    private val state: RollerCoasterDetailsPreviewState,
+    private val state: MainTopBarState,
 ) {
 
     @get:Rule
     val paparazzi = Paparazzi(
         deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
+        renderingMode = SessionParams.RenderingMode.SHRINK,
         showSystemUi = false,
         theme = "Theme.RollerCoasters",
     )
@@ -27,17 +29,15 @@ internal class RollerCoasterDetailsSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            CompositionLocalProvider(LocalInspectionMode provides true) {
-                RollerCoasterDetailsUiPreview(state)
-            }
+            MainTopBarPreview(state)
         }
     }
 
-    companion object {
+    companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            RollerCoasterDetailsUiPreviewProvider()
+            MainTopBarUiStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -29,6 +30,7 @@ dependencies {
     implementation(project(module.presentation.explore))
     implementation(project(module.presentation.favourites))
     implementation(project(module.presentation.navigation))
+    implementation(project(module.presentation.previews))
     implementation(project(module.presentation.rollerCoasterDetails))
     implementation(project(module.presentation.search))
     implementation(project(module.presentation.settings))

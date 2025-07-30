@@ -36,7 +36,6 @@ internal fun EmptyUiPreview(
     RollerCoastersPreviewTheme {
         when (state) {
             null -> EmptyUi(modifier = Modifier.background(colors.background))
-
             else -> EmptyUi(
                 modifier = Modifier.background(colors.background),
                 illustration = state.illustration,

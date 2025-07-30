@@ -45,7 +45,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.model.IconSta
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
+import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.Spacer
 import com.sottti.roller.coasters.presentation.utils.override
 import com.sottti.roller.coasters.presentation.utils.plus

@@ -15,8 +15,8 @@ import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 public fun ErrorUi(
-    button: ErrorButton,
     modifier: Modifier = Modifier,
+    button: ErrorButton? = null,
     illustration: IllustrationState = Illustrations.ExpeditionToEverest.state,
     @StringRes primaryText: Int = R.string.error_primary_text_default,
     @StringRes secondaryText: Int = R.string.error_secondary_text_default,
@@ -26,10 +26,12 @@ public fun ErrorUi(
         primaryText = primaryText,
         secondaryText = secondaryText,
         modifier = modifier,
-        button = InformativeButton(
-            text = button.text,
-            onClick = button.onClick,
-        ),
+        button = button?.let {
+            InformativeButton(
+                text = button.text,
+                onClick = button.onClick,
+            )
+        },
     )
 }
 
@@ -41,14 +43,7 @@ internal fun ErrorUiPreview(
 ) {
     RollerCoastersPreviewTheme {
         when (state) {
-            null -> ErrorUi(
-                ErrorButton(
-                    text = R.string.error_button_text_default,
-                    onClick = {},
-                ),
-                modifier = Modifier.background(colors.background),
-            )
-
+            null -> ErrorUi(modifier = Modifier.background(colors.background))
             else -> ErrorUi(
                 modifier = Modifier.background(colors.background),
                 illustration = state.illustration,
