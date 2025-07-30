@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.top.bars
+package com.sottti.roller.coasters.presentation.top.bars.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
@@ -13,12 +13,15 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 public fun MainTopBar(
     onNavigateToSettings: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior? = null,
@@ -60,4 +63,21 @@ private fun Icon(onNavigateToSettings: () -> Unit) {
         iconState = Icons.Settings.outlined,
         onClick = { onNavigateToSettings() },
     )
+}
+
+@Composable
+@RollerCoastersPreview
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun MainTopBarPreview(
+    @PreviewParameter(MainTopBarUiStateProvider::class)
+    state: MainTopBarState,
+) {
+    RollerCoastersPreviewTheme {
+        MainTopBar(
+            onNavigateToSettings = state.onNavigateToSettings,
+            scrollBehavior = state.scrollBehavior,
+            showTitle = state.showTitle,
+            titleResId = state.titleResId,
+        )
+    }
 }
