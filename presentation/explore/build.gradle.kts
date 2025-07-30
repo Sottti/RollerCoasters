@@ -49,4 +49,5 @@ dependencies {
     testImplementation(libs.paging.testing)
     testImplementation(libs.truth)
     testImplementation(libs.turbine)
+    testImplementation(testFixtures(project(module.presentation.tests)))
 }

@@ -35,4 +35,6 @@ dependencies {
     implementation(project(module.presentation.search))
     implementation(project(module.presentation.settings))
     ksp(libs.hilt.compiler)
+
+    testImplementation(testFixtures(project(module.presentation.tests)))
 }

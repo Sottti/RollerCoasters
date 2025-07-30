@@ -62,6 +62,7 @@ include(
     ":presentation:previews",
     ":presentation:roller-coaster-details",
     ":presentation:search",
+    ":presentation:tests",
     ":presentation:settings",
     ":presentation:string-provider",
     ":presentation:top-bars",

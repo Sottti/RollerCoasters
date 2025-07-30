@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.card.grid
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import org.junit.Rule
@@ -16,12 +16,7 @@ internal class MonoGridSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -34,14 +29,6 @@ internal class MonoGridSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            MonoCardGridStateProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+            nightModeParameters(MonoCardGridStateProvider().values)
     }
 }

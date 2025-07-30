@@ -42,4 +42,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
     testImplementation(libs.turbine)
+    testImplementation(testFixtures(project(module.presentation.tests)))
 }

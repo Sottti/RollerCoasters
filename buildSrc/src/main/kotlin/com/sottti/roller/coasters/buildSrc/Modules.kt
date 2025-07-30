@@ -10,6 +10,7 @@ object module {
         const val explore = ":presentation:explore"
         const val favourites = ":presentation:favourites"
         const val fixtures = ":presentation:fixtures"
+        const val tests = ":presentation:tests"
         const val format = ":presentation:format"
         const val home = ":presentation:home"
         const val imageLoading = ":presentation:image-loading"

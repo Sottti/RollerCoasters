@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.home.ui
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.android.resources.NightMode
 import org.junit.Rule
 import org.junit.Test
@@ -14,11 +14,7 @@ internal class HomeBottomBarUiSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -30,9 +26,6 @@ internal class HomeBottomBarUiSnapshotTest(
     companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> = listOf(
-            arrayOf(NightMode.NOTNIGHT),
-            arrayOf(NightMode.NIGHT),
-        )
+        fun data(): Collection<Array<Any>> = nightModeParameters()
     }
 }

@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.informative
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.android.resources.NightMode
 import org.junit.Rule
 import org.junit.Test
@@ -15,11 +15,7 @@ internal class InformativeSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -32,14 +28,6 @@ internal class InformativeSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            InformativeUiStateProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+            nightModeParameters(InformativeUiStateProvider().values)
     }
 }

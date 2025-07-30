@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.icons.icon
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreview
@@ -19,12 +19,7 @@ internal class IconSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -37,14 +32,6 @@ internal class IconSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            IconPreviewProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+            nightModeParameters(IconPreviewProvider().values)
     }
 }

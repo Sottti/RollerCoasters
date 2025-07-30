@@ -2,8 +2,8 @@ package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalInspectionMode
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsPreviewState
 import org.junit.Rule
@@ -18,11 +18,7 @@ internal class RollerCoasterDetailsSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -37,14 +33,6 @@ internal class RollerCoasterDetailsSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            RollerCoasterDetailsUiPreviewProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+            nightModeParameters(RollerCoasterDetailsUiPreviewProvider().values)
     }
 }

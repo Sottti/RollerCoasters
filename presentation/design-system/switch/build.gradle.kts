@@ -20,4 +20,5 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
+    testImplementation(testFixtures(project(module.presentation.tests)))
 }

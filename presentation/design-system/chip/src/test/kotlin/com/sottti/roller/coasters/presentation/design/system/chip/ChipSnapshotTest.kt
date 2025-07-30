@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.chip
 
-import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_6_PRO
-import app.cash.paparazzi.Paparazzi
+import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import org.junit.Rule
@@ -16,12 +16,7 @@ internal class ChipSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = PIXEL_6_PRO.copy(nightMode = nightMode),
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -34,14 +29,6 @@ internal class ChipSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            ChipPreviewProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+            nightModeParameters(ChipPreviewProvider().values)
     }
 }
