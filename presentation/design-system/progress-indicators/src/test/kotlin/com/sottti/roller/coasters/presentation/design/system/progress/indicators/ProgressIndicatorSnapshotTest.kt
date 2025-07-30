@@ -1,10 +1,9 @@
 package com.sottti.roller.coasters.presentation.design.system.progress.indicators
 
 import androidx.compose.ui.Modifier
-import com.sottti.roller.coasters.presentation.tests.paparazzi
-import com.sottti.roller.coasters.presentation.tests.nightModeParameters
-import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
+import com.sottti.roller.coasters.presentation.tests.paparazzi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,7 +28,7 @@ internal class ProgressIndicatorSnapshotTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> =
+        fun data(): Collection<Array<Any?>> =
             nightModeParameters(ProgressIndicatorPreviewProvider().values)
     }
 }

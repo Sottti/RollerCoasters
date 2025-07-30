@@ -12,6 +12,7 @@ android {
     buildFeatures { compose = true }
     @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
+    testFixtures { enable = true }
 }
 
 dependencies {

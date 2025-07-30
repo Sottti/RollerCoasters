@@ -12,6 +12,7 @@ android {
     buildFeatures { compose = true }
     @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
+    testFixtures { enable = true }
 }
 
 dependencies {
@@ -22,4 +23,6 @@ dependencies {
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
     testImplementation(testFixtures(project(module.presentation.tests)))
+    testFixturesImplementation(libs.paparazzi.core)
+    testImplementation(libs.paparazzi.core)
 }

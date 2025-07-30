@@ -9,12 +9,11 @@ android {
     buildFeatures { compose = true }
     @Suppress("UnstableApiUsage")
     composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
-    testFixtures {
-        enable = true
-    }
+    testFixtures { enable = true }
 }
 
 dependencies {
     implementation(libs.compose.ui)
     implementation(platform(libs.compose.bom))
+    testFixturesImplementation(libs.paparazzi.core)
 }

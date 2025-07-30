@@ -15,12 +15,15 @@ fun paparazzi(
     theme = "Theme.RollerCoasters",
 )
 
-fun nightModeParameters(): Collection<Array<Any>> = listOf(
-    arrayOf(NightMode.NOTNIGHT),
-    arrayOf(NightMode.NIGHT),
-)
+fun nightModeParameters(): Collection<Array<Any>> =
+    listOf(
+        arrayOf(NightMode.NOTNIGHT),
+        arrayOf(NightMode.NIGHT),
+    )
 
-fun <T> nightModeParameters(states: Sequence<T>): Collection<Array<Any?>> =
+fun <T> nightModeParameters(
+    states: Sequence<T>,
+): Collection<Array<Any?>> =
     states.flatMap { state ->
         listOf(
             arrayOf(NightMode.NOTNIGHT, state),
