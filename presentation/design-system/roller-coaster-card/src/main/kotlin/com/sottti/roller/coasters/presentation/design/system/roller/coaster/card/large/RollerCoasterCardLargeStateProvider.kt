@@ -7,7 +7,7 @@ import com.sottti.roller.coasters.presentation.fixtures.fixtureRollerCoasterName
 import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
 import com.sottti.roller.coasters.presentation.fixtures.fixtureState
 
-internal class RollerCoasterCardLargePreviewProvider :
+internal class RollerCoasterCardLargeStateProvider :
     PreviewParameterProvider<RollerCoasterCardLargeState> {
     override val values: Sequence<RollerCoasterCardLargeState> =
         sequence {

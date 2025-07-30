@@ -34,7 +34,7 @@ internal class DialogWithRadioButtonsSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            DialogWithRadioButtonsPreviewProvider()
+            DialogWithRadioButtonsStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

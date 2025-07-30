@@ -4,7 +4,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
-internal class DialogWithRadioButtonsPreviewProvider :
+internal class DialogWithRadioButtonsStateProvider :
     PreviewParameterProvider<DialogWithRadioButtonsState> {
     override val values: Sequence<DialogWithRadioButtonsState> = sequence {
         titleValues().forEach { title ->

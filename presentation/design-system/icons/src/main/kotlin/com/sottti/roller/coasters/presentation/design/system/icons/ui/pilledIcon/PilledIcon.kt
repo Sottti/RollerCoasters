@@ -63,8 +63,8 @@ private fun Text(text: Int) {
 @Composable
 @RollerCoastersPreview
 internal fun PilledIconPreview(
-    @PreviewParameter(PilledIconPreviewProvider::class)
-    state: PilledIconPreviewState,
+    @PreviewParameter(PilledIconStateProvider::class)
+    state: PilledIconState,
 ) {
     RollerCoastersPreviewTheme {
         PilledIcon(

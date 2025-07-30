@@ -54,7 +54,7 @@ private fun TrailingIcon(expanded: Boolean) =
 @Composable
 @RollerCoastersPreview
 internal fun ChipPreview(
-    @PreviewParameter(ChipPreviewProvider::class)
+    @PreviewParameter(ChipStateProvider::class)
     state: ChipState,
 ) {
     RollerCoastersPreviewTheme {

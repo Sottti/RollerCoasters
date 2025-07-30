@@ -1,19 +1,16 @@
-package com.sottti.roller.coasters.presentation.design.system.progress.indicators
+package com.sottti.roller.coasters.presentation.design.system.hero.image
 
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImagePreview
-import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImageState
-import com.sottti.roller.coasters.presentation.design.system.hero.image.ProfilePicturePreviewProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class ProfilePictureSnapshotTest(
+internal class HeroImageSnapshotTest(
     nightMode: NightMode,
     private val state: HeroImageState,
 ) {
@@ -33,11 +30,11 @@ internal class ProfilePictureSnapshotTest(
         }
     }
 
-    companion object {
+    companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            ProfilePicturePreviewProvider()
+            ProfilePictureStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

@@ -5,8 +5,8 @@ import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreview
-import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreviewProvider
-import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconPreviewState
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconStateProvider
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconState
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,7 +15,7 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class IconSnapshotTest(
     nightMode: NightMode,
-    private val state: IconPreviewState,
+    private val state: IconState,
 ) {
 
     @get:Rule
@@ -37,7 +37,7 @@ internal class IconSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            IconPreviewProvider()
+            IconStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

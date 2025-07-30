@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.design.system.dialogs.informativ
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
-internal class DialogInformativePreviewProvider : PreviewParameterProvider<DialogInformativeState> {
+internal class DialogInformativeStateProvider : PreviewParameterProvider<DialogInformativeState> {
     override val values: Sequence<DialogInformativeState> = sequence {
         titleValues().forEach { title ->
             textValues().forEach { text ->

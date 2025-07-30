@@ -51,8 +51,8 @@ public fun Icon(
 @Composable
 @RollerCoastersPreview
 internal fun IconPreview(
-    @PreviewParameter(IconPreviewProvider::class)
-    state: IconPreviewState,
+    @PreviewParameter(IconStateProvider::class)
+    state: com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconState,
 ) {
     RollerCoastersPreviewTheme {
         Icon(

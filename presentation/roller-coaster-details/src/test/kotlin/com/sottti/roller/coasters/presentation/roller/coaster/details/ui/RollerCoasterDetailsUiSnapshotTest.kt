@@ -37,7 +37,7 @@ internal class RollerCoasterDetailsUiSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            RollerCoasterDetailsUiPreviewProvider()
+            RollerCoasterDetailsUiStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

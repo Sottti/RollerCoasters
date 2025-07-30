@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.design.system.chip
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
-internal class ChipPreviewProvider : PreviewParameterProvider<ChipState> {
+internal class ChipStateProvider : PreviewParameterProvider<ChipState> {
     override val values: Sequence<ChipState> = sequence {
         leadingIconValues().forEach { leadingIcon ->
             selectedValues().forEach { enabled ->

@@ -34,7 +34,7 @@ internal class SwitchSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            SwitchPreviewProvider()
+            SwitchStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

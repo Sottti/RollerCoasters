@@ -34,7 +34,7 @@ internal class RollerCoasterCardSmallSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            RollerCoasterCardSmallPreviewProvider()
+            RollerCoasterCardSmallStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

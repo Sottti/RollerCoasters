@@ -13,7 +13,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.TopBarState
 
-internal class RollerCoasterDetailsUiPreviewProvider :
+internal class RollerCoasterDetailsUiStateProvider :
     PreviewParameterProvider<RollerCoasterDetailsPreviewState> {
     override val values: Sequence<RollerCoasterDetailsPreviewState> = sequenceOf(
         previewState(Loading),

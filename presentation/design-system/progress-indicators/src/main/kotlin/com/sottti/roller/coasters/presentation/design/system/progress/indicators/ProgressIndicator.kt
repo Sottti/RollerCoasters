@@ -49,7 +49,7 @@ private fun progressIndicatorSize(size: ProgressIndicatorSize): Dp =
 @Composable
 @RollerCoastersPreview
 internal fun ProgressIndicatorPreview(
-    @PreviewParameter(ProgressIndicatorPreviewProvider::class)
+    @PreviewParameter(ProgressIndicatorStateProvider::class)
     modifier: Modifier,
 ) {
     RollerCoastersPreviewTheme {

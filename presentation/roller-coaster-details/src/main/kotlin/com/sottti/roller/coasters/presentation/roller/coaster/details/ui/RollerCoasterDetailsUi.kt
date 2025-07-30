@@ -70,7 +70,7 @@ internal fun RollerCoasterDetailsUi(
 @Composable
 @RollerCoastersTallPreview
 internal fun RollerCoasterDetailsUiPreview(
-    @PreviewParameter(RollerCoasterDetailsUiPreviewProvider::class)
+    @PreviewParameter(RollerCoasterDetailsUiStateProvider::class)
     previewState: RollerCoasterDetailsPreviewState,
 ) {
     RollerCoastersPreviewTheme {

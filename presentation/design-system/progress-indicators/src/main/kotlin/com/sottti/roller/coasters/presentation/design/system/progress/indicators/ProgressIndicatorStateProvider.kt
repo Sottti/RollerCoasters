@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 
-internal class ProgressIndicatorPreviewProvider : PreviewParameterProvider<Modifier> {
+internal class ProgressIndicatorStateProvider : PreviewParameterProvider<Modifier> {
     override val values = sequenceOf(
         Modifier,
         Modifier

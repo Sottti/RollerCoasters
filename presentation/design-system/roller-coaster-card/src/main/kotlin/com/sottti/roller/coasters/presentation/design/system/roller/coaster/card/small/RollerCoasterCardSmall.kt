@@ -80,7 +80,7 @@ private fun Image(
 @Composable
 @RollerCoastersPreview
 internal fun RollerCoasterCardSmallPreview(
-    @PreviewParameter(RollerCoasterCardSmallPreviewProvider::class)
+    @PreviewParameter(RollerCoasterCardSmallStateProvider::class)
     state: RollerCoasterCardSmallState,
 ) {
     RollerCoastersPreviewTheme {

@@ -27,7 +27,7 @@ public fun DialogInformative(
 @Composable
 @RollerCoastersPreview
 internal fun DialogInformativePreview(
-    @PreviewParameter(DialogInformativePreviewProvider::class)
+    @PreviewParameter(DialogInformativeStateProvider::class)
     state: DialogInformativeState,
 ) {
     RollerCoastersPreviewTheme {

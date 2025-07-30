@@ -35,7 +35,7 @@ internal class ProgressIndicatorSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            ProgressIndicatorPreviewProvider()
+            ProgressIndicatorStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

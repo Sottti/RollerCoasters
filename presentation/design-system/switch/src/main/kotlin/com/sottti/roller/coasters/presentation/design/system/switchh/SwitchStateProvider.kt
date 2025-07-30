@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.switchh
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 
-internal class SwitchPreviewProvider : PreviewParameterProvider<SwitchState> {
+internal class SwitchStateProvider : PreviewParameterProvider<SwitchState> {
     override val values: Sequence<SwitchState> = sequence {
         enabledValues().forEach { enabled ->
             checkedValues().forEach { checked ->

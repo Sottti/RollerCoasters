@@ -5,7 +5,7 @@ import com.sottti.roller.coasters.presentation.fixtures.fixtureImageUrl
 import com.sottti.roller.coasters.presentation.fixtures.fixtureParkName
 import com.sottti.roller.coasters.presentation.fixtures.fixtureRollerCoasterName
 
-internal class RollerCoasterCardSmallPreviewProvider :
+internal class RollerCoasterCardSmallStateProvider :
     PreviewParameterProvider<RollerCoasterCardSmallState> {
     override val values: Sequence<RollerCoasterCardSmallState> =
         sequence {

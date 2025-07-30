@@ -34,7 +34,7 @@ internal class DialogInformativeSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            DialogInformativePreviewProvider()
+            DialogInformativeStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

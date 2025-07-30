@@ -34,7 +34,7 @@ internal class RollerCoasterCardLargeSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            RollerCoasterCardLargePreviewProvider()
+            RollerCoasterCardLargeStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

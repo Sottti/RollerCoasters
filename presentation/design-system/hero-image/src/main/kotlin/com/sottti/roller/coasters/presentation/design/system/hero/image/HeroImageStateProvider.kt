@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.images.data.Images
 
-internal class ProfilePicturePreviewProvider :
+internal class ProfilePictureStateProvider :
     PreviewParameterProvider<HeroImageState> {
     override val values = sequenceOf(
         profilePicture2024(),

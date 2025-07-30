@@ -25,7 +25,7 @@ public fun Switch(
 @Composable
 @RollerCoastersPreview
 internal fun SwitchPreview(
-    @PreviewParameter(SwitchPreviewProvider::class)
+    @PreviewParameter(SwitchStateProvider::class)
     state: SwitchState,
 ) {
     RollerCoastersPreviewTheme {

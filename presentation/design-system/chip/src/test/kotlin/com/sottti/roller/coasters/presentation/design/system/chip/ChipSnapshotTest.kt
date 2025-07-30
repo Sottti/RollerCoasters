@@ -34,7 +34,7 @@ internal class ChipSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            ChipPreviewProvider()
+            ChipStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

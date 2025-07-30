@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class CardGridSnapshotTest(
+internal class QuadCardGridSnapshotTest(
     nightMode: NightMode,
     private val state: QuadCardGridState,
 ) {
@@ -30,7 +30,7 @@ internal class CardGridSnapshotTest(
         }
     }
 
-    companion object {
+    companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =

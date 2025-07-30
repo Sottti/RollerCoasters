@@ -109,7 +109,7 @@ private fun Footer(
 @Composable
 @RollerCoastersPreview
 internal fun RollerCoasterCardLargePreview(
-    @PreviewParameter(RollerCoasterCardLargePreviewProvider::class)
+    @PreviewParameter(RollerCoasterCardLargeStateProvider::class)
     state: RollerCoasterCardLargeState,
 ) {
     RollerCoastersPreviewTheme {

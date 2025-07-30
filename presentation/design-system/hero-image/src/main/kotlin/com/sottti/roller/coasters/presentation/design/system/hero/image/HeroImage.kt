@@ -35,7 +35,7 @@ public fun HeroImage(
 @Composable
 @RollerCoastersPreview
 internal fun HeroImagePreview(
-    @PreviewParameter(ProfilePicturePreviewProvider::class)
+    @PreviewParameter(ProfilePictureStateProvider::class)
     state: HeroImageState,
 ) {
     RollerCoastersPreviewTheme {
