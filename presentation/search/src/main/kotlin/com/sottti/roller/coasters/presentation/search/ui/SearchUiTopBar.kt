@@ -18,6 +18,8 @@ import com.sottti.roller.coasters.presentation.design.system.search.box.SearchBo
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchViewState
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
+import com.sottti.roller.coasters.presentation.search.model.SearchState
+import com.sottti.roller.coasters.presentation.top.bars.MainTopBar
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,7 +27,7 @@ internal fun SearchTopBar(
     lazyListState: LazyListState,
     onAction: (SearchAction) -> Unit,
     onNavigateToSettings: () -> Unit,
-    state: SearchViewState,
+    state: SearchState,
 ) {
     val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
     val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor

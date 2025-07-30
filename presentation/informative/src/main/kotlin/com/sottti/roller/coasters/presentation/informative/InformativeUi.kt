@@ -72,15 +72,15 @@ public fun InformativeUi(
 @RollerCoastersPreview
 internal fun InformativeUiPreview(
     @PreviewParameter(InformativeUiStateProvider::class)
-    viewState: InformativeState,
+    state: InformativeState,
 ) {
     RollerCoastersPreviewTheme {
         InformativeUi(
             modifier = Modifier.background(colors.background),
-            illustration = viewState.illustration,
-            primaryText = viewState.primaryText,
-            secondaryText = viewState.secondaryText,
-            button = toButton(viewState.buttonText),
+            illustration = state.illustration,
+            primaryText = state.primaryText,
+            secondaryText = state.secondaryText,
+            button = toButton(state.buttonText),
         )
     }
 }

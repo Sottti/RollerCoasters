@@ -14,7 +14,7 @@ import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.search.data.SearchViewModel
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
-import com.sottti.roller.coasters.presentation.search.model.SearchViewState
+import com.sottti.roller.coasters.presentation.search.model.SearchState
 
 @Composable
 public fun SearchUi(
@@ -57,7 +57,7 @@ internal fun SearchUi(
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
     padding: PaddingValues,
-    state: SearchViewState,
+    state: SearchState,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val listState = rememberLazyListState()

@@ -9,5 +9,5 @@ internal data class SearchPreviewState(
     val onNavigateToRollerCoaster: (Int) -> Unit,
     val onNavigateToSettings: () -> Unit,
     val padding: PaddingValues,
-    val state: SearchViewState,
+    val state: SearchState,
 )

@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 internal class SearchBoxSnapshotTest(
     nightMode: NightMode,
-    private val state: SearchBoxViewState,
+    private val state: SearchBoxState,
 ) {
 
     @get:Rule
@@ -34,7 +34,7 @@ internal class SearchBoxSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> =
-            SearchBoxViewStateProvider()
+            SearchBoxStateProvider()
                 .values
                 .flatMap { state ->
                     listOf(

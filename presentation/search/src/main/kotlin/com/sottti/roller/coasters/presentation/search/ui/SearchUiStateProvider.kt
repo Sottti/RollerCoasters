@@ -6,11 +6,11 @@ import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
 import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.presentation.search.R
-import com.sottti.roller.coasters.presentation.search.model.SearchBarViewState
+import com.sottti.roller.coasters.presentation.search.model.SearchBarState
 import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
-import com.sottti.roller.coasters.presentation.search.model.SearchResultViewState
-import com.sottti.roller.coasters.presentation.search.model.SearchViewState
-import com.sottti.roller.coasters.presentation.search.model.toViewState
+import com.sottti.roller.coasters.presentation.search.model.SearchResultState
+import com.sottti.roller.coasters.presentation.search.model.SearchState
+import com.sottti.roller.coasters.presentation.search.model.toState
 
 internal class SearchUiStateProvider : PreviewParameterProvider<SearchPreviewState> {
     override val values: Sequence<SearchPreviewState> = sequenceOf(
@@ -32,21 +32,21 @@ private val loadingState = searchPreviewState(
 private val loadedState = searchPreviewState(
     searchBar = searchBarState(query = COASTER_NAME, showClearIcon = true),
     results = listOf(
-        rollerCoaster().toViewState(),
-        anotherRollerCoaster().toViewState(),
+        rollerCoaster().toState(),
+        anotherRollerCoaster().toState(),
     ),
 )
 
 private fun searchPreviewState(
     loading: Boolean = false,
-    results: List<SearchResultViewState> = emptyList(),
-    searchBar: SearchBarViewState,
+    results: List<SearchResultState> = emptyList(),
+    searchBar: SearchBarState,
 ) = SearchPreviewState(
     onAction = {},
     onNavigateToRollerCoaster = {},
     onNavigateToSettings = {},
     padding = PaddingValues(),
-    state = SearchViewState(
+    state = SearchState(
         searchBar = searchBar,
         loading = loading,
         results = results,
@@ -56,7 +56,7 @@ private fun searchPreviewState(
 private fun searchBarState(
     query: String?,
     showClearIcon: Boolean,
-) = SearchBarViewState(
+) = SearchBarState(
     hint = R.string.search_hint,
     query = query,
     showClearIcon = showClearIcon,
