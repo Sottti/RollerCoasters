@@ -6,7 +6,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewSingleLocale
 import androidx.compose.foundation.Image as MaterialImage
 
 @Composable
@@ -23,4 +26,19 @@ public fun Image(
             else -> modifier
         },
     )
+}
+
+@Composable
+@RollerCoastersPreviewSingleLocale
+internal fun ImagePreview(
+    @PreviewParameter(ImageStateProvider::class)
+    state: ImagePreviewState,
+) {
+    RollerCoastersPreviewTheme {
+        Image(
+            modifier = state.modifier,
+            roundedCorners = state.roundedCorners,
+            state = state.state,
+        )
+    }
 }
