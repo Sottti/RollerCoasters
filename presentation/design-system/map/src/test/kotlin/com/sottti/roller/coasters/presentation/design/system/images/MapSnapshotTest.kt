@@ -1,5 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.images
 
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
@@ -13,7 +15,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class ImagesSnapshotTest(
+internal class MapSnapshotTest(
     nightMode: NightMode,
     private val state: MapState,
 ) {
@@ -29,7 +31,9 @@ internal class ImagesSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            MapPreview(state)
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                MapPreview(state)
+            }
         }
     }
 
