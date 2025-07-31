@@ -64,6 +64,7 @@ include(
     ":presentation:search",
     ":presentation:settings",
     ":presentation:string-provider",
+    ":presentation:tests",
     ":presentation:top-bars",
     ":presentation:utils",
     ":utils:time-dates",

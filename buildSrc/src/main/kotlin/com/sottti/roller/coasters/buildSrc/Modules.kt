@@ -21,6 +21,7 @@ object module {
         const val search = ":presentation:search"
         const val settings = ":presentation:settings"
         const val stringProvider = ":presentation:string-provider"
+        const val tests = ":presentation:tests"
         const val topBars = ":presentation:top-bars"
         const val utils = ":presentation:utils"
 
