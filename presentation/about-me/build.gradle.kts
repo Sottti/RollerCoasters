@@ -41,4 +41,5 @@ dependencies {
     testImplementation(libs.kotlin.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
+    testImplementation(project(module.presentation.tests))
 }

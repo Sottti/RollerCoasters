@@ -1,9 +1,8 @@
 package com.sottti.roller.coasters.presentation.design.system.illustrations
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
-import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
+import com.sottti.roller.coasters.presentation.tests.paparazzi
 import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.CircledIllustrationPreview
 import org.junit.Rule
 import org.junit.Test
@@ -16,12 +15,7 @@ internal class CircledIllustrationSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -33,10 +27,6 @@ internal class CircledIllustrationSnapshotTest(
     companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> =
-            listOf(
-                arrayOf(NightMode.NOTNIGHT),
-                arrayOf(NightMode.NIGHT),
-            )
+        fun data(): Collection<Array<Any>> = nightModeParameters()
     }
 }

@@ -1,9 +1,8 @@
 package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.small
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
-import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
+import com.sottti.roller.coasters.presentation.tests.paparazzi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,12 +15,7 @@ internal class RollerCoasterCardSmallSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -33,15 +27,7 @@ internal class RollerCoasterCardSmallSnapshotTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> =
-            RollerCoasterCardSmallStateProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state as Any),
-                        arrayOf(NightMode.NIGHT, state as Any),
-                    )
-                }
-                .toList()
+        fun data(): Collection<Array<Any?>> =
+            nightModeParameters(RollerCoasterCardSmallStateProvider().values)
     }
 }
