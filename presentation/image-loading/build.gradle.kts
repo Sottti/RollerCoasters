@@ -25,4 +25,5 @@ dependencies {
     implementation(project(module.presentation.fixtures))
     implementation(project(module.presentation.previews))
     runtimeOnly(libs.startup.runtime)
+    testImplementation(project(module.presentation.tests))
 }

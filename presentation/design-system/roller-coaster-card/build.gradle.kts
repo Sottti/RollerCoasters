@@ -26,4 +26,5 @@ dependencies {
     implementation(project(module.presentation.imageLoading))
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.utils))
+    testImplementation(project(module.presentation.tests))
 }

@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
+import com.sottti.roller.coasters.presentation.tests.paparazzi
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeBottomSheetPreviewState
 import com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets.AboutMeUiBottomSheetContentPreview
 import com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets.AboutMeUiBottomSheetContentStateProvider
@@ -18,11 +18,7 @@ internal class AboutMeUiBottomSheetContentSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.Companion.PIXEL_6_PRO.copy(nightMode = nightMode),
-        showSystemUi = false,
-        theme = "Theme.RollerCoasters",
-    )
+    val paparazzi = paparazzi(nightMode)
 
     @Test
     fun snapshotTest() {
@@ -34,15 +30,7 @@ internal class AboutMeUiBottomSheetContentSnapshotTest(
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any>> =
-            AboutMeUiBottomSheetContentStateProvider()
-                .values
-                .flatMap { state ->
-                    listOf(
-                        arrayOf(NightMode.NOTNIGHT, state),
-                        arrayOf(NightMode.NIGHT, state),
-                    )
-                }
-                .toList()
+        fun data(): Collection<Array<Any?>> =
+            nightModeParameters(AboutMeUiBottomSheetContentStateProvider().values)
     }
 }
