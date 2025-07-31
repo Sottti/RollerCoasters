@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.search.box.SearchBox
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
-import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.search.model.SearchState
+import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

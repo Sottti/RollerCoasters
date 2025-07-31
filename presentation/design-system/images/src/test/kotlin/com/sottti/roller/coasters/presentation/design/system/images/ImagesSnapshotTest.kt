@@ -1,11 +1,11 @@
 package com.sottti.roller.coasters.presentation.design.system.images
 
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.tests.nightModeParameters
-import com.sottti.roller.coasters.presentation.tests.paparazzi
 import com.sottti.roller.coasters.presentation.design.system.images.ui.ImagePreview
 import com.sottti.roller.coasters.presentation.design.system.images.ui.ImagePreviewState
 import com.sottti.roller.coasters.presentation.design.system.images.ui.ImageStateProvider
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
+import com.sottti.roller.coasters.presentation.tests.paparazzi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

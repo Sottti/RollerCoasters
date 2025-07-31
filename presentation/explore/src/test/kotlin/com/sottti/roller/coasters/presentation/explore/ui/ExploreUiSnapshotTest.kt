@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
 import com.android.resources.NightMode
+import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import com.sottti.roller.coasters.presentation.tests.nightModeParameters
 import com.sottti.roller.coasters.presentation.tests.paparazzi
-import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

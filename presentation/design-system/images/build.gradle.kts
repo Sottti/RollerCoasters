@@ -1,5 +1,4 @@
 import com.sottti.roller.coasters.buildSrc.module
-import org.gradle.kotlin.dsl.project
 
 plugins {
     alias(libs.plugins.android.library)

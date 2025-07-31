@@ -1,11 +1,11 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.tests.nightModeParameters
-import com.sottti.roller.coasters.presentation.tests.paparazzi
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeBottomSheetPreviewState
 import com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets.AboutMeUiBottomSheetContentPreview
 import com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets.AboutMeUiBottomSheetContentStateProvider
+import com.sottti.roller.coasters.presentation.tests.nightModeParameters
+import com.sottti.roller.coasters.presentation.tests.paparazzi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
