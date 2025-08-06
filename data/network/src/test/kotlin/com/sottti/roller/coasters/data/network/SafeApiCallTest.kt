@@ -26,16 +26,16 @@ internal class SafeApiCallTest {
     fun `returns no internet error when unknown host exception occurs`() = runBlocking {
         val result = safeApiCall<String> { throw UnknownHostException(NO_INTERNET_ERROR_MESSAGE) }
 
-        assertThat(result.error).isInstanceOf(ExceptionApiModel.NoInternet::class.java)
-        assertThat(result.error.message).isEqualTo(NO_INTERNET_ERROR_MESSAGE)
+        assertThat(result.getError()).isInstanceOf(ExceptionApiModel.NoInternet::class.java)
+        assertThat(result.getError()?.message).isEqualTo(NO_INTERNET_ERROR_MESSAGE)
     }
 
     @Test
     fun `returns time out error when timeout exception occurs`() = runBlocking {
         val result = safeApiCall<String> { throw SocketTimeoutException(TIMEOUT_ERROR_MESSAGE) }
 
-        assertThat(result.error).isInstanceOf(ExceptionApiModel.Timeout::class.java)
-        assertThat(result.error.message).isEqualTo(TIMEOUT_ERROR_MESSAGE)
+        assertThat(result.getError()).isInstanceOf(ExceptionApiModel.Timeout::class.java)
+        assertThat(result.getError()?.message).isEqualTo(TIMEOUT_ERROR_MESSAGE)
     }
 
     @Test
@@ -43,8 +43,8 @@ internal class SafeApiCallTest {
         val unexpectedErrorMessage = "Unexpected Error"
         val result = safeApiCall<String> { throw RuntimeException(unexpectedErrorMessage) }
 
-        assertThat(result.error).isInstanceOf(ExceptionApiModel.Unknown::class.java)
-        assertThat(result.error.message).isEqualTo(unexpectedErrorMessage)
+        assertThat(result.getError()).isInstanceOf(ExceptionApiModel.Unknown::class.java)
+        assertThat(result.getError()?.message).isEqualTo(unexpectedErrorMessage)
     }
 
     @Test

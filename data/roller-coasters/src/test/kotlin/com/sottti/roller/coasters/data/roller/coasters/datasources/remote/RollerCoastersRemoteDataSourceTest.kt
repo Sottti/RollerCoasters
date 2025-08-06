@@ -2,6 +2,8 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.stubs.noInterNetException
@@ -41,7 +43,7 @@ internal class RollerCoastersRemoteDataSourceTest {
         val result = dataSource.getRollerCoaster(id = rollerCoasterId(), measurementSystem = Metric)
 
         assertThat(result.isOk).isTrue()
-        assertThat(result.value).isEqualTo(rollerCoaster())
+        assertThat(result.get()).isEqualTo(rollerCoaster())
 
         coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId()) }
     }
@@ -53,7 +55,7 @@ internal class RollerCoastersRemoteDataSourceTest {
         val result = dataSource.getRollerCoaster(id = rollerCoasterId(), measurementSystem = Metric)
 
         assertThat(result.isErr).isTrue()
-        assertThat(result.error.message).isEqualTo(noInterNetException.message)
+        assertThat(result.getError()?.message).isEqualTo(noInterNetException.message)
 
         coVerify(exactly = 1) { api.getRollerCoaster(rollerCoasterId()) }
     }
@@ -70,7 +72,7 @@ internal class RollerCoastersRemoteDataSourceTest {
 
         val result = dataSource.syncRollerCoasters(onStore)
 
-        assertThat(result.error.message).isEqualTo(serverErrorException.message)
+        assertThat(result.getError()?.message).isEqualTo(serverErrorException.message)
         assertThat(storedCoasters.flatten()).isEmpty()
 
         coVerify(exactly = 1) { api.getRollerCoasters(offset = any(), limit = any()) }
@@ -92,7 +94,7 @@ internal class RollerCoastersRemoteDataSourceTest {
 
         val result = dataSource.syncRollerCoasters(onStore)
 
-        assertThat(result.error.message).isEqualTo(serverErrorException.message)
+        assertThat(result.getError()?.message).isEqualTo(serverErrorException.message)
         coVerify(exactly = 2) { api.getRollerCoasters(offset = any(), limit = any()) }
     }
 
@@ -124,8 +126,8 @@ internal class RollerCoastersRemoteDataSourceTest {
         val result = dataSource.searchRollerCoasters(searchQuery, Metric)
 
         assertThat(result.isOk).isTrue()
-        assertThat(result.value).hasSize(searchRollercoastersResponseApiModel.rollerCoasters.size)
-        assertThat(result.value.first()).isEqualTo(rollerCoaster())
+        assertThat(result.get()).hasSize(searchRollercoastersResponseApiModel.rollerCoasters.size)
+        assertThat(result.get()?.first()).isEqualTo(rollerCoaster())
 
         coVerify(exactly = 1) { api.searchRollerCoasters(searchQueryApiModel) }
     }
@@ -137,7 +139,7 @@ internal class RollerCoastersRemoteDataSourceTest {
         val result = dataSource.searchRollerCoasters(searchQuery, Metric)
 
         assertThat(result.isErr).isTrue()
-        assertThat(result.error.message).isEqualTo(noInterNetException.message)
+        assertThat(result.getError()?.message).isEqualTo(noInterNetException.message)
 
         coVerify(exactly = 1) { api.searchRollerCoasters(searchQueryApiModel) }
     }
