@@ -6,6 +6,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
@@ -59,6 +60,7 @@ private fun FavouriteIcon(
             crossfade = true,
             iconState = state.iconState,
             onClick = onToggleFavourite,
+            tint = colors.primary.takeIf { state.isFavourite },
         )
 
         Loading -> ProgressIndicator(

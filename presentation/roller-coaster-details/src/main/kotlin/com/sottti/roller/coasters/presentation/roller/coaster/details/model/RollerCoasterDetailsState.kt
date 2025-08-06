@@ -21,7 +21,10 @@ internal data class TopBarState(
 @Immutable
 internal sealed interface FavouriteIconState {
     @Immutable
-    data class Loaded(val iconState: IconState) : FavouriteIconState
+    data class Loaded(
+        val iconState: IconState,
+        val isFavourite: Boolean,
+    ) : FavouriteIconState
 
     @Immutable
     data object Loading : FavouriteIconState

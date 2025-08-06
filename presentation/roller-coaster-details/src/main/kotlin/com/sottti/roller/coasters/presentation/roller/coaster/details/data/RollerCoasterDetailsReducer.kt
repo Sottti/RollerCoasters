@@ -71,8 +71,8 @@ internal fun MutableStateFlow<RollerCoasterDetailsState>.updateIsFavouriteRoller
         currentState.copy(
             topBar = currentState.topBar.copy(
                 favouriteIcon = when (favourite) {
-                    true -> Loaded(Icons.Star.filled)
-                    false -> Loaded(Icons.Star.outlined)
+                    true -> Loaded(iconState = Icons.Star.filled, isFavourite = true)
+                    false -> Loaded(iconState = Icons.Star.outlined, isFavourite = false)
                 }
             ),
         )

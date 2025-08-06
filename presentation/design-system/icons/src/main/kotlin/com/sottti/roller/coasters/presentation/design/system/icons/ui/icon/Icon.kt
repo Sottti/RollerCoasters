@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -19,6 +20,7 @@ public fun Icon(
     iconState: IconState,
     modifier: Modifier = Modifier,
     crossfade: Boolean = false,
+    tint: Color? = null,
     onClick: (() -> Unit)? = null,
 ) {
     val iconModifier = modifier.size(24.dp)
@@ -27,10 +29,17 @@ public fun Icon(
     fun RenderIcon(state: IconState) {
         when {
             onClick != null -> IconButton(onClick = onClick) {
-                MaterialIcon(
-                    painter = painterResource(state.resId),
+                tint?.let {
+                    MaterialIcon(
+                        contentDescription = stringResource(state.descriptionResId),
+                        modifier = iconModifier,
+                        painter = painterResource(state.resId),
+                        tint = tint,
+                    )
+                } ?: MaterialIcon(
                     contentDescription = stringResource(state.descriptionResId),
                     modifier = iconModifier,
+                    painter = painterResource(state.resId),
                 )
             }
 
