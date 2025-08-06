@@ -59,9 +59,10 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
         var successfulCalls = 0
         val rollerCoastersPage = api
             .getRollerCoasters(offset = 0, limit = limit)
-            .onSuccess { successfulCalls++ }
-            .onFailure { exception -> return Err(exception) }
-            .value
+            .mapBoth(
+                success = { successfulCalls++; it },
+                failure = { exception -> return Err(exception) }
+            )
 
         val totalItems = rollerCoastersPage.pagination.total
 
