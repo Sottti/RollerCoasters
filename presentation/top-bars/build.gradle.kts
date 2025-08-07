@@ -25,5 +25,4 @@ dependencies {
     implementation(project(module.presentation.fixtures))
     implementation(project(module.presentation.navigation))
     implementation(project(module.presentation.previews))
-    testImplementation(project(module.presentation.tests))
 }

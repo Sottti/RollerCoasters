@@ -22,5 +22,4 @@ dependencies {
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
-    testImplementation(project(module.presentation.tests))
 }

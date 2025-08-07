@@ -23,5 +23,4 @@ dependencies {
     implementation(project(module.presentation.designSystem.images))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
-    testImplementation(project(module.presentation.tests))
 }
