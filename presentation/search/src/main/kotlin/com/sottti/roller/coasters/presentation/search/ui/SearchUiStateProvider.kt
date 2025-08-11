@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.presentation.search.R
 import com.sottti.roller.coasters.presentation.search.model.SearchBarState
 import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
 import com.sottti.roller.coasters.presentation.search.model.SearchResultState
+import com.sottti.roller.coasters.presentation.search.model.SearchResults
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.search.model.toState
 
@@ -25,8 +26,7 @@ private val initialState = searchPreviewState(
 )
 
 private val loadingState = searchPreviewState(
-    searchBar = searchBarState(query = COASTER_NAME.take(3), showClearIcon = true),
-    loading = true
+    searchBar = searchBarState(query = COASTER_NAME.take(3), showClearIcon = true), loading = true
 )
 
 private val loadedState = searchPreviewState(
@@ -49,7 +49,7 @@ private fun searchPreviewState(
     state = SearchState(
         searchBar = searchBar,
         loading = loading,
-        results = results,
+        searchResults = SearchResults.NotEmpty(rollerCoasters = results),
     ),
 )
 
