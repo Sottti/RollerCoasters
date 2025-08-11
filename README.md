@@ -10,6 +10,8 @@ The project is under active development and the codebase is not yet stable or ne
 |-----------|-----------|
 | ![Screenshot_20250806_185237](https://github.com/user-attachments/assets/0f2c15d2-d003-415f-9b11-53bb01497f7f) | ![Screenshot_20250806_185228](https://github.com/user-attachments/assets/3b417d2c-bc56-483c-9343-58bc6733693a) |
 | <img width="1466" height="3101" alt="Screenshot_20250806_185918" src="https://github.com/user-attachments/assets/f277209c-d44d-408e-81e4-cda28898a63b" /> | <img width="1466" height="3101" alt="Screenshot_20250806_185923" src="https://github.com/user-attachments/assets/018d1d51-d430-4c7f-a88b-b5dc2c320efe" /> |
+| <img width="1466" height="3101" alt="Screenshot_20250811_143200" src="https://github.com/user-attachments/assets/a5983e2b-d698-4df7-833a-9e18263a2010" /> | <img width="1466" height="3101" alt="Screenshot_20250811_143155" src="https://github.com/user-attachments/assets/ea529a5d-2075-4a01-a7d0-a05fd8a8abe9" />|
+
 
 
 
