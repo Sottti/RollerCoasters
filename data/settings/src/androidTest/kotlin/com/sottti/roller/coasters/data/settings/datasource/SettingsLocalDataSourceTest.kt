@@ -16,6 +16,11 @@ import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastMana
 import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
 import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.locales.localeDe
+import com.sottti.roller.coasters.domain.locales.localeEs
+import com.sottti.roller.coasters.domain.locales.localeFr
+import com.sottti.roller.coasters.domain.locales.localeGb
+import com.sottti.roller.coasters.domain.locales.localeGl
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.HighContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.MediumContrast
@@ -263,7 +268,7 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testGetAppLanguageReturnsMappedLocale() = runTest {
-        val localeManager = mockk<LocaleManager> { every { appLocale } returns Locale.UK }
+        val localeManager = mockk<LocaleManager> { every { appLocale } returns localeGb }
         dataSource = createDataSource(localeManager = localeManager)
         assertThat(dataSource.getAppLanguage()).isEqualTo(AppLanguage.EnglishGb)
     }
@@ -271,7 +276,7 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testObserveAppLanguageEmitsInitialValue() = runTest {
         val localeManager =
-            mockk<LocaleManager> { every { appLocale } returns Locale.forLanguageTag("gl-ES") }
+            mockk<LocaleManager> { every { appLocale } returns localeGl }
         dataSource = createDataSource(localeManager = localeManager)
         val initialValue = dataSource.observeAppLanguage().first()
         assertThat(initialValue).isEqualTo(AppLanguage.Galician)
@@ -281,9 +286,9 @@ internal class SettingsLocalDataSourceTest {
     fun testObserveAppLanguageEmitsDistinctValues() = runTest {
         val localeManager = mockk<LocaleManager> {
             every { appLocale } returnsMany listOf(
-                Locale.UK,
-                Locale.UK,
-                Locale.forLanguageTag("es-ES"),
+                localeGb,
+                localeGb,
+                localeEs,
             )
         }
         val activityFlow = MutableSharedFlow<Unit>(replay = 0)
@@ -382,12 +387,12 @@ internal class SettingsLocalDataSourceTest {
             every { activityCreatedFlow } returns activityFlow
         }
         mockkStatic(Locale::class)
-        every { Locale.getDefault() } returns Locale.FRANCE
+        every { Locale.getDefault() } returns localeFr
 
         dataSource = createDataSource(activityLifecycleEmitter = activityLifecycleEmitter)
 
         val initialValue = dataSource.observeSystemLocale().first()
-        assertThat(initialValue).isEqualTo(Locale.FRANCE)
+        assertThat(initialValue).isEqualTo(localeFr)
 
         unmockkStatic(Locale::class)
     }
@@ -401,10 +406,10 @@ internal class SettingsLocalDataSourceTest {
 
         mockkStatic(Locale::class)
         every { Locale.getDefault() } returnsMany listOf(
-            Locale.FRANCE,
-            Locale.FRANCE,
-            Locale.FRANCE,
-            Locale.GERMANY,
+            localeFr,
+            localeFr,
+            localeFr,
+            localeDe,
         )
 
         dataSource = createDataSource(activityLifecycleEmitter = activityLifecycleEmitter)
@@ -426,7 +431,7 @@ internal class SettingsLocalDataSourceTest {
 
         job.join()
 
-        assertThat(emittedLocales).containsExactly(Locale.FRANCE, Locale.GERMANY).inOrder()
+        assertThat(emittedLocales).containsExactly(localeFr, localeDe).inOrder()
 
         unmockkStatic(Locale::class)
     }

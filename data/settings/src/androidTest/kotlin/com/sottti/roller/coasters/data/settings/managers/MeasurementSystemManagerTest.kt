@@ -5,6 +5,10 @@ import android.icu.util.ULocale
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.locales.localeEs
+import com.sottti.roller.coasters.domain.locales.localeGb
+import com.sottti.roller.coasters.domain.locales.localeLr
+import com.sottti.roller.coasters.domain.locales.localeUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
@@ -16,22 +20,9 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 internal class MeasurementSystemManagerTest {
-    private companion object {
-        // TODO: Move to a common test file
-        private const val LOCALE_SPAIN_TAG = "es-ES"
-        private const val LOCALE_UK_TAG = "en-GB"
-        private const val LOCALE_US_TAG = "en-US"
-
-        private val LOCALE_SPAIN = Locale.forLanguageTag("es-ES")
-        private val LOCALE_UK = Locale.forLanguageTag("en-GB")
-        private val LOCALE_US = Locale.forLanguageTag("en-US")
-        private val LOCALE_LIBERIA = Locale.forLanguageTag("en-LR")
-    }
-
     private lateinit var features: Features
     private lateinit var localeManager: LocaleManager
     private lateinit var manager: MeasurementSystemManager
@@ -52,9 +43,9 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureAvailableAndMetric() {
         every { features.measurementSystemAvailable() } returns true
-        every { localeManager.systemULocale } returns ULocale(LOCALE_SPAIN_TAG)
+        every { localeManager.systemULocale } returns ULocale(localeEs.toLanguageTag())
         every {
-            LocaleData.getMeasurementSystem(ULocale(LOCALE_SPAIN_TAG))
+            LocaleData.getMeasurementSystem(ULocale(localeEs.toLanguageTag()))
         } returns LocaleData.MeasurementSystem.SI
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(Metric)
@@ -63,9 +54,9 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureAvailableAndImperialUk() {
         every { features.measurementSystemAvailable() } returns true
-        every { localeManager.systemULocale } returns ULocale(LOCALE_UK_TAG)
+        every { localeManager.systemULocale } returns ULocale(localeGb.toLanguageTag())
         every {
-            LocaleData.getMeasurementSystem(ULocale(LOCALE_UK_TAG))
+            LocaleData.getMeasurementSystem(ULocale(localeGb.toLanguageTag()))
         } returns LocaleData.MeasurementSystem.UK
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUk)
@@ -74,9 +65,9 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureAvailableAndImperialUs() {
         every { features.measurementSystemAvailable() } returns true
-        every { localeManager.systemULocale } returns ULocale(LOCALE_US_TAG)
+        every { localeManager.systemULocale } returns ULocale(localeUs.toLanguageTag())
         every {
-            LocaleData.getMeasurementSystem(ULocale(LOCALE_US_TAG))
+            LocaleData.getMeasurementSystem(ULocale(localeUs.toLanguageTag()))
         } returns LocaleData.MeasurementSystem.US
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUs)
@@ -85,7 +76,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndImperialUsRegion() {
         every { features.measurementSystemAvailable() } returns false
-        every { localeManager.systemLocale } returns LOCALE_US
+        every { localeManager.systemLocale } returns localeUs
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUs)
     }
@@ -93,7 +84,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndImperialUkRegion() {
         every { features.measurementSystemAvailable() } returns false
-        every { localeManager.systemLocale } returns LOCALE_UK
+        every { localeManager.systemLocale } returns localeGb
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUk)
     }
@@ -101,7 +92,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndMetricRegion() {
         every { features.measurementSystemAvailable() } returns false
-        every { localeManager.systemLocale } returns LOCALE_SPAIN
+        every { localeManager.systemLocale } returns localeEs
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(Metric)
     }
@@ -109,7 +100,7 @@ internal class MeasurementSystemManagerTest {
     @Test
     fun testMeasurementSystemWhenFeatureUnavailableAndOtherImperialUsRegion() {
         every { features.measurementSystemAvailable() } returns false
-        every { localeManager.systemLocale } returns LOCALE_LIBERIA
+        every { localeManager.systemLocale } returns localeLr
 
         assertThat(manager.systemMeasurementSystem).isEqualTo(ImperialUs)
     }

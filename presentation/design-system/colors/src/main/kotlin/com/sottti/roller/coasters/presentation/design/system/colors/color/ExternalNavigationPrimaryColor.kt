@@ -7,7 +7,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.core.net.toUri
-import java.util.Locale
+import com.sottti.roller.coasters.domain.locales.localeUs
 
 private const val HOST_ANDROID_DEVELOPERS: String = "developer.android.com"
 private const val HOST_DRIBBBLE: String = "dribbble.com"
@@ -26,7 +26,7 @@ private const val HOST_X: String = "x.com"
 public fun externalNavigationPrimaryColor(@StringRes url: Int): Color {
 
     val host: String = stringResource(url)
-        .toUri().host?.lowercase(Locale.US) ?: return fallbackColor()
+        .toUri().host?.lowercase(localeUs) ?: return fallbackColor()
 
     return when {
         host.endsWith(HOST_ANDROID_DEVELOPERS) -> androidDevelopersColor()

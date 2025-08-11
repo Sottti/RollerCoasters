@@ -26,6 +26,7 @@ include(
     ":di",
     ":domain:features",
     ":domain:fixtures",
+    ":domain:locales",
     ":domain:model",
     ":domain:roller-coasters",
     ":domain:settings",

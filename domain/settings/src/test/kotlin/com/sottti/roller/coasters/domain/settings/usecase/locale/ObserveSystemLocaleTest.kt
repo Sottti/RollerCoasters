@@ -1,10 +1,10 @@
 package com.sottti.roller.coasters.domain.settings.usecase.locale
 
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.locales.localeGb
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
@@ -25,23 +25,16 @@ internal class ObserveSystemLocaleTest {
     }
 
     @Test
-    fun `invoking use case delegates to repository`() = runTest {
-        every { repository.observeSystemLocale() } returns flowOf(Locale.UK)
-        useCase()
-        verify { repository.observeSystemLocale() }
-    }
-
-    @Test
     fun `invoking use case emits locale uk from repository`() = runTest {
-        every { repository.observeSystemLocale() } returns flowOf(Locale.UK)
+        every { repository.observeSystemLocale() } returns flowOf(localeGb)
         val result = useCase().toList()
-        assertThat(result).containsExactly(Locale.UK)
+        assertThat(result).containsExactly(localeGb)
     }
 
     @Test
     fun `invoking use case emits multiple locales from repository`() = runTest {
-        every { repository.observeSystemLocale() } returns flowOf(Locale.UK, Locale("es", "ES"))
+        every { repository.observeSystemLocale() } returns flowOf(localeGb, Locale("es", "ES"))
         val result = useCase().toList()
-        assertThat(result).containsExactly(Locale.UK, Locale("es", "ES")).inOrder()
+        assertThat(result).containsExactly(localeGb, Locale("es", "ES")).inOrder()
     }
 }

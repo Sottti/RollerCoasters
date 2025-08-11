@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/features" />
             <option value="$PROJECT_DIR$/domain/fixtures" />
+            <option value="$PROJECT_DIR$/domain/locales" />
             <option value="$PROJECT_DIR$/domain/model" />
             <option value="$PROJECT_DIR$/domain/roller-coasters" />
             <option value="$PROJECT_DIR$/domain/settings" />

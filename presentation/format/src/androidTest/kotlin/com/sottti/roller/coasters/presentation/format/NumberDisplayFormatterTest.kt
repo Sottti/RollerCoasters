@@ -2,9 +2,9 @@ package com.sottti.roller.coasters.presentation.format
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.locales.localeFr
+import com.sottti.roller.coasters.domain.locales.localeUs
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
-import com.sottti.roller.coasters.presentation.fixtures.localeFr
-import com.sottti.roller.coasters.presentation.fixtures.localeUs
 import org.junit.Test
 import org.junit.runner.RunWith
 

@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(platform(libs.compose.bom))
     implementation(project(module.domain.fixtures))
+    implementation(project(module.domain.locales))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.presentation.designSystem.colors))
     implementation(project(module.presentation.fixtures))

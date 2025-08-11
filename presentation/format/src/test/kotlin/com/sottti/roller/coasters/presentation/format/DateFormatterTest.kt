@@ -2,10 +2,10 @@ package com.sottti.roller.coasters.presentation.format
 
 import android.content.Context
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.locales.localeEs
+import com.sottti.roller.coasters.domain.locales.localeFr
+import com.sottti.roller.coasters.domain.locales.localeUs
 import com.sottti.roller.coasters.domain.model.Date
-import com.sottti.roller.coasters.presentation.fixtures.localeEs
-import com.sottti.roller.coasters.presentation.fixtures.localeFr
-import com.sottti.roller.coasters.presentation.fixtures.localeUs
 import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test

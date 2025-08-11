@@ -3,6 +3,7 @@ package com.sottti.roller.coasters.presentation.explore.data
 import androidx.paging.PagingData
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
+import com.sottti.roller.coasters.domain.locales.localeUs
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoasters
@@ -31,7 +32,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
-import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class ExploreViewModelTest {
@@ -43,7 +43,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -67,7 +67,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -109,7 +109,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -151,7 +151,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -185,7 +185,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -212,7 +212,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -242,7 +242,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -269,7 +269,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -296,7 +296,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -323,7 +323,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Drop,
@@ -350,7 +350,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -377,7 +377,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
@@ -404,7 +404,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.GForce,
@@ -431,7 +431,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Height,
@@ -458,7 +458,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Inversions,
@@ -485,7 +485,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Length,
@@ -512,7 +512,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.MaxVertical,
@@ -539,7 +539,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Speed,
@@ -566,7 +566,7 @@ internal class ExploreViewModelTest {
         val observeRollerCoasters = mockk<ObserveRollerCoasters>()
 
         every { observeAppLanguage() } returns flowOf(EnglishGb)
-        every { observeSystemLocale() } returns flowOf(Locale.US)
+        every { observeSystemLocale() } returns flowOf(localeUs)
         coEvery {
             observeRollerCoasters.invoke(
                 sortByFilter = SortByFilter.Alphabetical,
