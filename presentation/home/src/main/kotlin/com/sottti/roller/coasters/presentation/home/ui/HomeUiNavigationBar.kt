@@ -88,7 +88,7 @@ internal fun NavigationBar(
             )
         },
     ) { padding ->
-        NavHost(
+        HomeNavHost(
             navController = navController,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             onNavigateToSettings = onNavigateToSettings,
@@ -109,7 +109,7 @@ internal fun NavigationBar(
 }
 
 @Composable
-private fun NavHost(
+private fun HomeNavHost(
     navController: NavHostController,
     startDestination: Explore,
     padding: PaddingValues,
