@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.settings.model.SettingsTopBarState
 
 @Composable
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun TopBar(
     onBackNavigation: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,

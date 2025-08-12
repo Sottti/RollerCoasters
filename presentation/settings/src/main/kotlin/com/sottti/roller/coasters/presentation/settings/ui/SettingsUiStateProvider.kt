@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.settings.ui
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
@@ -21,7 +20,6 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.updateDynam
 import com.sottti.roller.coasters.presentation.settings.model.SettingsPreviewState
 import kotlin.math.min
 
-@OptIn(ExperimentalMaterial3Api::class)
 internal class SettingsUiStateProvider : PreviewParameterProvider<SettingsPreviewState> {
 
     override val values: Sequence<SettingsPreviewState> = sequence {

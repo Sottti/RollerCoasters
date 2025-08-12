@@ -19,7 +19,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Favo
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.TopBarState
 
 @Composable
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun TopBar(
     onBackNavigation: () -> Unit,
     onToggleFavourite: () -> Unit,

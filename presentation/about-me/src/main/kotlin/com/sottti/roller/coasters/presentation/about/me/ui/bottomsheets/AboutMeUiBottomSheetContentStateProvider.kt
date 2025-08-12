@@ -1,12 +1,10 @@
 package com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.about.me.data.initialState
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeBottomSheetPreviewState
 import com.sottti.roller.coasters.presentation.about.me.model.TopicDescription
 
-@OptIn(ExperimentalMaterial3Api::class)
 internal class AboutMeUiBottomSheetContentStateProvider :
     PreviewParameterProvider<AboutMeBottomSheetPreviewState> {
     override val values: Sequence<AboutMeBottomSheetPreviewState> = sequenceOf(
