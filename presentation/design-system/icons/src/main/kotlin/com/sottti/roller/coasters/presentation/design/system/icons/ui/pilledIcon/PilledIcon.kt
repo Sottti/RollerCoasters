@@ -27,7 +27,7 @@ public fun PilledIcon(
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Graphic(iconState = iconState, onClick = onClick)
         Spacer(dimensions.padding.smallMedium)
-        Text(text)
+        Label(text)
 
     }
 }
@@ -53,7 +53,7 @@ private fun Graphic(
 }
 
 @Composable
-private fun Text(text: Int) {
+private fun Label(text: Int) {
     Text.Label.Medium(
         textResId = text,
         textColor = colors.onBackground,

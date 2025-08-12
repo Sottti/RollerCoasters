@@ -34,7 +34,7 @@ public fun MainTopBar(
     }
 
     TopAppBar(
-        actions = { Icon(onNavigateToSettings) },
+        actions = { SettingsIcon(onNavigateToSettings) },
         colors = colors,
         scrollBehavior = scrollBehavior,
         title = { Title(titleResId, showTitle) },
@@ -58,7 +58,7 @@ private fun Title(
 }
 
 @Composable
-private fun Icon(onNavigateToSettings: () -> Unit) {
+private fun SettingsIcon(onNavigateToSettings: () -> Unit) {
     Icon(
         iconState = Icons.Settings.outlined,
         onClick = { onNavigateToSettings() },
