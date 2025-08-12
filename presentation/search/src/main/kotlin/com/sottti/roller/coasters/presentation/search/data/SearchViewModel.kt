@@ -6,10 +6,8 @@ import com.github.michaelbull.result.getOrElse
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.SearchRollerCoasters
-import com.sottti.roller.coasters.presentation.search.R
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchAction.QueryChanged
-import com.sottti.roller.coasters.presentation.search.model.SearchBarState
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.search.model.toState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,14 +30,6 @@ import javax.inject.Inject
 internal class SearchViewModel @Inject constructor(
     private val searchRollerCoasters: SearchRollerCoasters,
 ) : ViewModel() {
-
-    private val initialState = SearchState(
-        SearchBarState(
-            hint = R.string.search_hint,
-            query = null,
-            showClearIcon = false,
-        )
-    )
 
     private val _state = MutableStateFlow(initialState)
     val state: StateFlow<SearchState> = _state.asStateFlow()
