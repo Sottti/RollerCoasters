@@ -21,7 +21,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 public fun MainTopBar(
     onNavigateToSettings: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior? = null,
@@ -67,7 +67,6 @@ private fun SettingsIcon(onNavigateToSettings: () -> Unit) {
 
 @Composable
 @RollerCoastersPreview
-@OptIn(ExperimentalMaterial3Api::class)
 internal fun MainTopBarPreview(
     @PreviewParameter(MainTopBarUiStateProvider::class)
     state: MainTopBarState,
