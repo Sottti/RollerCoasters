@@ -21,6 +21,8 @@ The project is under active development and the codebase is not yet stable or ne
 - **Settings** to pick dynamic color, theme, color contrast, language and measurement system.
 - **Dynamic theming** (Material 3, dynamic colors and color contrast)
 - Support for multiple languages and measurement systems
+- **Edge-to-edge** layout for immersive experiences
+- **Predictive back** navigation for smoother transitions
 
 ## Planned Features or improvements
 
