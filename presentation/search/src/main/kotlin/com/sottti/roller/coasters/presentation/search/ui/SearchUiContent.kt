@@ -22,7 +22,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
-import com.sottti.roller.coasters.presentation.search.model.SearchResultState
+import com.sottti.roller.coasters.presentation.search.model.SearchResults
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.utils.override
 import com.sottti.roller.coasters.presentation.utils.plus
@@ -55,7 +55,7 @@ internal fun SearchUiContent(
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
             scrollBehavior = scrollBehavior,
-            state = state.results,
+            state = state.searchResults,
         )
     }
 }
@@ -68,20 +68,22 @@ private fun SearchResults(
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
-    state: List<SearchResultState>,
+    state: SearchResults,
 ) {
     AnimatedContent(
-        targetState = state.isEmpty(),
+        targetState = state,
         transitionSpec = { fadeIn() togetherWith fadeOut() }
-    ) { isEmpty ->
-        when {
-            isEmpty -> EmptyUi(
+    ) { targetState ->
+        when (targetState) {
+            is SearchResults.Empty -> EmptyUi(
+                primaryText = targetState.primaryText,
+                secondaryText = targetState.secondaryText,
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize()
             )
 
-            else -> LazyColumn(
+            is SearchResults.NotEmpty -> LazyColumn(
                 state = listState,
                 contentPadding = padding + PaddingValues(dimensions.padding.medium),
                 verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
@@ -91,7 +93,7 @@ private fun SearchResults(
 
             ) {
                 items(
-                    items = state,
+                    items = targetState.rollerCoasters,
                     key = { result -> result.id }
                 ) { result ->
                     RollerCoasterCard.Small(
