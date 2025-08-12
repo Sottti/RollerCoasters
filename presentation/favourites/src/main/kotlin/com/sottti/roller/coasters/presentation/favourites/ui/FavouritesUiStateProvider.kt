@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.favourites.ui
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.paging.LoadState
 import androidx.paging.LoadState.Loading
@@ -63,6 +64,7 @@ private val errorState = favouritesPreviewState(
     data = emptyList(),
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 private fun favouritesPreviewState(
     refreshState: LoadState = NotLoading(endOfPaginationReached = false),
     appendState: LoadState = NotLoading(endOfPaginationReached = false),

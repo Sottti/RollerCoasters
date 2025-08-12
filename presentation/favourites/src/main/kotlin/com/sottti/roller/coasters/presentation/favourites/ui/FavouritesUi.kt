@@ -110,6 +110,7 @@ private fun FavouritesUiEffects(
 
 @Composable
 @RollerCoastersPreview
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun FavouritesUiPreview(
     @PreviewParameter(FavouritesUiStateProvider::class)
     state: FavouritesPreviewState,

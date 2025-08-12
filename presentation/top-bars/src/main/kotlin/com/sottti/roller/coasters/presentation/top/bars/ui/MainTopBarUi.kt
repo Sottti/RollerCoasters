@@ -67,6 +67,7 @@ private fun SettingsIcon(onNavigateToSettings: () -> Unit) {
 
 @Composable
 @RollerCoastersPreview
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun MainTopBarPreview(
     @PreviewParameter(MainTopBarUiStateProvider::class)
     state: MainTopBarState,
