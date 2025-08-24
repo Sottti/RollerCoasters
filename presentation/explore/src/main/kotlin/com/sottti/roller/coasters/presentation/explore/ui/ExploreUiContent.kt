@@ -81,7 +81,6 @@ private fun RollerCoasters(
                     0 -> EmptyUi(modifier = Modifier.padding(padding))
                     else -> LoadedRollerCoasters(
                         listState = listState,
-                        onAction = onAction,
                         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                         padding = padding,
                         rollerCoasters = rollerCoasters,
@@ -95,7 +94,6 @@ private fun RollerCoasters(
 @Composable
 private fun LoadedRollerCoasters(
     listState: LazyListState,
-    onAction: (ExploreAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
