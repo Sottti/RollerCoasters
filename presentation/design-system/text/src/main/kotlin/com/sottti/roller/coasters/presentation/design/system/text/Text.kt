@@ -7,6 +7,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
@@ -350,6 +351,23 @@ public object Text {
 
         @Composable
         public fun Medium(
+            text: AnnotatedString,
+            modifier: Modifier = Modifier,
+            textAlign: TextAlign? = null,
+            textColor: Color = Color.Unspecified,
+        ) {
+            ThemedText(
+                text = text,
+                textStyle = MaterialTheme.typography.bodyMedium,
+                textColor = textColor,
+                modifier = modifier,
+                textAlign = textAlign
+            )
+        }
+
+
+        @Composable
+        public fun Medium(
             @StringRes textResId: Int,
             modifier: Modifier = Modifier,
             textAlign: TextAlign? = null,
@@ -520,7 +538,24 @@ public object Text {
     private fun ThemedText(
         text: String,
         textStyle: TextStyle,
+        modifier: Modifier = Modifier,
         textColor: Color = Color.Unspecified,
+        textAlign: TextAlign? = null,
+    ) {
+        MaterialText(
+            text = text,
+            style = textStyle,
+            color = textColor,
+            modifier = modifier,
+            textAlign = textAlign
+        )
+    }
+
+    @Composable
+    private fun ThemedText(
+        text: AnnotatedString,
+        textStyle: TextStyle,
+        textColor: Color,
         modifier: Modifier = Modifier,
         textAlign: TextAlign? = null,
     ) {

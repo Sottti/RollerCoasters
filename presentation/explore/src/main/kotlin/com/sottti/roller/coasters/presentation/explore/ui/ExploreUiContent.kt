@@ -52,7 +52,6 @@ internal fun ExploreContent(
     ) { innerPadding ->
         RollerCoasters(
             listState = lazyListState,
-            onAction = onAction,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
             rollerCoasters = rollerCoasters,
@@ -63,7 +62,6 @@ internal fun ExploreContent(
 @Composable
 private fun RollerCoasters(
     listState: LazyListState,
-    onAction: (ExploreAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
