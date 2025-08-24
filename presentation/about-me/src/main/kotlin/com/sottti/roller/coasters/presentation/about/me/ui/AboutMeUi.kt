@@ -8,11 +8,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -22,7 +19,7 @@ import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewStat
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
-import kotlinx.coroutines.launch
+import com.sottti.roller.coasters.presentation.utils.OnScrollToTopUiEffects
 
 @Composable
 public fun AboutMeUi(
@@ -54,16 +51,11 @@ private fun AboutMeUi(
     AboutMeUi(
         onAction = viewModel.onAction,
         onListCreated = { lazyListState, scrollBehavior ->
-            val coroutineScope = rememberCoroutineScope()
-            val currentScrollBehavior by rememberUpdatedState(scrollBehavior)
-            LaunchedEffect(key1 = onScrollToTop) {
-                onScrollToTop {
-                    coroutineScope.launch {
-                        lazyListState.animateScrollToItem(0)
-                        currentScrollBehavior.state.contentOffset = 0f
-                    }
-                }
-            }
+            OnScrollToTopUiEffects(
+                lazyListState = lazyListState,
+                scrollBehavior = scrollBehavior,
+                onScrollToTop = onScrollToTop,
+            )
         },
         onNavigateToSettings = onNavigateToSettings,
         onShowBottomSheet = onShowBottomSheet,

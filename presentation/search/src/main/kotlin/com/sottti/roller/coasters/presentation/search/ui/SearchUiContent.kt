@@ -30,7 +30,7 @@ import com.sottti.roller.coasters.presentation.utils.plus
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun SearchUiContent(
-    listState: LazyListState,
+    lazyListState: LazyListState,
     onAction: (SearchAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
@@ -42,7 +42,7 @@ internal fun SearchUiContent(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             SearchTopBar(
-                lazyListState = listState,
+                lazyListState = lazyListState,
                 onAction = onAction,
                 onNavigateToSettings = onNavigateToSettings,
                 state = state,
@@ -50,8 +50,7 @@ internal fun SearchUiContent(
         },
     ) { innerPadding ->
         SearchResults(
-            listState = listState,
-            onAction = onAction,
+            listState = lazyListState,
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
             scrollBehavior = scrollBehavior,
@@ -64,7 +63,6 @@ internal fun SearchUiContent(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 private fun SearchResults(
     listState: LazyListState,
-    onAction: (SearchAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,

@@ -13,6 +13,7 @@ android {
 
 dependencies {
     implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
     implementation(libs.compose.ui)
     implementation(platform(libs.compose.bom))
 }
