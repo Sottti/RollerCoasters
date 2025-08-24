@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 internal class LocaleProvider @Inject constructor() {
     fun getAppLocale(): Locale =
-        AppCompatDelegate.getApplicationLocales().get(0) ?: getSystemLocale()
+        AppCompatDelegate.getApplicationLocales()[0] ?: getSystemLocale()
 
     fun getSystemLocale(): Locale = Locale.getDefault()
 

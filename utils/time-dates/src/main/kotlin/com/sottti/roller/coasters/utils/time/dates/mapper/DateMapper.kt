@@ -58,7 +58,7 @@ private fun String.cleanDate(): String =
     trim()
         .removeSuffix(YEAR_ONLY_SORTABLE_SUFFIX)
         .removeSuffix(YEAR_AND_MONTH_SORTABLE_SUFFIX)
-        .also { if (it.isEmpty()) throw IllegalArgumentException(EMPTY_OR_BLANK_DATE_MESSAGE) }
+        .also { require (it.isEmpty()) { EMPTY_OR_BLANK_DATE_MESSAGE } }
 
 private fun String.toFullDate(): Date = runCatching {
     FullDate(LocalDate.parse(this, fullDateFormatter))

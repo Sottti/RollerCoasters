@@ -41,6 +41,7 @@ internal object ColorTokens {
             internal val surfaceContainerHigh = Color(0xFFE6EDFA)
             internal val surfaceContainerHighest = Color(0xFFE2E9F7)
         }
+
         internal object MediumContrast {
             internal val primary = Color(0xFF003A99)
             internal val onPrimary = Color(0xFFFFFFFF)
@@ -78,6 +79,7 @@ internal object ColorTokens {
             internal val surfaceContainerHigh = Color(0xFFDDE6F4)
             internal val surfaceContainerHighest = Color(0xFFD6E1F1)
         }
+
         internal object HighContrast {
             internal val primary = Color(0xFF001F58)
             internal val onPrimary = Color(0xFFFFFFFF)
@@ -116,6 +118,7 @@ internal object ColorTokens {
             internal val surfaceContainerHighest = Color(0xFFC9D6EB)
         }
     }
+
     internal object Dark {
         internal object StandardContrast {
             internal val primary = Color(0xFF8AC1FF)
@@ -154,6 +157,7 @@ internal object ColorTokens {
             internal val surfaceContainerHigh = Color(0xFF232E45)
             internal val surfaceContainerHighest = Color(0xFF2A3754)
         }
+
         internal object MediumContrast {
             internal val primary = Color(0xFFA3D4FF)
             internal val onPrimary = Color(0xFF00193C)
@@ -191,6 +195,7 @@ internal object ColorTokens {
             internal val surfaceContainerHigh = Color(0xFF2F3C57)
             internal val surfaceContainerHighest = Color(0xFF3D4870)
         }
+
         internal object HighContrast {
             internal val primary = Color(0xFFD6EFFF)
             internal val onPrimary = Color(0xFF001A3C)

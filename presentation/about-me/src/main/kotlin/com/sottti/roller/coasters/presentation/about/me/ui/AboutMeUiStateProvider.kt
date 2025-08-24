@@ -11,7 +11,7 @@ internal class AboutMeUiStateProvider : PreviewParameterProvider<AboutMePreviewS
     override val values: Sequence<AboutMePreviewState> = sequenceOf(
         AboutMePreviewState(
             onAction = {},
-            onListCreated = { listState, scrollBehavior -> },
+            onListCreated = { _, _ -> },
             onNavigateToSettings = {},
             padding = PaddingValues(),
             state = initialState,

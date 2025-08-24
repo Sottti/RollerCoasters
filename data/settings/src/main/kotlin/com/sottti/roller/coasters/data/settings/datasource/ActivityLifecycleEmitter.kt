@@ -25,12 +25,29 @@ internal class ActivityLifecycleEmitter @Inject constructor(
                     _activityCreatedFlow.tryEmit(Unit)
                 }
 
-                override fun onActivityStarted(activity: Activity) {}
-                override fun onActivityResumed(activity: Activity) {}
-                override fun onActivityPaused(activity: Activity) {}
-                override fun onActivityStopped(activity: Activity) {}
-                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-                override fun onActivityDestroyed(activity: Activity) {}
+                override fun onActivityStarted(activity: Activity) {
+                    // No specific action required on activity started for this emitter.
+                }
+
+                override fun onActivityResumed(activity: Activity) {
+                    // No specific action required on activity resumed for this emitter.
+                }
+
+                override fun onActivityPaused(activity: Activity) {
+                    // No specific action required on activity paused for this emitter.
+                }
+
+                override fun onActivityStopped(activity: Activity) {
+                    // No specific action required on activity stopped for this emitter.
+                }
+
+                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+                    // No specific action required on activity save instance state for this emitter.
+                }
+
+                override fun onActivityDestroyed(activity: Activity) {
+                    // No specific action required on activity destroyed for this emitter.
+                }
             },
         )
 

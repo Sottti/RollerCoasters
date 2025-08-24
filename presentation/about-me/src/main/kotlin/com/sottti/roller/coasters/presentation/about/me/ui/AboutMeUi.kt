@@ -9,10 +9,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -87,10 +85,6 @@ internal fun AboutMeUi(
     val lazyListState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     key(lazyListState, scrollBehavior) { onListCreated(lazyListState, scrollBehavior) }
-    val showTitleAfterIndex = 2
-    val showTitle by remember {
-        derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
-    }
 
     AboutMeContent(
         lazyListState = lazyListState,
@@ -99,7 +93,6 @@ internal fun AboutMeUi(
         onShowBottomSheet = onShowBottomSheet,
         outerPadding = padding,
         scrollBehavior = scrollBehavior,
-        showTitle = showTitle,
         state = state,
     )
 }

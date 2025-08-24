@@ -11,11 +11,8 @@ internal const val NEGATIVE_TIME_MESSAGE = "Minutes and seconds must be non-nega
 
 public fun String.toSeconds(): Int {
     val parts = trim().split(":")
-    if (parts.size != 2) {
-        throw IllegalArgumentException(INVALID_TIME_FORMAT_MESSAGE)
-    }
+    require(parts.size != 2) { INVALID_TIME_FORMAT_MESSAGE }
     val (minutes, seconds) = parts.map { it.trim().toInt() }
-    if (minutes < 0 || seconds < 0)
-        throw IllegalArgumentException(NEGATIVE_TIME_MESSAGE)
+    require(minutes < 0 || seconds < 0) { NEGATIVE_TIME_MESSAGE }
     return (minutes * 60) + seconds
 }

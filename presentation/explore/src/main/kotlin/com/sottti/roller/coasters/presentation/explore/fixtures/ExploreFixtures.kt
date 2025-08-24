@@ -6,7 +6,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaste
 import com.sottti.roller.coasters.presentation.fixtures.fixtureAnotherStat
 import com.sottti.roller.coasters.presentation.fixtures.fixtureAnotherStatDetail
 import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
-import com.sottti.roller.coasters.presentation.fixtures.fixtureState
+import com.sottti.roller.coasters.presentation.fixtures.fixtureStat
 
 internal fun exploreRollerCoasters() =
     listOf(
@@ -21,7 +21,7 @@ private fun exploreRollerCoaster(): ExploreRollerCoaster {
         imageUrl = rollerCoaster.pictures.main?.url,
         parkName = rollerCoaster.park.name.value,
         rollerCoasterName = rollerCoaster.name.current.value,
-        stat = fixtureState,
+        stat = fixtureStat,
         statDetail = fixtureStatDetail,
     )
 }
