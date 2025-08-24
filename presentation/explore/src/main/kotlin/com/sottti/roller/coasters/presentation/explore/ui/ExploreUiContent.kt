@@ -18,7 +18,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
-aimport com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
+import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
@@ -115,7 +115,6 @@ private fun LoadedRollerCoasters(
         ) { index ->
             rollerCoasters[index]?.let { rollerCoaster ->
                 RollerCoaster(
-                    onAction = onAction,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     rollerCoaster = rollerCoaster,
                 )
@@ -130,7 +129,6 @@ private fun LoadedRollerCoasters(
 
 @Composable
 private fun RollerCoaster(
-    onAction: (ExploreAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoaster: ExploreRollerCoaster,
 ) {
@@ -145,7 +143,7 @@ private fun RollerCoaster(
                 detail = rollerCoaster.statDetail,
             )
         },
-        onClick = { onNavigateToRollerCoaster() },
+        onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
     )
 }
 

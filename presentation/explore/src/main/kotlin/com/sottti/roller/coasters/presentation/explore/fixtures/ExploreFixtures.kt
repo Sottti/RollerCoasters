@@ -5,8 +5,8 @@ import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.fixtures.fixtureAnotherStat
 import com.sottti.roller.coasters.presentation.fixtures.fixtureAnotherStatDetail
-import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
 import com.sottti.roller.coasters.presentation.fixtures.fixtureStat
+import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
 
 internal fun exploreRollerCoasters() =
     listOf(
