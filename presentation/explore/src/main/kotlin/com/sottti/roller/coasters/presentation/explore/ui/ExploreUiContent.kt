@@ -18,6 +18,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
+aimport com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
@@ -138,9 +139,13 @@ private fun RollerCoaster(
         modifier = Modifier.fillMaxWidth(),
         parkName = rollerCoaster.parkName,
         rollerCoasterName = rollerCoaster.rollerCoasterName,
-        stat = rollerCoaster.stat,
-        statDetail = rollerCoaster.statDetail,
-        onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
+        stat = rollerCoaster.stat?.let {
+            RollerCoasterCardStat(
+                value = rollerCoaster.stat,
+                detail = rollerCoaster.statDetail,
+            )
+        },
+        onClick = { onNavigateToRollerCoaster() },
     )
 }
 

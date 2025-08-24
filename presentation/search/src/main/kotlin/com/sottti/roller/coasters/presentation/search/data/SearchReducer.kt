@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.presentation.search.data
 
 import com.sottti.roller.coasters.presentation.search.R
-import com.sottti.roller.coasters.presentation.search.model.SearchResults
 import com.sottti.roller.coasters.presentation.search.model.SearchResultState
+import com.sottti.roller.coasters.presentation.search.model.SearchResults
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
