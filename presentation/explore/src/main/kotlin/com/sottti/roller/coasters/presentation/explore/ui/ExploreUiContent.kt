@@ -18,6 +18,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
+import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
 import com.sottti.roller.coasters.presentation.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.error.ErrorButton
 import com.sottti.roller.coasters.presentation.error.ErrorUi
@@ -80,7 +81,6 @@ private fun RollerCoasters(
                     0 -> EmptyUi(modifier = Modifier.padding(padding))
                     else -> LoadedRollerCoasters(
                         listState = listState,
-                        onAction = onAction,
                         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                         padding = padding,
                         rollerCoasters = rollerCoasters,
@@ -94,7 +94,6 @@ private fun RollerCoasters(
 @Composable
 private fun LoadedRollerCoasters(
     listState: LazyListState,
-    onAction: (ExploreAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     rollerCoasters: LazyPagingItems<ExploreRollerCoaster>,
@@ -114,7 +113,6 @@ private fun LoadedRollerCoasters(
         ) { index ->
             rollerCoasters[index]?.let { rollerCoaster ->
                 RollerCoaster(
-                    onAction = onAction,
                     onNavigateToRollerCoaster = onNavigateToRollerCoaster,
                     rollerCoaster = rollerCoaster,
                 )
@@ -129,7 +127,6 @@ private fun LoadedRollerCoasters(
 
 @Composable
 private fun RollerCoaster(
-    onAction: (ExploreAction) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     rollerCoaster: ExploreRollerCoaster,
 ) {
@@ -138,8 +135,12 @@ private fun RollerCoaster(
         modifier = Modifier.fillMaxWidth(),
         parkName = rollerCoaster.parkName,
         rollerCoasterName = rollerCoaster.rollerCoasterName,
-        stat = rollerCoaster.stat,
-        statDetail = rollerCoaster.statDetail,
+        stat = rollerCoaster.stat?.let {
+            RollerCoasterCardStat(
+                value = rollerCoaster.stat,
+                detail = rollerCoaster.statDetail,
+            )
+        },
         onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
     )
 }

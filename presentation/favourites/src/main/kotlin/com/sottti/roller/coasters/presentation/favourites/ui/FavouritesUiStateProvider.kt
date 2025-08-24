@@ -73,7 +73,7 @@ private fun favouritesPreviewState(
 ) = FavouritesPreviewState(
     onNavigateToSettings = {},
     onNavigateToRollerCoaster = {},
-    onListCreated = { a, b -> },
+    onListCreated = { _, _ -> },
     padding = PaddingValues(),
     rollerCoasters = favouritesRollerCoastersPagingDataFlow(
         appendState = appendState,

@@ -29,7 +29,7 @@ internal abstract class RollerCoastersDatabase : RoomDatabase() {
                 klass = RollerCoastersDatabase::class.java,
                 name = ROLLER_COASTERS_DATABASE_NAME,
             )
-                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration(dropAllTables = true)
                 .createFromAsset("databases/roller_coasters.db")
                 .build()
     }

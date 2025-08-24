@@ -7,6 +7,6 @@ public const val fixtureAnotherStatDetail: String = "Top 83"
 public const val fixtureContentDescription: String = "content description"
 public const val fixtureParkName: String = "PortAventura Park"
 public const val fixtureRollerCoasterName: String = "Dragon Khan"
+public const val fixtureStat: String = "49 meters"
 public const val fixtureStatDetail: String = "Top 38"
-public const val fixtureState: String = "49 meters"
 public val fixtureImageUrl: ImageUrl = ImageUrl("imageUrl")

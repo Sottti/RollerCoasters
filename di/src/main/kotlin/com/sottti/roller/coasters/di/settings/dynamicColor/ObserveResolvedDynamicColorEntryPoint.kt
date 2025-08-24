@@ -7,6 +7,6 @@ import dagger.hilt.components.SingletonComponent
 
 @EntryPoint
 @InstallIn(SingletonComponent::class)
-internal interface ObserveResolvedDynamicColorEntryPoint {
+internal fun interface ObserveResolvedDynamicColorEntryPoint {
     fun observeResolvedDynamicColor(): ObserveResolvedDynamicColor
 }

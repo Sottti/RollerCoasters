@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.search.ui
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.domain.fixtures.COASTER_NAME
 import com.sottti.roller.coasters.domain.fixtures.anotherRollerCoaster
@@ -37,6 +38,7 @@ private val loadedState = searchPreviewState(
     ),
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 private fun searchPreviewState(
     loading: Boolean = false,
     results: List<SearchResultState> = emptyList(),
@@ -45,6 +47,7 @@ private fun searchPreviewState(
     onAction = {},
     onNavigateToRollerCoaster = {},
     onNavigateToSettings = {},
+    onListCreated = { _, _ -> },
     padding = PaddingValues(),
     state = SearchState(
         searchBar = searchBar,

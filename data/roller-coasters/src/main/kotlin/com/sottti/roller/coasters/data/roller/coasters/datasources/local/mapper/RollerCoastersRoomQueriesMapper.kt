@@ -22,7 +22,7 @@ internal fun createFilteredRollerCoastersQuery(
     sortByFilter: SortByFilter,
     typeFilter: TypeFilter,
 ): SimpleSQLiteQuery {
-    val args = buildList {
+    val args = buildList<Any> {
         if (typeFilter != TypeFilter.All) add(typeFilter.toSqlValue())
         add(limit)
         add(offset)
@@ -43,7 +43,7 @@ internal fun createFilteredRollerCoastersQuery(
         append("LIMIT ? OFFSET ?")
     }
 
-    return SimpleSQLiteQuery(query, args.toTypedArray())
+    return SimpleSQLiteQuery(query, args.toTypedArray<Any>())
 }
 
 private fun SortByFilter.toSqlValue(): String =

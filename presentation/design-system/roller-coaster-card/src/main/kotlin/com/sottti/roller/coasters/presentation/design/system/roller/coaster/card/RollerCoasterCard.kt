@@ -32,8 +32,7 @@ public object RollerCoasterCard {
         imageUrl: ImageUrl?,
         parkName: String,
         rollerCoasterName: String,
-        stat: String?,
-        statDetail: String,
+        stat: RollerCoasterCardStat?,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
         foreverLoading: Boolean = false,
@@ -46,7 +45,6 @@ public object RollerCoasterCard {
             parkName = parkName,
             rollerCoasterName = rollerCoasterName,
             stat = stat,
-            statDetail = statDetail,
         )
     }
 }

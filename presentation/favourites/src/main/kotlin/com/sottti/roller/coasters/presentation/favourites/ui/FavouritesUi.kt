@@ -7,10 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -21,7 +18,7 @@ import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewMod
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesPreviewState
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
-import kotlinx.coroutines.launch
+import com.sottti.roller.coasters.presentation.utils.OnScrollToTopUiEffects
 
 @Composable
 public fun FavouritesUi(
@@ -54,7 +51,7 @@ private fun FavouritesUi(
     FavouritesUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
         onListCreated = { lazyListState, scrollBehavior ->
-            FavouritesUiEffects(
+            OnScrollToTopUiEffects(
                 lazyListState = lazyListState,
                 scrollBehavior = scrollBehavior,
                 onScrollToTop = onScrollToTop,
@@ -87,25 +84,6 @@ internal fun FavouritesUi(
         rollerCoasters = rollerCoasters,
         scrollBehavior = scrollBehavior,
     )
-}
-
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun FavouritesUiEffects(
-    lazyListState: LazyListState,
-    onScrollToTop: (() -> Unit) -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
-) {
-    val coroutineScope = rememberCoroutineScope()
-    val rememberedOnScrollToTop = rememberUpdatedState(onScrollToTop)
-    LaunchedEffect(Unit) {
-        rememberedOnScrollToTop.value {
-            coroutineScope.launch {
-                lazyListState.animateScrollToItem(0)
-                scrollBehavior.state.contentOffset = 0f
-            }
-        }
-    }
 }
 
 @Composable

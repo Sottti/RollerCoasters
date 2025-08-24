@@ -17,6 +17,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.R
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard.Large
+import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.image.loading.Image
@@ -31,8 +32,7 @@ internal fun LargeImpl(
     foreverLoading: Boolean,
     parkName: String,
     rollerCoasterName: String,
-    stat: String?,
-    statDetail: String,
+    stat: RollerCoasterCardStat?,
 ) {
     Card(
         modifier = modifier,
@@ -44,7 +44,6 @@ internal fun LargeImpl(
             parkName = parkName,
             rollerCoasterName = rollerCoasterName,
             stat = stat,
-            statDetail = statDetail,
         )
     }
 }
@@ -70,8 +69,7 @@ private fun Image(
 private fun Footer(
     parkName: String,
     rollerCoasterName: String,
-    stat: String?,
-    statDetail: String,
+    stat: RollerCoasterCardStat?,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -93,11 +91,11 @@ private fun Footer(
         stat?.let {
             Column(horizontalAlignment = Alignment.End) {
                 Text.Label.Small(
-                    text = statDetail,
+                    text = stat.value,
                     textColor = colors.onSurfaceVariant,
                 )
                 Text.Label.Medium(
-                    text = stat,
+                    text = stat.detail,
                     textColor = colors.onSurface,
                 )
             }
@@ -118,7 +116,6 @@ internal fun RollerCoasterCardLargePreview(
             parkName = state.parkName,
             rollerCoasterName = state.rollerCoasterName,
             stat = state.stat,
-            statDetail = state.statDetail,
             foreverLoading = state.foreverLoading,
             onClick = {},
         )

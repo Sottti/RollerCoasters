@@ -1,11 +1,12 @@
 package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.large
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
 import com.sottti.roller.coasters.presentation.fixtures.fixtureImageUrl
 import com.sottti.roller.coasters.presentation.fixtures.fixtureParkName
 import com.sottti.roller.coasters.presentation.fixtures.fixtureRollerCoasterName
+import com.sottti.roller.coasters.presentation.fixtures.fixtureStat
 import com.sottti.roller.coasters.presentation.fixtures.fixtureStatDetail
-import com.sottti.roller.coasters.presentation.fixtures.fixtureState
 
 internal class RollerCoasterCardLargeStateProvider :
     PreviewParameterProvider<RollerCoasterCardLargeState> {
@@ -19,8 +20,7 @@ internal class RollerCoasterCardLargeStateProvider :
                         onClick = {},
                         parkName = fixtureParkName,
                         rollerCoasterName = fixtureRollerCoasterName,
-                        stat = fixtureState,
-                        statDetail = fixtureStatDetail,
+                        stat = stat,
                     ),
                 )
             }
@@ -29,3 +29,4 @@ internal class RollerCoasterCardLargeStateProvider :
 }
 
 private val foreverLoadingValues = listOf(true, false)
+private val stat = RollerCoasterCardStat(value = fixtureStat, detail = fixtureStatDetail)
