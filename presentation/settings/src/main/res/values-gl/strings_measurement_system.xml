@@ -5,6 +5,6 @@
     <string name="measurement_system_imperial_united_states">Imperial (EUA)</string>
     <string name="measurement_system_metric">Métrico</string>
     <string name="measurement_system_picker_title">Escolle un sistema de medición</string>
-    <string name="measurement_system_supporting">Tema claro, escuro ou predeterminado polo sistema.</string>
+    <string name="measurement_system_supporting">Métrico, imperial ou sistema.</string>
     <string name="measurement_system_system">Sistema</string>
 </resources>

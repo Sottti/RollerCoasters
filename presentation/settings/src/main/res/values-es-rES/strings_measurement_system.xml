@@ -5,6 +5,6 @@
     <string name="measurement_system_imperial_united_states">Imperial (EUA)</string>
     <string name="measurement_system_metric">Métrico</string>
     <string name="measurement_system_picker_title">Elige un sistema de medida</string>
-    <string name="measurement_system_supporting">A aplicación usará o sistema de medidas que escollas.</string>
+    <string name="measurement_system_supporting">Métrico, imperial o sistema.</string>
     <string name="measurement_system_system">Sistema</string>
 </resources>

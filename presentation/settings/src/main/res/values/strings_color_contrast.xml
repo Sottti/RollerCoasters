@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="color_contrast_color_headline">Color Contrast</string>
-    <string name="color_contrast_color_supporting">
-        Higher contrast makes content stand out more.
-    </string>
+    <string name="color_contrast_color_supporting">How much the content stands out.</string>
     <string name="color_contrast_high_contrast">High</string>
     <string name="color_contrast_medium_contrast">Medium</string>
     <string name="color_contrast_not_available_message_text">

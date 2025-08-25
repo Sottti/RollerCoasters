@@ -5,6 +5,6 @@
     <string name="measurement_system_imperial_united_states">Imperial (US)</string>
     <string name="measurement_system_metric">Metric</string>
     <string name="measurement_system_picker_title">Pick measurement system</string>
-    <string name="measurement_system_supporting">Light, dark or system default theme.</string>
+    <string name="measurement_system_supporting">Metric, imperial or system.</string>
     <string name="measurement_system_system">System</string>
 </resources>

@@ -4,6 +4,6 @@
     <string name="theme_headline">Tema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_picker_title">Elige tema</string>
-    <string name="theme_supporting">Claro, oscuro o tema del sistema.</string>
+    <string name="theme_supporting">Claro, oscuro o sistema.</string>
     <string name="theme_system">Sistema</string>
 </resources>
