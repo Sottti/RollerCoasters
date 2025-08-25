@@ -56,7 +56,7 @@ private fun spanishSpainLanguage(
 ): SpanishSpainLanguage =
     SpanishSpainLanguage(
         text = R.string.language_spanish_spain,
-        icon = Icons.LanguageSpanish.outlined,
+        icon = Icons.Language.Spanish.outlined,
         selected = selected,
     )
 
@@ -64,6 +64,6 @@ private fun englishGbLanguage(
     selected: Boolean,
 ): EnglishGbLanguage = EnglishGbLanguage(
     text = R.string.language_english_gb,
-    icon = Icons.LanguageEnglishGb.outlined,
+    icon = Icons.Language.EnglishGb.outlined,
     selected = selected,
 )

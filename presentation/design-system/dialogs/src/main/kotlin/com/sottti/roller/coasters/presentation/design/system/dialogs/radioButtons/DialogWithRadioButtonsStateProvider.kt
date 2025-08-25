@@ -34,7 +34,7 @@ private fun dismissValues() = listOf(
 
 private fun optionsValues() = listOf(
     DialogRadioButtonOption(
-        icon = Icons.BrightnessAuto.outlined,
+        icon = Icons.Brightness.Auto.outlined,
         selected = false,
         text = FixturesR.fixture_option_a,
     ),

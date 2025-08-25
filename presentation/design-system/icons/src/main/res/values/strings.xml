@@ -11,6 +11,7 @@
     <string name="description_icon_brightness_standard">Standard brightness</string>
     <string name="description_icon_cancel">Cancel</string>
     <string name="description_icon_check">Checked</string>
+    <string name="description_icon_close">Close</string>
     <string name="description_icon_dark_mode">Dark mode</string>
     <string name="description_icon_explore">Explore</string>
     <string name="description_icon_filter_list">Filter</string>

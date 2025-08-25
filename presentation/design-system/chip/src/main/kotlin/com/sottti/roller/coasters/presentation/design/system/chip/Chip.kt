@@ -47,7 +47,7 @@ private fun TrailingIcon(expanded: Boolean) =
     Icon(
         crossfade = true,
         modifier = Modifier.size(FilterChipDefaults.IconSize),
-        iconState = if (expanded) Icons.ArrowDropUp.filled else Icons.ArrowDropDown.filled,
+        iconState = if (expanded) Icons.Arrow.DropUp.filled else Icons.Arrow.DropDown.filled,
     )
 
 

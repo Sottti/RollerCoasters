@@ -3,8 +3,6 @@ package com.sottti.roller.coasters.presentation.settings.data.mapper
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.DarkMode
-import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons.LightMode
 import com.sottti.roller.coasters.presentation.settings.R
 import com.sottti.roller.coasters.presentation.settings.model.AppThemeUi
 import com.sottti.roller.coasters.presentation.settings.model.DarkTheme
@@ -37,7 +35,7 @@ private fun systemTheme(
 ): SystemTheme =
     SystemTheme(
         text = R.string.theme_system,
-        icon = if (selected) Icons.BrightnessAuto.filled else Icons.BrightnessAuto.outlined,
+        icon = if (selected) Icons.Brightness.Auto.filled else Icons.Brightness.Auto.outlined,
         selected = selected,
     )
 
@@ -46,7 +44,7 @@ private fun lightTheme(
 ): LightTheme =
     LightTheme(
         text = R.string.theme_light,
-        icon = if (selected) LightMode.filled else LightMode.outlined,
+        icon = if (selected) Icons.Mode.Light.filled else Icons.Mode.Light.outlined,
         selected = selected,
     )
 
@@ -55,6 +53,6 @@ private fun darkTheme(
 ): DarkTheme =
     DarkTheme(
         text = R.string.theme_dark,
-        icon = if (selected) DarkMode.filled else DarkMode.outlined,
+        icon = if (selected) Icons.Mode.Dark.filled else Icons.Mode.Dark.outlined,
         selected = selected,
     )

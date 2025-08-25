@@ -62,7 +62,7 @@ internal class SettingsAppThemeUiMapperTest {
         val list = AppTheme.entries.map { it.toPresentationModel(false) }
         val unmatched = DialogRadioButtonOption(
             text = -999,
-            icon = Icons.DarkMode.outlined,
+            icon = Icons.Mode.Dark.outlined,
             selected = false,
         )
         val fallback = unmatched.toAppThemeUi(list)
@@ -73,7 +73,7 @@ internal class SettingsAppThemeUiMapperTest {
     fun `radio button option fallback fails with empty UI model list`() {
         val option = DialogRadioButtonOption(
             text = -1,
-            icon = Icons.DarkMode.outlined,
+            icon = Icons.Mode.Dark.outlined,
             selected = false,
         )
         option.toAppThemeUi(emptyList())

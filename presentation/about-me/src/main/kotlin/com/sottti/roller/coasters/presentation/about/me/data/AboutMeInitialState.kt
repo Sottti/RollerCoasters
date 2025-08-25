@@ -33,42 +33,42 @@ private fun socialProfilesState(): List<SocialProfileState> =
 
 private fun linkedInProfile(): SocialProfileState =
     SocialProfileState(
-        icon = Icons.LinkedIn.filled,
+        icon = Icons.Logos.LinkedIn.filled,
         text = R.string.social_profiles_linked_in_text,
         url = R.string.social_profiles_linked_in_url,
     )
 
 private fun xProfile(): SocialProfileState =
     SocialProfileState(
-        icon = Icons.X.filled,
+        icon = Icons.Logos.X.filled,
         text = R.string.social_profiles_x_text,
         url = R.string.social_profiles_x_url,
     )
 
 private fun gitHubProfile(): SocialProfileState =
     SocialProfileState(
-        icon = Icons.GitHub.filled,
+        icon = Icons.Logos.GitHub.filled,
         text = R.string.social_profiles_github_text,
         url = R.string.social_profiles_github_url,
     )
 
 private fun stackOverflowProfile(): SocialProfileState =
     SocialProfileState(
-        icon = Icons.StackOverflow.filled,
+        icon = Icons.Logos.StackOverflow.filled,
         text = R.string.social_profiles_stack_overflow_text,
         url = R.string.social_profiles_stack_overflow_url,
     )
 
 private fun instagramProfile(): SocialProfileState =
     SocialProfileState(
-        icon = Icons.Instagram.filled,
+        icon = Icons.Logos.Instagram.filled,
         text = R.string.social_profiles_instagram_text,
         url = R.string.social_profiles_instagram_url,
     )
 
 private fun mediumProfile(): SocialProfileState =
     SocialProfileState(
-        icon = Icons.Medium.filled,
+        icon = Icons.Logos.Medium.filled,
         text = R.string.social_profiles_medium_text,
         url = R.string.social_profiles_medium_url,
     )

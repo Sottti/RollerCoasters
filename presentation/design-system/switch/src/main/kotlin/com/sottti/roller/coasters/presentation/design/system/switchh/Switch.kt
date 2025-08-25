@@ -3,6 +3,8 @@ package com.sottti.roller.coasters.presentation.design.system.switchh
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import androidx.compose.material3.Switch as MaterialSwitch
@@ -19,6 +21,12 @@ public fun Switch(
         enabled = enabled,
         modifier = modifier,
         onCheckedChange = onCheckedChange,
+        thumbContent = {
+            when {
+                checked -> Icon(iconState = Icons.CheckSmall.filled)
+                else -> Icon(iconState = Icons.CloseSmall.outlined)
+            }
+        },
     )
 }
 

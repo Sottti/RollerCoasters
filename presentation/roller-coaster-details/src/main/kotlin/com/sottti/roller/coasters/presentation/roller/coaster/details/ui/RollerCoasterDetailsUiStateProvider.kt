@@ -41,7 +41,7 @@ internal fun previewState(
         content = content,
         topBar = TopBarState(
             favouriteIcon = FavouriteIconState.Loading,
-            navigationIcon = Icons.ArrowBack.filled,
+            navigationIcon = Icons.Arrow.Back.filled,
             title = null,
         ),
     ),

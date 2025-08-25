@@ -64,7 +64,7 @@ private fun initialAppThemeState() = AppThemeState(
         headline = R.string.theme_headline,
         supporting = R.string.theme_supporting,
         selectedAppTheme = SelectedAppThemeState.Loading,
-        icon = Icons.BrightnessMedium.outlined
+        icon = Icons.Brightness.Medium.outlined
     ),
     picker = null,
 )
@@ -80,4 +80,4 @@ private fun initialAppMeasurementSystemState() = AppMeasurementSystemState(
 )
 
 private fun initialTopBarState(): SettingsTopBarState =
-    SettingsTopBarState(title = R.string.title, icon = Icons.ArrowBack.filled)
+    SettingsTopBarState(title = R.string.title, icon = Icons.Arrow.Back.filled)
