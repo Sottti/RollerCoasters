@@ -111,7 +111,7 @@ private fun ExploreUiEffects(
     LaunchedEffect(events) {
         events.collect { event ->
             when (event) {
-                ScrollToTop -> coroutineScope.launch { lazyListState.scrollToItem(0) }
+                ScrollToTop -> lazyListState.scrollToItem(0)
             }
         }
     }
