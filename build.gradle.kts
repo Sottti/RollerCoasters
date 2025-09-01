@@ -10,7 +10,6 @@ plugins {
     alias(libs.plugins.dependency.analysis) apply false
     alias(libs.plugins.dependency.versions) apply true
     alias(libs.plugins.hilt) apply false
-    alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.ksp) apply false
@@ -31,24 +30,18 @@ subprojects {
             plugins.hasPlugin("com.android.library") -> androidLibraryConfig()
         }
     }
-    plugins.withId("org.jetbrains.kotlin.android") {
-        extensions.configure<KotlinAndroidProjectExtension> {
-            jvmToolchain(17)
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
-                freeCompilerArgs.add("-Xwhen-guards")
-            }
+    extensions.findByType<KotlinAndroidProjectExtension>()?.apply {
+        jvmToolchain(17)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-Xwhen-guards")
         }
+        explicitApi()
     }
     plugins.withId("org.jetbrains.kotlin.jvm") {
         extensions.configure<KotlinProjectExtension> {
             explicitApi()
             jvmToolchain(17)
-        }
-    }
-    plugins.withId("org.jetbrains.kotlin.android") {
-        extensions.configure<KotlinAndroidProjectExtension> {
-            explicitApi()
         }
     }
 }
