@@ -14,13 +14,11 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 internal class RollerCoastersRemoteDataSource @Inject constructor(
@@ -66,9 +64,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
 
         val totalItems = rollerCoastersPage.pagination.total
 
-        val rollerCoasters = withContext(Dispatchers.Default) {
-            rollerCoastersPage.rollerCoasters.map { it.toDomain(Metric) }
-        }
+        val rollerCoasters = rollerCoastersPage.rollerCoasters.map { it.toDomain(Metric) }
         onStoreRollerCoasters(rollerCoasters)
 
         val offsets = (limit until totalItems step limit).toList()
@@ -88,9 +84,7 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                     }
                     result.mapBoth(
                         success = { page ->
-                            val mappedCoasters = withContext(Dispatchers.Default) {
-                                page.rollerCoasters.map { it.toDomain(Metric) }
-                            }
+                            val mappedCoasters = page.rollerCoasters.map { it.toDomain(Metric) }
                             onStoreRollerCoasters(mappedCoasters)
                             Ok(Unit)
                         },
