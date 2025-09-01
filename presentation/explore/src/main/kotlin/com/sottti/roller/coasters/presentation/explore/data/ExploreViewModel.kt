@@ -54,7 +54,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -99,13 +100,12 @@ internal class ExploreViewModel @Inject constructor(
     internal val onAction: (ExploreAction) -> Unit = { action -> processAction(action) }
 
     init {
-        viewModelScope.launch {
-            combine(
-                _sortByFilter.distinctUntilChanged { old, new -> old == new },
-                _typeFilter.distinctUntilChanged { old, new -> old == new },
-            ) { sortBy, type -> sortBy to type }
-                .collect { _events.emit(ExploreEvent.ScrollToTop) }
-        }
+        combine(
+            _sortByFilter.distinctUntilChanged { old, new -> old == new },
+            _typeFilter.distinctUntilChanged { old, new -> old == new },
+        ) { sortBy, type -> sortBy to type }
+            .onEach { _events.emit(ExploreEvent.ScrollToTop) }
+            .launchIn(viewModelScope)
     }
 
     private fun processAction(action: ExploreAction) {
