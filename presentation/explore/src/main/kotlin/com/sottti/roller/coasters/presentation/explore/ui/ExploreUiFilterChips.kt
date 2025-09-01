@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.chip.Chip
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
@@ -25,11 +24,10 @@ internal fun FilterChips(
     filters: Filters,
     onAction: (ExploreAction) -> Unit,
 ) {
-    val rememberedOnAction = rememberUpdatedState(onAction)
     Column(modifier = Modifier.padding(vertical = dimensions.padding.small)) {
-        PrimaryFilters(filters.primary, rememberedOnAction.value)
+        PrimaryFilters(filters.primary, onAction)
         Spacer(dimensions.padding.small)
-        SecondaryFilters(filters.secondary, rememberedOnAction.value)
+        SecondaryFilters(filters.secondary, onAction)
     }
 }
 

@@ -11,7 +11,6 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -46,20 +45,14 @@ internal fun SettingsList(
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
 ) {
-    val onDynamicColorCheckedChange = remember(onAction) {
-        { checked: Boolean -> onAction(DynamicColorCheckedChange(checked)) }
+    val onDynamicColorCheckedChange: (Boolean) -> Unit = {
+        onAction(DynamicColorCheckedChange(it))
     }
-    val launchThemePicker = remember(onAction) {
-        { onAction(LaunchAppThemePicker) }
-    }
-    val launchColorContrastPicker = remember(onAction) {
-        { onAction(LaunchAppColorContrastPicker) }
-    }
-    val launchLanguagePicker = remember(onAction) {
-        { onAction(LaunchAppLanguagePicker) }
-    }
-    val launchMeasurementSystemPicker = remember(onAction) {
-        { onAction(AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker) }
+    val launchThemePicker = { onAction(LaunchAppThemePicker) }
+    val launchColorContrastPicker = { onAction(LaunchAppColorContrastPicker) }
+    val launchLanguagePicker = { onAction(LaunchAppLanguagePicker) }
+    val launchMeasurementSystemPicker = {
+        onAction(AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker)
     }
     LazyColumn(
         contentPadding = padding + PaddingValues(vertical = dimensions.padding.medium),
