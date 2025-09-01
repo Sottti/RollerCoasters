@@ -150,6 +150,6 @@ private fun FillMaxWidthProgressIndicator(
     ProgressIndicator(
         modifier = Modifier
             .padding(padding)
-            .fillMaxSize(),
+            .fillMaxWidth(),
     )
 }

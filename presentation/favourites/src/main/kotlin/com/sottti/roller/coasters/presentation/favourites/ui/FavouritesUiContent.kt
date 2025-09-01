@@ -132,7 +132,7 @@ private fun RollerCoaster(
     rollerCoaster: FavouritesRollerCoaster,
 ) {
     RollerCoasterCard.Small(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
         onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
         imageUrl = rollerCoaster.imageUrl,
         parkName = rollerCoaster.parkName,
@@ -147,6 +147,6 @@ private fun FillMaxWidthProgressIndicator(
     ProgressIndicator(
         modifier = Modifier
             .padding(padding)
-            .fillMaxSize(),
+            .fillMaxWidth(),
     )
 }
