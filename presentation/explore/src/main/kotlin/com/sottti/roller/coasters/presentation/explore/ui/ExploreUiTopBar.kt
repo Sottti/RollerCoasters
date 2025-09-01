@@ -7,7 +7,9 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.Filters
@@ -21,10 +23,9 @@ internal fun ExploreTopBar(
     onAction: (ExploreAction) -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
-    val topBarColors = TopAppBarDefaults.topAppBarColors()
-    val containerColor = topBarColors.containerColor
-    val scrolledContainerColor = topBarColors.scrolledContainerColor
-    val isScrolled = lazyListState.firstVisibleItemScrollOffset > 0
+    val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
+    val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
+    val isScrolled by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset > 0 } }
     val backgroundColor by animateColorAsState(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
         label = "expandable top bar background color animation",
