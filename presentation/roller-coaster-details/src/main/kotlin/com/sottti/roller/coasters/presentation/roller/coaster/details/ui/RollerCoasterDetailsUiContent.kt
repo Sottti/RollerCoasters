@@ -20,7 +20,6 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -124,7 +123,7 @@ private fun ImagesSection(
     val density = LocalDensity.current
     val windowHeightPx = LocalWindowInfo.current.containerSize.height
     val windowHeightDp = with(density) { windowHeightPx.toDp() }
-    val carouselHeight = remember(windowHeightDp) { (windowHeightDp * 0.25f) }
+    val carouselHeight = windowHeightDp * 0.25f
 
     Column(Modifier.fillMaxWidth()) {
         HorizontalPager(
@@ -163,7 +162,7 @@ private fun DetailsSection(
 
 @Composable
 private fun RideDetails(details: RollerCoasterRideState) {
-    val items = remember(
+    val items = listOfNotNull(
         details.speed,
         details.height,
         details.drop,
@@ -172,18 +171,7 @@ private fun RideDetails(details: RollerCoasterRideState) {
         details.length,
         details.duration,
         details.gForce,
-    ) {
-        listOfNotNull(
-            details.speed,
-            details.height,
-            details.drop,
-            details.maxVertical,
-            details.inversions,
-            details.length,
-            details.duration,
-            details.gForce,
-        )
-    }
+    )
 
     DetailsCard {
         items.forEachIndexed { index, item ->
@@ -194,9 +182,7 @@ private fun RideDetails(details: RollerCoasterRideState) {
 
 @Composable
 private fun IdentityDetails(state: RollerCoasterIdentityState) {
-    val items = remember(state.name, state.formerNames) {
-        listOfNotNull(state.name, state.formerNames)
-    }
+    val items = listOfNotNull(state.name, state.formerNames)
 
     DetailsCard {
         items.forEachIndexed { index, item ->
@@ -207,14 +193,7 @@ private fun IdentityDetails(state: RollerCoasterIdentityState) {
 
 @Composable
 private fun StatusDetails(state: RollerCoasterStatusState) {
-    val items = remember(
-        state.current,
-        state.former,
-        state.openedDate,
-        state.closedDate,
-    ) {
-        listOfNotNull(state.current, state.former, state.openedDate, state.closedDate)
-    }
+    val items = listOfNotNull(state.current, state.former, state.openedDate, state.closedDate)
 
     DetailsCard {
         items.forEachIndexed { index, item ->
@@ -238,9 +217,7 @@ private fun LocationDetails(state: RollerCoasterLocationState) {
             )
         }
 
-        val items = remember(state.park, state.city, state.country, state.relocations) {
-            listOfNotNull(state.park, state.city, state.country, state.relocations)
-        }
+        val items = listOfNotNull(state.park, state.city, state.country, state.relocations)
         items.forEachIndexed { index, item ->
             ListItem(state = item, showBottomDivider = index < items.lastIndex)
         }
