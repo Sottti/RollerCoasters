@@ -1,9 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.ui.dialogs
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogRadioButtonOption
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DialogWithRadioButtons
 
@@ -20,24 +17,13 @@ internal fun <T> GenericPickerDialog(
     onConfirm: (T) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val options = remember(items) {
-        items.map(toOption)
+    val options = items.map(toOption)
+    val selectedItem = findSelected(items)
+    val onOptionSelected: (DialogRadioButtonOption) -> Unit = { opt ->
+        val itm = fromOption(opt, items)
+        onSelect(itm)
     }
-    val selectedItem = remember(items) {
-        findSelected(items)
-    }
-    val currentOnSelect by rememberUpdatedState(onSelect)
-    val onOptionSelected = remember(currentOnSelect, items) {
-        { opt: DialogRadioButtonOption ->
-            val itm = fromOption(opt, items)
-            currentOnSelect(itm)
-        }
-    }
-    val onConfirmAction = remember(onConfirm, selectedItem) {
-        { onConfirm(selectedItem) }
-    }
-    val currentOnDismiss by rememberUpdatedState(onDismiss)
-    val onDismissAction = remember { { currentOnDismiss() } }
+    val onConfirmAction = { onConfirm(selectedItem) }
 
     DialogWithRadioButtons(
         title = title,
@@ -46,7 +32,7 @@ internal fun <T> GenericPickerDialog(
         dismiss = dismiss,
         onOptionSelected = onOptionSelected,
         onConfirm = onConfirmAction,
-        onDismiss = onDismissAction,
+        onDismiss = onDismiss,
     )
 }
 
