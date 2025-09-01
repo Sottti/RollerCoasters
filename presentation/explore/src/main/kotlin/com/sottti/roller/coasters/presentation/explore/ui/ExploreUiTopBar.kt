@@ -21,8 +21,9 @@ internal fun ExploreTopBar(
     onAction: (ExploreAction) -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
-    val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
-    val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
+    val topBarColors = TopAppBarDefaults.topAppBarColors()
+    val containerColor = topBarColors.containerColor
+    val scrolledContainerColor = topBarColors.scrolledContainerColor
     val isScrolled = lazyListState.firstVisibleItemScrollOffset > 0
     val backgroundColor by animateColorAsState(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
