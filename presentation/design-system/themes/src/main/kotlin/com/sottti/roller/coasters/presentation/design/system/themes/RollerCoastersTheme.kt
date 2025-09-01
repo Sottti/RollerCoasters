@@ -17,16 +17,13 @@ public fun RollerCoastersTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
-    val observeResolvedColorContrast = remember { provideObserveResolvedColorContrast(context) }
-    val observeResolvedDynamicColor = remember { provideObserveResolvedDynamicColor(context) }
-
     val resolvedDynamicColor =
-        observeResolvedDynamicColor()
+        provideObserveResolvedDynamicColor(context).invoke()
             .collectAsState(initial = ResolvedDynamicColor(false))
             .value
 
     val resolvedColorContrast =
-        observeResolvedColorContrast()
+        provideObserveResolvedColorContrast(context).invoke()
             .collectAsState(initial = ResolvedColorContrast.StandardContrast).value
 
     val colors = colors(
