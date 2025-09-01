@@ -21,8 +21,9 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,29 +47,28 @@ internal class SearchViewModel @Inject constructor(
     }
 
     init {
-        viewModelScope.launch {
-            state
-                .map { it.searchBar.query.orEmpty().trim() }
-                .distinctUntilChanged()
-                .debounce(300)
-                .flatMapLatest { query ->
-                    when {
-                        query.isBlank() -> flowOf(emptyList())
-                        else -> {
-                            _state.loading()
-                            flow {
-                                val searchResults =
-                                    searchRollerCoasters(SearchQuery(query)).getOrElse { emptyList() }
-                                emit(searchResults)
-                            }
+        state
+            .map { it.searchBar.query.orEmpty().trim() }
+            .distinctUntilChanged()
+            .debounce(300)
+            .flatMapLatest { query ->
+                when {
+                    query.isBlank() -> flowOf(emptyList())
+                    else -> {
+                        _state.loading()
+                        flow {
+                            val searchResults =
+                                searchRollerCoasters(SearchQuery(query)).getOrElse { emptyList() }
+                            emit(searchResults)
                         }
                     }
                 }
-                .collect { searchResults ->
-                    _state
-                        .notLoading()
-                        .updateResults(searchResults.map(RollerCoaster::toState))
-                }
-        }
+            }
+            .onEach { searchResults ->
+                _state
+                    .notLoading()
+                    .updateResults(searchResults.map(RollerCoaster::toState))
+            }
+            .launchIn(viewModelScope)
     }
 }
