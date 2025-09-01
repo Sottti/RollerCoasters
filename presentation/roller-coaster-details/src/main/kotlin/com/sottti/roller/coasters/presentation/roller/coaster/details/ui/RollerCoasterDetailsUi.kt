@@ -21,7 +21,6 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 @Composable
 public fun RollerCoasterDetailsUi(
     onBackNavigation: () -> Unit,
-    rollerCoasterId: Int,
 ) {
     RollerCoasterDetailsUi(
         onBackNavigation = onBackNavigation,
