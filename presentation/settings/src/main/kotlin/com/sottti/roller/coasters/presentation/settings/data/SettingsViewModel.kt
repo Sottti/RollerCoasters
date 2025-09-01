@@ -69,6 +69,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -100,108 +102,100 @@ internal class SettingsViewModel @Inject constructor(
     internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
 
     private fun processAction(action: SettingsAction) {
-        viewModelScope.launch {
-            when (action) {
-                is LoadUi -> {
-                    if (features.systemDynamicColorAvailable()) collectAppDynamicColor()
-                    collectTheme()
-                    collectAppColorContrast()
-                    collectAppLanguage()
-                    collectMeasurementSystem()
-                }
-
-                is DynamicColorCheckedChange -> handleDynamicColorChange(action)
-                is AppThemeActions -> handleAppThemeAction(action)
-                is AppColorContrastActions -> handleAppColorContrastAction(action)
-                is AppLanguageActions -> handleAppLanguageAction(action)
-                is AppMeasurementSystemActions -> handleAppMeasurementSystemAction(action)
+        when (action) {
+            is LoadUi -> {
+                if (features.systemDynamicColorAvailable()) collectAppDynamicColor()
+                collectTheme()
+                collectAppColorContrast()
+                collectAppLanguage()
+                collectMeasurementSystem()
             }
+
+            is DynamicColorCheckedChange -> handleDynamicColorChange(action)
+            is AppThemeActions -> handleAppThemeAction(action)
+            is AppColorContrastActions -> handleAppColorContrastAction(action)
+            is AppLanguageActions -> handleAppLanguageAction(action)
+            is AppMeasurementSystemActions -> handleAppMeasurementSystemAction(action)
         }
     }
 
     private fun collectAppDynamicColor() {
-        viewModelScope.launch {
-            observeAppDynamicColor().collect { dynamicColorChecked ->
-                _state.updateDynamicColor(dynamicColorChecked)
-            }
-        }
+        observeAppDynamicColor()
+            .onEach { dynamicColorChecked -> _state.updateDynamicColor(dynamicColorChecked) }
+            .launchIn(viewModelScope)
     }
 
     private fun collectTheme() {
-        viewModelScope.launch {
-            observeAppTheme().collect { theme ->
-                _state.updateAppTheme(theme)
-            }
-        }
+        observeAppTheme()
+            .onEach { theme -> _state.updateAppTheme(theme) }
+            .launchIn(viewModelScope)
     }
 
     private fun collectAppColorContrast() {
-        viewModelScope.launch {
-            observeAppColorContrast().collect { appColorContrast ->
-                _state.updateAppColorContrast(appColorContrast)
-            }
-        }
+        observeAppColorContrast()
+            .onEach { appColorContrast -> _state.updateAppColorContrast(appColorContrast) }
+            .launchIn(viewModelScope)
     }
 
     private fun collectAppLanguage() {
-        viewModelScope.launch {
-            observeAppLanguage().collect { appLanguage ->
-                _state.updateAppLanguage(appLanguage)
-            }
-        }
+        observeAppLanguage()
+            .onEach { appLanguage -> _state.updateAppLanguage(appLanguage) }
+            .launchIn(viewModelScope)
     }
 
     private fun collectMeasurementSystem() {
-        viewModelScope.launch {
-            observeAppMeasurementSystem().collect { measurementSystem ->
-                _state.updateAppMeasurementSystem(measurementSystem)
-            }
-        }
+        observeAppMeasurementSystem()
+            .onEach { measurementSystem -> _state.updateAppMeasurementSystem(measurementSystem) }
+            .launchIn(viewModelScope)
     }
 
-    private suspend fun handleDynamicColorChange(action: DynamicColorCheckedChange) {
+    private fun handleDynamicColorChange(action: DynamicColorCheckedChange) {
         val appDynamicColor = when {
             action.checked -> AppDynamicColor.Enabled
             else -> AppDynamicColor.Disabled
         }
-        setAppDynamicColor(appDynamicColor)
-        if (action.checked) {
-            setAppColorContrast(System)
+
+        viewModelScope.launch {
+            setAppDynamicColor(appDynamicColor)
+            if (action.checked) {
+                setAppColorContrast(System)
+            }
         }
     }
 
-    private suspend fun handleAppThemeAction(action: AppThemeActions) {
+    private fun handleAppThemeAction(action: AppThemeActions) {
         when (action) {
             is LaunchAppThemePicker -> {
-                val lightDarkSystemThemingAvailable = features.lightDarkSystemThemingAvailable()
-                val theme = getAppTheme().toPresentationModel(selected = true)
-                _state.showAppThemePicker(
-                    lightDarkAppThemingAvailable = lightDarkSystemThemingAvailable,
-                    selectedAppTheme = theme,
-                )
+                viewModelScope.launch {
+                    val theme = getAppTheme().toPresentationModel(selected = true)
+                    _state.showAppThemePicker(
+                        lightDarkAppThemingAvailable = features.lightDarkSystemThemingAvailable(),
+                        selectedAppTheme = theme,
+                    )
+                }
             }
 
-            is AppThemePickerSelectionChange -> _state.updateAppThemePicker(
-                selectedAppTheme = action.appTheme,
-            )
+            is AppThemePickerSelectionChange ->
+                _state.updateAppThemePicker(selectedAppTheme = action.appTheme)
 
             is ConfirmAppThemePickerSelection -> {
                 _state.hideAppThemePicker()
-                setAppTheme(action.appTheme.toDomain())
+                viewModelScope.launch { setAppTheme(action.appTheme.toDomain()) }
             }
 
             is DismissAppThemePicker -> _state.hideAppThemePicker()
         }
     }
 
-    private suspend fun handleAppColorContrastAction(action: AppColorContrastActions) {
+    private fun handleAppColorContrastAction(action: AppColorContrastActions) {
         when (action) {
-            is LaunchAppColorContrastPicker -> {
-                _state.showAppColorContrastPicker(
-                    selectedAppColorContrast = getAppColorContrast(),
-                    appColorContrastAvailable = features.systemColorContrastAvailable(),
-                )
-            }
+            is LaunchAppColorContrastPicker ->
+                viewModelScope.launch {
+                    _state.showAppColorContrastPicker(
+                        selectedAppColorContrast = getAppColorContrast(),
+                        appColorContrastAvailable = features.systemColorContrastAvailable(),
+                    )
+                }
 
             is AppColorContrastPickerSelectionChange -> {
                 _state.updateAppColorContrastPicker(
@@ -212,18 +206,20 @@ internal class SettingsViewModel @Inject constructor(
 
             is ConfirmColorContrastPickerSelection -> {
                 _state.hideAppColorContrastPicker()
-                setAppColorContrast(action.appColorContrast.toDomain())
+                viewModelScope.launch { setAppColorContrast(action.appColorContrast.toDomain()) }
             }
 
             is DismissAppColorContrastPicker -> _state.hideAppColorContrastPicker()
 
-            is DismissAppColorContrastNotAvailableMessage -> _state.hideAppColorContrastNotAvailableMessage()
+            is DismissAppColorContrastNotAvailableMessage ->
+                _state.hideAppColorContrastNotAvailableMessage()
         }
     }
 
-    private suspend fun handleAppLanguageAction(action: AppLanguageActions) {
+    private fun handleAppLanguageAction(action: AppLanguageActions) {
         when (action) {
-            is LaunchAppLanguagePicker -> _state.showAppLanguagePicker(getAppLanguage())
+            is LaunchAppLanguagePicker ->
+                viewModelScope.launch { _state.showAppLanguagePicker(getAppLanguage()) }
 
             is AppLanguagePickerSelectionChange -> _state.updateAppLanguagePicker(
                 action.appLanguage
@@ -238,19 +234,23 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun handleAppMeasurementSystemAction(action: AppMeasurementSystemActions) {
+    private fun handleAppMeasurementSystemAction(action: AppMeasurementSystemActions) {
         when (action) {
-            is LaunchAppMeasurementSystemPicker -> _state.showAppMeasurementSystemPicker(
-                getAppMeasurementSystem()
-            )
+            is LaunchAppMeasurementSystemPicker ->
+                viewModelScope.launch {
+                    _state.showAppMeasurementSystemPicker(
+                        getAppMeasurementSystem()
+                    )
+                }
 
-            is AppMeasurementSystemPickerSelectionChange -> _state.updateAppMeasurementSystemPicker(
-                action.appMeasurementSystem
-            )
+            is AppMeasurementSystemPickerSelectionChange ->
+                _state.updateAppMeasurementSystemPicker(action.appMeasurementSystem)
 
             is ConfirmAppMeasurementSystemPickerSelection -> {
                 _state.hideAppMeasurementSystemPicker()
-                setAppMeasurementSystem(action.appMeasurementSystem.toDomain())
+                viewModelScope.launch {
+                    setAppMeasurementSystem(action.appMeasurementSystem.toDomain())
+                }
             }
 
             is DismissAppMeasurementSystemPicker -> _state.hideAppMeasurementSystemPicker()
