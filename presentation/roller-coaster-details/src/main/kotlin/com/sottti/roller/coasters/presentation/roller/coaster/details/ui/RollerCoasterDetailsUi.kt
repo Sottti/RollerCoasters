@@ -5,7 +5,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,17 +52,14 @@ internal fun RollerCoasterDetailsUi(
     onBackNavigation: () -> Unit,
     state: RollerCoasterDetailsState,
 ) {
-    val content = remember(state.content) { state.content }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val topBarState = remember(state.topBar) { state.topBar }
-    val onToggleFavourite = remember(onAction) { { onAction(ToggleFavourite) } }
 
     RollerCoasterDetailsContent(
-        content = content,
+        content = state.content,
         onBackNavigation = onBackNavigation,
-        onToggleFavourite = onToggleFavourite,
+        onToggleFavourite = { onAction(ToggleFavourite) },
         scrollBehavior = scrollBehavior,
-        topBarState = topBarState,
+        topBarState = state.topBar,
     )
 }
 

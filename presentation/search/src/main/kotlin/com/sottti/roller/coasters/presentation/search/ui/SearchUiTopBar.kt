@@ -9,9 +9,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.search.box.SearchBox
@@ -29,7 +27,7 @@ internal fun SearchTopBar(
 ) {
     val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
     val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
-    val isScrolled by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset > 0 } }
+    val isScrolled = lazyListState.firstVisibleItemScrollOffset > 0
     val backgroundColor by animateColorAsState(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
         label = "expandable top bar background color animation",
