@@ -27,8 +27,9 @@ internal fun SearchTopBar(
     onNavigateToSettings: () -> Unit,
     state: SearchState,
 ) {
-    val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
-    val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
+    val topAppBarColors = remember { TopAppBarDefaults.topAppBarColors() }
+    val containerColor = topAppBarColors.containerColor
+    val scrolledContainerColor = topAppBarColors.scrolledContainerColor
     val isScrolled by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset > 0 } }
     val backgroundColor by animateColorAsState(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
