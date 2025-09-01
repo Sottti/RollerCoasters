@@ -16,11 +16,9 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 internal class RollerCoastersLocalDataSource @Inject constructor(
@@ -37,18 +35,16 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         rollerCoasters: List<RollerCoaster>,
     ) {
         if (rollerCoasters.isNotEmpty()) {
-            withContext(Dispatchers.Default) {
-                val rollerCoastersRoomModel =
-                    rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoom() }
+            val rollerCoastersRoomModel =
+                rollerCoasters.map { rollerCoaster -> rollerCoaster.toRoom() }
 
-                val picturesRoomModel =
-                    rollerCoasters.flatMap { rollerCoaster -> rollerCoaster.toPicturesRoom() }
+            val picturesRoomModel =
+                rollerCoasters.flatMap { rollerCoaster -> rollerCoaster.toPicturesRoom() }
 
-                dao.insertRollerCoasters(
-                    pictures = picturesRoomModel,
-                    rollerCoasters = rollerCoastersRoomModel,
-                )
-            }
+            dao.insertRollerCoasters(
+                pictures = picturesRoomModel,
+                rollerCoasters = rollerCoastersRoomModel,
+            )
         }
     }
 
