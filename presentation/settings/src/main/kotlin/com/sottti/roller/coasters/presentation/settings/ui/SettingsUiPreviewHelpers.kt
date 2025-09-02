@@ -11,5 +11,3 @@ internal fun previewState(
         onBackNavigation = {},
         state = state,
     )
-
-internal fun <T> List<T>.atLeast(index: Int): T = getOrElse(index) { last() }

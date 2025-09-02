@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hint" translatable="false">Sugerencia</string>
+    <string name="hint">Sugerencia</string>
 </resources>

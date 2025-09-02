@@ -29,9 +29,9 @@ internal object StringOrListSerializer : KSerializer<List<String>?> {
         when (val element = decoder.jsonElement()) {
             is JsonNull -> null
             is JsonPrimitive -> element.content.takeIf { it.isNotBlank() }?.let { listOf(it) }
-            is JsonArray -> element
-                .mapNotNull { it.jsonPrimitive.contentOrNull?.takeIf { it.isNotBlank() } }
-                .ifEmpty { null }
+            is JsonArray -> element.mapNotNull { jsonElement ->
+                jsonElement.jsonPrimitive.contentOrNull?.takeIf { string -> string.isNotBlank() }
+            }.ifEmpty { null }
 
             else -> null
         }
