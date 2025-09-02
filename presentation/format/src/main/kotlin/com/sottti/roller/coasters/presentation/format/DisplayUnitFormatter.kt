@@ -116,7 +116,7 @@ public class DisplayUnitFormatter @Inject constructor(
     }
 
     private fun Inversions.toDisplayFormatInversions(): String =
-        context.getString(R.string.inversions, value)
+        context.resources.getQuantityString(R.plurals.inversions, value, value)
 
     private fun MaxVertical.toDisplayFormatMaxVertical(): String =
         context.getString(R.string.max_vertical, degrees.value)
@@ -132,8 +132,9 @@ public class DisplayUnitFormatter @Inject constructor(
     private fun Meters.toDisplayFormatMeters(
         appLanguage: AppLanguage,
         defaultLocale: Locale,
-    ): String = context.getString(
-        R.string.distance_meters,
+    ): String = context.resources.getQuantityString(
+        R.plurals.distance_meters,
+        value.toInt(),
         value.toDisplayFormat(appLanguage, defaultLocale)
     )
 
