@@ -2,5 +2,4 @@
     <string name="search_empty_primary_text">Buscar</string>
     <string name="search_empty_secondary_text">Empeza a escribir para ver os resultados</string>
     <string name="search_hint">Buscar…</string>
-    <string name="top_bar_title">Buscar</string>
 </resources>

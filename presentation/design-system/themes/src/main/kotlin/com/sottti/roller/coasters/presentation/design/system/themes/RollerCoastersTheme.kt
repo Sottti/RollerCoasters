@@ -3,7 +3,6 @@ package com.sottti.roller.coasters.presentation.design.system.themes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.di.settings.colorContrast.provideObserveResolvedColorContrast
 import com.sottti.roller.coasters.di.settings.dynamicColor.provideObserveResolvedDynamicColor
