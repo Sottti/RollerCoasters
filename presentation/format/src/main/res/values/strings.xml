@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="distance_feet">%s ft</string>
-    <string name="distance_meters">%s meters</string>
+    <plurals name="distance_meters">
+        <item quantity="one">%s meter</item>
+        <item quantity="other">%s meters</item>
+    </plurals>
     <string name="g_force">%s g</string>
-    <string name="inversions">%d inversions</string>
+    <plurals name="inversions">
+        <item quantity="one">%d inversion</item>
+        <item quantity="other">%d inversions</item>
+    </plurals>
     <string name="max_vertical">%d°</string>
     <string name="speed_kph">%s kph</string>
     <string name="speed_mph">%s mph</string>
