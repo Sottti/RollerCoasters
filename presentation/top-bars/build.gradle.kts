@@ -16,7 +16,7 @@ android {
 
 dependencies {
     implementation(libs.compose.material)
-    implementation(libs.compose.navigation)
+    implementation(libs.compose.navigation2)
     implementation(libs.compose.ui.tooling)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.icons))

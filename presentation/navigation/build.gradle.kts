@@ -10,6 +10,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.compose.navigation)
+    implementation(libs.compose.navigation2)
     implementation(libs.kotlin.serialization.json)
 }

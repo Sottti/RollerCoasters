@@ -19,7 +19,7 @@ android {
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.compose.material)
-    implementation(libs.compose.navigation)
+    implementation(libs.compose.navigation2)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
