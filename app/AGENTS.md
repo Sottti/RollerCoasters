@@ -1,7 +1,7 @@
 # Instructions
 - Android application module written in Kotlin.
-- Keep resources organized and prefer Jetpack Compose where applicable.
-- Cover UI logic with unit tests.
+- Keep resources organized and prefer Jetpack Compose where possible.
+- Ensure to follow Android best practices and Material Design guidelines.
 
 # Programmatic checks
 - ./gradlew :app:test
