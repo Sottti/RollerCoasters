@@ -12,9 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor() : ViewModel() {
-    private val _state = MutableStateFlow(
-        NavigationBarState(navigationBarItems()),
-    )
+    private val _state = MutableStateFlow(NavigationBarState(navigationBarItems()))
     val state: StateFlow<NavigationBarState> = _state.asStateFlow()
 
     val actions = HomeActions(
