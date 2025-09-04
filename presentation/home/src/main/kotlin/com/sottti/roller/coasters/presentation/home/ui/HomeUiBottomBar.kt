@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.home.data.navigationBarItems
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItems
+import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -19,7 +20,15 @@ internal fun BottomBar(
     NavigationBar {
         navigationBarItems.items.forEach { item ->
             NavigationBarItem(
-                icon = { Icon(item.icon) },
+                icon = {
+                    val iconState =
+                        if (navigationBarItems.selectedItem == item.destination) {
+                            item.selectedIcon
+                        } else {
+                            item.unselectedIcon
+                        }
+                    Icon(iconState)
+                },
                 label = { Text.Vanilla(item.labelResId) },
                 selected = navigationBarItems.selectedItem == item.destination,
                 onClick = { onNavigationBarItemClick(item) },
@@ -33,7 +42,10 @@ internal fun BottomBar(
 internal fun BottomBarPreview() {
     RollerCoastersPreviewTheme {
         BottomBar(
-            navigationBarItems = navigationBarItems(),
+            navigationBarItems = HomeNavigationBarItems(
+                items = navigationBarItems(),
+                selectedItem = NavigationDestination.Explore,
+            ),
             onNavigationBarItemClick = {},
         )
     }
