@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Applies on Android 6.0–11 (API 23–30). Keep because minSdk is 26. -->
-<full-backup-content>
+<full-backup-content xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Back up all SharedPreferences -->
     <include domain="sharedpref" path="."/>
     <!-- Back up all app databases -->

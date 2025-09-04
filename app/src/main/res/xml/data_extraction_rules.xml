@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Minimal, safe defaults for Android 12+ (API 31+) -->
-<data-extraction-rules>
+<data-extraction-rules xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Cloud backup to Google Drive -->
     <cloud-backup>
         <!-- Back up all SharedPreferences -->
