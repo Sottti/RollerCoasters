@@ -20,15 +20,7 @@ internal fun BottomBar(
     NavigationBar {
         navigationBarItems.items.forEach { item ->
             NavigationBarItem(
-                icon = {
-                    val iconState =
-                        if (navigationBarItems.selectedItem == item.destination) {
-                            item.selectedIcon
-                        } else {
-                            item.unselectedIcon
-                        }
-                    Icon(iconState)
-                },
+                icon = { Icon(item.icon) },
                 label = { Text.Vanilla(item.labelResId) },
                 selected = navigationBarItems.selectedItem == item.destination,
                 onClick = { onNavigationBarItemClick(item) },
@@ -43,7 +35,7 @@ internal fun BottomBarPreview() {
     RollerCoastersPreviewTheme {
         BottomBar(
             navigationBarItems = HomeNavigationBarItems(
-                items = navigationBarItems(),
+                items = navigationBarItems(NavigationDestination.Explore),
                 selectedItem = NavigationDestination.Explore,
             ),
             onNavigationBarItemClick = {},

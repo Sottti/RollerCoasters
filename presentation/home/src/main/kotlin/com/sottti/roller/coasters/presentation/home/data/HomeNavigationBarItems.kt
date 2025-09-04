@@ -5,38 +5,33 @@ import com.sottti.roller.coasters.presentation.home.R
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
-internal fun navigationBarItems(): List<HomeNavigationBarItem> = listOf(
-    explore(),
-    favourites(),
-    search(),
-    aboutMe(),
+internal fun navigationBarItems(selected: NavigationDestination): List<HomeNavigationBarItem> = listOf(
+    explore(selected),
+    favourites(selected),
+    search(selected),
+    aboutMe(selected),
 )
 
-
-private fun explore() = HomeNavigationBarItem(
+private fun explore(selected: NavigationDestination) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_explore,
     destination = NavigationDestination.Explore,
-    selectedIcon = Icons.Explore.filled,
-    unselectedIcon = Icons.Explore.outlined,
+    icon = if (selected == NavigationDestination.Explore) Icons.Explore.filled else Icons.Explore.outlined,
 )
 
-private fun search() = HomeNavigationBarItem(
+private fun search(selected: NavigationDestination) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_search,
     destination = NavigationDestination.Search,
-    selectedIcon = Icons.Search.outlined,
-    unselectedIcon = Icons.Search.outlined,
+    icon = Icons.Search.outlined,
 )
 
-private fun favourites() = HomeNavigationBarItem(
+private fun favourites(selected: NavigationDestination) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_favourites,
     destination = NavigationDestination.Favourites,
-    selectedIcon = Icons.Star.filled,
-    unselectedIcon = Icons.Star.outlined,
+    icon = if (selected == NavigationDestination.Favourites) Icons.Star.filled else Icons.Star.outlined,
 )
 
-private fun aboutMe() = HomeNavigationBarItem(
+private fun aboutMe(selected: NavigationDestination) = HomeNavigationBarItem(
     labelResId = R.string.navigation_bar_item_label_about_me,
     destination = NavigationDestination.AboutMe,
-    selectedIcon = Icons.AccountCircle.filled,
-    unselectedIcon = Icons.AccountCircle.outlined,
+    icon = if (selected == NavigationDestination.AboutMe) Icons.AccountCircle.filled else Icons.AccountCircle.outlined,
 )

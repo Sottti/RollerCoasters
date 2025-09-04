@@ -14,12 +14,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor() : ViewModel() {
-    private val items = navigationBarItems()
 
     private val _state = MutableStateFlow(
         NavigationBarState(
-            HomeNavigationBarItems(
-                items = items,
+            items = HomeNavigationBarItems(
+                items = navigationBarItems(NavigationDestination.Explore),
                 selectedItem = NavigationDestination.Explore,
             ),
         ),
@@ -28,9 +27,12 @@ internal class HomeViewModel @Inject constructor() : ViewModel() {
 
     val actions = HomeActions(
         onDestinationSelected = { destination ->
-            _state.update { current ->
-                current.copy(
-                    items = current.items.copy(selectedItem = destination),
+            _state.update {
+                NavigationBarState(
+                    items = HomeNavigationBarItems(
+                        items = navigationBarItems(destination),
+                        selectedItem = destination,
+                    ),
                 )
             }
         }

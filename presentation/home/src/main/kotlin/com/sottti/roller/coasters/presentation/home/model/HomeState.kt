@@ -20,6 +20,5 @@ internal data class HomeNavigationBarItems(
 internal data class HomeNavigationBarItem(
     @StringRes val labelResId: Int,
     val destination: NavigationDestination,
-    val selectedIcon: IconState,
-    val unselectedIcon: IconState,
+    val icon: IconState,
 )
