@@ -40,6 +40,7 @@ The project is under active development and the codebase is not yet stable or ne
 - **Room** and **DataStore** for local persistence
 - **Ktor** client for networking
 - **WorkManager** for background tasks
+- **Automatic backups** for SharedPreferences and databases with custom backup rules
 - **Coroutines** and **Flow** for asynchronous work
 - **Gradle Version Catalog** for centralized dependencies
 - **Paparazzi** screenshot tests
