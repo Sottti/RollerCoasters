@@ -9,8 +9,8 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.illustrations.data.Illustrations
 import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.informative.InformativeButton
-import com.sottti.roller.coasters.presentation.informative.InformativeUi
+import com.sottti.roller.coasters.presentation.design.system.informative.InformativeButton
+import com.sottti.roller.coasters.presentation.design.system.informative.InformativeUi
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable

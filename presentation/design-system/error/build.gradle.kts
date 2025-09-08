@@ -22,9 +22,9 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.colors))
+    implementation(project(module.presentation.designSystem.informative))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.fixtures))
-    implementation(project(module.presentation.informative))
     implementation(project(module.presentation.previews))
     testImplementation(project(module.presentation.tests))
 }
