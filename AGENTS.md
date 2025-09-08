@@ -1,4 +1,5 @@
 # Instructions
+
 - This repository is a multi-module Android app project built with Gradle.
 - Prefer idiomatic Kotlin and follow Kotlin coding conventions.
 - Prefer idiomatic Gradle usage and follow Gradle best practices.
@@ -9,4 +10,5 @@
 - Prefer multiplatform solutions where applicable.
 
 # Programmatic checks
+
 - ./gradlew test

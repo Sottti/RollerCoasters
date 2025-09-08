@@ -20,11 +20,11 @@ import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sottti.roller.coasters.presentation.design.system.empty.EmptyUi
+import com.sottti.roller.coasters.presentation.design.system.error.ErrorButton
+import com.sottti.roller.coasters.presentation.design.system.error.ErrorUi
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
-import com.sottti.roller.coasters.presentation.empty.EmptyUi
-import com.sottti.roller.coasters.presentation.error.ErrorButton
-import com.sottti.roller.coasters.presentation.error.ErrorUi
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.override
