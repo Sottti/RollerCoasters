@@ -34,7 +34,7 @@ dependencies {
     implementation(project(module.presentation.imageLoading))
     implementation(project(module.presentation.navigation))
     implementation(project(module.presentation.previews))
-    implementation(project(module.presentation.utils))
+    implementation(project(module.presentation.compose))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
