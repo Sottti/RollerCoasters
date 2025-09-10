@@ -61,12 +61,12 @@ include(
     ":presentation:image-loading",
     ":presentation:navigation",
     ":presentation:navigation-external",
+    ":presentation:paparazzi",
     ":presentation:previews",
     ":presentation:roller-coaster-details",
     ":presentation:search",
     ":presentation:settings",
     ":presentation:string-provider",
-    ":presentation:tests",
     ":presentation:top-bars",
     ":utils:time-dates",
 )

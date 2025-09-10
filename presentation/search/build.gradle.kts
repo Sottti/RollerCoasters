@@ -37,5 +37,5 @@ dependencies {
     implementation(project(module.presentation.topBars))
     implementation(project(module.presentation.compose))
     ksp(libs.hilt.compiler)
-    testImplementation(project(module.presentation.tests))
+    testImplementation(project(module.presentation.paparazzi))
 }

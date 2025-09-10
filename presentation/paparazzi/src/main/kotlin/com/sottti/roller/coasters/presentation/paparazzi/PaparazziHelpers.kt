@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.tests
+package com.sottti.roller.coasters.presentation.paparazzi
 
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
@@ -8,7 +8,7 @@ public fun paparazzi(
     nightMode: NightMode,
     renderingMode: SessionParams.RenderingMode = SessionParams.RenderingMode.SHRINK,
 ): Paparazzi = Paparazzi(
-    deviceConfig = PIXEL_9_PRO_XL.copy(nightMode = nightMode),
+    deviceConfig = PIXEL_10_PRO_XL.copy(nightMode = nightMode),
     renderingMode = renderingMode,
     showSystemUi = false,
     theme = "Theme.RollerCoasters",

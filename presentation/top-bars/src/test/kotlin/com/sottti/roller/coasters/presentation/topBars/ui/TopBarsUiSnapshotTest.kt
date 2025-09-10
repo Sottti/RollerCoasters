@@ -1,8 +1,8 @@
 package com.sottti.roller.coasters.presentation.topBars.ui
 
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.tests.nightModeParameters
-import com.sottti.roller.coasters.presentation.tests.paparazzi
+import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
+import com.sottti.roller.coasters.presentation.paparazzi.paparazzi
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBarPreview
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBarState
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBarUiStateProvider

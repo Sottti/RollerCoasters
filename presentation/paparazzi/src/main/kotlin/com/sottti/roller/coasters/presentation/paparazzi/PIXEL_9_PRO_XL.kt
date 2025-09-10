@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.tests
+package com.sottti.roller.coasters.presentation.paparazzi
 
 import app.cash.paparazzi.DeviceConfig
 import com.android.resources.Density
@@ -13,7 +13,7 @@ import com.android.resources.ScreenSize
 import com.android.resources.TouchScreen
 import com.android.resources.UiMode
 
-public val PIXEL_9_PRO_XL: DeviceConfig =
+internal val PIXEL_10_PRO_XL: DeviceConfig =
     DeviceConfig(
         screenHeight = 2992,
         screenWidth = 1344,
@@ -34,5 +34,5 @@ public val PIXEL_9_PRO_XL: DeviceConfig =
         softButtons = true,
         navigation = Navigation.NONAV,
         screenRound = null,
-        released = "August 22, 2024"
+        released = "August 20, 2025"
     )

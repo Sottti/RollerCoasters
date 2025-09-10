@@ -22,5 +22,5 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
-    testImplementation(project(module.presentation.tests))
+    testImplementation(project(module.presentation.paparazzi))
 }
