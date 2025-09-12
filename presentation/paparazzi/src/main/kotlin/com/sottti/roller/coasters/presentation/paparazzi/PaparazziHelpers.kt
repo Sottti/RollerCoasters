@@ -6,7 +6,7 @@ import com.android.resources.NightMode
 
 public fun paparazzi(
     nightMode: NightMode,
-    renderingMode: SessionParams.RenderingMode = SessionParams.RenderingMode.SHRINK,
+    renderingMode: SessionParams.RenderingMode = SessionParams.RenderingMode.NORMAL,
 ): Paparazzi = Paparazzi(
     deviceConfig = PIXEL_10_PRO_XL.copy(nightMode = nightMode),
     renderingMode = renderingMode,

@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.design.system.illustrations
 
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.CircledIllustrationPreview
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
@@ -15,7 +16,7 @@ internal class CircledIllustrationSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = paparazzi(nightMode)
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
 
     @Test
     fun snapshotTest() {
