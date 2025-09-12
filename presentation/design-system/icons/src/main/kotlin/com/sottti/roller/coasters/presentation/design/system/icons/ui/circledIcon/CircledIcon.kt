@@ -42,7 +42,7 @@ public fun CircledIcon(
 internal fun CircledIconOnBackgroundPreview() {
     RollerCoastersPreviewTheme {
         CircledIcon(
-            iconState = Icons.Android.filled,
+            iconState = Icons.AccountCircle.filled,
             backgroundColor = colors.background,
             iconColor = colors.onBackground,
         )
@@ -54,7 +54,7 @@ internal fun CircledIconOnBackgroundPreview() {
 internal fun CircledIconOnSurfacePreview() {
     RollerCoastersPreviewTheme {
         CircledIcon(
-            iconState = Icons.Android.filled,
+            iconState = Icons.AccountCircle.filled,
             backgroundColor = colors.primaryContainer,
             iconColor = colors.onPrimaryContainer,
         )

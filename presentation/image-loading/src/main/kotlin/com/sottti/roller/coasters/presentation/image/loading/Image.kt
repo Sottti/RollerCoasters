@@ -41,12 +41,14 @@ public fun Image(
 
     Box(modifier = modifier.clip(cornerRadius)) {
         val matchParentSizeModifier = Modifier.matchParentSize()
-        if (!foreverLoading) Image(
-            painter = painter,
-            contentDescription = contentDescription,
-            contentScale = ContentScale.Crop,
-            modifier = matchParentSizeModifier,
-        )
+        if (!foreverLoading) {
+            Image(
+                painter = painter,
+                contentDescription = contentDescription,
+                contentScale = ContentScale.Crop,
+                modifier = matchParentSizeModifier,
+            )
+        }
         PlaceHolder(
             foreverLoading = foreverLoading,
             modifier = matchParentSizeModifier,
@@ -71,7 +73,8 @@ private fun PlaceHolder(
 private fun imageRequest(url: ImageUrl): ImageRequest {
     val context = LocalContext.current
     return remember(url, context) {
-        ImageRequest.Builder(context)
+        ImageRequest
+            .Builder(context)
             .data(url.value)
             .crossfade(true)
             .build()
@@ -91,7 +94,7 @@ internal fun ImagePreview(
         Image(
             contentDescription = state.contentDescription,
             foreverLoading = state.foreverLoading,
-            modifier = Modifier.aspectRatio(1.75f),
+            modifier = Modifier.aspectRatio(ratio = 1.75f),
             roundedCorners = state.roundedCorners,
             url = state.imageUrl,
         )

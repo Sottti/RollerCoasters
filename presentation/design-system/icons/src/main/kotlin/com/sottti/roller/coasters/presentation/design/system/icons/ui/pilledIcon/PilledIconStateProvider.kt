@@ -10,7 +10,7 @@ internal class PilledIconStateProvider : PreviewParameterProvider<PilledIconStat
 
 private val pilledIconState: PilledIconState =
     PilledIconState(
-        iconState = Icons.Explore.filled,
+        iconState = Icons.Logos.LinkedIn.filled,
         onClick = { },
         text = R.string.pilled_icon_preview_title,
     )
