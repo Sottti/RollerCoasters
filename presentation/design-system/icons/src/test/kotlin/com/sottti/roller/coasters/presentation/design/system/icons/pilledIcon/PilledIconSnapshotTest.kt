@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.design.system.icons.pilledIcon
 
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconPreview
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIconState
@@ -18,7 +19,7 @@ internal class PilledIconSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = paparazzi(nightMode)
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
 
     @Test
     fun snapshotTest() {

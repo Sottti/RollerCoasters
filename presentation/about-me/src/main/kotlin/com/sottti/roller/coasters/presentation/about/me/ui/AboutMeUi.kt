@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.presentation.about.me.data.AboutMeViewModel
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction

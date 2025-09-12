@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.large
 
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
 import com.sottti.roller.coasters.presentation.paparazzi.paparazzi
@@ -15,7 +16,7 @@ internal class RollerCoasterCardLargeSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = paparazzi(nightMode)
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
 
     @Test
     fun snapshotTest() {

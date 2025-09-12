@@ -1,5 +1,6 @@
 package com.sottti.roller.coasters.presentation.design.system.icons.circledIcon
 
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIconOnBackgroundPreview
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIconOnSurfacePreview
@@ -16,7 +17,7 @@ internal class CircledIconSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = paparazzi(nightMode)
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
 
     @Test
     fun snapshotOnBackgroundTest() {

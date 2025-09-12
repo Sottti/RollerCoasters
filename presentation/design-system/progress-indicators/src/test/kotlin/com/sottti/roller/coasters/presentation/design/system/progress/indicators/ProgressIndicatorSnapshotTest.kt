@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.progress.indicators
 
 import androidx.compose.ui.Modifier
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
 import com.sottti.roller.coasters.presentation.paparazzi.paparazzi
@@ -16,7 +17,7 @@ internal class ProgressIndicatorSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = paparazzi(nightMode)
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
 
     @Test
     fun snapshotTest() {

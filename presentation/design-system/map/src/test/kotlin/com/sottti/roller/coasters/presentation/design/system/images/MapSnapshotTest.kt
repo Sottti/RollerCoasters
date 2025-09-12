@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.images
 
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalInspectionMode
+import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.design.system.map.MapPreview
 import com.sottti.roller.coasters.presentation.design.system.map.MapState
@@ -20,7 +21,7 @@ internal class MapSnapshotTest(
 ) {
 
     @get:Rule
-    val paparazzi = paparazzi(nightMode)
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
 
     @Test
     fun snapshotTest() {
@@ -36,6 +37,5 @@ internal class MapSnapshotTest(
         @Parameterized.Parameters
         fun data(): Collection<Array<Any?>> =
             nightModeParameters(MapStateProvider().values)
-
     }
 }
