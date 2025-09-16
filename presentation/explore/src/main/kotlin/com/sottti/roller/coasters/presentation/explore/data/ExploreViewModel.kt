@@ -94,7 +94,7 @@ internal class ExploreViewModel @Inject constructor(
     private val _state = MutableStateFlow(initialState())
     val state: StateFlow<ExploreState> = _state.asStateFlow()
 
-    private val _events = MutableSharedFlow<ExploreEvent>()
+    private val _events = MutableSharedFlow<ExploreEvent>(extraBufferCapacity = 1)
     val events = _events.asSharedFlow()
 
     internal val onAction: (ExploreAction) -> Unit = { action -> processAction(action) }
