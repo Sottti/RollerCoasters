@@ -32,6 +32,7 @@ include(
     ":domain:settings",
     ":presentation:about-me",
     ":presentation:compose",
+    ":presentation:design-system:card",
     ":presentation:design-system:card-grid",
     ":presentation:design-system:chip",
     ":presentation:design-system:colors",

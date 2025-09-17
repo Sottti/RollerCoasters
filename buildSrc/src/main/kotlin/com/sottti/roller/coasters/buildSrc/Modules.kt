@@ -23,6 +23,7 @@ object module {
         const val topBars = ":presentation:top-bars"
 
         object designSystem {
+            const val card = ":presentation:design-system:card"
             const val cardGrid = ":presentation:design-system:card-grid"
             const val chip = ":presentation:design-system:chip"
             const val colors = ":presentation:design-system:colors"

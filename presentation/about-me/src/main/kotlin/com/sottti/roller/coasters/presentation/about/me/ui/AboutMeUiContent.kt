@@ -39,6 +39,7 @@ import com.sottti.roller.coasters.presentation.about.me.model.Topics
 import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
 import com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets.BottomSheetContent
 import com.sottti.roller.coasters.presentation.design.system.card.grid.CardGrid
+import com.sottti.roller.coasters.presentation.design.system.card.grid.model.CardGridItems
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
@@ -135,13 +136,12 @@ private fun AboutMeItems(
     }
 }
 
-
 @Composable
 private fun ProfileImage(state: ImageState) {
     HeroImage(
         modifier = Modifier
             .padding(top = dimensions.padding.large)
-            .fillMaxWidth(0.33f)
+            .fillMaxWidth(fraction = 0.33f)
             .aspectRatio(1f),
         image = state,
     )
@@ -227,7 +227,8 @@ private fun GetToKnowMe(
                         onAction = onAction,
                         onShow = onShowBottomSheet
                     )
-                })
+                }
+            )
             TopicsGrid(
                 topics = topics.hobbies,
                 iconState = Icons.Hobbies.outlined,
@@ -237,7 +238,8 @@ private fun GetToKnowMe(
                         onAction = onAction,
                         onShow = onShowBottomSheet
                     )
-                })
+                }
+            )
         }
     }
 }
@@ -248,10 +250,12 @@ private fun TopicsGrid(
     iconState: IconState,
     onClick: (Int) -> Unit,
 ) = CardGrid(
-    firstItem = topics.firstTopic.textResId,
-    secondItem = topics.secondTopic.textResId,
-    thirdItem = topics.thirdTopic.textResId,
-    forthItem = topics.fourthTopic.textResId,
+    items = CardGridItems(
+        firstItem = topics.firstTopic.textResId,
+        secondItem = topics.secondTopic.textResId,
+        thirdItem = topics.thirdTopic.textResId,
+        forthItem = topics.fourthTopic.textResId,
+    ),
     iconState = iconState,
     modifier = Modifier.fillMaxWidth(),
     onClick = onClick,

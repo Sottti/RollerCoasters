@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.design.system.card.grid
+package com.sottti.roller.coasters.presentation.design.system.card.grid.model
 
 import androidx.compose.ui.Modifier
 

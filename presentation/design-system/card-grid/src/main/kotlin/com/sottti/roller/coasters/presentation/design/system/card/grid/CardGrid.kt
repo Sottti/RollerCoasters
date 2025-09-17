@@ -9,21 +9,26 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sottti.roller.coasters.presentation.design.system.card.Card
+import com.sottti.roller.coasters.presentation.design.system.card.data.CardDefaults
+import com.sottti.roller.coasters.presentation.design.system.card.grid.model.CardGridItems
+import com.sottti.roller.coasters.presentation.design.system.card.grid.model.MonoCardGridState
+import com.sottti.roller.coasters.presentation.design.system.card.grid.model.QuadCardGridState
+import com.sottti.roller.coasters.presentation.design.system.card.model.CornerType
+import com.sottti.roller.coasters.presentation.design.system.card.model.Corners
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
-import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
-import androidx.compose.material3.Card as MaterialCard
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
+import androidx.compose.material3.CardDefaults as MaterialCardDefaults
 
 @Composable
 public fun CardGrid(
@@ -31,21 +36,44 @@ public fun CardGrid(
     modifier: Modifier,
     onClick: (() -> Unit),
 ) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
+    CardGrid(
+        modifier = modifier.fillMaxWidth(),
         onClick = { onClick() },
-        shape = allRounded(),
         textResId = item,
     )
 }
 
+@Composable
+private fun CardGrid(
+    modifier: Modifier,
+    onClick: (() -> Unit),
+    corners: Corners = CardDefaults.cardConvexCorners,
+    textResId: Int,
+) {
+    Card(
+        modifier = modifier,
+        onClick = onClick,
+        colors = MaterialCardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            contentColor = MaterialTheme.colorScheme.onSurface,
+        ),
+        corners = corners,
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text.Label.Medium(
+                modifier = Modifier.padding(dimensions.padding.medium),
+                textResId = textResId,
+            )
+        }
+    }
+}
 
 @Composable
 public fun CardGrid(
-    @StringRes firstItem: Int,
-    @StringRes forthItem: Int,
-    @StringRes secondItem: Int,
-    @StringRes thirdItem: Int,
+    items: CardGridItems,
     iconState: IconState,
     modifier: Modifier,
     onClick: ((Int) -> Unit),
@@ -56,31 +84,43 @@ public fun CardGrid(
             verticalArrangement = Arrangement.spacedBy(dimensions.padding.small),
         ) {
             CardGridRow {
-                Card(
+                CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(0) },
-                    shape = topStartRounded(),
-                    textResId = firstItem,
+                    corners = CardDefaults.cardSharpCorners.copy(
+                        bottomEnd = CornerType.Concave,
+                        topStart = CornerType.Convex,
+                    ),
+                    textResId = items.firstItem,
                 )
-                Card(
+                CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(1) },
-                    shape = topEndRounded(),
-                    textResId = secondItem,
+                    corners = CardDefaults.cardSharpCorners.copy(
+                        bottomStart = CornerType.Concave,
+                        topEnd = CornerType.Convex,
+                    ),
+                    textResId = items.secondItem,
                 )
             }
             CardGridRow {
-                Card(
+                CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(2) },
-                    shape = bottomStartRounded(),
-                    textResId = thirdItem,
+                    corners = CardDefaults.cardSharpCorners.copy(
+                        bottomStart = CornerType.Convex,
+                        topEnd = CornerType.Concave,
+                    ),
+                    textResId = items.thirdItem,
                 )
-                Card(
+                CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(3) },
-                    shape = bottomEndRounded(),
-                    textResId = forthItem,
+                    corners = CardDefaults.cardSharpCorners.copy(
+                        bottomEnd = CornerType.Convex,
+                        topStart = CornerType.Concave,
+                    ),
+                    textResId = items.forthItem,
                 )
             }
         }
@@ -106,35 +146,7 @@ private fun CardGridRow(
 }
 
 @Composable
-private fun Card(
-    modifier: Modifier,
-    onClick: (() -> Unit),
-    shape: Shape,
-    textResId: Int,
-) {
-    MaterialCard(
-        onClick = onClick,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer,
-            contentColor = MaterialTheme.colorScheme.onSurface,
-        ),
-        modifier = modifier,
-        shape = shape,
-    ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text.Label.Medium(
-                modifier = Modifier.padding(dimensions.padding.medium),
-                textResId = textResId,
-            )
-        }
-    }
-}
-
-@Composable
-@RollerCoastersPreview
+@RollerCoastersPreviewNoLocale
 internal fun QuadCardGridPreview(
     @PreviewParameter(QuadCardGridStateProvider::class)
     state: QuadCardGridState,
@@ -142,10 +154,7 @@ internal fun QuadCardGridPreview(
     RollerCoastersPreviewTheme {
         Box(modifier = Modifier.background(colors.surfaceContainerHighest)) {
             CardGrid(
-                firstItem = state.firstItem,
-                forthItem = state.forthItem,
-                secondItem = state.secondItem,
-                thirdItem = state.thirdItem,
+                items = state.items,
                 iconState = state.iconState,
                 modifier = state.modifier,
                 onClick = state.onClick,
@@ -155,7 +164,7 @@ internal fun QuadCardGridPreview(
 }
 
 @Composable
-@RollerCoastersPreview
+@RollerCoastersPreviewNoLocale
 internal fun MonoCardGridPreview(
     @PreviewParameter(MonoCardGridStateProvider::class)
     state: MonoCardGridState,
