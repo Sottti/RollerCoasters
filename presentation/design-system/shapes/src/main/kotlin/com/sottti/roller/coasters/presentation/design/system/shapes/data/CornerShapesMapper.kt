@@ -8,7 +8,6 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.RoundedCorne
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Convex
-import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Sharp
 import androidx.compose.foundation.shape.RoundedCornerShape as MaterialRoundedCornerShape
 
 @Composable
@@ -18,8 +17,8 @@ public fun cornerShapes(
     topEnd: Corner = Convex(MaterialTheme.shapes.large.topEnd),
     topStart: Corner = Convex(MaterialTheme.shapes.large.bottomStart),
 ): Shape = when {
-    topStart is Concave || topEnd is Concave ||
-            bottomStart is Concave || bottomEnd is Concave ->
+    listOf(bottomEnd, bottomStart, topEnd, topStart)
+        .any { it is Concave } ->
         RoundedCornerShape(
             bottomEnd = bottomEnd,
             bottomStart = bottomStart,
@@ -29,20 +28,20 @@ public fun cornerShapes(
 
     else -> MaterialRoundedCornerShape(
         topStart = when (topStart) {
-            Sharp -> ZeroCornerSize
-            else -> MaterialTheme.shapes.large.topStart
+            is Convex -> topStart.cornerSize
+            else -> ZeroCornerSize
         },
         topEnd = when (topEnd) {
-            Sharp -> ZeroCornerSize
-            else -> MaterialTheme.shapes.large.topEnd
+            is Convex -> topEnd.cornerSize
+            else -> ZeroCornerSize
         },
         bottomStart = when (bottomStart) {
-            Sharp -> ZeroCornerSize
-            else -> MaterialTheme.shapes.large.bottomStart
+            is Convex -> bottomStart.cornerSize
+            else -> ZeroCornerSize
         },
         bottomEnd = when (bottomEnd) {
-            Sharp -> ZeroCornerSize
-            else -> MaterialTheme.shapes.large.bottomEnd
+            is Convex -> bottomEnd.cornerSize
+            else -> ZeroCornerSize
         },
     )
 }
