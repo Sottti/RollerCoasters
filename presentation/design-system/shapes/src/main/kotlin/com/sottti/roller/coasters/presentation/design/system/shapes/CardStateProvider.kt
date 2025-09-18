@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import com.sottti.roller.coasters.presentation.design.system.shapes.data.Corners
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.CardState
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corners
 
 internal class CardStateProvider : PreviewParameterProvider<CardState> {
     override val values: Sequence<CardState> = sequence {

@@ -19,7 +19,7 @@ public fun cornerShapes(
     topStart: Corner = Convex(MaterialTheme.shapes.large.bottomStart),
 ): Shape = when {
     topStart is Concave || topEnd is Concave ||
-        bottomStart is Concave || bottomEnd is Concave ->
+            bottomStart is Concave || bottomEnd is Concave ->
         RoundedCornerShape(
             bottomEnd = bottomEnd,
             bottomStart = bottomStart,
