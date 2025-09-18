@@ -40,7 +40,6 @@
             <option value="$PROJECT_DIR$/presentation/about-me" />
             <option value="$PROJECT_DIR$/presentation/compose" />
             <option value="$PROJECT_DIR$/presentation/design-system" />
-            <option value="$PROJECT_DIR$/presentation/design-system/card" />
             <option value="$PROJECT_DIR$/presentation/design-system/card-grid" />
             <option value="$PROJECT_DIR$/presentation/design-system/chip" />
             <option value="$PROJECT_DIR$/presentation/design-system/colors" />
@@ -58,6 +57,7 @@
             <option value="$PROJECT_DIR$/presentation/design-system/progress-indicators" />
             <option value="$PROJECT_DIR$/presentation/design-system/roller-coaster-card" />
             <option value="$PROJECT_DIR$/presentation/design-system/search-box" />
+            <option value="$PROJECT_DIR$/presentation/design-system/shapes" />
             <option value="$PROJECT_DIR$/presentation/design-system/switch" />
             <option value="$PROJECT_DIR$/presentation/design-system/text" />
             <option value="$PROJECT_DIR$/presentation/design-system/themes" />

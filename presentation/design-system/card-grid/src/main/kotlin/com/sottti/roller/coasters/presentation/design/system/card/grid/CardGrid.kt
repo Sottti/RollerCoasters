@@ -9,22 +9,23 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.sottti.roller.coasters.presentation.design.system.card.Card
-import com.sottti.roller.coasters.presentation.design.system.card.data.CardDefaults
 import com.sottti.roller.coasters.presentation.design.system.card.grid.model.CardGridItems
 import com.sottti.roller.coasters.presentation.design.system.card.grid.model.MonoCardGridState
 import com.sottti.roller.coasters.presentation.design.system.card.grid.model.QuadCardGridState
-import com.sottti.roller.coasters.presentation.design.system.card.model.CornerType
-import com.sottti.roller.coasters.presentation.design.system.card.model.Corners
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
+import com.sottti.roller.coasters.presentation.design.system.shapes.data.cornerShapes
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Convex
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
@@ -47,7 +48,7 @@ public fun CardGrid(
 private fun CardGrid(
     modifier: Modifier,
     onClick: (() -> Unit),
-    corners: Corners = CardDefaults.cardConvexCorners,
+    shape: Shape = MaterialTheme.shapes.large,
     textResId: Int,
 ) {
     Card(
@@ -57,7 +58,7 @@ private fun CardGrid(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.onSurface,
         ),
-        corners = corners,
+        shape = shape,
     ) {
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -87,18 +88,18 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(0) },
-                    corners = CardDefaults.cardSharpCorners.copy(
-                        bottomEnd = CornerType.Concave,
-                        topStart = CornerType.Convex,
+                    shape = cornerShapes(
+                        bottomEnd = Concave(MaterialTheme.shapes.large.bottomEnd),
+                        topStart = Convex(MaterialTheme.shapes.large.topStart),
                     ),
                     textResId = items.firstItem,
                 )
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(1) },
-                    corners = CardDefaults.cardSharpCorners.copy(
-                        bottomStart = CornerType.Concave,
-                        topEnd = CornerType.Convex,
+                    shape = cornerShapes(
+                        bottomStart = Concave(MaterialTheme.shapes.large.bottomStart),
+                        topEnd = Convex(MaterialTheme.shapes.large.topEnd),
                     ),
                     textResId = items.secondItem,
                 )
@@ -107,18 +108,18 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(2) },
-                    corners = CardDefaults.cardSharpCorners.copy(
-                        bottomStart = CornerType.Convex,
-                        topEnd = CornerType.Concave,
+                    shape = cornerShapes(
+                        bottomStart = Convex(MaterialTheme.shapes.large.bottomStart),
+                        topEnd = Concave(MaterialTheme.shapes.large.topEnd),
                     ),
                     textResId = items.thirdItem,
                 )
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(3) },
-                    corners = CardDefaults.cardSharpCorners.copy(
-                        bottomEnd = CornerType.Convex,
-                        topStart = CornerType.Concave,
+                    shape = cornerShapes(
+                        bottomEnd = Convex(MaterialTheme.shapes.large.bottomEnd),
+                        topStart = Concave(MaterialTheme.shapes.large.topStart),
                     ),
                     textResId = items.forthItem,
                 )
