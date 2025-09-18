@@ -11,14 +11,22 @@ import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import com.sottti.roller.coasters.presentation.design.system.shapes.RoundedCornerShape.CornerPosition.BottomEnd
+import com.sottti.roller.coasters.presentation.design.system.shapes.RoundedCornerShape.CornerPosition.BottomStart
+import com.sottti.roller.coasters.presentation.design.system.shapes.RoundedCornerShape.CornerPosition.TopEnd
+import com.sottti.roller.coasters.presentation.design.system.shapes.RoundedCornerShape.CornerPosition.TopStart
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 
+/**
+ * A shape with per-corner types: Convex (rounded), Concave (inward cut), or Sharp (90º).
+ * Optimized for fast paths (rectangle, rounded) and uses path subtraction only for concave corners.
+ */
 @Immutable
 internal class RoundedCornerShape(
+    private val topStart: Corner,
+    private val topEnd: Corner,
     private val bottomEnd: Corner,
     private val bottomStart: Corner,
-    private val topEnd: Corner,
-    private val topStart: Corner,
 ) : Shape {
 
     override fun createOutline(
@@ -28,7 +36,7 @@ internal class RoundedCornerShape(
     ): Outline {
         val rect = Rect(0f, 0f, size.width, size.height)
         val corners = listOf(topStart, topEnd, bottomEnd, bottomStart)
-        val radii = corners.map { convexCornerRadius(it, size, density) }
+        val radii = corners.map { convexCornerRadius(it, density, size) }
         val hasConvex = radii.any { it != CornerRadius.Zero }
         val hasConcave = corners.any { it is Corner.Concave }
 
@@ -36,77 +44,47 @@ internal class RoundedCornerShape(
         if (!hasConvex && !hasConcave) return Outline.Rectangle(rect)
 
         // Fast path: rounded rectangle if no concave corners
-        if (!hasConcave) {
-            return Outline.Rounded(
-                RoundRect(
-                    rect = rect,
-                    topLeft = radii[0],
-                    topRight = radii[1],
-                    bottomRight = radii[2],
-                    bottomLeft = radii[3],
-                )
-            )
-        }
+        if (!hasConcave) return Outline.Rounded(rect.toRoundRect(radii))
 
-        // Handle concave corners with path subtraction
-        val concaveRadii = corners.map { concaveRadiusInPixels(it, size, density) }
-        val hasNonZeroConcave = concaveRadii.any { it > 0f }
-
-        // If no effective concave radii, fall back to rounded or rectangle
-        if (!hasNonZeroConcave) {
-            return if (hasConvex) {
-                Outline.Rounded(
-                    RoundRect(
-                        rect = rect,
-                        topLeft = radii[0],
-                        topRight = radii[1],
-                        bottomRight = radii[2],
-                        bottomLeft = radii[3],
-                    )
-                )
-            } else {
-                Outline.Rectangle(rect)
+        // Handle concave corners
+        val concaveRadii = corners.map { concaveRadiusInPixels(it, density, size) }
+        if (!concaveRadii.any { it > 0f }) {
+            // No effective concave radii: return rounded or rectangle
+            return when {
+                hasConvex -> Outline.Rounded(rect.toRoundRect(radii))
+                else -> Outline.Rectangle(rect)
             }
         }
 
         // Build base path (rounded if convex, else rectangle)
         val basePath = Path().apply {
-            when {
-                hasConvex -> addRoundRect(RoundRect(rect, radii[0], radii[1], radii[2], radii[3]))
-                else -> addRect(rect)
-            }
+            if (hasConvex) addRoundRect(rect.toRoundRect(radii)) else addRect(rect)
         }
 
         // Build concave cutouts
         val cutoutPath = Path().apply {
             concaveRadii.forEachIndexed { index, radius ->
                 if (radius > 0f) {
-                    addConcaveOval(
-                        position = CornerPosition.values()[index],
-                        radius = radius,
-                        size = size,
-                        layoutDirection = layoutDirection,
-                    )
+                    addConcaveOval(CornerPosition.entries[index], radius, size, layoutDirection)
                 }
             }
         }
 
         // Subtract cutouts from base
-        return Outline.Generic(
-            Path.combine(PathOperation.Difference, basePath, cutoutPath)
-        )
+        return Outline.Generic(Path.combine(PathOperation.Difference, basePath, cutoutPath))
     }
 
-    private fun convexCornerRadius(corner: Corner, size: Size, density: Density): CornerRadius =
+    private fun convexCornerRadius(corner: Corner, density: Density, size: Size): CornerRadius =
         when (corner) {
             is Corner.Convex -> {
                 val radius = corner.cornerSize.toPx(size, density)
                 if (radius > 0f) CornerRadius(radius) else CornerRadius.Zero
             }
+
             else -> CornerRadius.Zero
         }
 
-    private fun concaveRadiusInPixels(corner: Corner, size: Size, density: Density): Float =
+    private fun concaveRadiusInPixels(corner: Corner, density: Density, size: Size): Float =
         if (corner is Corner.Concave) corner.cornerSize.toPx(size, density) else 0f
 
     private fun Path.addConcaveOval(
@@ -116,25 +94,29 @@ internal class RoundedCornerShape(
         layoutDirection: LayoutDirection,
     ) {
         val (centerX, centerY) = when (position) {
-            CornerPosition.TopStart -> if (layoutDirection == LayoutDirection.Rtl) size.width to 0f else 0f to 0f
-            CornerPosition.TopEnd -> if (layoutDirection == LayoutDirection.Rtl) 0f to 0f else size.width to 0f
-            CornerPosition.BottomStart -> if (layoutDirection == LayoutDirection.Rtl) size.width to size.height else 0f to size.height
-            CornerPosition.BottomEnd -> if (layoutDirection == LayoutDirection.Rtl) 0f to size.height else size.width to size.height
+            TopStart -> if (layoutDirection == LayoutDirection.Rtl) size.width to 0f else 0f to 0f
+            TopEnd -> if (layoutDirection == LayoutDirection.Rtl) 0f to 0f else size.width to 0f
+            BottomStart -> if (layoutDirection == LayoutDirection.Rtl) size.width to size.height else 0f to size.height
+            BottomEnd -> if (layoutDirection == LayoutDirection.Rtl) 0f to size.height else size.width to size.height
         }
         val ovalRect = Rect(centerX - radius, centerY - radius, centerX + radius, centerY + radius)
-        // Use addOval if available; otherwise, fall back to arcTo for compatibility
-        try {
-            addOval(ovalRect)
-        } catch (e: NoSuchMethodError) {
-            // Fallback for older Compose versions or environments missing addOval
-            arcTo(
-                rect = ovalRect,
-                startAngleDegrees = 0f,
-                sweepAngleDegrees = 360f,
-                forceMoveTo = false
-            )
-        }
+        addOval(ovalRect)
     }
 
     private enum class CornerPosition { TopStart, TopEnd, BottomEnd, BottomStart }
+}
+
+/**
+ * Converts a Rect to a RoundRect using a list of four CornerRadius values in order:
+ * topStart, topEnd, bottomEnd, bottomStart.
+ */
+private fun Rect.toRoundRect(radii: List<CornerRadius>): RoundRect {
+    require(radii.size == 4) { "Radii list must contain exactly four elements" }
+    return RoundRect(
+        rect = this,
+        topLeft = radii[0],
+        topRight = radii[1],
+        bottomRight = radii[2],
+        bottomLeft = radii[3],
+    )
 }
