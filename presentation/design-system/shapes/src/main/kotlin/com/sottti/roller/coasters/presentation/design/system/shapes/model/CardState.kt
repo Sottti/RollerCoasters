@@ -10,5 +10,4 @@ internal data class CardState(
     val corners: Corners,
     val elevation: Dp,
     val modifier: Modifier,
-    val onClick: () -> Unit,
 )

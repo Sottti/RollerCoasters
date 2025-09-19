@@ -23,9 +23,9 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sottti.roller.coasters.presentation.design.system.shapes.data.cornersShape
+import com.sottti.roller.coasters.presentation.design.system.shapes.cornerShape
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
-import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Convex
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Rounded
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
@@ -89,20 +89,20 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(0) },
-                    shape = cornersShape(
+                    shape = cornerShape(
                         bottomEnd = Concave(MaterialTheme.shapes.large.bottomEnd),
-                        bottomStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
-                        topEnd = Convex(MaterialTheme.shapes.extraSmall.topEnd),
+                        bottomStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topEnd = Rounded(MaterialTheme.shapes.extraSmall.topEnd),
                     ),
                     textResId = items.firstItem,
                 )
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(1) },
-                    shape = cornersShape(
-                        bottomEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                    shape = cornerShape(
+                        bottomEnd = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
                         bottomStart = Concave(MaterialTheme.shapes.large.bottomStart),
-                        topStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
                     ),
                     textResId = items.secondItem,
                 )
@@ -111,20 +111,20 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(2) },
-                    shape = cornersShape(
+                    shape = cornerShape(
                         topEnd = Concave(MaterialTheme.shapes.large.topEnd),
-                        topStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
-                        bottomEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
+                        bottomEnd = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
                     ),
                     textResId = items.thirdItem,
                 )
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(3) },
-                    shape = cornersShape(
+                    shape = cornerShape(
                         topStart = Concave(MaterialTheme.shapes.large.topStart),
-                        bottomStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
-                        topEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                        bottomStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topEnd = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
                     ),
                     textResId = items.forthItem,
                 )

@@ -1,5 +1,9 @@
 package com.sottti.roller.coasters.presentation.design.system.shapes
 
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Rect
@@ -8,14 +12,55 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathOperation
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.BottomEnd
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.BottomStart
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.TopEnd
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.TopStart
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.BottomEnd
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.BottomStart
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.TopEnd
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.TopStart
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Cut
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Rounded
+import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Sharp
+
+@Composable
+public fun cornerShape(
+    bottomEnd: Corner = Rounded(MaterialTheme.shapes.large.bottomEnd),
+    bottomStart: Corner = Rounded(MaterialTheme.shapes.large.bottomStart),
+    topEnd: Corner = Rounded(MaterialTheme.shapes.large.topEnd),
+    topStart: Corner = Rounded(MaterialTheme.shapes.large.topStart),
+): Shape {
+    val corners = listOf(bottomEnd, bottomStart, topEnd, topStart)
+    return when {
+        corners.all { corner -> corner is Sharp } -> RectangleShape
+
+        corners.all { corner -> corner is Rounded || corner is Sharp } ->
+            RoundedCornerShape(
+                bottomEnd = bottomEnd.cornerSize,
+                bottomStart = bottomStart.cornerSize,
+                topEnd = topEnd.cornerSize,
+                topStart = topStart.cornerSize,
+            )
+
+        corners.all { corner -> corner is Cut || corner is Sharp } ->
+            CutCornerShape(
+                bottomEnd = bottomEnd.cornerSize,
+                bottomStart = bottomStart.cornerSize,
+                topEnd = topEnd.cornerSize,
+                topStart = topStart.cornerSize,
+            )
+
+        else -> CornerShape(
+            bottomEnd = bottomEnd,
+            bottomStart = bottomStart,
+            topEnd = topEnd,
+            topStart = topStart,
+        )
+    }
+}
 
 /**
  * A shape with per-corner customization: [Convex] (rounded), [Concave] (inward cut),
@@ -28,7 +73,7 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
  * @param bottomStart The corner style for the bottom-start corner.
  */
 @Immutable
-internal class CornersShape(
+private class CornerShape(
     private val topStart: Corner,
     private val topEnd: Corner,
     private val bottomEnd: Corner,
@@ -72,18 +117,20 @@ internal class CornersShape(
             corners.forEachIndexed { index, corner ->
                 val position = CornerPosition.entries[index]
                 when (corner) {
-                    is Corner.Concave -> {
+                    is Concave -> {
                         val radius = concaveRadiusInPixels(corner, density, size)
                         if (radius > 0f) {
                             addConcaveOval(position, radius, size, layoutDirection)
                         }
                     }
-                    is Corner.Cut -> {
+
+                    is Cut -> {
                         val cutSize = cutSizeInPixels(corner, density, size)
                         if (cutSize > 0f) {
                             addCutTriangle(position, cutSize, size, layoutDirection)
                         }
                     }
+
                     else -> Unit
                 }
             }
@@ -102,22 +149,23 @@ internal class CornersShape(
 
     private fun convexCornerRadius(corner: Corner, density: Density, size: Size): CornerRadius =
         when (corner) {
-            is Corner.Convex -> {
+            is Rounded -> {
                 val radius = clampCornerSize(corner.cornerSize.toPx(size, density), size)
                 if (radius > 0f) CornerRadius(radius) else CornerRadius.Zero
             }
-            is Corner.Cut, is Corner.Concave, is Corner.Sharp -> CornerRadius.Zero
+
+            is Cut, is Concave, is Sharp -> CornerRadius.Zero
         }
 
     private fun concaveRadiusInPixels(corner: Corner, density: Density, size: Size): Float =
         when (corner) {
-            is Corner.Concave -> clampCornerSize(corner.cornerSize.toPx(size, density), size)
+            is Concave -> clampCornerSize(corner.cornerSize.toPx(size, density), size)
             else -> 0f
         }
 
     private fun cutSizeInPixels(corner: Corner, density: Density, size: Size): Float =
         when (corner) {
-            is Corner.Cut -> clampCornerSize(corner.cornerSize.toPx(size, density), size)
+            is Cut -> clampCornerSize(corner.cornerSize.toPx(size, density), size)
             else -> 0f
         }
 
@@ -147,18 +195,21 @@ internal class CornersShape(
                 lineTo(cornerX, cornerY + cutSize)
                 close()
             }
+
             TopEnd -> {
                 moveTo(cornerX, cornerY)
                 lineTo(cornerX - cutSize, cornerY)
                 lineTo(cornerX, cornerY + cutSize)
                 close()
             }
+
             BottomEnd -> {
                 moveTo(cornerX, cornerY)
                 lineTo(cornerX, cornerY - cutSize)
                 lineTo(cornerX - cutSize, cornerY)
                 close()
             }
+
             BottomStart -> {
                 moveTo(cornerX, cornerY)
                 lineTo(cornerX + cutSize, cornerY)
