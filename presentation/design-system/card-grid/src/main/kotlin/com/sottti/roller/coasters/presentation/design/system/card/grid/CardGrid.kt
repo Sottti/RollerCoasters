@@ -23,7 +23,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sottti.roller.coasters.presentation.design.system.shapes.data.cornerShapes
+import com.sottti.roller.coasters.presentation.design.system.shapes.data.cornersShape
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Convex
 import com.sottti.roller.coasters.presentation.design.system.text.Text
@@ -89,7 +89,7 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(0) },
-                    shape = cornerShapes(
+                    shape = cornersShape(
                         bottomEnd = Concave(MaterialTheme.shapes.large.bottomEnd),
                         bottomStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                         topEnd = Convex(MaterialTheme.shapes.extraSmall.topEnd),
@@ -99,7 +99,7 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(1) },
-                    shape = cornerShapes(
+                    shape = cornersShape(
                         bottomEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                         bottomStart = Concave(MaterialTheme.shapes.large.bottomStart),
                         topStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
@@ -111,7 +111,7 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(2) },
-                    shape = cornerShapes(
+                    shape = cornersShape(
                         topEnd = Concave(MaterialTheme.shapes.large.topEnd),
                         topStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                         bottomEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
@@ -121,7 +121,7 @@ public fun CardGrid(
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(3) },
-                    shape = cornerShapes(
+                    shape = cornersShape(
                         topStart = Concave(MaterialTheme.shapes.large.topStart),
                         bottomStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                         topEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),

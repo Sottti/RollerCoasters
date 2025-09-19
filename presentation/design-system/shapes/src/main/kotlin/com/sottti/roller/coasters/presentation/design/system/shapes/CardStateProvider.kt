@@ -13,64 +13,70 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 internal class CardStateProvider : PreviewParameterProvider<CardState> {
     override val values: Sequence<CardState> = sequence {
         cornersValues().forEach { corners ->
-            yield(
-                CardState(
-                    content = {},
-                    corners = corners,
-                    modifier = Modifier
-                        .width(200.dp)
-                        .height(100.dp),
-                    onClick = {},
-                ),
-            )
+            cardElevationValues().forEach { elevation ->
+                yield(
+                    CardState(
+                        content = {},
+                        corners = corners,
+                        elevation = elevation,
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(100.dp),
+                        onClick = {},
+                    ),
+                )
+            }
         }
     }
+
+    private fun cornersValues() = listOf(
+        convexCorners(),
+        concaveCorners(),
+        cutCorners(),
+        sharpCorners(),
+        mixedCorners(),
+    )
+
+    private fun concaveCorners() = Corners(
+        topStart = Corner.Concave(smallCornerSize),
+        topEnd = Corner.Concave(mediumCornerSize),
+        bottomEnd = Corner.Concave(largeCornerSize),
+        bottomStart = Corner.Concave(extraLargeCornerSize),
+    )
+
+    private fun convexCorners() = Corners(
+        topStart = Corner.Convex(smallCornerSize),
+        topEnd = Corner.Convex(mediumCornerSize),
+        bottomEnd = Corner.Convex(largeCornerSize),
+        bottomStart = Corner.Convex(extraLargeCornerSize),
+    )
+
+    private fun sharpCorners() = Corners(
+        bottomStart = Corner.Sharp,
+        topStart = Corner.Sharp,
+        bottomEnd = Corner.Sharp,
+        topEnd = Corner.Sharp,
+    )
+
+    private fun cutCorners() = Corners(
+        topStart = Corner.Cut(smallCornerSize),
+        topEnd = Corner.Cut(mediumCornerSize),
+        bottomEnd = Corner.Cut(largeCornerSize),
+        bottomStart = Corner.Cut(extraLargeCornerSize),
+    )
+
+    private fun mixedCorners() = Corners(
+        topStart = Corner.Sharp,
+        topEnd = Corner.Convex(mediumCornerSize),
+        bottomEnd = Corner.Concave(mediumCornerSize),
+        bottomStart = Corner.Cut(largeCornerSize),
+    )
+
+    private fun cardElevationValues() =
+        listOf(0.dp, 1.dp, 3.dp, 6.dp, 8.dp, 12.dp)
+
+    private val smallCornerSize = CornerSize(4.dp)
+    private val mediumCornerSize = CornerSize(8.dp)
+    private val largeCornerSize = CornerSize(16.dp)
+    private val extraLargeCornerSize = CornerSize(32.dp)
 }
-
-private fun cornersValues() = listOf(
-    concaveCorners(),
-    convexCorners(),
-    sharpCorners(),
-    cutCorners(),
-    mixedCorners(),
-)
-
-private fun concaveCorners() = Corners(
-    topStart = Corner.Concave(smallCornerSize),
-    topEnd = Corner.Concave(mediumCornerSize),
-    bottomEnd = Corner.Concave(largeCornerSize),
-    bottomStart = Corner.Concave(extraLargeCornerSize),
-)
-
-private fun convexCorners() = Corners(
-    topStart = Corner.Convex(smallCornerSize),
-    topEnd = Corner.Convex(mediumCornerSize),
-    bottomEnd = Corner.Convex(largeCornerSize),
-    bottomStart = Corner.Convex(extraLargeCornerSize),
-)
-
-private fun sharpCorners() = Corners(
-    bottomStart = Corner.Sharp,
-    topStart = Corner.Sharp,
-    bottomEnd = Corner.Sharp,
-    topEnd = Corner.Sharp,
-)
-
-private fun cutCorners() = Corners(
-    topStart = Corner.Cut(smallCornerSize),
-    topEnd = Corner.Cut(mediumCornerSize),
-    bottomEnd = Corner.Cut(largeCornerSize),
-    bottomStart = Corner.Cut(extraLargeCornerSize),
-)
-
-private fun mixedCorners() = Corners(
-    topStart = Corner.Sharp,
-    topEnd = Corner.Convex(mediumCornerSize),
-    bottomEnd = Corner.Concave(largeCornerSize),
-    bottomStart = Corner.Cut(extraLargeCornerSize),
-)
-
-private val smallCornerSize = CornerSize(4.dp)
-private val mediumCornerSize = CornerSize(8.dp)
-private val largeCornerSize = CornerSize(16.dp)
-private val extraLargeCornerSize = CornerSize(32.dp)

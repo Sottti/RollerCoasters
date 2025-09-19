@@ -11,10 +11,10 @@ import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.BottomEnd
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.BottomStart
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.TopEnd
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape.CornerPosition.TopStart
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.BottomEnd
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.BottomStart
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.TopEnd
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape.CornerPosition.TopStart
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 
 /**
@@ -28,7 +28,7 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
  * @param bottomStart The corner style for the bottom-start corner.
  */
 @Immutable
-internal class CornerShape(
+internal class CornersShape(
     private val topStart: Corner,
     private val topEnd: Corner,
     private val bottomEnd: Corner,
@@ -62,18 +62,9 @@ internal class CornerShape(
             return Outline.Rectangle(rect)
         }
 
-        // Fast path: rounded rectangle if only convex corners
-        if (concaveRadii.all { it == 0f } && cutSizes.all { it == 0f }) {
-            return Outline.Rounded(rect.toRoundRect(radii))
-        }
-
-        // Build base path (rounded if convex, else rectangle)
+        // Build base path. Always use a RoundRect to handle all corner types correctly.
         val basePath = Path().apply {
-            if (radii.any { it != CornerRadius.Zero }) {
-                addRoundRect(rect.toRoundRect(radii))
-            } else {
-                addRect(rect)
-            }
+            addRoundRect(rect.toRoundRect(radii))
         }
 
         // Build concave and cut cutouts
@@ -87,20 +78,18 @@ internal class CornerShape(
                             addConcaveOval(position, radius, size, layoutDirection)
                         }
                     }
-
                     is Corner.Cut -> {
                         val cutSize = cutSizeInPixels(corner, density, size)
                         if (cutSize > 0f) {
                             addCutTriangle(position, cutSize, size, layoutDirection)
                         }
                     }
-
                     else -> Unit
                 }
             }
         }
 
-        // Return combined path if cutouts exist
+        // Use generic outline if any cutouts or concave/cut corners exist
         return if (cutoutPath.isEmpty) {
             Outline.Rounded(rect.toRoundRect(radii))
         } else {
@@ -117,8 +106,7 @@ internal class CornerShape(
                 val radius = clampCornerSize(corner.cornerSize.toPx(size, density), size)
                 if (radius > 0f) CornerRadius(radius) else CornerRadius.Zero
             }
-
-            else -> CornerRadius.Zero
+            is Corner.Cut, is Corner.Concave, is Corner.Sharp -> CornerRadius.Zero
         }
 
     private fun concaveRadiusInPixels(corner: Corner, density: Density, size: Size): Float =
@@ -150,33 +138,46 @@ internal class CornerShape(
         size: Size,
         layoutDirection: LayoutDirection,
     ) {
-        val (cornerX, cornerY) = position.getCenter(size, layoutDirection == LayoutDirection.Rtl)
-        val coords = position.getCutTriangleCoords(cornerX, cornerY, cutSize)
-        moveTo(coords[0], coords[1])
-        lineTo(coords[2], coords[3])
-        lineTo(coords[4], coords[5])
-        close()
+        val (cornerX, cornerY) = position.cornerXY(size, layoutDirection == LayoutDirection.Rtl)
+
+        when (position) {
+            TopStart -> {
+                moveTo(cornerX, cornerY)
+                lineTo(cornerX + cutSize, cornerY)
+                lineTo(cornerX, cornerY + cutSize)
+                close()
+            }
+            TopEnd -> {
+                moveTo(cornerX, cornerY)
+                lineTo(cornerX - cutSize, cornerY)
+                lineTo(cornerX, cornerY + cutSize)
+                close()
+            }
+            BottomEnd -> {
+                moveTo(cornerX, cornerY)
+                lineTo(cornerX, cornerY - cutSize)
+                lineTo(cornerX - cutSize, cornerY)
+                close()
+            }
+            BottomStart -> {
+                moveTo(cornerX, cornerY)
+                lineTo(cornerX + cutSize, cornerY)
+                lineTo(cornerX, cornerY - cutSize)
+                close()
+            }
+        }
     }
 
-    private fun CornerPosition.getCutTriangleCoords(
-        cornerX: Float,
-        cornerY: Float,
-        cutSize: Float,
-    ): List<Float> {
-        val (xSign, ySign) = when (this) {
-            TopStart -> 1f to 1f
-            TopEnd -> -1f to 1f
-            BottomStart -> 1f to -1f
-            BottomEnd -> -1f to -1f
+    private fun CornerPosition.cornerXY(size: Size, isRtl: Boolean): Pair<Float, Float> {
+        val x = when (this) {
+            TopStart, BottomStart -> if (isRtl) size.width else 0f
+            TopEnd, BottomEnd -> if (isRtl) 0f else size.width
         }
-        return listOf(
-            cornerX - cutSize * xSign,
-            cornerY, // x1, y1
-            cornerX,
-            cornerY + cutSize * ySign, // x2, y2
-            cornerX,
-            cornerY // x3, y3
-        )
+        val y = when (this) {
+            TopStart, TopEnd -> 0f
+            BottomStart, BottomEnd -> size.height
+        }
+        return x to y
     }
 
     private enum class CornerPosition(val baseX: Float, val baseY: Float) {

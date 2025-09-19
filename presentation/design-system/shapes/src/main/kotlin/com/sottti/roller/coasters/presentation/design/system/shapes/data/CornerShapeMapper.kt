@@ -6,14 +6,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import com.sottti.roller.coasters.presentation.design.system.shapes.CornerShape
+import com.sottti.roller.coasters.presentation.design.system.shapes.CornersShape
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Convex
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Cut
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Sharp
 
 @Composable
-public fun cornerShapes(
+public fun cornersShape(
     bottomEnd: Corner = Convex(MaterialTheme.shapes.large.bottomEnd),
     bottomStart: Corner = Convex(MaterialTheme.shapes.large.bottomStart),
     topEnd: Corner = Convex(MaterialTheme.shapes.large.topEnd),
@@ -39,7 +39,7 @@ public fun cornerShapes(
                 topStart = topStart.cornerSize,
             )
 
-        else -> CornerShape(
+        else -> CornersShape(
             bottomEnd = bottomEnd,
             bottomStart = bottomStart,
             topEnd = topEnd,
