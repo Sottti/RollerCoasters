@@ -14,17 +14,16 @@ internal fun CardPreview(
     @PreviewParameter(CardStateProvider::class)
     state: CardState,
 ) {
-    val corners = state.cornerKeyToValues.invoke(state.cornersKey)
     RollerCoastersPreviewTheme {
         Card(
             content = state.content,
             modifier = state.modifier,
             onClick = state.onClick,
             shape = cornerShapes(
-                bottomEnd = corners.bottomEnd,
-                bottomStart = corners.bottomStart,
-                topEnd = corners.topEnd,
-                topStart = corners.topStart,
+                bottomEnd = state.corners.bottomEnd,
+                bottomStart = state.corners.bottomStart,
+                topEnd = state.corners.topEnd,
+                topStart = state.corners.topStart,
             ),
         )
     }

@@ -22,7 +22,7 @@ import com.sottti.roller.coasters.presentation.design.system.card.grid.model.Qua
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
-import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
+import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.shapes.data.cornerShapes
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Convex
@@ -40,6 +40,7 @@ public fun CardGrid(
     CardGrid(
         modifier = modifier.fillMaxWidth(),
         onClick = { onClick() },
+        shape = MaterialTheme.shapes.large,
         textResId = item,
     )
 }
@@ -48,7 +49,7 @@ public fun CardGrid(
 private fun CardGrid(
     modifier: Modifier,
     onClick: (() -> Unit),
-    shape: Shape = MaterialTheme.shapes.large,
+    shape: Shape,
     textResId: Int,
 ) {
     Card(
@@ -90,7 +91,8 @@ public fun CardGrid(
                     onClick = { onClick(0) },
                     shape = cornerShapes(
                         bottomEnd = Concave(MaterialTheme.shapes.large.bottomEnd),
-                        topStart = Convex(MaterialTheme.shapes.large.topStart),
+                        bottomStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topEnd = Convex(MaterialTheme.shapes.extraSmall.topEnd),
                     ),
                     textResId = items.firstItem,
                 )
@@ -98,8 +100,9 @@ public fun CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(1) },
                     shape = cornerShapes(
+                        bottomEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                         bottomStart = Concave(MaterialTheme.shapes.large.bottomStart),
-                        topEnd = Convex(MaterialTheme.shapes.large.topEnd),
+                        topStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                     ),
                     textResId = items.secondItem,
                 )
@@ -109,8 +112,9 @@ public fun CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(2) },
                     shape = cornerShapes(
-                        bottomStart = Convex(MaterialTheme.shapes.large.bottomStart),
                         topEnd = Concave(MaterialTheme.shapes.large.topEnd),
+                        topStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                        bottomEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                     ),
                     textResId = items.thirdItem,
                 )
@@ -118,18 +122,18 @@ public fun CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(3) },
                     shape = cornerShapes(
-                        bottomEnd = Convex(MaterialTheme.shapes.large.bottomEnd),
                         topStart = Concave(MaterialTheme.shapes.large.topStart),
+                        bottomStart = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topEnd = Convex(MaterialTheme.shapes.extraSmall.bottomStart),
                     ),
                     textResId = items.forthItem,
                 )
             }
         }
-        CircledIcon(
-            modifier = Modifier.align(Alignment.Center),
+        Icon(
             iconState = iconState,
-            backgroundColor = colors.surfaceContainerHighest,
-            iconColor = colors.onSurface,
+            modifier = Modifier.align(Alignment.Center),
+            tint = colors.onSurface,
         )
     }
 }
@@ -171,12 +175,10 @@ internal fun MonoCardGridPreview(
     state: MonoCardGridState,
 ) {
     RollerCoastersPreviewTheme {
-        Box(modifier = Modifier.background(colors.surfaceContainerHighest)) {
-            CardGrid(
-                item = state.item,
-                modifier = state.modifier,
-                onClick = state.onClick,
-            )
-        }
+        CardGrid(
+            item = state.item,
+            modifier = state.modifier,
+            onClick = state.onClick,
+        )
     }
 }

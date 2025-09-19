@@ -6,8 +6,7 @@ import androidx.compose.ui.Modifier
 
 internal data class CardState(
     val content: @Composable ColumnScope.() -> Unit,
-    val cornersKey: Int,
-    val cornerKeyToValues: @Composable (Int) -> Corners,
+    val corners: Corners,
     val modifier: Modifier,
     val onClick: () -> Unit,
 )
