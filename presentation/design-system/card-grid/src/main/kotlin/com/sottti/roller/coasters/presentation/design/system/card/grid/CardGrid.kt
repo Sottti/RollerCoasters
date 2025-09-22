@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +25,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.shapes.cornerShape
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Concave
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Rounded
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
@@ -40,7 +40,7 @@ public fun CardGrid(
     CardGrid(
         modifier = modifier.fillMaxWidth(),
         onClick = { onClick() },
-        shape = MaterialTheme.shapes.large,
+        shape = shapes.roundedCorner.large,
         textResId = item,
     )
 }
@@ -56,8 +56,8 @@ private fun CardGrid(
         modifier = modifier,
         onClick = onClick,
         colors = MaterialCardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer,
-            contentColor = MaterialTheme.colorScheme.onSurface,
+            containerColor = colors.surfaceContainer,
+            contentColor = colors.onSurface,
         ),
         shape = shape,
     ) {
@@ -66,7 +66,7 @@ private fun CardGrid(
             contentAlignment = Alignment.Center,
         ) {
             Text.Label.Medium(
-                modifier = Modifier.padding(dimensions.padding.medium),
+                modifier = Modifier.padding(dimensions.spacing.medium),
                 textResId = textResId,
             )
         }
@@ -83,16 +83,16 @@ public fun CardGrid(
     Box {
         Column(
             modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(dimensions.padding.small),
+            verticalArrangement = Arrangement.spacedBy(dimensions.spacing.small),
         ) {
             CardGridRow {
                 CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(0) },
                     shape = cornerShape(
-                        bottomEnd = Concave(MaterialTheme.shapes.large.bottomEnd),
-                        bottomStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
-                        topEnd = Rounded(MaterialTheme.shapes.extraSmall.topEnd),
+                        bottomEnd = Concave(shapes.roundedCorner.large.bottomEnd),
+                        bottomStart = Rounded(shapes.roundedCorner.extraSmall.bottomStart),
+                        topEnd = Rounded(shapes.roundedCorner.extraSmall.topEnd),
                     ),
                     textResId = items.firstItem,
                 )
@@ -100,9 +100,9 @@ public fun CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(1) },
                     shape = cornerShape(
-                        bottomEnd = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
-                        bottomStart = Concave(MaterialTheme.shapes.large.bottomStart),
-                        topStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
+                        bottomEnd = Rounded(shapes.roundedCorner.extraSmall.bottomEnd),
+                        bottomStart = Concave(shapes.roundedCorner.large.bottomStart),
+                        topStart = Rounded(shapes.roundedCorner.extraSmall.topStart),
                     ),
                     textResId = items.secondItem,
                 )
@@ -112,9 +112,9 @@ public fun CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(2) },
                     shape = cornerShape(
-                        topEnd = Concave(MaterialTheme.shapes.large.topEnd),
-                        topStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
-                        bottomEnd = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topEnd = Concave(shapes.roundedCorner.large.topEnd),
+                        topStart = Rounded(shapes.roundedCorner.extraSmall.topStart),
+                        bottomEnd = Rounded(shapes.roundedCorner.extraSmall.bottomEnd),
                     ),
                     textResId = items.thirdItem,
                 )
@@ -122,9 +122,9 @@ public fun CardGrid(
                     modifier = Modifier.weight(1f),
                     onClick = { onClick(3) },
                     shape = cornerShape(
-                        topStart = Concave(MaterialTheme.shapes.large.topStart),
-                        bottomStart = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
-                        topEnd = Rounded(MaterialTheme.shapes.extraSmall.bottomStart),
+                        topStart = Concave(shapes.roundedCorner.large.topStart),
+                        bottomStart = Rounded(shapes.roundedCorner.extraSmall.bottomStart),
+                        topEnd = Rounded(shapes.roundedCorner.extraSmall.topEnd),
                     ),
                     textResId = items.forthItem,
                 )
@@ -144,7 +144,7 @@ private fun CardGridRow(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.small),
+        horizontalArrangement = Arrangement.spacedBy(dimensions.spacing.small),
     ) {
         content()
     }

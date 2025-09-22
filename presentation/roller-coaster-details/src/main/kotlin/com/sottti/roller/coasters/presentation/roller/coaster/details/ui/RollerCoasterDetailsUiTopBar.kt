@@ -64,7 +64,7 @@ private fun FavouriteIcon(
         )
 
         Loading -> ProgressIndicator(
-            modifier = Modifier.padding(end = dimensions.padding.medium),
+            modifier = Modifier.padding(end = dimensions.spacing.medium),
             size = ProgressIndicatorSize.Small,
         )
     }

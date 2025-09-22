@@ -8,22 +8,39 @@ internal object SpacingTokens {
     @Composable
     internal fun compact(): Spacing =
         Spacing(
-            small = 2.dp,
-            medium = 4.dp,
-            large = 8.dp,
+            none = 0.dp,
+            extraSmall = 2.dp,
+            small = 4.dp,
+            smallMedium = 8.dp,
+            medium = 16.dp,
+            mediumLarge = 24.dp,
+            large = 32.dp,
+            extraLarge = 64.dp,
         )
 
     @Composable
-    internal fun medium(): Spacing = Spacing(
-        small = 2.dp,
-        medium = 4.dp,
-        large = 8.dp,
-    )
+    internal fun medium(): Spacing =
+        Spacing(
+            none = 0.dp,
+            extraSmall = 2.dp,
+            small = 4.dp,
+            smallMedium = 8.dp,
+            medium = 16.dp,
+            mediumLarge = 24.dp,
+            large = 32.dp,
+            extraLarge = 64.dp,
+        )
 
     @Composable
-    internal fun expanded(): Spacing = Spacing(
-        small = 2.dp,
-        medium = 4.dp,
-        large = 8.dp,
-    )
+    internal fun expanded(): Spacing =
+        Spacing(
+            none = 0.dp,
+            extraSmall = 2.dp,
+            small = 4.dp,
+            smallMedium = 8.dp,
+            medium = 16.dp,
+            mediumLarge = 24.dp,
+            large = 32.dp,
+            extraLarge = 64.dp,
+        )
 }

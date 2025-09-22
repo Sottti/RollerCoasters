@@ -3,13 +3,13 @@ package com.sottti.roller.coasters.presentation.design.system.hero.image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
@@ -21,11 +21,11 @@ public fun HeroImage(
 ) {
     Card(
         modifier = modifier,
-        shape = MaterialTheme.shapes.large,
+        shape = shapes.roundedCorner.large,
     ) {
         Image(
             modifier = Modifier
-                .padding(dimensions.padding.small)
+                .padding(dimensions.spacing.small)
                 .fillMaxSize(),
             state = image,
         )

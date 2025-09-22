@@ -2,7 +2,6 @@ package com.sottti.roller.coasters.presentation.design.system.shapes
 
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.geometry.CornerRadius
@@ -28,10 +27,10 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 
 @Composable
 public fun cornerShape(
-    bottomEnd: Corner = Rounded(MaterialTheme.shapes.large.bottomEnd),
-    bottomStart: Corner = Rounded(MaterialTheme.shapes.large.bottomStart),
-    topEnd: Corner = Rounded(MaterialTheme.shapes.large.topEnd),
-    topStart: Corner = Rounded(MaterialTheme.shapes.large.topStart),
+    bottomEnd: Corner = Rounded(shapes.roundedCorner.large.bottomEnd),
+    bottomStart: Corner = Rounded(shapes.roundedCorner.large.bottomStart),
+    topEnd: Corner = Rounded(shapes.roundedCorner.large.topEnd),
+    topStart: Corner = Rounded(shapes.roundedCorner.large.topStart),
 ): Shape {
     val corners = listOf(bottomEnd, bottomStart, topEnd, topStart)
     return when {

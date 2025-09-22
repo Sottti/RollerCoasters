@@ -17,7 +17,6 @@ import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -48,6 +47,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.Spacer
@@ -82,9 +82,9 @@ internal fun AboutMeContent(
     ) { innerPadding ->
         val mergedPaddingValues =
             outerPadding
-                .override(top = dimensions.padding.zero) +
+                .override(top = dimensions.spacing.none) +
                     innerPadding
-                        .override(bottom = dimensions.padding.zero)
+                        .override(bottom = dimensions.spacing.none)
         AboutMeItems(
             listState = lazyListState,
             nestedScrollConnection = scrollBehavior.nestedScrollConnection,
@@ -119,11 +119,11 @@ private fun AboutMeItems(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item { ProfileImage(state.profileImage) }
-            item { Spacer(dimensions.padding.smallMedium) }
+            item { Spacer(dimensions.spacing.smallMedium) }
             item { Name(state.name) }
-            item { Spacer(dimensions.padding.large) }
+            item { Spacer(dimensions.spacing.large) }
             item { SocialProfiles(onAction = onAction, state = state.socialProfiles) }
-            item { Spacer(dimensions.padding.large) }
+            item { Spacer(dimensions.spacing.large) }
             item {
                 GetToKnowMe(
                     onAction = onAction,
@@ -140,7 +140,7 @@ private fun AboutMeItems(
 private fun ProfileImage(state: ImageState) {
     HeroImage(
         modifier = Modifier
-            .padding(top = dimensions.padding.large)
+            .padding(top = dimensions.spacing.large)
             .fillMaxWidth(fraction = 0.33f)
             .aspectRatio(1f),
         image = state,
@@ -164,8 +164,8 @@ private fun SocialProfiles(
     Row(
         modifier = Modifier
             .horizontalScroll(scrollState)
-            .padding(horizontal = dimensions.padding.medium),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
+            .padding(horizontal = dimensions.spacing.medium),
+        horizontalArrangement = Arrangement.spacedBy(dimensions.spacing.smallMedium),
     ) {
         state.forEach { profile ->
             val primaryColor = externalNavigationPrimaryColor(profile.url)
@@ -196,8 +196,8 @@ private fun GetToKnowMe(
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(
-            modifier = Modifier.padding(dimensions.padding.medium),
-            verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
+            modifier = Modifier.padding(dimensions.spacing.medium),
+            verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
         ) {
             AndroidJourney(
                 state = topics.journey,
@@ -285,7 +285,7 @@ private fun AndroidJourney(
 
 @Composable
 private fun topLevelCardShape(): CornerBasedShape =
-    MaterialTheme.shapes.extraLarge.copy(
+    shapes.roundedCorner.extraLarge.copy(
         bottomStart = ZeroCornerSize,
         bottomEnd = ZeroCornerSize,
     )

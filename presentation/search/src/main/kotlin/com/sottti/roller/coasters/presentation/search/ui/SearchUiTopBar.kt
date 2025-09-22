@@ -41,8 +41,8 @@ internal fun SearchTopBar(
             loading = state.loading,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = dimensions.padding.medium)
-                .padding(bottom = dimensions.padding.medium),
+                .padding(horizontal = dimensions.spacing.medium)
+                .padding(bottom = dimensions.spacing.medium),
             onQueryChange = { onAction(SearchAction.QueryChanged(it)) },
             query = state.searchBar.query,
         )

@@ -100,10 +100,10 @@ private fun LoadedRollerCoasters(
     rollerCoasters: LazyPagingItems<FavouritesRollerCoaster>,
 ) {
     LazyColumn(
-        contentPadding = padding + PaddingValues(dimensions.padding.medium),
+        contentPadding = padding + PaddingValues(dimensions.spacing.medium),
         modifier = Modifier.nestedScroll(nestedScrollConnection),
         state = listState,
-        verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
+        verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
             item { FillMaxWidthProgressIndicator() }
@@ -143,7 +143,7 @@ private fun RollerCoaster(
 
 @Composable
 private fun FillMaxWidthProgressIndicator(
-    padding: PaddingValues = PaddingValues(vertical = dimensions.padding.medium),
+    padding: PaddingValues = PaddingValues(vertical = dimensions.spacing.medium),
 ) {
     ProgressIndicator(
         modifier = Modifier

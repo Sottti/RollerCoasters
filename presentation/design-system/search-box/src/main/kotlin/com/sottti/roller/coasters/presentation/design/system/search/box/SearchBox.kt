@@ -2,7 +2,6 @@ package com.sottti.roller.coasters.presentation.design.system.search.box
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -15,6 +14,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
@@ -27,7 +27,7 @@ public fun SearchBox(
     modifier: Modifier = Modifier,
     onQueryChange: (String?) -> Unit,
 ) {
-    val shape = MaterialTheme.shapes.large
+    val shape = shapes.roundedCorner.large
     val queryString = query.orEmpty()
     TextField(
         value = queryString,

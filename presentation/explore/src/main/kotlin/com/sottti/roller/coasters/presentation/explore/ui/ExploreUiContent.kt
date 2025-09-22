@@ -98,8 +98,8 @@ private fun LoadedRollerCoasters(
 ) {
     LazyColumn(
         state = listState,
-        contentPadding = padding + PaddingValues(dimensions.padding.medium),
-        verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
+        contentPadding = padding + PaddingValues(dimensions.spacing.medium),
+        verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
             item { FillMaxWidthProgressIndicator() }
@@ -145,7 +145,7 @@ private fun RollerCoaster(
 
 @Composable
 private fun FillMaxWidthProgressIndicator(
-    padding: PaddingValues = PaddingValues(vertical = dimensions.padding.medium),
+    padding: PaddingValues = PaddingValues(vertical = dimensions.spacing.medium),
 ) {
     ProgressIndicator(
         modifier = Modifier

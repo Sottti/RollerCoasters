@@ -12,6 +12,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
     implementation(libs.compose.window.size)

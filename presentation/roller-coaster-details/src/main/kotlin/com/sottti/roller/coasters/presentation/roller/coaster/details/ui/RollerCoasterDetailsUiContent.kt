@@ -96,15 +96,15 @@ private fun LoadedContent(
     padding: PaddingValues,
     state: RollerCoasterDetailsRollerCoasterState,
 ) {
-    val topPadding = padding.calculateTopPadding() + dimensions.padding.medium
-    val bottomPadding = padding.calculateBottomPadding() + dimensions.padding.medium
+    val topPadding = padding.calculateTopPadding() + dimensions.spacing.medium
+    val bottomPadding = padding.calculateBottomPadding() + dimensions.spacing.medium
 
     LazyColumn(
         modifier = Modifier
             .nestedScroll(nestedScrollConnection)
             .fillMaxSize(),
         contentPadding = PaddingValues(bottom = bottomPadding, top = topPadding),
-        verticalArrangement = Arrangement.spacedBy(dimensions.padding.mediumLarge),
+        verticalArrangement = Arrangement.spacedBy(dimensions.spacing.mediumLarge),
     ) {
         state.images?.let { item { ImagesSection(state.images) } }
         item { DetailsSection(state.identity) }
@@ -129,8 +129,8 @@ private fun ImagesSection(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxWidth(),
-            pageSpacing = dimensions.padding.smallMedium,
-            contentPadding = PaddingValues(horizontal = dimensions.padding.medium),
+            pageSpacing = dimensions.spacing.smallMedium,
+            contentPadding = PaddingValues(horizontal = dimensions.spacing.medium),
         ) { page ->
             Image(
                 url = images[page].imageUrl,
@@ -148,9 +148,9 @@ private fun ImagesSection(
 private fun DetailsSection(
     details: RollerCoasterDetailsSectionState,
 ) {
-    Column(modifier = Modifier.padding(horizontal = dimensions.padding.medium)) {
+    Column(modifier = Modifier.padding(horizontal = dimensions.spacing.medium)) {
         Header(details.header)
-        Spacer(size = dimensions.padding.smallMedium)
+        Spacer(size = dimensions.spacing.smallMedium)
         when (details) {
             is RollerCoasterIdentityState -> IdentityDetails(details)
             is RollerCoasterLocationState -> LocationDetails(details)

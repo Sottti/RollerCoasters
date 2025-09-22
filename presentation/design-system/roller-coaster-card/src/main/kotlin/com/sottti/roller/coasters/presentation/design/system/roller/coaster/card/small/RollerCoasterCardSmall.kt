@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +17,7 @@ import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.R
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard.Small
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.image.loading.Image
@@ -35,7 +35,7 @@ internal fun SmallImpl(
     Card(
         modifier = modifier,
         onClick = onClick,
-        shape = MaterialTheme.shapes.large,
+        shape = shapes.roundedCorner.large,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             imageUrl?.let { Image(imageUrl = imageUrl, foreverLoading = foreverLoading) }
@@ -52,7 +52,7 @@ private fun RowScope.Details(
     Column(
         modifier = Modifier
             .weight(1.0f)
-            .padding(dimensions.padding.medium),
+            .padding(dimensions.spacing.medium),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text.Title.Large(text = rollerCoasterName, textAlign = TextAlign.Center)
@@ -71,7 +71,7 @@ private fun Image(
         modifier = Modifier
             .fillMaxWidth(0.33f)
             .aspectRatio(1.5f)
-            .padding(dimensions.padding.small),
+            .padding(dimensions.spacing.small),
         foreverLoading = foreverLoading,
         roundedCorners = true,
     )

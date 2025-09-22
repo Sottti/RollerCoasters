@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.Card
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +19,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.model.IconSta
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.circledIcon.CircledIcon
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.switchh.Switch
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.settings.model.AppSelectedLanguageState
@@ -55,17 +55,17 @@ internal fun SettingsList(
         onAction(AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker)
     }
     LazyColumn(
-        contentPadding = padding + PaddingValues(vertical = dimensions.padding.medium),
+        contentPadding = padding + PaddingValues(vertical = dimensions.spacing.medium),
         modifier = Modifier.nestedScroll(nestedScrollConnection),
     ) {
         dynamicColor(state = state, onDynamicColorCheckedChange = onDynamicColorCheckedChange)
-        item { Spacer(dimensions.padding.extraSmall) }
+        item { Spacer(dimensions.spacing.extraSmall) }
         theme(state = state, launchThemePicker = launchThemePicker)
-        item { Spacer(dimensions.padding.mediumLarge) }
+        item { Spacer(dimensions.spacing.mediumLarge) }
         colorContrast(state = state, launchColorContrastPicker = launchColorContrastPicker)
-        item { Spacer(dimensions.padding.extraSmall) }
+        item { Spacer(dimensions.spacing.extraSmall) }
         language(state = state, launchLanguagePicker = launchLanguagePicker)
-        item { Spacer(dimensions.padding.extraSmall) }
+        item { Spacer(dimensions.spacing.extraSmall) }
         measurementSystem(
             launchMeasurementSystemPicker = launchMeasurementSystemPicker,
             state = state,
@@ -225,21 +225,21 @@ private fun SettingsListCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = dimensions.padding.medium),
+            .padding(horizontal = dimensions.spacing.medium),
         onClick = onClick ?: {},
         shape = when {
-            topRounded && bottomRounded -> MaterialTheme.shapes.large
-            topRounded -> MaterialTheme.shapes.large.copy(
-                bottomStart = MaterialTheme.shapes.extraSmall.bottomStart,
-                bottomEnd = MaterialTheme.shapes.extraSmall.bottomEnd,
+            topRounded && bottomRounded -> shapes.roundedCorner.large
+            topRounded -> shapes.roundedCorner.large.copy(
+                bottomStart = shapes.roundedCorner.extraSmall.bottomStart,
+                bottomEnd = shapes.roundedCorner.extraSmall.bottomEnd,
             )
 
-            bottomRounded -> MaterialTheme.shapes.large.copy(
-                topStart = MaterialTheme.shapes.extraSmall.topStart,
-                topEnd = MaterialTheme.shapes.extraSmall.topEnd,
+            bottomRounded -> shapes.roundedCorner.large.copy(
+                topStart = shapes.roundedCorner.extraSmall.topStart,
+                topEnd = shapes.roundedCorner.extraSmall.topEnd,
             )
 
-            else -> MaterialTheme.shapes.extraSmall
+            else -> shapes.roundedCorner.extraSmall
         },
     ) {
         content()

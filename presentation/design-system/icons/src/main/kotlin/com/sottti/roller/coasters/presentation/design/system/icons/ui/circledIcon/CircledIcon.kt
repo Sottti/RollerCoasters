@@ -31,7 +31,7 @@ public fun CircledIcon(
         ),
     ) {
         Icon(
-            modifier = Modifier.padding(dimensions.padding.smallMedium),
+            modifier = Modifier.padding(dimensions.spacing.smallMedium),
             iconState = iconState,
         )
     }

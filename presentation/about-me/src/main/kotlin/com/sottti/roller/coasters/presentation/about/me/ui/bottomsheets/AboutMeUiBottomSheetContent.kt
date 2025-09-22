@@ -40,16 +40,16 @@ internal fun BottomSheetContent(
         modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(scrollState)
-            .padding(horizontal = dimensions.padding.medium, vertical = dimensions.padding.large),
+            .padding(horizontal = dimensions.spacing.medium, vertical = dimensions.spacing.large),
         horizontalAlignment = CenterHorizontally,
     ) {
         HeaderImage(state.image)
-        Spacer(dimensions.padding.large)
+        Spacer(dimensions.spacing.large)
         Text.Title.Large(textResId = state.titleResId)
-        Spacer(dimensions.padding.smallMedium)
+        Spacer(dimensions.spacing.smallMedium)
         Text.Body.Medium(textResId = state.bodyResId, modifier = Modifier.fillMaxWidth())
         state.hyperlink?.let {
-            Spacer(dimensions.padding.medium)
+            Spacer(dimensions.spacing.medium)
             Hyperlink(state.hyperlink, onAction)
         }
     }

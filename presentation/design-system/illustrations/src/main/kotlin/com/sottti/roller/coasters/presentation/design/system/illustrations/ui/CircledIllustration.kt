@@ -26,7 +26,7 @@ public fun CircledIllustration(
             state = state,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(dimensions.padding.extraSmall)
+                .padding(dimensions.spacing.extraSmall)
         )
     }
 }

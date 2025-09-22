@@ -4,7 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,13 +15,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
@@ -37,7 +37,10 @@ public fun Image(
     val model = if (isPreview) previewImageModel() else imageRequest(url)
     val painter = rememberAsyncImagePainter(model)
     val painterState by painter.state.collectAsState()
-    val cornerRadius = if (roundedCorners) MaterialTheme.shapes.medium else RoundedCornerShape(0.dp)
+    val cornerRadius = when {
+        roundedCorners -> shapes.roundedCorner.medium
+        else -> RoundedCornerShape(ZeroCornerSize)
+    }
 
     Box(modifier = modifier.clip(cornerRadius)) {
         val matchParentSizeModifier = Modifier.matchParentSize()

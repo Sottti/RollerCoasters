@@ -28,6 +28,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.heroImage))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.images))
+    implementation(project(module.presentation.designSystem.shapes))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.format))

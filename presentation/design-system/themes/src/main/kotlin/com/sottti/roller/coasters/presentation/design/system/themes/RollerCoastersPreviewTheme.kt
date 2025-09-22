@@ -7,6 +7,8 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedCo
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalMockProvider
+import com.sottti.roller.coasters.presentation.design.system.shapes.ShapesLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.typography.TypographyLocalProvider
 
 @Composable
 public fun RollerCoastersPreviewTheme(
@@ -22,9 +24,13 @@ public fun RollerCoastersPreviewTheme(
     )
 
     DimensionsLocalMockProvider(windowWidthSizeClass) {
-        BaseTheme(
-            content = content,
-            colors = colors,
-        )
+        ShapesLocalProvider {
+            TypographyLocalProvider {
+                RollerCoastersBaseTheme(
+                    content = content,
+                    colors = colors,
+                )
+            }
+        }
     }
 }

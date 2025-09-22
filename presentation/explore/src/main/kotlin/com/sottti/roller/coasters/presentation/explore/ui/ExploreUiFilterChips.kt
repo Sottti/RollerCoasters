@@ -24,9 +24,9 @@ internal fun FilterChips(
     filters: Filters,
     onAction: (ExploreAction) -> Unit,
 ) {
-    Column(modifier = Modifier.padding(vertical = dimensions.padding.small)) {
+    Column(modifier = Modifier.padding(vertical = dimensions.spacing.small)) {
         PrimaryFilters(filters.primary, onAction)
-        Spacer(dimensions.padding.small)
+        Spacer(dimensions.spacing.small)
         SecondaryFilters(filters.secondary, onAction)
     }
 }
@@ -39,8 +39,8 @@ private fun PrimaryFilters(
     FlowRow(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = dimensions.padding.medium),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium),
+            .padding(horizontal = dimensions.spacing.medium),
+        horizontalArrangement = Arrangement.spacedBy(dimensions.spacing.smallMedium),
     ) {
         filters.forEach { filter ->
             key(filter.labelResId) { PrimaryFilterChip(filter = filter, onAction = onAction) }
@@ -57,8 +57,8 @@ private fun SecondaryFilters(
         modifier = Modifier
             .fillMaxWidth()
             .animateContentSize()
-            .padding(horizontal = dimensions.padding.medium),
-        horizontalArrangement = Arrangement.spacedBy(dimensions.padding.smallMedium)
+            .padding(horizontal = dimensions.spacing.medium),
+        horizontalArrangement = Arrangement.spacedBy(dimensions.spacing.smallMedium)
     ) {
         filters
             .filter { it.visible }

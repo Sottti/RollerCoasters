@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,6 +12,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
@@ -26,7 +26,7 @@ public fun PilledIcon(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Graphic(iconState = iconState, onClick = onClick)
-        Spacer(dimensions.padding.smallMedium)
+        Spacer(dimensions.spacing.smallMedium)
         Label(text)
 
     }
@@ -39,13 +39,13 @@ private fun Graphic(
 ) {
     Card(
         onClick = onClick,
-        shape = MaterialTheme.shapes.extraLarge,
+        shape = shapes.roundedCorner.extraLarge,
     ) {
         Icon(
             modifier = Modifier
                 .padding(
-                    vertical = dimensions.padding.medium,
-                    horizontal = dimensions.padding.mediumLarge,
+                    vertical = dimensions.spacing.medium,
+                    horizontal = dimensions.spacing.mediumLarge,
                 ),
             iconState = iconState,
         )

@@ -34,7 +34,7 @@ public fun InformativeUi(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(dimensions.padding.medium),
+            .padding(dimensions.spacing.medium),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -49,7 +49,7 @@ public fun InformativeUi(
             textColor = colors.onBackground,
             textAlign = TextAlign.Center,
         )
-        Spacer(size = dimensions.padding.small)
+        Spacer(size = dimensions.spacing.small)
         Text.Body.Medium(
             text = stringResource(secondaryText),
             textColor = colors.onBackground,

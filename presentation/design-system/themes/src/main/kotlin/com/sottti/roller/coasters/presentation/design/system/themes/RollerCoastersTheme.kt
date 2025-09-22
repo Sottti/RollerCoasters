@@ -10,6 +10,8 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedCo
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.shapes.ShapesLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.typography.TypographyLocalProvider
 
 @Composable
 public fun RollerCoastersTheme(
@@ -32,9 +34,13 @@ public fun RollerCoastersTheme(
     )
 
     DimensionsLocalProvider {
-        BaseTheme(
-            colors = colors,
-            content = content,
-        )
+        ShapesLocalProvider {
+            TypographyLocalProvider {
+                RollerCoastersBaseTheme(
+                    colors = colors,
+                    content = content,
+                )
+            }
+        }
     }
 }

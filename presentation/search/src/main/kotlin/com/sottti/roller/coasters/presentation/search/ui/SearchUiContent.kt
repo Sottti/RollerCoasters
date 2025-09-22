@@ -83,8 +83,8 @@ private fun SearchResults(
 
             is SearchResults.NotEmpty -> LazyColumn(
                 state = listState,
-                contentPadding = padding + PaddingValues(dimensions.padding.medium),
-                verticalArrangement = Arrangement.spacedBy(dimensions.padding.medium),
+                contentPadding = padding + PaddingValues(dimensions.spacing.medium),
+                verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
                 modifier = Modifier
                     .fillMaxSize()
                     .nestedScroll(connection = scrollBehavior.nestedScrollConnection)

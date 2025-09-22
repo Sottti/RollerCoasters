@@ -27,6 +27,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.icons))
     implementation(project(module.presentation.designSystem.progressIndicators))
+    implementation(project(module.presentation.designSystem.shapes))
     implementation(project(module.presentation.designSystem.switch))
     implementation(project(module.presentation.designSystem.text))
     implementation(project(module.presentation.designSystem.themes))

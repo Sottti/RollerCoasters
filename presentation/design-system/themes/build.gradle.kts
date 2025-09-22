@@ -23,5 +23,6 @@ dependencies {
     implementation(project(module.di))
     implementation(project(module.domain.settings))
     implementation(project(module.presentation.designSystem.dimensions))
+    implementation(project(module.presentation.designSystem.shapes))
     implementation(project(module.presentation.designSystem.typography))
 }

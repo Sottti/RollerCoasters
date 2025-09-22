@@ -41,9 +41,9 @@ private fun strokeWidth(
 @Composable
 private fun progressIndicatorSize(size: ProgressIndicatorSize): Dp =
     when (size) {
-        ProgressIndicatorSize.Small -> dimensions.components.progressIndicator.small
-        ProgressIndicatorSize.Medium -> dimensions.components.progressIndicator.medium
-        ProgressIndicatorSize.Large -> dimensions.components.progressIndicator.large
+        ProgressIndicatorSize.Small -> dimensions.component.progressIndicator.small
+        ProgressIndicatorSize.Medium -> dimensions.component.progressIndicator.medium
+        ProgressIndicatorSize.Large -> dimensions.component.progressIndicator.large
     }
 
 @Composable

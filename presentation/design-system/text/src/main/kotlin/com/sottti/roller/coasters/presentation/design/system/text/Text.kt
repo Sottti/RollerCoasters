@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.design.system.text
 
 import androidx.annotation.StringRes
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
@@ -10,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import com.sottti.roller.coasters.presentation.design.system.typography.typography
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import androidx.compose.material3.Text as MaterialText
 
@@ -26,7 +26,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.displayLarge,
+                textStyle = typography.displayLarge,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign,
@@ -57,7 +57,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.displayMedium,
+                textStyle = typography.displayMedium,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -88,7 +88,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.displaySmall,
+                textStyle = typography.displaySmall,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -121,7 +121,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.headlineLarge,
+                textStyle = typography.headlineLarge,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -152,7 +152,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.headlineMedium,
+                textStyle = typography.headlineMedium,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -183,7 +183,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.headlineSmall,
+                textStyle = typography.headlineSmall,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -216,7 +216,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.titleLarge,
+                textStyle = typography.titleLarge,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -247,7 +247,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.titleMedium,
+                textStyle = typography.titleMedium,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -278,7 +278,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.titleSmall,
+                textStyle = typography.titleSmall,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -311,7 +311,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.bodyLarge,
+                textStyle = typography.bodyLarge,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -342,7 +342,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.bodyMedium,
+                textStyle = typography.bodyMedium,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -358,7 +358,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.bodyMedium,
+                textStyle = typography.bodyMedium,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -390,7 +390,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.bodySmall,
+                textStyle = typography.bodySmall,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -423,7 +423,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.labelLarge,
+                textStyle = typography.labelLarge,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -454,7 +454,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.labelMedium,
+                textStyle = typography.labelMedium,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign
@@ -485,7 +485,7 @@ public object Text {
         ) {
             ThemedText(
                 text = text,
-                textStyle = MaterialTheme.typography.labelSmall,
+                textStyle = typography.labelSmall,
                 textColor = textColor,
                 modifier = modifier,
                 textAlign = textAlign

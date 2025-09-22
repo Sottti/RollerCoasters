@@ -5,10 +5,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
-import com.sottti.roller.coasters.presentation.design.system.typography.typography
 
 @Composable
-internal fun BaseTheme(
+internal fun RollerCoastersBaseTheme(
     colors: ColorScheme,
     content: @Composable () -> Unit,
 ) {
@@ -16,8 +15,6 @@ internal fun BaseTheme(
         ColorsLocalProvider(colors = colors) {
             MaterialTheme(
                 colorScheme = colors,
-                shapes = MaterialTheme.shapes,
-                typography = typography,
                 content = content,
             )
         }
