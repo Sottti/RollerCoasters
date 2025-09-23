@@ -125,7 +125,6 @@ internal class ExploreViewModel @Inject constructor(
             ShowTypeFilters -> _state.expandTypePrimaryFilter()
             HideTypeFilters -> _state.collapseTypePrimaryFilter()
         }
-
     }
 
     private fun processSecondaryFilterAction(

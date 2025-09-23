@@ -17,27 +17,25 @@ import java.net.UnknownHostException
 
 public suspend fun <T> safeApiCall(
     apiCall: suspend () -> T,
-): Result<T, ExceptionApiModel> =
-    try {
-        Ok(apiCall())
-    } catch (exception: UnknownHostException) {
-        Err(NoInternet(exception.message ?: NO_INTERNET_ERROR_MESSAGE))
-    } catch (exception: SocketTimeoutException) {
-        Err(Timeout(exception.message ?: TIMEOUT_ERROR_MESSAGE))
-    } catch (exception: ClientRequestException) { // 4xx errors
-        Err(
-            ClientError(
-                message = exception.message,
-                code = exception.response.status.value,
-                errorBody = exception.response.bodyAsText(),
-            ),
-        )
-    } catch (exception: ServerResponseException) { // 5xx errors
-        Err(ServerError(message = exception.message, code = exception.response.status.value))
-    } catch (exception: Exception) {
-        Err(Unknown(exception.message ?: UNKNOWN_ERROR_MESSAGE))
-    }
-
+): Result<T, ExceptionApiModel> = try {
+    Ok(apiCall())
+} catch (exception: UnknownHostException) {
+    Err(NoInternet(exception.message ?: NO_INTERNET_ERROR_MESSAGE))
+} catch (exception: SocketTimeoutException) {
+    Err(Timeout(exception.message ?: TIMEOUT_ERROR_MESSAGE))
+} catch (exception: ClientRequestException) { // 4xx errors
+    Err(
+        ClientError(
+            message = exception.message,
+            code = exception.response.status.value,
+            errorBody = exception.response.bodyAsText(),
+        ),
+    )
+} catch (exception: ServerResponseException) { // 5xx errors
+    Err(ServerError(message = exception.message, code = exception.response.status.value))
+} catch (exception: Exception) {
+    Err(Unknown(exception.message ?: UNKNOWN_ERROR_MESSAGE))
+}
 
 internal const val NO_INTERNET_ERROR_MESSAGE = "No Internet"
 internal const val TIMEOUT_ERROR_MESSAGE = "Timeout"
