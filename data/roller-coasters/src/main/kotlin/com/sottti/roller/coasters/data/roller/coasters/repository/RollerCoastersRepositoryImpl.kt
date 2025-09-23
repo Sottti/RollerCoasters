@@ -53,7 +53,6 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
             }
         ).flow
 
-
     override fun observeRollerCoaster(
         id: RollerCoasterId,
         measurementSystem: ResolvedMeasurementSystem,
