@@ -35,8 +35,8 @@ internal object RollerCoastersModule {
     @Provides
     @Singleton
     fun provideSyncScheduler(
-        workManager: WorkManager,
-    ): RollerCoasterSyncScheduler = RollerCoasterSyncScheduler(workManager = workManager)
+        @ApplicationContext context: Context,
+    ): RollerCoasterSyncScheduler = RollerCoasterSyncScheduler(context = context)
 
     @Provides
     @Singleton
