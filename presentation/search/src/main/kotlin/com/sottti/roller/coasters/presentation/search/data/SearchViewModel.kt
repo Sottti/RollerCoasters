@@ -3,13 +3,11 @@ package com.sottti.roller.coasters.presentation.search.data
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.michaelbull.result.getOrElse
-import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.SearchRollerCoasters
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchAction.QueryChanged
 import com.sottti.roller.coasters.presentation.search.model.SearchState
-import com.sottti.roller.coasters.presentation.search.model.toState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -57,7 +55,7 @@ internal class SearchViewModel @Inject constructor(
                         _state.loading()
                         val searchResults =
                             searchRollerCoasters(SearchQuery(query)).getOrElse { emptyList() }
-                        _state.notLoading().updateResults(searchResults.map(RollerCoaster::toState))
+                        _state.notLoading().updateResults(searchResults)
                     }
                 }
             }.launchIn(viewModelScope)
