@@ -2,7 +2,9 @@ package com.sottti.roller.coasters.presentation.search.model
 
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 
-internal fun RollerCoaster.toState(): SearchResultState =
+internal fun List<RollerCoaster>.toState() = map { it.toState() }
+
+private fun RollerCoaster.toState(): SearchResultState =
     SearchResultState(
         id = id.value,
         imageUrl = pictures.main?.url,

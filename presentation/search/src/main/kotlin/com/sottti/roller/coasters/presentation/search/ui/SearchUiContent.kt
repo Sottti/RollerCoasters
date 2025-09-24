@@ -22,7 +22,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.empty.EmptyUi
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
-import com.sottti.roller.coasters.presentation.search.model.SearchResults
+import com.sottti.roller.coasters.presentation.search.model.SearchResult
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.utils.override
 import com.sottti.roller.coasters.presentation.utils.plus
@@ -54,7 +54,7 @@ internal fun SearchUiContent(
             onNavigateToRollerCoaster = onNavigateToRollerCoaster,
             padding = innerPadding.override(bottom = outerPadding.calculateBottomPadding()),
             scrollBehavior = scrollBehavior,
-            state = state.searchResults,
+            state = state.searchResult,
         )
     }
 }
@@ -66,14 +66,14 @@ private fun SearchResults(
     onNavigateToRollerCoaster: (Int) -> Unit,
     padding: PaddingValues,
     scrollBehavior: TopAppBarScrollBehavior,
-    state: SearchResults,
+    state: SearchResult,
 ) {
     AnimatedContent(
         targetState = state,
         transitionSpec = { fadeIn() togetherWith fadeOut() }
     ) { targetState ->
         when (targetState) {
-            is SearchResults.Empty -> EmptyUi(
+            is SearchResult.Empty -> EmptyUi(
                 primaryText = targetState.primaryText,
                 secondaryText = targetState.secondaryText,
                 modifier = Modifier
@@ -81,7 +81,7 @@ private fun SearchResults(
                     .fillMaxSize()
             )
 
-            is SearchResults.NotEmpty -> LazyColumn(
+            is SearchResult.NotEmpty -> LazyColumn(
                 state = listState,
                 contentPadding = padding + PaddingValues(dimensions.spacing.medium),
                 verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
