@@ -40,9 +40,10 @@ import java.util.Locale
 internal fun RollerCoasterDetailsState.updateRollerCoaster(
     appLanguage: AppLanguage,
     dateFormatter: DateFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
+    isFavourite: Boolean,
     rollerCoaster: RollerCoaster,
     systemLocale: Locale,
-    displayUnitFormatter: DisplayUnitFormatter,
 ): RollerCoasterDetailsState {
     val formatContext = FormatContext(
         appLanguage = appLanguage,
@@ -50,7 +51,13 @@ internal fun RollerCoasterDetailsState.updateRollerCoaster(
         displayUnitFormatter = displayUnitFormatter,
     )
     return copy(
-        topBar = topBar.copy(title = rollerCoaster.name.current.value),
+        topBar = topBar.copy(
+            title = rollerCoaster.name.current.value,
+            favouriteIcon = when (isFavourite) {
+                true -> Loaded(iconState = Icons.Star.filled, isFavourite = true)
+                false -> Loaded(iconState = Icons.Star.outlined, isFavourite = false)
+            }
+        ),
         content = RollerCoasterDetailsContentState.Loaded(
             rollerCoaster = rollerCoaster.toRollerCoasterDetails(
                 dateFormatter = dateFormatter,
@@ -59,17 +66,6 @@ internal fun RollerCoasterDetailsState.updateRollerCoaster(
         ),
     )
 }
-
-internal fun RollerCoasterDetailsState.updateIsFavouriteRollerCoaster(
-    favourite: Boolean,
-): RollerCoasterDetailsState = copy(
-    topBar = topBar.copy(
-        favouriteIcon = when (favourite) {
-            true -> Loaded(iconState = Icons.Star.filled, isFavourite = true)
-            false -> Loaded(iconState = Icons.Star.outlined, isFavourite = false)
-        }
-    ),
-)
 
 private fun RollerCoaster.toRollerCoasterDetails(
     dateFormatter: DateFormatter,

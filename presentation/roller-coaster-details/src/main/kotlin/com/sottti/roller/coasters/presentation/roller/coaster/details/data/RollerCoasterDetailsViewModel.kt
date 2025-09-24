@@ -17,7 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.runningFold
+import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -45,19 +45,19 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
                 previous
                     .updateRollerCoaster(
                         appLanguage = appLang,
+                        dateFormatter = dateFormatter,
+                        displayUnitFormatter = displayUnitFormatter,
+                        isFavourite = isFavourite,
                         rollerCoaster = coaster,
                         systemLocale = systemLocale,
-                        displayUnitFormatter = displayUnitFormatter,
-                        dateFormatter = dateFormatter,
                     )
-                    .updateIsFavouriteRollerCoaster(isFavourite)
             }
         }
-            .runningFold(initialState()) { prev, reduce -> reduce(prev) }
+            .scan(initialState()) { previous, reduce -> reduce(previous) }
             .stateIn(
                 scope = viewModelScope,
                 started = WhileSubscribed(5_000),
-                initialValue = initialState()
+                initialValue = initialState(),
             )
 
     internal val onAction: (RollerCoasterDetailsAction) -> Unit = { action ->
