@@ -23,8 +23,15 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
+
+private typealias Emission = Pair<Boolean, List<RollerCoaster>?>
+
+private fun loading(): Emission = true to null
+private fun idle(): Emission = false to null
+private fun data(items: List<RollerCoaster>): Emission = false to items
 
 @HiltViewModel
 internal class SearchViewModel @Inject constructor(
@@ -39,40 +46,42 @@ internal class SearchViewModel @Inject constructor(
     private val _state = MutableStateFlow(initialState)
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    private val searchResultsFlow: Flow<Pair<Boolean, List<RollerCoaster>?>> =
+    private val searchResultsFlow: Flow<Emission> =
         _state
             .map { it.searchBar.query.orEmpty().trim() }
             .distinctUntilChanged()
             .debounce(DEBOUNCE_MS)
             .flatMapLatest { query ->
-                when {
-                    query.isBlank() -> flowOf(false to (null as List<RollerCoaster>?))
-                    else -> {
-                        flow {
-                            emit(true to (null as List<RollerCoaster>?))
-                            val items =
-                                searchRollerCoasters(SearchQuery(query)).getOrElse { emptyList() }
-                            emit(false to items)
-                        }
-                    }
+                if (query.isBlank()) flowOf(idle())
+                else flow {
+                    emit(loading())
+                    val items = searchRollerCoasters(SearchQuery(query)).getOrElse { emptyList() }
+                    emit(data(items))
                 }
             }
+            .scan(loading()) { prev, next ->
+                if (next.first) next.copy(second = prev.second) else next
+            }
 
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val state: StateFlow<SearchState> = combine(
-        flow = _state,
-        flow2 = searchResultsFlow,
-    ) { state, (loading, results) ->
-        when {
-            loading -> state.loading()
-            results == null -> state.notLoading().copy(searchResult = searchResultsEmpty())
-            else -> state.notLoading().updateResults(results)
-        }
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(stopTimeoutMillis = STOP_TIMEOUT_MS),
-        initialValue = initialState
-    )
+    val state: StateFlow<SearchState> =
+        combine(
+            flow = _state,
+            flow2 = searchResultsFlow,
+        ) { state, (loading, results) ->
+            when {
+                loading -> {
+                    val withLoading = state.loading()
+                    if (results != null) withLoading.updateResults(results) else withLoading
+                }
+
+                results == null -> state.notLoading().copy(searchResult = searchResultsEmpty())
+                else -> state.notLoading().updateResults(results)
+            }
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = STOP_TIMEOUT_MS),
+            initialValue = initialState
+        )
 
     internal val onAction: (SearchAction) -> Unit = ::processAction
 
