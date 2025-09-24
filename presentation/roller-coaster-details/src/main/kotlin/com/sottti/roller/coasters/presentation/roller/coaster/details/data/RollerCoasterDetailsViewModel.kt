@@ -17,6 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -54,6 +55,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
             }
         }
             .scan(initialState()) { previous, reduce -> reduce(previous) }
+            .distinctUntilChanged()
             .stateIn(
                 scope = viewModelScope,
                 started = WhileSubscribed(5_000),
