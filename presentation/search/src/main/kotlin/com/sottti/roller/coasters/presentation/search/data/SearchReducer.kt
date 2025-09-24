@@ -22,19 +22,15 @@ internal fun MutableStateFlow<SearchState>.updateClearIcon(
         }
     }
 
-internal fun MutableStateFlow<SearchState>.loading(): MutableStateFlow<SearchState> =
-    apply { update { state -> state.copy(searchBar = state.searchBar.copy(loading = true)) } }
+internal fun SearchState.loading(): SearchState =
+    copy(searchBar = searchBar.copy(loading = true))
 
-internal fun MutableStateFlow<SearchState>.notLoading(): MutableStateFlow<SearchState> =
-    apply { update { state -> state.copy(searchBar = state.searchBar.copy(loading = false)) } }
+internal fun SearchState.notLoading(): SearchState =
+    copy(searchBar = searchBar.copy(loading = false))
 
-internal fun MutableStateFlow<SearchState>.onBlankQuery(): MutableStateFlow<SearchState> =
-    apply { update { state -> state.copy(searchResult = searchResultsEmpty()) } }
-
-internal fun MutableStateFlow<SearchState>.updateResults(
+internal fun SearchState.updateResults(
     rollerCoasters: List<RollerCoaster>,
-): MutableStateFlow<SearchState> =
-    apply { update { state -> state.copy(searchResult = rollerCoasters.toSearchResult()) } }
+): SearchState = copy(searchResult = rollerCoasters.toSearchResult())
 
 internal fun List<RollerCoaster>.toSearchResult(): SearchResult =
     when {
