@@ -6,7 +6,7 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.TopBarState
 
-internal fun initialState(): RollerCoasterDetailsState =
+internal val initialState: RollerCoasterDetailsState =
     RollerCoasterDetailsState(
         content = RollerCoasterDetailsContentState.Loading,
         topBar = TopBarState(

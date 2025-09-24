@@ -2,10 +2,12 @@ package com.sottti.roller.coasters.presentation.roller.coaster.details.data
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveIsFavouriteRollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveRollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ToggleFavouriteRollerCoaster
+import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.language.ObserveAppLanguage
 import com.sottti.roller.coasters.domain.settings.usecase.locale.ObserveSystemLocale
 import com.sottti.roller.coasters.presentation.format.DateFormatter
@@ -18,9 +20,11 @@ import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,29 +42,39 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
     internal val state: StateFlow<RollerCoasterDetailsState> =
         combine(
             flow = observeAppLanguage(),
-            flow2 = observeSystemLocale(),
-            flow3 = observeRollerCoaster(rollerCoasterId),
-            flow4 = observeIsFavouriteRollerCoaster(rollerCoasterId),
-        ) { appLang, systemLocale, coaster, isFavourite ->
-            { previous: RollerCoasterDetailsState ->
-                previous
-                    .updateRollerCoaster(
-                        appLanguage = appLang,
-                        dateFormatter = dateFormatter,
-                        displayUnitFormatter = displayUnitFormatter,
-                        isFavourite = isFavourite,
-                        rollerCoaster = coaster,
-                        systemLocale = systemLocale,
-                    )
-            }
+            flow2 = observeRollerCoaster(rollerCoasterId),
+            flow3 = observeIsFavouriteRollerCoaster(rollerCoasterId),
+            flow4 = observeSystemLocale(),
+        ) { appLang, coaster, isFavourite, systemLocale ->
+            reducer(appLang, coaster, isFavourite, systemLocale)
         }
-            .scan(initialState()) { previous, reduce -> reduce(previous) }
+            .scan(initialState) { previous, reduce -> reduce(previous) }
+            .drop(1)
             .distinctUntilChanged()
             .stateIn(
                 scope = viewModelScope,
                 started = WhileSubscribed(5_000),
-                initialValue = initialState(),
+                initialValue = initialState,
             )
+
+    private val reducer: (
+        appLang: AppLanguage,
+        coaster: RollerCoaster,
+        isFavourite: Boolean,
+        systemLocale: Locale,
+    ) -> (RollerCoasterDetailsState) -> RollerCoasterDetailsState =
+        { appLang, coaster, isFavourite, systemLocale ->
+            { previous: RollerCoasterDetailsState ->
+                previous.updateRollerCoaster(
+                    appLanguage = appLang,
+                    dateFormatter = dateFormatter,
+                    displayUnitFormatter = displayUnitFormatter,
+                    isFavourite = isFavourite,
+                    rollerCoaster = coaster,
+                    systemLocale = systemLocale,
+                )
+            }
+        }
 
     internal val onAction: (RollerCoasterDetailsAction) -> Unit = { action ->
         when (action) {
