@@ -6,7 +6,7 @@ import com.sottti.roller.coasters.presentation.search.model.SearchState
 
 internal val initialState = SearchState(
     searchBar = searchBarInitialState(),
-    searchResult = searchResultsEmpty(),
+    searchResult = searchResultEmpty(),
 )
 
 private fun searchBarInitialState(): SearchBarState =
