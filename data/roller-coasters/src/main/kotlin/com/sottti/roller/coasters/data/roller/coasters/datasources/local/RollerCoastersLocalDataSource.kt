@@ -18,7 +18,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 internal class RollerCoastersLocalDataSource @Inject constructor(
@@ -96,7 +96,7 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         Pager(
             config = pagerConfig,
             pagingSourceFactory = { dao.observePagedFavouriteRollerCoasters() }
-        ).flow.map { pagingData ->
+        ).flow.mapLatest { pagingData ->
             pagingData.map { roomModel ->
                 roomModel.toDomain(
                     measurementSystem = measurementSystem,
