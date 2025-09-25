@@ -53,7 +53,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
             .distinctUntilChanged()
             .stateIn(
                 scope = viewModelScope,
-                started = WhileSubscribed(5_000),
+                started = WhileSubscribed(stopTimeoutMillis = 5_000),
                 initialValue = initialState,
             )
 
