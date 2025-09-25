@@ -33,7 +33,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaste
 import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.string.provider.StringProvider
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import java.util.Locale
 
 internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
@@ -42,7 +42,7 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     stringProvider: StringProvider,
     systemLocale: Locale,
     displayUnitFormatter: DisplayUnitFormatter,
-): Flow<PagingData<ExploreRollerCoaster>> = map { pagingData ->
+): Flow<PagingData<ExploreRollerCoaster>> = mapLatest { pagingData ->
     var currentRank = 1
     var previousStat: String? = null
     var itemsWithSameStat = 0
