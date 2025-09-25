@@ -52,9 +52,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -73,11 +71,11 @@ internal class ExploreViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val rollerCoasters: Flow<PagingData<ExploreRollerCoaster>> =
         combine(
-            flow = _typeFilter,
-            flow2 = _sortByFilter,
+            flow = _sortByFilter,
+            flow2 = _typeFilter,
             flow3 = observeAppLanguage(),
             flow4 = observeSystemLocale()
-        ) { typeFilter, sortByFilter, appLanguage, systemLocale ->
+        ) { sortByFilter, typeFilter, appLanguage, systemLocale ->
             observeRollerCoasters(
                 sortByFilter = sortByFilter,
                 typeFilter = typeFilter,
@@ -88,7 +86,8 @@ internal class ExploreViewModel @Inject constructor(
                 systemLocale = systemLocale,
                 displayUnitFormatter = displayUnitFormatter,
             )
-        }.flatMapLatest { it }
+        }.onEach { _events.tryEmit(ExploreEvent.ScrollToTop) }
+            .flatMapLatest { it }
             .cachedIn(viewModelScope)
 
     private val _state = MutableStateFlow(initialState())
@@ -98,15 +97,6 @@ internal class ExploreViewModel @Inject constructor(
     val events = _events.asSharedFlow()
 
     internal val onAction: (ExploreAction) -> Unit = { action -> processAction(action) }
-
-    init {
-        combine(
-            _sortByFilter.distinctUntilChanged { old, new -> old == new },
-            _typeFilter.distinctUntilChanged { old, new -> old == new },
-        ) { sortBy, type -> sortBy to type }
-            .onEach { _events.emit(ExploreEvent.ScrollToTop) }
-            .launchIn(viewModelScope)
-    }
 
     private fun processAction(action: ExploreAction) {
         when (action) {
@@ -125,47 +115,66 @@ internal class ExploreViewModel @Inject constructor(
             ShowTypeFilters -> _state.expandTypePrimaryFilter()
             HideTypeFilters -> _state.collapseTypePrimaryFilter()
         }
-
     }
 
     private fun processSecondaryFilterAction(
         action: SecondaryFilterAction,
     ) {
-        updateSecondaryFilterQuery(action)
-        updateSecondaryFilterUi(action)
-    }
-
-    private fun updateSecondaryFilterUi(
-        action: SecondaryFilterAction,
-    ) {
         when (action) {
-            SelectSortByAlphabetical -> _state.select<AlphabeticalFilter>()
-            SelectSortByDrop -> _state.select<DropFilter>()
-            SelectSortByGForce -> _state.select<GForceFilter>()
-            SelectSortByHeight -> _state.select<HeightFilter>()
-            SelectSortByInversions -> _state.select<InversionsFilter>()
-            SelectSortByLength -> _state.select<LengthFilter>()
-            SelectSortByMaxVertical -> _state.select<MaxVerticalFilter>()
-            SelectSortBySpeed -> _state.select<SpeedFilter>()
-            SelectTypeAll -> _state.select<AllFilter>()
-            SelectTypeSteel -> _state.select<SteelFilter>()
-            SelectTypeWood -> _state.select<WoodFilter>()
-        }
-    }
+            SelectSortByAlphabetical -> {
+                _state.select<AlphabeticalFilter>()
+                _sortByFilter.value = SortByFilter.Alphabetical
+            }
 
-    private fun updateSecondaryFilterQuery(action: SecondaryFilterAction) {
-        when (action) {
-            SelectSortByAlphabetical -> _sortByFilter.value = SortByFilter.Alphabetical
-            SelectSortByDrop -> _sortByFilter.value = SortByFilter.Drop
-            SelectSortByGForce -> _sortByFilter.value = SortByFilter.GForce
-            SelectSortByHeight -> _sortByFilter.value = SortByFilter.Height
-            SelectSortByInversions -> _sortByFilter.value = SortByFilter.Inversions
-            SelectSortByLength -> _sortByFilter.value = SortByFilter.Length
-            SelectSortByMaxVertical -> _sortByFilter.value = SortByFilter.MaxVertical
-            SelectSortBySpeed -> _sortByFilter.value = SortByFilter.Speed
-            SelectTypeAll -> _typeFilter.value = TypeFilter.All
-            SelectTypeSteel -> _typeFilter.value = TypeFilter.Steel
-            SelectTypeWood -> _typeFilter.value = TypeFilter.Wood
+            SelectSortByDrop -> {
+                _state.select<DropFilter>()
+                _sortByFilter.value = SortByFilter.Drop
+            }
+
+            SelectSortByGForce -> {
+                _state.select<GForceFilter>()
+                _sortByFilter.value = SortByFilter.GForce
+            }
+
+            SelectSortByHeight -> {
+                _state.select<HeightFilter>()
+                _sortByFilter.value = SortByFilter.Height
+            }
+
+            SelectSortByInversions -> {
+                _state.select<InversionsFilter>()
+                _sortByFilter.value = SortByFilter.Inversions
+            }
+
+            SelectSortByLength -> {
+                _state.select<LengthFilter>()
+                _sortByFilter.value = SortByFilter.Length
+            }
+
+            SelectSortByMaxVertical -> {
+                _state.select<MaxVerticalFilter>()
+                _sortByFilter.value = SortByFilter.MaxVertical
+            }
+
+            SelectSortBySpeed -> {
+                _state.select<SpeedFilter>()
+                _sortByFilter.value = SortByFilter.Speed
+            }
+
+            SelectTypeAll -> {
+                _state.select<AllFilter>()
+                _typeFilter.value = TypeFilter.All
+            }
+
+            SelectTypeSteel -> {
+                _state.select<SteelFilter>()
+                _typeFilter.value = TypeFilter.Steel
+            }
+
+            SelectTypeWood -> {
+                _state.select<WoodFilter>()
+                _typeFilter.value = TypeFilter.Wood
+            }
         }
     }
 }

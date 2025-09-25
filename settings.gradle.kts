@@ -48,7 +48,7 @@ include(
     ":presentation:design-system:playground",
     ":presentation:design-system:progress-indicators",
     ":presentation:design-system:roller-coaster-card",
-    ":presentation:design-system:search-box",
+    ":presentation:design-system:search-bar",
     ":presentation:design-system:shapes",
     ":presentation:design-system:switch",
     ":presentation:design-system:text",

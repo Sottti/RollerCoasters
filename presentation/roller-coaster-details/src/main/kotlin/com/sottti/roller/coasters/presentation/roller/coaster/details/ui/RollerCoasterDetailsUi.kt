@@ -3,7 +3,6 @@ package com.sottti.roller.coasters.presentation.roller.coaster.details.ui
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -12,7 +11,6 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersTallPreview
 import com.sottti.roller.coasters.presentation.roller.coaster.details.data.RollerCoasterDetailsViewModel
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
-import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.LoadUi
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction.ToggleFavourite
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsPreviewState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
@@ -34,9 +32,7 @@ private fun RollerCoasterDetailsUi(
     viewModel: RollerCoasterDetailsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    LaunchedEffect(Unit) {
-        viewModel.onAction(LoadUi)
-    }
+
     RollerCoasterDetailsUi(
         onAction = viewModel.onAction,
         onBackNavigation = onBackNavigation,

@@ -14,7 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
-import com.sottti.roller.coasters.presentation.design.system.search.box.SearchBox
+import com.sottti.roller.coasters.presentation.design.system.search.bar.SearchBar
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
@@ -36,9 +36,9 @@ internal fun SearchTopBar(
     )
     Column(modifier = Modifier.background(backgroundColor)) {
         MainTopBar(onNavigateToSettings = onNavigateToSettings)
-        SearchBox(
+        SearchBar(
             hint = state.searchBar.hint,
-            loading = state.loading,
+            loading = state.searchBar.loading,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = dimensions.spacing.medium)
