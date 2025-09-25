@@ -12,7 +12,7 @@ android {
 dependencies {
     api(libs.result)
     api(libs.ktor.client.core)
-    api(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.hilt)
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)

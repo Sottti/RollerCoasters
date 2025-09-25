@@ -15,7 +15,7 @@ android {
 
 dependencies {
     api(libs.compose.window.size)
-    api(project(module.presentation.designSystem.colors))
+    implementation(project(module.presentation.designSystem.colors))
     implementation(libs.compose.material)
     implementation(libs.material)
     implementation(libs.splashscreen)
