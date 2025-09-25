@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +25,7 @@ internal class FavouritesViewModel @Inject constructor(
 ) : ViewModel() {
     private val _rollerCoastersFlow: Flow<PagingData<FavouritesRollerCoaster>> =
         observeFavouriteRollerCoasters()
-            .map { pagingData -> pagingData.map { rollerCoaster -> rollerCoaster.toUiModel() } }
+            .mapLatest { pagingData -> pagingData.map { rollerCoaster -> rollerCoaster.toUiModel() } }
             .let { flow -> if (testScope == null) flow.cachedIn(viewModelScope) else flow }
 
     private val _state = MutableStateFlow(FavouritesState(_rollerCoastersFlow))

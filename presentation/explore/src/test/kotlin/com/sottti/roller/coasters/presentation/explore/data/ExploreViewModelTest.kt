@@ -29,7 +29,9 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
@@ -171,11 +173,15 @@ internal class ExploreViewModelTest {
             observeSystemLocale = observeSystemLocale,
         )
 
+        val job = launch { viewModel.rollerCoasters.collect() }
+
         viewModel.events.test {
             viewModel.onAction(SecondaryFilterAction.SelectTypeSteel)
             assertThat(awaitItem()).isEqualTo(ExploreEvent.ScrollToTop)
             cancelAndIgnoreRemainingEvents()
         }
+
+        job.cancel()
     }
 
     @Test

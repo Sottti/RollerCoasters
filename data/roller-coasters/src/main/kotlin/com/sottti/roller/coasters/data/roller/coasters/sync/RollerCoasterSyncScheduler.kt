@@ -11,24 +11,8 @@ internal class RollerCoasterSyncScheduler @Inject constructor(
 ) {
     fun schedule() {
         with(receiver = WorkManager.getInstance(context)) {
-            scheduleUniqueWork()
-            schedulePeriodicWork()
+            RollerCoastersSyncUniqueWork.schedule(this)
+            RollerCoastersSyncPeriodicWork.schedule(this)
         }
     }
-}
-
-private fun WorkManager.schedulePeriodicWork() {
-    enqueueUniquePeriodicWork(
-        existingPeriodicWorkPolicy = RollerCoastersSyncPeriodicWork.existingWorkPolicy,
-        request = RollerCoastersSyncPeriodicWork.request,
-        uniqueWorkName = RollerCoastersSyncPeriodicWork.NAME,
-    )
-}
-
-private fun WorkManager.scheduleUniqueWork() {
-    enqueueUniqueWork(
-        existingWorkPolicy = RollerCoastersSyncUniqueWork.existingWorkPolicy,
-        request = RollerCoastersSyncUniqueWork.request,
-        uniqueWorkName = RollerCoastersSyncUniqueWork.NAME,
-    )
 }

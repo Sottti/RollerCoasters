@@ -94,7 +94,6 @@ internal class SettingsViewModel @Inject constructor(
     @get:VisibleForTesting private val initialState: SettingsState? = null,
 ) : ViewModel() {
 
-
     private val _state = MutableStateFlow(
         initialState ?: initialState(features.systemDynamicColorAvailable()),
     )

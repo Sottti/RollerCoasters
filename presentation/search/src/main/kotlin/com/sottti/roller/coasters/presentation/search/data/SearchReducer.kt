@@ -1,9 +1,10 @@
 package com.sottti.roller.coasters.presentation.search.data
 
+import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.presentation.search.R
-import com.sottti.roller.coasters.presentation.search.model.SearchResultState
-import com.sottti.roller.coasters.presentation.search.model.SearchResults
+import com.sottti.roller.coasters.presentation.search.model.SearchResult
 import com.sottti.roller.coasters.presentation.search.model.SearchState
+import com.sottti.roller.coasters.presentation.search.model.toState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
@@ -14,22 +15,23 @@ internal fun MutableStateFlow<SearchState>.updateClearIcon(query: String?): Muta
     apply { update { it.copy(searchBar = it.searchBar.copy(showClearIcon = !query.isNullOrBlank())) } }
 
 internal fun MutableStateFlow<SearchState>.loading(): MutableStateFlow<SearchState> =
-    apply { update { it.copy(loading = true) } }
+    apply { update { it.copy(searchBar = it.searchBar.copy(loading = true)) } }
 
 internal fun MutableStateFlow<SearchState>.notLoading(): MutableStateFlow<SearchState> =
-    apply { update { it.copy(loading = false) } }
+    apply { update { it.copy(searchBar = it.searchBar.copy(loading = false)) } }
 
 internal fun MutableStateFlow<SearchState>.updateResults(
-    results: List<SearchResultState>,
+    results: List<RollerCoaster>,
 ): MutableStateFlow<SearchState> =
-    apply { update { it.copy(searchResults = results.toSearchResult()) } }
+    apply { update { it.copy(searchResult = results.toSearchResult()) } }
 
-private fun List<SearchResultState>.toSearchResult(): SearchResults =
+internal fun List<RollerCoaster>.toSearchResult(): SearchResult =
     when {
-        isEmpty() -> SearchResults.Empty(
-            primaryText = R.string.search_empty_primary_text,
-            secondaryText = R.string.search_empty_secondary_text,
-        )
-
-        else -> SearchResults.NotEmpty(rollerCoasters = this)
+        isEmpty() -> searchResultEmpty()
+        else -> SearchResult.NotEmpty(rollerCoasters = this.toState())
     }
+
+internal fun searchResultEmpty(): SearchResult.Empty = SearchResult.Empty(
+    primaryText = R.string.search_empty_primary_text,
+    secondaryText = R.string.search_empty_secondary_text,
+)

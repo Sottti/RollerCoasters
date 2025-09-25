@@ -35,10 +35,7 @@ import com.sottti.roller.coasters.presentation.explore.model.TypePrimaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.TypeSecondaryFilter
 import com.sottti.roller.coasters.presentation.explore.model.WoodFilter
 
-internal fun initialState(
-): ExploreState = ExploreState(
-    filters = filtersInitialState(),
-)
+internal fun initialState() = ExploreState(filters = filtersInitialState())
 
 internal fun filtersInitialState(): Filters =
     Filters(
@@ -52,7 +49,7 @@ private fun primaryFiltersInitialState(): List<PrimaryFilter> =
         typePrimaryFilterInitialState(),
     )
 
-internal fun sortByPrimaryFilterInitialState(): SortByPrimaryFilter =
+private fun sortByPrimaryFilterInitialState(): SortByPrimaryFilter =
     SortByPrimaryFilter(
         action = ShowSortFilters,
         expanded = false,
@@ -61,7 +58,7 @@ internal fun sortByPrimaryFilterInitialState(): SortByPrimaryFilter =
         selected = true,
     )
 
-internal fun typePrimaryFilterInitialState(): TypePrimaryFilter =
+private fun typePrimaryFilterInitialState(): TypePrimaryFilter =
     TypePrimaryFilter(
         action = ShowTypeFilters,
         expanded = false,
@@ -70,7 +67,7 @@ internal fun typePrimaryFilterInitialState(): TypePrimaryFilter =
         leadingIcon = Icons.FilterList.filled,
     )
 
-internal fun secondaryFiltersInitialState(): List<SecondaryFilter> =
+private fun secondaryFiltersInitialState(): List<SecondaryFilter> =
     sortBySecondaryFiltersInitialState() + typeSecondaryFiltersInitialState()
 
 private fun sortBySecondaryFiltersInitialState(): List<SortBySecondaryFilter> =
@@ -91,7 +88,6 @@ private fun typeSecondaryFiltersInitialState(): List<TypeSecondaryFilter> =
         steelFilter,
         woodFilter,
     )
-
 
 private val alphabetical: AlphabeticalFilter =
     AlphabeticalFilter(

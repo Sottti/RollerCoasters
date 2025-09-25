@@ -4,24 +4,24 @@ import androidx.annotation.StringRes
 import com.sottti.roller.coasters.domain.model.ImageUrl
 
 internal data class SearchState(
-    val loading: Boolean,
     val searchBar: SearchBarState,
-    val searchResults: SearchResults,
+    val searchResult: SearchResult,
 )
 
-internal sealed interface SearchResults {
+internal sealed interface SearchResult {
     data class Empty(
         @StringRes val primaryText: Int,
         @StringRes val secondaryText: Int,
-    ) : SearchResults
+    ) : SearchResult
 
     data class NotEmpty(
         val rollerCoasters: List<SearchResultState>,
-    ) : SearchResults
+    ) : SearchResult
 }
 
 internal data class SearchBarState(
     @StringRes val hint: Int,
+    val loading: Boolean,
     val query: String?,
     val showClearIcon: Boolean,
 )

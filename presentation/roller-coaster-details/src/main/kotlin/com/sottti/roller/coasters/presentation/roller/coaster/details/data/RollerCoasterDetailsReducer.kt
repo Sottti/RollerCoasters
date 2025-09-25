@@ -35,83 +35,64 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterLocationState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterRideState
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterStatusState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 import java.util.Locale
 
-internal fun MutableStateFlow<RollerCoasterDetailsState>.updateRollerCoaster(
+internal fun RollerCoasterDetailsState.updateRollerCoaster(
     appLanguage: AppLanguage,
     dateFormatter: DateFormatter,
+    displayUnitFormatter: DisplayUnitFormatter,
+    isFavourite: Boolean,
     rollerCoaster: RollerCoaster,
     systemLocale: Locale,
-    displayUnitFormatter: DisplayUnitFormatter,
-): MutableStateFlow<RollerCoasterDetailsState> = apply {
+): RollerCoasterDetailsState {
     val formatContext = FormatContext(
         appLanguage = appLanguage,
         systemLocale = systemLocale,
         displayUnitFormatter = displayUnitFormatter,
     )
-    update { currentState ->
-        currentState.copy(
-            topBar = currentState.topBar.copy(title = rollerCoaster.name.current.value),
-            content = RollerCoasterDetailsContentState.Loaded(
-                rollerCoaster = rollerCoaster.toRollerCoasterDetails(
-                    dateFormatter = dateFormatter,
-                    formatContext = formatContext,
-                ),
+    return copy(
+        topBar = topBar.copy(
+            title = rollerCoaster.name.current.value,
+            favouriteIcon = when (isFavourite) {
+                true -> Loaded(iconState = Icons.Star.filled, isFavourite = true)
+                false -> Loaded(iconState = Icons.Star.outlined, isFavourite = false)
+            }
+        ),
+        content = RollerCoasterDetailsContentState.Loaded(
+            rollerCoaster = rollerCoaster.toRollerCoasterDetails(
+                dateFormatter = dateFormatter,
+                formatContext = formatContext,
             ),
-        )
-    }
-}
-
-internal fun MutableStateFlow<RollerCoasterDetailsState>.updateIsFavouriteRollerCoaster(
-    favourite: Boolean,
-): MutableStateFlow<RollerCoasterDetailsState> = apply {
-    update { currentState ->
-        currentState.copy(
-            topBar = currentState.topBar.copy(
-                favouriteIcon = when (favourite) {
-                    true -> Loaded(iconState = Icons.Star.filled, isFavourite = true)
-                    false -> Loaded(iconState = Icons.Star.outlined, isFavourite = false)
-                }
-            ),
-        )
-    }
+        ),
+    )
 }
 
 private fun RollerCoaster.toRollerCoasterDetails(
     dateFormatter: DateFormatter,
     formatContext: FormatContext,
-): RollerCoasterDetailsRollerCoasterState =
-    RollerCoasterDetailsRollerCoasterState(
-        images = pictures.toImagesState(),
-        identity = toIdentityState(),
-        location = toLocationState(),
-        ride = specs.ride?.toTrackRideState(formatContext),
-        status = status.toStatusState(dateFormatter),
-    )
+): RollerCoasterDetailsRollerCoasterState = RollerCoasterDetailsRollerCoasterState(
+    images = pictures.toImagesState(),
+    identity = toIdentityState(),
+    location = toLocationState(),
+    ride = specs.ride?.toTrackRideState(formatContext),
+    status = status.toStatusState(dateFormatter),
+)
 
-private fun Pictures.toImagesState() =
-    buildList {
-        add(main)
-        addAll(other)
-    }.filterNotNull()
-        .map { RollerCoasterDetailsImageState("", it.url) }
+private fun Pictures.toImagesState() = buildList {
+    add(main)
+    addAll(other)
+}.filterNotNull().map { RollerCoasterDetailsImageState("", it.url) }
 
-private fun RollerCoaster.toIdentityState() =
-    RollerCoasterIdentityState(
-        header = R.string.identity_header,
-        name = RollerCoasterDetailsRow(
-            headline = R.string.identity_name,
-            trailing = name.current.value,
-        ),
-        formerNames = name.former?.value?.let { formerNames ->
-            RollerCoasterDetailsRow(
-                headline = R.string.identity_former_names,
-                trailing = formerNames,
-            )
-        }
-    )
+private fun RollerCoaster.toIdentityState() = RollerCoasterIdentityState(
+    header = R.string.identity_header, name = RollerCoasterDetailsRow(
+        headline = R.string.identity_name,
+        trailing = name.current.value,
+    ), formerNames = name.former?.value?.let { formerNames ->
+        RollerCoasterDetailsRow(
+            headline = R.string.identity_former_names,
+            trailing = formerNames,
+        )
+    })
 
 private fun Status.toStatusState(
     dateFormatter: DateFormatter,
@@ -143,88 +124,86 @@ private fun Status.toStatusState(
     },
 ).takeIf { containsData() }
 
-private fun RollerCoaster.toLocationState() =
-    RollerCoasterLocationState(
-        coordinates = location.coordinates?.let { coordinates ->
-            RollerCoasterLocationCoordinatesState(
-                longitude = coordinates.longitude.value,
-                latitude = coordinates.latitude.value,
-            )
-        },
-        city = RollerCoasterDetailsRow(
-            trailing = location.city.value,
-            headline = R.string.location_city,
-        ),
-        country = RollerCoasterDetailsRow(
-            trailing = location.country.value,
-            headline = R.string.location_country,
-        ),
-        header = R.string.location_header,
-        park = RollerCoasterDetailsRow(
-            trailing = park.name.value,
-            headline = R.string.location_park,
-        ),
-        mapMarkerTitle = name.current.value,
-        relocations = location.relocations?.value?.let { relocations ->
-            RollerCoasterDetailsRow(
-                trailing = relocations,
-                headline = R.string.location_relocations,
-            )
-        },
-    )
+private fun RollerCoaster.toLocationState() = RollerCoasterLocationState(
+    coordinates = location.coordinates?.let { coordinates ->
+        RollerCoasterLocationCoordinatesState(
+            longitude = coordinates.longitude.value,
+            latitude = coordinates.latitude.value,
+        )
+    },
+    city = RollerCoasterDetailsRow(
+        trailing = location.city.value,
+        headline = R.string.location_city,
+    ),
+    country = RollerCoasterDetailsRow(
+        trailing = location.country.value,
+        headline = R.string.location_country,
+    ),
+    header = R.string.location_header,
+    park = RollerCoasterDetailsRow(
+        trailing = park.name.value,
+        headline = R.string.location_park,
+    ),
+    mapMarkerTitle = name.current.value,
+    relocations = location.relocations?.value?.let { relocations ->
+        RollerCoasterDetailsRow(
+            trailing = relocations,
+            headline = R.string.location_relocations,
+        )
+    },
+)
 
-private fun Ride.toTrackRideState(formatContext: FormatContext) =
-    RollerCoasterRideState(
-        header = R.string.ride_header,
-        length = maxLength()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatLength(it),
-                headline = R.string.ride_length,
-            )
-        },
-        height = maxHeight()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatHeight(it),
-                headline = R.string.ride_height,
-            )
-        },
-        drop = maxDrop()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatDrop(it),
-                headline = R.string.ride_drop,
-            )
-        },
-        inversions = maxInversions()?.let {
-            RollerCoasterDetailsRow(
-                trailing = it.value.toString(),
-                headline = R.string.ride_inversions,
-            )
-        },
-        maxVertical = maxMaxVertical()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatMaxVertical(it),
-                headline = R.string.ride_max_vertical,
-            )
-        },
-        duration = maxDuration()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatDuration(it),
-                headline = R.string.ride_duration,
-            )
-        },
-        gForce = maxGForce()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatGForce(it),
-                headline = R.string.ride_g_force,
-            )
-        },
-        speed = maxSpeed()?.let {
-            RollerCoasterDetailsRow(
-                trailing = formatContext.formatSpeed(it),
-                headline = R.string.ride_speed,
-            )
-        },
-    )
+private fun Ride.toTrackRideState(formatContext: FormatContext) = RollerCoasterRideState(
+    header = R.string.ride_header,
+    length = maxLength()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatLength(it),
+            headline = R.string.ride_length,
+        )
+    },
+    height = maxHeight()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatHeight(it),
+            headline = R.string.ride_height,
+        )
+    },
+    drop = maxDrop()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatDrop(it),
+            headline = R.string.ride_drop,
+        )
+    },
+    inversions = maxInversions()?.let {
+        RollerCoasterDetailsRow(
+            trailing = it.value.toString(),
+            headline = R.string.ride_inversions,
+        )
+    },
+    maxVertical = maxMaxVertical()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatMaxVertical(it),
+            headline = R.string.ride_max_vertical,
+        )
+    },
+    duration = maxDuration()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatDuration(it),
+            headline = R.string.ride_duration,
+        )
+    },
+    gForce = maxGForce()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatGForce(it),
+            headline = R.string.ride_g_force,
+        )
+    },
+    speed = maxSpeed()?.let {
+        RollerCoasterDetailsRow(
+            trailing = formatContext.formatSpeed(it),
+            headline = R.string.ride_speed,
+        )
+    },
+)
 
 private data class FormatContext(
     val appLanguage: AppLanguage,
