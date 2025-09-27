@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.material)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.compose))
+    implementation(project(module.presentation.designSystem.colors))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.shapes))
     implementation(project(module.presentation.designSystem.text))
