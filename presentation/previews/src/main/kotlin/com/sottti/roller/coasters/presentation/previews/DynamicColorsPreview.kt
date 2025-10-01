@@ -8,9 +8,13 @@ import androidx.compose.ui.tooling.preview.Wallpapers.GREEN_DOMINATED_EXAMPLE
 import androidx.compose.ui.tooling.preview.Wallpapers.RED_DOMINATED_EXAMPLE
 import androidx.compose.ui.tooling.preview.Wallpapers.YELLOW_DOMINATED_EXAMPLE
 
-@Retention(AnnotationRetention.BINARY)
-@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
-@Preview(group = lightThemeGroup, device = device, name = "Red", wallpaper = RED_DOMINATED_EXAMPLE)
+
+@Preview(
+    group = lightThemeGroup,
+    device = device,
+    name = "Red",
+    wallpaper = RED_DOMINATED_EXAMPLE,
+)
 @Preview(
     group = lightThemeGroup,
     device = device,
@@ -58,4 +62,6 @@ import androidx.compose.ui.tooling.preview.Wallpapers.YELLOW_DOMINATED_EXAMPLE
     name = "Yellow",
     wallpaper = YELLOW_DOMINATED_EXAMPLE,
 )
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)
 public annotation class DynamicColorsPreview
