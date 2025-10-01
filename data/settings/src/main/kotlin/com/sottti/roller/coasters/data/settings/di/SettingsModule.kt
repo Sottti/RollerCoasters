@@ -12,6 +12,7 @@ import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
 import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,14 +23,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal object SettingsModule {
-
-    @Provides
-    @Singleton
-    fun provideRepository(
-        localDataSource: SettingsLocalDataSource,
-    ): SettingsRepository = SettingsRepositoryImpl(
-        localDataSource = localDataSource,
-    )
 
     @Provides
     @Singleton
@@ -56,4 +49,15 @@ internal object SettingsModule {
         systemColorContrastManager = systemColorContrastManager,
         themeManager = themeManager,
     )
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+internal interface SettingsBindingsModule {
+
+    @Binds
+    @Singleton
+    fun bindRepository(
+        impl: SettingsRepositoryImpl,
+    ): SettingsRepository
 }
