@@ -45,7 +45,6 @@ internal class FilteredRollerCoastersPagingSource(
                 prevKey = if (page == 0) null else page - 1,
                 nextKey = if (rollerCoasters.size < pageSize) null else page + 1,
             )
-
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
