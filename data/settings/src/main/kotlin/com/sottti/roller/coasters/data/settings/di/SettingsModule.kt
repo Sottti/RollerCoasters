@@ -2,15 +2,10 @@ package com.sottti.roller.coasters.data.settings.di
 
 import android.app.UiModeManager
 import android.content.Context
-import com.sottti.roller.coasters.data.settings.datasource.ActivityLifecycleEmitter
-import com.sottti.roller.coasters.data.settings.datasource.SettingsLocalDataSource
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.sottti.roller.coasters.data.settings.datasource.dataStore
-import com.sottti.roller.coasters.data.settings.managers.LocaleManager
-import com.sottti.roller.coasters.data.settings.managers.MeasurementSystemManager
-import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastManager
-import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.repository.SettingsRepositoryImpl
-import com.sottti.roller.coasters.domain.features.Features
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import dagger.Binds
 import dagger.Module
@@ -39,22 +34,8 @@ internal fun interface SettingsModule {
 
         @Provides
         @Singleton
-        fun provideLocalDataSource(
+        fun provideSettingsDataStore(
             @ApplicationContext context: Context,
-            activityLifecycleEmitter: ActivityLifecycleEmitter,
-            features: Features,
-            localeManager: LocaleManager,
-            measurementSystemManager: MeasurementSystemManager,
-            systemColorContrastManager: SystemColorContrastManager,
-            themeManager: ThemeManager,
-        ): SettingsLocalDataSource = SettingsLocalDataSource(
-            activityLifecycleEmitter = activityLifecycleEmitter,
-            dataStore = context.dataStore,
-            features = features,
-            localeManager = localeManager,
-            measurementSystemManager = measurementSystemManager,
-            systemColorContrastManager = systemColorContrastManager,
-            themeManager = themeManager,
-        )
+        ): DataStore<Preferences> = context.dataStore
     }
 }
