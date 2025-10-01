@@ -13,6 +13,7 @@ import java.util.Locale
 public object FormatModule {
 
     @Provides
-    public fun provideLocale(@ApplicationContext context: Context): Locale =
-        context.resources.configuration.locales[0] ?: Locale.getDefault()
+    public fun provideLocale(
+        @ApplicationContext context: Context,
+    ): Locale = context.resources.configuration.locales[0]
 }

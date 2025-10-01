@@ -22,42 +22,39 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object SettingsModule {
-
-    @Provides
-    @Singleton
-    fun provideUiModeManager(
-        @ApplicationContext context: Context,
-    ): UiModeManager? = context.getSystemService(UiModeManager::class.java)
-
-    @Provides
-    @Singleton
-    fun provideLocalDataSource(
-        @ApplicationContext context: Context,
-        activityLifecycleEmitter: ActivityLifecycleEmitter,
-        features: Features,
-        localeManager: LocaleManager,
-        measurementSystemManager: MeasurementSystemManager,
-        systemColorContrastManager: SystemColorContrastManager,
-        themeManager: ThemeManager,
-    ): SettingsLocalDataSource = SettingsLocalDataSource(
-        activityLifecycleEmitter = activityLifecycleEmitter,
-        dataStore = context.dataStore,
-        features = features,
-        localeManager = localeManager,
-        measurementSystemManager = measurementSystemManager,
-        systemColorContrastManager = systemColorContrastManager,
-        themeManager = themeManager,
-    )
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-internal interface SettingsBindingsModule {
+internal fun interface SettingsModule {
 
     @Binds
     @Singleton
     fun bindRepository(
         impl: SettingsRepositoryImpl,
     ): SettingsRepository
+
+    companion object {
+        @Provides
+        @Singleton
+        fun provideUiModeManager(
+            @ApplicationContext context: Context,
+        ): UiModeManager? = context.getSystemService(UiModeManager::class.java)
+
+        @Provides
+        @Singleton
+        fun provideLocalDataSource(
+            @ApplicationContext context: Context,
+            activityLifecycleEmitter: ActivityLifecycleEmitter,
+            features: Features,
+            localeManager: LocaleManager,
+            measurementSystemManager: MeasurementSystemManager,
+            systemColorContrastManager: SystemColorContrastManager,
+            themeManager: ThemeManager,
+        ): SettingsLocalDataSource = SettingsLocalDataSource(
+            activityLifecycleEmitter = activityLifecycleEmitter,
+            dataStore = context.dataStore,
+            features = features,
+            localeManager = localeManager,
+            measurementSystemManager = measurementSystemManager,
+            systemColorContrastManager = systemColorContrastManager,
+            themeManager = themeManager,
+        )
+    }
 }

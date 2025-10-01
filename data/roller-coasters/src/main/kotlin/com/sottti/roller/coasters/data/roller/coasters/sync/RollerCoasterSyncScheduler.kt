@@ -2,12 +2,13 @@ package com.sottti.roller.coasters.data.roller.coasters.sync
 
 import android.content.Context
 import androidx.work.WorkManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 internal class RollerCoasterSyncScheduler @Inject constructor(
-    private val context: Context,
+    @ApplicationContext private val context: Context,
 ) {
     fun schedule() {
         with(receiver = WorkManager.getInstance(context)) {
