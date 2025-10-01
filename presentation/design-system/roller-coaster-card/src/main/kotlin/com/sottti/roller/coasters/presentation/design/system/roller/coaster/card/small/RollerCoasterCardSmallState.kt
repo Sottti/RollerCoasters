@@ -1,7 +1,9 @@
 package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.small
 
+import androidx.compose.runtime.Immutable
 import com.sottti.roller.coasters.domain.model.ImageUrl
 
+@Immutable
 internal data class RollerCoasterCardSmallState(
     val foreverLoading: Boolean,
     val imageUrl: ImageUrl?,
