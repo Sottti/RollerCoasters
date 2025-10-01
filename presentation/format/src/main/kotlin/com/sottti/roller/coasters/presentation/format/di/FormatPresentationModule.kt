@@ -10,9 +10,10 @@ import java.util.Locale
 
 @Module
 @InstallIn(SingletonComponent::class)
-public object FormatModule {
+public object FormatPresentationModule {
 
     @Provides
-    public fun provideLocale(@ApplicationContext context: Context): Locale =
-        context.resources.configuration.locales[0] ?: Locale.getDefault()
+    public fun provideLocale(
+        @ApplicationContext context: Context,
+    ): Locale = context.resources.configuration.locales[0]
 }

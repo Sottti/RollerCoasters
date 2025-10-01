@@ -10,7 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal object RollerCoasterDetailsModule {
+internal object RollerCoasterDetailsPresentationModule {
 
     @Provides
     fun provideRollerCoasterId(

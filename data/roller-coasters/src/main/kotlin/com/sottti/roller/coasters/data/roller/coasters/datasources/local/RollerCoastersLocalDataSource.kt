@@ -16,6 +16,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.mapLatest
@@ -24,6 +25,16 @@ import javax.inject.Inject
 internal class RollerCoastersLocalDataSource @Inject constructor(
     private val dao: RollerCoastersDao,
 ) {
+    private companion object {
+        const val PREFETCH_DISTANCE = 25
+        const val PAGE_SIZE = 25
+        val pagerConfig = PagingConfig(
+            enablePlaceholders = true,
+            initialLoadSize = PAGE_SIZE,
+            pageSize = PAGE_SIZE,
+            prefetchDistance = PREFETCH_DISTANCE,
+        )
+    }
 
     suspend fun storeRollerCoaster(
         rollerCoaster: RollerCoaster,
@@ -65,6 +76,21 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
         measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
+    ): Flow<PagingData<RollerCoaster>> = Pager(
+        config = pagerConfig,
+        pagingSourceFactory = {
+            observeRollerCoastersPagingSource(
+                measurementSystem = measurementSystem,
+                sortByFilter = sortByFilter,
+                typeFilter = typeFilter,
+            )
+        }
+    ).flow
+
+    private fun observeRollerCoastersPagingSource(
+        measurementSystem: ResolvedMeasurementSystem,
+        sortByFilter: SortByFilter,
+        typeFilter: TypeFilter,
     ): PagingSource<Int, RollerCoaster> =
         FilteredRollerCoastersPagingSource(
             dao = dao,
@@ -89,9 +115,9 @@ internal class RollerCoastersLocalDataSource @Inject constructor(
     suspend fun isFavouriteRollerCoaster(rollerCoasterId: RollerCoasterId): Boolean =
         dao.isFavouriteRollerCoaster(rollerCoasterId.value)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
-        pagerConfig: PagingConfig,
     ): Flow<PagingData<RollerCoaster>> =
         Pager(
             config = pagerConfig,

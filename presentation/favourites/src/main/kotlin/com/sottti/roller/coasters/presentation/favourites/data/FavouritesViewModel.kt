@@ -11,6 +11,7 @@ import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRoller
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,6 +24,7 @@ internal class FavouritesViewModel @Inject constructor(
     observeFavouriteRollerCoasters: ObserveFavouriteRollerCoasters,
     @VisibleForTesting testScope: CoroutineScope? = null,
 ) : ViewModel() {
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val _rollerCoastersFlow: Flow<PagingData<FavouritesRollerCoaster>> =
         observeFavouriteRollerCoasters()
             .mapLatest { pagingData -> pagingData.map { rollerCoaster -> rollerCoaster.toUiModel() } }
