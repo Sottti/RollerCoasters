@@ -85,5 +85,4 @@ private fun javaVersion() = JavaVersion.VERSION_17
 private fun minSdk() = libs.versions.minSdk.get().toInt()
 private fun targetSdk() = libs.versions.targetSdk.get().toInt()
 
-@Suppress("unused")
 private val kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
