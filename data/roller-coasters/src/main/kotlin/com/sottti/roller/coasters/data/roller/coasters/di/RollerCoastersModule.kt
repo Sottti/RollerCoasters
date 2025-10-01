@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.data.roller.coasters.repository.RollerCoasters
 import com.sottti.roller.coasters.data.roller.coasters.sync.RollerCoasterSyncScheduler
 import com.sottti.roller.coasters.data.roller.coasters.sync.RollerCoastersSyncWorkerFactory
 import com.sottti.roller.coasters.domain.roller.coasters.repository.RollerCoastersRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,18 +23,6 @@ internal object RollerCoastersModule {
 
     @Provides
     @Singleton
-    fun provideRepository(
-        localDataSource: RollerCoastersLocalDataSource,
-        remoteDataSource: RollerCoastersRemoteDataSource,
-        rollerCoasterSyncScheduler: RollerCoasterSyncScheduler,
-    ): RollerCoastersRepository = RollerCoastersRepositoryImpl(
-        localDataSource = localDataSource,
-        remoteDataSource = remoteDataSource,
-        rollerCoasterSyncScheduler = rollerCoasterSyncScheduler,
-    )
-
-    @Provides
-    @Singleton
     fun provideSyncScheduler(
         @ApplicationContext context: Context,
     ): RollerCoasterSyncScheduler = RollerCoasterSyncScheduler(context = context)
@@ -43,10 +32,21 @@ internal object RollerCoastersModule {
     fun provideWorkManager(
         @ApplicationContext context: Context,
     ): WorkManager = WorkManager.getInstance(context)
+}
 
-    @Provides
+@Module
+@InstallIn(SingletonComponent::class)
+internal interface RollerCoastersBindingsModule {
+
+    @Binds
     @Singleton
-    fun provideWorkerFactory(
+    fun bindRepository(
+        impl: RollerCoastersRepositoryImpl,
+    ): RollerCoastersRepository
+
+    @Binds
+    @Singleton
+    fun bindWorkerFactory(
         factory: RollerCoastersSyncWorkerFactory,
-    ): WorkerFactory = factory
+    ): WorkerFactory
 }

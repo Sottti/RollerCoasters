@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
     implementation(libs.hilt)
     implementation(libs.splashscreen)
     implementation(project(module.di))
