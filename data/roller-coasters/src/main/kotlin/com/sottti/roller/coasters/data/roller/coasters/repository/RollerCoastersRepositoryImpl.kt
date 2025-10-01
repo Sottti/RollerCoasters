@@ -1,7 +1,5 @@
 package com.sottti.roller.coasters.data.roller.coasters.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.github.michaelbull.result.onSuccess
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
@@ -26,32 +24,16 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     private val rollerCoasterSyncScheduler: RollerCoasterSyncScheduler,
 ) : RollerCoastersRepository {
 
-    companion object {
-        const val PREFETCH_DISTANCE = 25
-        const val PAGE_SIZE = 25
-        val pagerConfig = PagingConfig(
-            enablePlaceholders = true,
-            initialLoadSize = PAGE_SIZE,
-            pageSize = PAGE_SIZE,
-            prefetchDistance = PREFETCH_DISTANCE,
-        )
-    }
-
     override fun observeRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
         sortByFilter: SortByFilter,
         typeFilter: TypeFilter,
     ): Flow<PagingData<RollerCoaster>> =
-        Pager(
-            config = pagerConfig,
-            pagingSourceFactory = {
-                localDataSource.observeRollerCoasters(
-                    measurementSystem = measurementSystem,
-                    sortByFilter = sortByFilter,
-                    typeFilter = typeFilter,
-                )
-            }
-        ).flow
+        localDataSource.observeRollerCoasters(
+            measurementSystem = measurementSystem,
+            sortByFilter = sortByFilter,
+            typeFilter = typeFilter,
+        )
 
     override fun observeRollerCoaster(
         id: RollerCoasterId,
@@ -93,10 +75,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     override fun observeFavouriteRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
     ): Flow<PagingData<RollerCoaster>> =
-        localDataSource.observeFavouriteRollerCoasters(
-            measurementSystem = measurementSystem,
-            pagerConfig = pagerConfig,
-        )
+        localDataSource.observeFavouriteRollerCoasters(measurementSystem = measurementSystem)
 
     override suspend fun searchRollerCoasters(
         measurementSystem: ResolvedMeasurementSystem,
