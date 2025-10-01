@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal fun interface FeaturesModule {
+internal fun interface FeaturesDataModule {
 
     @Binds
     @Singleton

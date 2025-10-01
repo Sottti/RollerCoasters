@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal fun interface SettingsModule {
+internal fun interface SettingsDataModule {
 
     @Binds
     @Singleton

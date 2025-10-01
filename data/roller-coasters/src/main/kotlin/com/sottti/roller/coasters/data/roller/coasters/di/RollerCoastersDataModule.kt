@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal interface RollerCoastersModule {
+internal interface RollerCoastersDataModule {
 
     @Binds
     @Singleton

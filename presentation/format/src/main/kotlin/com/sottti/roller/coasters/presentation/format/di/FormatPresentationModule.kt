@@ -10,7 +10,7 @@ import java.util.Locale
 
 @Module
 @InstallIn(SingletonComponent::class)
-public object FormatModule {
+public object FormatPresentationModule {
 
     @Provides
     public fun provideLocale(

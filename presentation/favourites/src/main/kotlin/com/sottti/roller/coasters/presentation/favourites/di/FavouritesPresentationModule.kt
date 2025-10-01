@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal object FavouritesModule {
+internal object FavouritesPresentationModule {
 
     @Provides
     fun provideCoroutineScope(): CoroutineScope? = null
