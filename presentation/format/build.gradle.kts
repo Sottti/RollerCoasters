@@ -9,9 +9,7 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.format"
-    buildFeatures { compose = true }
-    @Suppress("UnstableApiUsage")
-    composeOptions { kotlinCompilerExtensionVersion = kotlinCompilerExtensionVersion }
+
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
