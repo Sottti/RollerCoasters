@@ -24,7 +24,7 @@ public fun RollerCoastersPreviewTheme(
     DimensionsLocalMockProvider(windowWidthSizeClass) {
         RollerCoastersBaseTheme(
             content = content,
-            colors = colors,
+            colorScheme = colors,
         )
     }
 }

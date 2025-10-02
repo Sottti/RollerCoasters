@@ -10,15 +10,15 @@ import com.sottti.roller.coasters.presentation.design.system.typography.Typograp
 
 @Composable
 internal fun RollerCoastersBaseTheme(
-    colors: ColorScheme,
+    colorScheme: ColorScheme,
     content: @Composable () -> Unit,
 ) {
     OpacityLocalProvider {
         ShapesLocalProvider {
             TypographyLocalProvider {
-                ColorsLocalProvider(colors = colors) {
+                ColorsLocalProvider(colorScheme = colorScheme) {
                     MaterialTheme(
-                        colorScheme = colors,
+                        colorScheme = colorScheme,
                         content = content,
                     )
                 }

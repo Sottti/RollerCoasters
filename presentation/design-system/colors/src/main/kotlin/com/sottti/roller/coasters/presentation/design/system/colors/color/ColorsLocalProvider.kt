@@ -6,10 +6,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
 public fun ColorsLocalProvider(
-    colors: ColorScheme,
+    colorScheme: ColorScheme,
     content: @Composable () -> Unit,
 ) {
-    CompositionLocalProvider(LocalColors provides colors) {
+    CompositionLocalProvider(LocalColors provides colorScheme) {
         content()
     }
 }
