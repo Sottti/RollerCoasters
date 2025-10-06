@@ -43,20 +43,20 @@ public fun Image(
     }
 
     Box(modifier = modifier.clip(cornerRadius)) {
-        val matchParentSizeModifier = Modifier.matchParentSize()
-        if (!foreverLoading) {
-            Image(
+        val imageModifier = Modifier.matchParentSize()
+        when {
+            !foreverLoading -> Image(
                 painter = painter,
                 contentDescription = contentDescription,
                 contentScale = ContentScale.Crop,
-                modifier = matchParentSizeModifier,
+                modifier = imageModifier,
+            )
+            else -> PlaceHolder(
+                foreverLoading = foreverLoading,
+                modifier = imageModifier,
+                painterState = painterState,
             )
         }
-        PlaceHolder(
-            foreverLoading = foreverLoading,
-            modifier = matchParentSizeModifier,
-            painterState = painterState,
-        )
     }
 }
 
