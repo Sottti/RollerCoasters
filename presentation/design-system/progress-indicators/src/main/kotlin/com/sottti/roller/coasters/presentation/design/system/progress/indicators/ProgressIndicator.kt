@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -39,6 +40,7 @@ private fun strokeWidth(
 }
 
 @Composable
+@ReadOnlyComposable
 private fun progressIndicatorSize(size: ProgressIndicatorSize): Dp =
     when (size) {
         ProgressIndicatorSize.Small -> dimensions.component.progressIndicator.small
