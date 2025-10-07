@@ -1,9 +1,11 @@
 package com.sottti.roller.coasters.presentation.design.system.dimensions.tokens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import com.sottti.roller.coasters.presentation.design.system.dimensions.model.Dimensions
 
 @Composable
+@ReadOnlyComposable
 internal fun compactDimensions() =
     Dimensions(
         component = DesignComponentTokens.compact(),
@@ -12,6 +14,7 @@ internal fun compactDimensions() =
     )
 
 @Composable
+@ReadOnlyComposable
 internal fun mediumDimensions() =
     Dimensions(
         component = DesignComponentTokens.medium(),
@@ -20,6 +23,7 @@ internal fun mediumDimensions() =
     )
 
 @Composable
+@ReadOnlyComposable
 internal fun expandedDimensions() =
     Dimensions(
         component = DesignComponentTokens.expanded(),

@@ -1,11 +1,13 @@
 package com.sottti.roller.coasters.presentation.design.system.dimensions.tokens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.dimensions.model.Spacing
 
 internal object SpacingTokens {
     @Composable
+    @ReadOnlyComposable
     internal fun compact(): Spacing =
         Spacing(
             none = 0.dp,
@@ -19,6 +21,7 @@ internal object SpacingTokens {
         )
 
     @Composable
+    @ReadOnlyComposable
     internal fun medium(): Spacing =
         Spacing(
             none = 0.dp,
@@ -32,6 +35,7 @@ internal object SpacingTokens {
         )
 
     @Composable
+    @ReadOnlyComposable
     internal fun expanded(): Spacing =
         Spacing(
             none = 0.dp,
