@@ -1,9 +1,11 @@
 package com.sottti.roller.coasters.presentation.design.system.typography
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.material3.Typography as MaterialTypography
 
 @Composable
+@ReadOnlyComposable
 internal fun typography(): Typography =
     with(MaterialTypography()) {
         Typography(
