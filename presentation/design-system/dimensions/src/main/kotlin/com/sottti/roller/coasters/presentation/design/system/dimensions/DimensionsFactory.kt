@@ -5,6 +5,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.presentation.design.system.dimensions.model.Dimensions
 import com.sottti.roller.coasters.presentation.design.system.dimensions.tokens.compactDimensions
@@ -12,6 +13,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.tokens.e
 import com.sottti.roller.coasters.presentation.design.system.dimensions.tokens.mediumDimensions
 
 @Composable
+@ReadOnlyComposable
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 internal fun dimensions(): Dimensions {
     val windowSizeClass = calculateWindowSizeClass(LocalContext.current as Activity)
