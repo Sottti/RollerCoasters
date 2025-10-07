@@ -13,6 +13,7 @@ android {
 
 dependencies {
     implementation(libs.hilt)
+    implementation(libs.hilt.work)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.paging.runtime)
     implementation(libs.room)

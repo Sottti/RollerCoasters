@@ -30,7 +30,7 @@ internal fun ExploreTopBar(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
         label = "explore ui top app bar background color animation",
     )
-    Column(modifier = Modifier.drawBehind{ drawRect(color = backgroundColor)}) {
+    Column(modifier = Modifier.drawBehind { drawRect(color = backgroundColor) }) {
         MainTopBar(onNavigateToSettings = onNavigateToSettings)
         filters?.let { FilterChips(filters = filters, onAction = onAction) }
     }

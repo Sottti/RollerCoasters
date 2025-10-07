@@ -34,7 +34,7 @@ internal fun SearchTopBar(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
         label = "expandable top bar background color animation",
     )
-    Column(modifier = Modifier.drawBehind{ drawRect(color = backgroundColor)}) {
+    Column(modifier = Modifier.drawBehind { drawRect(color = backgroundColor) }) {
         MainTopBar(onNavigateToSettings = onNavigateToSettings)
         SearchBar(
             hint = state.searchBar.hint,

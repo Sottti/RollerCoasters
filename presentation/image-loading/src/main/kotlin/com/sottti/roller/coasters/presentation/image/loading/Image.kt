@@ -52,6 +52,7 @@ public fun Image(
                 contentScale = ContentScale.Crop,
                 modifier = imageModifier,
             )
+
             else -> PlaceHolder(
                 foreverLoading = foreverLoading,
                 modifier = imageModifier,

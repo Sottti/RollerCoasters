@@ -37,7 +37,9 @@ android {
 
 dependencies {
     implementation(libs.hilt)
+    implementation(libs.hilt.work)
     implementation(libs.splashscreen)
+    implementation(libs.work.runtime)
     implementation(project(module.di))
     implementation(project(module.domain.features))
     implementation(project(module.domain.rollerCoasters))
