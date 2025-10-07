@@ -2,10 +2,12 @@ package com.sottti.roller.coasters.presentation.design.system.dimensions.tokens
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import com.sottti.roller.coasters.presentation.design.system.dimensions.model.CornerRadii
 
 internal object CornerRadiiTokens {
     @Composable
+    @ReadOnlyComposable
     internal fun compact(): CornerRadii =
         CornerRadii(
             extraSmall = MaterialTheme.shapes.extraSmall,
@@ -16,6 +18,7 @@ internal object CornerRadiiTokens {
         )
 
     @Composable
+    @ReadOnlyComposable
     internal fun medium(): CornerRadii =
         CornerRadii(
             extraSmall = MaterialTheme.shapes.extraSmall,
@@ -26,6 +29,7 @@ internal object CornerRadiiTokens {
         )
 
     @Composable
+    @ReadOnlyComposable
     internal fun expanded(): CornerRadii =
         CornerRadii(
             extraSmall = MaterialTheme.shapes.extraSmall,
