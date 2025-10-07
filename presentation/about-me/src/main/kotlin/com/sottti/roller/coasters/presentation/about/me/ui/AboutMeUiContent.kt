@@ -20,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -290,6 +291,7 @@ private fun AndroidJourney(
 }
 
 @Composable
+@ReadOnlyComposable
 private fun topLevelCardShape(): CornerBasedShape =
     shapes.roundedCorner.extraLarge.copy(
         bottomStart = ZeroCornerSize,

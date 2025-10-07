@@ -4,6 +4,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.RoundRect
@@ -26,6 +27,7 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner
 import com.sottti.roller.coasters.presentation.design.system.shapes.model.Corner.Sharp
 
 @Composable
+@ReadOnlyComposable
 public fun cornerShape(
     bottomEnd: Corner = Rounded(shapes.roundedCorner.large.bottomEnd),
     bottomStart: Corner = Rounded(shapes.roundedCorner.large.bottomStart),
