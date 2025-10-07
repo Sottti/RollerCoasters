@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.search.ui
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +12,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.search.bar.SearchBar
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
@@ -34,7 +34,7 @@ internal fun SearchTopBar(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
         label = "expandable top bar background color animation",
     )
-    Column(modifier = Modifier.background(backgroundColor)) {
+    Column(modifier = Modifier.drawBehind{ drawRect(color = backgroundColor)}) {
         MainTopBar(onNavigateToSettings = onNavigateToSettings)
         SearchBar(
             hint = state.searchBar.hint,

@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,6 +10,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
@@ -23,14 +23,15 @@ internal fun ExploreTopBar(
     onAction: (ExploreAction) -> Unit,
     onNavigateToSettings: () -> Unit,
 ) {
+    emptyList<Int>().runningReduce {  }
     val containerColor = TopAppBarDefaults.topAppBarColors().containerColor
     val scrolledContainerColor = TopAppBarDefaults.topAppBarColors().scrolledContainerColor
     val isScrolled by remember { derivedStateOf { lazyListState.firstVisibleItemScrollOffset > 0 } }
     val backgroundColor by animateColorAsState(
         targetValue = if (isScrolled) scrolledContainerColor else containerColor,
-        label = "expandable top bar background color animation",
+        label = "explore ui top app bar background color animation",
     )
-    Column(modifier = Modifier.background(backgroundColor)) {
+    Column(modifier = Modifier.drawBehind{ drawRect(color = backgroundColor)}) {
         MainTopBar(onNavigateToSettings = onNavigateToSettings)
         filters?.let { FilterChips(filters = filters, onAction = onAction) }
     }
