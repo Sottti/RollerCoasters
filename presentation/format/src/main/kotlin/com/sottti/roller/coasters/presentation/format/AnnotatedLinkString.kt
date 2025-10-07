@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.presentation.format
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -9,6 +10,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 
 @Composable
+@ReadOnlyComposable
 public fun annotatedLinkString(
     color: Color,
     text: String,

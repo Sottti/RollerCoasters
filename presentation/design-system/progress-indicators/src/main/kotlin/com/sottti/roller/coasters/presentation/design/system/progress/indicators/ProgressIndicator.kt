@@ -31,6 +31,7 @@ public fun ProgressIndicator(
 }
 
 @Composable
+@ReadOnlyComposable
 private fun strokeWidth(
     size: ProgressIndicatorSize,
 ): Dp = when (size) {

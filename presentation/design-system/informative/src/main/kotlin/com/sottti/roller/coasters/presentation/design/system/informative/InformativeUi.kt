@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -86,6 +87,7 @@ internal fun InformativeUiPreview(
 }
 
 @Composable
+@ReadOnlyComposable
 private fun toButton(@StringRes text: Int?): InformativeButton? =
     text?.let {
         InformativeButton(
