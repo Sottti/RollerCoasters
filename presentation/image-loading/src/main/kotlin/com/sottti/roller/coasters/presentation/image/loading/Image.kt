@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -85,6 +86,7 @@ private fun imageRequest(url: ImageUrl): ImageRequest {
 }
 
 @Composable
+@ReadOnlyComposable
 private fun previewImageModel() = R.drawable.dragon_khan_hero_image
 
 @Composable
