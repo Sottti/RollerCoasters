@@ -6,6 +6,7 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
@@ -13,6 +14,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.mapper.darkC
 import com.sottti.roller.coasters.presentation.design.system.colors.mapper.lightColorScheme
 
 @Composable
+@ReadOnlyComposable
 public fun colors(
     colorContrast: ResolvedColorContrast,
     darkTheme: Boolean,
@@ -24,6 +26,7 @@ public fun colors(
 }
 
 @Composable
+@ReadOnlyComposable
 @RequiresApi(Build.VERSION_CODES.S)
 private fun dynamicColorScheme(darkTheme: Boolean): ColorScheme =
     when {
