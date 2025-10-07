@@ -15,6 +15,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.tokens.m
 @Composable
 @ReadOnlyComposable
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@ReadOnlyComposable
 internal fun dimensions(): Dimensions {
     val windowSizeClass = calculateWindowSizeClass(LocalContext.current as Activity)
     return when (windowSizeClass.widthSizeClass) {
