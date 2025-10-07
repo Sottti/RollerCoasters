@@ -18,10 +18,7 @@ import androidx.compose.ui.unit.dp
 public fun RainbowLazyColumn(
     seedColor: Color,
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(
             rainbowColors(seedColor),
             key = { color: Color -> color.hashCode() }

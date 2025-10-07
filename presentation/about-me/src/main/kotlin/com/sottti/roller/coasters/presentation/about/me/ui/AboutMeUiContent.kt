@@ -118,13 +118,19 @@ private fun AboutMeItems(
             state = listState,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            item { ProfileImage(state.profileImage) }
-            item { Spacer(dimensions.spacing.smallMedium) }
-            item { Name(state.name) }
-            item { Spacer(dimensions.spacing.large) }
-            item { SocialProfiles(onAction = onAction, state = state.socialProfiles) }
-            item { Spacer(dimensions.spacing.large) }
-            item {
+            item(key = "profileImage") {
+                ProfileImage(state.profileImage)
+                Spacer(dimensions.spacing.smallMedium)
+            }
+            item(key = "name") {
+                Name(state.name)
+                Spacer(dimensions.spacing.large)
+            }
+            item(key = "socialProfiles") {
+                SocialProfiles(onAction, state.socialProfiles)
+                Spacer(dimensions.spacing.large)
+            }
+            item(key = "getToKnowMe") {
                 GetToKnowMe(
                     onAction = onAction,
                     onShowBottomSheet = onShowBottomSheet,

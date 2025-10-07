@@ -68,12 +68,14 @@ internal fun RollerCoasterDetailsContent(
                 scrollBehavior = scrollBehavior,
                 state = topBarState,
             )
-        }) { padding: PaddingValues ->
+        }
+    ) { padding: PaddingValues ->
         when (content) {
             RollerCoasterDetailsContentState.Error ->
                 ErrorUi(
                     modifier = Modifier.padding(padding),
-                    button = ErrorButton {})
+                    button = ErrorButton {}
+                )
 
             Loading -> ProgressIndicator(
                 modifier = Modifier
@@ -106,11 +108,11 @@ private fun LoadedContent(
         contentPadding = PaddingValues(bottom = bottomPadding, top = topPadding),
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.mediumLarge),
     ) {
-        state.images?.let { item { ImagesSection(state.images) } }
-        item { DetailsSection(state.identity) }
-        state.status?.let { item { DetailsSection(state.status) } }
-        item { DetailsSection(state.location) }
-        state.ride?.let { item { DetailsSection(state.ride) } }
+        state.images?.let { item(key = "images") { ImagesSection(state.images) } }
+        item(key = "identity") { DetailsSection(state.identity) }
+        state.status?.let { item(key = "status") { DetailsSection(state.status) } }
+        item(key = "location") { DetailsSection(state.location) }
+        state.ride?.let { item(key = "ride") { DetailsSection(state.ride) } }
     }
 }
 
@@ -123,7 +125,8 @@ private fun ImagesSection(
     val density = LocalDensity.current
     val windowHeightPx = LocalWindowInfo.current.containerSize.height
     val windowHeightDp = with(density) { windowHeightPx.toDp() }
-    val carouselHeight = windowHeightDp * 0.25f
+    val carouselHeightScreenPercent = 0.25f
+    val carouselHeight = windowHeightDp * carouselHeightScreenPercent
 
     Column(Modifier.fillMaxWidth()) {
         HorizontalPager(

@@ -246,7 +246,6 @@ private fun SettingsListCard(
     }
 }
 
-
 @Composable
 private fun SmallProgressIndicator() {
     ProgressIndicator(size = ProgressIndicatorSize.Small)
