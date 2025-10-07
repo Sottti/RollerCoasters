@@ -1,7 +1,9 @@
 package com.sottti.roller.coasters.presentation.design.system.typography
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle
 
+@Immutable
 public data class Typography(
     val displayLarge: TextStyle,
     val displayMedium: TextStyle,

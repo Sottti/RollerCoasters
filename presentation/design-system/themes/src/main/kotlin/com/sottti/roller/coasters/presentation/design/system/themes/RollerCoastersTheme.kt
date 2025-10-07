@@ -2,16 +2,14 @@ package com.sottti.roller.coasters.presentation.design.system.themes
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sottti.roller.coasters.di.settings.colorContrast.provideObserveResolvedColorContrast
 import com.sottti.roller.coasters.di.settings.dynamicColor.provideObserveResolvedDynamicColor
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
-import com.sottti.roller.coasters.presentation.design.system.shapes.ShapesLocalProvider
-import com.sottti.roller.coasters.presentation.design.system.typography.TypographyLocalProvider
 
 @Composable
 public fun RollerCoastersTheme(
@@ -20,12 +18,12 @@ public fun RollerCoastersTheme(
     val context = LocalContext.current
     val resolvedDynamicColor =
         provideObserveResolvedDynamicColor(context).invoke()
-            .collectAsState(initial = ResolvedDynamicColor(false))
+            .collectAsStateWithLifecycle(initialValue = ResolvedDynamicColor(false))
             .value
 
     val resolvedColorContrast =
         provideObserveResolvedColorContrast(context).invoke()
-            .collectAsState(initial = ResolvedColorContrast.StandardContrast).value
+            .collectAsStateWithLifecycle(initialValue = StandardContrast).value
 
     val colors = colors(
         colorContrast = resolvedColorContrast,
@@ -34,13 +32,9 @@ public fun RollerCoastersTheme(
     )
 
     DimensionsLocalProvider {
-        ShapesLocalProvider {
-            TypographyLocalProvider {
-                RollerCoastersBaseTheme(
-                    colors = colors,
-                    content = content,
-                )
-            }
-        }
+        RollerCoastersBaseTheme(
+            colorScheme = colors,
+            content = content,
+        )
     }
 }

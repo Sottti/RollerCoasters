@@ -40,14 +40,14 @@ public fun RainbowLazyColumn(
 private fun rainbowColors(
     seedColor: Color,
 ): List<Color> {
-    val hsv = FloatArray(3)
+    val hsv = FloatArray(size = 3)
     colorToHSV(seedColor.toArgb(), hsv)
 
     val seedHue = hsv[0]
     val seedSaturation = hsv[1]
     val seedValue = hsv[2]
 
-    return List(38) { index ->
+    return List(size = 38) { index ->
         Color.hsv(
             hue = (seedHue + index * 360f / 38) % 360,
             saturation = seedSaturation,
