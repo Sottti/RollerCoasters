@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -44,7 +43,6 @@ public fun SearchBar(
 }
 
 @Composable
-@ReadOnlyComposable
 private fun searchBarColors() = TextFieldDefaults.colors(
     unfocusedIndicatorColor = Color.Transparent,
     focusedIndicatorColor = Color.Transparent,
