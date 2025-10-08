@@ -33,28 +33,28 @@ import androidx.compose.material3.CardDefaults as MaterialCardDefaults
 
 @Composable
 public fun CardGrid(
-    @StringRes item: Int,
+    @StringRes textResId: Int,
     modifier: Modifier,
     onClick: (() -> Unit),
 ) {
     CardGrid(
-        modifier = modifier.fillMaxWidth(),
-        onClick = { onClick() },
+        modifier = modifier,
+        onClick = onClick,
         shape = shapes.roundedCorner.large,
-        textResId = item,
+        textResId = textResId,
     )
 }
 
 @Composable
 private fun CardGrid(
     modifier: Modifier,
-    onClick: (() -> Unit),
+    onClick: () -> Unit,
     shape: Shape,
     textResId: Int,
 ) {
     Card(
-        modifier = modifier,
         onClick = onClick,
+        modifier = modifier,
         colors = MaterialCardDefaults.cardColors(
             containerColor = colors.surfaceContainer,
             contentColor = colors.onSurface,
@@ -62,7 +62,7 @@ private fun CardGrid(
         shape = shape,
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier,
             contentAlignment = Alignment.Center,
         ) {
             Text.Label.Medium(
@@ -176,7 +176,7 @@ internal fun MonoCardGridPreview(
 ) {
     RollerCoastersPreviewTheme {
         CardGrid(
-            item = state.item,
+            textResId = state.textResId,
             modifier = state.modifier,
             onClick = state.onClick,
         )

@@ -284,7 +284,7 @@ private fun AndroidJourney(
     onClick: (() -> Unit),
 ) {
     CardGrid(
-        item = state.textResId,
+        textResId = state.textResId,
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick,
     )

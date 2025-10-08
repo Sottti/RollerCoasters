@@ -9,8 +9,8 @@ internal class MonoCardGridStateProvider : PreviewParameterProvider<MonoCardGrid
     override val values = sequenceOf(monoCardGridState)
 }
 
-private val monoCardGridState = MonoCardGridState(
-    item = R.string.first_item,
+internal val monoCardGridState = MonoCardGridState(
+    textResId = R.string.first_item,
     modifier = Modifier.fillMaxWidth(),
     onClick = {},
 )

@@ -9,9 +9,19 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.design.system.card.grid"
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.mockk.android) {
+        exclude(group = "org.junit.jupiter")
+        exclude(group = "org.junit.platform")
+    }
+    debugImplementation(libs.compose.ui.test.manifest)
+
     implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling)
     implementation(platform(libs.compose.bom))

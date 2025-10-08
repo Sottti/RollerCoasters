@@ -10,16 +10,9 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.settings"
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
 }
 
 dependencies {
-    androidTestImplementation(libs.compose.ui.test.junit4)
-    debugImplementation(libs.compose.ui.test.manifest)
-
     implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling)
     implementation(libs.hilt)
