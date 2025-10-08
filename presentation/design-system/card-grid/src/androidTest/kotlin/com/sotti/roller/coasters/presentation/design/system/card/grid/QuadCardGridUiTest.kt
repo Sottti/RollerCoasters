@@ -70,7 +70,7 @@ internal class QuadCardGridUiTest {
         rule.setContent {
             QuadCardGridPreview(
                 quadCardGridState.copy(
-                    onClick = { position -> clicks.add(position, position) },
+                    onClick = { position -> clicks+= position },
                 ),
             )
         }

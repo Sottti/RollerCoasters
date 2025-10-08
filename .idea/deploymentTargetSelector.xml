@@ -43,9 +43,6 @@
       <SelectionState runConfigName="MonoCardGridUiTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="respects_external_modifier_testTag()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="invokes_onClick()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -53,6 +50,9 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="each_card_invokes_correct_indices_in_order()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="displays_all_four_labels()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

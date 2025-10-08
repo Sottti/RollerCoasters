@@ -53,8 +53,8 @@ private fun CardGrid(
     textResId: Int,
 ) {
     Card(
-        onClick = onClick,
         modifier = modifier,
+        onClick = onClick,
         colors = MaterialCardDefaults.cardColors(
             containerColor = colors.surfaceContainer,
             contentColor = colors.onSurface,
@@ -62,7 +62,7 @@ private fun CardGrid(
         shape = shape,
     ) {
         Box(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center,
         ) {
             Text.Label.Medium(
