@@ -16,17 +16,16 @@ import javax.inject.Inject
 internal class AboutMeViewModel @Inject constructor(
     val externalNavigation: ExternalNavigation,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(initialState)
-    internal val state: StateFlow<AboutMeState> = _state.asStateFlow()
+    internal val state: StateFlow<AboutMeState> =
+        MutableStateFlow(initialState).asStateFlow()
 
-    internal val onAction: (AboutMeAction) -> Unit = { action -> processAction(action) }
+    internal val onAction: (AboutMeAction) -> Unit = ::processAction
 
-    private fun processAction(action: AboutMeAction) {
+    private fun processAction(action: AboutMeAction) =
         when (action) {
             is OpenUrl -> externalNavigation.openUrl(
                 urlResId = action.urlResId,
                 toolbarColor = action.primaryColor.toArgb(),
             )
         }
-    }
 }
