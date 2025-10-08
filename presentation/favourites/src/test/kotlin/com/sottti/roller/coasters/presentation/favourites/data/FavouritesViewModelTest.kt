@@ -36,8 +36,7 @@ internal class FavouritesViewModelTest {
                 observeFavouriteRollerCoasters = observeFavouriteRollerCoasters,
                 testScope = this,
             )
-            val state = viewModel.state.value
-            val snapshot = state.rollerCoasters.asSnapshot()
+            val snapshot = viewModel.state.asSnapshot()
             assertThat(snapshot).containsExactlyElementsIn(rollerCoasters.map { it.toUiModel() })
         } finally {
             Dispatchers.resetMain()

@@ -7,10 +7,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
@@ -45,8 +43,7 @@ private fun FavouritesUi(
     padding: PaddingValues,
     viewModel: FavouritesViewModel,
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
-    val rollerCoasters = state.rollerCoasters.collectAsLazyPagingItems()
+    val rollerCoasters = viewModel.state.collectAsLazyPagingItems()
 
     FavouritesUi(
         onNavigateToRollerCoaster = onNavigateToRollerCoaster,
