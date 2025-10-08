@@ -1,5 +1,6 @@
 package com.sotti.roller.coasters.presentation.design.system.card.grid
 
+import android.R
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.runtime.CompositionLocalProvider
@@ -12,8 +13,6 @@ import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertWidthIsAtLeast
-import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -42,11 +41,11 @@ internal class MonoCardGridUiTest {
 
     @Test
     fun displays_given_text() {
-        val textResId = android.R.string.copy
+        val textResId = R.string.copy
         rule.setContent { MonoCardGridPreview(monoCardGridState.copy(textResId = textResId)) }
 
         rule
-            .onNode(hasText(rule.activity.getString(textResId)) and hasClickAction())
+            .nodeWithClickableText(rule.activity.getString(textResId))
             .assertIsDisplayed()
     }
 
@@ -57,7 +56,7 @@ internal class MonoCardGridUiTest {
         rule.setContent { MonoCardGridPreview(monoCardGridState.copy(onClick = { clicks++ })) }
 
         rule
-            .onNode(hasText(text) and hasClickAction())
+            .nodeWithClickableText(text)
             .assertIsDisplayed()
             .performClick()
 
@@ -101,9 +100,7 @@ internal class MonoCardGridUiTest {
             }
         }
 
-        rule
-            .onNodeWithText(text)
-            .assertIsDisplayed()
+        rule.assertAllVisible(text)
     }
 
     @Test
@@ -114,8 +111,6 @@ internal class MonoCardGridUiTest {
             }
         }
 
-        rule
-            .onNodeWithText(text)
-            .assertIsDisplayed()
+        rule.assertAllVisible(text)
     }
 }

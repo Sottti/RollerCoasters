@@ -11,8 +11,6 @@ import androidx.compose.ui.test.FontScale
 import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertWidthIsAtLeast
-import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -49,18 +47,13 @@ internal class QuadCardGridUiTest {
     fun displays_all_four_labels() {
         rule.setContent { QuadCardGridPreview(quadCardGridState) }
 
-        rule
-            .onNode(hasText(first) and hasClickAction())
-            .assertIsDisplayed()
-        rule
-            .onNode(hasText(second) and hasClickAction())
-            .assertIsDisplayed()
-        rule
-            .onNode(hasText(third) and hasClickAction())
-            .assertIsDisplayed()
-        rule
-            .onNode(hasText(fourth) and hasClickAction())
-            .assertIsDisplayed()
+        rule.assertAllVisible(first, second, third, fourth)
+
+        listOf(first, second, third, fourth).forEach {
+            rule
+                .nodeWithClickableText(it)
+                .assertIsDisplayed()
+        }
     }
 
     @Test
@@ -70,23 +63,16 @@ internal class QuadCardGridUiTest {
         rule.setContent {
             QuadCardGridPreview(
                 quadCardGridState.copy(
-                    onClick = { position -> clicks+= position },
+                    onClick = { position -> clicks += position },
                 ),
             )
         }
 
-        rule
-            .onNode(hasText(first) and hasClickAction())
-            .performClick()
-        rule
-            .onNode(hasText(second) and hasClickAction())
-            .performClick()
-        rule
-            .onNode(hasText(third) and hasClickAction())
-            .performClick()
-        rule
-            .onNode(hasText(fourth) and hasClickAction())
-            .performClick()
+        listOf(first, second, third, fourth).forEach { label ->
+            rule
+                .nodeWithClickableText(label)
+                .performClick()
+        }
 
         assertThat(clicks)
             .containsExactly(0, 1, 2, 3)
@@ -119,22 +105,12 @@ internal class QuadCardGridUiTest {
             QuadCardGridPreview(quadCardGridState)
         }
 
-        rule
-            .onNodeWithText(first)
-            .assertWidthIsAtLeast(minTouchTargetSize)
-            .assertHeightIsAtLeast(minTouchTargetSize)
-        rule
-            .onNodeWithText(second)
-            .assertWidthIsAtLeast(minTouchTargetSize)
-            .assertHeightIsAtLeast(minTouchTargetSize)
-        rule
-            .onNodeWithText(third)
-            .assertWidthIsAtLeast(minTouchTargetSize)
-            .assertHeightIsAtLeast(minTouchTargetSize)
-        rule
-            .onNodeWithText(fourth)
-            .assertWidthIsAtLeast(minTouchTargetSize)
-            .assertHeightIsAtLeast(minTouchTargetSize)
+        listOf(first, second, third, fourth).forEach { label ->
+            rule
+                .onNodeWithText(label)
+                .assertWidthIsAtLeast(minTouchTargetSize)
+                .assertHeightIsAtLeast(minTouchTargetSize)
+        }
     }
 
     @Test
@@ -145,18 +121,7 @@ internal class QuadCardGridUiTest {
             }
         }
 
-        rule
-            .onNodeWithText(first)
-            .assertIsDisplayed()
-        rule
-            .onNodeWithText(second)
-            .assertIsDisplayed()
-        rule
-            .onNodeWithText(third)
-            .assertIsDisplayed()
-        rule
-            .onNodeWithText(fourth)
-            .assertIsDisplayed()
+        rule.assertAllVisible(first, second, third, fourth)
     }
 
     @Test
@@ -167,17 +132,6 @@ internal class QuadCardGridUiTest {
             }
         }
 
-        rule
-            .onNodeWithText(first)
-            .assertIsDisplayed()
-        rule
-            .onNodeWithText(second)
-            .assertIsDisplayed()
-        rule
-            .onNodeWithText(third)
-            .assertIsDisplayed()
-        rule
-            .onNodeWithText(fourth)
-            .assertIsDisplayed()
+        rule.assertAllVisible(first, second, third, fourth)
     }
 }
