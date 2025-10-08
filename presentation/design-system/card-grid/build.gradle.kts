@@ -16,10 +16,7 @@ android {
 
 dependencies {
     androidTestImplementation(libs.compose.ui.test.junit4)
-    androidTestImplementation(libs.mockk.android) {
-        exclude(group = "org.junit.jupiter")
-        exclude(group = "org.junit.platform")
-    }
+    androidTestImplementation(libs.truth)
     debugImplementation(libs.compose.ui.test.manifest)
 
     implementation(libs.compose.material)

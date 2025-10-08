@@ -94,7 +94,7 @@ public fun CardGrid(
                         bottomStart = Rounded(shapes.roundedCorner.extraSmall.bottomStart),
                         topEnd = Rounded(shapes.roundedCorner.extraSmall.topEnd),
                     ),
-                    textResId = items.firstItem,
+                    textResId = items.firstItemResId,
                 )
                 CardGrid(
                     modifier = Modifier.weight(1f),
@@ -104,7 +104,7 @@ public fun CardGrid(
                         bottomStart = Concave(shapes.roundedCorner.large.bottomStart),
                         topStart = Rounded(shapes.roundedCorner.extraSmall.topStart),
                     ),
-                    textResId = items.secondItem,
+                    textResId = items.secondItemResId,
                 )
             }
             CardGridRow {
@@ -116,7 +116,7 @@ public fun CardGrid(
                         topStart = Rounded(shapes.roundedCorner.extraSmall.topStart),
                         bottomEnd = Rounded(shapes.roundedCorner.extraSmall.bottomEnd),
                     ),
-                    textResId = items.thirdItem,
+                    textResId = items.thirdItemResId,
                 )
                 CardGrid(
                     modifier = Modifier.weight(1f),
@@ -126,7 +126,7 @@ public fun CardGrid(
                         bottomStart = Rounded(shapes.roundedCorner.extraSmall.bottomStart),
                         topEnd = Rounded(shapes.roundedCorner.extraSmall.topEnd),
                     ),
-                    textResId = items.forthItem,
+                    textResId = items.forthItemResId,
                 )
             }
         }

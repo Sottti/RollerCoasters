@@ -258,10 +258,10 @@ private fun TopicsGrid(
     onClick: (Int) -> Unit,
 ) = CardGrid(
     items = CardGridItems(
-        firstItem = topics.firstTopic.textResId,
-        secondItem = topics.secondTopic.textResId,
-        thirdItem = topics.thirdTopic.textResId,
-        forthItem = topics.fourthTopic.textResId,
+        firstItemResId = topics.firstTopic.textResId,
+        secondItemResId = topics.secondTopic.textResId,
+        thirdItemResId = topics.thirdTopic.textResId,
+        forthItemResId = topics.fourthTopic.textResId,
     ),
     iconState = iconState,
     modifier = Modifier.fillMaxWidth(),

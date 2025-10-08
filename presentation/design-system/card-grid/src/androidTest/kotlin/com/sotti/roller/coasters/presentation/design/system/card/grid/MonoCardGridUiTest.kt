@@ -21,11 +21,9 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridPreview
-import com.sottti.roller.coasters.presentation.design.system.card.grid.R
 import com.sottti.roller.coasters.presentation.design.system.card.grid.monoCardGridState
-import io.mockk.mockk
-import io.mockk.verify
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,7 +37,7 @@ internal class MonoCardGridUiTest {
 
     @Before
     fun setup() {
-        text = rule.activity.getString(R.string.first_item)
+        text = rule.activity.getString(monoCardGridState.textResId)
     }
 
     @Test
@@ -54,16 +52,16 @@ internal class MonoCardGridUiTest {
 
     @Test
     fun invokes_onClick() {
-        val onClick = mockk<() -> Unit>(relaxed = true)
+        var clicks = 0
 
-        rule.setContent { MonoCardGridPreview(monoCardGridState.copy(onClick = onClick)) }
+        rule.setContent { MonoCardGridPreview(monoCardGridState.copy(onClick = { clicks++ })) }
 
         rule
             .onNode(hasText(text) and hasClickAction())
             .assertIsDisplayed()
             .performClick()
 
-        verify { onClick.invoke() }
+        assertThat(clicks).isEqualTo(1)
     }
 
     @Test
@@ -98,9 +96,7 @@ internal class MonoCardGridUiTest {
     @Test
     fun large_font_scale_is_visible() {
         rule.setContent {
-            DeviceConfigurationOverride(
-                DeviceConfigurationOverride.FontScale(2f)
-            ) {
+            DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(2f)) {
                 MonoCardGridPreview(monoCardGridState)
             }
         }

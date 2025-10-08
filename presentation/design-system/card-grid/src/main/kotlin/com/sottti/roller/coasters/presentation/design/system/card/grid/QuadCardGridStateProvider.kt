@@ -8,17 +8,19 @@ import com.sottti.roller.coasters.presentation.design.system.card.grid.model.Qua
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class QuadCardGridStateProvider : PreviewParameterProvider<QuadCardGridState> {
-    override val values = sequenceOf(quadCardGridState())
+    override val values = sequenceOf(quadCardGridState)
 }
 
-private fun quadCardGridState(): QuadCardGridState =
+private val quadGridItems: CardGridItems = CardGridItems(
+    firstItemResId = R.string.first_item,
+    secondItemResId = R.string.second_item,
+    thirdItemResId = R.string.third_item,
+    forthItemResId = R.string.fourth_item,
+)
+
+internal val quadCardGridState: QuadCardGridState =
     QuadCardGridState(
-        items = CardGridItems(
-            firstItem = R.string.first_item,
-            secondItem = R.string.second_item,
-            thirdItem = R.string.third_item,
-            forthItem = R.string.fourth_item,
-        ),
+        items = quadGridItems,
         modifier = Modifier.fillMaxWidth(),
         iconState = Icons.Android.filled,
         onClick = {},
