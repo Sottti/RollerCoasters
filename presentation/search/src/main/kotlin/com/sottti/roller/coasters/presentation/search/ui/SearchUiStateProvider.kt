@@ -25,7 +25,6 @@ private val initialState = searchPreviewState(
     searchBar = searchBarState(
         loading = false,
         query = null,
-        showClearIcon = false,
     ),
     searchResults = emptyList()
 )
@@ -34,7 +33,6 @@ private val loadingState = searchPreviewState(
     searchBar = searchBarState(
         loading = true,
         query = COASTER_NAME.take(n = 3),
-        showClearIcon = true,
     ),
     searchResults = emptyList()
 )
@@ -42,7 +40,6 @@ private val loadingState = searchPreviewState(
 private val loadedState = searchPreviewState(
     searchBar = searchBarState(
         query = COASTER_NAME,
-        showClearIcon = true,
         loading = false,
     ),
     searchResults = listOf(
@@ -70,10 +67,8 @@ private fun searchPreviewState(
 private fun searchBarState(
     loading: Boolean,
     query: String?,
-    showClearIcon: Boolean,
 ) = SearchBarState(
     hint = R.string.search_hint,
     loading = loading,
     query = query,
-    showClearIcon = showClearIcon,
 )

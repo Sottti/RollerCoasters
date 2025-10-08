@@ -29,7 +29,6 @@ internal data class SearchBarState(
     @StringRes val hint: Int,
     val loading: Boolean,
     val query: String?,
-    val showClearIcon: Boolean,
 )
 
 @Immutable

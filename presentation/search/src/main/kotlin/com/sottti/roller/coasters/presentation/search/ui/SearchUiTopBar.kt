@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.drawBehind
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.search.bar.SearchBar
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
+import com.sottti.roller.coasters.presentation.search.model.SearchAction.QueryChanged
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 
@@ -43,7 +44,7 @@ internal fun SearchTopBar(
                 .fillMaxWidth()
                 .padding(horizontal = dimensions.spacing.medium)
                 .padding(bottom = dimensions.spacing.medium),
-            onQueryChange = { onAction(SearchAction.QueryChanged(it)) },
+            onQueryChange = { query -> onAction(QueryChanged(query)) },
             query = state.searchBar.query,
         )
     }
