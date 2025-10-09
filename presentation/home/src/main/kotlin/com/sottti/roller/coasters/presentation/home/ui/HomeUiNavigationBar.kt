@@ -27,6 +27,7 @@ import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUi
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUi
 import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesUi
 import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
+import com.sottti.roller.coasters.presentation.home.model.HomeActions.DestinationSelected
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
@@ -65,7 +66,7 @@ internal fun NavigationBar(
         val currentDestination = navBackStackEntry?.destination?.route.toNavigationDestination()
         if (currentDestination != selectedTab) {
             selectedTab = currentDestination
-            viewModel.actions.onDestinationSelected(currentDestination)
+            viewModel.onAction(DestinationSelected(currentDestination))
         }
     }
 
@@ -80,7 +81,7 @@ internal fun NavigationBar(
                         destination -> scrollToTopCallbacks[destination]?.invoke()
                         else -> {
                             selectedTab = destination
-                            viewModel.actions.onDestinationSelected(destination)
+                            viewModel.onAction(DestinationSelected(destination))
                             navController.navigateTo(homeNavigationBarItem)
                         }
                     }

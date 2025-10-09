@@ -21,9 +21,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.stateIn
@@ -36,26 +35,18 @@ internal class SearchViewModel @Inject constructor(
     private val searchRollerCoasters: SearchRollerCoasters,
 ) : ViewModel() {
 
-    internal val onAction: (SearchAction) -> Unit = ::processAction
+    private val loading = MutableStateFlow(false)
+
+    private val queryChanges: MutableSharedFlow<QueryChanged> =
+        MutableSharedFlow(extraBufferCapacity = 1)
 
     private val searchResults: Flow<List<RollerCoaster>> =
         queryChanges
             .map { newQuery -> newQuery.query.orEmpty().trim() }
             .distinctUntilChanged()
             .debounce(300.milliseconds)
-            .flatMapLatest { query ->
-                when {
-                    query.isBlank() -> emptyList()
-                    else -> {
-                        loading.tryEmit(true)
-                        val searchResult =
-                            searchRollerCoasters(SearchQuery(query))
-                                .getOrElse { emptyList() }
-                        loading.tryEmit(false)
-                        searchResult
-                    }
-                }.let { flowOf(it) }
-            }.onStart { emit(emptyList()) }
+            .mapLatest { query -> search(query) }
+            .onStart { emit(emptyList()) }
 
     val state: StateFlow<SearchState> =
         combine(
@@ -70,29 +61,40 @@ internal class SearchViewModel @Inject constructor(
                 started = WhileSubscribed(stopTimeoutMillis = 5000),
                 initialValue = initialState,
             )
-}
 
-private fun processAction(action: SearchAction) {
-    when (action) {
-        is QueryChanged -> queryChanges.tryEmit(action)
-    }
-}
+    private suspend fun search(
+        query: String,
+    ): List<RollerCoaster> =
+        when {
+            query.isBlank() -> emptyList()
+            else -> {
+                loading.tryEmit(true)
+                val searchResult =
+                    searchRollerCoasters(SearchQuery(query))
+                        .getOrElse { emptyList() }
+                loading.tryEmit(false)
+                searchResult
+            }
+        }
 
-private val loading = MutableStateFlow(false)
+    private val reducer: (
+        loading: Boolean,
+        queryChanged: QueryChanged,
+        searchResults: List<RollerCoaster>,
+    ) -> (SearchState) -> SearchState =
+        { loading, queryChanged, searchResults ->
+            { previous: SearchState ->
+                previous
+                    .updateLoading(loading)
+                    .updateQuery(queryChanged.query)
+                    .updateResults(searchResults)
+            }
+        }
 
-private val queryChanges: MutableSharedFlow<QueryChanged> =
-    MutableSharedFlow(extraBufferCapacity = 1)
-
-private val reducer: (
-    loading: Boolean,
-    queryChanged: QueryChanged,
-    searchResults: List<RollerCoaster>,
-) -> (SearchState) -> SearchState =
-    { loading, queryChanged, searchResults ->
-        { previous: SearchState ->
-            previous
-                .updateLoading(loading)
-                .updateQuery(queryChanged.query)
-                .updateResults(searchResults)
+    internal val onAction: (SearchAction) -> Unit = ::processAction
+    private fun processAction(action: SearchAction) {
+        when (action) {
+            is QueryChanged -> queryChanges.tryEmit(action)
         }
     }
+}

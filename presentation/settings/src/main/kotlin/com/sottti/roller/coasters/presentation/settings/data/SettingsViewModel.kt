@@ -98,8 +98,9 @@ internal class SettingsViewModel @Inject constructor(
         initialState ?: initialState(features.systemDynamicColorAvailable()),
     )
     internal val state: StateFlow<SettingsState> = _state.asStateFlow()
-    internal val onAction: (SettingsAction) -> Unit = { action -> processAction(action) }
 
+
+    internal val onAction: (SettingsAction) -> Unit = ::processAction
     private fun processAction(action: SettingsAction) {
         when (action) {
             is LoadUi -> {

@@ -76,7 +76,8 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
             }
         }
 
-    internal val onAction: (RollerCoasterDetailsAction) -> Unit = { action ->
+    internal val onAction: (RollerCoasterDetailsAction) -> Unit = ::processAction
+    private fun processAction(action: RollerCoasterDetailsAction) {
         when (action) {
             ToggleFavourite -> viewModelScope.launch {
                 toggleFavouriteRollerCoaster(rollerCoasterId)

@@ -87,7 +87,7 @@ internal class ExploreViewModel @Inject constructor(
                 displayUnitFormatter = displayUnitFormatter,
             )
         }.onEach { _events.tryEmit(ExploreEvent.ScrollToTop) }
-            .flatMapLatest { it }
+            .flatMapLatest { pagingData -> pagingData }
             .cachedIn(viewModelScope)
 
     private val _state = MutableStateFlow(initialState())
@@ -96,7 +96,7 @@ internal class ExploreViewModel @Inject constructor(
     private val _events = MutableSharedFlow<ExploreEvent>(extraBufferCapacity = 1)
     val events = _events.asSharedFlow()
 
-    internal val onAction: (ExploreAction) -> Unit = { action -> processAction(action) }
+    internal val onAction: (ExploreAction) -> Unit = ::processAction
 
     private fun processAction(action: ExploreAction) {
         when (action) {

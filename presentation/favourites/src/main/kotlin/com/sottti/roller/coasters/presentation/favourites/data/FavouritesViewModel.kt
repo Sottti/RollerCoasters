@@ -24,6 +24,6 @@ internal class FavouritesViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val state: Flow<PagingData<FavouritesRollerCoaster>> =
         observeFavouriteRollerCoasters()
-            .map { pagingData -> pagingData.map { it.toUiModel() } }
+            .map { pagingData -> pagingData.map { rollerCoaster -> rollerCoaster.toUiModel() } }
             .let { flow -> if (testScope == null) flow.cachedIn(viewModelScope) else flow }
 }
