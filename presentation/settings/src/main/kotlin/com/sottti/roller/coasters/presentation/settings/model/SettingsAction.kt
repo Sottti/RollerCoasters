@@ -6,83 +6,83 @@ import androidx.compose.runtime.Immutable
 internal sealed interface SettingsAction {
 
     @Immutable
-    sealed interface SideEffect : SettingsAction
+    sealed interface SideEffectAction : SettingsAction
 
     @Immutable
-    sealed interface StateMutation : SettingsAction
+    sealed interface StateMutationAction : SettingsAction
 
     @Immutable
-    data object NoOp : StateMutation
+    data object NoOp : StateMutationAction
 
     @Immutable
     data class DynamicColorCheckedChange(
         val checked: Boolean,
-    ) : SettingsAction, SideEffect
+    ) : SettingsAction, SideEffectAction
 
     @Immutable
-    data object LaunchAppThemePicker : StateMutation
+    data object LaunchAppThemePicker : StateMutationAction
 
     @Immutable
     data class AppThemePickerSelectionChange(
         val appTheme: AppThemeUi,
-    ) : StateMutation
+    ) : StateMutationAction
 
     @Immutable
     data class ConfirmAppThemePickerSelection(
         val appTheme: AppThemeUi,
-    ) : StateMutation, SideEffect
+    ) : StateMutationAction, SideEffectAction
 
     @Immutable
-    data object DismissAppThemePicker : StateMutation
+    data object DismissAppThemePicker : StateMutationAction
 
     @Immutable
-    data object LaunchAppColorContrastPicker : StateMutation
+    data object LaunchAppColorContrastPicker : StateMutationAction
 
     @Immutable
     data class AppColorContrastPickerSelectionChange(
         val appColorContrast: AppColorContrastUi,
-    ) : StateMutation
+    ) : StateMutationAction
 
     @Immutable
     data class ConfirmColorContrastPickerSelection(
         val appColorContrast: AppColorContrastUi,
-    ) : StateMutation, SideEffect
+    ) : StateMutationAction, SideEffectAction
 
     @Immutable
-    data object DismissAppColorContrastPicker : StateMutation
+    data object DismissAppColorContrastPicker : StateMutationAction
 
     @Immutable
-    data object DismissAppColorContrastNotAvailableMessage : StateMutation
+    data object DismissAppColorContrastNotAvailableMessage : StateMutationAction
 
     @Immutable
-    data object LaunchAppLanguagePicker : StateMutation
+    data object LaunchAppLanguagePicker : StateMutationAction
 
     @Immutable
     data class AppLanguagePickerSelectionChange(
         val appLanguage: AppLanguageUi,
-    ) : StateMutation
+    ) : StateMutationAction
 
     @Immutable
     data class ConfirmAppLanguagePickerSelection(
         val appLanguage: AppLanguageUi,
-    ) : StateMutation, SideEffect
+    ) : StateMutationAction, SideEffectAction
 
     @Immutable
-    data object DismissAppLanguagePicker : StateMutation
+    data object DismissAppLanguagePicker : StateMutationAction
 
     @Immutable
-    data object LaunchAppMeasurementSystemPicker : StateMutation
+    data object LaunchAppMeasurementSystemPicker : StateMutationAction
 
     @Immutable
     data class AppMeasurementSystemPickerSelectionChange(
         val appMeasurementSystem: AppMeasurementSystemUi,
-    ) : StateMutation
+    ) : StateMutationAction
 
     @Immutable
     data class ConfirmAppMeasurementSystemPickerSelection(
         val appMeasurementSystem: AppMeasurementSystemUi,
-    ) : StateMutation, SideEffect
+    ) : StateMutationAction, SideEffectAction
 
     @Immutable
-    data object DismissAppMeasurementSystemPicker : StateMutation
+    data object DismissAppMeasurementSystemPicker : StateMutationAction
 }

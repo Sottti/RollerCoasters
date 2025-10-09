@@ -64,15 +64,14 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Lau
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.NoOp
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.SideEffect
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.StateMutation
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.SideEffectAction
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.StateMutationAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.utils.combine
 import com.sottti.roller.coasters.presentation.utils.stateInWhileSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.scan
@@ -101,30 +100,29 @@ internal class SettingsViewModel @Inject constructor(
 
     private val initialState =
         testInitialState ?: initialState(features.systemDynamicColorAvailable())
-    private val stateMutations: MutableSharedFlow<StateMutation> =
+    private val stateMutationActionActions: MutableSharedFlow<StateMutationAction> =
         MutableSharedFlow(extraBufferCapacity = 64)
 
     internal val state: StateFlow<SettingsState> =
         combine(
-            flow = stateMutations.onStart { emit(NoOp) },
+            flow = stateMutationActionActions.onStart { emit(NoOp) },
             flow2 = observeAppColorContrast(),
             flow3 = observeAppDynamicColor(),
             flow4 = observeAppLanguage(),
             flow5 = observeAppMeasurementSystem(),
             flow6 = observeAppTheme(),
-        ) { stateMutation, appColorContrast, appDynamicColor, appLanguage, appMeasurementSystem, appTheme ->
+        ) { stateMutationAction, appColorContrast, appDynamicColor, appLanguage, appMeasurementSystem, appTheme ->
             reducer(
                 appColorContrast,
                 appDynamicColor,
                 appLanguage,
                 appMeasurementSystem,
                 appTheme,
-                stateMutation,
+                stateMutationAction,
             )
         }
             .scan(initialState) { previous, reduce -> reduce(previous) }
             .drop(1)
-            .distinctUntilChanged()
             .stateInWhileSubscribed(initialState)
 
     private val reducer: (
@@ -133,12 +131,12 @@ internal class SettingsViewModel @Inject constructor(
         appLanguage: AppLanguage,
         appMeasurementSystem: AppMeasurementSystem,
         appTheme: AppTheme,
-        stateMutation: StateMutation,
+        stateMutationAction: StateMutationAction,
     ) -> suspend (SettingsState) -> SettingsState =
-        { appColorContrast, appDynamicColor, appLanguage, appMeasurementSystem, appTheme, stateMutation ->
+        { appColorContrast, appDynamicColor, appLanguage, appMeasurementSystem, appTheme, stateMutationAction ->
             { previous: SettingsState ->
                 previous
-                    .reduceState(stateMutation)
+                    .handleStateMutationAction(stateMutationAction)
                     .updateAppColorContrast(appColorContrast)
                     .updateDynamicColor(appDynamicColor)
                     .updateAppLanguage(appLanguage)
@@ -148,16 +146,16 @@ internal class SettingsViewModel @Inject constructor(
         }
 
     internal val onAction: (SettingsAction) -> Unit = { action: SettingsAction ->
-        if (action is StateMutation) {
-            stateMutations.tryEmit(action)
+        if (action is StateMutationAction) {
+            stateMutationActionActions.tryEmit(action)
         }
 
-        if (action is SideEffect) {
-            handleSideEffect(action)
+        if (action is SideEffectAction) {
+            handleSideEffectAction(action)
         }
     }
 
-    private fun handleSideEffect(action: SideEffect) {
+    private fun handleSideEffectAction(action: SideEffectAction) {
         viewModelScope.launch {
             when (action) {
                 is DynamicColorCheckedChange -> {
@@ -175,9 +173,8 @@ internal class SettingsViewModel @Inject constructor(
                 is ConfirmColorContrastPickerSelection ->
                     setAppColorContrast(action.appColorContrast.toDomain())
 
-                is ConfirmAppLanguagePickerSelection ->{
+                is ConfirmAppLanguagePickerSelection ->
                     setAppLanguage(action.appLanguage.toDomain())
-                }
 
                 is ConfirmAppMeasurementSystemPickerSelection ->
                     setAppMeasurementSystem(action.appMeasurementSystem.toDomain())
@@ -185,8 +182,8 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun SettingsState.reduceState(
-        action: StateMutation,
+    private suspend fun SettingsState.handleStateMutationAction(
+        action: StateMutationAction,
     ): SettingsState =
         when (action) {
             LaunchAppThemePicker -> showAppThemePicker(

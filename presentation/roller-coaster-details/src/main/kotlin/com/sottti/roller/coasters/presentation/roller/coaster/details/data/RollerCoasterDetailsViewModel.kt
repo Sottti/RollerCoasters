@@ -19,7 +19,6 @@ import com.sottti.roller.coasters.presentation.utils.stateInWhileSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.launch
@@ -49,7 +48,6 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
         }
             .scan(initialState) { previous, reduce -> reduce(previous) }
             .drop(1)
-            .distinctUntilChanged()
             .stateInWhileSubscribed(initialState)
 
     private val reducer: (
@@ -60,14 +58,15 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
     ) -> (RollerCoasterDetailsState) -> RollerCoasterDetailsState =
         { appLang, coaster, isFavourite, systemLocale ->
             { previous: RollerCoasterDetailsState ->
-                previous.updateRollerCoaster(
-                    appLanguage = appLang,
-                    dateFormatter = dateFormatter,
-                    displayUnitFormatter = displayUnitFormatter,
-                    isFavourite = isFavourite,
-                    rollerCoaster = coaster,
-                    systemLocale = systemLocale,
-                )
+                previous
+                    .updateRollerCoaster(
+                        appLanguage = appLang,
+                        dateFormatter = dateFormatter,
+                        displayUnitFormatter = displayUnitFormatter,
+                        isFavourite = isFavourite,
+                        rollerCoaster = coaster,
+                        systemLocale = systemLocale,
+                    )
             }
         }
 
