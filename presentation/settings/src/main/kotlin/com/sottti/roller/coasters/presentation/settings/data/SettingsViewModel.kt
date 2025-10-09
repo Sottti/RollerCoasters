@@ -171,11 +171,13 @@ internal class SettingsViewModel @Inject constructor(
                 }
 
                 is ConfirmAppThemePickerSelection -> setAppTheme(action.appTheme.toDomain())
+
                 is ConfirmColorContrastPickerSelection ->
                     setAppColorContrast(action.appColorContrast.toDomain())
 
-                is ConfirmAppLanguagePickerSelection ->
+                is ConfirmAppLanguagePickerSelection ->{
                     setAppLanguage(action.appLanguage.toDomain())
+                }
 
                 is ConfirmAppMeasurementSystemPickerSelection ->
                     setAppMeasurementSystem(action.appMeasurementSystem.toDomain())

@@ -15,7 +15,7 @@ import javax.inject.Singleton
 internal class ActivityLifecycleEmitter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    private val _activityCreatedFlow = MutableSharedFlow<Unit>()
+    private val _activityCreatedFlow = MutableSharedFlow<Unit>(replay = 1, extraBufferCapacity = 1)
     val activityCreatedFlow: Flow<Unit> = _activityCreatedFlow
 
     init {
