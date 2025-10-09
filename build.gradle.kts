@@ -1,8 +1,9 @@
+
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -31,24 +32,26 @@ subprojects {
             plugins.hasPlugin("com.android.library") -> androidLibraryConfig()
         }
     }
+
     plugins.withId("org.jetbrains.kotlin.android") {
         extensions.configure<KotlinAndroidProjectExtension> {
+            explicitApi()
             jvmToolchain(17)
             compilerOptions {
                 jvmTarget.set(JvmTarget.JVM_17)
                 freeCompilerArgs.add("-Xwhen-guards")
+                freeCompilerArgs.add("-Xcontext-parameters")
             }
         }
     }
+
     plugins.withId("org.jetbrains.kotlin.jvm") {
-        extensions.configure<KotlinProjectExtension> {
+        extensions.configure<KotlinJvmProjectExtension> {
             explicitApi()
             jvmToolchain(17)
-        }
-    }
-    plugins.withId("org.jetbrains.kotlin.android") {
-        extensions.configure<KotlinAndroidProjectExtension> {
-            explicitApi()
+            compilerOptions{
+                freeCompilerArgs.add("-Xcontext-parameters")
+            }
         }
     }
 }
