@@ -1,7 +1,6 @@
 package com.sottti.roller.coasters.presentation.search.data
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.github.michaelbull.result.getOrElse
 import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SearchQuery
@@ -9,13 +8,13 @@ import com.sottti.roller.coasters.domain.roller.coasters.usecase.SearchRollerCoa
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchAction.QueryChanged
 import com.sottti.roller.coasters.presentation.search.model.SearchState
+import com.sottti.roller.coasters.presentation.utils.stateInWhileSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
@@ -25,7 +24,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.scan
-import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -56,11 +54,7 @@ internal class SearchViewModel @Inject constructor(
         ) { queryChanged, loading, searchResults -> reducer(loading, queryChanged, searchResults) }
             .scan(initialState) { previous, reduce -> reduce(previous) }
             .drop(1)
-            .stateIn(
-                scope = viewModelScope,
-                started = WhileSubscribed(stopTimeoutMillis = 5000),
-                initialValue = initialState,
-            )
+            .stateInWhileSubscribed(initialValue = initialState)
 
     private suspend fun search(
         query: String,

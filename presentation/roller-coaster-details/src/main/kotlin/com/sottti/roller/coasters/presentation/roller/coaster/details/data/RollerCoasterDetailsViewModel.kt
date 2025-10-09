@@ -17,13 +17,11 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.Roll
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsState
 import com.sottti.roller.coasters.presentation.utils.stateInWhileSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.scan
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
@@ -53,11 +51,6 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
             .drop(1)
             .distinctUntilChanged()
             .stateInWhileSubscribed(initialValue = initialState)
-            .stateIn(
-                scope = viewModelScope,
-                started = WhileSubscribed(stopTimeoutMillis = 5_000),
-                initialValue = initialState,
-            )
 
     private val reducer: (
         appLang: AppLanguage,
