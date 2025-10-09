@@ -31,7 +31,6 @@ include(
     ":domain:roller-coasters",
     ":domain:settings",
     ":presentation:about-me",
-    ":presentation:compose",
     ":presentation:design-system:card-grid",
     ":presentation:design-system:chip",
     ":presentation:design-system:colors",
@@ -69,5 +68,6 @@ include(
     ":presentation:settings",
     ":presentation:string-provider",
     ":presentation:top-bars",
+    ":presentation:utils",
     ":utils:time-dates",
 )

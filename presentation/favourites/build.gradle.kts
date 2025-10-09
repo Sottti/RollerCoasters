@@ -33,7 +33,7 @@ dependencies {
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.topBars))
-    implementation(project(module.presentation.compose))
+    implementation(project(module.presentation.utils))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)

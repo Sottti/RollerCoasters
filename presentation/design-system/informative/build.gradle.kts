@@ -26,6 +26,6 @@ dependencies {
     implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.fixtures))
     implementation(project(module.presentation.previews))
-    implementation(project(module.presentation.compose))
+    implementation(project(module.presentation.utils))
     testImplementation(project(module.presentation.paparazzi))
 }

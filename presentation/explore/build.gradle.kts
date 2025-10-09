@@ -26,7 +26,6 @@ dependencies {
     implementation(project(module.domain.fixtures))
     implementation(project(module.domain.locales))
     implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.presentation.compose))
     implementation(project(module.presentation.designSystem.chip))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.empty))
@@ -41,6 +40,7 @@ dependencies {
     implementation(project(module.presentation.previews))
     implementation(project(module.presentation.stringProvider))
     implementation(project(module.presentation.topBars))
+    implementation(project(module.presentation.utils))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
