@@ -36,25 +36,24 @@ import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppCo
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppLanguagePicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppMeasurementSystemPicker
 import com.sottti.roller.coasters.presentation.settings.data.reducer.updateAppThemePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.AppColorContrastPickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.ConfirmColorContrastPickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastNotAvailableMessage
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.LaunchAppColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.AppLanguagePickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.ConfirmAppLanguagePickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.DismissAppLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.LaunchAppLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.AppMeasurementSystemPickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.ConfirmAppMeasurementSystemPickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.DismissAppMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.AppThemePickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.ConfirmAppThemePickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.DismissAppThemePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguagePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppLanguagePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppMeasurementSystemPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppThemePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppColorContrastNotAvailableMessage
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -374,8 +373,6 @@ internal class SettingsViewModelTest {
             observeAppTheme = observeAppTheme,
         )
 
-        viewModel.onAction(LoadUi)
-
         val expectedState = loadedState(dynamicColorAvailable)
         viewModel.assertHasState(expectedState)
     }
@@ -404,8 +401,6 @@ internal class SettingsViewModelTest {
             observeAppMeasurementSystem = observeAppMeasurementSystem,
             observeAppTheme = observeAppTheme,
         )
-
-        viewModel.onAction(LoadUi)
 
         val expectedState = loadedState(dynamicColorAvailable)
         viewModel.assertHasState(expectedState)

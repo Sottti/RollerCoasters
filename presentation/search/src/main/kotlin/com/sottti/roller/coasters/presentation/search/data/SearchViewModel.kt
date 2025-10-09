@@ -36,7 +36,7 @@ internal class SearchViewModel @Inject constructor(
     private val loading = MutableStateFlow(false)
 
     private val queryChanges: MutableSharedFlow<QueryChanged> =
-        MutableSharedFlow(extraBufferCapacity = 1)
+        MutableSharedFlow(extraBufferCapacity = 64)
 
     private val searchResults: Flow<List<RollerCoaster>> =
         queryChanges

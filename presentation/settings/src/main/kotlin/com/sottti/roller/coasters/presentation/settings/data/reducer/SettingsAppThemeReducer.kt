@@ -13,26 +13,18 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeSt
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SystemTheme
 import com.sottti.roller.coasters.presentation.settings.model.ThemePickerState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppTheme(
     newAppTheme: AppTheme,
 ): SettingsState = copy(
     appTheme = appTheme.copy(
-        appTheme.listItem.copy(
+        listItem = appTheme.listItem.copy(
             selectedAppTheme = SelectedAppThemeState.Loaded(
                 newAppTheme.toPresentationModel(selected = true),
             )
         ),
     ),
 )
-
-internal fun MutableStateFlow<SettingsState>.updateAppTheme(
-    newAppTheme: AppTheme,
-): MutableStateFlow<SettingsState> = apply {
-    update { currentState -> currentState.updateAppTheme(newAppTheme) }
-}
 
 internal fun SettingsState.showAppThemePicker(
     lightDarkAppThemingAvailable: Boolean,
@@ -45,18 +37,6 @@ internal fun SettingsState.showAppThemePicker(
         )
     )
 )
-
-internal fun MutableStateFlow<SettingsState>.showAppThemePicker(
-    lightDarkAppThemingAvailable: Boolean,
-    selectedAppTheme: AppThemeUi,
-): MutableStateFlow<SettingsState> = apply {
-    update { currentState ->
-        currentState.showAppThemePicker(
-            lightDarkAppThemingAvailable = lightDarkAppThemingAvailable,
-            selectedAppTheme = selectedAppTheme,
-        )
-    }
-}
 
 internal fun SettingsState.updateAppThemePicker(
     selectedAppTheme: AppThemeUi,
@@ -72,7 +52,7 @@ internal fun SettingsState.updateAppThemePicker(
         }
     }
 
-    if (updatedThemes === currentThemes || updatedThemes == currentThemes) return this
+    if (updatedThemes == currentThemes) return this
 
     return copy(
         appTheme = appTheme.copy(
@@ -81,23 +61,8 @@ internal fun SettingsState.updateAppThemePicker(
     )
 }
 
-internal fun MutableStateFlow<SettingsState>.updateAppThemePicker(
-    selectedAppTheme: AppThemeUi,
-): MutableStateFlow<SettingsState> = apply {
-    update { currentState ->
-        currentState.updateAppThemePicker(
-            selectedAppTheme = selectedAppTheme,
-        )
-    }
-}
-
 internal fun SettingsState.hideAppThemePicker(): SettingsState =
     copy(appTheme = appTheme.copy(picker = null))
-
-internal fun MutableStateFlow<SettingsState>.hideAppThemePicker(): MutableStateFlow<SettingsState> =
-    apply {
-        update { currentState -> currentState.hideAppThemePicker() }
-    }
 
 private fun appThemePickerState(
     lightDarkAppThemingAvailable: Boolean,

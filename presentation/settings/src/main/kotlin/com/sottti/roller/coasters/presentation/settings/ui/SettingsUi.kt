@@ -3,7 +3,6 @@ package com.sottti.roller.coasters.presentation.settings.ui
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -12,7 +11,6 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.settings.data.SettingsViewModel
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LoadUi
 import com.sottti.roller.coasters.presentation.settings.model.SettingsPreviewState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 
@@ -33,10 +31,6 @@ private fun SettingsUi(
     viewModel: SettingsViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.onAction(LoadUi)
-    }
 
     SettingsUi(
         onAction = viewModel.onAction,

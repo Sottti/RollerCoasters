@@ -29,14 +29,13 @@ import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasure
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppMeasurementSystemState.Loading
 import com.sottti.roller.coasters.presentation.settings.model.SelectedAppThemeState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.LaunchAppColorContrastPicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.LaunchAppLanguagePicker
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppThemeActions.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DynamicColorCheckedChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.utils.Spacer
-import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 internal fun SettingsList(
@@ -52,7 +51,7 @@ internal fun SettingsList(
     val launchColorContrastPicker = { onAction(LaunchAppColorContrastPicker) }
     val launchLanguagePicker = { onAction(LaunchAppLanguagePicker) }
     val launchMeasurementSystemPicker = {
-        onAction(AppMeasurementSystemActions.LaunchAppMeasurementSystemPicker)
+        onAction(LaunchAppMeasurementSystemPicker)
     }
     LazyColumn(
         contentPadding = padding + PaddingValues(vertical = dimensions.spacing.medium),

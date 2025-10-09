@@ -5,9 +5,9 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toAppMeasure
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.AppMeasurementSystemPickerState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.AppMeasurementSystemPickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.ConfirmAppMeasurementSystemPickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemActions.DismissAppMeasurementSystemPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppMeasurementSystemPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppMeasurementSystemPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppMeasurementSystemPicker
 
 private const val MEASUREMENT_SYSTEM_EMPTY_ERROR = "Measurement system list must not be empty"
 

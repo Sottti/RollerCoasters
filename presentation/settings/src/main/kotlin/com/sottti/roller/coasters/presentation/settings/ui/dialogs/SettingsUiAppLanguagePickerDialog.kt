@@ -5,9 +5,9 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toAppLanguag
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.AppLanguagePickerState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.AppLanguagePickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.ConfirmAppLanguagePickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguageActions.DismissAppLanguagePicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppLanguagePickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmAppLanguagePickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppLanguagePicker
 
 private const val LANGUAGE_EMPTY_ERROR = "Language list must not be empty"
 

@@ -50,7 +50,7 @@ internal class RollerCoasterDetailsViewModel @Inject constructor(
             .scan(initialState) { previous, reduce -> reduce(previous) }
             .drop(1)
             .distinctUntilChanged()
-            .stateInWhileSubscribed(initialValue = initialState)
+            .stateInWhileSubscribed(initialState)
 
     private val reducer: (
         appLang: AppLanguage,

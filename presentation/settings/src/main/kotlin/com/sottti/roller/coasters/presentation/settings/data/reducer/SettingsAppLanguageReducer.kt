@@ -15,8 +15,6 @@ import com.sottti.roller.coasters.presentation.settings.model.GalicianLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.settings.model.SpanishSpainLanguage
 import com.sottti.roller.coasters.presentation.settings.model.SystemLanguage
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
 
 internal fun SettingsState.updateAppLanguage(
     newAppLanguage: AppLanguage,
@@ -30,12 +28,6 @@ internal fun SettingsState.updateAppLanguage(
     ),
 )
 
-internal fun MutableStateFlow<SettingsState>.updateAppLanguage(
-    newAppLanguage: AppLanguage,
-): MutableStateFlow<SettingsState> = apply {
-    update { currentState -> currentState.updateAppLanguage(newAppLanguage) }
-}
-
 internal fun SettingsState.showAppLanguagePicker(
     selectedAppLanguage: AppLanguage,
 ): SettingsState = copy(
@@ -44,40 +36,17 @@ internal fun SettingsState.showAppLanguagePicker(
     )
 )
 
-internal fun MutableStateFlow<SettingsState>.showAppLanguagePicker(
-    selectedAppLanguage: AppLanguage,
-): MutableStateFlow<SettingsState> = apply {
-    update { currentState ->
-        currentState.showAppLanguagePicker(selectedAppLanguage)
-    }
-}
-
 internal fun SettingsState.updateAppLanguagePicker(
     selectedAppLanguage: AppLanguageUi,
 ): SettingsState = copy(
     appLanguage = appLanguage.copy(picker = appLanguagePickerState(selectedAppLanguage)),
 )
 
-internal fun MutableStateFlow<SettingsState>.updateAppLanguagePicker(
-    selectedAppLanguage: AppLanguageUi,
-): MutableStateFlow<SettingsState> = apply {
-    update { currentState ->
-        currentState.updateAppLanguagePicker(
-            selectedAppLanguage = selectedAppLanguage,
-        )
-    }
-}
-
 internal fun SettingsState.hideAppLanguagePicker(): SettingsState {
     return copy(
         appLanguage = appLanguage.copy(picker = null)
     )
 }
-
-internal fun MutableStateFlow<SettingsState>.hideAppLanguagePicker(): MutableStateFlow<SettingsState> =
-    apply {
-        update { currentState -> currentState.hideAppLanguagePicker() }
-    }
 
 private fun appLanguagePickerState(
     selectedAppLanguage: AppLanguageUi,

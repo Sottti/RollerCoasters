@@ -4,84 +4,85 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 internal sealed interface SettingsAction {
-    @Immutable
-    data object LoadUi : SettingsAction
 
     @Immutable
-    data class DynamicColorCheckedChange(val checked: Boolean) : SettingsAction
+    sealed interface SideEffect : SettingsAction
 
     @Immutable
-    sealed interface AppThemeActions : SettingsAction {
-        @Immutable
-        data object LaunchAppThemePicker : AppThemeActions
-
-        @Immutable
-        data class AppThemePickerSelectionChange(val appTheme: AppThemeUi) : AppThemeActions
-
-        @Immutable
-        data class ConfirmAppThemePickerSelection(val appTheme: AppThemeUi) : AppThemeActions
-
-        @Immutable
-        data object DismissAppThemePicker : AppThemeActions
-    }
+    sealed interface StateMutation : SettingsAction
 
     @Immutable
-    sealed interface AppColorContrastActions : SettingsAction {
-        @Immutable
-        data object LaunchAppColorContrastPicker : AppColorContrastActions
-
-        @Immutable
-        data class AppColorContrastPickerSelectionChange(
-            val appColorContrast: AppColorContrastUi,
-        ) : AppColorContrastActions
-
-        @Immutable
-        data class ConfirmColorContrastPickerSelection(
-            val appColorContrast: AppColorContrastUi,
-        ) : AppColorContrastActions
-
-        @Immutable
-        data object DismissAppColorContrastPicker : AppColorContrastActions
-
-        @Immutable
-        data object DismissAppColorContrastNotAvailableMessage : AppColorContrastActions
-    }
+    data object NoOp : StateMutation
 
     @Immutable
-    sealed interface AppLanguageActions : SettingsAction {
-        @Immutable
-        data object LaunchAppLanguagePicker : AppLanguageActions
-
-        @Immutable
-        data class AppLanguagePickerSelectionChange(
-            val appLanguage: AppLanguageUi,
-        ) : AppLanguageActions
-
-        @Immutable
-        data class ConfirmAppLanguagePickerSelection(
-            val appLanguage: AppLanguageUi,
-        ) : AppLanguageActions
-
-        @Immutable
-        data object DismissAppLanguagePicker : AppLanguageActions
-    }
+    data class DynamicColorCheckedChange(
+        val checked: Boolean,
+    ) : SettingsAction, SideEffect
 
     @Immutable
-    sealed interface AppMeasurementSystemActions : SettingsAction {
-        @Immutable
-        data object LaunchAppMeasurementSystemPicker : AppMeasurementSystemActions
+    data object LaunchAppThemePicker : StateMutation
 
-        @Immutable
-        data class AppMeasurementSystemPickerSelectionChange(
-            val appMeasurementSystem: AppMeasurementSystemUi,
-        ) : AppMeasurementSystemActions
+    @Immutable
+    data class AppThemePickerSelectionChange(
+        val appTheme: AppThemeUi,
+    ) : StateMutation
 
-        @Immutable
-        data class ConfirmAppMeasurementSystemPickerSelection(
-            val appMeasurementSystem: AppMeasurementSystemUi,
-        ) : AppMeasurementSystemActions
+    @Immutable
+    data class ConfirmAppThemePickerSelection(
+        val appTheme: AppThemeUi,
+    ) : StateMutation, SideEffect
 
-        @Immutable
-        data object DismissAppMeasurementSystemPicker : AppMeasurementSystemActions
-    }
+    @Immutable
+    data object DismissAppThemePicker : StateMutation
+
+    @Immutable
+    data object LaunchAppColorContrastPicker : StateMutation
+
+    @Immutable
+    data class AppColorContrastPickerSelectionChange(
+        val appColorContrast: AppColorContrastUi,
+    ) : StateMutation
+
+    @Immutable
+    data class ConfirmColorContrastPickerSelection(
+        val appColorContrast: AppColorContrastUi,
+    ) : StateMutation, SideEffect
+
+    @Immutable
+    data object DismissAppColorContrastPicker : StateMutation
+
+    @Immutable
+    data object DismissAppColorContrastNotAvailableMessage : StateMutation
+
+    @Immutable
+    data object LaunchAppLanguagePicker : StateMutation
+
+    @Immutable
+    data class AppLanguagePickerSelectionChange(
+        val appLanguage: AppLanguageUi,
+    ) : StateMutation
+
+    @Immutable
+    data class ConfirmAppLanguagePickerSelection(
+        val appLanguage: AppLanguageUi,
+    ) : StateMutation, SideEffect
+
+    @Immutable
+    data object DismissAppLanguagePicker : StateMutation
+
+    @Immutable
+    data object LaunchAppMeasurementSystemPicker : StateMutation
+
+    @Immutable
+    data class AppMeasurementSystemPickerSelectionChange(
+        val appMeasurementSystem: AppMeasurementSystemUi,
+    ) : StateMutation
+
+    @Immutable
+    data class ConfirmAppMeasurementSystemPickerSelection(
+        val appMeasurementSystem: AppMeasurementSystemUi,
+    ) : StateMutation, SideEffect
+
+    @Immutable
+    data object DismissAppMeasurementSystemPicker : StateMutation
 }

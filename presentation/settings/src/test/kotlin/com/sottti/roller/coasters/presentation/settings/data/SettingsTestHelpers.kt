@@ -55,7 +55,7 @@ internal fun createViewModel(
     setAppLanguage = setAppLanguage,
     setAppMeasurementSystem = setAppMeasurementSystem,
     setAppTheme = setAppTheme,
-    initialState = initialState,
+    testInitialState = initialState,
 )
 
 internal suspend fun SettingsViewModel.assertHasState(expected: SettingsState) =

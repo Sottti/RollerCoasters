@@ -5,9 +5,9 @@ import com.sottti.roller.coasters.presentation.settings.data.mapper.toAppColorCo
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toRadioButtonOption
 import com.sottti.roller.coasters.presentation.settings.model.AppColorContrastPickerState
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.AppColorContrastPickerSelectionChange
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.ConfirmColorContrastPickerSelection
-import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastActions.DismissAppColorContrastPicker
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.AppColorContrastPickerSelectionChange
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.ConfirmColorContrastPickerSelection
+import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.DismissAppColorContrastPicker
 
 private const val COLOR_CONTRAST_EMPTY_ERROR = "Color contrast list must not be empty"
 
