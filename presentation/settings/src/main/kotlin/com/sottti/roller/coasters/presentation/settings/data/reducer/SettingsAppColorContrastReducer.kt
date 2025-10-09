@@ -82,7 +82,10 @@ private fun appColorContrastPickerState(
     title = R.string.color_contrast_picker_title,
     confirm = R.string.picker_confirm,
     dismiss = R.string.picker_dismiss,
-    appColorContrasts = colorContrastsList(appColorContrastAvailable, selectedAppColorContrast),
+    appColorContrasts = colorContrastsList(
+        appColorContrastAvailable = appColorContrastAvailable,
+        selectedAppColorContrast = selectedAppColorContrast
+    ),
 )
 
 private fun colorContrastsList(

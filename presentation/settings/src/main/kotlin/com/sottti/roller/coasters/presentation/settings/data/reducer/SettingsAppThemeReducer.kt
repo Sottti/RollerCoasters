@@ -40,26 +40,14 @@ internal fun SettingsState.showAppThemePicker(
 
 internal fun SettingsState.updateAppThemePicker(
     selectedAppTheme: AppThemeUi,
-): SettingsState {
-    val currentPicker = appTheme.picker ?: return this
-    val currentThemes = currentPicker.appThemes
-
-    val updatedThemes = currentThemes.map { theme ->
-        val shouldBeSelected = theme::class == selectedAppTheme::class
-        when (theme.selected) {
-            shouldBeSelected -> theme
-            else -> theme.withSelected(shouldBeSelected)
-        }
-    }
-
-    if (updatedThemes == currentThemes) return this
-
-    return copy(
-        appTheme = appTheme.copy(
-            picker = currentPicker.copy(appThemes = updatedThemes),
-        ),
+): SettingsState = copy(
+    appTheme = appTheme.copy(
+        picker = appThemePickerState(
+            lightDarkAppThemingAvailable = true,
+            selectedAppTheme = selectedAppTheme,
+        )
     )
-}
+)
 
 internal fun SettingsState.hideAppThemePicker(): SettingsState =
     copy(appTheme = appTheme.copy(picker = null))
@@ -83,9 +71,3 @@ private fun appThemesList(
     LightAppTheme.toPresentationModel(selected = selectedAppTheme is LightTheme),
     DarkAppTheme.toPresentationModel(selected = selectedAppTheme is DarkTheme),
 )
-
-private fun AppThemeUi.withSelected(selected: Boolean): AppThemeUi = when (this) {
-    is DarkTheme -> copy(selected = selected)
-    is LightTheme -> copy(selected = selected)
-    is SystemTheme -> copy(selected = selected)
-}
