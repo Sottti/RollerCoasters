@@ -54,7 +54,7 @@ internal class SearchViewModel @Inject constructor(
         ) { queryChanged, loading, searchResults -> reducer(loading, queryChanged, searchResults) }
             .scan(initialState) { previous, reduce -> reduce(previous) }
             .drop(1)
-            .stateInWhileSubscribed(initialValue = initialState)
+            .stateInWhileSubscribed(initialState)
 
     private suspend fun search(
         query: String,
