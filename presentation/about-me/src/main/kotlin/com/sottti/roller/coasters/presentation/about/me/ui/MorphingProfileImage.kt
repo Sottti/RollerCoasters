@@ -6,13 +6,19 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction.Cancel
+import androidx.compose.foundation.interaction.PressInteraction.Press
+import androidx.compose.foundation.interaction.PressInteraction.Release
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.graphics.shapes.Morph
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
@@ -36,6 +42,18 @@ internal fun MorphingProfileImage(
         animationSpec = spring(dampingRatio = 0.4f, stiffness = Spring.StiffnessMedium),
     )
     val morphPolygonShape = MorphPolygonShape(morph = morph, percentage = progress)
+    val haptic = LocalHapticFeedback.current
+
+    LaunchedEffect(interactionSource) {
+        interactionSource.interactions.collect { interaction ->
+            when (interaction) {
+                is Press -> haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                is Release -> haptic.performHapticFeedback(HapticFeedbackType.KeyboardTap)
+                is Cancel -> {}
+            }
+        }
+    }
+
 
     Image(
         state = image,
