@@ -1,23 +1,21 @@
 package com.sottti.roller.coasters.presentation.about.me.ui
 
-import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Spring.DampingRatioMediumBouncy
+import androidx.compose.animation.core.Spring.StiffnessMedium
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction.Cancel
-import androidx.compose.foundation.interaction.PressInteraction.Press
-import androidx.compose.foundation.interaction.PressInteraction.Release
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.graphics.shapes.Morph
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
@@ -38,22 +36,14 @@ internal fun MorphingProfileImage(
     val isPressed by interactionSource.collectIsPressedAsState()
     val progress by animateFloatAsState(
         targetValue = if (isPressed) 1f else 0f,
-        label = "progress",
-        animationSpec = spring(dampingRatio = 0.4f, stiffness = Spring.StiffnessMedium),
+        label = "morphing_profile_image_progress",
+        animationSpec = spring(
+            dampingRatio = DampingRatioMediumBouncy,
+            stiffness = StiffnessMedium,
+        ),
     )
     val morphPolygonShape = MorphPolygonShape(morph = morph, percentage = progress)
     val haptic = LocalHapticFeedback.current
-
-    LaunchedEffect(interactionSource) {
-        interactionSource.interactions.collect { interaction ->
-            when (interaction) {
-                is Press -> haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                is Release -> haptic.performHapticFeedback(HapticFeedbackType.KeyboardTap)
-                is Cancel -> {}
-            }
-        }
-    }
-
 
     Image(
         state = image,
@@ -64,6 +54,18 @@ internal fun MorphingProfileImage(
                 color = CardDefaults.cardColors().containerColor,
                 shape = morphPolygonShape
             )
-            .clickable(interactionSource = interactionSource) {}
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent()
+                        if (event.changes.any { it.pressed && !it.previousPressed }) {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                    }
+                }
+            }
+            .clickable(interactionSource = interactionSource) {
+                haptic.performHapticFeedback(HapticFeedbackType.KeyboardTap)
+            }
     )
 }
