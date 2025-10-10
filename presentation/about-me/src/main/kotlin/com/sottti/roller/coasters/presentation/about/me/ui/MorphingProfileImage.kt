@@ -5,7 +5,6 @@ import androidx.compose.animation.core.Spring.StiffnessMedium
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.material3.CardDefaults
@@ -14,8 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.graphics.shapes.Morph
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
@@ -23,6 +20,7 @@ import com.sottti.roller.coasters.presentation.design.system.images.model.ImageS
 import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
 import com.sottti.roller.coasters.presentation.design.system.shapes.polygon.MorphPolygonShape
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
+import com.sottti.roller.coasters.presentation.utils.onClickPressAndReleaseHaptics
 
 @Composable
 internal fun MorphingProfileImage(
@@ -54,18 +52,6 @@ internal fun MorphingProfileImage(
                 color = CardDefaults.cardColors().containerColor,
                 shape = morphPolygonShape
             )
-            .pointerInput(Unit) {
-                awaitPointerEventScope {
-                    while (true) {
-                        val event = awaitPointerEvent()
-                        if (event.changes.any { it.pressed && !it.previousPressed }) {
-                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                        }
-                    }
-                }
-            }
-            .clickable(interactionSource = interactionSource) {
-                haptic.performHapticFeedback(HapticFeedbackType.KeyboardTap)
-            }
+            .onClickPressAndReleaseHaptics(interactionSource)
     )
 }
