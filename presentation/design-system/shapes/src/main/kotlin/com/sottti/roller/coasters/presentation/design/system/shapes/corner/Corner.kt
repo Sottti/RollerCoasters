@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.design.system.shapes.model
+package com.sottti.roller.coasters.presentation.design.system.shapes.corner
 
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.ZeroCornerSize
