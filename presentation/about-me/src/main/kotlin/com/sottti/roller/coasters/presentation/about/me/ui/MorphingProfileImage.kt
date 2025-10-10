@@ -27,7 +27,7 @@ internal fun MorphingProfileImage(
 ) {
     val startShape = shapes.roundedPolygon.hexagon
     val endShape = shapes.roundedPolygon.octagon
-    val morph = remember { Morph(start = startShape, end = endShape) }
+    val morph = remember(startShape, endShape) { Morph(start = startShape, end = endShape) }
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val progress by animateFloatAsState(
@@ -40,11 +40,11 @@ internal fun MorphingProfileImage(
     Image(
         state = image,
         modifier = modifier
-            .clip(MorphPolygonShape(morph = morph, percentage = progress))
+            .clip(morphPolygonShape)
             .border(
                 width = dimensions.spacing.small,
                 color = CardDefaults.cardColors().containerColor,
-                shape = MorphPolygonShape(morph = morph, percentage = progress)
+                shape = morphPolygonShape
             )
             .clickable(interactionSource = interactionSource) {}
     )

@@ -15,17 +15,12 @@ public class MorphPolygonShape(
     private val percentage: Float,
 ) : Shape {
 
-    private val matrix = Matrix()
-
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
         density: Density,
     ): Outline {
-        // Below assumes that you haven't changed the default radius of 1f,
-        // nor the centerX and centerY of 0f
-        // By default this stretches the path to the size of the container,
-        // if you don't want stretching, use the same size.width for both x and y.
+        val matrix = Matrix()
         matrix.scale(size.width / 2f, size.height / 2f)
         matrix.translate(1f, 1f)
 

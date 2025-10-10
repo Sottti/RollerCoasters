@@ -146,7 +146,7 @@ private fun ProfileImage(state: ImageState) {
     MorphingProfileImage(
         modifier = Modifier
             .padding(top = dimensions.spacing.large)
-            .fillMaxWidth(fraction = 0.33f)
+            .fillMaxWidth(fraction = 0.4f)
             .aspectRatio(1f),
         image = state,
     )
