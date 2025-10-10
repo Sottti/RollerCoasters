@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.graphics.shapes.Morph
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
@@ -41,7 +40,6 @@ internal fun MorphingProfileImage(
         ),
     )
     val morphPolygonShape = MorphPolygonShape(morph = morph, percentage = progress)
-    val haptic = LocalHapticFeedback.current
 
     Image(
         state = image,
