@@ -43,7 +43,6 @@ import com.sottti.roller.coasters.presentation.design.system.card.grid.model.Car
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
-import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImage
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
@@ -53,7 +52,6 @@ import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.Spacer
 import com.sottti.roller.coasters.presentation.utils.override
-import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -145,7 +143,7 @@ private fun AboutMeItems(
 
 @Composable
 private fun ProfileImage(state: ImageState) {
-    HeroImage(
+    MorphingProfileImage(
         modifier = Modifier
             .padding(top = dimensions.spacing.large)
             .fillMaxWidth(fraction = 0.33f)

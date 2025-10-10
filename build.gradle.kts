@@ -1,4 +1,3 @@
-
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -49,7 +48,7 @@ subprojects {
         extensions.configure<KotlinJvmProjectExtension> {
             explicitApi()
             jvmToolchain(17)
-            compilerOptions{
+            compilerOptions {
                 freeCompilerArgs.add("-Xcontext-parameters")
             }
         }
