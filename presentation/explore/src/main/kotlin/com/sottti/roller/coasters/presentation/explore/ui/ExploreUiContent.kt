@@ -26,7 +26,6 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.utils.override
-import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 internal fun ExploreContent(
@@ -68,7 +67,7 @@ private fun RollerCoasters(
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         when (rollerCoasters.loadState.refresh) {
-            is Loading -> FillMaxWidthProgressIndicator(padding)
+            is Loading -> FillMaxSizeProgressIndicator(padding)
             is LoadState.Error -> ErrorUi(
                 modifier = Modifier.padding(padding),
                 button = ErrorButton(onClick = {})
@@ -102,7 +101,7 @@ private fun LoadedRollerCoasters(
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
-            item { FillMaxWidthProgressIndicator() }
+            item(key = "loading") { FillMaxWidthProgressIndicator() }
         }
 
         items(
@@ -118,7 +117,7 @@ private fun LoadedRollerCoasters(
         }
 
         if (rollerCoasters.loadState.append is Loading) {
-            item { FillMaxWidthProgressIndicator() }
+            item(key = "loading") { FillMaxWidthProgressIndicator() }
         }
     }
 }
@@ -140,6 +139,17 @@ private fun RollerCoaster(
             )
         },
         onClick = { onNavigateToRollerCoaster(rollerCoaster.id) },
+    )
+}
+
+@Composable
+private fun FillMaxSizeProgressIndicator(
+    padding: PaddingValues = PaddingValues(vertical = dimensions.spacing.medium),
+) {
+    ProgressIndicator(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxSize(),
     )
 }
 

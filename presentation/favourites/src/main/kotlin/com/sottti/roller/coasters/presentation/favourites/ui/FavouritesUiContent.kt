@@ -106,7 +106,7 @@ private fun LoadedRollerCoasters(
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
-            item { FillMaxWidthProgressIndicator() }
+            item(key = "loading") { FillMaxWidthProgressIndicator() }
         }
 
         items(
@@ -122,7 +122,7 @@ private fun LoadedRollerCoasters(
         }
 
         if (rollerCoasters.loadState.append is Loading) {
-            item { FillMaxWidthProgressIndicator() }
+            item(key = "loading") { FillMaxWidthProgressIndicator() }
         }
     }
 }
