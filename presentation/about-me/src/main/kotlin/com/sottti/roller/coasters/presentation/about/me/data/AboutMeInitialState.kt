@@ -99,6 +99,10 @@ private fun android(): Topics = Topics(
             image = Image(Images.MaterialDesign3Expressive.state),
             titleResId = R.string.topic_android_material_design_title,
             bodyResId = R.string.topic_android_material_design_description,
+            hyperlink = TopicHyperlink(
+                textResId = R.string.topic_android_material_design_hyperlink_text,
+                urlResId = R.string.topic_android_material_design_hyperlink_url,
+            )
         ),
     ),
     thirdTopic = Topic(
@@ -110,7 +114,7 @@ private fun android(): Topics = Topics(
             hyperlink = TopicHyperlink(
                 textResId = R.string.topic_android_design_systems_hyperlink_text,
                 urlResId = R.string.topic_android_design_systems_hyperlink_url,
-            )
+            ),
         ),
     ),
     fourthTopic = Topic(

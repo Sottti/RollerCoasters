@@ -1,7 +1,9 @@
 package com.sottti.roller.coasters.presentation.about.me.ui.bottomsheets
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,6 +11,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -46,7 +50,7 @@ internal fun BottomSheetContent(
         HeaderImage(state.image)
         Spacer(dimensions.spacing.large)
         Text.Title.Large(textResId = state.titleResId)
-        Spacer(dimensions.spacing.smallMedium)
+        Spacer(dimensions.spacing.medium)
         Text.Body.Medium(textResId = state.bodyResId, modifier = Modifier.fillMaxWidth())
         state.hyperlink?.let {
             Spacer(dimensions.spacing.medium)
@@ -76,7 +80,7 @@ private fun HeaderImage(
 }
 
 @Composable
-private fun Hyperlink(
+private fun ColumnScope.Hyperlink(
     hyperlink: TopicHyperlink,
     onAction: (AboutMeAction) -> Unit,
 ) {
@@ -90,8 +94,11 @@ private fun Hyperlink(
 
     Text.Body.Medium(
         modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) },
+            .align(Alignment.Start)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+            ) { onAction(OpenUrl(hyperlink.urlResId, primaryColor = primaryColor)) },
         text = annotatedLinkString,
     )
 }
