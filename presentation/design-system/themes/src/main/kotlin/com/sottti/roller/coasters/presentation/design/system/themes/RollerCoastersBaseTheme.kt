@@ -7,6 +7,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.Colors
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.shapes.ShapesLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.typography.TypographyLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.typography.typography
 
 @Composable
 internal fun RollerCoastersBaseTheme(
@@ -20,6 +21,7 @@ internal fun RollerCoastersBaseTheme(
                     MaterialTheme(
                         colorScheme = colorScheme,
                         content = content,
+                        typography = typography,
                     )
                 }
             }

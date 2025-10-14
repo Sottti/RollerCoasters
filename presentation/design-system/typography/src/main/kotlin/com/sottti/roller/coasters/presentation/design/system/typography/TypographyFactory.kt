@@ -1,28 +1,9 @@
 package com.sottti.roller.coasters.presentation.design.system.typography
 
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.material3.Typography as MaterialTypography
 
 @Composable
 @ReadOnlyComposable
-internal fun typography(): Typography =
-    with(MaterialTypography()) {
-        Typography(
-            displayLarge = displayLarge,
-            displayMedium = displayMedium,
-            displaySmall = displaySmall,
-            headlineLarge = headlineLarge,
-            headlineMedium = headlineMedium,
-            headlineSmall = headlineSmall,
-            titleLarge = titleLarge,
-            titleMedium = titleMedium,
-            titleSmall = titleSmall,
-            bodyLarge = bodyLarge,
-            bodyMedium = bodyMedium,
-            bodySmall = bodySmall,
-            labelLarge = labelLarge,
-            labelMedium = labelMedium,
-            labelSmall = labelSmall,
-        )
-    }
+internal fun typography(): Typography = Typography()
