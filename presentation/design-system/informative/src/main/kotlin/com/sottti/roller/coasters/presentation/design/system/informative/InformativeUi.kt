@@ -20,7 +20,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
 import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.CircledIllustration
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.utils.Spacer
 
@@ -75,7 +75,7 @@ internal fun InformativeUiPreview(
     @PreviewParameter(InformativeUiStateProvider::class)
     state: InformativeState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         InformativeUi(
             modifier = Modifier.background(colors.background),
             illustration = state.illustration,

@@ -10,7 +10,7 @@ import com.sottti.roller.coasters.presentation.design.system.illustrations.data.
 import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
 import com.sottti.roller.coasters.presentation.design.system.informative.InformativeButton
 import com.sottti.roller.coasters.presentation.design.system.informative.InformativeUi
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -41,7 +41,7 @@ internal fun ErrorUiPreview(
     @PreviewParameter(ErrorUiStateProvider::class)
     state: ErrorState?,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         when (state) {
             null -> ErrorUi(modifier = Modifier.background(colors.background))
             else -> ErrorUi(

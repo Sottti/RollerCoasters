@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import androidx.compose.material3.Icon as MaterialIcon
 
@@ -63,7 +63,7 @@ internal fun IconPreview(
     @PreviewParameter(IconStateProvider::class)
     state: com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.IconState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Icon(
             crossfade = state.crossfade,
             onClick = state.onClick,

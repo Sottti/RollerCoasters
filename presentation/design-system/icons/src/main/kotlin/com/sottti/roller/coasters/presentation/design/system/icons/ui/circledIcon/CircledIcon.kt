@@ -12,7 +12,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -40,7 +40,7 @@ public fun CircledIcon(
 @Composable
 @RollerCoastersPreview
 internal fun CircledIconOnBackgroundPreview() {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         CircledIcon(
             iconState = Icons.AccountCircle.filled,
             backgroundColor = colors.background,
@@ -52,7 +52,7 @@ internal fun CircledIconOnBackgroundPreview() {
 @Composable
 @RollerCoastersPreview
 internal fun CircledIconOnSurfacePreview() {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         CircledIcon(
             iconState = Icons.AccountCircle.filled,
             backgroundColor = colors.primaryContainer,

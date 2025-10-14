@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewSingleLocale
 import androidx.compose.foundation.Image as MaterialImage
 
@@ -34,7 +34,7 @@ internal fun ImagePreview(
     @PreviewParameter(ImageStateProvider::class)
     state: ImagePreviewState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Image(
             modifier = state.modifier,
             roundedCorners = state.roundedCorners,

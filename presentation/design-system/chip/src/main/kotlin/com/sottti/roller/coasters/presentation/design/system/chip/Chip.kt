@@ -13,7 +13,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -57,7 +57,7 @@ internal fun ChipPreview(
     @PreviewParameter(ChipStateProvider::class)
     state: ChipState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Chip(
             expanded = state.expanded,
             labelResId = state.labelResId,

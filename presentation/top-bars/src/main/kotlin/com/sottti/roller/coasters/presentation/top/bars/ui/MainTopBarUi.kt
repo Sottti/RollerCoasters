@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -72,7 +72,7 @@ internal fun MainTopBarPreview(
     @PreviewParameter(MainTopBarUiStateProvider::class)
     state: MainTopBarState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         MainTopBar(
             onNavigateToSettings = state.onNavigateToSettings,
             scrollBehavior = state.scrollBehavior,

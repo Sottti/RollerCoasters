@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersTallPreview
 import com.sottti.roller.coasters.presentation.roller.coaster.details.data.RollerCoasterDetailsViewModel
 import com.sottti.roller.coasters.presentation.roller.coaster.details.model.RollerCoasterDetailsAction
@@ -67,7 +67,7 @@ internal fun RollerCoasterDetailsUiPreview(
     @PreviewParameter(RollerCoasterDetailsUiStateProvider::class)
     previewState: RollerCoasterDetailsPreviewState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         RollerCoasterDetailsUi(
             onAction = previewState.onAction,
             onBackNavigation = previewState.onBackNavigation,

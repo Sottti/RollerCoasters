@@ -17,7 +17,7 @@ import com.sottti.roller.coasters.presentation.about.me.data.AboutMeViewModel
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeAction
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewState
 import com.sottti.roller.coasters.presentation.about.me.model.AboutMeState
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.utils.OnScrollToTopUiEffects
 
@@ -96,7 +96,7 @@ internal fun AboutMeUiPreview(
     @PreviewParameter(AboutMeUiStateProvider::class)
     state: AboutMePreviewState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         AboutMeUi(
             onAction = state.onAction,
             onListCreated = state.onListCreated,

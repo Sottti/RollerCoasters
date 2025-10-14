@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
 
 @Composable
@@ -37,7 +37,7 @@ private fun Playground1() {
 @Composable
 @RollerCoastersPreviewNoLocale
 private fun MyPreview() {
-    RollerCoastersPreviewTheme {}
+    RollerCoastersTheme {}
 }
 
 @Composable

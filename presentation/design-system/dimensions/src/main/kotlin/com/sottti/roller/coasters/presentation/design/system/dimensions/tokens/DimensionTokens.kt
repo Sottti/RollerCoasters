@@ -6,27 +6,9 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.model.Di
 
 @Composable
 @ReadOnlyComposable
-internal fun compactDimensions() =
+internal fun dimensions() =
     Dimensions(
-        component = DesignComponentTokens.compact(),
-        cornerRadii = CornerRadiiTokens.compact(),
-        spacing = SpacingTokens.compact(),
-    )
-
-@Composable
-@ReadOnlyComposable
-internal fun mediumDimensions() =
-    Dimensions(
-        component = DesignComponentTokens.medium(),
-        cornerRadii = CornerRadiiTokens.medium(),
-        spacing = SpacingTokens.medium(),
-    )
-
-@Composable
-@ReadOnlyComposable
-internal fun expandedDimensions() =
-    Dimensions(
-        component = DesignComponentTokens.expanded(),
-        cornerRadii = CornerRadiiTokens.expanded(),
-        spacing = SpacingTokens.expanded(),
+        component = componentTokens(),
+        cornerRadii = cornerRadiiTokens(),
+        spacing = spacingTokens(),
     )

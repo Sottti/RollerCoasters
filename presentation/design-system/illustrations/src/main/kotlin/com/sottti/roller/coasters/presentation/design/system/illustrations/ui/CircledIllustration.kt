@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.illustrations.data.Illustrations
 import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -34,7 +34,7 @@ public fun CircledIllustration(
 @Composable
 @RollerCoastersPreview
 internal fun CircledIllustrationPreview() {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         CircledIllustration(
             state = Illustrations.DragonKhanAndShambhala.state,
             modifier = Modifier,

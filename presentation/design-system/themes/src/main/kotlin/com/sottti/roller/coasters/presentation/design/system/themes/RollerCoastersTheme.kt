@@ -1,40 +1,44 @@
 package com.sottti.roller.coasters.presentation.design.system.themes
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sottti.roller.coasters.di.settings.colorContrast.provideObserveResolvedColorContrast
-import com.sottti.roller.coasters.di.settings.dynamicColor.provideObserveResolvedDynamicColor
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
+import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
+import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.dimensions.DimensionsLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.shapes.ShapesLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.typography.TypographyLocalProvider
+import com.sottti.roller.coasters.presentation.design.system.typography.typography
 
 @Composable
 public fun RollerCoastersTheme(
+    colorContrast: ResolvedColorContrast = StandardContrast,
+    dynamicColor: ResolvedDynamicColor = ResolvedDynamicColor(true),
     content: @Composable () -> Unit,
 ) {
-    val context = LocalContext.current
-    val resolvedDynamicColor =
-        provideObserveResolvedDynamicColor(context)()
-            .collectAsStateWithLifecycle(initialValue = ResolvedDynamicColor(false))
-            .value
-
-    val resolvedColorContrast =
-        provideObserveResolvedColorContrast(context)()
-            .collectAsStateWithLifecycle(initialValue = StandardContrast).value
-
     val colors = colors(
-        colorContrast = resolvedColorContrast,
+        colorContrast = colorContrast,
         darkTheme = isSystemInDarkTheme(),
-        dynamicColor = resolvedDynamicColor,
+        dynamicColor = dynamicColor,
     )
 
-    DimensionsLocalProvider {
-        RollerCoastersBaseTheme(
-            colorScheme = colors,
-            content = content,
-        )
+    ColorsLocalProvider(colorScheme = colors) {
+        TypographyLocalProvider {
+            OpacityLocalProvider {
+                DimensionsLocalProvider {
+                    ShapesLocalProvider {
+                        MaterialTheme(
+                            colorScheme = colors,
+                            content = content,
+                            typography = typography,
+                        )
+                    }
+                }
+            }
+        }
     }
 }

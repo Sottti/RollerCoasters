@@ -13,7 +13,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.explore.data.ExploreViewModel
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreEvent
@@ -123,7 +123,7 @@ internal fun ExploreUiPreview(
     @PreviewParameter(ExploreUiStateProvider::class)
     state: ExplorePreviewState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         ExploreUi(
             filters = state.filters,
             onAction = state.onAction,

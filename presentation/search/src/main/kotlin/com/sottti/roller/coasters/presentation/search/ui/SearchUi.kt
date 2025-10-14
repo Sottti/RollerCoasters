@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.search.data.SearchViewModel
 import com.sottti.roller.coasters.presentation.search.model.SearchAction
@@ -92,7 +92,7 @@ internal fun SearchUi(
 internal fun SearchUiPreview(
     @PreviewParameter(SearchUiStateProvider::class) state: SearchPreviewState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         SearchUi(
             onAction = state.onAction,
             onListCreated = state.onListCreated,

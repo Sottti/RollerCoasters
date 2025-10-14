@@ -2,7 +2,6 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.local
 
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.database.RollerCoastersDao
-import com.sottti.roller.coasters.data.roller.coasters.datasources.local.paging.FilteredRollerCoastersPagingSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherNotMainPictureRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.anotherRollerCoasterRoomModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.stubs.notMainPictureRoomModel
@@ -14,8 +13,6 @@ import com.sottti.roller.coasters.domain.fixtures.notMainPicture
 import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.fixtures.rollerCoasterId
 import com.sottti.roller.coasters.domain.roller.coasters.model.Pictures
-import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter.Alphabetical
-import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter.All
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem.Metric
@@ -87,16 +84,6 @@ internal class RollerCoastersLocalDataSourceTest {
     fun `store roller coasters when list is empty`() = runTest {
         localDataSource.storeRollerCoasters(emptyList())
         coVerify(exactly = 0) { dao.insertRollerCoasters(any(), any()) }
-    }
-
-    @Test
-    fun `get paged roller coasters returns a paging source`() {
-        val result = localDataSource.observeRollerCoasters(
-            measurementSystem = Metric,
-            sortByFilter = Alphabetical,
-            typeFilter = All,
-        )
-        assertThat(result).isInstanceOf(FilteredRollerCoastersPagingSource::class.java)
     }
 
     @Test

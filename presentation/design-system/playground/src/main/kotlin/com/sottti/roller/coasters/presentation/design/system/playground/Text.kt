@@ -10,14 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import androidx.compose.material3.Text as MaterialText
 
 
 @Preview
 @Composable
 private fun Material3Text() {
-    RollerCoastersPreviewTheme() {
+    RollerCoastersTheme() {
         MyCard {
             MaterialText(text = "This is a Material 3 Text")
         }
@@ -27,7 +27,7 @@ private fun Material3Text() {
 @Preview
 @Composable
 private fun VanillaText() {
-    RollerCoastersPreviewTheme() {
+    RollerCoastersTheme() {
         MyCard {
             Text.Vanilla(text = "This is a Material 3 Text")
         }
@@ -38,7 +38,7 @@ private fun VanillaText() {
 @Preview
 @Composable
 private fun BodyMediumText() {
-    RollerCoastersPreviewTheme() {
+    RollerCoastersTheme() {
         MyCard {
             Text.Body.Medium(text = "This is a Material 3 Text")
         }

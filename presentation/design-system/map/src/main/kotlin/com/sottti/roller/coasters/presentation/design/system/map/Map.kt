@@ -18,7 +18,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
 import com.sottti.roller.coasters.presentation.design.system.images.data.Images
 import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.design.system.themes.getMapStyle
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
@@ -91,7 +91,7 @@ internal fun MapPreview(
     @PreviewParameter(MapStateProvider::class)
     state: MapState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Map(
             latitude = state.latitude,
             longitude = state.longitude,

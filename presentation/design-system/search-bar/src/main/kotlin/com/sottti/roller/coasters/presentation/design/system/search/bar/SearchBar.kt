@@ -16,7 +16,7 @@ import com.sottti.roller.coasters.presentation.design.system.progress.indicators
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -70,7 +70,7 @@ internal fun SearchBarPreview(
     @PreviewParameter(SearchBarStateProvider::class)
     state: SearchBarState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         SearchBar(
             hint = state.hint,
             loading = state.loading,

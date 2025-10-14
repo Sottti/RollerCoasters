@@ -14,7 +14,7 @@ import com.sottti.roller.coasters.presentation.design.system.icons.model.IconSta
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import com.sottti.roller.coasters.presentation.utils.Spacer
 
@@ -66,7 +66,7 @@ internal fun PilledIconPreview(
     @PreviewParameter(PilledIconStateProvider::class)
     state: PilledIconState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         PilledIcon(
             text = state.text,
             iconState = state.iconState,

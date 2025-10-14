@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import androidx.compose.material3.Switch as MaterialSwitch
 
@@ -36,7 +36,7 @@ internal fun SwitchPreview(
     @PreviewParameter(SwitchStateProvider::class)
     state: SwitchState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Switch(
             checked = state.checked,
             enabled = state.enabled,

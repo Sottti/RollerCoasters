@@ -27,7 +27,7 @@ import com.sottti.roller.coasters.presentation.design.system.shapes.corner.Corne
 import com.sottti.roller.coasters.presentation.design.system.shapes.corner.Corner.Rounded
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
 import androidx.compose.material3.CardDefaults as MaterialCardDefaults
 
@@ -156,7 +156,7 @@ internal fun QuadCardGridPreview(
     @PreviewParameter(QuadCardGridStateProvider::class)
     state: QuadCardGridState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Box(modifier = Modifier.background(colors.surfaceContainerHighest)) {
             CardGrid(
                 items = state.items,
@@ -174,7 +174,7 @@ internal fun MonoCardGridPreview(
     @PreviewParameter(MonoCardGridStateProvider::class)
     state: MonoCardGridState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         CardGrid(
             textResId = state.textResId,
             modifier = state.modifier,

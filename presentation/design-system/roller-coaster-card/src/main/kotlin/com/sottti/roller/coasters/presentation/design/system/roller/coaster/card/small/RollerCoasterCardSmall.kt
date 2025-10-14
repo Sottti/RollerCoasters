@@ -19,7 +19,7 @@ import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard.Small
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.image.loading.Image
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
@@ -83,7 +83,7 @@ internal fun RollerCoasterCardSmallPreview(
     @PreviewParameter(RollerCoasterCardSmallStateProvider::class)
     state: RollerCoasterCardSmallState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         Small(
             modifier = Modifier.fillMaxWidth(),
             imageUrl = state.imageUrl,

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.dialogs.radioButtons.DismissButton
 import com.sottti.roller.coasters.presentation.design.system.text.Text
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -30,7 +30,7 @@ internal fun DialogInformativePreview(
     @PreviewParameter(DialogInformativeStateProvider::class)
     state: DialogInformativeState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         DialogInformative(
             title = state.title,
             text = state.text,

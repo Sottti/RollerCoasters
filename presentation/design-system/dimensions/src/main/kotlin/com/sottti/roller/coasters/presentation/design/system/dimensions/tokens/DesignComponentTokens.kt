@@ -2,27 +2,17 @@ package com.sottti.roller.coasters.presentation.design.system.dimensions.tokens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.dimensions.model.ComponentDimensions
+import com.sottti.roller.coasters.presentation.design.system.dimensions.model.ProgressIndicatorDimensions
 
-internal object DesignComponentTokens {
-    @Composable
-    @ReadOnlyComposable
-    internal fun compact() =
-        ComponentDimensions(
-            progressIndicator = ProgressIndicatorTokens.compat(),
-        )
-
-    @Composable
-    @ReadOnlyComposable
-    internal fun medium() =
-        ComponentDimensions(
-            progressIndicator = ProgressIndicatorTokens.medium(),
-        )
-
-    @Composable
-    @ReadOnlyComposable
-    internal fun expanded() =
-        ComponentDimensions(
-            progressIndicator = ProgressIndicatorTokens.expanded(),
-        )
-}
+@Composable
+@ReadOnlyComposable
+internal fun componentTokens() =
+    ComponentDimensions(
+        progressIndicator = ProgressIndicatorDimensions(
+            small = 24.dp,
+            medium = 36.dp,
+            large = 48.dp,
+        ),
+    )

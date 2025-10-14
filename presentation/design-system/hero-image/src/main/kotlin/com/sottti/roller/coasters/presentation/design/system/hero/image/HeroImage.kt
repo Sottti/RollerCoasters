@@ -10,7 +10,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 
@@ -38,7 +38,7 @@ internal fun HeroImagePreview(
     @PreviewParameter(ProfilePictureStateProvider::class)
     state: HeroImageState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         HeroImage(
             modifier = state.modifier,
             image = state.image,

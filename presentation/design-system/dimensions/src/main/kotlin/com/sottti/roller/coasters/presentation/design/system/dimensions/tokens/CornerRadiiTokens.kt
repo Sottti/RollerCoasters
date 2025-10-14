@@ -5,37 +5,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import com.sottti.roller.coasters.presentation.design.system.dimensions.model.CornerRadii
 
-internal object CornerRadiiTokens {
-    @Composable
-    @ReadOnlyComposable
-    internal fun compact(): CornerRadii =
-        CornerRadii(
-            extraSmall = MaterialTheme.shapes.extraSmall,
-            small = MaterialTheme.shapes.small,
-            medium = MaterialTheme.shapes.medium,
-            large = MaterialTheme.shapes.large,
-            extraLarge = MaterialTheme.shapes.extraLarge,
-        )
-
-    @Composable
-    @ReadOnlyComposable
-    internal fun medium(): CornerRadii =
-        CornerRadii(
-            extraSmall = MaterialTheme.shapes.extraSmall,
-            small = MaterialTheme.shapes.small,
-            medium = MaterialTheme.shapes.medium,
-            large = MaterialTheme.shapes.large,
-            extraLarge = MaterialTheme.shapes.extraLarge,
-        )
-
-    @Composable
-    @ReadOnlyComposable
-    internal fun expanded(): CornerRadii =
-        CornerRadii(
-            extraSmall = MaterialTheme.shapes.extraSmall,
-            small = MaterialTheme.shapes.small,
-            medium = MaterialTheme.shapes.medium,
-            large = MaterialTheme.shapes.large,
-            extraLarge = MaterialTheme.shapes.extraLarge,
-        )
-}
+@Composable
+@ReadOnlyComposable
+internal fun cornerRadiiTokens(): CornerRadii =
+    CornerRadii(
+        extraSmall = MaterialTheme.shapes.extraSmall,
+        small = MaterialTheme.shapes.small,
+        medium = MaterialTheme.shapes.medium,
+        large = MaterialTheme.shapes.large,
+        extraLarge = MaterialTheme.shapes.extraLarge,
+    )

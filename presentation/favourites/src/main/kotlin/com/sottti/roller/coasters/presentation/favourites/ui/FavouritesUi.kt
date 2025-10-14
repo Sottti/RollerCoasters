@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersPreviewTheme
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.favourites.data.FavouritesViewModel
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesPreviewState
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
@@ -90,7 +90,7 @@ internal fun FavouritesUiPreview(
     @PreviewParameter(FavouritesUiStateProvider::class)
     state: FavouritesPreviewState,
 ) {
-    RollerCoastersPreviewTheme {
+    RollerCoastersTheme {
         FavouritesUi(
             onListCreated = state.onListCreated,
             onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
