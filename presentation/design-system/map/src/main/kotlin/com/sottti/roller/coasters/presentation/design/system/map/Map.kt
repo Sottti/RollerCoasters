@@ -63,7 +63,7 @@ private fun RealMap(
     val latLng = remember(latitude, longitude) { LatLng(latitude, longitude) }
     val markerState = rememberUpdatedMarkerState(position = latLng)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(latLng, 17f)
+        position = CameraPosition.fromLatLngZoom(/* target = */ latLng, /* zoom = */ 17f)
     }
     val mapUiSettings = remember { MapUiSettings(scrollGesturesEnabled = false) }
     val mapProperties = remember(mapStyleOptions) {

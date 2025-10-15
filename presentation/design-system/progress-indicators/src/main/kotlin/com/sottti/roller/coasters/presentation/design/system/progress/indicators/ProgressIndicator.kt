@@ -14,7 +14,6 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
-
 @Composable
 public fun ProgressIndicator(
     modifier: Modifier = Modifier,

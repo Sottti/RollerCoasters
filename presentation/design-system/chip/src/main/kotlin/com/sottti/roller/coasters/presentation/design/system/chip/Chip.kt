@@ -50,7 +50,6 @@ private fun TrailingIcon(expanded: Boolean) =
         iconState = if (expanded) Icons.Arrow.DropUp.filled else Icons.Arrow.DropDown.filled,
     )
 
-
 @Composable
 @RollerCoastersPreview
 internal fun ChipPreview(

@@ -28,7 +28,6 @@ public fun PilledIcon(
         Graphic(iconState = iconState, onClick = onClick)
         Spacer(dimensions.spacing.smallMedium)
         Label(text)
-
     }
 }
 

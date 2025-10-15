@@ -70,7 +70,8 @@ private fun RadioButtonRow(
         trailingContent = {
             RadioButton(
                 selected = option.selected,
-                onClick = { onOptionSelected(option) })
+                onClick = { onOptionSelected(option) }
+            )
         },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         modifier = Modifier

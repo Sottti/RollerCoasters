@@ -103,7 +103,6 @@ private fun Footer(
     }
 }
 
-
 @Composable
 @RollerCoastersPreview
 internal fun RollerCoasterCardLargePreview(

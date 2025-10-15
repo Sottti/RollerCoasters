@@ -11,7 +11,6 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.home"
-
 }
 
 dependencies {

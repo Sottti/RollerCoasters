@@ -69,8 +69,8 @@ private fun Image(
         url = imageUrl,
         contentDescription = stringResource(R.string.image_content_description),
         modifier = Modifier
-            .fillMaxWidth(0.33f)
-            .aspectRatio(1.5f)
+            .fillMaxWidth(fraction = 0.33f)
+            .aspectRatio(ratio = 1.5f)
             .padding(dimensions.spacing.small),
         foreverLoading = foreverLoading,
         roundedCorners = true,
