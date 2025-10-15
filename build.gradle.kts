@@ -1,3 +1,4 @@
+
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -40,6 +41,7 @@ subprojects {
                 jvmTarget.set(JvmTarget.JVM_17)
                 freeCompilerArgs.add("-Xwhen-guards")
                 freeCompilerArgs.add("-Xcontext-parameters")
+                freeCompilerArgs.add("-Xannotation-default-target=param-property")
             }
         }
     }

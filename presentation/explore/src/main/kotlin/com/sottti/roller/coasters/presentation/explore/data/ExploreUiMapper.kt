@@ -32,10 +32,12 @@ import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.format.DisplayUnitFormatter
 import com.sottti.roller.coasters.presentation.string.provider.StringProvider
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 import java.util.Locale
 
+@OptIn(ExperimentalCoroutinesApi::class)
 internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
     appLanguage: AppLanguage,
     sortByFilter: SortByFilter,
