@@ -75,7 +75,6 @@ internal fun Flow<PagingData<RollerCoaster>>.toUiModel(
             stat = currentStat,
             statDetail = stringProvider.getString(R.string.roller_coaster_ranking, currentRank),
         )
-
     }
 }
 

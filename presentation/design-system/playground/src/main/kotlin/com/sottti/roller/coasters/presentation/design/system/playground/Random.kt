@@ -2,6 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.playground
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,6 +19,7 @@ import kotlin.math.min
 @Composable
 @RollerCoastersPreviewNoLocale
 private fun DefaultMinSize0() {
+    BoxWithConstraints() { }
     Box(
         modifier = Modifier
             .size(300.dp)

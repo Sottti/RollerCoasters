@@ -44,7 +44,7 @@ internal class AboutMeViewModelTest {
 
         justRun {
             externalNavigation.openUrl(
-                urlResId = urlResId,
+                urlResId = URL_RES_ID,
                 toolbarColor = toolbarColorInt,
             )
         }
@@ -53,7 +53,7 @@ internal class AboutMeViewModelTest {
 
         verify(exactly = 1) {
             externalNavigation.openUrl(
-                urlResId = urlResId,
+                urlResId = URL_RES_ID,
                 toolbarColor = toolbarColorInt,
             )
         }
