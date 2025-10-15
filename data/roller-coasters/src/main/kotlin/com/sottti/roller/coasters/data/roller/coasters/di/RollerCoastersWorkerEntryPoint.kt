@@ -7,6 +7,6 @@ import dagger.hilt.components.SingletonComponent
 
 @EntryPoint
 @InstallIn(SingletonComponent::class)
-internal interface RollerCoastersWorkerEntryPoint {
+internal fun interface RollerCoastersWorkerEntryPoint {
     fun rollerCoastersRepository(): RollerCoastersRepository
 }
