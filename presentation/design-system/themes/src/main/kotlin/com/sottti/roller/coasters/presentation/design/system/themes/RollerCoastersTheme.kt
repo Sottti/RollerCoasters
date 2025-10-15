@@ -17,6 +17,22 @@ import com.sottti.roller.coasters.presentation.design.system.typography.typograp
 public fun RollerCoastersTheme(
     colorContrast: ResolvedColorContrast = StandardContrast,
     dynamicColor: ResolvedDynamicColor = ResolvedDynamicColor(true),
+    themeType: RollerCoastersThemeType = RollerCoastersThemeType.Default,
+    content: @Composable () -> Unit,
+) {
+    when (themeType) {
+        RollerCoastersThemeType.Default -> defaultTheme(
+            colorContrast = colorContrast,
+            dynamicColor = dynamicColor,
+            content = content
+        )
+    }
+}
+
+@Composable
+private fun defaultTheme(
+    colorContrast: ResolvedColorContrast,
+    dynamicColor: ResolvedDynamicColor,
     content: @Composable () -> Unit,
 ) {
     ColorsLocalProvider(colorContrast = colorContrast, dynamicColor = dynamicColor) {
