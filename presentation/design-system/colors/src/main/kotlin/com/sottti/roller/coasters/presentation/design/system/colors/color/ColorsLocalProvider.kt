@@ -1,15 +1,24 @@
 package com.sottti.roller.coasters.presentation.design.system.colors.color
 
-import androidx.compose.material3.ColorScheme
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
+import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 
 @Composable
 public fun ColorsLocalProvider(
-    colorScheme: ColorScheme,
+    colorContrast: ResolvedColorContrast,
+    dynamicColor: ResolvedDynamicColor,
     content: @Composable () -> Unit,
 ) {
-    CompositionLocalProvider(LocalColors provides colorScheme) {
+    val colors = colors(
+        colorContrast = colorContrast,
+        darkTheme = isSystemInDarkTheme(),
+        dynamicColor = dynamicColor,
+    )
+
+    CompositionLocalProvider(LocalColors provides colors) {
         content()
     }
 }

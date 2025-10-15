@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.design.system.themes
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
@@ -20,13 +19,7 @@ public fun RollerCoastersTheme(
     dynamicColor: ResolvedDynamicColor = ResolvedDynamicColor(true),
     content: @Composable () -> Unit,
 ) {
-    val colors = colors(
-        colorContrast = colorContrast,
-        darkTheme = isSystemInDarkTheme(),
-        dynamicColor = dynamicColor,
-    )
-
-    ColorsLocalProvider(colorScheme = colors) {
+    ColorsLocalProvider(colorContrast = colorContrast, dynamicColor = dynamicColor) {
         TypographyLocalProvider {
             OpacityLocalProvider {
                 DimensionsLocalProvider {
