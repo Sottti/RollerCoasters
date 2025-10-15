@@ -21,7 +21,7 @@ public fun RollerCoastersTheme(
     content: @Composable () -> Unit,
 ) {
     when (themeType) {
-        RollerCoastersThemeType.Default -> defaultTheme(
+        RollerCoastersThemeType.Default -> DefaultTheme(
             colorContrast = colorContrast,
             dynamicColor = dynamicColor,
             content = content
@@ -30,7 +30,7 @@ public fun RollerCoastersTheme(
 }
 
 @Composable
-private fun defaultTheme(
+private fun DefaultTheme(
     colorContrast: ResolvedColorContrast,
     dynamicColor: ResolvedDynamicColor,
     content: @Composable () -> Unit,
