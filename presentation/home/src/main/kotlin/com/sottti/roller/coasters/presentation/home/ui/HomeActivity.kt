@@ -33,7 +33,7 @@ internal class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 combine(
                     flow = provideObserveResolvedColorContrast(),
                     flow2 = provideObserveResolvedDynamicColor(),
