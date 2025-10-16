@@ -19,7 +19,7 @@ import kotlin.math.min
 @Composable
 @RollerCoastersPreviewNoLocale
 private fun DefaultMinSize0() {
-    BoxWithConstraints() { }
+    BoxWithConstraints { }
     Box(
         modifier = Modifier
             .size(300.dp)
@@ -34,7 +34,6 @@ private fun DefaultMinSize0() {
         )
     }
 }
-
 
 private fun Modifier.circledRainbowBorder(
     strokeWidth: Dp,
