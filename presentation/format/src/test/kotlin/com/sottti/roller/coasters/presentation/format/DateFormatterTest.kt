@@ -1,12 +1,10 @@
 package com.sottti.roller.coasters.presentation.format
 
-import android.content.Context
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.domain.locales.localeEs
 import com.sottti.roller.coasters.domain.locales.localeFr
 import com.sottti.roller.coasters.domain.locales.localeUs
 import com.sottti.roller.coasters.domain.model.Date
-import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
@@ -14,8 +12,6 @@ import java.time.Year
 import java.time.YearMonth
 
 internal class DateFormatterTest {
-
-    private val context: Context = mockk()
 
     private val localDate = LocalDate.of(2025, 4, 24)
     private val yearMonth = YearMonth.of(2025, 4)
@@ -41,9 +37,9 @@ internal class DateFormatterTest {
 
     @Before
     fun setUp() {
-        formatterUs = DateFormatter(context, localeUs)
-        formatterEs = DateFormatter(context, localeEs)
-        formatterFr = DateFormatter(context, localeFr)
+        formatterUs = DateFormatter(localeUs)
+        formatterEs = DateFormatter(localeEs)
+        formatterFr = DateFormatter(localeFr)
     }
 
     @Test
