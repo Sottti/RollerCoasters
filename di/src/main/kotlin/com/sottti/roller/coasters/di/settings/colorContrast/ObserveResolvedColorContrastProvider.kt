@@ -10,4 +10,4 @@ public fun provideObserveResolvedColorContrast(
     EntryPointAccessors.fromApplication(
         context = context.applicationContext,
         entryPoint = ObserveResolvedColorContrastEntryPoint::class.java,
-    ).observeColorContrast()
+    ).observeResolvedColorContrast()

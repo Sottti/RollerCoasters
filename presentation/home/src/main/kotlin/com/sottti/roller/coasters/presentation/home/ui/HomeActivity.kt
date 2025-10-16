@@ -13,6 +13,9 @@ import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveR
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveResolvedDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,9 +33,14 @@ internal class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                provideObserveResolvedColorContrast().collect { resolvedColorContrast ->
-                    provideObserveResolvedDynamicColor().collect { resolvedDynamicColor ->
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                combine(
+                    flow = provideObserveResolvedColorContrast(),
+                    flow2 = provideObserveResolvedDynamicColor(),
+                ) { resolvedColorContrast, resolvedDynamicColor ->
+                    resolvedColorContrast to resolvedDynamicColor
+                }.distinctUntilChanged()
+                    .collectLatest { (resolvedColorContrast, resolvedDynamicColor) ->
                         setContent {
                             RollerCoastersTheme(
                                 colorContrast = resolvedColorContrast,
@@ -40,7 +48,6 @@ internal class HomeActivity : AppCompatActivity() {
                             ) { HomeUi() }
                         }
                     }
-                }
             }
         }
     }

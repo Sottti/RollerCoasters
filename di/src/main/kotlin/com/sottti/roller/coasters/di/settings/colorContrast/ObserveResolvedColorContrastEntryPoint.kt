@@ -8,5 +8,5 @@ import dagger.hilt.components.SingletonComponent
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 internal fun interface ObserveResolvedColorContrastEntryPoint {
-    fun observeColorContrast(): ObserveResolvedColorContrast
+    fun observeResolvedColorContrast(): ObserveResolvedColorContrast
 }
