@@ -114,7 +114,7 @@ private fun LazyListScope.theme(
         supporting = state.appTheme.listItem.supporting,
         iconState = state.appTheme.listItem.icon,
         onClick = launchThemePicker,
-        topRounded = false,
+        topRounded = state.dynamicColor == null,
         bottomRounded = true,
         key = "theme",
     ) {
