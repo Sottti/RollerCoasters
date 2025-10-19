@@ -39,7 +39,8 @@ internal class HomeActivity : AppCompatActivity() {
                     flow2 = provideObserveResolvedDynamicColor(),
                 ) { resolvedColorContrast, resolvedDynamicColor ->
                     resolvedColorContrast to resolvedDynamicColor
-                }.distinctUntilChanged()
+                }
+                    .distinctUntilChanged()
                     .collectLatest { (resolvedColorContrast, resolvedDynamicColor) ->
                         setContent {
                             RollerCoastersTheme(

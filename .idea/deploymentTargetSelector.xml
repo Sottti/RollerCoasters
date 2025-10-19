@@ -38,10 +38,10 @@
       <SelectionState runConfigName="MonoCardGridUiTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="QuadCardGridUiTest">
+      <SelectionState runConfigName="cardElevationAnimation">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="each_card_invokes_correct_indices_in_order()">
+      <SelectionState runConfigName="RecompositionDemoPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

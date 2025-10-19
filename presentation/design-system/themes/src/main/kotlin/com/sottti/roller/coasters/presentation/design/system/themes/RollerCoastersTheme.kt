@@ -21,11 +21,12 @@ public fun RollerCoastersTheme(
     content: @Composable () -> Unit,
 ) {
     when (themeType) {
-        RollerCoastersThemeType.Default -> DefaultTheme(
-            colorContrast = colorContrast,
-            dynamicColor = dynamicColor,
-            content = content
-        )
+        RollerCoastersThemeType.Default ->
+            DefaultTheme(
+                colorContrast = colorContrast,
+                dynamicColor = dynamicColor,
+                content = content
+            )
     }
 }
 

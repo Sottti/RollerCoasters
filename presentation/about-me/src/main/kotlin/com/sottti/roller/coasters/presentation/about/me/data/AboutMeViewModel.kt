@@ -16,6 +16,7 @@ import javax.inject.Inject
 internal class AboutMeViewModel @Inject constructor(
     val externalNavigation: ExternalNavigation,
 ) : ViewModel() {
+
     internal val state: StateFlow<AboutMeState> =
         MutableStateFlow(initialState).asStateFlow()
 

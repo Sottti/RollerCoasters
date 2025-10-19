@@ -20,9 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
-private fun Playground1() {
+private fun BackgroundArg() {
     val backgroundColor by animateColorBetween(Color.Magenta, Color.Green)
     Box(
         modifier = Modifier
@@ -35,19 +37,13 @@ private fun Playground1() {
 }
 
 @Composable
-@RollerCoastersPreviewNoLocale
-private fun MyPreview() {
-    RollerCoastersTheme {}
-}
-
-@Composable
 internal fun animateColorBetween(start: Color, end: Color): State<Color> {
     val infiniteTransition = rememberInfiniteTransition()
     return infiniteTransition.animateColor(
         initialValue = start,
         targetValue = end,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 2000),
+            animation = tween(durationMillis = 2.seconds.inWholeMilliseconds.toInt()),
             repeatMode = RepeatMode.Reverse,
         )
     )
@@ -60,8 +56,16 @@ private fun animateAlphaBetween(start: Float, end: Float): State<Float> {
         initialValue = start,
         targetValue = end,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 2000),
+            animation = tween(durationMillis = 2.seconds.inWholeMilliseconds.toInt()),
             repeatMode = RepeatMode.Reverse,
         )
     )
+}
+
+@Composable
+@RollerCoastersPreviewNoLocale
+private fun MyPreview() {
+    RollerCoastersTheme {
+        BackgroundArg()
+    }
 }

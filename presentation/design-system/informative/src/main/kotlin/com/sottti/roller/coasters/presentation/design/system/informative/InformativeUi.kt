@@ -42,7 +42,8 @@ public fun InformativeUi(
         Spacer(weight = 1f)
         CircledIllustration(
             state = illustration,
-            modifier = Modifier.fillMaxWidth(fraction = 0.8f),
+            modifier = Modifier
+                .fillMaxWidth(fraction = 0.8f),
         )
         Spacer(weight = 0.5f)
         Text.Headline.Medium(
