@@ -34,7 +34,7 @@ internal fun String.toTheme(): AppTheme =
 internal fun AppTheme.toUiModeManagerNightMode() = when (this) {
     AppTheme.DarkAppTheme -> UiModeManager.MODE_NIGHT_YES
     AppTheme.LightAppTheme -> UiModeManager.MODE_NIGHT_NO
-    AppTheme.System -> UiModeManager.MODE_NIGHT_CUSTOM
+    AppTheme.System -> UiModeManager.MODE_NIGHT_AUTO
 }
 
 internal fun AppTheme.toAppCompatDelegateNightMode() = when (this) {
