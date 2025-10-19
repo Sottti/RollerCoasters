@@ -13,6 +13,7 @@ internal class SystemColorContrastManager @Inject constructor(
     val systemColorContrast: SystemColorContrast
         get() = when {
             features.systemColorContrastAvailable() -> {
+                // uiModeManager.contrast returns 0f for standard, 0.5f for medium and 1f for high
                 val contrast = uiModeManager?.contrast ?: 0f
                 toSystemColorContrast(contrast)
             }
