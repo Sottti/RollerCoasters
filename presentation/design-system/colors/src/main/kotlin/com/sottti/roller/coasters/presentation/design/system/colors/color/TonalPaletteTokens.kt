@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.colors.color
 
 import androidx.compose.ui.graphics.Color
 
-internal object PaletteTokens {
+internal object TonalPaletteTokens {
     val Error10 = Color(red = 147, green = 0, blue = 10)
     val Error20 = Color(red = 96, green = 0, blue = 4)
     val Error30 = Color(red = 116, green = 0, blue = 6)
