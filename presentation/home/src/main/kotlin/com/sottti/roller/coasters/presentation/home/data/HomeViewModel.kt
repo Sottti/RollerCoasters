@@ -25,7 +25,7 @@ internal class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val actions = MutableSharedFlow<HomeActions>(extraBufferCapacity = 64)
-    val state: StateFlow<HomeState?> = combine(
+    val state: StateFlow<HomeState> = combine(
         flow = observeResolvedColorContrast(),
         flow2 = observeResolvedDynamicColor(),
         flow3 = actions.onStart { emit(NoOp) },
@@ -35,23 +35,19 @@ internal class HomeViewModel @Inject constructor(
             resolvedDynamicColor,
             stateMutationAction,
         )
-    }
-        .scan(null as HomeState?) { previous, reduce -> reduce(previous) }
+    }.scan(initialState) { previous, reduce -> reduce(previous) }
         .drop(1)
-        .stateInWhileSubscribed(initialValue = null)
+        .stateInWhileSubscribed(initialValue = initialState)
 
     internal val onAction: (HomeActions) -> Unit = ::processAction
-    private fun processAction(action: HomeActions) {
-        actions.tryEmit(action)
-    }
-
+    private fun processAction(action: HomeActions) = actions.tryEmit(action)
     private val reducer: (
         resolvedColorContrast: ResolvedColorContrast,
         resolvedDynamicColor: ResolvedDynamicColor,
         stateMutationAction: HomeActions,
-    ) -> (HomeState?) -> HomeState =
+    ) -> (HomeState) -> HomeState =
         { resolvedColorContrast, resolvedDynamicColor, stateMutationAction ->
-            { previous: HomeState? ->
+            { previous: HomeState ->
                 previous.reduce(
                     resolvedDynamicColor = resolvedDynamicColor,
                     stateMutationAction = stateMutationAction,

@@ -40,7 +40,7 @@ public sealed interface NavigationDestination {
     }
 
     public companion object {
-        public val  saver: Saver<NavigationDestination, String> = Saver(
+        public val saver: Saver<NavigationDestination, String> = Saver(
             save = { navigationDestination ->
                 navigationDestination::class.qualifiedName ?: Explore::class.qualifiedName
             },

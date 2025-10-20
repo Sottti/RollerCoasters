@@ -25,7 +25,7 @@ internal class HomeActivity : AppCompatActivity() {
                 .state
                 .collectAsStateWithLifecycle()
                 .value
-                ?.let { state ->
+                .let { state ->
                     RollerCoastersTheme(
                         colorContrast = state.colorContrast,
                         dynamicColor = state.dynamicColor,

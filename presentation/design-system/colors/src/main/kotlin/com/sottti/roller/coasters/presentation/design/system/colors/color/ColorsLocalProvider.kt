@@ -9,7 +9,7 @@ import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDyn
 public fun ColorsLocalProvider(
     colorContrast: ResolvedColorContrast,
     dynamicColor: ResolvedDynamicColor,
-    isSystemInDarkTheme : Boolean,
+    isSystemInDarkTheme: Boolean,
     content: @Composable () -> Unit,
 ) {
     val colors = colors(
