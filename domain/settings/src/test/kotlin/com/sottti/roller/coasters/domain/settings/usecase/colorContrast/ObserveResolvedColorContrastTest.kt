@@ -53,7 +53,7 @@ internal class ObserveResolvedColorContrastTest {
     fun `emits resolved high contrast when system high contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
-            settingsRepository.getAppSystemColorContrast()
+            settingsRepository.getSystemColorContrast()
         } returns SystemColorContrast.HighContrast
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.HighContrast)
@@ -63,7 +63,7 @@ internal class ObserveResolvedColorContrastTest {
     fun `emits resolved low contrast when system low contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
-            settingsRepository.getAppSystemColorContrast()
+            settingsRepository.getSystemColorContrast()
         } returns SystemColorContrast.LowContrast
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.LowContrast)
@@ -73,7 +73,7 @@ internal class ObserveResolvedColorContrastTest {
     fun `emits resolved medium contrast when system medium contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
-            settingsRepository.getAppSystemColorContrast()
+            settingsRepository.getSystemColorContrast()
         } returns SystemColorContrast.MediumContrast
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.MediumContrast)
@@ -83,7 +83,7 @@ internal class ObserveResolvedColorContrastTest {
     fun `emits resolved standard contrast when system standard contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
         coEvery {
-            settingsRepository.getAppSystemColorContrast()
+            settingsRepository.getSystemColorContrast()
         } returns SystemColorContrast.StandardContrast
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.StandardContrast)
@@ -95,7 +95,7 @@ internal class ObserveResolvedColorContrastTest {
             settingsRepository.observeAppColorContrast()
         } returns flowOf(HighContrast, System)
         coEvery {
-            settingsRepository.getAppSystemColorContrast()
+            settingsRepository.getSystemColorContrast()
         } returns SystemColorContrast.MediumContrast
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(

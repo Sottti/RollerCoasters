@@ -21,6 +21,9 @@ internal class SettingsRepositoryImpl @Inject constructor(
         localDataSource.setAppDynamicColor(appDynamicColor)
     }
 
+    override suspend fun getAppDynamicColor(): AppDynamicColor =
+        localDataSource.getAppDynamicColor()
+
     override fun observeAppDynamicColor(): Flow<AppDynamicColor> =
         localDataSource.observeAppDynamicColor()
 
@@ -48,7 +51,7 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override fun observeAppColorContrast(): Flow<AppColorContrast> =
         localDataSource.observeAppColorContrast()
 
-    override fun getAppSystemColorContrast(): SystemColorContrast =
+    override fun getSystemColorContrast(): SystemColorContrast =
         localDataSource.getSystemColorContrast()
 
     override fun setAppLanguage(appLanguage: AppLanguage) {

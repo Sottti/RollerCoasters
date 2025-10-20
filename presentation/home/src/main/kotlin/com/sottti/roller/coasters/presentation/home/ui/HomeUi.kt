@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.sottti.roller.coasters.presentation.home.model.HomeActions
+import com.sottti.roller.coasters.presentation.home.model.HomeState
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Home
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.RollerCoasterDetails
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Settings
@@ -11,7 +13,11 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.ui.RollerC
 import com.sottti.roller.coasters.presentation.settings.ui.SettingsUi
 
 @Composable
-internal fun HomeUi() {
+internal fun HomeUi(
+    state: HomeState,
+    onAction: (HomeActions) -> Unit,
+
+    ) {
     val rootNavController = rememberNavController()
 
     NavHost(
@@ -20,10 +26,14 @@ internal fun HomeUi() {
     ) {
         composable<Home> {
             NavigationBar(
-                onNavigateToSettings = { rootNavController.navigate(Settings) },
+                onAction = onAction,
                 onNavigateToRollerCoaster = { rollerCoasterId ->
-                    rootNavController.navigate(RollerCoasterDetails(rollerCoasterId))
+                    rootNavController.navigate(
+                        RollerCoasterDetails(rollerCoasterId)
+                    )
                 },
+                onNavigateToSettings = { rootNavController.navigate(Settings) },
+                state = state,
             )
         }
         composable<Settings> {

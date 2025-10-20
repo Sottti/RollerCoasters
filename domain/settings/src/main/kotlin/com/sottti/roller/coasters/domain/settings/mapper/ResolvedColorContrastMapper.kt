@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedCo
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 
 @VisibleForTesting
-internal const val SYSTEM_CONTRAST_UNRESOLVED_MESSAGE = "System contrast should be resolved"
+internal const val SYSTEM_CONTRAST_UNRESOLVED_MESSAGE = "Should rely on system color contrast"
 
 internal fun AppColorContrast.toResolvedColorContrast(): ResolvedColorContrast =
     when (this) {

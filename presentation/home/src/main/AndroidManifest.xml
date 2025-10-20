@@ -4,6 +4,7 @@
     <application>
         <activity
             android:name=".ui.HomeActivity"
+            android:configChanges="uiMode"
             android:exported="false"
             android:icon="@mipmap/ic_launcher"
             android:theme="@style/Theme.RollerCoasters" />

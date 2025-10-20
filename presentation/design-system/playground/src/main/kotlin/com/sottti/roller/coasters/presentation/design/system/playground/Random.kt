@@ -35,6 +35,7 @@ private fun MutatingButton() {
 @Composable
 @RollerCoastersPreviewNoLocale
 private fun DefaultMinSize0() {
+    val a by remember { mutableStateOf(listOf(1)) }
     Box(
         modifier = Modifier
             .size(300.dp)

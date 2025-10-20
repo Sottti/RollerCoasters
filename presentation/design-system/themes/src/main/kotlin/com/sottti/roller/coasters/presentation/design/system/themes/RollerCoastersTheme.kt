@@ -1,7 +1,12 @@
 package com.sottti.roller.coasters.presentation.design.system.themes
 
+import android.app.Activity
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
@@ -36,11 +41,17 @@ private fun DefaultTheme(
     dynamicColor: ResolvedDynamicColor,
     content: @Composable () -> Unit,
 ) {
-    ColorsLocalProvider(colorContrast = colorContrast, dynamicColor = dynamicColor) {
+    val isSystemInDarkTheme = isSystemInDarkTheme()
+    ColorsLocalProvider(
+        colorContrast = colorContrast,
+        dynamicColor = dynamicColor,
+        isSystemInDarkTheme = isSystemInDarkTheme,
+    ) {
         TypographyLocalProvider {
             OpacityLocalProvider {
                 DimensionsLocalProvider {
                     ShapesLocalProvider {
+                        updateSystemBars(isSystemInDarkTheme)
                         MaterialTheme(
                             colorScheme = colors,
                             content = content,
@@ -49,6 +60,24 @@ private fun DefaultTheme(
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun updateSystemBars(
+    isSystemInDarkTheme: Boolean,
+) {
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            WindowCompat
+                .getInsetsController(window, view)
+                .apply {
+                    isAppearanceLightStatusBars = !isSystemInDarkTheme
+                    isAppearanceLightNavigationBars = !isSystemInDarkTheme
+                }
         }
     }
 }

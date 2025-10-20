@@ -16,8 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,9 +24,10 @@ import androidx.navigation.compose.rememberNavController
 import com.sottti.roller.coasters.presentation.about.me.ui.AboutMeUi
 import com.sottti.roller.coasters.presentation.explore.ui.ExploreUi
 import com.sottti.roller.coasters.presentation.favourites.ui.FavouritesUi
-import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
+import com.sottti.roller.coasters.presentation.home.model.HomeActions
 import com.sottti.roller.coasters.presentation.home.model.HomeActions.DestinationSelected
-import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
+import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItemState
+import com.sottti.roller.coasters.presentation.home.model.HomeState
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.AboutMe
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination.Explore
@@ -40,9 +39,10 @@ import com.sottti.roller.coasters.presentation.search.ui.SearchUi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun NavigationBar(
+    onAction: (HomeActions) -> Unit,
     onNavigateToRollerCoaster: (Int) -> Unit,
     onNavigateToSettings: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel(),
+    state: HomeState,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var bottomSheetContent by remember {
@@ -54,7 +54,6 @@ internal fun NavigationBar(
 
     val navController = rememberNavController()
     val startDestination = Explore
-    val state by viewModel.state.collectAsStateWithLifecycle()
     var selectedTab by rememberSaveable(stateSaver = NavigationDestination.saver) {
         mutableStateOf(startDestination)
     }
@@ -66,7 +65,7 @@ internal fun NavigationBar(
         val currentDestination = navBackStackEntry?.destination?.route.toNavigationDestination()
         if (currentDestination != selectedTab) {
             selectedTab = currentDestination
-            viewModel.onAction(DestinationSelected(currentDestination))
+            onAction(DestinationSelected(currentDestination))
         }
     }
 
@@ -74,14 +73,14 @@ internal fun NavigationBar(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             BottomBar(
-                navigationBarItems = state.items,
+                navigationBarItems = state.navigationBarItems,
                 onNavigationBarItemClick = { homeNavigationBarItem ->
                     val destination = homeNavigationBarItem.destination
                     when (selectedTab) {
                         destination -> scrollToTopCallbacks[destination]?.invoke()
                         else -> {
                             selectedTab = destination
-                            viewModel.onAction(DestinationSelected(destination))
+                            onAction(DestinationSelected(destination))
                             navController.navigateTo(homeNavigationBarItem)
                         }
                     }
@@ -160,9 +159,9 @@ private fun HomeNavHost(
 }
 
 private fun NavHostController.navigateTo(
-    homeNavigationBarItem: HomeNavigationBarItem,
+    homeNavigationBarItemState: HomeNavigationBarItemState,
 ) {
-    navigate(homeNavigationBarItem.destination) {
+    navigate(homeNavigationBarItemState.destination) {
         popUpTo(graph.startDestinationId) { saveState = true }
         launchSingleTop = true
         restoreState = true

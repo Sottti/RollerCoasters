@@ -67,6 +67,8 @@ internal class SettingsLocalDataSource @Inject constructor(
         }
     }
 
+    suspend fun getAppDynamicColor() = observeAppDynamicColor().first()
+
     fun observeAppDynamicColor(): Flow<AppDynamicColor> = appDynamicColorFlow
 
     suspend fun setAppTheme(appTheme: AppTheme) {

@@ -4,17 +4,15 @@ import com.sottti.roller.coasters.domain.settings.mapper.toResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-public class ObserveResolvedColorContrast @Inject constructor(
+public class GetResolvedColorContrast @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) {
-    public operator fun invoke(): Flow<ResolvedColorContrast> =
+    public suspend operator fun invoke(): ResolvedColorContrast =
         settingsRepository
-            .observeAppColorContrast()
-            .map { appColorContrast -> appColorContrast.resolve() }
+            .getAppColorContrast()
+            .resolve()
 
     private fun AppColorContrast.resolve(): ResolvedColorContrast =
         when (this) {
@@ -24,6 +22,8 @@ public class ObserveResolvedColorContrast @Inject constructor(
                 -> toResolvedColorContrast()
 
             AppColorContrast.System ->
-                settingsRepository.getSystemColorContrast().toResolvedColorContrast()
+                settingsRepository
+                    .getSystemColorContrast()
+                    .toResolvedColorContrast()
         }
 }

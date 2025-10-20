@@ -7,14 +7,14 @@ import com.sottti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.home.data.navigationBarItems
-import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItem
-import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItems
+import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItemState
+import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarState
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
 internal fun BottomBar(
-    navigationBarItems: HomeNavigationBarItems,
-    onNavigationBarItemClick: (item: HomeNavigationBarItem) -> Unit,
+    navigationBarItems: HomeNavigationBarState,
+    onNavigationBarItemClick: (item: HomeNavigationBarItemState) -> Unit,
 ) {
     NavigationBar {
         navigationBarItems.items.forEach { item ->

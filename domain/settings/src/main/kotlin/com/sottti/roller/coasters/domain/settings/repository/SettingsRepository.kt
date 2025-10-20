@@ -11,24 +11,25 @@ import kotlinx.coroutines.flow.Flow
 import java.util.Locale
 
 public interface SettingsRepository {
-    public suspend fun setAppDynamicColor(appDynamicColor: AppDynamicColor)
     public fun observeAppDynamicColor(): Flow<AppDynamicColor>
+    public suspend fun getAppDynamicColor(): AppDynamicColor
+    public suspend fun setAppDynamicColor(appDynamicColor: AppDynamicColor)
 
-    public suspend fun setAppTheme(appTheme: AppTheme)
-    public suspend fun getAppTheme(): AppTheme
     public fun observeAppTheme(): Flow<AppTheme>
+    public suspend fun getAppTheme(): AppTheme
+    public suspend fun setAppTheme(appTheme: AppTheme)
 
     public suspend fun applyStoredAppTheme()
 
-    public suspend fun setAppColorContrast(contrast: AppColorContrast)
-    public suspend fun getAppColorContrast(): AppColorContrast
     public fun observeAppColorContrast(): Flow<AppColorContrast>
+    public suspend fun getAppColorContrast(): AppColorContrast
+    public suspend fun setAppColorContrast(contrast: AppColorContrast)
 
-    public fun getAppSystemColorContrast(): SystemColorContrast
+    public fun getSystemColorContrast(): SystemColorContrast
 
+    public fun observeAppLanguage(): Flow<AppLanguage>
     public fun setAppLanguage(appLanguage: AppLanguage)
     public suspend fun getAppLanguage(): AppLanguage
-    public fun observeAppLanguage(): Flow<AppLanguage>
 
     public fun observeSystemLocale(): Flow<Locale>
 
