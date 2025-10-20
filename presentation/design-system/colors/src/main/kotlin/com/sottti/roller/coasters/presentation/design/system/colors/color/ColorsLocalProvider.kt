@@ -14,8 +14,8 @@ public fun ColorsLocalProvider(
 ) {
     val colors = colors(
         colorContrast = colorContrast,
-        darkTheme = isSystemInDarkTheme,
         dynamicColor = dynamicColor,
+        isSystemInDarkTheme = isSystemInDarkTheme,
     )
 
     CompositionLocalProvider(LocalColors provides colors) {

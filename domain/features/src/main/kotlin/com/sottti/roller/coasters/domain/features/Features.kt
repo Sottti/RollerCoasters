@@ -17,4 +17,7 @@ public interface Features {
 
     @ChecksSdkIntAtLeast(api = 31)
     public fun setPersistentNightModeAvailable(): Boolean
+
+    @ChecksSdkIntAtLeast(api = 31)
+    public fun isComposeTrackingUiModeAvailable(): Boolean
 }

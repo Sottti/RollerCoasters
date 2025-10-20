@@ -13,11 +13,12 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorS
 @Composable
 @ReadOnlyComposable
 @RequiresApi(api = 31)
-internal fun dynamicColorScheme(darkTheme: Boolean): ColorScheme =
-    when {
-        darkTheme -> dynamicDarkColorScheme(LocalContext.current)
-        else -> dynamicLightColorScheme(LocalContext.current)
-    }
+internal fun dynamicColorScheme(
+    isSystemInDarkTheme: Boolean,
+): ColorScheme = when (isSystemInDarkTheme) {
+    true -> dynamicDarkColorScheme(LocalContext.current)
+    false -> dynamicLightColorScheme(LocalContext.current)
+}
 
 
 internal fun ResolvedColorContrast.darkColorScheme(): ColorScheme =

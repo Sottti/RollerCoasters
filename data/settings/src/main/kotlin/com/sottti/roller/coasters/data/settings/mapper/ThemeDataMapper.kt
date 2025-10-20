@@ -31,14 +31,16 @@ internal fun String.toTheme(): AppTheme =
     }
 
 @RequiresApi(Build.VERSION_CODES.R)
-internal fun AppTheme.toUiModeManagerNightMode() = when (this) {
-    AppTheme.DarkAppTheme -> UiModeManager.MODE_NIGHT_YES
-    AppTheme.LightAppTheme -> UiModeManager.MODE_NIGHT_NO
-    AppTheme.System -> UiModeManager.MODE_NIGHT_AUTO
-}
+internal fun AppTheme.toUiModeManagerNightMode() =
+    when (this) {
+        AppTheme.DarkAppTheme -> UiModeManager.MODE_NIGHT_YES
+        AppTheme.LightAppTheme -> UiModeManager.MODE_NIGHT_NO
+        AppTheme.System -> UiModeManager.MODE_NIGHT_AUTO
+    }
 
-internal fun AppTheme.toAppCompatDelegateNightMode() = when (this) {
-    AppTheme.DarkAppTheme -> AppCompatDelegate.MODE_NIGHT_YES
-    AppTheme.LightAppTheme -> AppCompatDelegate.MODE_NIGHT_NO
-    AppTheme.System -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-}
+internal fun AppTheme.toAppCompatDelegateNightMode() =
+    when (this) {
+        AppTheme.DarkAppTheme -> AppCompatDelegate.MODE_NIGHT_YES
+        AppTheme.LightAppTheme -> AppCompatDelegate.MODE_NIGHT_NO
+        AppTheme.System -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+    }

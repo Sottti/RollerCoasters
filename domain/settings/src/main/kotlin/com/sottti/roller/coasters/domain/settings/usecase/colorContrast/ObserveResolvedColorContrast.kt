@@ -24,6 +24,8 @@ public class ObserveResolvedColorContrast @Inject constructor(
                 -> toResolvedColorContrast()
 
             AppColorContrast.System ->
-                settingsRepository.getSystemColorContrast().toResolvedColorContrast()
+                settingsRepository
+                    .getSystemColorContrast()
+                    .toResolvedColorContrast()
         }
 }

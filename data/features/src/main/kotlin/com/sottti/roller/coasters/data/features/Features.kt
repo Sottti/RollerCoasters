@@ -24,6 +24,9 @@ internal class FeaturesImpl @Inject constructor() : Features {
 
     @ChecksSdkIntAtLeast(api = S)
     override fun setPersistentNightModeAvailable(): Boolean = isAtLeastSdk31()
+
+    @ChecksSdkIntAtLeast(api = S)
+    override fun isComposeTrackingUiModeAvailable(): Boolean = isAtLeastSdk31()
 }
 
 @ChecksSdkIntAtLeast(api = UPSIDE_DOWN_CAKE)

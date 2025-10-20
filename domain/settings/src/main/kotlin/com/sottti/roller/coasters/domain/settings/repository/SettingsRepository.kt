@@ -7,6 +7,7 @@ import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
 import kotlinx.coroutines.flow.Flow
 import java.util.Locale
 
@@ -18,6 +19,8 @@ public interface SettingsRepository {
     public fun observeAppTheme(): Flow<AppTheme>
     public suspend fun getAppTheme(): AppTheme
     public suspend fun setAppTheme(appTheme: AppTheme)
+
+    public suspend fun getSystemTheme(): SystemTheme
 
     public suspend fun applyStoredAppTheme()
 

@@ -49,9 +49,9 @@ internal class HomeViewModel @Inject constructor(
         { resolvedColorContrast, resolvedDynamicColor, stateMutationAction ->
             { previous: HomeState ->
                 previous.reduce(
+                    resolvedColorContrast = resolvedColorContrast,
                     resolvedDynamicColor = resolvedDynamicColor,
                     stateMutationAction = stateMutationAction,
-                    resolvedColorContrast = resolvedColorContrast,
                 )
             }
         }

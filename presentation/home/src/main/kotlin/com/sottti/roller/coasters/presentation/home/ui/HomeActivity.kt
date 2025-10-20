@@ -13,30 +13,36 @@ import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-internal class HomeActivity : AppCompatActivity() {
+internal open class HomeActivityBase : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             val viewModel = hiltViewModel<HomeViewModel>()
-
-            viewModel
-                .state
-                .collectAsStateWithLifecycle()
-                .value
-                .let { state ->
-                    RollerCoastersTheme(
-                        colorContrast = state.colorContrast,
-                        dynamicColor = state.dynamicColor,
-                    ) {
-                        HomeUi(state = state, onAction = viewModel.onAction)
-                    }
+            viewModel.state.collectAsStateWithLifecycle().value.let { state ->
+                RollerCoastersTheme(
+                    colorContrast = state.colorContrast,
+                    dynamicColor = state.dynamicColor,
+                ) {
+                    HomeUi(state = state, onAction = viewModel.onAction)
                 }
+            }
         }
     }
 }
 
-public fun startHomeActivity(context: Context) {
-    context.startActivity(Intent(context, HomeActivity::class.java))
+internal class HomeActivityWithComposeUiModeTracking : HomeActivityBase()
+
+internal class HomeActivityWithoutComposeUiModeTracking : HomeActivityBase()
+
+public fun startHomeActivity(
+    context: Context,
+    composeUiModeTrackingAvailable: Boolean,
+) {
+    val activity = when (composeUiModeTrackingAvailable) {
+        true -> HomeActivityWithComposeUiModeTracking::class.java
+        false -> HomeActivityWithoutComposeUiModeTracking::class.java
+    }
+    context.startActivity(Intent(context, activity))
 }

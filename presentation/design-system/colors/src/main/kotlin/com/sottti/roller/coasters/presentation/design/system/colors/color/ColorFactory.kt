@@ -13,10 +13,10 @@ import com.sottti.roller.coasters.presentation.design.system.colors.mapper.light
 @ReadOnlyComposable
 public fun colors(
     colorContrast: ResolvedColorContrast,
-    darkTheme: Boolean,
     dynamicColor: ResolvedDynamicColor,
+    isSystemInDarkTheme: Boolean,
 ): ColorScheme = when {
-    dynamicColor.enabled -> dynamicColorScheme(darkTheme)
-    darkTheme -> colorContrast.darkColorScheme()
+    dynamicColor.enabled -> dynamicColorScheme(isSystemInDarkTheme)
+    isSystemInDarkTheme -> colorContrast.darkColorScheme()
     else -> colorContrast.lightColorScheme()
 }

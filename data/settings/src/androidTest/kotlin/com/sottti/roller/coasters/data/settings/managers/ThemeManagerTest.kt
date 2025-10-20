@@ -1,6 +1,7 @@
 package com.sottti.roller.coasters.data.settings.managers
 
 import android.app.UiModeManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sottti.roller.coasters.domain.features.Features
@@ -20,15 +21,17 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class ThemeManagerTest {
 
+    private lateinit var context: Context
     private lateinit var features: Features
-    private lateinit var uiModeManager: UiModeManager
     private lateinit var manager: ThemeManager
+    private lateinit var uiModeManager: UiModeManager
 
     @Before
     fun setup() {
+        context = mockk()
         features = mockk()
         uiModeManager = mockk()
-        manager = ThemeManager(features, uiModeManager)
+        manager = ThemeManager(context, features, uiModeManager)
         mockkStatic(AppCompatDelegate::class)
     }
 
@@ -70,7 +73,7 @@ internal class ThemeManagerTest {
     @Test
     fun testSetThemeDarkWhenFeatureAvailableAndUiModeManagerNull() {
         every { features.setPersistentNightModeAvailable() } returns true
-        manager = ThemeManager(features, null)
+        manager = ThemeManager(context, features, null)
 
         manager.setTheme(AppTheme.DarkAppTheme)
 

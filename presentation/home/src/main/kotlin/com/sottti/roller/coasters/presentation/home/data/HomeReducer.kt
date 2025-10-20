@@ -11,11 +11,11 @@ internal fun HomeState.reduce(
     resolvedColorContrast: ResolvedColorContrast,
     resolvedDynamicColor: ResolvedDynamicColor,
     stateMutationAction: HomeActions,
-): HomeState = this.copy(
+): HomeState = copy(
     colorContrast = resolvedColorContrast,
     dynamicColor = resolvedDynamicColor,
     navigationBarItems = when (stateMutationAction) {
         is DestinationSelected -> navigationBarItems(stateMutationAction.destination)
         NoOp -> navigationBarItems()
-    }
+    },
 )

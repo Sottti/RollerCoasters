@@ -28,6 +28,7 @@ import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
@@ -81,6 +82,8 @@ internal class SettingsLocalDataSource @Inject constructor(
     suspend fun getAppTheme(): AppTheme = appThemeFlow.first()
 
     fun observeAppTheme(): Flow<AppTheme> = appThemeFlow
+
+    fun getSystemTheme(): SystemTheme = themeManager.getSystemTheme()
 
     suspend fun applyStoredAppTheme() {
         themeManager.setTheme(appThemeFlow.first())

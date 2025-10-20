@@ -8,6 +8,7 @@ import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import java.util.Locale
@@ -30,6 +31,9 @@ internal class SettingsRepositoryImpl @Inject constructor(
     override suspend fun setAppTheme(appTheme: AppTheme) {
         localDataSource.setAppTheme(appTheme)
     }
+
+    override suspend fun getSystemTheme(): SystemTheme =
+        localDataSource.getSystemTheme()
 
     override suspend fun getAppTheme(): AppTheme = localDataSource.getAppTheme()
 

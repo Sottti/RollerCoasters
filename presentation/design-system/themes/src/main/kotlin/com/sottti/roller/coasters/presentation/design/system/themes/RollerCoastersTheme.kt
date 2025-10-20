@@ -72,11 +72,12 @@ private fun updateSystemBars(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
+            val isLightTheme = !isSystemInDarkTheme
             WindowCompat
                 .getInsetsController(window, view)
                 .apply {
-                    isAppearanceLightStatusBars = !isSystemInDarkTheme
-                    isAppearanceLightNavigationBars = !isSystemInDarkTheme
+                    isAppearanceLightStatusBars = isLightTheme
+                    isAppearanceLightNavigationBars = isLightTheme
                 }
         }
     }

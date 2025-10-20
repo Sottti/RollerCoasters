@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
 internal val initialState = HomeState(
     colorContrast = ResolvedColorContrast.StandardContrast,
-    dynamicColor = ResolvedDynamicColor(enabled = true),
+    dynamicColor = ResolvedDynamicColor(enabled = false),
     navigationBarItems = navigationBarItems(),
 )
 
