@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.sottti.roller.coasters.data.settings.mapper.toAppCompatDelegateNightMode
 import com.sottti.roller.coasters.data.settings.mapper.toUiModeManagerNightMode
 import com.sottti.roller.coasters.domain.features.Features
-import com.sottti.roller.coasters.domain.settings.di.InAppThemeChangeSignal
+import com.sottti.roller.coasters.domain.settings.di.ThemeChangeSignal
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -18,7 +18,7 @@ import javax.inject.Singleton
 internal class ThemeManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val features: Features,
-    private val inAppThemeChangeSignal: InAppThemeChangeSignal,
+    private val themeChangeSignal: ThemeChangeSignal,
     private val uiModeManager: UiModeManager?,
 ) {
     fun setTheme(
@@ -30,15 +30,14 @@ internal class ThemeManager @Inject constructor(
                 uiModeManager?.setApplicationNightMode(appTheme.toUiModeManagerNightMode())
 
             else -> {
-                inAppThemeChangeSignal.activityRecreationNeeded = userTriggered
+                themeChangeSignal.activityRecreationNeeded = userTriggered
                 AppCompatDelegate.setDefaultNightMode(appTheme.toAppCompatDelegateNightMode())
             }
         }
     }
 
     fun getSystemTheme(): SystemTheme =
-        when (Configuration.UI_MODE_NIGHT_YES
-        ) {
+        when (Configuration.UI_MODE_NIGHT_YES) {
             (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ->
                 SystemTheme.DarkAppTheme
 

@@ -4,6 +4,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class InAppThemeChangeSignal @Inject constructor() {
+public class ThemeChangeSignal @Inject constructor() {
     public var activityRecreationNeeded: Boolean = false
 }

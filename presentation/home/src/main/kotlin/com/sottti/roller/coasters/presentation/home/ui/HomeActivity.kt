@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sottti.roller.coasters.domain.settings.di.InAppThemeChangeSignal
+import com.sottti.roller.coasters.domain.settings.di.ThemeChangeSignal
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.home.data.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ internal open class HomeActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModels()
 
     @Inject
-    lateinit var inAppThemeChangeSignal: InAppThemeChangeSignal
+    lateinit var themeChangeSignal: ThemeChangeSignal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -40,8 +40,8 @@ internal open class HomeActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        if (inAppThemeChangeSignal.activityRecreationNeeded) {
-            inAppThemeChangeSignal.activityRecreationNeeded = false
+        if (themeChangeSignal.activityRecreationNeeded) {
+            themeChangeSignal.activityRecreationNeeded = false
             recreate()
         }
     }
