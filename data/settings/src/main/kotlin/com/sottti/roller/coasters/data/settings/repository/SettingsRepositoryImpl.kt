@@ -32,7 +32,10 @@ internal class SettingsRepositoryImpl @Inject constructor(
         localDataSource.setAppTheme(appTheme)
     }
 
-    override suspend fun getSystemTheme(): SystemTheme =
+    override fun observeSystemTheme(): Flow<SystemTheme> =
+        localDataSource.observeSystemTheme()
+
+    override fun getSystemTheme(): SystemTheme =
         localDataSource.getSystemTheme()
 
     override suspend fun getAppTheme(): AppTheme = localDataSource.getAppTheme()

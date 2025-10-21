@@ -83,10 +83,12 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     fun observeAppTheme(): Flow<AppTheme> = appThemeFlow
 
+    fun observeSystemTheme(): Flow<SystemTheme> = themeManager.observeSystemTheme()
+
     fun getSystemTheme(): SystemTheme = themeManager.getSystemTheme()
 
     suspend fun applyStoredAppTheme() {
-        themeManager.setTheme(appTheme = appThemeFlow.first(), userTriggered = false)
+        themeManager.setTheme(appTheme = appThemeFlow.first())
     }
 
     suspend fun setAppColorContrast(appColorContrast: AppColorContrast) {

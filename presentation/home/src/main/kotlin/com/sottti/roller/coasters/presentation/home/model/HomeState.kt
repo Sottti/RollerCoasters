@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
+import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
@@ -11,6 +12,7 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 internal data class HomeState(
     val colorContrast: ResolvedColorContrast,
     val dynamicColor: ResolvedDynamicColor,
+    val theme : ResolvedTheme,
     val navigationBarItems: HomeNavigationBarState,
 )
 

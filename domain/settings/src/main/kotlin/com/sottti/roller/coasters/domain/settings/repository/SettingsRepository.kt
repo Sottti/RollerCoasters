@@ -20,7 +20,8 @@ public interface SettingsRepository {
     public suspend fun getAppTheme(): AppTheme
     public suspend fun setAppTheme(appTheme: AppTheme)
 
-    public suspend fun getSystemTheme(): SystemTheme
+    public fun observeSystemTheme(): Flow<SystemTheme>
+    public fun getSystemTheme(): SystemTheme
 
     public suspend fun applyStoredAppTheme()
 

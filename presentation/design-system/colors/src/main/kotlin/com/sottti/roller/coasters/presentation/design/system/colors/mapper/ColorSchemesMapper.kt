@@ -8,14 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
+import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme
 import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorSchemes
 
 @Composable
 @ReadOnlyComposable
 @RequiresApi(api = 31)
 internal fun dynamicColorScheme(
-    isSystemInDarkTheme: Boolean,
-): ColorScheme = when (isSystemInDarkTheme) {
+    theme: ResolvedTheme,
+): ColorScheme = when (theme == ResolvedTheme.DarkResolvedTheme) {
     true -> dynamicDarkColorScheme(LocalContext.current)
     false -> dynamicLightColorScheme(LocalContext.current)
 }

@@ -194,7 +194,8 @@ internal class SettingsViewModel @Inject constructor(
             is AppThemePickerSelectionChange ->
                 updateAppThemePicker(selectedAppTheme = action.appTheme)
 
-            is ConfirmAppThemePickerSelection -> hideAppThemePicker()
+            is ConfirmAppThemePickerSelection ->hideAppThemePicker()
+
             DismissAppThemePicker -> hideAppThemePicker()
 
             LaunchAppColorContrastPicker -> showAppColorContrastPicker(

@@ -3,8 +3,11 @@ package com.sottti.roller.coasters.presentation.home.data
 import androidx.lifecycle.ViewModel
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
+import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.dynamicColor.ObserveResolvedDynamicColor
+import com.sottti.roller.coasters.domain.settings.usecase.theme.GetSystemTheme
+import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveResolvedTheme
 import com.sottti.roller.coasters.presentation.home.model.HomeActions
 import com.sottti.roller.coasters.presentation.home.model.HomeActions.NoOp
 import com.sottti.roller.coasters.presentation.home.model.HomeState
@@ -20,19 +23,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
+    getSystemThemeTheme: GetSystemTheme,
     observeResolvedColorContrast: ObserveResolvedColorContrast,
     observeResolvedDynamicColor: ObserveResolvedDynamicColor,
+    observeResolvedTheme: ObserveResolvedTheme,
 ) : ViewModel() {
+
+    val initialState = initialState(getSystemThemeTheme())
 
     private val actions = MutableSharedFlow<HomeActions>(extraBufferCapacity = 64)
     val state: StateFlow<HomeState> = combine(
         flow = observeResolvedColorContrast(),
         flow2 = observeResolvedDynamicColor(),
-        flow3 = actions.onStart { emit(NoOp) },
-    ) { resolvedColorContrast, resolvedDynamicColor, stateMutationAction ->
+        flow3 = observeResolvedTheme(),
+        flow4 = actions.onStart { emit(NoOp) },
+    ) { resolvedColorContrast, resolvedDynamicColor, resolvedTheme, stateMutationAction ->
         reducer(
             resolvedColorContrast,
             resolvedDynamicColor,
+            resolvedTheme,
             stateMutationAction,
         )
     }.scan(initialState) { previous, reduce -> reduce(previous) }
@@ -44,13 +53,15 @@ internal class HomeViewModel @Inject constructor(
     private val reducer: (
         resolvedColorContrast: ResolvedColorContrast,
         resolvedDynamicColor: ResolvedDynamicColor,
+        resolvedTheme: ResolvedTheme,
         stateMutationAction: HomeActions,
     ) -> (HomeState) -> HomeState =
-        { resolvedColorContrast, resolvedDynamicColor, stateMutationAction ->
+        { resolvedColorContrast, resolvedDynamicColor, resolvedTheme, stateMutationAction ->
             { previous: HomeState ->
                 previous.reduce(
                     resolvedColorContrast = resolvedColorContrast,
                     resolvedDynamicColor = resolvedDynamicColor,
+                    resolvedTheme = resolvedTheme,
                     stateMutationAction = stateMutationAction,
                 )
             }

@@ -2,6 +2,8 @@ package com.sottti.roller.coasters.presentation.home.data
 
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
+import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme
+import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.home.R
 import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarItemState
@@ -9,10 +11,16 @@ import com.sottti.roller.coasters.presentation.home.model.HomeNavigationBarState
 import com.sottti.roller.coasters.presentation.home.model.HomeState
 import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 
-internal val initialState = HomeState(
+internal fun initialState(
+    theme: SystemTheme,
+) = HomeState(
     colorContrast = ResolvedColorContrast.StandardContrast,
     dynamicColor = ResolvedDynamicColor(enabled = false),
     navigationBarItems = navigationBarItems(),
+    theme = when (theme) {
+        SystemTheme.LightSystemTheme -> ResolvedTheme.LightResolvedTheme
+        SystemTheme.DarkSystemTheme -> ResolvedTheme.DarkResolvedTheme
+    },
 )
 
 internal fun navigationBarItems(

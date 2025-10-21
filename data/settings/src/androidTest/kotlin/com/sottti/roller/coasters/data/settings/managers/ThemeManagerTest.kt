@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sottti.roller.coasters.domain.features.Features
-import com.sottti.roller.coasters.domain.settings.di.ThemeChangeSignal
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import io.mockk.every
 import io.mockk.just
@@ -26,15 +25,13 @@ internal class ThemeManagerTest {
     private lateinit var features: Features
     private lateinit var manager: ThemeManager
     private lateinit var uiModeManager: UiModeManager
-    private lateinit var themeChangeSignal: ThemeChangeSignal
 
     @Before
     fun setup() {
         context = mockk()
         features = mockk()
         uiModeManager = mockk()
-        themeChangeSignal = mockk()
-        manager = ThemeManager(context, features, themeChangeSignal, uiModeManager)
+        manager = ThemeManager(context, features, uiModeManager)
         mockkStatic(AppCompatDelegate::class)
     }
 
@@ -76,7 +73,7 @@ internal class ThemeManagerTest {
     @Test
     fun testSetThemeDarkWhenFeatureAvailableAndUiModeManagerNull() {
         every { features.setPersistentNightModeAvailable() } returns true
-        manager = ThemeManager(context, features, themeChangeSignal, null)
+        manager = ThemeManager(context, features, null)
 
         manager.setTheme(AppTheme.DarkAppTheme)
 
