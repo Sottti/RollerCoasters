@@ -86,7 +86,7 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun getSystemTheme(): SystemTheme = themeManager.getSystemTheme()
 
     suspend fun applyStoredAppTheme() {
-        themeManager.setTheme(appThemeFlow.first())
+        themeManager.setTheme(appTheme = appThemeFlow.first(), userTriggered = false)
     }
 
     suspend fun setAppColorContrast(appColorContrast: AppColorContrast) {

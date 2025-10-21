@@ -35,7 +35,10 @@ import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoaste
 import kotlin.math.roundToInt
 
 @Composable
-@Preview(widthDp = 600)
+@Preview(
+    widthDp = 1200,
+    heightDp = 600,
+)
 private fun cardElevationAnimation() {
     Row {
         LightTheme { ElevatingCard() }

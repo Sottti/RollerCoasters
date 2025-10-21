@@ -36,10 +36,7 @@ internal class SplashScreenActivity : ComponentActivity() {
 
         scheduleRollerCoastersSync()
 
-        startHomeActivity(
-            context = this,
-            composeUiModeTrackingAvailable = features.isComposeTrackingUiModeAvailable(),
-        )
+        startHomeActivity(context = this)
 
         finish()
     }
