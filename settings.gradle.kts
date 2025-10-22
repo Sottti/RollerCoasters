@@ -39,6 +39,7 @@ include(
     ":presentation:design-system:empty",
     ":presentation:design-system:error",
     ":presentation:design-system:hero-image",
+    ":presentation:design-system:icon-resources",
     ":presentation:design-system:icons",
     ":presentation:design-system:illustrations",
     ":presentation:design-system:images",

@@ -14,17 +14,35 @@
         <item name="colorPrimaryContainer">@color/primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
 
+        <!-- Primary Fixed -->
+        <item name="colorPrimaryFixed">@color/primaryFixed</item>
+        <item name="colorPrimaryFixedDim">@color/primaryFixedDim</item>
+        <item name="colorOnPrimaryFixed">@color/onPrimaryFixed</item>
+        <item name="colorOnPrimaryFixedVariant">@color/onPrimaryFixedVariant</item>
+
         <!-- Secondary Colors -->
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorOnSecondary">@color/onSecondary</item>
         <item name="colorSecondaryContainer">@color/secondaryContainer</item>
         <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
 
+        <!-- Secondary Fixed -->
+        <item name="colorSecondaryFixed">@color/secondaryFixed</item>
+        <item name="colorSecondaryFixedDim">@color/secondaryFixedDim</item>
+        <item name="colorOnSecondaryFixed">@color/onSecondaryFixed</item>
+        <item name="colorOnSecondaryFixedVariant">@color/onSecondaryFixedVariant</item>
+
         <!-- Tertiary Colors -->
         <item name="colorTertiary">@color/tertiary</item>
         <item name="colorOnTertiary">@color/onTertiary</item>
         <item name="colorTertiaryContainer">@color/tertiaryContainer</item>
         <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
+
+        <!-- Tertiary Fixed -->
+        <item name="colorTertiaryFixed">@color/tertiaryFixed</item>
+        <item name="colorTertiaryFixedDim">@color/tertiaryFixedDim</item>
+        <item name="colorOnTertiaryFixed">@color/onTertiaryFixed</item>
+        <item name="colorOnTertiaryFixedVariant">@color/onTertiaryFixedVariant</item>
 
         <!-- Error Colors -->
         <item name="colorError">@color/error</item>

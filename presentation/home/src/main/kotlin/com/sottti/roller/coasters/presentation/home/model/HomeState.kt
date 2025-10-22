@@ -12,7 +12,7 @@ import com.sottti.roller.coasters.presentation.navigation.NavigationDestination
 internal data class HomeState(
     val colorContrast: ResolvedColorContrast,
     val dynamicColor: ResolvedDynamicColor,
-    val theme : ResolvedTheme,
+    val theme: ResolvedTheme,
     val navigationBarItems: HomeNavigationBarState,
 )
 

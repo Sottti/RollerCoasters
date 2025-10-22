@@ -31,6 +31,7 @@ object module {
             const val empty = ":presentation:design-system:empty"
             const val error = ":presentation:design-system:error"
             const val heroImage = ":presentation:design-system:hero-image"
+            const val iconResources = ":presentation:design-system:icon-resources"
             const val icons = ":presentation:design-system:icons"
             const val illustrations = ":presentation:design-system:illustrations"
             const val images = ":presentation:design-system:images"

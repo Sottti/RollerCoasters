@@ -18,7 +18,6 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.colors))
     implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.themes))
     implementation(project(module.presentation.designSystem.typography))
     implementation(project(module.presentation.previews))
     testImplementation(project(module.presentation.paparazzi))

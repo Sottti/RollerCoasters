@@ -4,11 +4,7 @@
 - Prefer idiomatic Kotlin and follow Kotlin coding conventions.
 - Prefer idiomatic Gradle usage and follow Gradle best practices.
 - Prefer idiomatic Android development practices and follow Android best practices.
-- Use hilt for dependency injection.
-- Use jetpack compose for UI development.
+- Use Hilt for dependency injection.
+- Use Jetpack Compose for UI development.
 - Use kotlin coroutines for asynchronous programming.
 - Prefer multiplatform solutions where applicable.
-
-# Programmatic checks
-
-- ./gradlew test

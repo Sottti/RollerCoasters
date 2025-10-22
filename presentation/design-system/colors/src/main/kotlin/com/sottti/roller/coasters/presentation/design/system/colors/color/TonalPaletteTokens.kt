@@ -49,7 +49,7 @@ internal object TonalPaletteTokens {
     val Neutral99 = Color(red = 245, green = 251, blue = 246)
     val Neutral100 = Color(red = 255, green = 255, blue = 255)
     val NeutralVariant10 = Color(red = 39, green = 75, blue = 93)
-    val NeutralVariant20 = Color(red = 50, green = 60, blue = 56) // New tone added
+    val NeutralVariant20 = Color(red = 50, green = 60, blue = 56)
     val NeutralVariant30 = Color(red = 63, green = 73, blue = 68)
     val NeutralVariant40 = Color(red = 66, green = 75, blue = 71)
     val NeutralVariant60 = Color(red = 102, green = 111, blue = 106)

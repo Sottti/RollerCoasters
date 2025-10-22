@@ -10,7 +10,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import com.sottti.roller.coasters.presentation.design.system.typography.typography
-import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 import androidx.compose.material3.Text as MaterialText
 
 @Stable
@@ -567,10 +566,4 @@ public object Text {
             textAlign = textAlign
         )
     }
-}
-
-@Composable
-@RollerCoastersPreview
-public fun TextPreview() {
-    TextPreviewContent()
 }
