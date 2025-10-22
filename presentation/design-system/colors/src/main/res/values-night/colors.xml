@@ -5,7 +5,7 @@
     <color name="onPrimary">#1F3701</color>
     <color name="primaryContainer">#354E16</color>
     <color name="onPrimaryContainer">#CDEDA3</color>
-    <!-- Primary Fixed (Dark) -->
+    <!-- Primary Fixed -->
     <color name="primaryFixed">#A4F2D5</color>
     <color name="primaryFixedDim">#88D6BA</color>
     <color name="onPrimaryFixed">#003326</color>
@@ -16,7 +16,7 @@
     <color name="onSecondary">#2A331E</color>
     <color name="secondaryContainer">#404A33</color>
     <color name="onSecondaryContainer">#DCE7C8</color>
-    <!-- Secondary Fixed (Dark) -->
+    <!-- Secondary Fixed -->
     <color name="secondaryFixed">#CEE9DC</color>
     <color name="secondaryFixedDim">#B2CCC0</color>
     <color name="onSecondaryFixed">#1A3028</color>
@@ -27,7 +27,7 @@
     <color name="onTertiary">#003735</color>
     <color name="tertiaryContainer">#1F4E4B</color>
     <color name="onTertiaryContainer">#BCECE7</color>
-    <!-- Tertiary Fixed (Dark) -->
+    <!-- Tertiary Fixed -->
     <color name="tertiaryFixed">#C3E8FE</color>
     <color name="tertiaryFixedDim">#A7CCE1</color>
     <color name="onTertiaryFixed">#053041</color>
