@@ -3,13 +3,12 @@ agp = "8.13.0"
 annotations = "1.9.1"
 appcompat = "1.7.1"
 browser = "1.9.0"
-build-health = "3.1.0"
 coil = "3.3.0"
 compileSdk = "36"
 compose-bom = "2025.10.00"
 compose-maps = "6.12.1"
 compose-navigation2 = "2.9.5"
-compose-navigation3 = "1.0.0-alpha11"
+compose-navigation3 = "1.0.0-beta01"
 core = "1.17.0"
 coroutines = "1.10.2"
 datastore-preferences = "1.1.7"
@@ -103,7 +102,6 @@ work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-build-health = { id = "com.autonomousapps.build-health", version.ref = "build-health" }
 gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
