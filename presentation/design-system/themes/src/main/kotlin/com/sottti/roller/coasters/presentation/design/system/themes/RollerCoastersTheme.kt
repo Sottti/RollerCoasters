@@ -56,7 +56,7 @@ private fun DefaultThemeVariant(
             OpacityLocalProvider {
                 DimensionsLocalProvider {
                     ShapesLocalProvider {
-                        updateSystemBars(theme)
+                        UpdateSystemBars(theme)
                         MaterialTheme(
                             colorScheme = colors,
                             content = content,
@@ -70,7 +70,7 @@ private fun DefaultThemeVariant(
 }
 
 @Composable
-private fun updateSystemBars(
+private fun UpdateSystemBars(
     theme: ResolvedTheme,
 ) {
     val view = LocalView.current
