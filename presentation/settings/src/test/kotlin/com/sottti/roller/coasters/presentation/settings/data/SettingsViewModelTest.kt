@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
@@ -68,7 +68,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `app color contrast picker selection change`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val appColorContrastAvailable = true
         val initialSelectedColorContrast = AppColorContrast.System
         val newSelectedColorContrast =
@@ -190,7 +190,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `app theme picker selection change`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val lightDarkSystemThemingAvailable = true
         val initialSelectedAppTheme = AppTheme.System.toPresentationModel(selected = true)
         val newSelectedTheme = AppTheme.LightAppTheme.toPresentationModel(selected = true)
@@ -350,7 +350,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loaded state with dynamic color available`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val dynamicColorAvailable = true
         val observeAppColorContrast = mockk<ObserveAppColorContrast>()
         val observeAppDynamicColor = mockk<ObserveAppDynamicColor>()
@@ -379,7 +379,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loaded state with dynamic color unavailable`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val dynamicColorAvailable = false
         val observeAppColorContrast = mockk<ObserveAppColorContrast>()
         val observeAppDynamicColor = mockk<ObserveAppDynamicColor>()
@@ -408,7 +408,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loading state with dynamic color available`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         every { features.systemDynamicColorAvailable() } returns true
         val viewModel = createViewModel(features = features)
 
@@ -417,7 +417,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loading state with dynamic color unavailable`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         every { features.systemDynamicColorAvailable() } returns false
         val viewModel = createViewModel(features = features)
 
@@ -427,7 +427,7 @@ internal class SettingsViewModelTest {
     @Test
     fun `shows app color contrast picker when dynamic color disabled`() = runTest {
         val getAppColorContrast = mockk<GetAppColorContrast>()
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val colorContrastAvailable = true
         val dynamicColorAvailable = true
         val dynamicColorState = AppDynamicColor.Disabled
@@ -455,7 +455,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `shows app color contrast picker when dynamic color enabled`() = runTest {
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val colorContrastAvailable = true
         val dynamicColorAvailable = true
         val dynamicColorState = AppDynamicColor.Enabled
@@ -519,7 +519,7 @@ internal class SettingsViewModelTest {
     @Test
     fun `shows app theme picker`() = runTest {
         val getAppTheme = mockk<GetAppTheme>()
-        val features = mockk<Features>()
+        val features = mockk<SystemFeatures>()
         val appTheme = AppTheme.System
         val lightDarkSystemThemingAvailable = true
         coEvery { getAppTheme() } returns appTheme

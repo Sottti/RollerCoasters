@@ -4,7 +4,7 @@ import android.app.UiModeManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import io.mockk.every
 import io.mockk.just
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith
 internal class ThemeManagerTest {
 
     private lateinit var context: Context
-    private lateinit var features: Features
+    private lateinit var features: SystemFeatures
     private lateinit var manager: ThemeManager
     private lateinit var uiModeManager: UiModeManager
 

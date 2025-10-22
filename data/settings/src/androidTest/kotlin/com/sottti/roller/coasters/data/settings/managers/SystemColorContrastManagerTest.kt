@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.data.settings.managers
 import android.app.UiModeManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import io.mockk.every
 import io.mockk.mockk
@@ -14,7 +14,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class SystemColorContrastManagerTest {
 
-    private lateinit var features: Features
+    private lateinit var features: SystemFeatures
     private lateinit var uiModeManager: UiModeManager
     private lateinit var manager: SystemColorContrastManager
 

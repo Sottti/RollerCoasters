@@ -19,12 +19,12 @@ dependencyResolutionManagement {
 }
 include(
     ":app",
-    ":data:features",
+    ":data:system-features",
     ":data:network",
     ":data:roller-coasters",
     ":data:settings",
     ":di",
-    ":domain:features",
+    ":domain:system-features",
     ":domain:fixtures",
     ":domain:locales",
     ":domain:model",

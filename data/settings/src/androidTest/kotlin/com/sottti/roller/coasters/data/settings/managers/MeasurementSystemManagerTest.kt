@@ -4,7 +4,7 @@ import android.icu.util.LocaleData
 import android.icu.util.ULocale
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.locales.localeEs
 import com.sottti.roller.coasters.domain.locales.localeGb
 import com.sottti.roller.coasters.domain.locales.localeLr
@@ -23,7 +23,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class MeasurementSystemManagerTest {
-    private lateinit var features: Features
+    private lateinit var features: SystemFeatures
     private lateinit var localeManager: LocaleManager
     private lateinit var manager: MeasurementSystemManager
 

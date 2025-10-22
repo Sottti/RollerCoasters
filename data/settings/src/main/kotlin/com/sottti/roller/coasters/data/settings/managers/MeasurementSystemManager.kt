@@ -4,12 +4,12 @@ import android.icu.util.LocaleData.getMeasurementSystem
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.sottti.roller.coasters.data.settings.mapper.toSystemMeasurementSystem
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import javax.inject.Inject
 
 internal class MeasurementSystemManager @Inject constructor(
-    private val features: Features,
+    private val features: SystemFeatures,
     private val localeManager: LocaleManager,
 ) {
     private companion object {

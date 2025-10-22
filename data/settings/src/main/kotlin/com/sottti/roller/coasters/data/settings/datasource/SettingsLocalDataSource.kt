@@ -18,7 +18,7 @@ import com.sottti.roller.coasters.data.settings.mapper.toBoolean
 import com.sottti.roller.coasters.data.settings.mapper.toLanguage
 import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
 import com.sottti.roller.coasters.data.settings.mapper.toTheme
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
@@ -44,7 +44,7 @@ internal class SettingsLocalDataSource @Inject constructor(
     private val measurementSystemManager: MeasurementSystemManager,
     private val systemColorContrastManager: SystemColorContrastManager,
     private val themeManager: ThemeManager,
-    features: Features,
+    features: SystemFeatures,
 ) {
     companion object {
         internal const val DATA_STORE_NAME = "settings"

@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.settings.data
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
@@ -85,7 +85,7 @@ internal class SettingsViewModel @Inject constructor(
     observeAppLanguage: ObserveAppLanguage,
     observeAppMeasurementSystem: ObserveAppMeasurementSystem,
     observeAppTheme: ObserveAppTheme,
-    private val features: Features,
+    private val features: SystemFeatures,
     private val getAppColorContrast: GetAppColorContrast,
     private val getAppLanguage: GetAppLanguage,
     private val getAppMeasurementSystem: GetAppMeasurementSystem,

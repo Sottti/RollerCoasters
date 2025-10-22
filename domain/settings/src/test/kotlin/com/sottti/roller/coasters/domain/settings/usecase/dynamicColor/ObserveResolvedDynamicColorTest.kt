@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Disabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Enabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
@@ -16,7 +16,7 @@ import org.junit.Test
 
 internal class ObserveResolvedDynamicColorTest {
 
-    private lateinit var features: Features
+    private lateinit var features: SystemFeatures
     private lateinit var settingsRepository: SettingsRepository
     private lateinit var observeResolvedDynamicColor: ObserveResolvedDynamicColor
 

@@ -1,8 +1,8 @@
-package com.sottti.roller.coasters.domain.features
+package com.sottti.roller.coasters.domain.system.features
 
 import androidx.annotation.ChecksSdkIntAtLeast
 
-public interface Features {
+public interface SystemFeatures {
     @ChecksSdkIntAtLeast(api = 34)
     public fun systemColorContrastAvailable(): Boolean
 

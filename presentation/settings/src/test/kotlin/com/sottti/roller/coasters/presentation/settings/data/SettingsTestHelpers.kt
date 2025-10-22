@@ -4,7 +4,7 @@ package com.sottti.roller.coasters.presentation.settings.data
 import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.GetAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.ObserveAppColorContrast
 import com.sottti.roller.coasters.domain.settings.usecase.colorContrast.SetAppColorContrast
@@ -23,7 +23,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import io.mockk.mockk
 
 internal fun createViewModel(
-    features: Features = mockk(),
+    features: SystemFeatures = mockk(),
     getAppColorContrast: GetAppColorContrast = mockk(),
     getAppLanguage: GetAppLanguage = mockk(),
     getAppMeasurementSystem: GetAppMeasurementSystem = mockk(),
