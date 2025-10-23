@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Disabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Enabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
@@ -16,20 +16,20 @@ import org.junit.Test
 
 internal class ObserveResolvedDynamicColorTest {
 
-    private lateinit var features: Features
+    private lateinit var systemFeatures: SystemFeatures
     private lateinit var settingsRepository: SettingsRepository
     private lateinit var observeResolvedDynamicColor: ObserveResolvedDynamicColor
 
     @Before
     fun setUp() {
-        features = mockk()
+        systemFeatures = mockk()
         settingsRepository = mockk()
-        observeResolvedDynamicColor = ObserveResolvedDynamicColor(features, settingsRepository)
+        observeResolvedDynamicColor = ObserveResolvedDynamicColor(systemFeatures, settingsRepository)
     }
 
     @Test
     fun `emits resolved enabled when system supports dynamic color and app is enabled`() = runTest {
-        every { features.systemDynamicColorAvailable() } returns true
+        every { systemFeatures.systemDynamicColorAvailable() } returns true
         every { settingsRepository.observeAppDynamicColor() } returns flowOf(Enabled)
         val emissions = observeResolvedDynamicColor().toList()
         assertThat(emissions).containsExactly(ResolvedDynamicColor(enabled = true))
@@ -38,7 +38,7 @@ internal class ObserveResolvedDynamicColorTest {
     @Test
     fun `emits resolved disabled when system supports dynamic color and app is disabled`() =
         runTest {
-            every { features.systemDynamicColorAvailable() } returns true
+            every { systemFeatures.systemDynamicColorAvailable() } returns true
             every { settingsRepository.observeAppDynamicColor() } returns flowOf(Disabled)
             val emissions = observeResolvedDynamicColor().toList()
             assertThat(emissions).containsExactly(ResolvedDynamicColor(enabled = false))
@@ -46,7 +46,7 @@ internal class ObserveResolvedDynamicColorTest {
 
     @Test
     fun `emits disabled when system does not support dynamic color`() = runTest {
-        every { features.systemDynamicColorAvailable() } returns false
+        every { systemFeatures.systemDynamicColorAvailable() } returns false
         val emissions = observeResolvedDynamicColor().toList()
         assertThat(emissions).containsExactly(ResolvedDynamicColor(enabled = false))
     }
@@ -54,7 +54,7 @@ internal class ObserveResolvedDynamicColorTest {
     @Test
     fun `emits multiple resolved values when system supports dynamic color and app changes`() =
         runTest {
-            every { features.systemDynamicColorAvailable() } returns true
+            every { systemFeatures.systemDynamicColorAvailable() } returns true
             every {
                 settingsRepository.observeAppDynamicColor()
             } returns flowOf(Enabled, Disabled)

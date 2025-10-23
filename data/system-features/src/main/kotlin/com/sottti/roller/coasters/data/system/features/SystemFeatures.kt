@@ -1,14 +1,14 @@
-package com.sottti.roller.coasters.data.features
+package com.sottti.roller.coasters.data.system.features
 
 import android.os.Build
 import android.os.Build.VERSION_CODES.Q
 import android.os.Build.VERSION_CODES.S
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import androidx.annotation.ChecksSdkIntAtLeast
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import javax.inject.Inject
 
-internal class FeaturesImpl @Inject constructor() : Features {
+internal class SystemFeaturesImpl @Inject constructor() : SystemFeatures {
 
     @ChecksSdkIntAtLeast(api = UPSIDE_DOWN_CAKE)
     override fun systemColorContrastAvailable(): Boolean = isAtLeastSdk34()

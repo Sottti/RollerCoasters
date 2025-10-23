@@ -4,7 +4,7 @@ import android.app.UiModeManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import io.mockk.every
 import io.mockk.just
@@ -22,16 +22,16 @@ import org.junit.runner.RunWith
 internal class ThemeManagerTest {
 
     private lateinit var context: Context
-    private lateinit var features: Features
+    private lateinit var systemFeatures: SystemFeatures
     private lateinit var manager: ThemeManager
     private lateinit var uiModeManager: UiModeManager
 
     @Before
     fun setup() {
         context = mockk()
-        features = mockk()
+        systemFeatures = mockk()
         uiModeManager = mockk()
-        manager = ThemeManager(context, features, uiModeManager)
+        manager = ThemeManager(context, systemFeatures, uiModeManager)
         mockkStatic(AppCompatDelegate::class)
     }
 
@@ -42,7 +42,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeDarkWhenFeatureAvailable() {
-        every { features.setPersistentNightModeAvailable() } returns true
+        every { systemFeatures.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES) } just runs
 
         manager.setTheme(AppTheme.DarkAppTheme)
@@ -52,7 +52,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeLightWhenFeatureAvailable() {
-        every { features.setPersistentNightModeAvailable() } returns true
+        every { systemFeatures.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO) } just runs
 
         manager.setTheme(AppTheme.LightAppTheme)
@@ -62,7 +62,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeSystemWhenFeatureAvailable() {
-        every { features.setPersistentNightModeAvailable() } returns true
+        every { systemFeatures.setPersistentNightModeAvailable() } returns true
         every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) } just runs
 
         manager.setTheme(AppTheme.System)
@@ -72,8 +72,8 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeDarkWhenFeatureAvailableAndUiModeManagerNull() {
-        every { features.setPersistentNightModeAvailable() } returns true
-        manager = ThemeManager(context, features, null)
+        every { systemFeatures.setPersistentNightModeAvailable() } returns true
+        manager = ThemeManager(context, systemFeatures, null)
 
         manager.setTheme(AppTheme.DarkAppTheme)
 
@@ -82,7 +82,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeDarkWhenFeatureUnavailable() {
-        every { features.setPersistentNightModeAvailable() } returns false
+        every { systemFeatures.setPersistentNightModeAvailable() } returns false
         every { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) } just runs
 
         manager.setTheme(AppTheme.DarkAppTheme)
@@ -92,7 +92,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeLightWhenFeatureUnavailable() {
-        every { features.setPersistentNightModeAvailable() } returns false
+        every { systemFeatures.setPersistentNightModeAvailable() } returns false
         every { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) } just runs
 
         manager.setTheme(AppTheme.LightAppTheme)
@@ -102,7 +102,7 @@ internal class ThemeManagerTest {
 
     @Test
     fun testSetThemeSystemWhenFeatureUnavailable() {
-        every { features.setPersistentNightModeAvailable() } returns false
+        every { systemFeatures.setPersistentNightModeAvailable() } returns false
         every {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         } just runs

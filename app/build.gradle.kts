@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.splashscreen)
     implementation(libs.work.runtime)
     implementation(project(module.di))
-    implementation(project(module.domain.features))
+    implementation(project(module.domain.systemFeatures))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.domain.settings))
     implementation(project(module.presentation.home))
