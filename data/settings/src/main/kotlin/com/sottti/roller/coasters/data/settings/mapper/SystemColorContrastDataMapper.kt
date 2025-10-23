@@ -3,14 +3,17 @@ package com.sottti.roller.coasters.data.settings.mapper
 import androidx.annotation.FloatRange
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 
-// uiModeManager.contrast returns 0f for standard, 0.5f for medium and 1f for high
+private const val STANDARD_CONTRAST_THRESHOLD = 0f
+private const val MEDIUM_CONTRAST_THRESHOLD = 0.5f
+private const val HIGH_CONTRAST_THRESHOLD = 1.0f
+
 internal fun toSystemColorContrast(
-    @FloatRange(from = -1.0, to = 1.0) contrast: Float,
+    @FloatRange(from = -1.0, to = 1.0) contrast: Float?,
 ): SystemColorContrast =
     when {
-        contrast < 0f -> SystemColorContrast.LowContrast
-        contrast < 0.5f -> SystemColorContrast.StandardContrast
-        contrast < 1.0f -> SystemColorContrast.MediumContrast
-        contrast >= 1.0f -> SystemColorContrast.HighContrast
+        contrast < STANDARD_CONTRAST_THRESHOLD -> SystemColorContrast.LowContrast
+        contrast < MEDIUM_CONTRAST_THRESHOLD -> SystemColorContrast.StandardContrast
+        contrast < HIGH_CONTRAST_THRESHOLD -> SystemColorContrast.MediumContrast
+        contrast >= HIGH_CONTRAST_THRESHOLD -> SystemColorContrast.HighContrast
         else -> SystemColorContrast.StandardContrast
     }

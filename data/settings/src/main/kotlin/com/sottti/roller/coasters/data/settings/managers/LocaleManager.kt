@@ -9,7 +9,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import java.util.Locale
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class LocaleManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val localeProvider: LocaleProvider,

@@ -7,8 +7,11 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColo
 import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.utils.lifecycle.observeConfigurationChanges
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class SystemColorContrastManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val systemFeatures: SystemFeatures,
@@ -17,14 +20,13 @@ internal class SystemColorContrastManager @Inject constructor(
     fun getSystemColorContrast(): SystemColorContrast =
         when {
             systemFeatures.systemColorContrastAvailable() -> {
-                // uiModeManager.contrast returns 0f for standard, 0.5f for medium and 1f for high
-                val contrast = uiModeManager?.contrast ?: 0f
+                val contrast = uiModeManager?.contrast
                 toSystemColorContrast(contrast)
             }
 
             else -> SystemColorContrast.StandardContrast
         }
 
-    fun observeSystemColorContrast() =
+    fun observeSystemColorContrast(): Flow<SystemColorContrast> =
         context.observeConfigurationChanges({ getSystemColorContrast() })
 }
