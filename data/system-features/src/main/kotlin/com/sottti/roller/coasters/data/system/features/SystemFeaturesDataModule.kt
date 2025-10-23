@@ -9,11 +9,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal fun interface SystemFeaturesDataModule {
+internal interface SystemFeaturesDataModule {
 
     @Binds
     @Singleton
-    fun bindSdkSystemFeatures(
+    fun bindSystemFeatures(
         impl: SystemFeaturesImpl,
     ): SystemFeatures
 }
