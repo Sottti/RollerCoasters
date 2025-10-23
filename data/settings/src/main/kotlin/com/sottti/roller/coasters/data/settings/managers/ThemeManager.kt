@@ -7,7 +7,7 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.sottti.roller.coasters.data.settings.mapper.toAppCompatDelegateNightMode
 import com.sottti.roller.coasters.data.settings.mapper.toUiModeManagerNightMode
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -22,12 +22,12 @@ import javax.inject.Singleton
 @Singleton
 internal class ThemeManager @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val features: Features,
+    private val systemFeatures: SystemFeatures,
     private val uiModeManager: UiModeManager?,
 ) {
     fun setTheme(appTheme: AppTheme) {
         when {
-            features.setPersistentNightModeAvailable() ->
+            systemFeatures.setPersistentNightModeAvailable() ->
                 uiModeManager?.setApplicationNightMode(appTheme.toUiModeManagerNightMode())
 
             else -> AppCompatDelegate.setDefaultNightMode(appTheme.toAppCompatDelegateNightMode())

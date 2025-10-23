@@ -18,7 +18,7 @@ import com.sottti.roller.coasters.data.settings.mapper.toBoolean
 import com.sottti.roller.coasters.data.settings.mapper.toLanguage
 import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
 import com.sottti.roller.coasters.data.settings.mapper.toTheme
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
@@ -44,7 +44,7 @@ internal class SettingsLocalDataSource @Inject constructor(
     private val measurementSystemManager: MeasurementSystemManager,
     private val systemColorContrastManager: SystemColorContrastManager,
     private val themeManager: ThemeManager,
-    features: Features,
+    systemFeatures: SystemFeatures,
 ) {
     companion object {
         internal const val DATA_STORE_NAME = "settings"
@@ -167,18 +167,18 @@ internal class SettingsLocalDataSource @Inject constructor(
             key.toAppMeasurementSystem()
         }
 
-    private val appDynamicColorDefault by lazy { features.systemDynamicColorAvailable() }
+    private val appDynamicColorDefault by lazy { systemFeatures.systemDynamicColorAvailable() }
 
     private val appThemeDefaultValue by lazy {
         when {
-            features.lightDarkSystemThemingAvailable() -> AppTheme.System.key
+            systemFeatures.lightDarkSystemThemingAvailable() -> AppTheme.System.key
             else -> AppTheme.LightAppTheme.key
         }
     }
 
     private val appColorContrastDefaultValue by lazy {
         when {
-            features.systemColorContrastAvailable() -> System.key
+            systemFeatures.systemColorContrastAvailable() -> System.key
             else -> StandardContrast.key
         }
     }

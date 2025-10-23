@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.data.features"
+    namespace = "com.sottti.roller.coasters.data.system.features"
 }
 
 dependencies {
     implementation(libs.hilt)
-    implementation(project(module.domain.features))
+    implementation(project(module.domain.systemFeatures))
     ksp(libs.hilt.compiler)
 }

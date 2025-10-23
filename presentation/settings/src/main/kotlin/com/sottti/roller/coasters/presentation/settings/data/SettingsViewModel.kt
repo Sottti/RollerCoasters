@@ -3,7 +3,7 @@ package com.sottti.roller.coasters.presentation.settings.data
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
@@ -85,7 +85,7 @@ internal class SettingsViewModel @Inject constructor(
     observeAppLanguage: ObserveAppLanguage,
     observeAppMeasurementSystem: ObserveAppMeasurementSystem,
     observeAppTheme: ObserveAppTheme,
-    private val features: Features,
+    private val systemFeatures: SystemFeatures,
     private val getAppColorContrast: GetAppColorContrast,
     private val getAppLanguage: GetAppLanguage,
     private val getAppMeasurementSystem: GetAppMeasurementSystem,
@@ -99,7 +99,7 @@ internal class SettingsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val initialState =
-        testInitialState ?: initialState(features.systemDynamicColorAvailable())
+        testInitialState ?: initialState(systemFeatures.systemDynamicColorAvailable())
     private val stateMutationActionActions: MutableSharedFlow<StateMutationAction> =
         MutableSharedFlow(extraBufferCapacity = 64)
 
@@ -187,7 +187,7 @@ internal class SettingsViewModel @Inject constructor(
     ): SettingsState =
         when (action) {
             LaunchAppThemePicker -> showAppThemePicker(
-                lightDarkAppThemingAvailable = features.lightDarkSystemThemingAvailable(),
+                lightDarkAppThemingAvailable = systemFeatures.lightDarkSystemThemingAvailable(),
                 selectedAppTheme = getAppTheme().toPresentationModel(selected = true),
             )
 
@@ -200,11 +200,11 @@ internal class SettingsViewModel @Inject constructor(
 
             LaunchAppColorContrastPicker -> showAppColorContrastPicker(
                 selectedAppColorContrast = getAppColorContrast(),
-                appColorContrastAvailable = features.systemColorContrastAvailable(),
+                appColorContrastAvailable = systemFeatures.systemColorContrastAvailable(),
             )
 
             is AppColorContrastPickerSelectionChange -> updateAppColorContrastPicker(
-                appColorContrastAvailable = features.systemColorContrastAvailable(),
+                appColorContrastAvailable = systemFeatures.systemColorContrastAvailable(),
                 selectedAppColorContrast = action.appColorContrast,
             )
 
