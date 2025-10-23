@@ -64,11 +64,11 @@ This template is built using modern Android development practices and libraries:
 ### 🌙 Dark Theme
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3b417d2c-bc56-483c-9343-58bc6733693a" width="250" />
-  <img src="https://github.com/user-attachments/assets/018d1d51-d430-4c7f-a88b-b5dc2c320efe" width="250" />
-  <img src="https://github.com/user-attachments/assets/a5983e2b-d698-4df7-833a-9e18263a2010" width="250" />
+    <img src="https://github.com/user-attachments/assets/e8f79eab-7e5e-4d75-b6d6-156b96df1dce" width="225"/>
+    <img src="https://github.com/user-attachments/assets/1a9840ee-9294-4e96-911d-f33e572c3ce9" width="225"/>
+    <img src="https://github.com/user-attachments/assets/dba6e3bb-e418-4aa2-8191-67947dd55db9" width="225"/>
+    <img src="https://github.com/user-attachments/assets/92d0a3e9-a25f-4fca-88c8-821cf5875f7e" width="225"/>
 </p>
-
 
 ## 📁 Project Structure
 
