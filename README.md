@@ -1,4 +1,4 @@
-# Roller Coasters (Modern Android Showcase)
+# Roller Coasters
 
 ![API](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.minSdk&label=API&color=brightgreen&suffix=%2B&logo=android&logoColor=white)
 ![Compose BOM](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.compose-bom&label=Compose%20BOM&color=007ACC&logo=jetpackcompose&logoColor=white)
@@ -6,57 +6,68 @@
 ![Kotlin](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.kotlin&label=Kotlin&color=7F52FF&logo=kotlin&logoColor=white)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat&logo=opensourceinitiative&logoColor=white)](https://opensource.org/licenses/MIT)
 
+## Overview
+
 Roller Coasters is a personal playground where I experiment with modern Android development
 practices, libraries, and tools. It is a space to try new APIs, patterns, and approaches—especially
 around Jetpack Compose—without the constraints of production code.
 
 The project is under active development and the codebase is not yet stable or nearly finished.
 
-| Light                                                                                                                                                     | Dark                                                                                                                                                      |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![Screenshot_20250806_185237](https://github.com/user-attachments/assets/0f2c15d2-d003-415f-9b11-53bb01497f7f)                                            | ![Screenshot_20250806_185228](https://github.com/user-attachments/assets/3b417d2c-bc56-483c-9343-58bc6733693a)                                            |
+## ⚙️ Tech Stack & Architecture
+
+This template is built using modern Android development practices and libraries:
+
+* **Language:** 100% [Kotlin](https://kotlinlang.org/)
+* **UI:** [Jetpack Compose](https://developer.android.com/jetpack/compose) for declarative UI.
+    * **Theming:** [Material 3](https://m3.material.io/) (Material You) with dynamic color support.
+    * **Navigation:** [Compose Navigation 3](https://developer.android.com/guide/navigation/navigation-3) for screen transitions.
+* **Architecture:** Follows Google's official "Guide to app architecture", combining [MVVM](https://developer.android.com/jetpack/guide) (Model-View-ViewModel) with principles from Clean Architecture.
+    * **UI Layer:** State-driven UI using `ViewModel`, `State`, and `Actions`. ViewModels follow a [declarative approach](https://proandroiddev.com/loading-initial-data-in-launchedeffect-vs-viewmodel-f1747c20ce62).
+    * **Domain Layer:** (Optional) UseCases encapsulate specific business logic (e.g., `GetFavoriteCoastersUseCase`).
+    * **Data Layer:** `Repository` pattern providing a single source of truth.
+* **Asynchronicity:** [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [Flows](https://developer.android.com/kotlin/flow) for managing background tasks and data streams.
+* **Dependency Injection:** [Hilt](https://dagger.dev/hilt/) for managing dependencies throughout the app.
+* **Networking:** [Ktor Client](https://ktor.io/docs/client-overview.html) for REST API communication.
+* **Serialization:** [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON parsing.
+* **Testing:**
+    * **Unit Tests:** [JUnit 4](https://junit.org/junit4/) & [Mockk](https://mockk.io/)
+    * **Screenshot Tests:** [Paparazzi](https://github.com/cashapp/paparazzi)
+    * **UI Tests:** [Compose Test Rules](https://developer.android.com/jetpack/compose/testing)
+
+## 📱 App Features
+
+* **Explore Feed:** View roller coasters, filterable by various criteria (specs, materials, etc.).
+* **Favorites:** Mark and view your favorite roller coasters.
+* **Details Screen:** See detailed information and images for each coaster.
+* **Settings:** Customize theme (Light/Dark/System), enable/disable dynamic color, adjust color contrast, change language, and select measurement system (Metric/Imperial).
+* **Modern UI:**
+    * Dynamic Theming (Material You).
+    * Support for multiple languages.
+    * Edge-to-edge display.
+    * Predictive back navigation.
+* **About Screen:** Information about the project/developer.
+
+| Light                                                                                                                                                       | Dark                                                                                                                                                        |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Screenshot_20250806_185237](https://github.com/user-attachments/assets/0f2c15d2-d003-415f-9b11-53bb01497f7f)                                             | ![Screenshot_20250806_185228](https://github.com/user-attachments/assets/3b417d2c-bc56-483c-9343-58bc6733693a)                                             |
 | <img width="1466" height="3101" alt="Screenshot_20250806_185918" src="https://github.com/user-attachments/assets/f277209c-d44d-408e-81e4-cda28898a63b" /> | <img width="1466" height="3101" alt="Screenshot_20250806_185923" src="https://github.com/user-attachments/assets/018d1d51-d430-4c7f-a88b-b5dc2c320efe" /> |
 | <img width="1466" height="3101" alt="Screenshot_20250811_143155" src="https://github.com/user-attachments/assets/ea529a5d-2075-4a01-a7d0-a05fd8a8abe9" /> | <img width="1466" height="3101" alt="Screenshot_20250811_143200" src="https://github.com/user-attachments/assets/a5983e2b-d698-4df7-833a-9e18263a2010" /> |
 
-## Current Features
+## 📁 Project Structure
 
-- **Explore** feed showcasing coasters filtered by specifics like specs or materials.
-- **Favourites** list of favourite roller coasters
-- **About** screen with information about me
-- **Roller coaster details** with detailed information and images
-- **Settings** to pick dynamic color, theme, color contrast, language and measurement system.
-- **Dynamic theming** (Material 3, dynamic colors and color contrast)
-- Support for multiple languages and measurement systems
-- **Edge-to-edge** layout for immersive experiences
-- **Predictive back** navigation for smoother transitions
+This project follows a standard multi-module setup, which is highly recommended for separation of
+concerns and build speed.
 
-## Planned Features or improvements
+## 🚀 Planned Features or Improvements
 
-- **Search** roller coasters directly by name (work in progress...)
-- **Parks** as first class entities
-- **Better discovery** including filtering by manufacturer, park...
-- **Error handling**
-- **Empty states**
+* **Search:** Find roller coasters by name.
+* **Parks:** Add information about amusement parks.
+* **Enhanced Discovery:** More filtering options (manufacturer, park, etc.).
+* **Robustness:** Improved error handling and empty state displays.
+* **UI/UX:** Add animations; improve support for large screens and foldables.
+* **Navigation:** Migrate fully to Jetpack Compose Navigation 3 (if not already done).
 
-## Current Tech
+## 📜 License
 
-- **Jetpack Compose** for all UI components and previews
-- **Paging** for efficient data loading
-- **Hilt** for dependency injection
-- **Room** and **DataStore** for local persistence
-- **Ktor** client for networking
-- **WorkManager** for background tasks
-- **Automatic backups** for SharedPreferences and databases with custom backup rules
-- **Coroutines** and **Flow** for asynchronous work
-- **Gradle Version Catalog** for centralized dependencies
-- **Paparazzi** screenshot tests
-
-## Planned Tech Updates
-
-- **Navigation** using Jetpack Compose Navigation 3
-- **Animations** for enhanced user experience
-- **Large screens support** with multi-window and foldable devices
-
-## License
-
-This repository is for learning purposes only and does not include an explicit license.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
