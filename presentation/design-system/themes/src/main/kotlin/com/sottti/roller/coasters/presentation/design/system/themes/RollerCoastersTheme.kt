@@ -7,12 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
-import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast.StandardContrast
-import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
-import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme.DarkResolvedTheme
-import com.sottti.roller.coasters.domain.settings.model.theme.ResolvedTheme.LightResolvedTheme
+import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorContrast
 import com.sottti.roller.coasters.presentation.design.system.colors.color.ColorsLocalProvider
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.opacity.OpacityLocalProvider
@@ -23,40 +18,40 @@ import com.sottti.roller.coasters.presentation.design.system.typography.typograp
 
 @Composable
 public fun RollerCoastersTheme(
-    colorContrast: ResolvedColorContrast = StandardContrast,
-    dynamicColor: ResolvedDynamicColor = ResolvedDynamicColor(true),
-    theme: ResolvedTheme = if (isSystemInDarkTheme()) DarkResolvedTheme else LightResolvedTheme,
+    colorContrast: ColorContrast = ColorContrast.Standard,
     themeVariant: RollerCoastersThemeVariant = RollerCoastersThemeVariant.Default,
+    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    useDynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     when (themeVariant) {
         RollerCoastersThemeVariant.Default ->
             DefaultThemeVariant(
                 colorContrast = colorContrast,
-                dynamicColor = dynamicColor,
-                theme = theme,
-                content = content
+                content = content,
+                useDarkTheme = useDarkTheme,
+                useDynamicColor = useDynamicColor,
             )
     }
 }
 
 @Composable
 private fun DefaultThemeVariant(
-    colorContrast: ResolvedColorContrast,
-    dynamicColor: ResolvedDynamicColor,
-    theme: ResolvedTheme,
+    colorContrast: ColorContrast,
+    useDarkTheme: Boolean,
+    useDynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     ColorsLocalProvider(
         colorContrast = colorContrast,
-        dynamicColor = dynamicColor,
-        theme = theme,
+        useDarkTheme = useDarkTheme,
+        useDynamicColor = useDynamicColor,
     ) {
         TypographyLocalProvider {
             OpacityLocalProvider {
                 DimensionsLocalProvider {
                     ShapesLocalProvider {
-                        UpdateSystemBars(theme)
+                        UpdateSystemBars(useDarkTheme)
                         MaterialTheme(
                             colorScheme = colors,
                             content = content,
@@ -71,13 +66,13 @@ private fun DefaultThemeVariant(
 
 @Composable
 private fun UpdateSystemBars(
-    theme: ResolvedTheme,
+    useDarkTheme: Boolean,
 ) {
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            val isLightTheme = theme == LightResolvedTheme
+            val isLightTheme = !useDarkTheme
             WindowCompat
                 .getInsetsController(window, view)
                 .apply {

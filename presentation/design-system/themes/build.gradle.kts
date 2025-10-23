@@ -11,11 +11,11 @@ android {
 }
 
 dependencies {
+    api(project(module.presentation.designSystem.colors))
     implementation(libs.compose.material)
     implementation(libs.material)
     implementation(libs.splashscreen)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.presentation.designSystem.colors))
     implementation(project(module.presentation.designSystem.dimensions))
     implementation(project(module.presentation.designSystem.iconResources))
     implementation(project(module.presentation.designSystem.shapes))

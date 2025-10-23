@@ -28,7 +28,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
@@ -146,6 +145,6 @@ private fun LightDarkTheme(
         LocalConfiguration provides newConfiguration
     ) {
 
-        RollerCoastersTheme(content = content, dynamicColor = ResolvedDynamicColor(false))
+        RollerCoastersTheme(content = content)
     }
 }

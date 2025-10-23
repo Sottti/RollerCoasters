@@ -12,7 +12,6 @@ android {
 
 dependencies {
     api(project(module.domain.locales))
-    api(project(module.domain.settings))
     implementation(libs.compose.material)
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
