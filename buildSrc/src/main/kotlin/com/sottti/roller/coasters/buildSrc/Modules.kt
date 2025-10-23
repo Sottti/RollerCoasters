@@ -65,6 +65,7 @@ object module {
     }
 
     object utils {
+        const val lifecycle = ":utils:lifecycle"
         const val timeDates = ":utils:time-dates"
     }
 

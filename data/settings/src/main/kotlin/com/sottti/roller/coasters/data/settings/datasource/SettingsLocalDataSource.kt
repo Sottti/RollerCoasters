@@ -18,7 +18,6 @@ import com.sottti.roller.coasters.data.settings.mapper.toBoolean
 import com.sottti.roller.coasters.data.settings.mapper.toLanguage
 import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
 import com.sottti.roller.coasters.data.settings.mapper.toTheme
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.StandardContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
@@ -29,16 +28,14 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.AppMea
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import java.util.Locale
 import javax.inject.Inject
 
 internal class SettingsLocalDataSource @Inject constructor(
-    private val activityLifecycleEmitter: ActivityLifecycleEmitter,
     private val dataStore: DataStore<Preferences>,
     private val localeManager: LocaleManager,
     private val measurementSystemManager: MeasurementSystemManager,
@@ -83,9 +80,9 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     fun observeAppTheme(): Flow<AppTheme> = appThemeFlow
 
-    fun observeSystemTheme(): Flow<SystemTheme> = themeManager.observeSystemTheme()
-
     fun getSystemTheme(): SystemTheme = themeManager.getSystemTheme()
+
+    fun observeSystemTheme(): Flow<SystemTheme> = themeManager.observeSystemTheme()
 
     suspend fun applyStoredAppTheme() {
         themeManager.setTheme(appTheme = appThemeFlow.first())
@@ -102,7 +99,10 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun observeAppColorContrast(): Flow<AppColorContrast> = appColorContrastFlow
 
     fun getSystemColorContrast(): SystemColorContrast =
-        systemColorContrastManager.systemColorContrast
+        systemColorContrastManager.getSystemColorContrast()
+
+    fun observeSystemColorContrast(): Flow<SystemColorContrast> =
+        systemColorContrastManager.observeSystemColorContrast()
 
     fun setAppLanguage(appLanguage: AppLanguage) {
         localeManager.setLocaleList(appLanguage.toLocaleList())
@@ -111,13 +111,14 @@ internal class SettingsLocalDataSource @Inject constructor(
     fun getAppLanguage(): AppLanguage =
         localeManager.appLocale.toLanguage()
 
-    fun observeAppLanguage(): Flow<AppLanguage> = observeLifecycle(
-        transform = { localeManager.appLocale.toLanguage() },
-    )
+    fun observeAppLanguage(): Flow<AppLanguage> =
+        localeManager
+            .observeAppLocale()
+            .map { it.toLanguage() }
 
-    fun observeSystemLocale(): Flow<Locale> = observeLifecycle(
-        transform = { Locale.getDefault() }
-    )
+    fun observeSystemLocale(): Flow<Locale> =
+        localeManager.observeSystemLocale()
+
 
     suspend fun setAppMeasurementSystem(appMeasurementSystem: AppMeasurementSystem) {
         dataStore.edit { preferences ->
@@ -133,15 +134,6 @@ internal class SettingsLocalDataSource @Inject constructor(
 
     fun getSystemMeasurementSystem(): SystemMeasurementSystem =
         measurementSystemManager.systemMeasurementSystem
-
-    private inline fun <T> observeLifecycle(
-        crossinline transform: () -> T,
-    ): Flow<T> =
-        activityLifecycleEmitter
-            .activityCreatedFlow
-            .map { transform() }
-            .onStart { emit(transform()) }
-            .distinctUntilChanged()
 
     private val appDynamicColorFlow: Flow<AppDynamicColor> =
         dataStore.data.map { preferences ->

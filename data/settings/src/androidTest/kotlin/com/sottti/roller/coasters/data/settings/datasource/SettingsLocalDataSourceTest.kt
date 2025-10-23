@@ -15,7 +15,6 @@ import com.sottti.roller.coasters.data.settings.managers.MeasurementSystemManage
 import com.sottti.roller.coasters.data.settings.managers.SystemColorContrastManager
 import com.sottti.roller.coasters.data.settings.managers.ThemeManager
 import com.sottti.roller.coasters.data.settings.mapper.toLocaleList
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.locales.localeDe
 import com.sottti.roller.coasters.domain.locales.localeEs
 import com.sottti.roller.coasters.domain.locales.localeFr
@@ -35,6 +34,7 @@ import com.sottti.roller.coasters.domain.settings.model.measurementSystem.System
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.DarkAppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme.LightAppTheme
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -60,7 +60,6 @@ import java.util.Locale
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class SettingsLocalDataSourceTest {
 
-    private lateinit var activityLifecycleEmitter: ActivityLifecycleEmitter
     private lateinit var context: Context
     private lateinit var dataSource: SettingsLocalDataSource
     private lateinit var dataStore: DataStore<Preferences>
@@ -70,11 +69,6 @@ internal class SettingsLocalDataSourceTest {
     fun setup() {
         context = ApplicationProvider.getApplicationContext()
         dataStore = context.dataStore
-        activityLifecycleEmitter = mockk {
-            every {
-                activityCreatedFlow
-            } returns MutableSharedFlow<Unit>(replay = 1).apply { tryEmit(Unit) }
-        }
         localeManager = mockk()
         runTest { dataStore.edit { it.clear() } }
     }
@@ -240,7 +234,6 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testGetSystemColorContrast() = runTest {
         val systemColorContrastManager = mockk<SystemColorContrastManager> {
-            every { systemColorContrast } returns SystemColorContrast.HighContrast
         }
         dataSource = createDataSource(systemColorContrastManager = systemColorContrastManager)
         assertThat(dataSource.getSystemColorContrast()).isEqualTo(SystemColorContrast.HighContrast)
@@ -249,11 +242,10 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testGetSystemColorContrastManagerCall() = runTest {
         val systemColorContrastManager = mockk<SystemColorContrastManager> {
-            every { systemColorContrast } returns SystemColorContrast.HighContrast
         }
         dataSource = createDataSource(systemColorContrastManager = systemColorContrastManager)
         dataSource.getSystemColorContrast()
-        verify { systemColorContrastManager.systemColorContrast }
+        verify { systemColorContrastManager.getSystemColorContrast() }
     }
 
     @Test
@@ -292,11 +284,7 @@ internal class SettingsLocalDataSourceTest {
             )
         }
         val activityFlow = MutableSharedFlow<Unit>(replay = 0)
-        val activityLifecycleEmitter = mockk<ActivityLifecycleEmitter> {
-            every { activityCreatedFlow } returns activityFlow
-        }
         dataSource = createDataSource(
-            activityLifecycleEmitter = activityLifecycleEmitter,
             localeManager = localeManager,
         )
 
@@ -382,14 +370,10 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testObserveSystemLocaleEmitsInitialValue() = runTest {
-        val activityFlow = MutableSharedFlow<Unit>(replay = 0)
-        val activityLifecycleEmitter = mockk<ActivityLifecycleEmitter> {
-            every { activityCreatedFlow } returns activityFlow
-        }
         mockkStatic(Locale::class)
         every { Locale.getDefault() } returns localeFr
 
-        dataSource = createDataSource(activityLifecycleEmitter = activityLifecycleEmitter)
+        dataSource = createDataSource()
 
         val initialValue = dataSource.observeSystemLocale().first()
         assertThat(initialValue).isEqualTo(localeFr)
@@ -400,9 +384,6 @@ internal class SettingsLocalDataSourceTest {
     @Test
     fun testObserveSystemLocaleEmitsDistinctValues() = runTest {
         val activityFlow = MutableSharedFlow<Unit>(replay = 0)
-        val activityLifecycleEmitter = mockk<ActivityLifecycleEmitter> {
-            every { activityCreatedFlow } returns activityFlow
-        }
 
         mockkStatic(Locale::class)
         every { Locale.getDefault() } returnsMany listOf(
@@ -412,7 +393,7 @@ internal class SettingsLocalDataSourceTest {
             localeDe,
         )
 
-        dataSource = createDataSource(activityLifecycleEmitter = activityLifecycleEmitter)
+        dataSource = createDataSource()
 
         val emittedLocales = mutableListOf<Locale>()
         val job = launch {
@@ -437,14 +418,12 @@ internal class SettingsLocalDataSourceTest {
     }
 
     private fun createDataSource(
-        activityLifecycleEmitter: ActivityLifecycleEmitter = this.activityLifecycleEmitter,
         localeManager: LocaleManager = this.localeManager,
         measurementSystemManager: MeasurementSystemManager = mockk(),
         systemColorContrastManager: SystemColorContrastManager = mockk(),
         themeManager: ThemeManager = mockk(),
         systemFeatures: SystemFeatures = mockk(),
     ) = SettingsLocalDataSource(
-        activityLifecycleEmitter = activityLifecycleEmitter,
         dataStore = dataStore,
         localeManager = localeManager,
         measurementSystemManager = measurementSystemManager,

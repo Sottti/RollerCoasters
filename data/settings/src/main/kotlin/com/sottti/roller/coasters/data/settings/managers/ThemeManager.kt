@@ -1,21 +1,17 @@
 package com.sottti.roller.coasters.data.settings.managers
 
 import android.app.UiModeManager
-import android.content.ComponentCallbacks
 import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.sottti.roller.coasters.data.settings.mapper.toAppCompatDelegateNightMode
 import com.sottti.roller.coasters.data.settings.mapper.toUiModeManagerNightMode
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
 import com.sottti.roller.coasters.domain.settings.model.theme.SystemTheme
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
+import com.sottti.roller.coasters.utils.lifecycle.observeConfigurationChanges
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.conflate
-import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -42,21 +38,6 @@ internal class ThemeManager @Inject constructor(
             else -> SystemTheme.LightSystemTheme
         }
 
-    fun observeSystemTheme(): Flow<SystemTheme> = callbackFlow {
-        trySend(getSystemTheme())
-
-        val callbacks = object : ComponentCallbacks {
-            override fun onConfigurationChanged(newConfig: Configuration) {
-                trySend(getSystemTheme())
-            }
-
-            @Deprecated("Deprecated in Java")
-            override fun onLowMemory() = Unit
-        }
-
-        context.registerComponentCallbacks(callbacks)
-        awaitClose { context.unregisterComponentCallbacks(callbacks) }
-    }
-        .distinctUntilChanged()
-        .conflate()
+    fun observeSystemTheme(): Flow<SystemTheme> =
+        context.observeConfigurationChanges { getSystemTheme() }
 }

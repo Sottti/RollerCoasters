@@ -70,5 +70,6 @@ include(
     ":presentation:string-provider",
     ":presentation:top-bars",
     ":presentation:utils",
+    ":utils:lifecycle",
     ":utils:time-dates",
 )
