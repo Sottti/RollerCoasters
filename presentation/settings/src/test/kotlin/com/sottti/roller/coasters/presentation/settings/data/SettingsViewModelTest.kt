@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.language.AppLanguage
@@ -68,7 +68,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `app color contrast picker selection change`() = runTest {
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val appColorContrastAvailable = true
         val initialSelectedColorContrast = AppColorContrast.System
         val newSelectedColorContrast =
@@ -82,9 +82,9 @@ internal class SettingsViewModelTest {
             appColorContrastAvailable = appColorContrastAvailable,
             selectedAppColorContrast = newSelectedColorContrast,
         )
-        coEvery { features.systemColorContrastAvailable() } returns appColorContrastAvailable
+        coEvery { systemFeatures.systemColorContrastAvailable() } returns appColorContrastAvailable
         val viewModel = createViewModel(
-            features = features,
+            systemFeatures = systemFeatures,
             initialState = initialState,
         )
 
@@ -190,7 +190,7 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `app theme picker selection change`() = runTest {
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val lightDarkSystemThemingAvailable = true
         val initialSelectedAppTheme = AppTheme.System.toPresentationModel(selected = true)
         val newSelectedTheme = AppTheme.LightAppTheme.toPresentationModel(selected = true)
@@ -201,10 +201,10 @@ internal class SettingsViewModelTest {
         val expectedState = initialState.updateAppThemePicker(
             selectedAppTheme = newSelectedTheme,
         )
-        coEvery { features.lightDarkSystemThemingAvailable() } returns lightDarkSystemThemingAvailable
+        coEvery { systemFeatures.lightDarkSystemThemingAvailable() } returns lightDarkSystemThemingAvailable
         val viewModel = createViewModel(
             initialState = initialState,
-            features = features,
+            systemFeatures = systemFeatures,
         )
 
         viewModel.onAction(AppThemePickerSelectionChange(newSelectedTheme))
@@ -350,21 +350,21 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loaded state with dynamic color available`() = runTest {
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val dynamicColorAvailable = true
         val observeAppColorContrast = mockk<ObserveAppColorContrast>()
         val observeAppDynamicColor = mockk<ObserveAppDynamicColor>()
         val observeAppLanguage = mockk<ObserveAppLanguage>()
         val observeAppMeasurementSystem = mockk<ObserveAppMeasurementSystem>()
         val observeAppTheme = mockk<ObserveAppTheme>()
-        every { features.systemDynamicColorAvailable() } returns dynamicColorAvailable
+        every { systemFeatures.systemDynamicColorAvailable() } returns dynamicColorAvailable
         every { observeAppColorContrast() } returns flowOf(AppColorContrast.System)
         every { observeAppDynamicColor() } returns flowOf(AppDynamicColor.Enabled)
         every { observeAppLanguage() } returns flowOf(AppLanguage.System)
         every { observeAppMeasurementSystem() } returns flowOf(System)
         every { observeAppTheme() } returns flowOf(AppTheme.System)
         val viewModel = createViewModel(
-            features = features,
+            systemFeatures = systemFeatures,
             initialState = loadingState(dynamicColorAvailable),
             observeAppColorContrast = observeAppColorContrast,
             observeAppDynamicColor = observeAppDynamicColor,
@@ -379,21 +379,21 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loaded state with dynamic color unavailable`() = runTest {
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val dynamicColorAvailable = false
         val observeAppColorContrast = mockk<ObserveAppColorContrast>()
         val observeAppDynamicColor = mockk<ObserveAppDynamicColor>()
         val observeAppLanguage = mockk<ObserveAppLanguage>()
         val observeAppMeasurementSystem = mockk<ObserveAppMeasurementSystem>()
         val observeAppTheme = mockk<ObserveAppTheme>()
-        every { features.systemDynamicColorAvailable() } returns dynamicColorAvailable
+        every { systemFeatures.systemDynamicColorAvailable() } returns dynamicColorAvailable
         every { observeAppColorContrast() } returns flowOf(AppColorContrast.System)
         every { observeAppDynamicColor() } returns flowOf(AppDynamicColor.Enabled)
         every { observeAppLanguage() } returns flowOf(AppLanguage.System)
         every { observeAppMeasurementSystem() } returns flowOf(System)
         every { observeAppTheme() } returns flowOf(AppTheme.System)
         val viewModel = createViewModel(
-            features = features,
+            systemFeatures = systemFeatures,
             initialState = loadingState(dynamicColorAvailable),
             observeAppColorContrast = observeAppColorContrast,
             observeAppDynamicColor = observeAppDynamicColor,
@@ -408,18 +408,18 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `initial loading state with dynamic color available`() = runTest {
-        val features = mockk<Features>()
-        every { features.systemDynamicColorAvailable() } returns true
-        val viewModel = createViewModel(features = features)
+        val systemFeatures = mockk<SystemFeatures>()
+        every { systemFeatures.systemDynamicColorAvailable() } returns true
+        val viewModel = createViewModel(systemFeatures = systemFeatures)
 
         viewModel.assertHasState(loadingState(dynamicColorAvailable = true))
     }
 
     @Test
     fun `initial loading state with dynamic color unavailable`() = runTest {
-        val features = mockk<Features>()
-        every { features.systemDynamicColorAvailable() } returns false
-        val viewModel = createViewModel(features = features)
+        val systemFeatures = mockk<SystemFeatures>()
+        every { systemFeatures.systemDynamicColorAvailable() } returns false
+        val viewModel = createViewModel(systemFeatures = systemFeatures)
 
         viewModel.assertHasState(loadingState(dynamicColorAvailable = false))
     }
@@ -427,19 +427,19 @@ internal class SettingsViewModelTest {
     @Test
     fun `shows app color contrast picker when dynamic color disabled`() = runTest {
         val getAppColorContrast = mockk<GetAppColorContrast>()
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val colorContrastAvailable = true
         val dynamicColorAvailable = true
         val dynamicColorState = AppDynamicColor.Disabled
         val appColorContrast = AppColorContrast.System
         coEvery { getAppColorContrast() } returns appColorContrast
-        every { features.systemColorContrastAvailable() } returns colorContrastAvailable
+        every { systemFeatures.systemColorContrastAvailable() } returns colorContrastAvailable
         val initialState = loadedState(
             dynamicColorAvailable = dynamicColorAvailable,
             dynamicColorState = dynamicColorState,
         )
         val viewModel = createViewModel(
-            features = features,
+            systemFeatures = systemFeatures,
             getAppColorContrast = getAppColorContrast,
             initialState = initialState,
         )
@@ -455,20 +455,20 @@ internal class SettingsViewModelTest {
 
     @Test
     fun `shows app color contrast picker when dynamic color enabled`() = runTest {
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val colorContrastAvailable = true
         val dynamicColorAvailable = true
         val dynamicColorState = AppDynamicColor.Enabled
         val appColorContrast = AppColorContrast.System
         val getAppColorContrast = mockk<GetAppColorContrast>()
         coEvery { getAppColorContrast() } returns appColorContrast
-        every { features.systemColorContrastAvailable() } returns colorContrastAvailable
+        every { systemFeatures.systemColorContrastAvailable() } returns colorContrastAvailable
         val initialState = loadedState(
             dynamicColorAvailable = dynamicColorAvailable,
             dynamicColorState = dynamicColorState,
         )
         val viewModel = createViewModel(
-            features = features,
+            systemFeatures = systemFeatures,
             getAppColorContrast = getAppColorContrast,
             initialState = initialState,
         )
@@ -519,14 +519,14 @@ internal class SettingsViewModelTest {
     @Test
     fun `shows app theme picker`() = runTest {
         val getAppTheme = mockk<GetAppTheme>()
-        val features = mockk<Features>()
+        val systemFeatures = mockk<SystemFeatures>()
         val appTheme = AppTheme.System
         val lightDarkSystemThemingAvailable = true
         coEvery { getAppTheme() } returns appTheme
-        coEvery { features.lightDarkSystemThemingAvailable() } returns lightDarkSystemThemingAvailable
+        coEvery { systemFeatures.lightDarkSystemThemingAvailable() } returns lightDarkSystemThemingAvailable
         val initialState = loadedState()
         val viewModel = createViewModel(
-            features = features,
+            systemFeatures = systemFeatures,
             getAppTheme = getAppTheme,
             initialState = initialState,
         )

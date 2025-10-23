@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.features.Features
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Disabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Enabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
@@ -16,21 +16,21 @@ import org.junit.Test
 
 internal class GetResolvedDynamicColorTest {
 
-    private lateinit var features: Features
+    private lateinit var systemFeatures: SystemFeatures
     private lateinit var settingsRepository: SettingsRepository
     private lateinit var getResolvedDynamicColor: GetResolvedDynamicColor
 
     @Before
     fun setUp() {
-        features = mockk()
+        systemFeatures = mockk()
         settingsRepository = mockk()
-        getResolvedDynamicColor = GetResolvedDynamicColor(features, settingsRepository)
+        getResolvedDynamicColor = GetResolvedDynamicColor(systemFeatures, settingsRepository)
     }
 
     @Test
     fun `returns resolved enabled when system supports dynamic color and app is enabled`() =
         runTest {
-            every { features.systemDynamicColorAvailable() } returns true
+            every { systemFeatures.systemDynamicColorAvailable() } returns true
             coEvery { settingsRepository.getAppDynamicColor() } returns Enabled
 
             val result = getResolvedDynamicColor()
@@ -41,7 +41,7 @@ internal class GetResolvedDynamicColorTest {
     @Test
     fun `returns resolved disabled when system supports dynamic color and app is disabled`() =
         runTest {
-            every { features.systemDynamicColorAvailable() } returns true
+            every { systemFeatures.systemDynamicColorAvailable() } returns true
             coEvery { settingsRepository.getAppDynamicColor() } returns Disabled
 
             val result = getResolvedDynamicColor()
@@ -51,7 +51,7 @@ internal class GetResolvedDynamicColorTest {
 
     @Test
     fun `returns disabled when system does not support dynamic color`() = runTest {
-        every { features.systemDynamicColorAvailable() } returns false
+        every { systemFeatures.systemDynamicColorAvailable() } returns false
 
         val result = getResolvedDynamicColor()
 

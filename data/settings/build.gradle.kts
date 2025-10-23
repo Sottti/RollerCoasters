@@ -18,7 +18,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.datastore.preferences)
     implementation(libs.hilt)
-    implementation(project(module.domain.features))
+    implementation(project(module.domain.systemFeatures))
     implementation(project(module.domain.locales))
     implementation(project(module.domain.settings))
     ksp(libs.hilt.compiler)

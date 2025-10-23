@@ -49,7 +49,7 @@ object module {
     }
 
     object domain {
-        const val features = ":domain:features"
+        const val systemFeatures = ":domain:system-features"
         const val fixtures = ":domain:fixtures"
         const val locales = ":domain:locales"
         const val model = ":domain:model"
@@ -58,7 +58,7 @@ object module {
     }
 
     object data {
-        const val features = ":data:features"
+        const val systemFeatures = ":data:system-features"
         const val network = ":data:network"
         const val rollerCoasters = ":data:roller-coasters"
         const val settings = ":data:settings"

@@ -59,18 +59,20 @@ This template is built using modern Android development practices and libraries:
 
 ### 💡 Light Theme
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/0f2c15d2-d003-415f-9b11-53bb01497f7f" width="250" />
-  <img src="https://github.com/user-attachments/assets/f277209c-d44d-408e-81e4-cda28898a63b" width="250" />
-  <img src="https://github.com/user-attachments/assets/ea529a5d-2075-4a01-a7d0-a05fd8a8abe9" width="250" />
+<p align="center">   
+   <img src="https://github.com/user-attachments/assets/1d66db52-e2d5-4a5b-af38-9dfd4201cff2" width="24%"/> 
+   <img src="https://github.com/user-attachments/assets/723cf128-155c-4ed2-9dae-f694d5bf8d33" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/b155a20a-e8d2-4047-8ff2-b804b0abf548" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/cc648cd7-0ec9-4bf4-8e05-9ae1818cf3aa" width="24%"/>    
 </p>
 
 ### 🌙 Dark Theme
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3b417d2c-bc56-483c-9343-58bc6733693a" width="250" />
-  <img src="https://github.com/user-attachments/assets/018d1d51-d430-4c7f-a88b-b5dc2c320efe" width="250" />
-  <img src="https://github.com/user-attachments/assets/a5983e2b-d698-4df7-833a-9e18263a2010" width="250" />
+    <img src="https://github.com/user-attachments/assets/dba6e3bb-e418-4aa2-8191-67947dd55db9" width="24%"/>
+    <img src="https://github.com/user-attachments/assets/92d0a3e9-a25f-4fca-88c8-821cf5875f7e" width="24%"/>
+    <img src="https://github.com/user-attachments/assets/1a9840ee-9294-4e96-911d-f33e572c3ce9" width="24%"/>
+    <img src="https://github.com/user-attachments/assets/e8f79eab-7e5e-4d75-b6d6-156b96df1dce" width="24%"/>
 </p>
 
 ## 📁 Project Structure
