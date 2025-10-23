@@ -50,7 +50,9 @@ This template is built using modern Android development practices and libraries:
     * Predictive back navigation.
 * **About Screen:** Information about the project/developer.
 
-### 💡 Light Theme Screenshots
+## 📷 Screenshots
+
+### 💡 Light Theme
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/0f2c15d2-d003-415f-9b11-53bb01497f7f" width="250" />
@@ -58,7 +60,7 @@ This template is built using modern Android development practices and libraries:
   <img src="https://github.com/user-attachments/assets/ea529a5d-2075-4a01-a7d0-a05fd8a8abe9" width="250" />
 </p>
 
-### 🌙 Dark Theme Screenshots
+### 🌙 Dark Theme
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3b417d2c-bc56-483c-9343-58bc6733693a" width="250" />
