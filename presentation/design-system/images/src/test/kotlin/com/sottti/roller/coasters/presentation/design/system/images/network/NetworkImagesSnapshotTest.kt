@@ -1,10 +1,7 @@
-package com.sottti.roller.coasters.presentation.design.system.images
+package com.sottti.roller.coasters.presentation.design.system.images.network
 
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.images.ui.ImagePreview
-import com.sottti.roller.coasters.presentation.design.system.images.ui.ImagePreviewState
-import com.sottti.roller.coasters.presentation.design.system.images.ui.ImageStateProvider
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
 import com.sottti.roller.coasters.presentation.paparazzi.paparazzi
 import org.junit.Rule
@@ -13,9 +10,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class ImagesSnapshotTest(
+internal class NetworkImagesSnapshotTest(
     nightMode: NightMode,
-    private val state: ImagePreviewState,
+    private val state: NetworkImageState,
 ) {
 
     @get:Rule
@@ -24,15 +21,14 @@ internal class ImagesSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            ImagePreview(state)
+            NetworkImagePreview(state)
         }
     }
 
-    companion object Companion {
+    companion object {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any?>> =
-            nightModeParameters(ImageStateProvider().values)
-
+            nightModeParameters(NetworkImageStateProvider().values)
     }
 }

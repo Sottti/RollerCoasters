@@ -10,7 +10,6 @@ object module {
         const val fixtures = ":presentation:fixtures"
         const val format = ":presentation:format"
         const val home = ":presentation:home"
-        const val imageLoading = ":presentation:image-loading"
         const val navigation = ":presentation:navigation"
         const val navigationExternal = ":presentation:navigation-external"
         const val paparazzi = ":presentation:paparazzi"

@@ -46,7 +46,7 @@ import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensio
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 import com.sottti.roller.coasters.presentation.design.system.icons.model.IconState
 import com.sottti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
-import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sottti.roller.coasters.presentation.design.system.images.local.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar

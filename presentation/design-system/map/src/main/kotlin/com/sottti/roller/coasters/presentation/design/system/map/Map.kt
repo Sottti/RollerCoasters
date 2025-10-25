@@ -16,8 +16,8 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
-import com.sottti.roller.coasters.presentation.design.system.images.data.Images
-import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.data.Images
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.design.system.themes.getMapStyle
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview

@@ -23,15 +23,26 @@ This template is built using modern Android development practices and libraries:
 * **Language:** 100% [Kotlin](https://kotlinlang.org/)
 * **UI:** [Jetpack Compose](https://developer.android.com/jetpack/compose) for declarative UI.
     * **Theming:** [Material 3](https://m3.material.io/) (Material You) with dynamic color support.
-    * **Navigation:** [Compose Navigation 3](https://developer.android.com/guide/navigation/navigation-3) for screen transitions.
-* **Architecture:** Follows Google's official "Guide to app architecture", combining [MVVM](https://developer.android.com/jetpack/guide) (Model-View-ViewModel) with principles from Clean Architecture.
-    * **UI Layer:** State-driven UI using `ViewModel`, `State`, and `Actions`. ViewModels follow a [declarative approach](https://proandroiddev.com/loading-initial-data-in-launchedeffect-vs-viewmodel-f1747c20ce62).
-    * **Domain Layer:** (Optional) UseCases encapsulate specific business logic (e.g., `GetFavoriteCoastersUseCase`).
+    * **Navigation:
+      ** [Compose Navigation 3](https://developer.android.com/guide/navigation/navigation-3) for
+      screen transitions.
+* **Architecture:** Follows Google's official "Guide to app architecture",
+  combining [MVVM](https://developer.android.com/jetpack/guide) (Model-View-ViewModel) with
+  principles from Clean Architecture.
+    * **UI Layer:** State-driven UI using `ViewModel`, `State`, and `Actions`. ViewModels follow
+      a [declarative approach](https://proandroiddev.com/loading-initial-data-in-launchedeffect-vs-viewmodel-f1747c20ce62).
+    * **Domain Layer:** (Optional) UseCases encapsulate specific business logic (e.g.,
+      `GetFavoriteCoastersUseCase`).
     * **Data Layer:** `Repository` pattern providing a single source of truth.
-* **Asynchronicity:** [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [Flows](https://developer.android.com/kotlin/flow) for managing background tasks and data streams.
-* **Dependency Injection:** [Hilt](https://dagger.dev/hilt/) for managing dependencies throughout the app.
-* **Networking:** [Ktor Client](https://ktor.io/docs/client-overview.html) for REST API communication.
-* **Serialization:** [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON parsing.
+* **Asynchronicity:
+  ** [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [Flows](https://developer.android.com/kotlin/flow)
+  for managing background tasks and data streams.
+* **Dependency Injection:** [Hilt](https://dagger.dev/hilt/) for managing dependencies throughout
+  the app.
+* **Networking:** [Ktor Client](https://ktor.io/docs/client-overview.html) for REST API
+  communication.
+* **Serialization:** [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for
+  JSON parsing.
 * **Testing:**
     * **Unit Tests:** [JUnit 4](https://junit.org/junit4/) & [Mockk](https://mockk.io/)
     * **Screenshot Tests:** [Paparazzi](https://github.com/cashapp/paparazzi)
@@ -43,11 +54,11 @@ This template is built using modern Android development practices and libraries:
 * **Favorites:** Mark and view your favorite roller coasters.
 * **Details Screen:** See detailed information and images for each coaster.
 * **Settings:**
-    *  Customize theme (Light/Dark/System)
-    *  Enable/disable dynamic color
-    *  Adjust color contrast
-    *  Change language (English, Spanish and Galician)
-    *  Select measurement system (Metric/Imperial).
+    * Customize theme (Light/Dark/System)
+    * Enable/disable dynamic color
+    * Adjust color contrast
+    * Change language (English, Spanish and Galician)
+    * Select measurement system (Metric/Imperial).
 * **Modern UI:**
     * Dynamic Theming (Material You).
     * Support for multiple languages.
@@ -91,4 +102,5 @@ concerns and build speed.
 
 ## 📜 License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see
+the [LICENSE](LICENSE) file for details.

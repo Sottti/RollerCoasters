@@ -27,7 +27,7 @@ import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImage
-import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.Image
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.format.annotatedLinkString
@@ -72,10 +72,11 @@ private fun HeaderImage(
                 .aspectRatio(1.0f),
         )
 
-        is TopicDescriptionImage.Image -> Image(
-            state = state.state,
-            modifier = Modifier.fillMaxWidth(widthPercent),
-        )
+        is TopicDescriptionImage.Image ->
+            Image(
+                state = state.state,
+                modifier = Modifier.fillMaxWidth(widthPercent),
+            )
     }
 }
 

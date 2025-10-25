@@ -15,12 +15,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.domain.model.ImageUrl
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sottti.roller.coasters.presentation.design.system.images.network.NetworkImage
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.R
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard.Small
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
-import com.sottti.roller.coasters.presentation.image.loading.Image
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
 
 @Composable
@@ -65,7 +65,7 @@ private fun Image(
     imageUrl: ImageUrl,
     foreverLoading: Boolean,
 ) {
-    Image(
+    NetworkImage(
         url = imageUrl,
         contentDescription = stringResource(R.string.image_content_description),
         modifier = Modifier

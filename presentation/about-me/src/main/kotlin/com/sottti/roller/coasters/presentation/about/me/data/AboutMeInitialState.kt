@@ -11,7 +11,7 @@ import com.sottti.roller.coasters.presentation.about.me.model.TopicHyperlink
 import com.sottti.roller.coasters.presentation.about.me.model.Topics
 import com.sottti.roller.coasters.presentation.about.me.model.TopicsState
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
-import com.sottti.roller.coasters.presentation.design.system.images.data.Images
+import com.sottti.roller.coasters.presentation.design.system.images.local.data.Images
 
 internal val initialState = AboutMeState(
     name = R.string.name,

@@ -80,7 +80,8 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testSetAppDynamicColorTrue() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         dataSource.setAppDynamicColor(AppDynamicColor.Enabled)
         assertThat(dataSource.observeAppDynamicColor().first()).isEqualTo(AppDynamicColor.Enabled)
@@ -88,7 +89,8 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testSetAppDynamicColorFalse() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         dataSource.setAppDynamicColor(AppDynamicColor.Disabled)
         assertThat(dataSource.observeAppDynamicColor().first()).isEqualTo(AppDynamicColor.Disabled)
@@ -96,14 +98,16 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testAppDynamicColorDefaultWhenMissing() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         assertThat(dataSource.observeAppDynamicColor().first()).isEqualTo(AppDynamicColor.Enabled)
     }
 
     @Test
     fun testAppDynamicColorWhenFeatureUnavailable() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns false }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemDynamicColorAvailable() } returns false }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         assertThat(dataSource.observeAppDynamicColor().first()).isEqualTo(AppDynamicColor.Disabled)
     }
@@ -142,14 +146,16 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testThemeDefaultWhenMissing() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         assertThat(dataSource.getAppTheme()).isEqualTo(AppTheme.System)
     }
 
     @Test
     fun testThemeFallbackForInvalidValue() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         dataStore.edit { preferences -> preferences[appThemeKey] = "invalid_key" }
         assertThat(dataSource.getAppTheme()).isEqualTo(AppTheme.System)
@@ -157,7 +163,8 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testThemeWhenFeatureUnavailable() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns false }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns false }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         assertThat(dataSource.getAppTheme()).isEqualTo(LightAppTheme)
     }
@@ -173,7 +180,8 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testApplyStoredAppThemeWithDefault() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { lightDarkSystemThemingAvailable() } returns true }
         val themeManager = mockk<ThemeManager> { every { setTheme(AppTheme.System) } just runs }
         dataSource = createDataSource(systemFeatures = systemFeatures, themeManager = themeManager)
         dataStore.edit { it.clear() }
@@ -211,14 +219,16 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testAppColorContrastDefaultWhenMissing() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemColorContrastAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemColorContrastAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         assertThat(dataSource.getAppColorContrast()).isEqualTo(AppColorContrast.System)
     }
 
     @Test
     fun testAppColorContrastFallbackForInvalidValue() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemColorContrastAvailable() } returns true }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemColorContrastAvailable() } returns true }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         dataStore.edit { preferences -> preferences[appColorContrastKey] = "invalid_key" }
         assertThat(dataSource.getAppColorContrast()).isEqualTo(AppColorContrast.System)
@@ -226,7 +236,8 @@ internal class SettingsLocalDataSourceTest {
 
     @Test
     fun testAppColorContrastWhenFeatureUnavailable() = runTest {
-        val systemFeatures = mockk<SystemFeatures> { every { systemColorContrastAvailable() } returns false }
+        val systemFeatures =
+            mockk<SystemFeatures> { every { systemColorContrastAvailable() } returns false }
         dataSource = createDataSource(systemFeatures = systemFeatures)
         assertThat(dataSource.getAppColorContrast()).isEqualTo(StandardContrast)
     }

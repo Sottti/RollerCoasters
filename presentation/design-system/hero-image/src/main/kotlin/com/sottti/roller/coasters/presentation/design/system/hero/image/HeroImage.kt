@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
-import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
-import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview

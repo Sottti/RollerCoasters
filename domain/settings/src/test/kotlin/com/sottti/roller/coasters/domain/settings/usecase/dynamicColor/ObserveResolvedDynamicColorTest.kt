@@ -1,11 +1,11 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Disabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Enabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -24,7 +24,8 @@ internal class ObserveResolvedDynamicColorTest {
     fun setUp() {
         systemFeatures = mockk()
         settingsRepository = mockk()
-        observeResolvedDynamicColor = ObserveResolvedDynamicColor(systemFeatures, settingsRepository)
+        observeResolvedDynamicColor =
+            ObserveResolvedDynamicColor(systemFeatures, settingsRepository)
     }
 
     @Test

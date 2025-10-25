@@ -4,8 +4,8 @@ import android.app.UiModeManager
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.theme.AppTheme
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk

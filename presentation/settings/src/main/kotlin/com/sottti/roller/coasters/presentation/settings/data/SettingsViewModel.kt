@@ -3,7 +3,6 @@ package com.sottti.roller.coasters.presentation.settings.data
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorContrast.System
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
@@ -24,6 +23,7 @@ import com.sottti.roller.coasters.domain.settings.usecase.measurementSystem.SetA
 import com.sottti.roller.coasters.domain.settings.usecase.theme.GetAppTheme
 import com.sottti.roller.coasters.domain.settings.usecase.theme.ObserveAppTheme
 import com.sottti.roller.coasters.domain.settings.usecase.theme.SetAppTheme
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toDomain
 import com.sottti.roller.coasters.presentation.settings.data.mapper.toPresentationModel
 import com.sottti.roller.coasters.presentation.settings.data.reducer.hideAppColorContrastNotAvailableMessage

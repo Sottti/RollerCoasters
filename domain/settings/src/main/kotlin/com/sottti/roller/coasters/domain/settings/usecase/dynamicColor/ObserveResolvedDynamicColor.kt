@@ -1,9 +1,9 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.mapper.toResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map

@@ -1,11 +1,11 @@
 package com.sottti.roller.coasters.domain.settings.usecase.dynamicColor
 
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Disabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor.Enabled
 import com.sottti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every

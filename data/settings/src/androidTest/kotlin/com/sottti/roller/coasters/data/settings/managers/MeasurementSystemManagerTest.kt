@@ -4,7 +4,6 @@ import android.icu.util.LocaleData
 import android.icu.util.ULocale
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.locales.localeEs
 import com.sottti.roller.coasters.domain.locales.localeGb
 import com.sottti.roller.coasters.domain.locales.localeLr
@@ -12,6 +11,7 @@ import com.sottti.roller.coasters.domain.locales.localeUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUk
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.ImperialUs
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem.Metric
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic

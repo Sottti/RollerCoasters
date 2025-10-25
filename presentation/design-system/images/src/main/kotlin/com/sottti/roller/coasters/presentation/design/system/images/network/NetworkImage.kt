@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.image.loading
+package com.sottti.roller.coasters.presentation.design.system.images.network
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,13 +20,14 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.sottti.roller.coasters.domain.model.ImageUrl
+import com.sottti.roller.coasters.presentation.design.system.images.R
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
-import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
 
 @Composable
-public fun Image(
+public fun NetworkImage(
     url: ImageUrl,
     contentDescription: String,
     modifier: Modifier = Modifier,
@@ -35,7 +35,7 @@ public fun Image(
     foreverLoading: Boolean = false,
 ) {
     val isPreview = LocalInspectionMode.current
-    val model = if (isPreview) previewImageModel() else imageRequest(url)
+    val model = if (isPreview) R.drawable.dragon_khan_hero_image else imageRequest(url)
     val painter = rememberAsyncImagePainter(model)
     val painterState by painter.state.collectAsStateWithLifecycle()
     val cornerRadius = when {
@@ -45,32 +45,21 @@ public fun Image(
 
     Box(modifier = modifier.clip(cornerRadius)) {
         val imageModifier = Modifier.matchParentSize()
+
         when {
-            !foreverLoading -> Image(
-                painter = painter,
-                contentDescription = contentDescription,
-                contentScale = ContentScale.Crop,
-                modifier = imageModifier,
-            )
+            foreverLoading || painterState is AsyncImagePainter.State.Loading ->
+                ProgressIndicator(modifier = imageModifier)
 
-            else -> PlaceHolder(
-                foreverLoading = foreverLoading,
-                modifier = imageModifier,
-                painterState = painterState,
-            )
+            painterState is AsyncImagePainter.State.Success ->
+                Image(
+                    painter = painter,
+                    contentDescription = contentDescription,
+                    contentScale = ContentScale.Crop,
+                    modifier = imageModifier,
+                )
+
+            else -> Box(modifier = imageModifier)
         }
-    }
-}
-
-@Composable
-private fun PlaceHolder(
-    foreverLoading: Boolean,
-    modifier: Modifier,
-    painterState: AsyncImagePainter.State,
-) {
-    when {
-        foreverLoading || painterState is AsyncImagePainter.State.Loading ->
-            ProgressIndicator(modifier = modifier)
     }
 }
 
@@ -87,17 +76,13 @@ private fun imageRequest(url: ImageUrl): ImageRequest {
 }
 
 @Composable
-@ReadOnlyComposable
-private fun previewImageModel() = R.drawable.dragon_khan_hero_image
-
-@Composable
-@RollerCoastersPreview
-internal fun ImagePreview(
-    @PreviewParameter(ImageStateProvider::class)
-    state: ImageState,
+@RollerCoastersPreviewNoLocale
+internal fun NetworkImagePreview(
+    @PreviewParameter(NetworkImageStateProvider::class)
+    state: NetworkImageState,
 ) {
     RollerCoastersTheme {
-        Image(
+        NetworkImage(
             contentDescription = state.contentDescription,
             foreverLoading = state.foreverLoading,
             modifier = Modifier.aspectRatio(ratio = 1.75f),

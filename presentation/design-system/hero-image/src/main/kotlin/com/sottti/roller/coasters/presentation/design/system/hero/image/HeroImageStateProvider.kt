@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import com.sottti.roller.coasters.presentation.design.system.images.data.Images
+import com.sottti.roller.coasters.presentation.design.system.images.local.data.Images
 
 internal class ProfilePictureStateProvider :
     PreviewParameterProvider<HeroImageState> {

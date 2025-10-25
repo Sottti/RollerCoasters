@@ -1,7 +1,7 @@
-package com.sottti.roller.coasters.presentation.design.system.images.data
+package com.sottti.roller.coasters.presentation.design.system.images.local.data
 
 import com.sottti.roller.coasters.presentation.design.system.images.R
-import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sottti.roller.coasters.presentation.design.system.images.local.model.ImageState
 
 public object Images {
     public object AndroidDevSummitCredentials {

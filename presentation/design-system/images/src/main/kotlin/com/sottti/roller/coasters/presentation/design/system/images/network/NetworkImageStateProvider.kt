@@ -1,12 +1,12 @@
-package com.sottti.roller.coasters.presentation.image.loading
+package com.sottti.roller.coasters.presentation.design.system.images.network
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.fixtures.fixtureContentDescription
 import com.sottti.roller.coasters.presentation.fixtures.fixtureImageUrl
 
-internal class ImageStateProvider :
-    PreviewParameterProvider<ImageState> {
-    override val values: Sequence<ImageState> =
+internal class NetworkImageStateProvider :
+    PreviewParameterProvider<NetworkImageState> {
+    override val values: Sequence<NetworkImageState> =
         sequence {
             yield(imageState(loading = true, roundedCorners = false))
             roundedCornersValues.forEach { roundedCorners ->
@@ -20,7 +20,7 @@ private val roundedCornersValues = listOf(false, true)
 private fun imageState(
     loading: Boolean,
     roundedCorners: Boolean,
-) = ImageState(
+) = NetworkImageState(
     contentDescription = fixtureContentDescription,
     foreverLoading = loading,
     imageUrl = fixtureImageUrl,

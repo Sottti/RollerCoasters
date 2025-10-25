@@ -4,8 +4,8 @@ import android.icu.util.LocaleData.getMeasurementSystem
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.sottti.roller.coasters.data.settings.mapper.toSystemMeasurementSystem
-import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.SystemMeasurementSystem
+import com.sottti.roller.coasters.domain.system.features.SystemFeatures
 import javax.inject.Inject
 
 internal class MeasurementSystemManager @Inject constructor(

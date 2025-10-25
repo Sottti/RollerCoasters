@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.graphics.shapes.Morph
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
-import com.sottti.roller.coasters.presentation.design.system.images.model.ImageState
-import com.sottti.roller.coasters.presentation.design.system.images.ui.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.Image
+import com.sottti.roller.coasters.presentation.design.system.images.local.model.ImageState
 import com.sottti.roller.coasters.presentation.design.system.shapes.polygon.MorphPolygonShape
 import com.sottti.roller.coasters.presentation.design.system.shapes.shapes
 import com.sottti.roller.coasters.presentation.utils.onClickPressAndReleaseHaptics

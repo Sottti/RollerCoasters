@@ -1,4 +1,4 @@
-package com.sottti.roller.coasters.presentation.image.loading
+package com.sottti.roller.coasters.presentation.design.system.images.local
 
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
@@ -10,9 +10,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class ImageSnapshotTest(
+internal class ImagesSnapshotTest(
     nightMode: NightMode,
-    private val state: ImageState,
+    private val state: ImagePreviewState,
 ) {
 
     @get:Rule
@@ -25,10 +25,11 @@ internal class ImageSnapshotTest(
         }
     }
 
-    companion object {
+    companion object Companion {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any?>> =
             nightModeParameters(ImageStateProvider().values)
+
     }
 }

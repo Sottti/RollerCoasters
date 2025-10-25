@@ -19,13 +19,13 @@ internal class LocaleManager @Inject constructor(
     val appLocale: Locale
         get() = localeProvider.getAppLocale()
 
-    fun observeAppLocale() : Flow<Locale> =
+    fun observeAppLocale(): Flow<Locale> =
         context.observeConfigurationChanges { appLocale }
 
     val systemLocale: Locale
         get() = localeProvider.getSystemLocale()
 
-    fun observeSystemLocale() : Flow<Locale> =
+    fun observeSystemLocale(): Flow<Locale> =
         context.observeConfigurationChanges { systemLocale }
 
     val systemULocale: ULocale

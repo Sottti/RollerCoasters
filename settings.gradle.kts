@@ -59,7 +59,6 @@ include(
     ":presentation:fixtures",
     ":presentation:format",
     ":presentation:home",
-    ":presentation:image-loading",
     ":presentation:navigation",
     ":presentation:navigation-external",
     ":presentation:paparazzi",
