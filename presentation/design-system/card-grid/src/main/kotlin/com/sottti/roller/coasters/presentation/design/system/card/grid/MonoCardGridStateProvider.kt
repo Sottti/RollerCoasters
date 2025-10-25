@@ -6,7 +6,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.sottti.roller.coasters.presentation.design.system.card.grid.model.MonoCardGridState
 
 internal class MonoCardGridStateProvider : PreviewParameterProvider<MonoCardGridState> {
-    override val values = sequenceOf(monoCardGridState)
+    override val values = sequence {
+        yield(monoCardGridState)
+    }
 }
 
 internal val monoCardGridState = MonoCardGridState(

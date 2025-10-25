@@ -15,11 +15,11 @@ import com.sottti.roller.coasters.presentation.roller.coaster.details.model.TopB
 
 internal class RollerCoasterDetailsUiStateProvider :
     PreviewParameterProvider<RollerCoasterDetailsPreviewState> {
-    override val values: Sequence<RollerCoasterDetailsPreviewState> = sequenceOf(
-        previewState(Loading),
-        previewState(Loaded(rollerCoasterDetailsMaxedOut)).addTopBarTitle(),
-        previewState(Error),
-    )
+    override val values: Sequence<RollerCoasterDetailsPreviewState> = sequence {
+        yield(previewState(Loading))
+        yield(previewState(Loaded(rollerCoasterDetailsMaxedOut)).addTopBarTitle())
+        yield(previewState(Error))
+    }
 }
 
 private fun RollerCoasterDetailsPreviewState.addTopBarTitle(): RollerCoasterDetailsPreviewState {

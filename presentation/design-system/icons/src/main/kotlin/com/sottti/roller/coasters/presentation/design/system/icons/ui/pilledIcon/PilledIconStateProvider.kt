@@ -5,7 +5,9 @@ import com.sottti.roller.coasters.presentation.design.system.icons.R
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class PilledIconStateProvider : PreviewParameterProvider<PilledIconState> {
-    override val values = sequenceOf(pilledIconState)
+    override val values = sequence {
+        yield(pilledIconState)
+    }
 }
 
 private val pilledIconState: PilledIconState =

@@ -14,18 +14,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class ExploreUiStateProvider : PreviewParameterProvider<ExplorePreviewState> {
-    override val values: Sequence<ExplorePreviewState> = sequenceOf(
-        loadingState,
-        loadedStateAppendLoading,
-        loadedStatePrependLoading,
-        loadedStateAppendPrependBothLoading,
-        loadedStateNoPagination,
-        loadedStateAppendEndReached,
-        loadedStatePrependEndReached,
-        loadedStateAppendPrependBothEndsReached,
-        emptyState,
-        errorState,
-    )
+    override val values: Sequence<ExplorePreviewState> = sequence {
+        yield(loadingState)
+        yield(loadedStateAppendLoading)
+        yield(loadedStatePrependLoading)
+        yield(loadedStateAppendPrependBothLoading)
+        yield(loadedStateNoPagination)
+        yield(loadedStateAppendEndReached)
+        yield(loadedStatePrependEndReached)
+        yield(loadedStateAppendPrependBothEndsReached)
+        yield(emptyState)
+        yield(errorState)
+    }
 }
 
 private val loadingState = explorePreviewState(
