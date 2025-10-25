@@ -8,25 +8,21 @@ internal class ImageStateProvider :
     PreviewParameterProvider<ImageState> {
     override val values: Sequence<ImageState> =
         sequence {
-            yield(
-                ImageState(
-                    contentDescription = fixtureContentDescription,
-                    foreverLoading = true,
-                    imageUrl = fixtureImageUrl,
-                    roundedCorners = false,
-                ),
-            )
+            yield(imageState(loading = true, roundedCorners = false))
             roundedCornersValues.forEach { roundedCorners ->
-                yield(
-                    ImageState(
-                        contentDescription = fixtureContentDescription,
-                        foreverLoading = false,
-                        imageUrl = fixtureImageUrl,
-                        roundedCorners = roundedCorners,
-                    )
-                )
+                yield(imageState(loading = false, roundedCorners = roundedCorners))
             }
         }
 }
 
 private val roundedCornersValues = listOf(false, true)
+
+private fun imageState(
+    loading: Boolean,
+    roundedCorners: Boolean,
+) = ImageState(
+    contentDescription = fixtureContentDescription,
+    foreverLoading = loading,
+    imageUrl = fixtureImageUrl,
+    roundedCorners = roundedCorners,
+)
