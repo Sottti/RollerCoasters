@@ -42,7 +42,12 @@ This template is built using modern Android development practices and libraries:
 * **Explore Feed:** View roller coasters, filterable by various criteria (specs, materials, etc.).
 * **Favorites:** Mark and view your favorite roller coasters.
 * **Details Screen:** See detailed information and images for each coaster.
-* **Settings:** Customize theme (Light/Dark/System), enable/disable dynamic color, adjust color contrast, change language, and select measurement system (Metric/Imperial).
+* **Settings:**
+    *  Customize theme (Light/Dark/System)
+    *  Enable/disable dynamic color
+    *  Adjust color contrast
+    *  Change language (English, Spanish and Galician)
+    *  Select measurement system (Metric/Imperial).
 * **Modern UI:**
     * Dynamic Theming (Material You).
     * Support for multiple languages.
