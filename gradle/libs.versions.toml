@@ -33,7 +33,6 @@ result = "2.1.0"
 room = "2.8.2"
 secrets = "2.0.1"
 splashscreen = "1.2.0-rc01"
-startup = "1.2.0"
 targetSdk = "36"
 test-runner = "1.7.0"
 truth = "1.4.5"
@@ -93,7 +92,6 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup" }
 test-runner = { group = "androidx.test", name = "runner", version.ref = "test-runner" }
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }

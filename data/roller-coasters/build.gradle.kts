@@ -18,7 +18,6 @@ dependencies {
     implementation(libs.paging.runtime)
     implementation(libs.room)
     implementation(libs.room.paging)
-    implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
     implementation(project(module.data.network))
     implementation(project(module.domain.fixtures))
