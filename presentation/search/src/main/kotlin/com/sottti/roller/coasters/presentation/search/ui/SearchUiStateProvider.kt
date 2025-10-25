@@ -14,11 +14,11 @@ import com.sottti.roller.coasters.presentation.search.model.SearchPreviewState
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 
 internal class SearchUiStateProvider : PreviewParameterProvider<SearchPreviewState> {
-    override val values: Sequence<SearchPreviewState> = sequenceOf(
-        initialState,
-        loadingState,
-        loadedState,
-    )
+    override val values: Sequence<SearchPreviewState> = sequence {
+        yield(initialState)
+        yield(loadingState)
+        yield(loadedState)
+    }
 }
 
 private val initialState = searchPreviewState(

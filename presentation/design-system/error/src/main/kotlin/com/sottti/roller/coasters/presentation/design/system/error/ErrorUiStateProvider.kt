@@ -6,10 +6,10 @@ import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class ErrorUiStateProvider : PreviewParameterProvider<ErrorState?> {
     override val values: Sequence<ErrorState?> =
-        sequenceOf(
-            defaultError,
-            alternativeError,
-        )
+        sequence {
+            yield(defaultError)
+            yield(alternativeError)
+        }
 }
 
 private val defaultError = null

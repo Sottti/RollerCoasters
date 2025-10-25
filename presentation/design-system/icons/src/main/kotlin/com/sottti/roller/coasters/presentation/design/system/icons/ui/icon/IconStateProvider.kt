@@ -13,7 +13,7 @@ internal class IconStateProvider : PreviewParameterProvider<IconState> {
                             crossfade = crossfade,
                             onClick = onClick,
                             iconState = state,
-                        ),
+                        )
                     )
                 }
             }

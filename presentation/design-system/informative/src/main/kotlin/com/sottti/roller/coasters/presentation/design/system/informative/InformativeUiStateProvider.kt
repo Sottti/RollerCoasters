@@ -6,10 +6,10 @@ import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class InformativeUiStateProvider : PreviewParameterProvider<InformativeState> {
     override val values: Sequence<InformativeState> =
-        sequenceOf(
-            informativeWithButton,
-            informativeWithoutButton,
-        )
+        sequence {
+            yield(informativeWithButton)
+            yield(informativeWithoutButton)
+        }
 }
 
 private val informativeWithButton = InformativeState(

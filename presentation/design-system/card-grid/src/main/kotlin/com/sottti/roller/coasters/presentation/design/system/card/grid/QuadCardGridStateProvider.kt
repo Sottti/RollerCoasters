@@ -8,7 +8,9 @@ import com.sottti.roller.coasters.presentation.design.system.card.grid.model.Qua
 import com.sottti.roller.coasters.presentation.design.system.icons.data.Icons
 
 internal class QuadCardGridStateProvider : PreviewParameterProvider<QuadCardGridState> {
-    override val values = sequenceOf(quadCardGridState)
+    override val values = sequence {
+        yield(quadCardGridState)
+    }
 }
 
 private val quadGridItems: CardGridItems = CardGridItems(

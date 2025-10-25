@@ -10,7 +10,7 @@ internal class SwitchStateProvider : PreviewParameterProvider<SwitchState> {
                     SwitchState(
                         checked = checked,
                         enabled = enabled,
-                    ),
+                    )
                 )
             }
         }

@@ -16,18 +16,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class FavouritesUiStateProvider : PreviewParameterProvider<FavouritesPreviewState> {
     override val values: Sequence<FavouritesPreviewState>
-        get() = sequenceOf(
-            loadingState,
-            loadedStateAppendLoading,
-            loadedStatePrependLoading,
-            loadedStateAppendPrependBothLoading,
-            loadedStateNoPagination,
-            loadedStateAppendEndReached,
-            loadedStatePrependEndReached,
-            loadedStateAppendPrependBothEndsReached,
-            emptyState,
-            errorState,
-        )
+        get() = sequence {
+            yield(loadingState)
+            yield(loadedStateAppendLoading)
+            yield(loadedStatePrependLoading)
+            yield(loadedStateAppendPrependBothLoading)
+            yield(loadedStateNoPagination)
+            yield(loadedStateAppendEndReached)
+            yield(loadedStatePrependEndReached)
+            yield(loadedStateAppendPrependBothEndsReached)
+            yield(emptyState)
+            yield(errorState)
+        }
 }
 
 private val favouritesRollerCoasters = favouritesRollerCoasters()
