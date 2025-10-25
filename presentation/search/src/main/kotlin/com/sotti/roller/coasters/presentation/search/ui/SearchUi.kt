@@ -1,0 +1,105 @@
+package com.sotti.roller.coasters.presentation.search.ui
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.sotti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
+import com.sotti.roller.coasters.presentation.previews.RollerCoastersPreview
+import com.sotti.roller.coasters.presentation.search.data.SearchViewModel
+import com.sotti.roller.coasters.presentation.search.model.SearchAction
+import com.sotti.roller.coasters.presentation.search.model.SearchPreviewState
+import com.sotti.roller.coasters.presentation.search.model.SearchState
+import com.sotti.roller.coasters.presentation.utils.OnScrollToTopUiEffects
+
+@Composable
+public fun SearchUi(
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onScrollToTop: (() -> Unit) -> Unit,
+    padding: PaddingValues,
+) {
+    SearchUi(
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onNavigateToSettings = onNavigateToSettings,
+        onScrollToTop = onScrollToTop,
+        padding = padding,
+        viewModel = hiltViewModel()
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun SearchUi(
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onScrollToTop: (() -> Unit) -> Unit,
+    padding: PaddingValues,
+    viewModel: SearchViewModel,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    SearchUi(
+        onAction = viewModel.onAction,
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onListCreated = { lazyListState, scrollBehavior ->
+            OnScrollToTopUiEffects(
+                lazyListState = lazyListState,
+                scrollBehavior = scrollBehavior,
+                onScrollToTop = onScrollToTop,
+            )
+        },
+        onNavigateToSettings = onNavigateToSettings,
+        padding = padding,
+        state = state,
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun SearchUi(
+    onAction: (SearchAction) -> Unit,
+    onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -> Unit,
+    onNavigateToRollerCoaster: (Int) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    padding: PaddingValues,
+    state: SearchState,
+) {
+    val lazyListState = rememberLazyListState()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    onListCreated(lazyListState, scrollBehavior)
+
+    SearchUiContent(
+        lazyListState = lazyListState,
+        onAction = onAction,
+        onNavigateToRollerCoaster = onNavigateToRollerCoaster,
+        onNavigateToSettings = onNavigateToSettings,
+        outerPadding = padding,
+        scrollBehavior = scrollBehavior,
+        state = state,
+    )
+}
+
+@Composable
+@RollerCoastersPreview
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun SearchUiPreview(
+    @PreviewParameter(SearchUiStateProvider::class) state: SearchPreviewState,
+) {
+    RollerCoastersTheme {
+        SearchUi(
+            onAction = state.onAction,
+            onListCreated = state.onListCreated,
+            onNavigateToRollerCoaster = state.onNavigateToRollerCoaster,
+            onNavigateToSettings = state.onNavigateToSettings,
+            padding = state.padding,
+            state = state.state,
+        )
+    }
+}

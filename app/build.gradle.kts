@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sotti.roller.coasters.buildSrc.module
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,14 +9,14 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.app"
+    namespace = "com.sotti.roller.coasters.app"
     androidResources {
         @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
     }
 
     defaultConfig {
-        applicationId = "com.sottti.roller.coasters"
+        applicationId = "com.sotti.roller.coasters"
         versionCode = 1
         versionName = "1.0"
     }

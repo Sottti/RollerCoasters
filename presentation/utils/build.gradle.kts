@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.presentation.utils"
+    namespace = "com.sotti.roller.coasters.presentation.utils"
 }
 
 dependencies {

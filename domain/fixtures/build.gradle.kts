@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sotti.roller.coasters.buildSrc.module
 
 plugins {
     alias(libs.plugins.kotlin.jvm)

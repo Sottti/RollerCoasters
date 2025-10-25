@@ -1,0 +1,13 @@
+package com.sotti.roller.coasters.presentation.search.model
+
+import com.sotti.roller.coasters.domain.roller.coasters.model.RollerCoaster
+
+internal fun List<RollerCoaster>.toState() = map { it.toState() }
+
+private fun RollerCoaster.toState(): SearchResultState =
+    SearchResultState(
+        id = id.value,
+        imageUrl = pictures.main?.url,
+        name = name.current.value,
+        parkName = park.name.value,
+    )

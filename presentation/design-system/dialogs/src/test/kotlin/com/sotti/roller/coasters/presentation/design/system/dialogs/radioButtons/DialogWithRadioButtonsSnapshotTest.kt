@@ -1,0 +1,34 @@
+package com.sotti.roller.coasters.presentation.design.system.dialogs.radioButtons
+
+import com.android.ide.common.rendering.api.SessionParams
+import com.android.resources.NightMode
+import com.sotti.roller.coasters.presentation.paparazzi.nightModeParameters
+import com.sotti.roller.coasters.presentation.paparazzi.paparazzi
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+
+@RunWith(Parameterized::class)
+internal class DialogWithRadioButtonsSnapshotTest(
+    nightMode: NightMode,
+    private val state: DialogWithRadioButtonsState,
+) {
+
+    @get:Rule
+    val paparazzi = paparazzi(nightMode, SessionParams.RenderingMode.SHRINK)
+
+    @Test
+    fun snapshotTest() {
+        paparazzi.snapshot {
+            DialogWithRadioButtonsPreview(state)
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters
+        fun data(): Collection<Array<Any?>> =
+            nightModeParameters(DialogWithRadioButtonsStateProvider().values)
+    }
+}

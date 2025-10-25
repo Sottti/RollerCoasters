@@ -1,0 +1,71 @@
+package com.sotti.roller.coasters.presentation.roller.coaster.details.ui
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.sotti.roller.coasters.presentation.design.system.colors.color.colors
+import com.sotti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sotti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
+import com.sotti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicatorSize
+import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.roller.coaster.details.model.FavouriteIconState
+import com.sotti.roller.coasters.presentation.roller.coaster.details.model.FavouriteIconState.Loaded
+import com.sotti.roller.coasters.presentation.roller.coaster.details.model.FavouriteIconState.Loading
+import com.sotti.roller.coasters.presentation.roller.coaster.details.model.TopBarState
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun TopBar(
+    onBackNavigation: () -> Unit,
+    onToggleFavourite: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior,
+    state: TopBarState,
+) {
+    TopAppBar(
+        title = { state.title?.let { Text.Vanilla(state.title) } },
+        scrollBehavior = scrollBehavior,
+        navigationIcon = { NavigationIcon(state.navigationIcon, onBackNavigation) },
+        actions = {
+            FavouriteIcon(
+                state = state.favouriteIcon,
+                onToggleFavourite = onToggleFavourite,
+            )
+        },
+    )
+}
+
+@Composable
+private fun NavigationIcon(
+    state: IconState,
+    onBackNavigation: () -> Unit,
+) {
+    Icon(
+        iconState = state,
+        onClick = { onBackNavigation() },
+    )
+}
+
+@Composable
+private fun FavouriteIcon(
+    state: FavouriteIconState,
+    onToggleFavourite: () -> Unit,
+) {
+    when (state) {
+        is Loaded -> Icon(
+            crossfade = true,
+            iconState = state.iconState,
+            onClick = onToggleFavourite,
+            tint = colors.primary.takeIf { state.isFavourite },
+        )
+
+        Loading -> ProgressIndicator(
+            modifier = Modifier.padding(end = dimensions.spacing.medium),
+            size = ProgressIndicatorSize.Small,
+        )
+    }
+}

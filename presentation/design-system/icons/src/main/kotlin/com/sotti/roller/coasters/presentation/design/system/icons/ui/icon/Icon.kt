@@ -1,0 +1,73 @@
+package com.sotti.roller.coasters.presentation.design.system.icons.ui.icon
+
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
+import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sotti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
+import com.sotti.roller.coasters.presentation.previews.RollerCoastersPreview
+import androidx.compose.material3.Icon as MaterialIcon
+
+@Composable
+public fun Icon(
+    iconState: IconState,
+    modifier: Modifier = Modifier,
+    crossfade: Boolean = false,
+    tint: Color? = null,
+    onClick: (() -> Unit)? = null,
+) {
+    val iconModifier = modifier.size(24.dp)
+
+    @Composable
+    fun RenderIcon(state: IconState) {
+        when {
+            onClick != null -> IconButton(onClick = onClick) {
+                tint?.let {
+                    MaterialIcon(
+                        contentDescription = stringResource(state.descriptionResId),
+                        modifier = iconModifier,
+                        painter = painterResource(state.resId),
+                        tint = tint,
+                    )
+                } ?: MaterialIcon(
+                    contentDescription = stringResource(state.descriptionResId),
+                    modifier = iconModifier,
+                    painter = painterResource(state.resId),
+                )
+            }
+
+            else -> MaterialIcon(
+                painter = painterResource(state.resId),
+                contentDescription = stringResource(state.descriptionResId),
+                modifier = iconModifier,
+            )
+        }
+    }
+
+    when {
+        crossfade -> Crossfade(targetState = iconState) { targetState -> RenderIcon(targetState) }
+        else -> RenderIcon(iconState)
+    }
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun IconPreview(
+    @PreviewParameter(IconStateProvider::class)
+    state: com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.IconState,
+) {
+    RollerCoastersTheme {
+        Icon(
+            crossfade = state.crossfade,
+            onClick = state.onClick,
+            iconState = state.iconState,
+        )
+    }
+}

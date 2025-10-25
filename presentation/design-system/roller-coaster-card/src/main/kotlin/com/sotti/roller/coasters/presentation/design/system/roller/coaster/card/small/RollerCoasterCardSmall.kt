@@ -1,0 +1,96 @@
+package com.sotti.roller.coasters.presentation.design.system.roller.coaster.card.small
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sotti.roller.coasters.domain.model.ImageUrl
+import com.sotti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sotti.roller.coasters.presentation.design.system.roller.coaster.card.R
+import com.sotti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard.Small
+import com.sotti.roller.coasters.presentation.design.system.shapes.shapes
+import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
+import com.sotti.roller.coasters.presentation.image.loading.Image
+import com.sotti.roller.coasters.presentation.previews.RollerCoastersPreview
+
+@Composable
+internal fun SmallImpl(
+    foreverLoading: Boolean,
+    imageUrl: ImageUrl?,
+    modifier: Modifier,
+    onClick: () -> Unit,
+    parkName: String,
+    rollerCoasterName: String,
+) {
+    Card(
+        modifier = modifier,
+        onClick = onClick,
+        shape = shapes.roundedCorner.large,
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            imageUrl?.let { Image(imageUrl = imageUrl, foreverLoading = foreverLoading) }
+            Details(rollerCoasterName, parkName)
+        }
+    }
+}
+
+@Composable
+private fun RowScope.Details(
+    rollerCoasterName: String,
+    parkName: String,
+) {
+    Column(
+        modifier = Modifier
+            .weight(1.0f)
+            .padding(dimensions.spacing.medium),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text.Title.Large(text = rollerCoasterName, textAlign = TextAlign.Center)
+        Text.Body.Small(text = parkName, textAlign = TextAlign.Center)
+    }
+}
+
+@Composable
+private fun Image(
+    imageUrl: ImageUrl,
+    foreverLoading: Boolean,
+) {
+    Image(
+        url = imageUrl,
+        contentDescription = stringResource(R.string.image_content_description),
+        modifier = Modifier
+            .fillMaxWidth(fraction = 0.33f)
+            .aspectRatio(ratio = 1.5f)
+            .padding(dimensions.spacing.small),
+        foreverLoading = foreverLoading,
+        roundedCorners = true,
+    )
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun RollerCoasterCardSmallPreview(
+    @PreviewParameter(RollerCoasterCardSmallStateProvider::class)
+    state: RollerCoasterCardSmallState,
+) {
+    RollerCoastersTheme {
+        Small(
+            modifier = Modifier.fillMaxWidth(),
+            imageUrl = state.imageUrl,
+            parkName = state.parkName,
+            rollerCoasterName = state.rollerCoasterName,
+            foreverLoading = state.foreverLoading,
+            onClick = {},
+        )
+    }
+}

@@ -1,0 +1,4 @@
+package com.sotti.roller.coasters.domain.model
+
+@JvmInline
+public value class ImageUrl(public val value: String)

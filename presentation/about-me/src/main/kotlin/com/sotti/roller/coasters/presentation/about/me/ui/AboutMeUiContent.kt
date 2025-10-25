@@ -1,0 +1,307 @@
+package com.sotti.roller.coasters.presentation.about.me.ui
+
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.shape.ZeroCornerSize
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import com.sotti.roller.coasters.presentation.about.me.model.AboutMeAction
+import com.sotti.roller.coasters.presentation.about.me.model.AboutMeAction.OpenUrl
+import com.sotti.roller.coasters.presentation.about.me.model.AboutMeState
+import com.sotti.roller.coasters.presentation.about.me.model.SocialProfileState
+import com.sotti.roller.coasters.presentation.about.me.model.Topic
+import com.sotti.roller.coasters.presentation.about.me.model.TopicDescription
+import com.sotti.roller.coasters.presentation.about.me.model.Topics
+import com.sotti.roller.coasters.presentation.about.me.model.TopicsState
+import com.sotti.roller.coasters.presentation.about.me.ui.bottomsheets.BottomSheetContent
+import com.sotti.roller.coasters.presentation.design.system.card.grid.CardGrid
+import com.sotti.roller.coasters.presentation.design.system.card.grid.model.CardGridItems
+import com.sotti.roller.coasters.presentation.design.system.colors.color.colors
+import com.sotti.roller.coasters.presentation.design.system.colors.color.externalNavigationPrimaryColor
+import com.sotti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sotti.roller.coasters.presentation.design.system.icons.data.Icons
+import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon.PilledIcon
+import com.sotti.roller.coasters.presentation.design.system.images.model.ImageState
+import com.sotti.roller.coasters.presentation.design.system.shapes.shapes
+import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.top.bars.ui.MainTopBar
+import com.sotti.roller.coasters.presentation.utils.Spacer
+import com.sotti.roller.coasters.presentation.utils.override
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun AboutMeContent(
+    lazyListState: LazyListState,
+    onAction: (AboutMeAction) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    outerPadding: PaddingValues,
+    scrollBehavior: TopAppBarScrollBehavior,
+    state: AboutMeState,
+    onShowBottomSheet: (@Composable (ColumnScope.() -> Unit)) -> Unit,
+) {
+    val showTitleAfterIndex = 2
+    val showTitle by remember {
+        derivedStateOf { lazyListState.firstVisibleItemIndex > showTitleAfterIndex }
+    }
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            MainTopBar(
+                onNavigateToSettings = onNavigateToSettings,
+                scrollBehavior = scrollBehavior,
+                showTitle = showTitle,
+                titleResId = state.title,
+            )
+        }
+    ) { innerPadding ->
+        val mergedPaddingValues =
+            outerPadding
+                .override(top = dimensions.spacing.none) +
+                    innerPadding
+                        .override(bottom = dimensions.spacing.none)
+        AboutMeItems(
+            listState = lazyListState,
+            nestedScrollConnection = scrollBehavior.nestedScrollConnection,
+            onAction = onAction,
+            onShowBottomSheet = onShowBottomSheet,
+            padding = mergedPaddingValues,
+            state = state,
+        )
+    }
+}
+
+@Composable
+private fun AboutMeItems(
+    listState: LazyListState,
+    nestedScrollConnection: NestedScrollConnection,
+    onAction: (AboutMeAction) -> Unit,
+    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
+    padding: PaddingValues,
+    state: AboutMeState,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(padding),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .nestedScroll(nestedScrollConnection),
+            state = listState,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            item(key = "profileImage") {
+                ProfileImage(state.profileImage)
+                Spacer(dimensions.spacing.smallMedium)
+            }
+            item(key = "name") {
+                Name(state.name)
+                Spacer(dimensions.spacing.large)
+            }
+            item(key = "socialProfiles") {
+                SocialProfiles(onAction, state.socialProfiles)
+                Spacer(dimensions.spacing.large)
+            }
+            item(key = "getToKnowMe") {
+                GetToKnowMe(
+                    onAction = onAction,
+                    onShowBottomSheet = onShowBottomSheet,
+                    topics = state.getToKnowMe,
+                )
+            }
+        }
+        FillerCard()
+    }
+}
+
+@Composable
+private fun ProfileImage(state: ImageState) {
+    MorphingProfileImage(
+        modifier = Modifier
+            .padding(top = dimensions.spacing.large)
+            .fillMaxWidth(fraction = 0.4f)
+            .aspectRatio(1f),
+        image = state,
+    )
+}
+
+@Composable
+private fun Name(state: Int) {
+    Text.Headline.Medium(
+        textResId = state,
+        textColor = colors.onBackground,
+    )
+}
+
+@Composable
+private fun SocialProfiles(
+    onAction: (AboutMeAction) -> Unit,
+    state: List<SocialProfileState>,
+) {
+    val scrollState = rememberScrollState()
+    Row(
+        modifier = Modifier
+            .horizontalScroll(scrollState)
+            .padding(horizontal = dimensions.spacing.medium),
+        horizontalArrangement = Arrangement.spacedBy(dimensions.spacing.smallMedium),
+    ) {
+        state.forEach { profile ->
+            val primaryColor = externalNavigationPrimaryColor(profile.url)
+            PilledIcon(
+                text = profile.text,
+                iconState = profile.icon,
+                onClick = {
+                    onAction(
+                        OpenUrl(
+                            urlResId = profile.url,
+                            primaryColor = primaryColor,
+                        )
+                    )
+                },
+            )
+        }
+    }
+}
+
+@Composable
+private fun GetToKnowMe(
+    onAction: (AboutMeAction) -> Unit,
+    onShowBottomSheet: (@Composable ColumnScope.() -> Unit) -> Unit,
+    topics: TopicsState,
+) {
+    Card(
+        shape = topLevelCardShape(),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(
+            modifier = Modifier.padding(dimensions.spacing.medium),
+            verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
+        ) {
+            AndroidJourney(
+                state = topics.journey,
+                onClick = {
+                    onShowBottomSheet {
+                        BottomSheetContent(onAction = onAction, state = topics.journey.description)
+                    }
+                }
+            )
+            TopicsGrid(
+                topics = topics.android,
+                iconState = Icons.Android.filled,
+                onClick = { position ->
+                    showTopicBottomSheet(
+                        topic = topics.android.description(position),
+                        onAction = onAction,
+                        onShow = onShowBottomSheet
+                    )
+                },
+            )
+            TopicsGrid(
+                topics = topics.languages,
+                iconState = Icons.Translate.outlined,
+                onClick = { position ->
+                    showTopicBottomSheet(
+                        topic = topics.languages.description(position),
+                        onAction = onAction,
+                        onShow = onShowBottomSheet
+                    )
+                }
+            )
+            TopicsGrid(
+                topics = topics.hobbies,
+                iconState = Icons.Hobbies.outlined,
+                onClick = { position ->
+                    showTopicBottomSheet(
+                        topic = topics.hobbies.description(position),
+                        onAction = onAction,
+                        onShow = onShowBottomSheet
+                    )
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun TopicsGrid(
+    topics: Topics,
+    iconState: IconState,
+    onClick: (Int) -> Unit,
+) = CardGrid(
+    items = CardGridItems(
+        firstItemResId = topics.firstTopic.textResId,
+        secondItemResId = topics.secondTopic.textResId,
+        thirdItemResId = topics.thirdTopic.textResId,
+        forthItemResId = topics.fourthTopic.textResId,
+    ),
+    iconState = iconState,
+    modifier = Modifier.fillMaxWidth(),
+    onClick = onClick,
+)
+
+private inline fun showTopicBottomSheet(
+    topic: TopicDescription?,
+    noinline onAction: (AboutMeAction) -> Unit,
+    onShow: (@Composable ColumnScope.() -> Unit) -> Unit,
+) {
+    topic?.let { description ->
+        onShow { BottomSheetContent(onAction, description) }
+    }
+}
+
+@Composable
+private fun AndroidJourney(
+    state: Topic,
+    onClick: (() -> Unit),
+) {
+    CardGrid(
+        textResId = state.textResId,
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick,
+    )
+}
+
+@Composable
+@ReadOnlyComposable
+private fun topLevelCardShape(): CornerBasedShape =
+    shapes.roundedCorner.extraLarge.copy(
+        bottomStart = ZeroCornerSize,
+        bottomEnd = ZeroCornerSize,
+    )
+
+@Composable
+private fun ColumnScope.FillerCard() {
+    Card(
+        shape = RectangleShape,
+        modifier = Modifier
+            .weight(1f)
+            .fillMaxWidth()
+    ) {}
+}

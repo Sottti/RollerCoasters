@@ -1,0 +1,71 @@
+package com.sotti.roller.coasters.presentation.settings.ui
+
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.sotti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
+import com.sotti.roller.coasters.presentation.previews.RollerCoastersPreview
+import com.sotti.roller.coasters.presentation.settings.data.SettingsViewModel
+import com.sotti.roller.coasters.presentation.settings.model.SettingsAction
+import com.sotti.roller.coasters.presentation.settings.model.SettingsPreviewState
+import com.sotti.roller.coasters.presentation.settings.model.SettingsState
+
+@Composable
+public fun SettingsUi(
+    onBackNavigation: () -> Unit,
+) {
+    SettingsUi(
+        onBackNavigation = onBackNavigation,
+        viewModel = hiltViewModel(),
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun SettingsUi(
+    onBackNavigation: () -> Unit,
+    viewModel: SettingsViewModel,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    SettingsUi(
+        onAction = viewModel.onAction,
+        onBackNavigation = onBackNavigation,
+        state = state,
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun SettingsUi(
+    onAction: (SettingsAction) -> Unit,
+    onBackNavigation: () -> Unit,
+    state: SettingsState,
+) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
+    SettingsUiContent(
+        onAction = onAction,
+        onBackNavigation = onBackNavigation,
+        scrollBehavior = scrollBehavior,
+        state = state,
+    )
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun SettingsUiPreview(
+    @PreviewParameter(SettingsUiStateProvider::class) state: SettingsPreviewState,
+) {
+    RollerCoastersTheme {
+        SettingsUi(
+            onAction = state.onAction,
+            onBackNavigation = state.onBackNavigation,
+            state = state.state,
+        )
+    }
+}

@@ -1,0 +1,23 @@
+package com.sotti.roller.coasters.presentation.design.system.colors.color
+
+import androidx.compose.material3.ColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import com.sotti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
+import com.sotti.roller.coasters.domain.settings.model.dynamicColor.ResolvedDynamicColor
+import com.sotti.roller.coasters.domain.settings.model.theme.ResolvedTheme
+import com.sotti.roller.coasters.presentation.design.system.colors.mapper.darkColorScheme
+import com.sotti.roller.coasters.presentation.design.system.colors.mapper.dynamicColorScheme
+import com.sotti.roller.coasters.presentation.design.system.colors.mapper.lightColorScheme
+
+@Composable
+@ReadOnlyComposable
+public fun colors(
+    colorContrast: ResolvedColorContrast,
+    dynamicColor: ResolvedDynamicColor,
+    theme: ResolvedTheme,
+): ColorScheme = when {
+    dynamicColor.enabled -> dynamicColorScheme(theme)
+    theme == ResolvedTheme.DarkResolvedTheme -> colorContrast.darkColorScheme()
+    else -> colorContrast.lightColorScheme()
+}

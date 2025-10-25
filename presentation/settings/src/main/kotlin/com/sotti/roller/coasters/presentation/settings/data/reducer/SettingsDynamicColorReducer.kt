@@ -1,0 +1,18 @@
+package com.sotti.roller.coasters.presentation.settings.data.reducer
+
+import com.sotti.roller.coasters.domain.settings.model.dynamicColor.AppDynamicColor
+import com.sotti.roller.coasters.presentation.settings.model.DynamicColorCheckedState
+import com.sotti.roller.coasters.presentation.settings.model.SettingsState
+
+internal fun SettingsState.updateDynamicColor(
+    dynamicColorChecked: AppDynamicColor,
+): SettingsState = copy(
+    dynamicColor = dynamicColor?.copy(
+        checkedState = DynamicColorCheckedState.Loaded(
+            when (dynamicColorChecked) {
+                AppDynamicColor.Disabled -> false
+                AppDynamicColor.Enabled -> true
+            },
+        )
+    )
+)

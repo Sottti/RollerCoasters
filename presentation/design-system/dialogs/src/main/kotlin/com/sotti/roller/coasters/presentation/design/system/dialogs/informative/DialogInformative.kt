@@ -1,0 +1,41 @@
+package com.sotti.roller.coasters.presentation.design.system.dialogs.informative
+
+import androidx.annotation.StringRes
+import androidx.compose.material3.AlertDialog
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sotti.roller.coasters.presentation.design.system.dialogs.radioButtons.DismissButton
+import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
+import com.sotti.roller.coasters.presentation.previews.RollerCoastersPreview
+
+@Composable
+public fun DialogInformative(
+    @StringRes title: Int,
+    @StringRes text: Int,
+    @StringRes dismiss: Int,
+    onDismiss: () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text.Vanilla(title) },
+        text = { Text.Vanilla(text) },
+        confirmButton = { DismissButton(text = dismiss, onDismiss = onDismiss) },
+    )
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun DialogInformativePreview(
+    @PreviewParameter(DialogInformativeStateProvider::class)
+    state: DialogInformativeState,
+) {
+    RollerCoastersTheme {
+        DialogInformative(
+            title = state.title,
+            text = state.text,
+            dismiss = state.dismiss,
+            onDismiss = {},
+        )
+    }
+}

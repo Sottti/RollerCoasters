@@ -1,0 +1,34 @@
+package com.sotti.roller.coasters.presentation.explore.ui
+
+import com.android.resources.NightMode
+import com.sotti.roller.coasters.presentation.explore.model.ExplorePreviewState
+import com.sotti.roller.coasters.presentation.paparazzi.nightModeParameters
+import com.sotti.roller.coasters.presentation.paparazzi.paparazzi
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+
+@RunWith(Parameterized::class)
+internal class ExploreUiSnapshotTest(
+    nightMode: NightMode,
+    private val state: ExplorePreviewState,
+) {
+
+    @get:Rule
+    val paparazzi = paparazzi(nightMode)
+
+    @Test
+    fun snapshotTest() {
+        paparazzi.snapshot {
+            ExploreUiPreview(state)
+        }
+    }
+
+    companion object Companion {
+        @JvmStatic
+        @Parameterized.Parameters
+        fun data(): Collection<Array<Any?>> =
+            nightModeParameters(ExploreUiStateProvider().values)
+    }
+}

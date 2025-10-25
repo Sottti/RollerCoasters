@@ -1,0 +1,75 @@
+package com.sotti.roller.coasters.presentation.design.system.icons.ui.pilledIcon
+
+import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.sotti.roller.coasters.presentation.design.system.colors.color.colors
+import com.sotti.roller.coasters.presentation.design.system.dimensions.dimensions
+import com.sotti.roller.coasters.presentation.design.system.icons.model.IconState
+import com.sotti.roller.coasters.presentation.design.system.icons.ui.icon.Icon
+import com.sotti.roller.coasters.presentation.design.system.shapes.shapes
+import com.sotti.roller.coasters.presentation.design.system.text.Text
+import com.sotti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
+import com.sotti.roller.coasters.presentation.previews.RollerCoastersPreview
+import com.sotti.roller.coasters.presentation.utils.Spacer
+
+@Composable
+public fun PilledIcon(
+    @StringRes text: Int,
+    iconState: IconState,
+    onClick: () -> Unit,
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Graphic(iconState = iconState, onClick = onClick)
+        Spacer(dimensions.spacing.smallMedium)
+        Label(text)
+    }
+}
+
+@Composable
+private fun Graphic(
+    iconState: IconState,
+    onClick: () -> Unit,
+) {
+    Card(
+        onClick = onClick,
+        shape = shapes.roundedCorner.extraLarge,
+    ) {
+        Icon(
+            modifier = Modifier
+                .padding(
+                    vertical = dimensions.spacing.medium,
+                    horizontal = dimensions.spacing.mediumLarge,
+                ),
+            iconState = iconState,
+        )
+    }
+}
+
+@Composable
+private fun Label(text: Int) {
+    Text.Label.Medium(
+        textResId = text,
+        textColor = colors.onBackground,
+    )
+}
+
+@Composable
+@RollerCoastersPreview
+internal fun PilledIconPreview(
+    @PreviewParameter(PilledIconStateProvider::class)
+    state: PilledIconState,
+) {
+    RollerCoastersTheme {
+        PilledIcon(
+            text = state.text,
+            iconState = state.iconState,
+            onClick = state.onClick,
+        )
+    }
+}

@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.presentation.design.system.card.grid.QuadCardGridPreview
-import com.sottti.roller.coasters.presentation.design.system.card.grid.quadCardGridState
+import com.sotti.roller.coasters.presentation.design.system.card.grid.QuadCardGridPreview
+import com.sotti.roller.coasters.presentation.design.system.card.grid.quadCardGridState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

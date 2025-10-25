@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sotti.roller.coasters.buildSrc.module
 
 plugins {
     alias(libs.plugins.android.library)
@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sottti.roller.coasters.presentation.design.system.shapes"
+    namespace = "com.sotti.roller.coasters.presentation.design.system.shapes"
 }
 
 dependencies {
