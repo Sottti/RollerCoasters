@@ -9,7 +9,6 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.image.loading"
-
 }
 
 dependencies {

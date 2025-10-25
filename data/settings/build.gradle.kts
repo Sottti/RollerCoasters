@@ -8,7 +8,6 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.data.settings"
-
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

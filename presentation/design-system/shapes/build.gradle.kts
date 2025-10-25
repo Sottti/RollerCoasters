@@ -8,7 +8,6 @@ plugins {
 
 android {
     namespace = "com.sottti.roller.coasters.presentation.design.system.shapes"
-
 }
 
 dependencies {
