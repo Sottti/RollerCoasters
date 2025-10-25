@@ -5,40 +5,40 @@ import android.content.res.Configuration.UI_MODE_TYPE_NORMAL
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(
-    device = device,
-    group = lightThemeGroup,
-    name = "1.Light English",
+    device = DEVICE,
+    group = LIGHT_THEME_GROUP,
+    name = LIGHT_ENGLISH_NAME,
 )
 @Preview(
-    device = device,
-    group = lightThemeGroup,
+    device = DEVICE,
+    group = LIGHT_THEME_GROUP,
     locale = "es",
-    name = "2. Light Spanish",
+    name = LIGHT_SPANISH_NAME,
 )
 @Preview(
-    device = device,
-    group = lightThemeGroup,
+    device = DEVICE,
+    group = LIGHT_THEME_GROUP,
     locale = "gl",
-    name = "3. Light Galician",
+    name = LIGHT_GALICIAN_NAME,
 )
 @Preview(
-    device = device,
-    group = darkThemeGroup,
-    name = "4. Dark English",
+    device = DEVICE,
+    group = DARK_THEME_GROUP,
+    name = DARK_ENGLISH_NAME,
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 @Preview(
-    device = device,
-    group = darkThemeGroup,
+    device = DEVICE,
+    group = DARK_THEME_GROUP,
     locale = "es",
-    name = "5. Dark Spanish",
+    name = DARK_SPANISH_NAME,
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 @Preview(
-    device = device,
-    group = darkThemeGroup,
+    device = DEVICE,
+    group = DARK_THEME_GROUP,
     locale = "gl",
-    name = "6. Dark Galician",
+    name = DARK_GALICIAN_NAME,
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
 )
 @Retention(AnnotationRetention.BINARY)
