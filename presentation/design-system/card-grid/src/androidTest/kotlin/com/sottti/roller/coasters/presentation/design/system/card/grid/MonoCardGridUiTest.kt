@@ -1,4 +1,4 @@
-package com.sotti.roller.coasters.presentation.design.system.card.grid
+package com.sottti.roller.coasters.presentation.design.system.card.grid
 
 import android.R
 import androidx.activity.ComponentActivity
@@ -21,8 +21,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.google.common.truth.Truth.assertThat
-import com.sottti.roller.coasters.presentation.design.system.card.grid.MonoCardGridPreview
-import com.sottti.roller.coasters.presentation.design.system.card.grid.monoCardGridState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

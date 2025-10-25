@@ -1,4 +1,4 @@
-package com.sotti.roller.coasters.presentation.design.system.card.grid
+package com.sottti.roller.coasters.presentation.design.system.card.grid
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
