@@ -15,7 +15,7 @@ internal class ChipStateProvider : PreviewParameterProvider<ChipState> {
                                 labelResId = checked,
                                 leadingIcon = leadingIcon,
                                 selected = enabled,
-                            ),
+                            )
                         )
                     }
                 }

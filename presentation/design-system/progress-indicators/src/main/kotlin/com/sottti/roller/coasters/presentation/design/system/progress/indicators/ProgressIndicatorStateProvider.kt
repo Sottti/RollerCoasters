@@ -7,10 +7,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 
 internal class ProgressIndicatorStateProvider : PreviewParameterProvider<Modifier> {
-    override val values = sequenceOf(
-        Modifier,
-        Modifier
-            .width(360.dp)
-            .height(640.dp),
-    )
+    override val values = sequence {
+        yield(Modifier)
+        yield(
+            Modifier
+                .width(360.dp)
+                .height(640.dp)
+        )
+    }
 }

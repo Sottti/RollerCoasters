@@ -9,9 +9,9 @@ import com.sottti.roller.coasters.presentation.design.system.images.data.Images
 
 internal class ProfilePictureStateProvider :
     PreviewParameterProvider<HeroImageState> {
-    override val values = sequenceOf(
-        profilePicture2024(),
-    )
+    override val values = sequence {
+        yield(profilePicture2024())
+    }
 }
 
 private fun profilePicture2024() =

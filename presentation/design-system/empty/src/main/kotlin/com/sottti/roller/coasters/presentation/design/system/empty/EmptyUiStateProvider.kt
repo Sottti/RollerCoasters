@@ -6,10 +6,10 @@ import com.sottti.roller.coasters.presentation.fixtures.FixturesR
 
 internal class EmptyUiStateProvider : PreviewParameterProvider<EmptyState?> {
     override val values: Sequence<EmptyState?> =
-        sequenceOf(
-            emptyDefault,
-            emptyAlternative,
-        )
+        sequence {
+            yield(emptyDefault)
+            yield(emptyAlternative)
+        }
 }
 
 private val emptyDefault = null

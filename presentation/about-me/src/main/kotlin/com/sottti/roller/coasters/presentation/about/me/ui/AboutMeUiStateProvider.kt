@@ -8,13 +8,15 @@ import com.sottti.roller.coasters.presentation.about.me.model.AboutMePreviewStat
 
 internal class AboutMeUiStateProvider : PreviewParameterProvider<AboutMePreviewState> {
     @OptIn(ExperimentalMaterial3Api::class)
-    override val values: Sequence<AboutMePreviewState> = sequenceOf(
-        AboutMePreviewState(
-            onAction = {},
-            onListCreated = { _, _ -> },
-            onNavigateToSettings = {},
-            padding = PaddingValues(),
-            state = initialState,
-        ),
-    )
+    override val values: Sequence<AboutMePreviewState> = sequence {
+        yield(
+            AboutMePreviewState(
+                onAction = {},
+                onListCreated = { _, _ -> },
+                onNavigateToSettings = {},
+                padding = PaddingValues(),
+                state = initialState,
+            )
+        )
+    }
 }
