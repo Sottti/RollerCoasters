@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.sottti.roller.coasters.presentation.design.system.colors.color.colors
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.illustrations.model.IllustrationState
-import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.CircledIllustration
+import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.circled.CircledIllustration
 import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreview

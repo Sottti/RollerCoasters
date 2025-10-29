@@ -2,7 +2,7 @@ package com.sottti.roller.coasters.presentation.design.system.illustrations
 
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
-import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.CircledIllustrationPreview
+import com.sottti.roller.coasters.presentation.design.system.illustrations.ui.circled.CircledIllustrationPreview
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
 import com.sottti.roller.coasters.presentation.paparazzi.paparazzi
 import org.junit.Rule
