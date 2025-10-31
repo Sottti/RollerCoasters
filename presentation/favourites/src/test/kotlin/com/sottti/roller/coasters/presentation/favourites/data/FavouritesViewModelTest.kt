@@ -8,13 +8,9 @@ import com.sottti.roller.coasters.domain.fixtures.rollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ObserveFavouriteRollerCoasters
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -26,20 +22,15 @@ internal class FavouritesViewModelTest {
 
     @Test
     fun `coasters flow emits expected data`() = runTest {
-        Dispatchers.setMain(UnconfinedTestDispatcher(testScheduler))
 
-        try {
-            val observeFavouriteRollerCoasters = mockk<ObserveFavouriteRollerCoasters>()
-            coEvery { observeFavouriteRollerCoasters() } returns pagingFlow
+        val observeFavouriteRollerCoasters = mockk<ObserveFavouriteRollerCoasters>()
+        coEvery { observeFavouriteRollerCoasters() } returns pagingFlow
 
-            val viewModel = FavouritesViewModel(
-                observeFavouriteRollerCoasters = observeFavouriteRollerCoasters,
-                testScope = this,
-            )
-            val snapshot = viewModel.state.asSnapshot()
-            assertThat(snapshot).containsExactlyElementsIn(rollerCoasters.map { it.toUiModel() })
-        } finally {
-            Dispatchers.resetMain()
-        }
+        val viewModel = FavouritesViewModel(
+            observeFavouriteRollerCoasters = observeFavouriteRollerCoasters,
+            testScope = this,
+        )
+        val snapshot = viewModel.state.asSnapshot()
+        assertThat(snapshot).containsExactlyElementsIn(rollerCoasters.map { it.toUiModel() })
     }
 }

@@ -70,7 +70,7 @@ private fun RollerCoasters(
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         when (rollerCoasters.loadState.refresh) {
-            is Loading -> FillMaxWidthProgressIndicator(padding)
+            is Loading -> ProgressIndicatorFillMaxSize(padding)
             is LoadState.Error -> ErrorUi(
                 modifier = Modifier.padding(padding),
                 button = ErrorButton(onClick = {})
@@ -105,7 +105,7 @@ private fun LoadedRollerCoasters(
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
-            item(key = "loading") { FillMaxWidthProgressIndicator() }
+            item(key = "prepend loading") { ProgressIndicatorFillMaxWidth() }
         }
 
         items(
@@ -121,7 +121,7 @@ private fun LoadedRollerCoasters(
         }
 
         if (rollerCoasters.loadState.append is Loading) {
-            item(key = "loading") { FillMaxWidthProgressIndicator() }
+            item(key = "append loading") { ProgressIndicatorFillMaxWidth() }
         }
     }
 }
@@ -141,12 +141,19 @@ private fun RollerCoaster(
 }
 
 @Composable
-private fun FillMaxWidthProgressIndicator(
-    padding: PaddingValues = PaddingValues(vertical = dimensions.spacing.medium),
+private fun ProgressIndicatorFillMaxSize(
+    padding: PaddingValues,
 ) {
+    ProgressIndicator(modifier = Modifier
+        .padding(padding)
+        .fillMaxSize())
+}
+
+@Composable
+private fun ProgressIndicatorFillMaxWidth() {
     ProgressIndicator(
         modifier = Modifier
-            .padding(padding)
+            .padding(PaddingValues(vertical = dimensions.spacing.medium))
             .fillMaxWidth(),
     )
 }
