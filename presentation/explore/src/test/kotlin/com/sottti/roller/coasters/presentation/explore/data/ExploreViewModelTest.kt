@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
@@ -174,6 +175,7 @@ internal class ExploreViewModelTest {
         )
 
         val job = launch { viewModel.rollerCoasters.collect() }
+        runCurrent()
 
         viewModel.events.test {
             viewModel.onAction(SecondaryFilterAction.SelectTypeSteel)

@@ -68,13 +68,14 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Sid
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.StateMutationAction
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.utils.combine
-import com.sottti.roller.coasters.presentation.utils.stateInWhileSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.scan
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -123,7 +124,15 @@ internal class SettingsViewModel @Inject constructor(
         }
             .scan(initialState) { previous, reduce -> reduce(previous) }
             .drop(1)
-            .stateInWhileSubscribed(initialState)
+            .stateIn(
+                scope = viewModelScope,
+                started = if (testInitialState == null) {
+                    SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000)
+                } else {
+                    SharingStarted.Eagerly
+                },
+                initialValue = initialState,
+            )
 
     private val reducer: (
         appColorContrast: AppColorContrast,

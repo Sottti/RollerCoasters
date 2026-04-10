@@ -1,5 +1,8 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
+import org.gradle.api.tasks.testing.Test
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.jvm.toolchain.JavaToolchainService
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
@@ -49,6 +52,18 @@ subprojects {
             compilerOptions {
                 freeCompilerArgs.add("-Xcontext-parameters")
             }
+        }
+    }
+
+    plugins.withId("app.cash.paparazzi") {
+        val javaToolchainService = extensions.getByType<JavaToolchainService>()
+
+        tasks.withType<Test>().configureEach {
+            javaLauncher.set(
+                javaToolchainService.launcherFor {
+                    languageVersion.set(JavaLanguageVersion.of(21))
+                },
+            )
         }
     }
 }

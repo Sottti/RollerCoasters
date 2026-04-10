@@ -1,6 +1,6 @@
 package com.sottti.roller.coasters.data.settings.mappers
 
-import android.app.UiModeManager.MODE_NIGHT_CUSTOM
+import android.app.UiModeManager.MODE_NIGHT_AUTO
 import android.app.UiModeManager.MODE_NIGHT_NO
 import android.app.UiModeManager.MODE_NIGHT_YES
 import androidx.appcompat.app.AppCompatDelegate
@@ -70,9 +70,9 @@ internal class AppThemeMapperTest {
     }
 
     @Test
-    fun `system theme maps to night custom`() {
+    fun `system theme maps to night auto`() {
         val result = AppTheme.System.toUiModeManagerNightMode()
-        assertThat(result).isEqualTo(MODE_NIGHT_CUSTOM)
+        assertThat(result).isEqualTo(MODE_NIGHT_AUTO)
     }
 
     @Test

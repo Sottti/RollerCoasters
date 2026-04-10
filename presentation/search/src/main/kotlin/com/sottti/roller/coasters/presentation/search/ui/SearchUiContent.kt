@@ -25,6 +25,7 @@ import com.sottti.roller.coasters.presentation.search.model.SearchAction
 import com.sottti.roller.coasters.presentation.search.model.SearchResult
 import com.sottti.roller.coasters.presentation.search.model.SearchState
 import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

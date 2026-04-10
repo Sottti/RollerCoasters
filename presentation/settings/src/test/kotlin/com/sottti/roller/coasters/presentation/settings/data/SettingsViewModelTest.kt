@@ -88,9 +88,9 @@ internal class SettingsViewModelTest {
             initialState = initialState,
         )
 
-        viewModel.onAction(AppColorContrastPickerSelectionChange(newSelectedColorContrast))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(AppColorContrastPickerSelectionChange(newSelectedColorContrast))
+        }
     }
 
     @Test
@@ -108,9 +108,9 @@ internal class SettingsViewModelTest {
             setAppColorContrast = setAppColorContrast,
         )
 
-        viewModel.onAction(ConfirmColorContrastPickerSelection(selectedAppColorContrast))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(ConfirmColorContrastPickerSelection(selectedAppColorContrast))
+        }
         coVerify(exactly = 1) { setAppColorContrast(selectedAppColorContrast.toDomain()) }
     }
 
@@ -126,9 +126,9 @@ internal class SettingsViewModelTest {
         )
         val viewModel = createViewModel(initialState = initialState)
 
-        viewModel.onAction(AppLanguagePickerSelectionChange(newSelectedLanguage))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(AppLanguagePickerSelectionChange(newSelectedLanguage))
+        }
     }
 
     @Test
@@ -145,9 +145,9 @@ internal class SettingsViewModelTest {
             setAppLanguage = setAppLanguage,
         )
 
-        viewModel.onAction(ConfirmAppLanguagePickerSelection(selectedAppLanguage))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(ConfirmAppLanguagePickerSelection(selectedAppLanguage))
+        }
         coVerify(exactly = 1) { setAppLanguage(selectedAppLanguage.toDomain()) }
     }
 
@@ -163,9 +163,9 @@ internal class SettingsViewModelTest {
         )
         val viewModel = createViewModel(initialState = initialState)
 
-        viewModel.onAction(AppMeasurementSystemPickerSelectionChange(newSelectedMeasurementSystem))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(AppMeasurementSystemPickerSelectionChange(newSelectedMeasurementSystem))
+        }
     }
 
     @Test
@@ -182,9 +182,9 @@ internal class SettingsViewModelTest {
             setAppMeasurementSystem = setAppMeasurementSystem,
         )
 
-        viewModel.onAction(ConfirmAppMeasurementSystemPickerSelection(selectedAppMeasurementSystem))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(ConfirmAppMeasurementSystemPickerSelection(selectedAppMeasurementSystem))
+        }
         coVerify(exactly = 1) { setAppMeasurementSystem(selectedAppMeasurementSystem.toDomain()) }
     }
 
@@ -207,9 +207,9 @@ internal class SettingsViewModelTest {
             systemFeatures = systemFeatures,
         )
 
-        viewModel.onAction(AppThemePickerSelectionChange(newSelectedTheme))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(AppThemePickerSelectionChange(newSelectedTheme))
+        }
     }
 
     @Test
@@ -228,9 +228,9 @@ internal class SettingsViewModelTest {
             setAppTheme = setAppTheme,
         )
 
-        viewModel.onAction(ConfirmAppThemePickerSelection(selectedAppTheme))
-
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(ConfirmAppThemePickerSelection(selectedAppTheme))
+        }
         coVerify(exactly = 1) { setAppTheme(selectedAppTheme.toDomain()) }
     }
 
@@ -284,28 +284,10 @@ internal class SettingsViewModelTest {
         )
         val viewModel = createViewModel(initialState = initialState)
 
-        viewModel.onAction(DismissAppColorContrastNotAvailableMessage)
-
         val expectedState = initialState.hideAppColorContrastNotAvailableMessage()
-        viewModel.assertHasState(expectedState)
-    }
-
-    @Test
-    fun `hides app color contrast picker`() = runTest {
-        val colorContrastAvailable = true
-        val appColorContrast = AppColorContrast.System
-        val initialState = loadedState(
-            dynamicColorState = AppDynamicColor.Disabled,
-        ).showAppColorContrastPicker(
-            selectedAppColorContrast = appColorContrast,
-            appColorContrastAvailable = colorContrastAvailable,
-        )
-        val viewModel = createViewModel(initialState = initialState)
-
-        viewModel.onAction(DismissAppColorContrastPicker)
-
-        val expectedState = initialState.hideAppColorContrastPicker()
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(DismissAppColorContrastNotAvailableMessage)
+        }
     }
 
     @Test
@@ -315,10 +297,10 @@ internal class SettingsViewModelTest {
         )
         val viewModel = createViewModel(initialState = initialState)
 
-        viewModel.onAction(DismissAppLanguagePicker)
-
         val expectedState = initialState.hideAppLanguagePicker()
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(DismissAppLanguagePicker)
+        }
     }
 
     @Test
@@ -328,10 +310,10 @@ internal class SettingsViewModelTest {
         )
         val viewModel = createViewModel(initialState = initialState)
 
-        viewModel.onAction(DismissAppMeasurementSystemPicker)
-
         val expectedState = initialState.hideAppMeasurementSystemPicker()
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(DismissAppMeasurementSystemPicker)
+        }
     }
 
     @Test
@@ -342,10 +324,10 @@ internal class SettingsViewModelTest {
         )
         val viewModel = createViewModel(initialState = initialState)
 
-        viewModel.onAction(DismissAppThemePicker)
-
         val expectedState = initialState.hideAppThemePicker()
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(DismissAppThemePicker)
+        }
     }
 
     @Test
@@ -444,13 +426,13 @@ internal class SettingsViewModelTest {
             initialState = initialState,
         )
 
-        viewModel.onAction(LaunchAppColorContrastPicker)
-
         val expectedState = initialState.showAppColorContrastPicker(
             selectedAppColorContrast = appColorContrast,
             appColorContrastAvailable = colorContrastAvailable,
         )
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(LaunchAppColorContrastPicker)
+        }
     }
 
     @Test
@@ -473,13 +455,13 @@ internal class SettingsViewModelTest {
             initialState = initialState,
         )
 
-        viewModel.onAction(LaunchAppColorContrastPicker)
-
         val expectedState = initialState.showAppColorContrastPicker(
             selectedAppColorContrast = appColorContrast,
             appColorContrastAvailable = colorContrastAvailable,
         )
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(LaunchAppColorContrastPicker)
+        }
     }
 
     @Test
@@ -493,10 +475,10 @@ internal class SettingsViewModelTest {
             initialState = initialState,
         )
 
-        viewModel.onAction(LaunchAppLanguagePicker)
-
         val expectedState = initialState.showAppLanguagePicker(appLanguage)
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(LaunchAppLanguagePicker)
+        }
     }
 
     @Test
@@ -510,10 +492,10 @@ internal class SettingsViewModelTest {
             initialState = initialState,
         )
 
-        viewModel.onAction(LaunchAppMeasurementSystemPicker)
-
         val expectedState = initialState.showAppMeasurementSystemPicker(appMeasurementSystem)
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(LaunchAppMeasurementSystemPicker)
+        }
     }
 
     @Test
@@ -531,12 +513,12 @@ internal class SettingsViewModelTest {
             initialState = initialState,
         )
 
-        viewModel.onAction(LaunchAppThemePicker)
-
         val expectedState = initialState.showAppThemePicker(
             lightDarkAppThemingAvailable = lightDarkSystemThemingAvailable,
             selectedAppTheme = appTheme.toPresentationModel(selected = true),
         )
-        viewModel.assertHasState(expectedState)
+        viewModel.assertHasStateAfterAction(expectedState) {
+            onAction(LaunchAppThemePicker)
+        }
     }
 }

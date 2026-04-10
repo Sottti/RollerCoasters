@@ -28,6 +28,7 @@ import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 
 @Composable

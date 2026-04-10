@@ -36,6 +36,7 @@ import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.Lau
 import com.sottti.roller.coasters.presentation.settings.model.SettingsAction.LaunchAppThemePicker
 import com.sottti.roller.coasters.presentation.settings.model.SettingsState
 import com.sottti.roller.coasters.presentation.utils.Spacer
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 internal fun SettingsList(
