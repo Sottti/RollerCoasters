@@ -26,6 +26,7 @@ import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 internal fun ExploreContent(
@@ -101,7 +102,7 @@ private fun LoadedRollerCoasters(
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         if (rollerCoasters.loadState.prepend is Loading) {
-            item(key = "loading") { FillMaxWidthProgressIndicator() }
+            item(key = "prepend loading") { FillMaxWidthProgressIndicator() }
         }
 
         items(
@@ -117,7 +118,7 @@ private fun LoadedRollerCoasters(
         }
 
         if (rollerCoasters.loadState.append is Loading) {
-            item(key = "loading") { FillMaxWidthProgressIndicator() }
+            item(key = "append loading") { FillMaxWidthProgressIndicator() }
         }
     }
 }

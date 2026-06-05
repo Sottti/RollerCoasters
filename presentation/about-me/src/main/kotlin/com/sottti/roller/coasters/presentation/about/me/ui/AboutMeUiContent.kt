@@ -52,6 +52,7 @@ import com.sottti.roller.coasters.presentation.design.system.text.Text
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.Spacer
 import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,5 +1,8 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
+import org.gradle.api.tasks.testing.Test
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.jvm.toolchain.JavaToolchainService
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
@@ -9,7 +12,6 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.gradle.versions) apply true
     alias(libs.plugins.hilt) apply false
-    alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.ksp) apply false
@@ -29,18 +31,11 @@ subprojects {
         }
     }
 
-    plugins.withId("org.jetbrains.kotlin.android") {
-        extensions.configure<KotlinAndroidProjectExtension> {
-            explicitApi()
-            jvmToolchain(17)
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
-                freeCompilerArgs.add("-Xwhen-guards")
-                freeCompilerArgs.add("-Xcontext-parameters")
-                freeCompilerArgs.add("-Xannotation-default-target=param-property")
-            }
-        }
-    }
+    plugins.withId("com.android.application") { configureKotlinAndroid() }
+
+    plugins.withId("com.android.library") { configureKotlinAndroid() }
+
+    plugins.withId("app.cash.paparazzi") { configurePaparazziTests() }
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
         extensions.configure<KotlinJvmProjectExtension> {
@@ -50,6 +45,17 @@ subprojects {
                 freeCompilerArgs.add("-Xcontext-parameters")
             }
         }
+    }
+}
+
+private fun Project.configurePaparazziTests() {
+    val javaToolchains = extensions.getByType<JavaToolchainService>()
+    tasks.withType<Test>().configureEach {
+        javaLauncher.set(
+            javaToolchains.launcherFor {
+                languageVersion.set(JavaLanguageVersion.of(21))
+            },
+        )
     }
 }
 
@@ -76,6 +82,18 @@ private fun Project.androidLibraryConfig() {
         compileOptions {
             sourceCompatibility = javaVersion()
             targetCompatibility = javaVersion()
+        }
+    }
+}
+
+private fun Project.configureKotlinAndroid() {
+    extensions.configure<KotlinAndroidProjectExtension> {
+        explicitApi()
+        jvmToolchain(17)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-Xcontext-parameters")
+            freeCompilerArgs.add("-Xannotation-default-target=param-property")
         }
     }
 }

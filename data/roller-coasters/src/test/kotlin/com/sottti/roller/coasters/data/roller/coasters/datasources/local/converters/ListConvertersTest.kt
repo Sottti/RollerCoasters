@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.roller.coasters.datasources.local.converters
 
 import com.google.common.truth.Truth.assertThat
-import kotlin.test.Test
+import org.junit.Test
 
 internal class ListConvertersTest {
 
