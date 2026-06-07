@@ -5,11 +5,16 @@ import com.github.michaelbull.result.get
 import com.github.michaelbull.result.getError
 import com.google.common.truth.Truth.assertThat
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respondError
 import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import java.net.UnknownHostException
+import kotlin.coroutines.cancellation.CancellationException
 
 internal class SafeApiCallTest {
 
@@ -65,6 +70,26 @@ internal class SafeApiCallTest {
     }
 
     @Test
+    fun `production client returns server error when server returns 5xx`() = runBlocking {
+        val mockClient = createHttpClient(
+            MockEngine {
+                respondError(
+                    status = HttpStatusCode.InternalServerError,
+                    content = "Internal Server Error",
+                )
+            }
+        )
+
+        val result = mockClient.fetchWithSafeApiCall()
+
+        val error = result.getError()
+        assertThat(error).isInstanceOf(ExceptionApiModel.ServerError::class.java)
+        with(error as ExceptionApiModel.ServerError) {
+            assertThat(code).isEqualTo(500)
+        }
+    }
+
+    @Test
     fun `returns client error when client request exception occurs`() = runBlocking {
         val content = "Resource not found"
         val mockEngine = mockEngineForResponse(
@@ -82,6 +107,57 @@ internal class SafeApiCallTest {
             assertThat(code).isEqualTo(404)
             assertThat(errorBody).isEqualTo(content)
             assertThat(message).contains("404")
+        }
+    }
+
+    @Test
+    fun `production client returns client error when server returns 4xx`() = runBlocking {
+        val content = "Resource not found"
+        val mockClient = createHttpClient(
+            MockEngine {
+                respondError(
+                    status = HttpStatusCode.NotFound,
+                    content = content,
+                )
+            }
+        )
+
+        val result = mockClient.fetchWithSafeApiCall()
+
+        val error = result.getError()
+        assertThat(error).isInstanceOf(ExceptionApiModel.ClientError::class.java)
+        with(error as ExceptionApiModel.ClientError) {
+            assertThat(code).isEqualTo(404)
+            assertThat(errorBody).isEqualTo(content)
+        }
+    }
+
+    @Test
+    fun `returns redirect error when redirect response exception occurs`() = runBlocking {
+        val mockEngine = mockEngineForResponse(
+            content = "",
+            headers = headersOf(HttpHeaders.Location, "https://example.com/redirected"),
+            status = HttpStatusCode.MovedPermanently,
+        )
+        val mockClient = createMockClient(
+            engine = mockEngine,
+            followRedirects = false,
+        )
+
+        val result = mockClient.fetchWithSafeApiCall()
+
+        val error = result.getError()
+        assertThat(error).isInstanceOf(ExceptionApiModel.RedirectError::class.java)
+        with(error as ExceptionApiModel.RedirectError) {
+            assertThat(code).isEqualTo(301)
+            assertThat(message).contains("301")
+        }
+    }
+
+    @Test(expected = CancellationException::class)
+    fun `rethrows cancellation exception`() {
+        runBlocking {
+            safeApiCall<String> { throw CancellationException("Job cancelled") }
         }
     }
 }

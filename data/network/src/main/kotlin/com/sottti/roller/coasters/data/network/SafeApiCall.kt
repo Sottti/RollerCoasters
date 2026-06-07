@@ -6,14 +6,17 @@ import com.github.michaelbull.result.Result
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.ClientError
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.NoInternet
+import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.RedirectError
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.ServerError
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.Timeout
 import com.sottti.roller.coasters.data.network.model.ExceptionApiModel.Unknown
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.bodyAsText
 import java.net.UnknownHostException
+import kotlin.coroutines.cancellation.CancellationException
 
 public suspend fun <T> safeApiCall(
     apiCall: suspend () -> T,
@@ -24,15 +27,20 @@ public suspend fun <T> safeApiCall(
 } catch (exception: SocketTimeoutException) {
     Err(Timeout(exception.message ?: TIMEOUT_ERROR_MESSAGE))
 } catch (exception: ClientRequestException) { // 4xx errors
+    val errorBody = exception.response.bodyAsText()
     Err(
         ClientError(
             message = exception.message,
             code = exception.response.status.value,
-            errorBody = exception.response.bodyAsText(),
+            errorBody = errorBody,
         ),
     )
 } catch (exception: ServerResponseException) { // 5xx errors
     Err(ServerError(message = exception.message, code = exception.response.status.value))
+} catch (exception: RedirectResponseException) { // 3xx errors
+    Err(RedirectError(message = exception.message, code = exception.response.status.value))
+} catch (exception: CancellationException) {
+    throw exception
 } catch (exception: Exception) {
     Err(Unknown(exception.message ?: UNKNOWN_ERROR_MESSAGE))
 }
