@@ -34,7 +34,6 @@ paging = "3.5.0"
 paparazzi = "2.0.0-alpha05"
 result = "2.3.1"
 room = "2.8.4"
-secrets = "2.0.1"
 splashscreen = "1.2.0"
 targetSdk = "36"
 test-runner = "1.7.0"
@@ -116,4 +115,3 @@ kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
