@@ -1,3 +1,5 @@
 <resources>
     <string name="top_bar_title">Favoritos</string>>
+    <string name="pagination_error">No pudimos cargar más favoritos.</string>
+    <string name="pagination_error_retry">Reintentar</string>
 </resources>
