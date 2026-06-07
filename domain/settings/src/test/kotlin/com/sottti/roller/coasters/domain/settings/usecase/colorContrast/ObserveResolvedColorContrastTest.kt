@@ -8,7 +8,6 @@ import com.sottti.roller.coasters.domain.settings.model.colorContrast.AppColorCo
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.ResolvedColorContrast
 import com.sottti.roller.coasters.domain.settings.model.colorContrast.SystemColorContrast
 import com.sottti.roller.coasters.domain.settings.repository.SettingsRepository
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -25,6 +24,9 @@ internal class ObserveResolvedColorContrastTest {
     @Before
     fun setUp() {
         settingsRepository = mockk()
+        every {
+            settingsRepository.observeSystemColorContrast()
+        } returns flowOf(SystemColorContrast.StandardContrast)
         observeResolvedColorContrast = ObserveResolvedColorContrast(settingsRepository)
     }
 
@@ -52,9 +54,9 @@ internal class ObserveResolvedColorContrastTest {
     @Test
     fun `emits resolved high contrast when system high contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
-        coEvery {
-            settingsRepository.getSystemColorContrast()
-        } returns SystemColorContrast.HighContrast
+        every {
+            settingsRepository.observeSystemColorContrast()
+        } returns flowOf(SystemColorContrast.HighContrast)
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.HighContrast)
     }
@@ -62,9 +64,9 @@ internal class ObserveResolvedColorContrastTest {
     @Test
     fun `emits resolved low contrast when system low contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
-        coEvery {
-            settingsRepository.getSystemColorContrast()
-        } returns SystemColorContrast.LowContrast
+        every {
+            settingsRepository.observeSystemColorContrast()
+        } returns flowOf(SystemColorContrast.LowContrast)
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.LowContrast)
     }
@@ -72,9 +74,9 @@ internal class ObserveResolvedColorContrastTest {
     @Test
     fun `emits resolved medium contrast when system medium contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
-        coEvery {
-            settingsRepository.getSystemColorContrast()
-        } returns SystemColorContrast.MediumContrast
+        every {
+            settingsRepository.observeSystemColorContrast()
+        } returns flowOf(SystemColorContrast.MediumContrast)
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.MediumContrast)
     }
@@ -82,9 +84,9 @@ internal class ObserveResolvedColorContrastTest {
     @Test
     fun `emits resolved standard contrast when system standard contrast is observed`() = runTest {
         every { settingsRepository.observeAppColorContrast() } returns flowOf(System)
-        coEvery {
-            settingsRepository.getSystemColorContrast()
-        } returns SystemColorContrast.StandardContrast
+        every {
+            settingsRepository.observeSystemColorContrast()
+        } returns flowOf(SystemColorContrast.StandardContrast)
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(ResolvedColorContrast.StandardContrast)
     }
@@ -94,9 +96,9 @@ internal class ObserveResolvedColorContrastTest {
         every {
             settingsRepository.observeAppColorContrast()
         } returns flowOf(HighContrast, System)
-        coEvery {
-            settingsRepository.getSystemColorContrast()
-        } returns SystemColorContrast.MediumContrast
+        every {
+            settingsRepository.observeSystemColorContrast()
+        } returns flowOf(SystemColorContrast.MediumContrast, SystemColorContrast.MediumContrast)
         val emissions = observeResolvedColorContrast().toList()
         assertThat(emissions).containsExactly(
             ResolvedColorContrast.HighContrast,

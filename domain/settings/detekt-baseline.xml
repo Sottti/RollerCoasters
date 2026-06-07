@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>Filename:ResolvedMeasurementSystemMapperTest.kt:com.sottti.roller.coasters.domain.settings.mapper.ResolvedMeasurementSystemMapperTest.kt</ID>
+    <ID>Indentation:GetResolvedColorContrast.kt:GetResolvedColorContrast$ </ID>
+    <ID>Indentation:ObserveResolvedColorContrast.kt:ObserveResolvedColorContrast$ </ID>
+    <ID>MatchingDeclarationName:ResolvedMeasurementSystemMapperTest.kt:MeasurementSystemMapperTest</ID>
+    <ID>NoConsecutiveBlankLines:GetResolvedColorContrastTest.kt:GetResolvedColorContrastTest$ </ID>
+    <ID>TooManyFunctions:SettingsRepository.kt:SettingsRepository</ID>
+  </CurrentIssues>
+</SmellBaseline>

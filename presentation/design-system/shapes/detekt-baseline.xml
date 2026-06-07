@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ReturnCount:CornerShape.kt:CornerShape$override fun createOutline: Outline</ID>
+    <ID>TopLevelPropertyNaming:LocalShapes.kt:internal val LocalShapes = staticCompositionLocalOf&lt;Shapes&gt; { error("No shapes provided. Make sure to wrap your composables in a custom theme.") }</ID>
+  </CurrentIssues>
+</SmellBaseline>

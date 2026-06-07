@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:RollerCoasterDetailsReducer.kt:( header = R.string.identity_header, name = RollerCoasterDetailsRow( headline = R.string.identity_name, trailing = name.current.value, ), formerNames = name.former?.value?.let { formerNames -&gt; RollerCoasterDetailsRow( headline = R.string.identity_former_names, trailing = formerNames, ) })</ID>
+    <ID>SpacingAroundParens:RollerCoasterDetailsReducer.kt:(</ID>
+    <ID>Wrapping:RollerCoasterDetailsReducer.kt:(</ID>
+    <ID>Wrapping:RollerCoasterDetailsReducer.kt:( header = R.string.identity_header, name = RollerCoasterDetailsRow( headline = R.string.identity_name, trailing = name.current.value, ), formerNames = name.former?.value?.let { formerNames -&gt; RollerCoasterDetailsRow( headline = R.string.identity_former_names, trailing = formerNames, ) })</ID>
+  </CurrentIssues>
+</SmellBaseline>

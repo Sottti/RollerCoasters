@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>MagicNumber:TimeMapper.kt:60</ID>
+    <ID>NoConsecutiveBlankLines:DateMapperTestStubs.kt: </ID>
+    <ID>NoConsecutiveBlankLines:TimeMapper.kt: </ID>
+    <ID>NoMultipleSpaces:DateMapperTestStubs.kt: </ID>
+    <ID>TopLevelPropertyNaming:DateMapper.kt:private val FULL_DATE_REGEX_PATTERN = Regex("""\d{4}-\d{2}-\d{2}""")</ID>
+    <ID>TopLevelPropertyNaming:DateMapper.kt:private val YEAR_MONTH_REGEX_PATTERN = Regex("""\d{4}-\d{1,2}""")</ID>
+    <ID>TopLevelPropertyNaming:DateMapper.kt:private val YEAR_ONLY_REGEX_PATTERN = Regex("""-?\d{4}""")</ID>
+  </CurrentIssues>
+</SmellBaseline>

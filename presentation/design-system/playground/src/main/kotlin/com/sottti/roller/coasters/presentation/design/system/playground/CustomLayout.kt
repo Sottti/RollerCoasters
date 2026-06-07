@@ -112,7 +112,7 @@ private fun SpecialBox() {
 }
 
 public fun Modifier.centerInParent0(): Modifier =
-    this then layout { measurable, constraints ->
+    layout { measurable, constraints ->
         val maxWidthAllowedByParent = constraints.maxWidth
         val maxHeightAllowedByTheParent = constraints.maxHeight
         val placeable = measurable.measure(constraints)
@@ -129,7 +129,7 @@ public fun Modifier.paddingModifier(
     end: Dp = 0.dp,
     bottom: Dp = 0.dp,
 ): Modifier {
-    return this then layout { measurable, constraints ->
+    return layout { measurable, constraints ->
         val horizontal = (start + end).roundToPx()
         val vertical = (top + bottom).roundToPx()
         val placeable = measurable.measure(
@@ -147,21 +147,19 @@ public fun Modifier.paddingModifier(
 }
 
 public fun Modifier.centerInParent(): Modifier =
-    this.then(
-        layout { measurable, constraints ->
-            val parentWidth = constraints.maxWidth
-            val parentHeight = constraints.maxHeight
+    layout { measurable, constraints ->
+        val parentWidth = constraints.maxWidth
+        val parentHeight = constraints.maxHeight
 
-            val placeable = measurable.measure(constraints)
+        val placeable = measurable.measure(constraints)
 
-            check(placeable[FirstBaseline] != AlignmentLine.Unspecified)
+        check(placeable[FirstBaseline] != AlignmentLine.Unspecified)
 
 
-            val x = (parentWidth - placeable.width) / 2
-            val y = (parentHeight - placeable.height) / 2
+        val x = (parentWidth - placeable.width) / 2
+        val y = (parentHeight - placeable.height) / 2
 
-            layout(placeable.width, placeable.height) {
-                placeable.placeRelative(x, y)
-            }
+        layout(placeable.width, placeable.height) {
+            placeable.placeRelative(x, y)
         }
-    )
+    }

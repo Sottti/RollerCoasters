@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LambdaParameterEventTrailing:CardGrid.kt:onClick: (() -&gt; Unit)</ID>
+    <ID>LambdaParameterEventTrailing:CardGrid.kt:onClick: ((Int) -&gt; Unit)</ID>
+  </CurrentIssues>
+</SmellBaseline>

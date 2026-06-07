@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:DisplayUnitFormatter.kt:DisplayUnitFormatter$( R.string.g_force, value.toDisplayFormat(appLanguage, defaultLocale), )</ID>
+  </CurrentIssues>
+</SmellBaseline>
