@@ -13,7 +13,8 @@ android {
 dependencies {
     api(project(module.presentation.designSystem.icons))
     implementation(libs.compose.material)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.shapes))
     implementation(project(module.presentation.designSystem.text))

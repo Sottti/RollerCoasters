@@ -13,7 +13,8 @@ android {
 dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.maps)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
     implementation(platform(libs.compose.bom))
     implementation(project(module.domain.fixtures))
     implementation(project(module.presentation.designSystem.images))

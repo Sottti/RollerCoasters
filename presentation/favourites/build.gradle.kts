@@ -14,7 +14,8 @@ android {
 dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.paging.compose)
