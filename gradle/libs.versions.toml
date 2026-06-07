@@ -53,6 +53,7 @@ compose-navigation2 = { group = "androidx.navigation", name = "navigation-compos
 compose-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "compose-navigation3" }
 compose-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "compose-navigation3" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+compose-runtime-saveable = { group = "androidx.compose.runtime", name = "runtime-saveable" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
