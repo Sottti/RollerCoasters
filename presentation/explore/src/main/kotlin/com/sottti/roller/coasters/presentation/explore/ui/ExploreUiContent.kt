@@ -8,10 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.LoadState
+import androidx.paging.LoadState.Error
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
 import androidx.paging.compose.LazyPagingItems
@@ -22,10 +27,13 @@ import com.sottti.roller.coasters.presentation.design.system.error.ErrorUi
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
+import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.Filters
 import com.sottti.roller.coasters.presentation.utils.override
+import com.sottti.roller.coasters.presentation.utils.plus
 
 @Composable
 internal fun ExploreContent(
@@ -100,8 +108,13 @@ private fun LoadedRollerCoasters(
         contentPadding = padding + PaddingValues(dimensions.spacing.medium),
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
-        if (rollerCoasters.loadState.prepend is Loading) {
-            item(key = "loading") { FillMaxWidthProgressIndicator() }
+        when (rollerCoasters.loadState.prepend) {
+            is Error -> item(key = "prepend error") {
+                PaginationErrorItem(onRetry = { rollerCoasters.retry() })
+            }
+
+            is Loading -> item(key = "prepend loading") { FillMaxWidthProgressIndicator() }
+            else -> Unit
         }
 
         items(
@@ -116,8 +129,13 @@ private fun LoadedRollerCoasters(
             }
         }
 
-        if (rollerCoasters.loadState.append is Loading) {
-            item(key = "loading") { FillMaxWidthProgressIndicator() }
+        when (rollerCoasters.loadState.append) {
+            is Error -> item(key = "append error") {
+                PaginationErrorItem(onRetry = { rollerCoasters.retry() })
+            }
+
+            is Loading -> item(key = "append loading") { FillMaxWidthProgressIndicator() }
+            else -> Unit
         }
     }
 }
@@ -162,4 +180,27 @@ private fun FillMaxWidthProgressIndicator(
             .padding(padding)
             .fillMaxWidth(),
     )
+}
+
+@Composable
+private fun PaginationErrorItem(
+    onRetry: () -> Unit,
+) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensions.spacing.medium),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(dimensions.spacing.small),
+        ) {
+            Text.Body.Medium(
+                textResId = R.string.pagination_error,
+                textAlign = TextAlign.Center,
+            )
+            Button(onClick = onRetry) {
+                Text.Vanilla(R.string.pagination_error_retry)
+            }
+        }
+    }
 }

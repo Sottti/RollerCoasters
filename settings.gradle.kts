@@ -58,7 +58,7 @@ include(
     ":presentation:favourites",
     ":presentation:fixtures",
     ":presentation:format",
-    ":presentation:home",
+    ":presentation:app-shell",
     ":presentation:navigation",
     ":presentation:navigation-external",
     ":presentation:paparazzi",

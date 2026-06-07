@@ -1,9 +1,8 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildsrc.module
 
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
 }
 

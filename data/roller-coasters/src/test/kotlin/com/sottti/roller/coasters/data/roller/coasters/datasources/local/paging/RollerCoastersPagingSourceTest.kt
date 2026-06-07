@@ -22,6 +22,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import kotlin.coroutines.cancellation.CancellationException
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class RollerCoastersPagingSourceTest {
@@ -115,6 +116,20 @@ internal class RollerCoastersPagingSourceTest {
         val error = result as PagingSource.LoadResult.Error
         assertThat(error.throwable).isInstanceOf(RuntimeException::class.java)
         assertThat(error.throwable.message).isEqualTo("DB Error")
+    }
+
+    @Test(expected = CancellationException::class)
+    fun `load - rethrows cancellation exceptions`() = runBlocking {
+        coEvery { dao.getPagedRollerCoasters(any()) } throws CancellationException("cancelled")
+
+        val params = PagingSource.LoadParams.Refresh(
+            key = 0,
+            loadSize = 2,
+            placeholdersEnabled = false,
+        )
+
+        pagingSource.load(params)
+        Unit
     }
 
     @Test

@@ -1,8 +1,7 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildsrc.module
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.paparazzi)
 }
@@ -20,7 +19,8 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
 
     implementation(libs.compose.material)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
     implementation(platform(libs.compose.bom))
     implementation(project(module.presentation.designSystem.colors))
     implementation(project(module.presentation.designSystem.dimensions))

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>NoBlankLineBeforeRbrace:ImagesSnapshotTest.kt:ImagesSnapshotTest.Companion$ </ID>
+  </CurrentIssues>
+</SmellBaseline>

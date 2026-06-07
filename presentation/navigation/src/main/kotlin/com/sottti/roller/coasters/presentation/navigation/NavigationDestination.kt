@@ -21,7 +21,7 @@ public sealed interface NavigationDestination {
 
     @Immutable
     @Serializable
-    public data object Home : NavigationDestination
+    public data object AppShell : NavigationDestination
 
     @Immutable
     @Serializable

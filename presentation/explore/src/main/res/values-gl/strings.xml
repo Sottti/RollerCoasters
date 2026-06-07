@@ -13,5 +13,7 @@
     <string name="chip_label_type_all">Todos</string>
     <string name="chip_label_type_steel">Aceiro</string>
     <string name="chip_label_type_wood">Madeira</string>
+    <string name="pagination_error">Non puidemos cargar máis montañas rusas.</string>
+    <string name="pagination_error_retry">Tentar de novo</string>
     <string name="roller_coaster_ranking">Clasificado #%1$d</string>
 </resources>

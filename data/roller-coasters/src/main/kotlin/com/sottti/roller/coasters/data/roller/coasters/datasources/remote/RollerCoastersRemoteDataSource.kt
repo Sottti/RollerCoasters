@@ -3,8 +3,8 @@ package com.sottti.roller.coasters.data.roller.coasters.datasources.remote
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.mapBoth
-import com.github.michaelbull.result.onFailure
-import com.github.michaelbull.result.onSuccess
+import com.github.michaelbull.result.onErr
+import com.github.michaelbull.result.onOk
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.api.RollerCoastersApiCalls
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toApiModel
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.mapper.toDomain
@@ -79,8 +79,8 @@ internal class RollerCoastersRemoteDataSource @Inject constructor(
                     val result = api.getRollerCoasters(offset = offset, limit = limit)
                     mutex.withLock {
                         result
-                            .onSuccess { successfulCalls++ }
-                            .onFailure { exceptionApi -> error = exceptionApi }
+                            .onOk { successfulCalls++ }
+                            .onErr { exceptionApi -> error = exceptionApi }
                     }
                     result.mapBoth(
                         success = { page ->

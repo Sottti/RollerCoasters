@@ -1,11 +1,13 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildsrc.module
+import org.gradle.api.Project
+import java.util.Properties
+
+private val mapsApiKeyProperty = "MAPS_API_KEY"
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
-    alias(libs.plugins.secrets)
 }
 
 android {
@@ -19,6 +21,7 @@ android {
         applicationId = "com.sottti.roller.coasters"
         versionCode = 1
         versionName = "1.0"
+        manifestPlaceholders[mapsApiKeyProperty] = project.mapsApiKey()
     }
 
     buildTypes {
@@ -44,6 +47,23 @@ dependencies {
     implementation(project(module.domain.systemFeatures))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.domain.settings))
-    implementation(project(module.presentation.home))
+    implementation(project(module.presentation.appShell))
     ksp(libs.hilt.compiler)
+}
+
+private fun Project.mapsApiKey(): String =
+    providers.gradleProperty(mapsApiKeyProperty)
+        .orElse(providers.environmentVariable(mapsApiKeyProperty))
+        .orElse(providers.provider { localProperties().getProperty(mapsApiKeyProperty).orEmpty() })
+        .get()
+
+private fun Project.localProperties(): Properties {
+    val properties = Properties()
+    val localPropertiesFile = rootProject.file("local.properties")
+
+    if (localPropertiesFile.isFile) {
+        localPropertiesFile.inputStream().use(properties::load)
+    }
+
+    return properties
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>Filename:IllustrationsUiStateProvider.kt:com.sottti.roller.coasters.presentation.design.system.illustrations.ui.default.IllustrationsUiStateProvider.kt</ID>
+    <ID>MatchingDeclarationName:IllustrationsUiStateProvider.kt:IllustrationUiStateProvider : PreviewParameterProvider</ID>
+    <ID>Wrapping:Illustration.kt:-&gt;</ID>
+  </CurrentIssues>
+</SmellBaseline>
