@@ -1,6 +1,6 @@
 @file:Suppress("ClassName", "ConstPropertyName")
 
-package com.sottti.roller.coasters.buildSrc
+package com.sottti.roller.coasters.buildsrc
 
 object module {
     object presentation {

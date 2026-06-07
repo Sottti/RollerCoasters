@@ -1,4 +1,4 @@
-import com.sottti.roller.coasters.buildSrc.module
+import com.sottti.roller.coasters.buildsrc.module
 
 plugins {
     alias(libs.plugins.android.application)
