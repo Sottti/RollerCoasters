@@ -8,7 +8,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Sottti/RollerCoasters)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat&logo=opensourceinitiative&logoColor=white)](https://opensource.org/licenses/MIT)
 
-## Overview
+## 🧭 Overview
 
 Roller Coasters is a personal playground where I experiment with modern Android development
 practices, libraries, and tools. It is a space to try new APIs, patterns, and approaches—especially
