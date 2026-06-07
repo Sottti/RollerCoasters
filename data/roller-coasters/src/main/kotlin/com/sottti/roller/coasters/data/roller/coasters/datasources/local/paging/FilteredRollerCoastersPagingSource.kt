@@ -9,6 +9,7 @@ import com.sottti.roller.coasters.domain.roller.coasters.model.RollerCoaster
 import com.sottti.roller.coasters.domain.roller.coasters.model.SortByFilter
 import com.sottti.roller.coasters.domain.roller.coasters.model.TypeFilter
 import com.sottti.roller.coasters.domain.settings.model.measurementSystem.ResolvedMeasurementSystem
+import kotlin.coroutines.cancellation.CancellationException
 
 internal class FilteredRollerCoastersPagingSource(
     private val dao: RollerCoastersDao,
@@ -45,6 +46,8 @@ internal class FilteredRollerCoastersPagingSource(
                 prevKey = if (page == 0) null else page - 1,
                 nextKey = if (rollerCoasters.size < pageSize) null else page + 1,
             )
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
