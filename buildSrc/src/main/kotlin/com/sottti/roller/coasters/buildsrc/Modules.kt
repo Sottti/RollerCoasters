@@ -9,7 +9,7 @@ object module {
         const val favourites = ":presentation:favourites"
         const val fixtures = ":presentation:fixtures"
         const val format = ":presentation:format"
-        const val home = ":presentation:home"
+        const val appShell = ":presentation:app-shell"
         const val navigation = ":presentation:navigation"
         const val navigationExternal = ":presentation:navigation-external"
         const val paparazzi = ":presentation:paparazzi"

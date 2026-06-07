@@ -43,6 +43,6 @@ dependencies {
     implementation(project(module.domain.systemFeatures))
     implementation(project(module.domain.rollerCoasters))
     implementation(project(module.domain.settings))
-    implementation(project(module.presentation.home))
+    implementation(project(module.presentation.appShell))
     ksp(libs.hilt.compiler)
 }
