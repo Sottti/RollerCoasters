@@ -12,13 +12,6 @@
 Modern Kotlin Android playground for exploring roller coaster discovery with Jetpack Compose, Hilt,
 Ktor, Room/Paging, Google Maps, Paparazzi, and a modular MVVM/Clean Architecture setup.
 
-<p align="center">
-   <img src="https://github.com/user-attachments/assets/1d66db52-e2d5-4a5b-af38-9dfd4201cff2" alt="Explore screen in light theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/723cf128-155c-4ed2-9dae-f694d5bf8d33" alt="Roller coaster details screen in light theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/b155a20a-e8d2-4047-8ff2-b804b0abf548" alt="Settings screen in light theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/dba6e3bb-e418-4aa2-8191-67947dd55db9" alt="Explore screen in dark theme" width="24%"/>
-</p>
-
 ## Disclaimer
 
 This repository is a personal playground for trying modern Android APIs, libraries, architecture
@@ -31,6 +24,26 @@ Roller Coasters is an Android app for browsing, filtering, saving, and inspectin
 data. The app uses a layered multi-module setup to explore how a real product codebase can keep UI,
 domain logic, data access, dependency injection, and shared tooling separated while still feeling
 fast to iterate on.
+
+## Screenshots
+
+### Light Theme
+
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/1d66db52-e2d5-4a5b-af38-9dfd4201cff2" alt="Explore screen in light theme" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/723cf128-155c-4ed2-9dae-f694d5bf8d33" alt="Roller coaster details screen in light theme" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/b155a20a-e8d2-4047-8ff2-b804b0abf548" alt="Settings screen in light theme" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/cc648cd7-0ec9-4bf4-8e05-9ae1818cf3aa" alt="About screen in light theme" width="24%"/>
+</p>
+
+### Dark Theme
+
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/dba6e3bb-e418-4aa2-8191-67947dd55db9" alt="Explore screen in dark theme" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/92d0a3e9-a25f-4fca-88c8-821cf5875f7e" alt="Roller coaster details screen in dark theme" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/1a9840ee-9294-4e96-911d-f33e572c3ce9" alt="Settings screen in dark theme" width="24%"/>
+   <img src="https://github.com/user-attachments/assets/e8f79eab-7e5e-4d75-b6d6-156b96df1dce" alt="About screen in dark theme" width="24%"/>
+</p>
 
 ## Features
 
@@ -49,7 +62,7 @@ This app uses modern libraries and tools from the Android ecosystem:
 * **Asynchronous work:** [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
   & [Flows](https://developer.android.com/kotlin/flow) for background work and reactive streams.
 * **Dependency Injection:** [Hilt](https://dagger.dev/hilt/) for managing dependencies.
-* **Networking:** [Ktor Client](https://ktor.io/docs/client-overview.html) for REST API
+* **Networking:** [Ktor Client](https://ktor.io/docs/client-create-and-configure.html) for REST API
   communication.
 * **Persistence:** [Room](https://developer.android.com/training/data-storage/room) and
   [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) for local data.
@@ -165,26 +178,6 @@ Every Gradle module has a single responsibility. Use the list below to find the 
 * **Shared utilities**
     * `utils:lifecycle` and `utils:time-dates`: Lifecycle-aware coroutine helpers and date/time
       utilities.
-
-## Screenshots
-
-### Light Theme
-
-<p align="center">
-   <img src="https://github.com/user-attachments/assets/1d66db52-e2d5-4a5b-af38-9dfd4201cff2" alt="Explore screen in light theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/723cf128-155c-4ed2-9dae-f694d5bf8d33" alt="Roller coaster details screen in light theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/b155a20a-e8d2-4047-8ff2-b804b0abf548" alt="Settings screen in light theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/cc648cd7-0ec9-4bf4-8e05-9ae1818cf3aa" alt="About screen in light theme" width="24%"/>
-</p>
-
-### Dark Theme
-
-<p align="center">
-   <img src="https://github.com/user-attachments/assets/dba6e3bb-e418-4aa2-8191-67947dd55db9" alt="Explore screen in dark theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/92d0a3e9-a25f-4fca-88c8-821cf5875f7e" alt="Roller coaster details screen in dark theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/1a9840ee-9294-4e96-911d-f33e572c3ce9" alt="Settings screen in dark theme" width="24%"/>
-   <img src="https://github.com/user-attachments/assets/e8f79eab-7e5e-4d75-b6d6-156b96df1dce" alt="About screen in dark theme" width="24%"/>
-</p>
 
 ## Contributing
 
