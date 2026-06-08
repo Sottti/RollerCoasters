@@ -1,5 +1,3 @@
-import com.sottti.roller.coasters.buildsrc.module
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
@@ -21,18 +19,18 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.fixtures))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.empty))
-    implementation(project(module.presentation.designSystem.error))
-    implementation(project(module.presentation.designSystem.progressIndicators))
-    implementation(project(module.presentation.designSystem.rollerCoasterCard))
-    implementation(project(module.presentation.designSystem.text))
-    implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.previews))
-    implementation(project(module.presentation.topBars))
-    implementation(project(module.presentation.utils))
+    implementation(projects.domain.fixtures)
+    implementation(projects.domain.rollerCoasters)
+    implementation(projects.presentation.designSystem.dimensions)
+    implementation(projects.presentation.designSystem.empty)
+    implementation(projects.presentation.designSystem.error)
+    implementation(projects.presentation.designSystem.progressIndicators)
+    implementation(projects.presentation.designSystem.rollerCoasterCard)
+    implementation(projects.presentation.designSystem.text)
+    implementation(projects.presentation.designSystem.themes)
+    implementation(projects.presentation.previews)
+    implementation(projects.presentation.topBars)
+    implementation(projects.presentation.utils)
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
@@ -41,5 +39,5 @@ dependencies {
     testImplementation(libs.paging.testing)
     testImplementation(libs.truth)
     testImplementation(libs.turbine)
-    testImplementation(project(module.presentation.paparazzi))
+    testImplementation(projects.presentation.paparazzi)
 }

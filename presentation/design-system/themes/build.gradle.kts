@@ -1,5 +1,3 @@
-import com.sottti.roller.coasters.buildsrc.module
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
@@ -10,13 +8,13 @@ android {
 }
 
 dependencies {
-    api(project(module.presentation.designSystem.colors))
+    api(projects.presentation.designSystem.colors)
     implementation(libs.compose.material)
     implementation(libs.material)
     implementation(libs.splashscreen)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.iconResources))
-    implementation(project(module.presentation.designSystem.shapes))
-    implementation(project(module.presentation.designSystem.typography))
+    implementation(projects.presentation.designSystem.dimensions)
+    implementation(projects.presentation.designSystem.iconResources)
+    implementation(projects.presentation.designSystem.shapes)
+    implementation(projects.presentation.designSystem.typography)
 }

@@ -1,4 +1,3 @@
-import com.sottti.roller.coasters.buildsrc.module
 import org.gradle.api.Project
 import java.util.Properties
 
@@ -43,11 +42,11 @@ dependencies {
     implementation(libs.hilt.work)
     implementation(libs.splashscreen)
     implementation(libs.work.runtime)
-    implementation(project(module.di))
-    implementation(project(module.domain.systemFeatures))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.domain.settings))
-    implementation(project(module.presentation.appShell))
+    implementation(projects.di)
+    implementation(projects.domain.systemFeatures)
+    implementation(projects.domain.rollerCoasters)
+    implementation(projects.domain.settings)
+    implementation(projects.presentation.appShell)
     ksp(libs.hilt.compiler)
 }
 

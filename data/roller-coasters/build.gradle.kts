@@ -1,5 +1,3 @@
-import com.sottti.roller.coasters.buildsrc.module
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.ksp)
@@ -18,10 +16,10 @@ dependencies {
     implementation(libs.room)
     implementation(libs.room.paging)
     implementation(libs.work.runtime)
-    implementation(project(module.data.network))
-    implementation(project(module.domain.fixtures))
-    implementation(project(module.domain.rollerCoasters))
-    implementation(project(module.utils.timeDates))
+    implementation(projects.data.network)
+    implementation(projects.domain.fixtures)
+    implementation(projects.domain.rollerCoasters)
+    implementation(projects.utils.timeDates)
     ksp(libs.hilt.compiler)
     ksp(libs.room.compiler)
 

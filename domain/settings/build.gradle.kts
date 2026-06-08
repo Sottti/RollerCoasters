@@ -1,5 +1,3 @@
-import com.sottti.roller.coasters.buildsrc.module
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }
@@ -8,8 +6,8 @@ dependencies {
     implementation(libs.annotations)
     implementation(libs.javax.inject)
     implementation(libs.kotlin.coroutines.core)
-    implementation(project(module.domain.systemFeatures))
-    implementation(project(module.domain.locales))
+    implementation(projects.domain.systemFeatures)
+    implementation(projects.domain.locales)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.coroutines.test)
