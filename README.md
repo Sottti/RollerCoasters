@@ -1,9 +1,9 @@
 # Roller Coasters
 
-![API](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.minSdk&label=API&color=brightgreen&suffix=%2B&logo=android&logoColor=white)
-![Compose BOM](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.compose-bom&label=Compose%20BOM&color=007ACC&logo=jetpackcompose&logoColor=white)
-![Navigation Compose](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.compose-navigation2&label=Navigation%20Compose&color=4CAF50&logo=android&logoColor=white)
-![Kotlin](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.kotlin&label=Kotlin&color=7F52FF&logo=kotlin&logoColor=white)
+![API](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.minSdk&label=API&color=brightgreen&suffix=%2B&logo=android&logoColor=white)
+![Compose BOM](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.compose-bom&label=Compose%20BOM&color=007ACC&logo=jetpackcompose&logoColor=white)
+![Navigation Compose](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.compose-navigation2&label=Navigation%20Compose&color=4CAF50&logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.kotlin&label=Kotlin&color=7F52FF&logo=kotlin&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Sottti/RollerCoasters?logo=github&logoColor=white)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Sottti/RollerCoasters)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat&logo=opensourceinitiative&logoColor=white)](https://opensource.org/licenses/MIT)
@@ -86,7 +86,7 @@ This project is built using modern Android development practices and libraries:
 
 ## Getting Started
 
-These instructions follow the default `dev` branch. Dependency versions are defined in
+These instructions follow the default `develop` branch. Dependency versions are defined in
 [the version catalog](gradle/libs.versions.toml).
 
 ### Requirements
@@ -101,7 +101,7 @@ These instructions follow the default `dev` branch. Dependency versions are defi
 Clone the default branch and open the project root in Android Studio:
 
 ```bash
-git clone --branch dev https://github.com/Sottti/RollerCoasters.git
+git clone --branch develop https://github.com/Sottti/RollerCoasters.git
 cd RollerCoasters
 ```
 
