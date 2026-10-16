@@ -63,11 +63,11 @@ internal class ThemeManagerTest {
     @Test
     fun testSetThemeSystemWhenFeatureAvailable() {
         every { systemFeatures.setPersistentNightModeAvailable() } returns true
-        every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) } just runs
+        every { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO) } just runs
 
         manager.setTheme(AppTheme.System)
 
-        verify { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_CUSTOM) }
+        verify { uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO) }
     }
 
     @Test
