@@ -1,39 +1,28 @@
 # Contributing
 
-Thanks for helping improve Roller Coasters.
+Use the [shared contribution and title guidance](https://github.com/Sottti/.github/blob/main/CONTRIBUTING.md)
+and the matching [shared issue or pull request template](https://github.com/Sottti/.github/tree/main/.github).
+The shared templates remain the source for GitHub submissions.
 
 ## Workflow
 
-1. Fork the repository.
-2. Create a focused branch from `develop`.
-3. Keep changes small enough to review.
-4. Run the relevant checks before opening a pull request.
-5. Open a pull request using the template and describe the behavior change.
+1. Create a focused branch from `develop`.
+2. Keep changes small enough to review.
+3. Run the checks relevant to the change using JDK 21 and the checked-in Gradle wrapper.
+4. Describe the resulting behavior, verification and any remaining limitations in the shared PR template.
 
-## Local Checks
+## Local checks
 
-Run the narrowest check that covers your change. Use JDK 21 or newer. For broad changes, run:
-
-```bash
-./gradlew checkModuleDependencyBoundaries detekt lintDebug test \
-  -PexcludeSnapshotTests=true \
-  verifyPaparazziDebug koverXmlReport koverVerify assembleDebug
-```
-
-Run Paparazzi with `--no-parallel` if a local Gradle configuration enables parallel execution:
+For broad changes, run these commands separately. The test-exclusion property must not be passed to snapshot verification:
 
 ```bash
+./gradlew checkModuleDependencyBoundaries
+./gradlew detekt lintDebug
+./gradlew test -PexcludeSnapshotTests=true
 ./gradlew --no-parallel verifyPaparazziDebug
+./gradlew :koverXmlReport -PexcludeSnapshotTests=true
+./gradlew assembleDebug
 ```
 
-## Pull Requests
-
-Pull requests should include:
-
-- What changed.
-- Why the change is needed.
-- How it was verified.
-- Screenshots or recordings for visible UI changes.
-
-Please keep unrelated formatting, generated files, and IDE metadata out of the
-pull request unless they are required for the change.
+The coverage report aggregates Android and Kotlin modules; no minimum coverage threshold is configured.
+See [the README](README.md#getting-started) for SDK, Maps-key and device setup.

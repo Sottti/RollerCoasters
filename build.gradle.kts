@@ -147,9 +147,15 @@ subprojects {
         }
     }
 
-    plugins.withId("com.android.application") { configureKotlinAndroid() }
+    plugins.withId("com.android.application") {
+        configureKotlinAndroid()
+        configureKover()
+    }
 
-    plugins.withId("com.android.library") { configureKotlinAndroid() }
+    plugins.withId("com.android.library") {
+        configureKotlinAndroid()
+        configureKover()
+    }
 
     plugins.withId("app.cash.paparazzi") { configurePaparazziTests() }
 
@@ -158,6 +164,7 @@ subprojects {
     }
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
+        configureKover()
         extensions.configure<KotlinJvmProjectExtension> {
             explicitApi()
             jvmToolchain(17)
@@ -270,6 +277,11 @@ private fun String.isNonPresentationLayer() =
 
 private fun String.isAllowedDiDependency() =
     startsWith(":data:") || startsWith(":domain:")
+
+private fun Project.configureKover() {
+    apply(plugin = "org.jetbrains.kotlinx.kover")
+    rootProject.dependencies.add("kover", this)
+}
 
 private fun Project.configurePaparazziTests() {
     val javaToolchains = extensions.getByType<JavaToolchainService>()
