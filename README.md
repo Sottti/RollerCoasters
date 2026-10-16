@@ -70,6 +70,7 @@ This project is built using modern Android development practices and libraries:
 
 * **Explore Feed:** View roller coasters, filterable by various criteria (specs, materials, etc.).
 * **Favorites:** Mark and view your favorite roller coasters.
+* **Search:** Find roller coasters by name.
 * **Details Screen:** See detailed information and images for each coaster.
 * **Settings:**
     * Customize theme (Light/Dark/System)
@@ -189,13 +190,12 @@ The app is split into Gradle modules by responsibility:
 | [`data/`](data/) | Repository implementations, local storage, network access, settings, and background synchronization. |
 | [`di/`](di/) | Dependency wiring across the app's layers. |
 | [`utils/`](utils/) | Shared lifecycle and date/time utilities. |
-| [`buildSrc/`](buildSrc/) | Shared Gradle module definitions. |
+| [`buildSrc/`](buildSrc/) | Gradle build support. |
 
 See [`settings.gradle.kts`](settings.gradle.kts) for the complete module list.
 
 ## 🚀 Planned Features or Improvements
 
-* **Search:** Find roller coasters by name.
 * **Parks:** Add information about amusement parks.
 * **Enhanced Discovery:** More filtering options (manufacturer, park, etc.).
 * **Robustness:** Improved error handling and empty state displays.

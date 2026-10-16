@@ -1,5 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.large
 
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
@@ -21,7 +23,9 @@ internal class RollerCoasterCardLargeSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            RollerCoasterCardLargePreview(state)
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                RollerCoasterCardLargePreview(state)
+            }
         }
     }
 
