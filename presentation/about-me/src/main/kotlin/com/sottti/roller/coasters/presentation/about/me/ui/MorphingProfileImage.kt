@@ -13,8 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.TransformOrigin
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.graphics.shapes.Morph
 import com.sottti.roller.coasters.presentation.design.system.dimensions.dimensions
 import com.sottti.roller.coasters.presentation.design.system.images.local.Image
@@ -45,7 +43,6 @@ internal fun MorphingProfileImage(
 
     Image(
         state = image,
-        roundedCorners = false,
         modifier = modifier
             .clip(morphPolygonShape)
             .border(
@@ -54,13 +51,5 @@ internal fun MorphingProfileImage(
                 shape = morphPolygonShape
             )
             .onClickPressAndReleaseHaptics(interactionSource)
-            .graphicsLayer {
-                // Crop the torso to center the face while retaining the full head.
-                scaleX = PROFILE_IMAGE_SCALE
-                scaleY = PROFILE_IMAGE_SCALE
-                transformOrigin = TransformOrigin(pivotFractionX = 0.5f, pivotFractionY = 0f)
-            }
     )
 }
-
-private const val PROFILE_IMAGE_SCALE = 1.25f
