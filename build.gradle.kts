@@ -215,6 +215,9 @@ private val presentationSupportModules = setOf(
 )
 
 private fun ProjectDependencyEdge.boundaryViolations(): List<String> = buildList {
+    // Root coverage aggregation does not add an application dependency to another module.
+    if (source == ":" && configuration == "kover") return@buildList
+
     if (source in dependencyFreeModules) {
         add("$source must not declare project dependencies, but $configuration depends on $target.")
     }
