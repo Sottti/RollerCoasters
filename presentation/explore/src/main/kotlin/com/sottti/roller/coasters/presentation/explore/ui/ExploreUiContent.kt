@@ -109,11 +109,11 @@ private fun LoadedRollerCoasters(
         verticalArrangement = Arrangement.spacedBy(dimensions.spacing.medium),
     ) {
         when (rollerCoasters.loadState.prepend) {
-            is Error -> item(key = "prepend error") {
+            is Error -> item(key = "prepend_error") {
                 PaginationErrorItem(onRetry = { rollerCoasters.retry() })
             }
 
-            is Loading -> item(key = "prepend loading") { FillMaxWidthProgressIndicator() }
+            is Loading -> item(key = "prepend_loading") { FillMaxWidthProgressIndicator() }
             else -> Unit
         }
 
@@ -130,11 +130,11 @@ private fun LoadedRollerCoasters(
         }
 
         when (rollerCoasters.loadState.append) {
-            is Error -> item(key = "append error") {
+            is Error -> item(key = "append_error") {
                 PaginationErrorItem(onRetry = { rollerCoasters.retry() })
             }
 
-            is Loading -> item(key = "append loading") { FillMaxWidthProgressIndicator() }
+            is Loading -> item(key = "append_loading") { FillMaxWidthProgressIndicator() }
             else -> Unit
         }
     }

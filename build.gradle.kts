@@ -36,44 +36,59 @@ private val snapshotTestPattern = "**/*SnapshotTest.class"
 
 val libraries = the<LibrariesForLibs>()
 
-val checkModuleDependencyBoundaries = tasks.register("checkModuleDependencyBoundaries") {
-    group = "verification"
-    description = "Checks direct project dependencies follow the configured module boundary rules."
+abstract class CheckModuleDependencyBoundaries : DefaultTask() {
+    @get:Input
+    abstract val violations: ListProperty<String>
 
-    doLast {
-        val dependencyViolations = allprojects
-            .flatMap { project ->
-                project.configurations.flatMap { configuration ->
-                    configuration.dependencies
-                        .withType(ProjectDependency::class.java)
-                        .filter { dependency -> dependency.path != project.path }
-                        .map { dependency ->
-                            ProjectDependencyEdge(
-                                configuration = configuration.name,
-                                source = project.path,
-                                target = dependency.path,
-                            )
-                        }
-                }
-            }
-            .flatMap { dependency -> dependency.boundaryViolations() }
-
-        val pluginViolations = allprojects
-            .filter { project -> project.path in pureKotlinModules }
-            .flatMap { project -> project.pureKotlinModuleViolations() }
-
-        val violations = (dependencyViolations + pluginViolations)
-            .distinct()
-            .sorted()
-
-        if (violations.isNotEmpty()) {
+    @TaskAction
+    fun checkBoundaries() {
+        val failures = violations.get()
+        if (failures.isNotEmpty()) {
             throw GradleException(
-                buildString {
-                    appendLine("Module dependency boundary violations found:")
-                    violations.forEach { violation -> appendLine("- $violation") }
-                },
+                failures.joinToString(
+                    separator = "\n- ",
+                    prefix = "Module dependency boundary violations found:\n- ",
+                ),
             )
         }
+    }
+}
+
+val checkModuleDependencyBoundaries = tasks.register<CheckModuleDependencyBoundaries>(
+    "checkModuleDependencyBoundaries",
+) {
+    group = "verification"
+    description = "Checks direct project dependencies follow the configured module boundary rules."
+}
+
+gradle.projectsEvaluated {
+    val dependencyViolations = allprojects
+        .flatMap { project ->
+            project.configurations.flatMap { configuration ->
+                configuration.dependencies
+                    .withType(ProjectDependency::class.java)
+                    .filter { dependency -> dependency.path != project.path }
+                    .map { dependency ->
+                        ProjectDependencyEdge(
+                            configuration = configuration.name,
+                            source = project.path,
+                            target = dependency.path,
+                        )
+                    }
+            }
+        }
+        .flatMap { dependency -> dependency.boundaryViolations() }
+
+    val pluginViolations = allprojects
+        .filter { project -> project.path in pureKotlinModules }
+        .flatMap { project -> project.pureKotlinModuleViolations() }
+
+    val violations = (dependencyViolations + pluginViolations)
+        .distinct()
+        .sorted()
+
+    checkModuleDependencyBoundaries.configure {
+        this.violations.set(violations)
     }
 }
 
