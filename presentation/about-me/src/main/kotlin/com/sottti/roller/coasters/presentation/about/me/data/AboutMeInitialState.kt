@@ -15,7 +15,7 @@ import com.sottti.roller.coasters.presentation.design.system.images.local.data.I
 
 internal val initialState = AboutMeState(
     name = R.string.name,
-    profileImage = Images.ProfilePicture2024.state,
+    profileImage = Images.ProfilePicture2026.state,
     socialProfiles = socialProfilesState(),
     title = R.string.name,
     getToKnowMe = getToKnowMeState(),
