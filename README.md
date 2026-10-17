@@ -1,9 +1,9 @@
 # Roller Coasters
 
-![API](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.minSdk&label=API&color=brightgreen&suffix=%2B&logo=android&logoColor=white)
-![Compose BOM](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.compose-bom&label=Compose%20BOM&color=007ACC&logo=jetpackcompose&logoColor=white)
-![Navigation Compose](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.compose-navigation2&label=Navigation%20Compose&color=4CAF50&logo=android&logoColor=white)
-![Kotlin](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/dev/gradle/libs.versions.toml&query=$.versions.kotlin&label=Kotlin&color=7F52FF&logo=kotlin&logoColor=white)
+![API](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.minSdk&label=API&color=brightgreen&suffix=%2B&logo=android&logoColor=white)
+![Compose BOM](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.compose-bom&label=Compose%20BOM&color=007ACC&logo=jetpackcompose&logoColor=white)
+![Navigation Compose](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.compose-navigation2&label=Navigation%20Compose&color=4CAF50&logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/dynamic/toml?url=https://raw.githubusercontent.com/Sottti/RollerCoasters/refs/heads/develop/gradle/libs.versions.toml&query=$.versions.kotlin&label=Kotlin&color=7F52FF&logo=kotlin&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Sottti/RollerCoasters?logo=github&logoColor=white)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Sottti/RollerCoasters)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat&logo=opensourceinitiative&logoColor=white)](https://opensource.org/licenses/MIT)
@@ -70,6 +70,7 @@ This project is built using modern Android development practices and libraries:
 
 * **Explore Feed:** View roller coasters, filterable by various criteria (specs, materials, etc.).
 * **Favorites:** Mark and view your favorite roller coasters.
+* **Search:** Find roller coasters by name.
 * **Details Screen:** See detailed information and images for each coaster.
 * **Settings:**
     * Customize theme (Light/Dark/System)
@@ -86,13 +87,14 @@ This project is built using modern Android development practices and libraries:
 
 ## Getting Started
 
-These instructions follow the default `dev` branch. Dependency versions are defined in
+These instructions follow the default `develop` branch. Dependency versions are defined in
 [the version catalog](gradle/libs.versions.toml).
 
 ### Requirements
 
-* **JDK 17**, selected as the Gradle JDK in Android Studio or through `JAVA_HOME` for command-line builds.
-* **Android SDK Platform 36** and Android SDK Platform-Tools.
+* **JDK 21**, selected as the Gradle JDK in Android Studio or through `JAVA_HOME` for command-line builds.
+* **JDK 17**, installed alongside JDK 21 for the Android and Kotlin/JVM compilation toolchains.
+* **Android SDK Platform 37.0** and Android SDK Platform-Tools.
 * **An emulator or Android device running API 26 (Android 8.0) or newer** to run the app.
 * Use the checked-in **Gradle wrapper**; a separate Gradle installation is not needed.
 
@@ -101,7 +103,7 @@ These instructions follow the default `dev` branch. Dependency versions are defi
 Clone the default branch and open the project root in Android Studio:
 
 ```bash
-git clone --branch dev https://github.com/Sottti/RollerCoasters.git
+git clone --branch develop https://github.com/Sottti/RollerCoasters.git
 cd RollerCoasters
 ```
 
@@ -110,9 +112,28 @@ for command-line setup, create it with your own SDK path:
 
 ```properties
 sdk.dir=/absolute/path/to/Android/sdk
+MAPS_API_KEY=your_google_maps_api_key
 ```
 
-This file is ignored by Git. Sync the project, select the `app` run configuration, and choose a device.
+The Maps key is used by the map previews and runtime maps. This file is ignored by Git.
+
+Keep Gradle running on JDK 21. Install JDK 17 in a standard system location or download it with
+Android Studio so Gradle can detect it. Check that Gradle lists both JDK versions:
+
+```bash
+./gradlew -q javaToolchains
+```
+
+For a JDK 17 installation in a custom location, add its path to your user-level
+`~/.gradle/gradle.properties`:
+
+```properties
+org.gradle.java.installations.paths=/absolute/path/to/jdk17
+```
+
+The project does not configure automatic toolchain downloads.
+
+Sync the project, select the `app` run configuration, and choose a device.
 
 ### Build and Run
 
@@ -162,8 +183,18 @@ Device-based tests require a running emulator or connected device:
 ./gradlew connectedDebugAndroidTest
 ```
 
-The existing [CI workflow](.github/workflows/ci.yml) runs `assembleDebug` and `testDebugUnitTest`.
-The `test` command above also covers the plain Kotlin/JVM modules.
+The [CI workflow](.github/workflows/ci.yml) keeps the required `Build` and `JVM Tests` jobs.
+Gradle and Paparazzi run on JDK 21; the runner image supplies JDK 17 for compilation:
+
+| Check | Command |
+| --- | --- |
+| Module boundaries | `./gradlew checkModuleDependencyBoundaries` |
+| Static analysis | `./gradlew detekt lintDebug` |
+| JVM tests and coverage | `./gradlew test :koverXmlReport -PexcludeSnapshotTests=true` |
+| Screenshots | `./gradlew --no-parallel verifyPaparazziDebug` |
+| Debug build | `./gradlew assembleDebug` |
+
+Coverage reports aggregate the Android and Kotlin modules. A minimum coverage threshold has not been configured.
 
 ## 📁 Project Structure
 
@@ -177,13 +208,11 @@ The app is split into Gradle modules by responsibility:
 | [`data/`](data/) | Repository implementations, local storage, network access, settings, and background synchronization. |
 | [`di/`](di/) | Dependency wiring across the app's layers. |
 | [`utils/`](utils/) | Shared lifecycle and date/time utilities. |
-| [`buildSrc/`](buildSrc/) | Shared Gradle module definitions. |
 
 See [`settings.gradle.kts`](settings.gradle.kts) for the complete module list.
 
 ## 🚀 Planned Features or Improvements
 
-* **Search:** Find roller coasters by name.
 * **Parks:** Add information about amusement parks.
 * **Enhanced Discovery:** More filtering options (manufacturer, park, etc.).
 * **Robustness:** Improved error handling and empty state displays.

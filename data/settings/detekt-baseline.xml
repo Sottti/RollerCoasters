@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>NoConsecutiveBlankLines:SettingsLocalDataSource.kt:SettingsLocalDataSource$ </ID>
+    <ID>TooManyFunctions:SettingsLocalDataSource.kt:SettingsLocalDataSource</ID>
+    <ID>TooManyFunctions:SettingsRepositoryImpl.kt:SettingsRepositoryImpl : SettingsRepository</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>Indentation:Padding.kt: </ID>
+    <ID>MagicNumber:Combine.kt:3</ID>
+    <ID>MagicNumber:Combine.kt:5</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:RollerCoastersApiMapper.kt:private fun RollerCoasterStatsApiModel.isMultiTrack: Boolean</ID>
+    <ID>Filename:StatsRoomModel.kt:com.sottti.roller.coasters.data.roller.coasters.datasources.local.model.StatsRoomModel.kt</ID>
+    <ID>Indentation:RollerCoastersApiMapper.kt: </ID>
+    <ID>Indentation:RollerCoastersRoomQueriesMapperTest.kt:RollerCoastersRoomQueriesMapperTest$ </ID>
+    <ID>MatchingDeclarationName:StatsRoomModel.kt:RideRoomModel</ID>
+    <ID>MultiLineIfElse:PictureSerializer.kt:PictureSerializer$Json.decodeFromJsonElement(PictureApiModel.serializer(), element)</ID>
+    <ID>MultiLineIfElse:PictureSerializer.kt:PictureSerializer$null</ID>
+    <ID>MultiLineIfElse:RollerCoastersRemoteDataSource.kt:RollerCoastersRemoteDataSource$Err(error ?: Exception("Error syncing roller coasters"))</ID>
+    <ID>MultiLineIfElse:RollerCoastersRemoteDataSource.kt:RollerCoastersRemoteDataSource$Ok(Unit)</ID>
+    <ID>NoConsecutiveBlankLines:RollerCoastersRemoteDataSourceTest.kt:RollerCoastersRemoteDataSourceTest$ </ID>
+    <ID>ReturnCount:CoordinatesSerializer.kt:CoordinatesSerializer$override fun deserialize: CoordinatesApiModel?</ID>
+    <ID>StatementWrapping:RollerCoastersRemoteDataSource.kt:RollerCoastersRemoteDataSource$;</ID>
+    <ID>StatementWrapping:RollerCoastersRemoteDataSource.kt:RollerCoastersRemoteDataSource$successfulCalls++; it</ID>
+    <ID>TooGenericExceptionCaught:FilteredRollerCoastersPagingSource.kt:FilteredRollerCoastersPagingSource$e: Exception</ID>
+    <ID>TooManyFunctions:RollerCoastersDao.kt:RollerCoastersDao</ID>
+    <ID>Wrapping:RollerCoastersRemoteDataSource.kt:RollerCoastersRemoteDataSource$(</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,7 +1,7 @@
 package com.sottti.roller.coasters.data.roller.coasters.repository
 
 import androidx.paging.PagingData
-import com.github.michaelbull.result.onSuccess
+import com.github.michaelbull.result.onOk
 import com.sottti.roller.coasters.data.roller.coasters.datasources.local.RollerCoastersLocalDataSource
 import com.sottti.roller.coasters.data.roller.coasters.datasources.remote.RollerCoastersRemoteDataSource
 import com.sottti.roller.coasters.data.roller.coasters.sync.RollerCoasterSyncScheduler
@@ -45,7 +45,7 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
                 if (rollerCoaster == null) {
                     remoteDataSource
                         .getRollerCoaster(id, measurementSystem)
-                        .onSuccess { localDataSource.storeRollerCoaster(it) }
+                        .onOk { localDataSource.storeRollerCoaster(it) }
                 }
             }.filterNotNull()
 
@@ -83,5 +83,5 @@ internal class RollerCoastersRepositoryImpl @Inject constructor(
     ): Result<List<RollerCoaster>> =
         remoteDataSource
             .searchRollerCoasters(query = query, measurementSystem = measurementSystem)
-            .onSuccess { rollerCoasters -> localDataSource.storeRollerCoasters(rollerCoasters) }
+            .onOk { rollerCoasters -> localDataSource.storeRollerCoasters(rollerCoasters) }
 }

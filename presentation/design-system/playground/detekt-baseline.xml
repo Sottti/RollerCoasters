@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:Animations.kt:( Modifier .alpha(alpha = alpha.value) .clickable { onClick() })</ID>
+    <ID>ArgumentListWrapping:Animations.kt:( modifier = Modifier.align(Alignment.Center), text = "Colours", color = Color.Black, )</ID>
+    <ID>CommentSpacing:CustomModifiers.kt://) : Modifier.Node() {</ID>
+    <ID>CommentSpacing:CustomModifiers.kt://) : ModifierNodeElement&lt;PulsateNode&gt;() {</ID>
+    <ID>CommentSpacing:CustomModifiers.kt://private class PulsateNode(</ID>
+    <ID>CommentSpacing:CustomModifiers.kt://private data class PulsateElement(</ID>
+    <ID>CommentSpacing:CustomModifiers.kt://private fun Modifier.pulsate(enabled: Boolean = true) = this.then(PulsateElement(enabled))</ID>
+    <ID>CommentSpacing:CustomModifiers.kt://}</ID>
+    <ID>ComposableNaming:ElevationAndShadows.kt:@Composable @Preview( widthDp = 1200, heightDp = 600, ) private fun cardElevationAnimation</ID>
+    <ID>ForEachOnRange:CustomLayout.kt:1..10</ID>
+    <ID>ForEachOnRange:Intrinsics.kt:1..10</ID>
+    <ID>MultipleEmitters:CoutingRecompositions.kt:@Composable private fun A</ID>
+    <ID>MultipleEmitters:CoutingRecompositions.kt:@Composable private fun RecompositionDemonstrator</ID>
+    <ID>MutableStateAutoboxing:CoutingRecompositions.kt:mutableStateOf(0)</ID>
+    <ID>MutableStateAutoboxing:Random.kt:mutableStateOf(0)</ID>
+    <ID>NoConsecutiveBlankLines:CustomLayout.kt: </ID>
+    <ID>NoConsecutiveBlankLines:ElevationAndShadows.kt: </ID>
+    <ID>NoConsecutiveBlankLines:Text.kt: </ID>
+    <ID>NoEmptyFile:CustomModifiers.kt:com.sottti.roller.coasters.presentation.design.system.playground.CustomModifiers.kt</ID>
+    <ID>NoEmptyFirstLineInMethodBlock:ElevationAndShadows.kt: </ID>
+    <ID>NoMultipleSpaces:CoutingRecompositions.kt: </ID>
+    <ID>SpacingAroundParens:Animations.kt:(</ID>
+    <ID>UnnecessaryParenthesesBeforeTrailingLambda:Text.kt:()</ID>
+    <ID>Wrapping:Animations.kt:(</ID>
+  </CurrentIssues>
+</SmellBaseline>

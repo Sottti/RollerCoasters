@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LambdaParameterEventTrailing:SearchBar.kt:onQueryChange: (String?) -&gt; Unit</ID>
+  </CurrentIssues>
+</SmellBaseline>

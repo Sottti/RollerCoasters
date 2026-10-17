@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:ExploreReducer.kt:( primary = state.filters.primary.map { filter -&gt; when { primaryFilterClass.isInstance(filter) -&gt; (filter as T).updateFilter(state) else -&gt; filter } })</ID>
+    <ID>ArgumentListWrapping:ExploreReducer.kt:( secondary = state.filters.secondary.map { filter -&gt; when (filter) { is AllFilter -&gt; filter.copy(visible = filter is T) is AlphabeticalFilter -&gt; filter.copy(visible = filter is T) is DropFilter -&gt; filter.copy(visible = filter is T) is GForceFilter -&gt; filter.copy(visible = filter is T) is HeightFilter -&gt; filter.copy(visible = filter is T) is InversionsFilter -&gt; filter.copy(visible = filter is T) is LengthFilter -&gt; filter.copy(visible = filter is T) is MaxVerticalFilter -&gt; filter.copy(visible = filter is T) is SpeedFilter -&gt; filter.copy(visible = filter is T) is SteelFilter -&gt; filter.copy(visible = filter is T) is WoodFilter -&gt; filter.copy(visible = filter is T) } })</ID>
+    <ID>CyclomaticComplexMethod:ExploreTestHelpers.kt:internal fun filtersWithExpansion</ID>
+    <ID>CyclomaticComplexMethod:ExploreUiMapper.kt:private fun Ride.contextualStat: String?</ID>
+    <ID>Indentation:ExploreReducer.kt: </ID>
+    <ID>LambdaParameterInRestartableEffect:ExploreUi.kt:onScrollToTop: (() -&gt; Unit) -&gt; Unit</ID>
+    <ID>NoConsecutiveBlankLines:ExploreReducer.kt: </ID>
+    <ID>NoConsecutiveBlankLines:ExploreState.kt: </ID>
+    <ID>NoConsecutiveBlankLines:ExploreTestHelpers.kt: </ID>
+    <ID>ParameterNaming:ExploreUi.kt:onListCreated: @Composable (LazyListState) -&gt; Unit</ID>
+    <ID>SpacingAroundParens:ExploreReducer.kt:(</ID>
+    <ID>ThrowingExceptionsWithoutMessageOrCause:ExploreUiStateProvider.kt:Exception()</ID>
+    <ID>Wrapping:ExploreReducer.kt:(</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,4 +1,6 @@
-rootProject.name = "Roller Coasters"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "RollerCoasters"
 
 pluginManagement {
     repositories {
@@ -58,7 +60,7 @@ include(
     ":presentation:favourites",
     ":presentation:fixtures",
     ":presentation:format",
-    ":presentation:home",
+    ":presentation:app-shell",
     ":presentation:navigation",
     ":presentation:navigation-external",
     ":presentation:paparazzi",

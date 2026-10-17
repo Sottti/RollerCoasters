@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sottti.roller.coasters.domain.roller.coasters.usecase.ScheduleRollerCoastersSync
 import com.sottti.roller.coasters.domain.settings.usecase.theme.ApplyStoredAppTheme
 import com.sottti.roller.coasters.domain.system.features.SystemFeatures
-import com.sottti.roller.coasters.presentation.home.ui.startHomeActivity
+import com.sottti.roller.coasters.presentation.app.shell.ui.startAppShellActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,7 +36,7 @@ internal class SplashScreenActivity : ComponentActivity() {
 
         scheduleRollerCoastersSync()
 
-        startHomeActivity(context = this)
+        startAppShellActivity(context = this)
 
         finish()
     }

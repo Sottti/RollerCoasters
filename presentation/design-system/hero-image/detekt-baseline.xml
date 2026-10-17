@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>Filename:HeroImageStateProvider.kt:com.sottti.roller.coasters.presentation.design.system.hero.image.HeroImageStateProvider.kt</ID>
+    <ID>MatchingDeclarationName:HeroImageStateProvider.kt:ProfilePictureStateProvider : PreviewParameterProvider</ID>
+    <ID>NoConsecutiveBlankLines:HeroImage.kt: </ID>
+  </CurrentIssues>
+</SmellBaseline>

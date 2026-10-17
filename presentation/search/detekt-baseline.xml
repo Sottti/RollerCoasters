@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>NoConsecutiveBlankLines:SearchReducer.kt: </ID>
+    <ID>ParameterNaming:SearchUi.kt:onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -&gt; Unit</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -14,6 +14,11 @@ public sealed class ExceptionApiModel(
         val errorBody: String?,
     ) : ExceptionApiModel(message)
 
+    public data class RedirectError(
+        override val message: String,
+        val code: Int,
+    ) : ExceptionApiModel(message)
+
     public data class ServerError(
         override val message: String,
         val code: Int,

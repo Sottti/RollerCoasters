@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImagePainter
@@ -35,9 +36,6 @@ public fun NetworkImage(
     foreverLoading: Boolean = false,
 ) {
     val isPreview = LocalInspectionMode.current
-    val model = if (isPreview) R.drawable.dragon_khan_hero_image else imageRequest(url)
-    val painter = rememberAsyncImagePainter(model)
-    val painterState by painter.state.collectAsStateWithLifecycle()
     val cornerRadius = when {
         roundedCorners -> shapes.roundedCorner.medium
         else -> RoundedCornerShape(ZeroCornerSize)
@@ -47,21 +45,54 @@ public fun NetworkImage(
         val imageModifier = Modifier.matchParentSize()
 
         when {
-            foreverLoading || painterState is AsyncImagePainter.State.Loading ->
+            foreverLoading ->
                 ProgressIndicator(modifier = imageModifier)
 
-            painterState is AsyncImagePainter.State.Success ->
+            isPreview ->
                 Image(
-                    painter = painter,
+                    painter = painterResource(R.drawable.dragon_khan_hero_image),
                     contentDescription = contentDescription,
                     contentScale = ContentScale.Crop,
                     modifier = imageModifier,
                 )
 
-            else -> Box(modifier = imageModifier)
+            else -> AsyncNetworkImage(
+                contentDescription = contentDescription,
+                modifier = imageModifier,
+                url = url,
+            )
         }
     }
 }
+
+@Composable
+private fun AsyncNetworkImage(
+    url: ImageUrl,
+    contentDescription: String,
+    modifier: Modifier,
+) {
+    val painter = rememberNetworkImagePainter(url)
+    val painterState by painter.state.collectAsStateWithLifecycle()
+
+    when {
+        painterState is AsyncImagePainter.State.Loading ->
+            ProgressIndicator(modifier = modifier)
+
+        painterState is AsyncImagePainter.State.Success ->
+            Image(
+                painter = painter,
+                contentDescription = contentDescription,
+                contentScale = ContentScale.Crop,
+                modifier = modifier,
+            )
+
+        else -> Box(modifier = modifier)
+    }
+}
+
+@Composable
+private fun rememberNetworkImagePainter(url: ImageUrl): AsyncImagePainter =
+    rememberAsyncImagePainter(imageRequest(url))
 
 @Composable
 private fun imageRequest(url: ImageUrl): ImageRequest {

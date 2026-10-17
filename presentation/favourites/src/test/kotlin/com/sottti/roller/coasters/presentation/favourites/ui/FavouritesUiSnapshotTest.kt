@@ -1,5 +1,7 @@
 package com.sottti.roller.coasters.presentation.favourites.ui
 
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesPreviewState
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
@@ -21,7 +23,9 @@ internal class FavouritesUiSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            FavouritesUiPreview(state)
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                FavouritesUiPreview(state)
+            }
         }
     }
 
