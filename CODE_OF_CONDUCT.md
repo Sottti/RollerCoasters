@@ -25,5 +25,5 @@ Maintainers may edit, hide, or remove comments, issues, pull requests, or other
 contributions that do not follow this code of conduct. Repeated or severe
 violations may result in being blocked from participating in the project.
 
-Report concerns by opening a private security advisory or contacting the
-maintainer through the public profile links.
+Report concerns by contacting the maintainer through the contact links on their
+[public profile](https://github.com/Sottti).

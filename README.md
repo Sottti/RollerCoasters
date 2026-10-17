@@ -171,9 +171,8 @@ and runs the following checks with JDK 21:
 | --- | --- |
 | Module boundaries | `./gradlew checkModuleDependencyBoundaries` |
 | Static analysis | `./gradlew detekt lintDebug` |
-| JVM tests | `./gradlew test -PexcludeSnapshotTests=true` |
+| JVM tests and coverage | `./gradlew test :koverXmlReport -PexcludeSnapshotTests=true` |
 | Screenshots | `./gradlew --no-parallel verifyPaparazziDebug` |
-| Coverage report | `./gradlew :koverXmlReport -PexcludeSnapshotTests=true` |
 | Debug build | `./gradlew assembleDebug` |
 
 Coverage reports aggregate the Android and Kotlin modules. A minimum coverage threshold has not been configured.

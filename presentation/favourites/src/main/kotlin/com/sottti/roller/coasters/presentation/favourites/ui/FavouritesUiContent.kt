@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,8 +32,10 @@ import com.sottti.roller.coasters.presentation.design.system.error.ErrorUi
 import com.sottti.roller.coasters.presentation.design.system.progress.indicators.ProgressIndicator
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.favourites.R
 import com.sottti.roller.coasters.presentation.favourites.model.FavouritesRollerCoaster
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
 import com.sottti.roller.coasters.presentation.top.bars.ui.MainTopBar
 import com.sottti.roller.coasters.presentation.utils.override
 import com.sottti.roller.coasters.presentation.utils.plus
@@ -195,6 +198,16 @@ private fun PaginationErrorItem(
             Button(onClick = onRetry) {
                 Text.Vanilla(R.string.pagination_error_retry)
             }
+        }
+    }
+}
+
+@Composable
+@RollerCoastersPreviewNoLocale
+internal fun PaginationErrorItemPreview() {
+    RollerCoastersTheme {
+        Surface {
+            PaginationErrorItem(onRetry = {})
         }
     }
 }

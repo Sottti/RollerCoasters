@@ -18,9 +18,8 @@ For broad changes, run these commands separately. The test-exclusion property mu
 ```bash
 ./gradlew checkModuleDependencyBoundaries
 ./gradlew detekt lintDebug
-./gradlew test -PexcludeSnapshotTests=true
+./gradlew test :koverXmlReport -PexcludeSnapshotTests=true
 ./gradlew --no-parallel verifyPaparazziDebug
-./gradlew :koverXmlReport -PexcludeSnapshotTests=true
 ./gradlew assembleDebug
 ```
 

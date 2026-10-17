@@ -14,6 +14,7 @@ import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
+import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import java.net.UnknownHostException
 import kotlin.coroutines.cancellation.CancellationException
@@ -27,7 +28,7 @@ public suspend fun <T> safeApiCall(
 } catch (exception: SocketTimeoutException) {
     Err(Timeout(exception.message ?: TIMEOUT_ERROR_MESSAGE))
 } catch (exception: ClientRequestException) { // 4xx errors
-    val errorBody = exception.response.bodyAsText()
+    val errorBody = exception.response.readErrorBodyOrNull()
     Err(
         ClientError(
             message = exception.message,
@@ -43,6 +44,14 @@ public suspend fun <T> safeApiCall(
     throw exception
 } catch (exception: Exception) {
     Err(Unknown(exception.message ?: UNKNOWN_ERROR_MESSAGE))
+}
+
+private suspend fun HttpResponse.readErrorBodyOrNull(): String? = try {
+    bodyAsText()
+} catch (exception: CancellationException) {
+    throw exception
+} catch (_: Exception) {
+    null
 }
 
 internal const val NO_INTERNET_ERROR_MESSAGE = "No Internet"

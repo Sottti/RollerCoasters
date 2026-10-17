@@ -60,6 +60,7 @@ jobs:
           path: |
             **/build/reports/**
             **/build/test-results/**
+            **/build/paparazzi/failures/**
           if-no-files-found: ignore
 
   jvm-tests:
@@ -92,12 +93,10 @@ jobs:
         run: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
-      - name: Run JVM Tests
-        run: ./gradlew test -PexcludeSnapshotTests=true --stacktrace --no-daemon
+      - name: Run JVM Tests and Generate Kover Coverage
+        run: ./gradlew test :koverXmlReport -PexcludeSnapshotTests=true --stacktrace --no-daemon
       - name: Verify Paparazzi Snapshots
         run: ./gradlew verifyPaparazziDebug --no-parallel --stacktrace --no-daemon
-      - name: Generate Kover Coverage
-        run: ./gradlew :koverXmlReport -PexcludeSnapshotTests=true --stacktrace --no-daemon
 
       - name: Upload Reports
         if: always()
@@ -107,4 +106,5 @@ jobs:
           path: |
             **/build/reports/**
             **/build/test-results/**
+            **/build/paparazzi/failures/**
           if-no-files-found: ignore

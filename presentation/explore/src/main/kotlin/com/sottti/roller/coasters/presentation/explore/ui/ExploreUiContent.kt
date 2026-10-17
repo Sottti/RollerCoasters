@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,10 +29,12 @@ import com.sottti.roller.coasters.presentation.design.system.progress.indicators
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCard
 import com.sottti.roller.coasters.presentation.design.system.roller.coaster.card.RollerCoasterCardStat
 import com.sottti.roller.coasters.presentation.design.system.text.Text
+import com.sottti.roller.coasters.presentation.design.system.themes.RollerCoastersTheme
 import com.sottti.roller.coasters.presentation.explore.R
 import com.sottti.roller.coasters.presentation.explore.model.ExploreAction
 import com.sottti.roller.coasters.presentation.explore.model.ExploreRollerCoaster
 import com.sottti.roller.coasters.presentation.explore.model.Filters
+import com.sottti.roller.coasters.presentation.previews.RollerCoastersPreviewNoLocale
 import com.sottti.roller.coasters.presentation.utils.override
 import com.sottti.roller.coasters.presentation.utils.plus
 
@@ -201,6 +204,16 @@ private fun PaginationErrorItem(
             Button(onClick = onRetry) {
                 Text.Vanilla(R.string.pagination_error_retry)
             }
+        }
+    }
+}
+
+@Composable
+@RollerCoastersPreviewNoLocale
+internal fun PaginationErrorItemPreview() {
+    RollerCoastersTheme {
+        Surface {
+            PaginationErrorItem(onRetry = {})
         }
     }
 }
