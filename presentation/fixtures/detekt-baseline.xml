@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureAnotherStat: String = "94 meters"</ID>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureAnotherStatDetail: String = "Top 83"</ID>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureContentDescription: String = "content description"</ID>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureParkName: String = "PortAventura Park"</ID>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureRollerCoasterName: String = "Dragon Khan"</ID>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureStat: String = "49 meters"</ID>
+    <ID>PropertyName:RollerCoasterFixtures.kt:public const val fixtureStatDetail: String = "Top 38"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureAnotherStat: String = "94 meters"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureAnotherStatDetail: String = "Top 83"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureContentDescription: String = "content description"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureParkName: String = "PortAventura Park"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureRollerCoasterName: String = "Dragon Khan"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureStat: String = "49 meters"</ID>
+    <ID>TopLevelPropertyNaming:RollerCoasterFixtures.kt:public const val fixtureStatDetail: String = "Top 38"</ID>
+  </CurrentIssues>
+</SmellBaseline>

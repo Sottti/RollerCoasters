@@ -61,10 +61,14 @@ import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
+import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class SettingsViewModelTest {
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Test
     fun `app color contrast picker selection change`() = runTest {
@@ -264,6 +268,9 @@ internal class SettingsViewModelTest {
             initialState = initialState,
             setAppColorContrast = setAppColorContrast,
             setAppDynamicColor = setAppDynamicColor,
+            observations = SettingsObservations(
+                appDynamicColor = flowOf(initialDynamicColorState),
+            ),
         )
 
         viewModel.onAction(DynamicColorCheckedChange(true))
@@ -300,7 +307,12 @@ internal class SettingsViewModelTest {
             selectedAppColorContrast = appColorContrast,
             appColorContrastAvailable = colorContrastAvailable,
         )
-        val viewModel = createViewModel(initialState = initialState)
+        val viewModel = createViewModel(
+            initialState = initialState,
+            observations = SettingsObservations(
+                appDynamicColor = flowOf(AppDynamicColor.Disabled),
+            ),
+        )
 
         viewModel.onAction(DismissAppColorContrastPicker)
 
@@ -410,7 +422,10 @@ internal class SettingsViewModelTest {
     fun `initial loading state with dynamic color available`() = runTest {
         val systemFeatures = mockk<SystemFeatures>()
         every { systemFeatures.systemDynamicColorAvailable() } returns true
-        val viewModel = createViewModel(systemFeatures = systemFeatures)
+        val viewModel = createViewModel(
+            systemFeatures = systemFeatures,
+            observations = pendingSettingsObservations(),
+        )
 
         viewModel.assertHasState(loadingState(dynamicColorAvailable = true))
     }
@@ -419,7 +434,10 @@ internal class SettingsViewModelTest {
     fun `initial loading state with dynamic color unavailable`() = runTest {
         val systemFeatures = mockk<SystemFeatures>()
         every { systemFeatures.systemDynamicColorAvailable() } returns false
-        val viewModel = createViewModel(systemFeatures = systemFeatures)
+        val viewModel = createViewModel(
+            systemFeatures = systemFeatures,
+            observations = pendingSettingsObservations(),
+        )
 
         viewModel.assertHasState(loadingState(dynamicColorAvailable = false))
     }
@@ -442,6 +460,9 @@ internal class SettingsViewModelTest {
             systemFeatures = systemFeatures,
             getAppColorContrast = getAppColorContrast,
             initialState = initialState,
+            observations = SettingsObservations(
+                appDynamicColor = flowOf(dynamicColorState),
+            ),
         )
 
         viewModel.onAction(LaunchAppColorContrastPicker)

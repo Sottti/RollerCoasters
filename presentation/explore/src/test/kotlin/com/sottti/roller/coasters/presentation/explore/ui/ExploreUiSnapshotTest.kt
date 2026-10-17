@@ -1,5 +1,7 @@
 package com.sottti.roller.coasters.presentation.explore.ui
 
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.android.resources.NightMode
 import com.sottti.roller.coasters.presentation.explore.model.ExplorePreviewState
 import com.sottti.roller.coasters.presentation.paparazzi.nightModeParameters
@@ -21,7 +23,9 @@ internal class ExploreUiSnapshotTest(
     @Test
     fun snapshotTest() {
         paparazzi.snapshot {
-            ExploreUiPreview(state)
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                ExploreUiPreview(state)
+            }
         }
     }
 

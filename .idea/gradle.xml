@@ -4,17 +4,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT">
-            <builds>
-              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
-                <projects>
-                  <project path="$PROJECT_DIR$/buildSrc" />
-                </projects>
-              </build>
-            </builds>
-          </compositeBuild>
-        </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="#JAVA_HOME" />
@@ -22,7 +11,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/network" />
             <option value="$PROJECT_DIR$/data/roller-coasters" />
@@ -38,6 +26,7 @@
             <option value="$PROJECT_DIR$/domain/system-features" />
             <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/presentation/about-me" />
+            <option value="$PROJECT_DIR$/presentation/app-shell" />
             <option value="$PROJECT_DIR$/presentation/design-system" />
             <option value="$PROJECT_DIR$/presentation/design-system/card-grid" />
             <option value="$PROJECT_DIR$/presentation/design-system/chip" />
@@ -66,7 +55,6 @@
             <option value="$PROJECT_DIR$/presentation/favourites" />
             <option value="$PROJECT_DIR$/presentation/fixtures" />
             <option value="$PROJECT_DIR$/presentation/format" />
-            <option value="$PROJECT_DIR$/presentation/home" />
             <option value="$PROJECT_DIR$/presentation/navigation" />
             <option value="$PROJECT_DIR$/presentation/navigation-external" />
             <option value="$PROJECT_DIR$/presentation/paparazzi" />

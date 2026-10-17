@@ -112,11 +112,11 @@ public object Images {
             )
     }
 
-    public object ProfilePicture2024 {
-        private val description: Int = R.string.description_image_profile_picture_2024
+    public object ProfilePicture2026 {
+        private val description: Int = R.string.description_image_profile_picture_2026
         public val state: ImageState =
             ImageState(
-                resId = R.drawable.img_profile_picture_2024,
+                resId = R.drawable.img_profile_picture_2026,
                 descriptionResId = description,
             )
     }

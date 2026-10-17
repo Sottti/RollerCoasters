@@ -1,8 +1,5 @@
-import com.sottti.roller.coasters.buildSrc.module
-
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
 }
 
@@ -11,12 +8,12 @@ android {
 }
 
 dependencies {
-    implementation(project(module.domain.rollerCoasters))
+    implementation(projects.domain.rollerCoasters)
     implementation(libs.hilt)
-    implementation(project(module.data.systemFeatures))
-    implementation(project(module.data.rollerCoasters))
-    implementation(project(module.data.settings))
-    implementation(project(module.domain.systemFeatures))
-    implementation(project(module.domain.settings))
+    implementation(projects.data.systemFeatures)
+    implementation(projects.data.rollerCoasters)
+    implementation(projects.data.settings)
+    implementation(projects.domain.systemFeatures)
+    implementation(projects.domain.settings)
     ksp(libs.hilt.compiler)
 }

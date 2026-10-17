@@ -26,7 +26,7 @@ internal fun MorphingProfileImage(
     image: ImageState,
     modifier: Modifier = Modifier,
 ) {
-    val startShape = shapes.roundedPolygon.hexagon
+    val startShape = shapes.roundedPolygon.decagon
     val endShape = shapes.roundedPolygon.octagon
     val morph = remember(startShape, endShape) { Morph(start = startShape, end = endShape) }
     val interactionSource = remember { MutableInteractionSource() }

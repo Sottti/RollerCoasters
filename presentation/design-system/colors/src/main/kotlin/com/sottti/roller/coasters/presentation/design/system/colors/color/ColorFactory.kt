@@ -1,5 +1,7 @@
 package com.sottti.roller.coasters.presentation.design.system.colors.color
 
+import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
@@ -14,7 +16,11 @@ public fun colors(
     useDarkTheme: Boolean,
     useDynamicColor: Boolean = false,
 ): ColorScheme = when {
-    useDynamicColor -> dynamicColorScheme(useDarkTheme)
+    useDynamicColor && isDynamicColorAvailable() -> dynamicColorScheme(useDarkTheme)
     useDarkTheme -> colorContrast.darkColorScheme()
     else -> colorContrast.lightColorScheme()
 }
+
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
+private fun isDynamicColorAvailable(): Boolean =
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S

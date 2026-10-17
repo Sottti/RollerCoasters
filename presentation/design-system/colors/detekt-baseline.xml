@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>Filename:ResolvedColorContrastMappersTest.kt:com.sottti.roller.coasters.presentation.design.system.colors.mapper.ResolvedColorContrastMappersTest.kt</ID>
+    <ID>MatchingDeclarationName:ResolvedColorContrastMappersTest.kt:ColorContrastMappersTest</ID>
+    <ID>NoConsecutiveBlankLines:ColorSchemesMapper.kt: </ID>
+    <ID>NoConsecutiveBlankLines:ExternalNavigationPrimaryColor.kt: </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:ExternalNavigationPrimaryColor.kt: </ID>
+    <ID>TopLevelPropertyNaming:LocalColors.kt:internal val LocalColors = staticCompositionLocalOf&lt;ColorScheme&gt; { error("No colors provided. Make sure to wrap your composables in a custom theme.") }</ID>
+    <ID>TopLevelPropertyNaming:LocalOpacities.kt:internal val LocalOpacities = staticCompositionLocalOf&lt;Opacities&gt; { error("No opacities provided. Make sure to wrap your composables in a custom theme.") }</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val ANDROID_DEVELOPERS_PRIMARY_COLOR_DARK: Color = Color(0xFF000000)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val ANDROID_DEVELOPERS_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val DRIBBBLE_PRIMARY_COLOR_DARK: Color = Color(0xFF000000)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val DRIBBBLE_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val FALLBACK_COLOR_DARK: Color = Color(0xFF000000)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val FALLBACK_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val GITHUB_PRIMARY_COLOR_DARK: Color = Color(0xFF020409)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val GITHUB_PRIMARY_COLOR_LIGHT: Color = Color(0xFFF6F8FA)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val INSTAGRAM_PRIMARY_COLOR_DARK: Color = Color(0xFF000000)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val INSTAGRAM_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val LINKED_IN_PRIMARY_COLOR_DARK: Color = Color(0xFF1E2226)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val LINKED_IN_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val MEDIUM_PRIMARY_COLOR_DARK: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val MEDIUM_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val STACK_OVERFLOW_PRIMARY_COLOR_DARK: Color = Color(0xFF252627)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val STACK_OVERFLOW_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val X_PRIMARY_COLOR_DARK: Color = Color(0xFF000000)</ID>
+    <ID>TopLevelPropertyNaming:SocialNetworkColors.kt:private val X_PRIMARY_COLOR_LIGHT: Color = Color(0xFFFFFFFF)</ID>
+  </CurrentIssues>
+</SmellBaseline>
