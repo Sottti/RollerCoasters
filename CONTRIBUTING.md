@@ -8,7 +8,8 @@ The shared templates remain the source for GitHub submissions.
 
 1. Create a focused branch from `develop`.
 2. Keep changes small enough to review.
-3. Run the checks relevant to the change using JDK 21 and the checked-in Gradle wrapper.
+3. Run the checks relevant to the change using JDK 21 and the checked-in Gradle wrapper. Also install
+   JDK 17 for compilation, as described in the [setup requirements](README.md#requirements).
 4. Describe the resulting behavior, verification and any remaining limitations in the shared PR template.
 
 ## Local checks

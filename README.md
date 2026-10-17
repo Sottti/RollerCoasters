@@ -93,6 +93,7 @@ These instructions follow the default `develop` branch. Dependency versions are 
 ### Requirements
 
 * **JDK 21**, selected as the Gradle JDK in Android Studio or through `JAVA_HOME` for command-line builds.
+* **JDK 17**, installed alongside JDK 21 for the Android and Kotlin/JVM compilation toolchains.
 * **Android SDK Platform 37.0** and Android SDK Platform-Tools.
 * **An emulator or Android device running API 26 (Android 8.0) or newer** to run the app.
 * Use the checked-in **Gradle wrapper**; a separate Gradle installation is not needed.
@@ -114,7 +115,25 @@ sdk.dir=/absolute/path/to/Android/sdk
 MAPS_API_KEY=your_google_maps_api_key
 ```
 
-The Maps key is used by the map previews and runtime maps. This file is ignored by Git. Sync the project, select the `app` run configuration, and choose a device.
+The Maps key is used by the map previews and runtime maps. This file is ignored by Git.
+
+Keep Gradle running on JDK 21. Install JDK 17 in a standard system location or download it with
+Android Studio so Gradle can detect it. Check that Gradle lists both JDK versions:
+
+```bash
+./gradlew -q javaToolchains
+```
+
+For a JDK 17 installation in a custom location, add its path to your user-level
+`~/.gradle/gradle.properties`:
+
+```properties
+org.gradle.java.installations.paths=/absolute/path/to/jdk17
+```
+
+The project does not configure automatic toolchain downloads.
+
+Sync the project, select the `app` run configuration, and choose a device.
 
 ### Build and Run
 
@@ -164,8 +183,8 @@ Device-based tests require a running emulator or connected device:
 ./gradlew connectedDebugAndroidTest
 ```
 
-The [CI workflow](.github/workflows/ci.yml) keeps the required `Build` and `JVM Tests` jobs
-and runs the following checks with JDK 21:
+The [CI workflow](.github/workflows/ci.yml) keeps the required `Build` and `JVM Tests` jobs.
+Gradle and Paparazzi run on JDK 21; the runner image supplies JDK 17 for compilation:
 
 | Check | Command |
 | --- | --- |
