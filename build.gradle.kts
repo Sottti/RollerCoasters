@@ -313,8 +313,6 @@ private fun ApplicationExtension.androidApplicationConfig() {
         baselineFile("lint-baseline.xml")?.let { baseline = it }
         abortOnError = true
         checkReleaseBuilds = false
-        xmlReport = true
-        htmlReport = true
     }
 
     compileOptions {
@@ -335,8 +333,6 @@ private fun Project.androidLibraryConfig() {
             targetSdk = targetSdk()
             baselineFile("lint-baseline.xml")?.let { baseline = it }
             abortOnError = true
-            xmlReport = true
-            htmlReport = true
         }
 
         compileOptions {
