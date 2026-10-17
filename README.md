@@ -94,7 +94,7 @@ These instructions follow the default `develop` branch. Dependency versions are 
 
 * **JDK 21**, selected as the Gradle JDK in Android Studio or through `JAVA_HOME` for command-line builds.
 * **JDK 17**, installed alongside JDK 21 for the Android and Kotlin/JVM compilation toolchains.
-* **Android SDK Platform 37.0** and Android SDK Platform-Tools.
+* **Android SDK Platform 37.1** and Android SDK Platform-Tools.
 * **An emulator or Android device running API 26 (Android 8.0) or newer** to run the app.
 * Use the checked-in **Gradle wrapper**; a separate Gradle installation is not needed.
 
