@@ -1,6 +1,5 @@
 package com.sottti.roller.coasters.presentation.settings.data
 
-
 import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
 import androidx.lifecycle.viewModelScope

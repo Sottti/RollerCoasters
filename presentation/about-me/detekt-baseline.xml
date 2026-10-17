@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>Indentation:AboutMeUiContent.kt: </ID>
+    <ID>MagicNumber:AboutMeState.kt:Topics$3</ID>
+    <ID>NoEmptyFirstLineInMethodBlock:AboutMeViewModelTest.kt:AboutMeViewModelTest$ </ID>
+    <ID>ParameterNaming:AboutMeUi.kt:onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -&gt; Unit</ID>
+  </CurrentIssues>
+</SmellBaseline>

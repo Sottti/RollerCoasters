@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>TopLevelPropertyNaming:LocalTypography.kt:internal val LocalTypography = staticCompositionLocalOf&lt;Typography&gt; { error("No typography provided. Make sure to wrap your composables in a custom theme.") }</ID>
+  </CurrentIssues>
+</SmellBaseline>

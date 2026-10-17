@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>LambdaParameterInRestartableEffect:AppShellUiNavigationBar.kt:onAction: (AppShellActions) -&gt; Unit</ID>
+    <ID>MutableParams:AppShellUiNavigationBar.kt:scrollToTopCallbacks: MutableMap&lt;NavigationDestination, () -&gt; Unit&gt;</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,8 +1,5 @@
-import com.sottti.roller.coasters.buildSrc.module
-
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.paparazzi)
@@ -14,22 +11,23 @@ android {
 
 dependencies {
     implementation(libs.compose.material)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(platform(libs.compose.bom))
-    implementation(project(module.domain.systemFeatures))
-    implementation(project(module.domain.settings))
-    implementation(project(module.presentation.designSystem.dialogs))
-    implementation(project(module.presentation.designSystem.dimensions))
-    implementation(project(module.presentation.designSystem.icons))
-    implementation(project(module.presentation.designSystem.progressIndicators))
-    implementation(project(module.presentation.designSystem.shapes))
-    implementation(project(module.presentation.designSystem.switch))
-    implementation(project(module.presentation.designSystem.text))
-    implementation(project(module.presentation.designSystem.themes))
-    implementation(project(module.presentation.previews))
-    implementation(project(module.presentation.utils))
+    implementation(projects.domain.systemFeatures)
+    implementation(projects.domain.settings)
+    implementation(projects.presentation.designSystem.dialogs)
+    implementation(projects.presentation.designSystem.dimensions)
+    implementation(projects.presentation.designSystem.icons)
+    implementation(projects.presentation.designSystem.progressIndicators)
+    implementation(projects.presentation.designSystem.shapes)
+    implementation(projects.presentation.designSystem.switch)
+    implementation(projects.presentation.designSystem.text)
+    implementation(projects.presentation.designSystem.themes)
+    implementation(projects.presentation.previews)
+    implementation(projects.presentation.utils)
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
@@ -37,5 +35,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.truth)
     testImplementation(libs.turbine)
-    testImplementation(project(module.presentation.paparazzi))
+    testImplementation(projects.presentation.paparazzi)
 }

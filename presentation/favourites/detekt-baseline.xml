@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:FavouritesUiContent.kt:(modifier = Modifier .padding(padding) .fillMaxSize())</ID>
+    <ID>FunctionOnlyReturningConstant:FavouritesPresentationModule.kt:FavouritesPresentationModule$@Provides fun provideCoroutineScope: CoroutineScope?</ID>
+    <ID>NoConsecutiveBlankLines:FavouritesUiContent.kt: </ID>
+    <ID>NoEmptyFirstLineInMethodBlock:FavouritesViewModelTest.kt:FavouritesViewModelTest$ </ID>
+    <ID>ParameterNaming:FavouritesUi.kt:onListCreated: @Composable (LazyListState, TopAppBarScrollBehavior) -&gt; Unit</ID>
+    <ID>ThrowingExceptionsWithoutMessageOrCause:FavouritesUiStateProvider.kt:Exception()</ID>
+    <ID>Wrapping:FavouritesUiContent.kt:(</ID>
+  </CurrentIssues>
+</SmellBaseline>

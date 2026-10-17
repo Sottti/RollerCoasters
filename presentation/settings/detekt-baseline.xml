@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ChainWrapping:SettingsAppColorContrastReducer.kt:&amp;&amp;</ID>
+    <ID>CyclomaticComplexMethod:SettingsViewModel.kt:SettingsViewModel$private suspend fun SettingsState.handleStateMutationAction: SettingsState</ID>
+    <ID>FunctionOnlyReturningConstant:SettingsPresentationModule.kt:SettingsPresentationModule$@Provides @ViewModelScoped fun provideInitialSettingsState: SettingsState?</ID>
+    <ID>Indentation:SettingsAppColorContrastReducer.kt: </ID>
+    <ID>NoConsecutiveBlankLines:SettingsAppLanguageUiMapperTest.kt:SettingsAppLanguageUiMapperTest$ </ID>
+    <ID>NoConsecutiveBlankLines:SettingsInitialState.kt: </ID>
+    <ID>Wrapping:SettingsAppLanguageReducerTest.kt:SettingsAppLanguageReducerTest$(</ID>
+    <ID>Wrapping:SettingsAppMeasurementSystemReducerTest.kt:SettingsAppMeasurementSystemReducerTest$(</ID>
+    <ID>Wrapping:SettingsAppThemeReducerTest.kt:SettingsAppThemeReducerTest$(</ID>
+    <ID>Wrapping:SettingsUiList.kt:(</ID>
+  </CurrentIssues>
+</SmellBaseline>
