@@ -190,7 +190,6 @@ The app is split into Gradle modules by responsibility:
 | [`data/`](data/) | Repository implementations, local storage, network access, settings, and background synchronization. |
 | [`di/`](di/) | Dependency wiring across the app's layers. |
 | [`utils/`](utils/) | Shared lifecycle and date/time utilities. |
-| [`buildSrc/`](buildSrc/) | Gradle build support. |
 
 See [`settings.gradle.kts`](settings.gradle.kts) for the complete module list.
 
