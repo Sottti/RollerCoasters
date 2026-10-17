@@ -180,6 +180,25 @@ internal class SafeApiCallTest {
     }
 
     @Test
+    fun `production client decodes successful JSON into the requested model`() = runBlocking {
+        val mockClient = createHttpClient(
+            MockEngine {
+                respond(
+                    content = "{\"value\":\"Success\"}",
+                    status = HttpStatusCode.OK,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
+                )
+            }
+        )
+
+        val result = mockClient.use { client ->
+            safeApiCall { client.fetch<SuccessPayload>("https://example.com") }
+        }
+
+        assertThat(result.get()).isEqualTo(SuccessPayload("Success"))
+    }
+
+    @Test
     fun `production client maps malformed successful JSON to unknown error`() = runBlocking {
         val mockClient = createHttpClient(
             MockEngine {
