@@ -298,7 +298,11 @@ private fun Project.configurePaparazziTests() {
 }
 
 private fun ApplicationExtension.androidApplicationConfig() {
-    compileSdk = compileSdk()
+    compileSdk {
+        version = release(compileSdk()) {
+            minorApiLevel = compileSdkMinor()
+        }
+    }
 
     defaultConfig {
         minSdk = minSdk()
@@ -309,8 +313,6 @@ private fun ApplicationExtension.androidApplicationConfig() {
         baselineFile("lint-baseline.xml")?.let { baseline = it }
         abortOnError = true
         checkReleaseBuilds = false
-        xmlReport = true
-        htmlReport = true
     }
 
     compileOptions {
@@ -321,14 +323,16 @@ private fun ApplicationExtension.androidApplicationConfig() {
 
 private fun Project.androidLibraryConfig() {
     extensions.configure<LibraryExtension> {
-        compileSdk = compileSdk()
+        compileSdk {
+            version = release(compileSdk()) {
+                minorApiLevel = compileSdkMinor()
+            }
+        }
         defaultConfig { minSdk = minSdk() }
         lint {
             targetSdk = targetSdk()
             baselineFile("lint-baseline.xml")?.let { baseline = it }
             abortOnError = true
-            xmlReport = true
-            htmlReport = true
         }
 
         compileOptions {
@@ -354,6 +358,7 @@ private fun Project.baselineFile(path: String) =
     file(path).takeIf { it.exists() }
 
 private fun compileSdk() = libs.versions.compileSdk.get().toInt()
+private fun compileSdkMinor() = libs.versions.compileSdkMinor.get().toInt()
 private fun javaVersion() = JavaVersion.VERSION_17
 private fun minSdk() = libs.versions.minSdk.get().toInt()
 private fun targetSdk() = libs.versions.targetSdk.get().toInt()
