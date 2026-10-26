@@ -1,7 +1,7 @@
 # Contributing
 
-Use the [shared contribution and title guidance](https://github.com/Sottti/.github/blob/main/CONTRIBUTING.md)
-and the matching [shared issue or pull request template](https://github.com/Sottti/.github/tree/main/.github).
+Use the [shared contribution and title guidance](https://github.com/Sottti/.github/blob/develop/CONTRIBUTING.md)
+and the matching [shared issue or pull request template](https://github.com/Sottti/.github/tree/develop/.github).
 The shared templates remain the source for GitHub submissions.
 
 ## Workflow
