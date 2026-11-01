@@ -27,52 +27,42 @@ For broad changes, run these commands separately. The test-exclusion property mu
 The coverage report aggregates Android and Kotlin modules; no minimum coverage threshold is configured.
 See [the README](README.md#getting-started) for SDK, Maps-key and device setup.
 
-## Weekly verification policy
+## PR and manual verification policy
 
-Android CI and both Dependabot ecosystems run once weekly, Friday at 03:17 in
-`Europe/Madrid`. The [Actions schedule timezone](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onschedule)
-preserves local time across DST. Scheduled Actions use the latest `develop` revision and GitHub may delay admission.
-Android CI also supports explicit manual dispatch:
+Android CI runs on every pull request, including drafts and updates, and allows
+explicit manual dispatch from `develop`. There is no CI cron schedule and no
+push or post-merge run. Superseded runs are cancelled per PR; different PRs do
+not cancel one another.
 
 ```bash
 gh workflow run ci.yml --repo Sottti/RollerCoasters --ref develop
 ```
 
-PR creation, updates, pushes and merges must not automatically start Actions or
-CI, including managed workflows or indirect callers. Do not add PR, push,
-comment, merge-group, workflow-run or automatic reusable-workflow callers.
-Do not require `Build` or `JVM Tests` statuses on PRs, add dummy successful
-checks, or restore the retired per-PR check policy. PR review, completed
-conversation resolution, force-push/deletion safeguards and all local checks
-above still apply. A weekly result does not verify an individual PR; regressions
-can be discovered after merge.
+This is an owner-approved PR-CI exception for this public repository. Use
+`pull_request`, not privileged `pull_request_target`, comment commands or indirect
+caller chains. Inspect the actual `Build` and `JVM Tests` check results. Do not
+add required CI status gates or alter unrelated protection. Local verification,
+independent review and completed conversation resolution still apply.
 
-Both retained jobs run for schedule and manual events without PR payload
-conditions. Build validates the wrapper, module boundaries, detekt/lint and
-assembly; JVM Tests depends on Build and runs JVM/Kover coverage followed by
-Paparazzi without `excludeSnapshotTests`. Existing reports upload on failure.
-Keep JDKs, caches, Maps secret injection and coverage settings intact.
+Build validates the wrapper, module boundaries, detekt/lint and assembly. JVM
+Tests depends on Build and runs JVM/Kover coverage followed by Paparazzi without
+`excludeSnapshotTests`. Preserve both jobs, failure behavior and report uploads,
+along with the existing JDKs, caches, Maps-key injection and coverage settings.
+For PRs without repository secrets, preserve the existing Maps-key injection
+and the build configuration's empty-key fallback; do not grant privileged PR access.
 
-Dependabot automatic rebasing is disabled. PRs opened before the change can
-continue rebasing for 30 days, so rollout must reconcile those existing PRs.
-Do not silently reopen stale branches with automatic workflow definitions.
+Dependabot version updates remain weekly on Friday at 03:17 Europe/Madrid,
+with automatic rebasing disabled. This dependency-update cadence is separate
+from CI and is unchanged. Keep vulnerability alerts, the dependency graph and
+existing security rules. Automatic Dependabot security-fix PR generation remains
+disabled; request security remediation manually.
 
-Keep vulnerability alerts, the dependency graph and existing security rules.
-Automatic Dependabot security-fix PR generation is disabled because alerts can
-otherwise start managed update jobs after a dependency push. Request security
-remediation manually; weekly version updates remain enabled. Do not re-enable
-automatic fix PRs as part of routine setup or restoration.
+Use the owner's existing GitHub Actions failure-email notifications. A failed
+job, skipped downstream job and runner/billing admission failure are different
+outcomes. Inspect run details and artifacts, fix the cause, then explicitly
+dispatch recovery if needed. Do not add automatic retry loops or paid services.
+Local and manual results apply to their tested revision and do not replace the
+actual PR checks.
 
-Use the owner's existing GitHub Actions failure-email notifications; verify the
-recipient and Actions email/failures-only preferences in GitHub notification
-settings. A failed job, a skipped downstream job and a billing/runner admission
-failure are different outcomes. Inspect run details and artifacts, fix the
-cause, then explicitly dispatch recovery if needed. Do not add automatic retry
-loops, paid notification services, or change billing/subscriptions.
-
-Rollout evidence and outstanding runtime proof are tracked in
-[issue #170](https://github.com/Sottti/RollerCoasters/issues/170). Manual success
-is not scheduled proof. Keep the first genuine Friday outcome pending until
-observed. Shared defaults and restoration instructions must agree with
-[Sottti/.github #13](https://github.com/Sottti/.github/issues/13) before declaring
-rollout complete.
+Keep [shared defaults](https://github.com/Sottti/.github/blob/develop/branch-protection/README.md)
+aligned with this exception; other repositories retain their approved cadence.
