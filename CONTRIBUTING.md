@@ -57,6 +57,12 @@ Dependabot automatic rebasing is disabled. PRs opened before the change can
 continue rebasing for 30 days, so rollout must reconcile those existing PRs.
 Do not silently reopen stale branches with automatic workflow definitions.
 
+Keep vulnerability alerts, the dependency graph and existing security rules.
+Automatic Dependabot security-fix PR generation is disabled because alerts can
+otherwise start managed update jobs after a dependency push. Request security
+remediation manually; weekly version updates remain enabled. Do not re-enable
+automatic fix PRs as part of routine setup or restoration.
+
 Use the owner's existing GitHub Actions failure-email notifications; verify the
 recipient and Actions email/failures-only preferences in GitHub notification
 settings. A failed job, a skipped downstream job and a billing/runner admission
