@@ -48,8 +48,8 @@ Build validates the wrapper, module boundaries, detekt/lint and assembly. JVM
 Tests depends on Build and runs JVM/Kover coverage followed by Paparazzi without
 `excludeSnapshotTests`. Preserve both jobs, failure behavior and report uploads,
 along with the existing JDKs, caches, Maps-key injection and coverage settings.
-Fork and Dependabot PRs do not receive repository secrets; CI writes an empty
-Maps key in that context, which is sufficient to compile and run these checks.
+For PRs without repository secrets, preserve the existing Maps-key injection
+and the build configuration's empty-key fallback; do not grant privileged PR access.
 
 Dependabot version updates remain weekly on Friday at 03:17 Europe/Madrid,
 with automatic rebasing disabled. This dependency-update cadence is separate
