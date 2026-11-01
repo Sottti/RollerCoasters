@@ -30,8 +30,8 @@ See [the README](README.md#getting-started) for SDK, Maps-key and device setup.
 ## Weekly verification policy
 
 Android CI and both Dependabot ecosystems run once weekly, Friday at 03:17 in
-`Europe/Madrid`. The IANA timezone preserves local time across DST. Scheduled
-Actions use the latest `develop` revision and GitHub may delay admission.
+`Europe/Madrid`. The [Actions schedule timezone](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onschedule)
+preserves local time across DST. Scheduled Actions use the latest `develop` revision and GitHub may delay admission.
 Android CI also supports explicit manual dispatch:
 
 ```bash
