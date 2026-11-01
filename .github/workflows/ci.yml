@@ -1,12 +1,10 @@
 name: Android CI
 
 on:
-  push:
-    branches: [ "develop" ]
-  pull_request:
   workflow_dispatch:
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "17 3 * * 5"
+      timezone: "Europe/Madrid"
 
 permissions:
   contents: read

@@ -30,3 +30,13 @@ Raw API creation does not populate templates automatically. Preserve applicable
 repository-specific metadata, contribution and verification policies, and read
 back the stored title and body after creation. If a shared source cannot be
 read, report that limitation instead of silently assuming a local copy is current.
+
+## Verification cadence
+
+Follow [CONTRIBUTING.md](CONTRIBUTING.md#weekly-verification-policy). CI and
+Dependabot run Friday at 03:17 Europe/Madrid; Actions also supports explicit
+manual dispatch. Do not initiate automatic Actions/CI for PRs, updates, pushes
+or merges through direct, indirect or managed triggers. Do not restore required
+PR CI statuses or wait for checks that intentionally do not run. Preserve local
+verification, independent PR review and unrelated protections. Weekly success
+does not validate individual PRs; post-merge regression detection is expected.
