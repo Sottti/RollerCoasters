@@ -51,9 +51,9 @@ along with the existing JDKs, caches, Maps-key injection and coverage settings.
 For PRs without repository secrets, preserve the existing Maps-key injection
 and the build configuration's empty-key fallback; do not grant privileged PR access.
 
-Dependabot version updates remain weekly on Friday at 03:17 Europe/Madrid,
+Dependabot version updates run monthly on the first day at 03:17 Europe/Madrid,
 with automatic rebasing disabled. This dependency-update cadence is separate
-from CI and is unchanged. Keep vulnerability alerts, the dependency graph and
+from CI. Keep vulnerability alerts, the dependency graph and
 existing security rules. Automatic Dependabot security-fix PR generation remains
 disabled; request security remediation manually.
 

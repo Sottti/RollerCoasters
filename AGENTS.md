@@ -36,7 +36,7 @@ read, report that limitation instead of silently assuming a local copy is curren
 Follow [CONTRIBUTING.md](CONTRIBUTING.md#pr-and-manual-verification-policy).
 Android CI runs on every PR and manual dispatch from `develop`; cancel
 superseded PR runs and use no CI cron, push or post-merge trigger. Dependabot
-version updates remain Friday at 03:17 Europe/Madrid. Keep local verification,
+version updates run on the first day of each month at 03:17 Europe/Madrid. Keep local verification,
 independent review and actual PR checks, without adding required CI status gates
 or changing unrelated protections. This repository's PR-CI exception does not
 change the cadence of other repositories.
