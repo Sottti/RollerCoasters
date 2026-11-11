@@ -31,6 +31,10 @@ repository-specific metadata, contribution and verification policies, and read
 back the stored title and body after creation. If a shared source cannot be
 read, report that limitation instead of silently assuming a local copy is current.
 
+Before merging a pull request, read the shared
+[merge requirements](https://github.com/Sottti/.github/blob/develop/CONTRIBUTING.md#protected-branches-and-merge-requirements),
+including the one local peer review every pull request needs before it merges.
+
 ## Verification cadence
 
 Follow [CONTRIBUTING.md](CONTRIBUTING.md#pr-and-manual-verification-policy).
