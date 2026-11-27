@@ -44,3 +44,12 @@ version updates run on the first day of each month at 03:17 Europe/Madrid. Keep 
 independent review and actual PR checks, without adding required CI status gates
 or changing unrelated protections. This repository's PR-CI exception does not
 change the cadence of other repositories.
+
+## Second opinions
+
+Second opinions from other models (GPT, Gemini or Claude) run only on the
+owner's Mac, through the
+[`second-opinion` skill](https://github.com/Sottti/Agent-Workflows/blob/develop/skills/second-opinion/SKILL.md).
+A session running elsewhere, such as a cloud session, doesn't have it. If asked
+for one there, or if one would help, say it needs a local session; don't ask
+other models instead.
